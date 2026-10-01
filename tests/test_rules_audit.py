@@ -32,11 +32,11 @@ def _bar(h, m, o, hi, lo, c):
 def test_fill_retouch_defaults_reproduce_the_a10_fill():
     entry = 5.00
     fwd = [_bar(9, 40, 4.95, 4.99, 4.90, 4.97), _bar(9, 41, 4.98, 5.05, 4.97, 5.03)]
-    assert RA.fill_retouch(fwd, entry, 3, 0.3) == (1, entry)                  # touched inside the cap
+    assert RA.fill_retouch(fwd, entry, 3, 0.3) == (1, entry, "entry")         # touched inside the cap
     gap = [_bar(9, 40, 5.10, 5.20, 5.09, 5.15), _bar(9, 41, 5.12, 5.13, 5.01, 5.05)]
-    assert RA.fill_retouch(gap, entry, 3, 0.3) == (1, RA.cap_of(entry, 0.3))  # opened above the cap, came back
+    assert RA.fill_retouch(gap, entry, 3, 0.3) == (1, RA.cap_of(entry, 0.3), "cap_return")  # came back
     assert RA.fill_retouch(gap, entry, 1, 0.3) is None                         # no return inside a 1-bar expiry
-    assert RA.fill_retouch([_bar(9, 40, 5.01, 5.02, 4.99, 5.0)], entry, 3, 0.3) == (0, 5.01)  # opened inside the cap
+    assert RA.fill_retouch([_bar(9, 40, 5.01, 5.02, 4.99, 5.0)], entry, 3, 0.3) == (0, 5.01, "open")
 
 
 def test_run_exit_trails_and_flattens_with_spread():
@@ -49,8 +49,9 @@ def test_run_exit_trails_and_flattens_with_spread():
 
 def _p(sym, t, arm, out, red=()):
     return {"sym": sym, "day": "2024-03-04", "t": t, "arm": arm, "entry": 5.0, "stop": 4.8, "stop_pct": 4.0,
-            "fade": 5.0, "red": list(red), "macd_line_pos": True, "push_rising": True, "push_elevated": True,
-            "pm": False, "dv5": 5e5, "spread_ratio": 20.0, "out": {"base": out}}
+            "fade": 5.0, "red": list(red), "fade_prev": 5.0, "red_prev": list(red), "retrace": 0.3,
+            "macd_line_pos": True, "push_rising": True, "push_elevated": True,
+            "pm": False, "dv5": 5e5, "spread_ratio": 20.0, "out": {("A", "base"): out}}
 
 
 def test_portfolio_one_position_slot_from_the_order_and_daily_lock():
@@ -65,3 +66,29 @@ def test_portfolio_one_position_slot_from_the_order_and_daily_lock():
     assert [t["sym"] for t in tr] == ["CCC", "DDD", "EEE"]
     off = RA.portfolio({"2024-03-04": [a, b, c, d, e, f]}, dict(RA.BASE, streak=None, loss=None))
     assert [t["sym"] for t in off] == ["CCC", "DDD", "EEE", "FFF"]
+
+
+def test_corrected_modes_change_only_the_ambiguous_bars():
+    """Review 2026-10-01: on a cap-return fill the fill bar's high may have come
+    before the fill; mode C ratchets with max(fill, close). CA treats a fill-bar
+    low under the stop as earlier than a fill at the trigger. H puts each later
+    bar's high first."""
+    entry, stop = 5.0, 4.8
+    fill_bar = _bar(10, 0, 5.30, 5.40, 5.00, 5.05)            # opened above the cap, filled at the cap on the way down
+    nxt = _bar(10, 1, 5.05, 5.10, 4.95, 5.00)
+    cap = RA.cap_of(entry, 0.3)
+    r_a = RA.run_exit([fill_bar, nxt], entry, stop, cap, 1.0, dtime(11, 30), "A", "cap_return")
+    r_c = RA.run_exit([fill_bar, nxt], entry, stop, cap, 1.0, dtime(11, 30), "C", "cap_return")
+    assert r_a[2] == 1 and r_a[0] > 0                          # A: trail at 5.20 from the 5.40 high, stopped there
+    assert r_c[2] == 1 and r_c[0] < r_a[0]                     # C: no ratchet from a pre-fill high
+    low_first = _bar(10, 0, 4.90, 5.10, 4.78, 5.05)            # opened under the trigger, low under the stop
+    after = _bar(10, 1, 5.05, 5.30, 5.02, 5.25)
+    assert RA.run_exit([low_first, after], entry, stop, entry, 1.0, dtime(11, 30), "C", "entry")[2] == 0
+    assert RA.run_exit([low_first, after], entry, stop, entry, 1.0, dtime(11, 30), "CA", "entry")[2] == 1
+    spike = _bar(10, 1, 5.05, 5.60, 5.20, 5.30)                # high then a fade to 5.20 inside the minute
+    tail = _bar(10, 2, 5.30, 5.35, 5.25, 5.30)
+    first = _bar(10, 0, 4.99, 5.05, 4.99, 5.05)
+    rh = RA.run_exit([first, spike, tail], entry, stop, entry, 1.0, dtime(11, 30), "H", "entry")
+    rc = RA.run_exit([first, spike, tail], entry, stop, entry, 1.0, dtime(11, 30), "C", "entry")
+    assert rh[2] == 1 and abs(rh[0] - 2.0) < 1e-9              # H: trail raised to 5.40 by the spike, faded through
+    assert rc[2] == 2 and rc[0] < 0.5 + 1e-9 or rc[2] == 2     # C: the low is tested before the spike raises the stop

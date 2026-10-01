@@ -337,3 +337,43 @@ test alone: if it passes, it is flagged to the owner with the data.
 **Sensitivities, never deciding:** an intrabar entry model (fill on the
 trigger bar itself, the way the live desk arms while the bar forms) and the
 "old" cost model (one cent a side).
+
+### Addendum 2026-10-01b — after the adversarial review, before the corrected run
+
+The first run (`research/paper-exercise/reports/rules_audit_output.txt`) put
+three single variants through the rule above — no entries before 09:30, stop
+≥ 3 %, stop ≥ 6× spread — and, wrongly, $80 risk. A three-lens adversarial
+review reproduced every number exactly and found that the backtest's way of
+reading a 1-minute bar is the most favourable one for those passes:
+
+* on a fill at the cap after the bar opened above it, the bar's high (which
+  came BEFORE the fill) ratcheted the trail;
+* a fill-bar low under the stop always stops the trade, though it may have
+  come before a fill at the trigger;
+* the trail tests each bar's low before its high, where the live trail
+  follows the 10-second tape;
+* the order expiry counts bars, not minutes.
+
+Under the corrected readings the reviewers measured the singles failing and
+a post-hoc combination (no pre-market entries + stop ≥ 3 %) surviving most
+but not all corrections. Those numbers are known to me before this run.
+
+**Rules for the corrected run (`scripts/rules_audit.py`, `MODES`).** Mode A
+is the preregistered run, unchanged. Mode C corrects the cap-return fill bar
+(ratchet with max(fill, close)) and counts the expiry in minutes. **A change
+is adopted only if it passes the adoption rule above under BOTH A and C** —
+stricter than the original rule, never looser. Reported, never deciding: CA
+(C + fill-bar low before a fill at the trigger), H (C + high first on every
+later bar), the "old", "light" and gross cost models, and an intrabar entry
+gated on the last completed bar (the live desk never sees the trigger bar's
+close; the first run's intrabar figures used it and are withdrawn).
+**Sizing variants are judged in dollars**, not R. **The two post-hoc
+combinations** (09:30 + 3 %; 3 % + 6×) are not among the preregistered
+variants and reuse levers read on 2024-2026: by §3 they are CONTAMINATED and
+can only go live behind a switch that stays OFF until ≥ 200 prospective paper
+trades confirm them. **Two Ross-retracement variants are added (K = 43):**
+the pullback may give back at most 50 % of the push (impulse high minus the
+first impulse bar's open) — with rule 5, and instead of it. His words:
+*"50% is a hard cut ... I prefer to be consolidating in the top 20% 25%"*
+(DP4ayEWhmvM 00:30:17); *"I never want to see the price retrace more than 50%
+of the move"* (HYoQYCBW4sw 00:34:22). Never run before this addendum.

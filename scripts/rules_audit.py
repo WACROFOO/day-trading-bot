@@ -52,7 +52,7 @@ SPLIT = "2024-01-01"
 ARM_START, ARM_END = dtime(7, 0), dtime(11, 30)     # recorded; the rule window is applied later
 RTH = dtime(9, 30)
 PROXY = SpreadProxy()
-K_VARIANTS = 41
+K_VARIANTS = 43          # 41 preregistered + 2 Ross-retrace (addendum 2026-10-01b)
 ALPHA = 0.05 / K_VARIANTS
 PLANS_CACHE = ROOT / "data" / "cache" / "rules_audit_plans.pkl"
 
@@ -64,39 +64,98 @@ EXIT_KEYS = {"tr0.5": (0.5, dtime(11, 30)), "tr1.5": (1.5, dtime(11, 30)), "tr2.
 
 
 # ------------------------------------------------------------------ engine
+#: Bar-order readings of a 1-minute bar (added after the 2026-10-01 adversarial
+#: review; mode A is the preregistered run, reproduced exactly):
+#:   A   as run — `backtest_recent` semantics: the fill bar's high ratchets the
+#:       trail even when the fill came on the way DOWN to the cap, the fill
+#:       bar's low stops the trade even if it came before the fill, the order
+#:       expiry counts bars;
+#:   C   corrected — on a cap-return fill the fill bar ratchets only with
+#:       max(fill, close); the expiry counts minutes from the order;
+#:   CA  C, and a fill-bar low under the stop is taken to have come BEFORE a
+#:       fill at the trigger (the stop-limit had not yet triggered);
+#:   H   C, and on every later bar the high comes first (a spike then a fade
+#:       inside the minute, as the live 10-second trail would see it).
+MODES = ("A", "C", "CA", "H")
+
+
 def cap_of(entry: float, cap_pct: float) -> float:
     """A10's limit: trigger + max(1 cent, cap %) — execution.intent.entry_limit at 0.3 %."""
     return round(entry + max(0.01, entry * cap_pct / 100.0), 4)
 
 
-def fill_retouch(fwd: list, entry: float, ttl: int, cap_pct: float):
+def fill_retouch(fwd: list, entry: float, ttl: int, cap_pct: float, order_t: int | None = None):
     """`backtest_recent.plans_for_day(gap_miss=True)`, with the expiry and the cap
-    as parameters: (index into fwd, fill price) or None."""
+    as parameters: (index into fwd, fill price, kind) or None. kind is 'entry'
+    (crossed the trigger), 'open' (opened between trigger and cap) or
+    'cap_return' (opened above the cap, filled on the way back down). With
+    `order_t` (epoch of the order) the expiry is `ttl` MINUTES from the order,
+    as the live runner cancels it; without, `ttl` bars as backtest_recent did."""
     cap = cap_of(entry, cap_pct)
-    touch = next((k for k, b in enumerate(fwd[:ttl]) if b[2] >= entry), None)
+    if order_t is None:
+        window = list(range(min(ttl, len(fwd))))
+    else:
+        window = [k for k, b in enumerate(fwd) if b[0].timestamp() < order_t + ttl * 60]
+    touch = next((k for k in window if fwd[k][2] >= entry), None)
     if touch is None:
         return None
     o = fwd[touch][1]
     if o > cap:
-        back = next((k for k in range(touch, min(len(fwd), touch + ttl)) if fwd[k][3] <= cap), None)
-        return None if back is None else (back, cap)
+        back_range = (range(touch, min(len(fwd), touch + ttl)) if order_t is None
+                      else [k for k in window if k >= touch])
+        back = next((k for k in back_range if fwd[k][3] <= cap), None)
+        return None if back is None else (back, cap, "cap_return")
     if o > entry:
-        return touch, o
-    return touch, entry
+        return touch, o, "open"
+    return touch, entry, "entry"
 
 
-def run_exit(bars: list, entry: float, stop: float, fill: float, trail_r: float, flat: dtime):
+def run_exit(bars: list, entry: float, stop: float, fill: float, trail_r: float, flat: dtime,
+             mode: str = "A", kind: str = "entry"):
     """A3 trail (`backtest_recent.simulate` 'trail' with the multiple and the
-    flatten time as parameters). Returns (R, stopish, exit bar index)."""
+    flatten time as parameters), under one bar-order reading (MODES). Returns
+    (R, stopish, exit bar index)."""
     rps = entry - stop
     level = stop
     for k, (ts, o, h, l, c, v) in enumerate(bars):
         if ts.time() >= flat:
             return (o - fill) / rps, True, k                # a market flatten crosses the spread too
+        if k == 0:
+            skip_low = mode == "CA" and kind == "entry" and o <= entry
+            if l <= level and not skip_low:
+                return (min(level, o) - fill) / rps, True, k
+            top = max(fill, c) if (mode != "A" and kind == "cap_return") else h
+            level = max(level, top - trail_r * rps)
+            continue
+        if mode == "H":
+            # open, then the high, then the low: a gap under the standing stop
+            # fills at the open; otherwise the high raises the stop first and
+            # the fade takes it out at that raised level.
+            if o <= level:
+                return (o - fill) / rps, True, k
+            level = max(level, h - trail_r * rps)
+            if l <= level:
+                return (level - fill) / rps, True, k
+            continue
         if l <= level:
             return (min(level, o) - fill) / rps, True, k
         level = max(level, h - trail_r * rps)
     return (bars[-1][4] - fill) / rps, False, len(bars) - 1
+
+
+def _red(g: dict, entry: float, volume_ok: bool) -> list:
+    red = []
+    if not (E.PRICE_MIN <= entry <= E.PRICE_MAX):
+        red.append("price")
+    if g["above_vwap"] is not True:
+        red.append("vwap")
+    if g["above_ema9"] is not True:
+        red.append("ema9")
+    if g["macd_positive_and_above_signal"] is not True:
+        red.append("macd")
+    if not volume_ok:
+        red.append("volume")
+    return red
 
 
 def plans_for_symbol_day(sym: str, day: str, rows: list, prev_close: float) -> list[dict]:
@@ -105,6 +164,7 @@ def plans_for_symbol_day(sym: str, day: str, rows: list, prev_close: float) -> l
     hi = None
     out = []
     for i, (ts, o, h, l, c, v) in enumerate(rows):
+        hi_prev = hi
         hi = h if hi is None else max(hi, h)
         hist.append([int(ts.timestamp()), o, h, l, c, v])
         plan = det.on_bar(Bar(symbol=sym, timeframe="1m", ts=ts.astimezone(timezone.utc),
@@ -114,18 +174,12 @@ def plans_for_symbol_day(sym: str, day: str, rows: list, prev_close: float) -> l
         entry, stop = round(plan.entry, 4), round(plan.stop, 4)
         if entry - stop <= 0:
             continue
-        g = I.chart_gates(hist)
-        red = []
-        if not (E.PRICE_MIN <= entry <= E.PRICE_MAX):
-            red.append("price")
-        if g["above_vwap"] is not True:
-            red.append("vwap")
-        if g["above_ema9"] is not True:
-            red.append("ema9")
-        if g["macd_positive_and_above_signal"] is not True:
-            red.append("macd")
-        if not plan.volume_ok:
-            red.append("volume")
+        red = _red(I.chart_gates(hist), entry, plan.volume_ok)
+        # The live desk arms while the trigger bar forms and freezes the gates
+        # then: it never sees this bar's close. For an entry ON the trigger bar
+        # the honest gates are the last completed bar's (review 2026-10-01).
+        red_prev = _red(I.chart_gates(hist[:-1]), entry, plan.volume_ok)
+        c_prev = rows[i - 1][4] if i else c
         m = I.macd([b[4] for b in hist])
         macd_line_pos = bool(m and m[0][-1] > 0)
         imp = list(det._w.impulse_bars)
@@ -136,46 +190,57 @@ def plans_for_symbol_day(sym: str, day: str, rows: list, prev_close: float) -> l
         k0 = next((j for j in range(len(hist)) if hist[j][0] == first_imp), None)
         before = [b[5] for b in hist[max(0, (k0 or 0) - 10):(k0 or 0)]] if k0 is not None else []
         push_elevated = bool(before) and (sum(vols) / len(vols)) >= (sum(before) / len(before))
+        leg_low = imp[0].open if imp else None
+        leg = (plan.impulse_high - leg_low) if leg_low else None
+        retrace = (plan.impulse_high - plan.pullback_low) / leg if leg and leg > 0 else None
         pm = ts.time() < RTH
         dv5 = float(sum(b[4] * b[5] for b in hist[-5:]))
         spread = PROXY.spread(entry, pm, dv5)
         rec = {"sym": sym, "day": day, "t": ts.strftime("%H:%M"), "arm": int(ts.timestamp()),
                "entry": entry, "stop": stop, "stop_pct": (entry - stop) / entry * 100.0,
                "fade": 100.0 * (hi - c) / hi if hi else 0.0, "red": red,
+               "fade_prev": 100.0 * (hi_prev - c_prev) / hi_prev if hi_prev else 0.0, "red_prev": red_prev,
+               "retrace": retrace,
                "macd_line_pos": macd_line_pos, "push_rising": push_rising, "push_elevated": push_elevated,
                "pm": pm, "dv5": dv5, "spread_ratio": (entry - stop) / spread if spread > 0 else 99.0,
                "out": {}}
         fwd = rows[i + 1:]
         if not fwd:
             out.append(rec); continue
-        for key, (model, ttl, cap_pct) in ENTRY_KEYS.items():
-            f = None
-            if model == "ib":
-                cap = cap_of(entry, cap_pct)
-                if o <= entry <= h:
-                    f = ("bar", entry)                      # crossed while the trigger bar formed
-                elif entry < o <= cap:
-                    f = ("bar", o)
-                if f is not None:
-                    bars = rows[i:]
-                    r, stopish, k = run_exit(bars, entry, stop, f[1], 1.0, dtime(11, 30))
-                    rec["out"][key] = (int(bars[0][0].timestamp()), int(bars[k][0].timestamp()), round(r, 4), stopish, f[1])
-                    continue
-            got = fill_retouch(fwd, entry, ttl, cap_pct)
-            if got is None:
-                rec["out"][key] = None; continue
-            fk, px = got
-            bars = fwd[fk:]
-            r, stopish, k = run_exit(bars, entry, stop, px, 1.0, dtime(11, 30))
-            rec["out"][key] = (int(bars[0][0].timestamp()), int(bars[k][0].timestamp()), round(r, 4), stopish, px)
-        base_fill = fill_retouch(fwd, entry, 3, 0.3)
-        for key, (trail_r, flat) in EXIT_KEYS.items():
-            if base_fill is None:
-                rec["out"][key] = None; continue
-            fk, px = base_fill
-            bars = fwd[fk:]
-            r, stopish, k = run_exit(bars, entry, stop, px, trail_r, flat)
-            rec["out"][key] = (int(bars[0][0].timestamp()), int(bars[k][0].timestamp()), round(r, 4), stopish, px)
+        order_t = int(ts.timestamp()) + 60
+        for mode in MODES:
+            mins = None if mode == "A" else order_t
+            for key, (model, ttl, cap_pct) in ENTRY_KEYS.items():
+                f = None
+                if model == "ib":
+                    cap = cap_of(entry, cap_pct)
+                    if o <= entry <= h:
+                        f = (entry, "entry")                # crossed while the trigger bar formed
+                    elif entry < o <= cap:
+                        f = (o, "open")
+                    if f is not None:
+                        bars = rows[i:]
+                        r, stopish, k = run_exit(bars, entry, stop, f[0], 1.0, dtime(11, 30), mode, f[1])
+                        rec["out"][(mode, key)] = (int(bars[0][0].timestamp()), int(bars[k][0].timestamp()),
+                                                   round(r, 4), stopish, f[0])
+                        continue
+                got = fill_retouch(fwd, entry, ttl, cap_pct, mins)
+                if got is None:
+                    rec["out"][(mode, key)] = None; continue
+                fk, px, kind = got
+                bars = fwd[fk:]
+                r, stopish, k = run_exit(bars, entry, stop, px, 1.0, dtime(11, 30), mode, kind)
+                rec["out"][(mode, key)] = (int(bars[0][0].timestamp()), int(bars[k][0].timestamp()),
+                                           round(r, 4), stopish, px)
+            base_fill = fill_retouch(fwd, entry, 3, 0.3, mins)
+            for key, (trail_r, flat) in EXIT_KEYS.items():
+                if base_fill is None:
+                    rec["out"][(mode, key)] = None; continue
+                fk, px, kind = base_fill
+                bars = fwd[fk:]
+                r, stopish, k = run_exit(bars, entry, stop, px, trail_r, flat, mode, kind)
+                rec["out"][(mode, key)] = (int(bars[0][0].timestamp()), int(bars[k][0].timestamp()),
+                                           round(r, 4), stopish, px)
         out.append(rec)
     return out
 
@@ -211,29 +276,39 @@ def collect(days: list[str], uni: dict, cache: str, procs: int) -> list[dict]:
 
 # ------------------------------------------------------------------ costs
 def cost_live(entry: float, stop: float, stopish: bool, pm: bool, dv5: float,
-              risk: float = 40.0, notional: float | None = 2000.0) -> float:
+              risk: float = 40.0, notional: float | None = 2000.0, model: str = "live") -> float:
     """`backtest_recent.cost_r` model "live", with the risk and the cap as
-    parameters (F1). tests/test_rules_audit.py pins it to cost_r at $40 / $2,000."""
+    parameters (F1). tests/test_rules_audit.py pins it to cost_r at $40 / $2,000.
+    model "old": one cent a marketable side, no spread (the preregistered
+    sensitivity); "light": the larger of the half-spread and one cent a side
+    (edge_hunt.costs "light"); "none": gross."""
+    if model == "none":
+        return 0.0
     rps = entry - stop
     sh = int(risk // rps)
     if notional:
         sh = min(sh, int(notional // entry))
     sh = max(1, sh)
     half = PROXY.spread(entry, pm, dv5) / 2
+    per = {"live": half + 0.01, "old": 0.01, "light": max(half, 0.01)}[model]
     comm = 2 * min(max(1.0, 0.005 * sh), max(1.0, 0.01 * sh * entry))
-    fric = sh * (half + 0.01) * (2 if stopish else 1)
+    fric = sh * per * (2 if stopish else 1)
     return round((comm + fric) / (sh * rps), 3)
 
 
 # ------------------------------------------------------------------ rules and portfolio
 BASE = dict(fade=25.0, stop_floor=2.0, spread_k=4.0, start="07:00", end="11:20", push=None, macd_line=False,
-            key="base", ttl=3, max_pos=1, loss=3.0, streak=3, orders=6, risk=40.0, notional=2000.0)
+            key="base", ttl=3, max_pos=1, loss=3.0, streak=3, orders=6, risk=40.0, notional=2000.0,
+            mode="A", costs="live", gates="close", retrace=None)
 
 
 def passes(p: dict, c: dict) -> bool:
-    if p["red"]:
+    prev = c.get("gates") == "prev"
+    if (p["red_prev"] if prev else p["red"]):
         return False
-    if c["fade"] is not None and p["fade"] > c["fade"]:
+    if c["fade"] is not None and (p["fade_prev"] if prev else p["fade"]) > c["fade"]:
+        return False
+    if c.get("retrace") is not None and (p["retrace"] is None or p["retrace"] > c["retrace"]):
         return False
     if c["stop_floor"] and p["stop_pct"] < c["stop_floor"]:
         return False
@@ -279,14 +354,15 @@ def portfolio(plans_by_day: dict, c: dict) -> list[dict]:
             if (c["max_pos"] and len(busy) >= c["max_pos"]) or any(s == p["sym"] for _, s in busy):
                 continue
             orders += 1
-            o = p["out"].get(c["key"])
+            o = p["out"].get((c.get("mode", "A"), c["key"]))
             if o is None:
                 busy.append((t_order + c["ttl"] * 60, p["sym"]))
                 continue
             t_in, t_out, r, stopish, px = o
             busy.append((t_out + 60, p["sym"]))
             pending.append((t_out + 60, r))
-            net = r - cost_live(p["entry"], p["stop"], stopish, p["pm"], p["dv5"], c["risk"], c["notional"])
+            net = r - cost_live(p["entry"], p["stop"], stopish, p["pm"], p["dv5"], c["risk"], c["notional"],
+                                c.get("costs", "live"))
             trades.append({"day": day, "t": p["t"], "sym": p["sym"], "gross": r, "net": net,
                            "win": window_of(p["t"]), "out": t_out})
     return trades
@@ -392,20 +468,35 @@ SENSITIVITIES = [("entry model", "intrabar fill (live-like)", {"key": "intrabar"
 RISK_RULES = ("E6", "E7", "F1")
 
 
-def verdict(group: str, b: dict, v: dict, lb: float) -> tuple[str, dict]:
-    tr_ok = v["train"].get("n", 0) and v["train"]["mean"] > b["train"]["mean"]
-    te_ok = v["test"].get("n", 0) and v["test"]["mean"] > b["test"]["mean"]
+def verdict(group: str, b: dict, v: dict, lb: float, scale: float = 1.0) -> tuple[str, dict]:
+    """The preregistered adoption rule. `scale` = variant risk / $40: a sizing
+    variant is judged in DOLLARS (review 2026-10-01: in R, $80 risk 'passed'
+    while losing 50 % more dollars), so its means and drawdown are scaled."""
+    tr_ok = v["train"].get("n", 0) and v["train"]["mean"] * scale > b["train"]["mean"]
+    te_ok = v["test"].get("n", 0) and v["test"]["mean"] * scale > b["test"]["mean"]
     n_ok = v["test"].get("n", 0) >= 200
     yrs = sum(1 for y in ("2024", "2025", "2026")
               if v["years"][y].get("n", 0) and b["years"][y].get("n", 0)
-              and v["years"][y]["mean"] > b["years"][y]["mean"])
-    lb_ok = lb == lb and lb > 0
+              and v["years"][y]["mean"] * scale > b["years"][y]["mean"])
+    lb_ok = lb == lb and lb > 0 and scale == 1.0
+    if scale != 1.0:                          # dollars: the per-trade gap itself, no bootstrap in R
+        lb_ok = bool(te_ok and tr_ok)
     dd_ok = True
     if group.split()[0] in RISK_RULES:
-        dd_ok = v["test"].get("max_dd", 1e9) <= 1.10 * b["test"].get("max_dd", 0)
+        dd_ok = v["test"].get("max_dd", 1e9) * scale <= 1.10 * b["test"].get("max_dd", 0)
     checks = {"train better": bool(tr_ok), "test better": bool(te_ok), ">=200 test trades": bool(n_ok),
               "2 of 3 test years": yrs >= 2, "paired lower bound > 0": bool(lb_ok), "drawdown ok": bool(dd_ok)}
     return ("ADOPT" if all(checks.values()) else "keep B"), checks
+
+
+POSTHOC = [
+    ("post-hoc combo", "start 09:30 + stop 3 %", {"start": "09:30", "stop_floor": 3.0}),
+    ("post-hoc combo", "stop 3 % + spread 6x", {"stop_floor": 3.0, "spread_k": 6.0}),
+]
+ROSS_RETRACE = [
+    ("Ross retrace", "pullback <= 50 % of the push (with rule 5)", {"retrace": 0.5}),
+    ("Ross retrace", "pullback <= 50 % of the push, instead of rule 5", {"retrace": 0.5, "fade": None}),
+]
 
 
 def main(argv=None) -> int:
@@ -422,9 +513,12 @@ def main(argv=None) -> int:
     if args.sample:
         days = sorted(random.Random(20261001).sample(days, args.sample))
     cache_ok = PLANS_CACHE.exists() and not args.rebuild and not args.sample
+    plans = None
     if cache_ok:
         plans = pickle.loads(PLANS_CACHE.read_bytes())
-    else:
+        if plans and ("C", "base") not in plans[0]["out"] and plans[0]["out"]:
+            plans = None                                   # a cache from before the bar-order modes
+    if plans is None:
         plans = collect(days, uni, args.cache, args.procs)
         if not args.sample:
             PLANS_CACHE.parent.mkdir(parents=True, exist_ok=True)
@@ -433,45 +527,87 @@ def main(argv=None) -> int:
     for p in plans:
         by_day[p["day"]].append(p)
     print(f"{len(plans)} plans armed 07:00-11:30 on {len(by_day)} sessions · costs live ($40 / $2,000, spread proxy + 1c)")
-    base_tr = portfolio(by_day, BASE)
-    b = split_stats(base_tr)
-    res = {"baseline": b, "variants": [], "sensitivities": [], "alpha": ALPHA, "K": K_VARIANTS}
+    res = {"alpha": ALPHA, "K": K_VARIANTS, "modes": {}, "robustness": []}
 
     def line(name, s):
         tr, te = s["train"], s["test"]
-        return (f"  {name:<40}{tr.get('n', 0):>7}{tr.get('mean', float('nan')):>+9.3f}"
-                f"{te.get('n', 0):>7}{te.get('mean', float('nan')):>+9.3f}{te.get('total', 0):>+10.1f}"
-                f"{te.get('max_dd', 0):>8.1f}{te.get('lose_streak', 0):>6}{te.get('worst_day', 0):>+8.1f}"
-                f"{te.get('per_month', 0):>7.1f}")
+        return (f"  {name:<46}{tr.get('n', 0):>6}{tr.get('mean', float('nan')):>+8.3f}"
+                f"{te.get('n', 0):>6}{te.get('mean', float('nan')):>+8.3f}{te.get('total', 0):>+9.1f}"
+                f"{te.get('max_dd', 0):>7.1f}{te.get('lose_streak', 0):>5}{te.get('worst_day', 0):>+7.1f}"
+                f"{te.get('per_month', 0):>6.1f}")
+    hdr = (f"  {'rule · variant':<46}{'tr n':>6}{'tr R':>8}{'te n':>6}{'te R':>8}{'te tot':>9}"
+           f"{'te DD':>7}{'strk':>5}{'worst':>7}{'/mo':>6}")
 
-    hdr = (f"  {'rule · variant':<40}{'tr n':>7}{'tr R':>9}{'te n':>7}{'te R':>9}{'te tot':>10}"
-           f"{'te DD':>8}{'strk':>6}{'worst':>8}{'/mo':>7}")
-    print("\nBASELINE B (live rules) · one position · net R per trade")
-    print(hdr)
-    print(line("B", b))
-    for y in ("2024", "2025", "2026"):
-        s = b["years"][y]
-        print(f"    test {y}: n {s.get('n', 0)} · mean {s.get('mean', float('nan')):+.3f} · total {s.get('total', 0):+.1f}")
-    for w, s in b["windows"].items():
-        print(f"    {w:<12} train {s['train'].get('n', 0):>5} {s['train'].get('mean', float('nan')):+.3f}"
-              f" · test {s['test'].get('n', 0):>5} {s['test'].get('mean', float('nan')):+.3f}")
-    print("\nVARIANTS, one at a time against B")
-    print(hdr + "  verdict")
-    for group, name, over in VARIANTS:
-        c = dict(BASE, **over)
-        tr = portfolio(by_day, c)
-        s = split_stats(tr)
-        lb = paired_lb(tr, base_tr)
-        v, checks = verdict(group, b, s, lb)
-        res["variants"].append({"group": group, "variant": name, "stats": s, "paired_lb": lb,
-                                "verdict": v, "checks": checks})
-        yrs = " ".join(f"{s['years'][y].get('mean', float('nan')):+.2f}" for y in ("2024", "2025", "2026"))
-        print(line(f"{group} · {name}", s) + f"  {v}  (lb {lb:+.3f} · yrs {yrs})", flush=True)
-    print("\nSENSITIVITIES (never deciding)")
-    for group, name, over in SENSITIVITIES:
-        s = split_stats(portfolio(by_day, dict(BASE, **over)))
-        res["sensitivities"].append({"group": group, "variant": name, "stats": s})
-        print(line(f"{group} · {name}", s))
+    base_trades, base_stats, verdicts = {}, {}, defaultdict(dict)
+    for mode in ("A", "C"):
+        bc = dict(BASE, mode=mode)
+        base_trades[mode] = portfolio(by_day, bc)
+        b = base_stats[mode] = split_stats(base_trades[mode])
+        title = ("A — as preregistered (backtest_recent bar semantics)" if mode == "A"
+                 else "C — corrected bar order (cap-return fill bar, expiry in minutes)")
+        print(f"\n=== MODE {title} ===")
+        print("BASELINE B (live rules) · one position · net R per trade")
+        print(hdr)
+        print(line("B", b))
+        for y in ("2024", "2025", "2026"):
+            sy = b["years"][y]
+            print(f"    test {y}: n {sy.get('n', 0)} · mean {sy.get('mean', float('nan')):+.3f} · total {sy.get('total', 0):+.1f}")
+        for w, sw in b["windows"].items():
+            print(f"    {w:<12} train {sw['train'].get('n', 0):>5} {sw['train'].get('mean', float('nan')):+.3f}"
+                  f" · test {sw['test'].get('n', 0):>5} {sw['test'].get('mean', float('nan')):+.3f}")
+        print("\nVARIANTS, one at a time against B")
+        print(hdr + "  verdict")
+        rows = []
+        for group, name, over in VARIANTS + POSTHOC + ROSS_RETRACE:
+            c = dict(bc, **over)
+            tr = portfolio(by_day, c)
+            s_ = split_stats(tr)
+            lb = paired_lb(tr, base_trades[mode])
+            scale = c["risk"] / 40.0
+            v, checks = verdict(group, b, s_, lb, scale)
+            verdicts[(group, name)][mode] = (v, lb, s_["test"].get("mean"))
+            rows.append({"group": group, "variant": name, "stats": s_, "paired_lb": lb, "verdict": v, "checks": checks})
+            yrs = " ".join(f"{s_['years'][y].get('mean', float('nan')):+.2f}" for y in ("2024", "2025", "2026"))
+            print(line(f"{group} · {name}", s_) + f"  {v}  (lb {lb:+.3f} · yrs {yrs})", flush=True)
+        res["modes"][mode] = {"baseline": b, "variants": rows}
+
+    print("\n=== ADOPTION: a change must pass under BOTH A and C (addendum 2026-10-01b) ===")
+    both = []
+    for (group, name), d in verdicts.items():
+        ok = all(d.get(m, ("keep B",))[0] == "ADOPT" for m in ("A", "C"))
+        flag = "POST-HOC: contaminated, switch OFF until 200 prospective trades" if group == "post-hoc combo" else ""
+        if any(d.get(m, ("keep B",))[0] == "ADOPT" for m in ("A", "C")):
+            print(f"  {group} · {name:<46} A {d['A'][0]:<7}(lb {d['A'][1]:+.3f})  C {d['C'][0]:<7}(lb {d['C'][1]:+.3f})"
+                  f"  -> {'PASSES BOTH' if ok else 'fails one'} {flag}")
+        if ok:
+            both.append((group, name))
+    res["pass_both"] = both
+
+    print("\n=== ROBUSTNESS (never deciding): bar readings CA and H, cost models, live-like intrabar entry gated at the break ===")
+    focus = [("B", {})] + [(f"{g} · {n}", o) for g, n, o in VARIANTS + POSTHOC + ROSS_RETRACE
+                            if any(verdicts[(g, n)].get(m, ("",))[0] == "ADOPT" for m in ("A", "C"))]
+    settings = [("CA", "live", "close", "base"), ("H", "live", "close", "base"),
+                ("A", "old", "close", "base"), ("C", "old", "close", "base"),
+                ("A", "light", "close", "base"), ("C", "none", "close", "base"),
+                ("C", "live", "prev", "intrabar")]
+    print(f"  {'variant':<52}" + "".join(f"{m}/{cst}/{g[:4]}/{k[:5]:>6}".rjust(22) for m, cst, g, k in settings))
+    ref = {}
+    for st in settings:
+        m, cst, g, k = st
+        ref[st] = portfolio(by_day, dict(BASE, mode=m, costs=cst, gates=g, key=k))
+    for name, over in focus:
+        cells = []
+        for st in settings:
+            m, cst, g, k = st
+            tr = ref[st] if not over else portfolio(by_day, dict(BASE, mode=m, costs=cst, gates=g, key=k, **over))
+            s_ = split_stats(tr)
+            lb = float("nan") if not over else paired_lb(tr, ref[st])
+            cells.append(f"{s_['train'].get('mean', float('nan')):+.3f}/{s_['test'].get('mean', float('nan')):+.3f}"
+                         + (f" {lb:+.3f}" if over else "       "))
+            res["robustness"].append({"variant": name, "setting": st, "train": s_["train"].get("mean"),
+                                      "test": s_["test"].get("mean"), "n_test": s_["test"].get("n"), "lb": lb})
+        print(f"  {name:<52}" + "".join(c.rjust(22) for c in cells), flush=True)
+    print("  cells: train mean / test mean net R per trade, then the paired lower bound against B in the same setting")
     Path(args.json).write_text(json.dumps(res, indent=1, default=str))
     print(f"\nwritten {args.json}")
     return 0
