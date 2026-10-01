@@ -110,6 +110,25 @@ Entry line, never `ARMED`.
 `~/Library/Logs/day-trading-bot/`. The Gateway login stays yours.
 `bash scripts/install_daily.sh --remove` takes it out.
 
+### Watching a day the agent started
+
+Nothing appears in a terminal: the day runs in the background. Its lock
+refuses a second `day.py` ("a trading day is already running … pid N"), and
+`kill -INT N` is the only clean way to stop it early.
+
+| to see | run (in the repo, any terminal) |
+|---|---|
+| the executor's log — REFUSED, TAKEN, fills, exits, stop enforcement — live | `tail -f ~/Library/Logs/day-trading-bot/day.out.log` |
+| errors only | `tail -f ~/Library/Logs/day-trading-bot/day.err.log` |
+| **every** plan, including the ones the stock filters KILL (they never reach the executor log), plus orders, fills, exits and order events, live | `python3 scripts/watch.py` |
+| the desk itself | http://127.0.0.1:8787/ |
+
+Ctrl-C in these windows stops the viewer, never the bot. `watch.py` opens
+the ledger read-only and needs nothing but the standard library, so it also
+runs against an older checkout. The agent runs `git pull` before starting: a
+local file that a pull would overwrite (an untracked report under
+`research/`) makes it run yesterday's code — move such a file aside.
+
 ## If something looks wrong
 
 - **Desk shows no plans all morning** → `exercise.py report`: the REJECTS
