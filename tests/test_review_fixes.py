@@ -212,3 +212,22 @@ def test_the_review_command_runs_on_a_fixture_ledger(tmp_path):
     assert r.returncode == 0, r.stderr
     for h in ("SESSIONS", "WHAT KILLS", "VERDICTS AT THE PLAN", "CONTROLS", "REPLAY", "RISK TODAY"):
         assert h in r.stdout
+
+
+def test_the_entry_cap_counts_sent_orders_not_the_intent_being_asked_about():
+    """Rules audit 2026-10-01: the intent row exists before place_bracket asks
+    the gate, so 'entries >= 6' locked on the 6th attempt — a 5-entry cap — and
+    a row refused before sending counted as an entry."""
+    c = L.connect(":memory:"); build_session(FIXTURE, journal=c)
+    gate = JournalRiskGate(c, Limits(max_daily_loss_r=99, consecutive_losses=99, max_entries_per_day=6),
+                           today=lambda: "2026-09-01")
+    for _ in range(5):
+        _order(c, fill=5.0, exit_=5.0)                      # five sent, scratched
+    did = L.decisions(c, plan_allowed=1)[0]["decision_id"]
+    L.record_intent(c, did, symbol="X", session="regular", trigger=5.0, stop=4.8, target=None,
+                    shares=100, dollar_risk=20.0)           # the 6th, being asked about
+    c.execute("UPDATE orders SET placed_at='2026-09-01T14:40:00Z' WHERE status='intent'")
+    gate.assert_can_buy()                                   # the 6th entry is allowed
+    _order(c, fill=5.0, exit_=5.0)                          # it was sent
+    with pytest.raises(RiskVeto, match="entries"):
+        gate.assert_can_buy()                               # a 7th is not

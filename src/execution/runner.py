@@ -80,6 +80,18 @@ SELECTIVE_MIN_PRICE = 2.0
 #: or second plan" live meant "none after dawn", not the ablation's pullback count.
 SELECTIVE_MAX_PLAN_INDEX = None
 
+#: A15 CANDIDATE, OFF — no new entries before 09:30 and stops of at least 3 % of
+#: price. The rules audit (research/paper-exercise/reports/rules_audit_output_v2.txt)
+#: found no single rule change that survives both bar readings; this pair does
+#: (test -0.293 / -0.304 R a trade against -0.477 / -0.475 for the live rules),
+#: but it was chosen after seeing 2024-2026 and both levers had been read on
+#: those years. research/edge-hunt/PREREGISTRATION.md §3: a contaminated
+#: configuration stays OFF until >= 200 prospective paper trades confirm it —
+#: scored on the ledger with `exercise.py whatif --start 09:30 --stop-pct 3`.
+A15_CANDIDATE = False
+A15_START = "09:30"
+A15_MIN_STOP_PCT = 3.0
+
 MODES = ("LOG_ONLY", "TRADE")
 
 
@@ -302,6 +314,12 @@ class Runner:
                            f"— chart gates must all be true at entry")
         if self.mode == "TRADE" and SELECTIVE:
             reasons.extend(self._selective(row, intent))
+        if self.mode == "TRADE" and A15_CANDIDATE:
+            if str(row["ts_et"] or "")[11:16] < A15_START:
+                reasons.append(f"no new entries before {A15_START} (A15 candidate)")
+            if intent.trigger and intent.risk_per_share / intent.trigger * 100 < A15_MIN_STOP_PCT:
+                reasons.append(f"A15 candidate: stop {intent.risk_per_share / intent.trigger * 100:.1f}% of price, "
+                               f"under {A15_MIN_STOP_PCT:g}%")
         if self.mode == "TRADE" and not reasons:
             # Alignment at the instant of the order. The decision was made on
             # the desk's tape; the order goes to a different session that may

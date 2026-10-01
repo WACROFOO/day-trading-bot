@@ -72,8 +72,13 @@ def closed_trades(conn: sqlite3.Connection, day: str) -> list[dict]:
 
 
 def entries_today(conn: sqlite3.Connection, day: str) -> int:
-    return conn.execute("SELECT COUNT(*) FROM orders WHERE substr(placed_at,1,10)=? OR "
-                        "substr(fill_ts,1,10)=?", (day, day)).fetchone()[0]
+    """Orders SENT today. The order being asked about is already an 'intent'
+    row when place_bracket asks the gate, so counting every row made the
+    6-entry cap a 5-entry cap; and a row refused before sending is not an
+    entry either. A sent order carries the broker's parent id (rules audit
+    2026-10-01)."""
+    return conn.execute("SELECT COUNT(*) FROM orders WHERE parent_id IS NOT NULL AND "
+                        "(substr(placed_at,1,10)=? OR substr(fill_ts,1,10)=?)", (day, day)).fetchone()[0]
 
 
 class JournalRiskGate:

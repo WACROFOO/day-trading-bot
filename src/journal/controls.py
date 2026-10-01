@@ -320,8 +320,10 @@ def refusal_key(text: str) -> str:
         return "one position at a time"
     if t.startswith("bar is outside the"):
         return "outside the 07:00-16:00 session window"
-    if t.startswith("no new entries before 09:30"):
-        return "no pre-market entries (A15)"
+    if t.startswith("no new entries before") and "A15" in t:
+        return "A15 candidate: no pre-market entries"
+    if t.startswith("A15 candidate: stop"):
+        return "A15 candidate: stop floor"
     return t.split(" — ")[0].split(":")[0].split(";")[0][:44]
 
 

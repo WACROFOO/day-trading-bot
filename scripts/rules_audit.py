@@ -486,6 +486,11 @@ def verdict(group: str, b: dict, v: dict, lb: float, scale: float = 1.0) -> tupl
         dd_ok = v["test"].get("max_dd", 1e9) * scale <= 1.10 * b["test"].get("max_dd", 0)
     checks = {"train better": bool(tr_ok), "test better": bool(te_ok), ">=200 test trades": bool(n_ok),
               "2 of 3 test years": yrs >= 2, "paired lower bound > 0": bool(lb_ok), "drawdown ok": bool(dd_ok)}
+    if group.split()[0] == "F1":
+        # With a negative expectancy, less money at risk always loses fewer
+        # dollars and more always loses more: neither unit can judge a sizing
+        # change. It is the owner's capital decision; R is reported for costs.
+        return "OWNER", checks
     return ("ADOPT" if all(checks.values()) else "keep B"), checks
 
 

@@ -64,3 +64,27 @@ def test_plan_index_lever_is_off_by_default():
     for m in range(5):
         row = _plan(c, "AAA", f"2026-09-29T09:4{m}:00", 10.00, 9.70)
     assert r._selective(row, _intent(row)) == []
+
+
+def test_a15_candidate_is_off_and_refuses_premarket_and_tight_stops_when_on(monkeypatch):
+    """Rules audit 2026-10-01: contaminated, so OFF until 200 prospective trades."""
+    assert RN.A15_CANDIDATE is False
+    from datetime import datetime, timezone
+    from execution.runner import Runner
+    from journal import ledger as L
+    from momentum_platform.dashboard.session_builder import build_session
+    root = Path(__file__).resolve().parents[1]
+    c = L.connect(":memory:"); build_session(root / "fixtures/market_replay/workstation_open_2026-09-01.jsonl", journal=c)
+    c.execute("UPDATE decisions SET verdict='REVIEW' WHERE plan_allowed=1"); c.commit()
+    L.set_state(c, phase="B")
+    monkeypatch.setattr(RN, "A15_CANDIDATE", True)
+    monkeypatch.setattr(RN, "SELECTIVE", False)
+    class T:
+        account = "DU1"; placed = []
+        def place_bracket(self, *a, **k): raise AssertionError("refused before placing")
+        def adopt(self, rows): return 0
+        def sync(self): pass
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=T(), max_age_s=3600, quote=lambda s: None,
+               now=lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc))
+    done = r.step()
+    assert done and all(any("A15 candidate" in x for x in a.reasons) for a in done)

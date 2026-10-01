@@ -1,0 +1,140 @@
+88823 plans armed 07:00-11:30 on 2576 sessions · costs live ($40 / $2,000, spread proxy + 1c)
+
+=== MODE A — as preregistered (backtest_recent bar semantics) ===
+BASELINE B (live rules) · one position · net R per trade
+  rule · variant                                  tr n    tr R  te n    te R   te tot  te DD strk  worst   /mo
+  B                                               2246  -0.411  1492  -0.477   -712.2  712.2   24  -12.0  46.6
+    test 2024: n 512 · mean -0.491 · total -251.4
+    test 2025: n 606 · mean -0.480 · total -290.9
+    test 2026: n 374 · mean -0.454 · total -169.9
+    pre-market   train   835 -0.444 · test   713 -0.575
+    09:30-10:30  train  1100 -0.378 · test   611 -0.391
+    10:30-11:30  train   311 -0.441 · test   168 -0.378
+
+VARIANTS, one at a time against B
+  rule · variant                                  tr n    tr R  te n    te R   te tot  te DD strk  worst   /mo  verdict
+  5 still rising · off the high <= 15 %           2125  -0.407  1385  -0.480   -665.2  666.0   18  -12.0  43.3  keep B  (lb -0.040 · yrs -0.51 -0.49 -0.42)
+  5 still rising · off the high <= 35 %           2273  -0.403  1507  -0.472   -711.2  711.2   24  -12.0  47.1  keep B  (lb -0.005 · yrs -0.48 -0.47 -0.45)
+  5 still rising · off the high <= 50 %           2283  -0.400  1511  -0.473   -714.6  714.6   24  -12.0  47.2  keep B  (lb -0.008 · yrs -0.49 -0.48 -0.45)
+  5 still rising · off                            2286  -0.398  1511  -0.473   -714.6  714.6   24  -12.0  47.2  keep B  (lb -0.008 · yrs -0.49 -0.48 -0.45)
+  E1 window · start 08:00                         2053  -0.404  1335  -0.436   -582.0  582.0   19  -11.8  41.7  keep B  (lb -0.003 · yrs -0.44 -0.45 -0.41)
+  E1 window · start 09:30                         1576  -0.389   956  -0.383   -366.4  367.8   14   -6.9  29.9  ADOPT  (lb +0.003 · yrs -0.36 -0.41 -0.38)
+  E1 window · end 10:30                           1935  -0.406  1324  -0.490   -648.8  648.8   21  -12.0  41.4  keep B  (lb -0.050 · yrs -0.52 -0.48 -0.46)
+  E1 window · end 11:00                           2141  -0.409  1433  -0.479   -686.9  686.9   22  -12.0  44.8  keep B  (lb -0.021 · yrs -0.49 -0.48 -0.48)
+  E1 window · end 11:30 (no A8 buffer)            2287  -0.415  1523  -0.473   -721.0  721.0   17  -12.0  47.6  keep B  (lb -0.007 · yrs -0.48 -0.47 -0.46)
+  E2 stop floor · off                             2358  -0.422  1528  -0.488   -745.0  745.0   24  -12.0  47.8  keep B  (lb -0.031 · yrs -0.49 -0.49 -0.48)
+  E2 stop floor · 1 %                             2358  -0.422  1528  -0.488   -745.0  745.0   24  -12.0  47.8  keep B  (lb -0.031 · yrs -0.49 -0.49 -0.48)
+  E2 stop floor · 1.5 %                           2358  -0.422  1528  -0.488   -745.0  745.0   24  -12.0  47.8  keep B  (lb -0.031 · yrs -0.49 -0.49 -0.48)
+  E2 stop floor · 3 %                             1289  -0.282   995  -0.387   -384.6  384.6   24   -4.8  31.1  ADOPT  (lb +0.010 · yrs -0.40 -0.39 -0.37)
+  E3 stop vs spread · off                         2595  -0.456  1678  -0.498   -835.0  835.0   23  -12.0  52.4  keep B  (lb -0.068 · yrs -0.49 -0.49 -0.51)
+  E3 stop vs spread · 2x                          2574  -0.447  1652  -0.489   -807.8  807.8   21  -12.0  51.6  keep B  (lb -0.055 · yrs -0.47 -0.50 -0.50)
+  E3 stop vs spread · 3x                          2374  -0.411  1551  -0.474   -735.1  735.1   24  -12.0  48.5  keep B  (lb -0.022 · yrs -0.46 -0.49 -0.47)
+  E3 stop vs spread · 6x                          1376  -0.320  1018  -0.398   -405.1  405.1   24   -4.8  31.8  ADOPT  (lb +0.001 · yrs -0.41 -0.39 -0.41)
+  E6 positions · 2 at once                        2306  -0.412  1571  -0.481   -756.5  756.5   28  -12.0  49.1  keep B  (lb -0.036 · yrs -0.50 -0.48 -0.45)
+  E6 positions · no cap                           2311  -0.413  1573  -0.481   -756.5  756.5   28  -12.0  49.2  keep B  (lb -0.028 · yrs -0.50 -0.48 -0.46)
+  E7 daily limits · all off                       2472  -0.402  1707  -0.466   -794.7  794.7   16  -13.4  53.3  keep B  (lb -0.019 · yrs -0.47 -0.47 -0.46)
+  E7 daily limits · loss -2 R                     2224  -0.410  1471  -0.474   -696.9  696.9   23  -12.0  46.0  keep B  (lb -0.007 · yrs -0.49 -0.48 -0.45)
+  E7 daily limits · loss -4 R                     2247  -0.412  1495  -0.478   -714.3  714.3   24  -12.0  46.7  keep B  (lb -0.004 · yrs -0.49 -0.48 -0.45)
+  E7 daily limits · streak 2                      2081  -0.404  1307  -0.495   -647.5  647.5   19  -12.0  40.8  keep B  (lb -0.056 · yrs -0.50 -0.48 -0.51)
+  E7 daily limits · streak 4                      2291  -0.409  1538  -0.470   -723.6  723.6   26  -12.0  48.1  keep B  (lb -0.006 · yrs -0.48 -0.48 -0.44)
+  E7 daily limits · orders 4                      2052  -0.424  1283  -0.497   -637.1  637.1   23  -12.0  40.1  keep B  (lb -0.058 · yrs -0.52 -0.49 -0.48)
+  E7 daily limits · orders 8                      2309  -0.407  1553  -0.475   -737.0  737.0   24  -12.0  48.5  keep B  (lb -0.014 · yrs -0.48 -0.48 -0.46)
+  F1 sizing · $20 risk                            2246  -0.440  1492  -0.508   -757.8  757.8   24  -12.1  46.6  OWNER  (lb -0.033 · yrs -0.52 -0.51 -0.49)
+  F1 sizing · $80 risk                            2246  -0.406  1492  -0.471   -702.2  702.2   24  -12.0  46.6  OWNER  (lb +0.006 · yrs -0.48 -0.47 -0.45)
+  F1 sizing · no $2,000 cap                       2246  -0.411  1492  -0.477   -712.2  712.2   24  -12.0  46.6  OWNER  (lb +0.000 · yrs -0.49 -0.48 -0.45)
+  F2 entry order · expiry 1 bar                   1875  -0.402  1231  -0.473   -582.0  582.0   21   -7.4  38.5  keep B  (lb -0.053 · yrs -0.53 -0.45 -0.44)
+  F2 entry order · expiry 5 bars                  2380  -0.406  1563  -0.488   -763.1  763.1   17  -12.0  48.8  keep B  (lb -0.043 · yrs -0.50 -0.50 -0.46)
+  F2 entry order · cap +0.5 %                     2279  -0.416  1508  -0.487   -733.9  733.9   24  -12.1  47.1  keep B  (lb -0.023 · yrs -0.51 -0.49 -0.46)
+  F2 entry order · cap +1 %                       2370  -0.408  1551  -0.500   -775.4  775.9   24  -12.2  48.5  keep B  (lb -0.057 · yrs -0.51 -0.52 -0.45)
+  G1 trail · 0.5 R                                2280  -0.400  1553  -0.450   -699.4  699.4   22  -12.0  48.5  keep B  (lb -0.042 · yrs -0.45 -0.43 -0.48)
+  G1 trail · 1.5 R                                2187  -0.433  1429  -0.513   -733.4  733.4   17  -12.2  44.7  keep B  (lb -0.104 · yrs -0.57 -0.52 -0.43)
+  G1 trail · 2 R                                  2120  -0.500  1368  -0.579   -792.7  792.7   26  -12.7  42.8  keep B  (lb -0.199 · yrs -0.69 -0.55 -0.48)
+  G4 flat time · 11:00                            2248  -0.408  1493  -0.473   -705.9  705.9   17  -12.0  46.7  keep B  (lb -0.016 · yrs -0.47 -0.47 -0.47)
+  G4 flat time · 12:00                            2246  -0.410  1492  -0.477   -711.9  711.9   24  -12.0  46.6  keep B  (lb -0.001 · yrs -0.49 -0.48 -0.45)
+  Ross volume · push volume rising                1810  -0.417  1248  -0.524   -654.4  654.4   27  -12.0  39.0  keep B  (lb -0.107 · yrs -0.55 -0.49 -0.55)
+  Ross volume · push volume elevated              2043  -0.401  1353  -0.447   -604.8  604.8   24   -5.3  42.3  keep B  (lb -0.016 · yrs -0.48 -0.42 -0.44)
+  MACD reading · line above zero and signal       2164  -0.413  1428  -0.464   -661.8  661.8   23   -6.9  44.6  keep B  (lb -0.021 · yrs -0.47 -0.47 -0.45)
+  post-hoc combo · start 09:30 + stop 3 %          897  -0.259   584  -0.293   -171.1  173.9   14   -3.6  18.2  ADOPT  (lb +0.055 · yrs -0.33 -0.29 -0.25)
+  post-hoc combo · stop 3 % + spread 6x           1199  -0.287   931  -0.391   -363.8  363.8   25   -4.8  29.1  ADOPT  (lb +0.002 · yrs -0.41 -0.39 -0.37)
+  Ross retrace · pullback <= 50 % of the push (with rule 5)   923  -0.406   599  -0.503   -301.1  301.1   23  -12.0  18.7  keep B  (lb -0.152 · yrs -0.52 -0.51 -0.45)
+  Ross retrace · pullback <= 50 % of the push, instead of rule 5   943  -0.398   611  -0.496   -303.1  303.1   23  -12.0  19.1  keep B  (lb -0.150 · yrs -0.51 -0.51 -0.45)
+
+=== MODE C — corrected bar order (cap-return fill bar, expiry in minutes) ===
+BASELINE B (live rules) · one position · net R per trade
+  rule · variant                                  tr n    tr R  te n    te R   te tot  te DD strk  worst   /mo
+  B                                               2231  -0.436  1479  -0.475   -701.9  701.9   18  -12.8  46.2
+    test 2024: n 511 · mean -0.531 · total -271.5
+    test 2025: n 598 · mean -0.483 · total -288.6
+    test 2026: n 370 · mean -0.383 · total -141.7
+    pre-market   train   828 -0.472 · test   712 -0.544
+    09:30-10:30  train  1089 -0.399 · test   603 -0.403
+    10:30-11:30  train   314 -0.470 · test   164 -0.437
+
+VARIANTS, one at a time against B
+  rule · variant                                  tr n    tr R  te n    te R   te tot  te DD strk  worst   /mo  verdict
+  5 still rising · off the high <= 15 %           2107  -0.432  1373  -0.483   -663.1  664.4   17  -12.8  42.9  keep B  (lb -0.057 · yrs -0.55 -0.48 -0.39)
+  5 still rising · off the high <= 35 %           2257  -0.428  1494  -0.470   -701.9  701.9   19  -12.8  46.7  keep B  (lb -0.006 · yrs -0.52 -0.48 -0.39)
+  5 still rising · off the high <= 50 %           2266  -0.426  1498  -0.472   -706.9  706.9   19  -12.8  46.8  keep B  (lb -0.012 · yrs -0.53 -0.48 -0.39)
+  5 still rising · off                            2269  -0.424  1498  -0.472   -706.9  706.9   19  -12.8  46.8  keep B  (lb -0.012 · yrs -0.53 -0.48 -0.39)
+  E1 window · start 08:00                         2044  -0.425  1321  -0.424   -560.5  560.5   14  -11.8  41.3  ADOPT  (lb +0.001 · yrs -0.48 -0.44 -0.34)
+  E1 window · start 09:30                         1564  -0.407   942  -0.396   -373.4  374.3   18   -4.9  29.4  keep B  (lb -0.027 · yrs -0.41 -0.39 -0.39)
+  E1 window · end 10:30                           1917  -0.431  1315  -0.479   -630.3  630.3   21  -12.8  41.1  keep B  (lb -0.043 · yrs -0.55 -0.48 -0.38)
+  E1 window · end 11:00                           2126  -0.433  1421  -0.476   -676.5  676.5   22  -12.8  44.4  keep B  (lb -0.021 · yrs -0.52 -0.48 -0.41)
+  E1 window · end 11:30 (no A8 buffer)            2272  -0.438  1510  -0.470   -710.0  710.0   18  -12.8  47.2  keep B  (lb -0.007 · yrs -0.52 -0.48 -0.39)
+  E2 stop floor · off                             2338  -0.444  1515  -0.485   -734.3  734.3   15  -12.8  47.3  keep B  (lb -0.032 · yrs -0.53 -0.49 -0.41)
+  E2 stop floor · 1 %                             2338  -0.444  1515  -0.485   -734.3  734.3   15  -12.8  47.3  keep B  (lb -0.032 · yrs -0.53 -0.49 -0.41)
+  E2 stop floor · 1.5 %                           2338  -0.444  1515  -0.485   -734.3  734.3   15  -12.8  47.3  keep B  (lb -0.032 · yrs -0.53 -0.49 -0.41)
+  E2 stop floor · 3 %                             1277  -0.311   984  -0.391   -384.5  384.7   24   -4.8  30.8  keep B  (lb -0.009 · yrs -0.41 -0.41 -0.34)
+  E3 stop vs spread · off                         2571  -0.481  1653  -0.485   -802.0  802.0   22  -12.8  51.7  keep B  (lb -0.059 · yrs -0.52 -0.50 -0.42)
+  E3 stop vs spread · 2x                          2553  -0.472  1631  -0.481   -784.2  784.2   22  -12.8  51.0  keep B  (lb -0.050 · yrs -0.50 -0.51 -0.41)
+  E3 stop vs spread · 3x                          2355  -0.437  1537  -0.471   -723.9  723.9   18  -12.8  48.0  keep B  (lb -0.025 · yrs -0.50 -0.50 -0.39)
+  E3 stop vs spread · 6x                          1364  -0.351  1010  -0.410   -414.2  414.2   23   -4.8  31.6  keep B  (lb -0.022 · yrs -0.42 -0.42 -0.38)
+  E6 positions · 2 at once                        2294  -0.435  1559  -0.481   -749.5  749.5   16  -12.8  48.7  keep B  (lb -0.042 · yrs -0.53 -0.49 -0.40)
+  E6 positions · no cap                           2299  -0.435  1563  -0.480   -749.9  749.9   16  -12.8  48.8  keep B  (lb -0.034 · yrs -0.53 -0.48 -0.41)
+  E7 daily limits · all off                       2458  -0.424  1691  -0.462   -781.5  781.5   18  -14.2  52.8  keep B  (lb -0.020 · yrs -0.50 -0.46 -0.40)
+  E7 daily limits · loss -2 R                     2195  -0.431  1443  -0.468   -675.3  675.3   17  -12.8  45.1  keep B  (lb -0.003 · yrs -0.53 -0.48 -0.37)
+  E7 daily limits · loss -4 R                     2232  -0.436  1481  -0.474   -702.8  702.8   18  -12.8  46.3  keep B  (lb -0.003 · yrs -0.53 -0.48 -0.38)
+  E7 daily limits · streak 2                      2046  -0.438  1288  -0.486   -626.7  626.7   18  -12.8  40.2  keep B  (lb -0.051 · yrs -0.54 -0.49 -0.41)
+  E7 daily limits · streak 4                      2276  -0.431  1526  -0.470   -717.8  717.8   18  -12.8  47.7  keep B  (lb -0.010 · yrs -0.52 -0.48 -0.39)
+  E7 daily limits · orders 4                      2043  -0.448  1278  -0.487   -622.8  622.8   16  -12.8  39.9  keep B  (lb -0.052 · yrs -0.54 -0.49 -0.40)
+  E7 daily limits · orders 8                      2287  -0.432  1539  -0.472   -727.1  727.1   18  -12.8  48.1  keep B  (lb -0.016 · yrs -0.53 -0.48 -0.39)
+  F1 sizing · $20 risk                            2231  -0.464  1479  -0.505   -747.0  747.0   19  -12.8  46.2  OWNER  (lb -0.033 · yrs -0.56 -0.51 -0.41)
+  F1 sizing · $80 risk                            2231  -0.431  1479  -0.468   -692.2  692.2   18  -12.8  46.2  OWNER  (lb +0.006 · yrs -0.53 -0.48 -0.38)
+  F1 sizing · no $2,000 cap                       2231  -0.436  1479  -0.475   -701.9  701.9   18  -12.8  46.2  OWNER  (lb +0.000 · yrs -0.53 -0.48 -0.38)
+  F2 entry order · expiry 1 bar                   1868  -0.430  1218  -0.464   -564.7  564.7   20   -7.4  38.1  keep B  (lb -0.051 · yrs -0.55 -0.46 -0.35)
+  F2 entry order · expiry 5 bars                  2357  -0.429  1548  -0.489   -757.1  757.1   17  -12.8  48.4  keep B  (lb -0.046 · yrs -0.55 -0.50 -0.39)
+  F2 entry order · cap +0.5 %                     2264  -0.440  1493  -0.483   -721.3  721.3   18  -12.8  46.7  keep B  (lb -0.045 · yrs -0.54 -0.50 -0.39)
+  F2 entry order · cap +1 %                       2361  -0.419  1543  -0.496   -765.0  766.0   24  -13.0  48.2  keep B  (lb -0.074 · yrs -0.52 -0.53 -0.41)
+  G1 trail · 0.5 R                                2261  -0.404  1528  -0.452   -690.7  690.7   23  -12.5  47.8  keep B  (lb -0.054 · yrs -0.45 -0.45 -0.46)
+  G1 trail · 1.5 R                                2183  -0.439  1413  -0.502   -708.8  708.8   19  -12.1  44.2  keep B  (lb -0.096 · yrs -0.62 -0.49 -0.35)
+  G1 trail · 2 R                                  2114  -0.502  1362  -0.570   -776.3  776.3   23  -12.6  42.6  keep B  (lb -0.193 · yrs -0.72 -0.52 -0.45)
+  G4 flat time · 11:00                            2233  -0.431  1480  -0.468   -693.0  693.0   18  -12.8  46.2  keep B  (lb -0.015 · yrs -0.51 -0.47 -0.40)
+  G4 flat time · 12:00                            2231  -0.435  1479  -0.474   -701.6  701.6   18  -12.8  46.2  keep B  (lb -0.001 · yrs -0.53 -0.48 -0.38)
+  Ross volume · push volume rising                1805  -0.436  1238  -0.530   -656.4  656.4   20  -12.8  38.7  keep B  (lb -0.126 · yrs -0.60 -0.50 -0.48)
+  Ross volume · push volume elevated              2026  -0.426  1343  -0.433   -581.7  581.7   17   -5.3  42.0  keep B  (lb -0.010 · yrs -0.52 -0.41 -0.35)
+  MACD reading · line above zero and signal       2152  -0.438  1421  -0.459   -651.8  651.8   23   -6.9  44.4  keep B  (lb -0.021 · yrs -0.52 -0.46 -0.38)
+  post-hoc combo · start 09:30 + stop 3 %          887  -0.291   578  -0.304   -175.6  178.9   17   -3.8  18.1  ADOPT  (lb +0.030 · yrs -0.36 -0.29 -0.25)
+  post-hoc combo · stop 3 % + spread 6x           1187  -0.318   923  -0.401   -370.0  370.0   25   -4.8  28.8  keep B  (lb -0.024 · yrs -0.42 -0.43 -0.34)
+  Ross retrace · pullback <= 50 % of the push (with rule 5)   920  -0.404   596  -0.500   -298.1  298.1   17  -12.8  18.6  keep B  (lb -0.162 · yrs -0.56 -0.50 -0.40)
+  Ross retrace · pullback <= 50 % of the push, instead of rule 5   940  -0.398   608  -0.494   -300.3  300.3   17  -12.8  19.0  keep B  (lb -0.161 · yrs -0.54 -0.50 -0.42)
+
+=== ADOPTION: a change must pass under BOTH A and C (addendum 2026-10-01b) ===
+  E1 window · start 08:00                                    A keep B (lb -0.003)  C ADOPT  (lb +0.001)  -> fails one 
+  E1 window · start 09:30                                    A ADOPT  (lb +0.003)  C keep B (lb -0.027)  -> fails one 
+  E2 stop floor · 3 %                                            A ADOPT  (lb +0.010)  C keep B (lb -0.009)  -> fails one 
+  E3 stop vs spread · 6x                                             A ADOPT  (lb +0.001)  C keep B (lb -0.022)  -> fails one 
+  post-hoc combo · start 09:30 + stop 3 %                         A ADOPT  (lb +0.055)  C ADOPT  (lb +0.030)  -> PASSES BOTH POST-HOC: contaminated, switch OFF until 200 prospective trades
+  post-hoc combo · stop 3 % + spread 6x                           A ADOPT  (lb +0.002)  C keep B (lb -0.024)  -> fails one POST-HOC: contaminated, switch OFF until 200 prospective trades
+
+=== ROBUSTNESS (never deciding): bar readings CA and H, cost models, live-like intrabar entry gated at the break ===
+  variant                                                CA/live/clos/  base    H/live/clos/  base     A/old/clos/  base     C/old/clos/  base   A/light/clos/  base    C/none/clos/  base    C/live/prev/ intra
+  B                                                     -0.410/-0.432         -0.563/-0.568         -0.255/-0.329         -0.280/-0.326         -0.291/-0.364         -0.047/-0.107         -0.435/-0.461       
+  E1 window · start 08:00                               -0.398/-0.395 -0.011  -0.555/-0.523 +0.003  -0.249/-0.288 -0.003  -0.270/-0.276 +0.000  -0.284/-0.324 -0.004  -0.037/-0.057 +0.001  -0.449/-0.456 -0.039
+  E1 window · start 09:30                               -0.381/-0.388 -0.056  -0.550/-0.507 -0.024  -0.240/-0.237 +0.001  -0.258/-0.250 -0.029  -0.275/-0.276 -0.002  -0.033/-0.036 -0.034  -0.429/-0.408 -0.027
+  E2 stop floor · 3 %                                   -0.285/-0.374 -0.035  -0.466/-0.497 -0.005  -0.161/-0.271 -0.023  -0.191/-0.275 -0.042  -0.190/-0.301 -0.017  -0.008/-0.106 -0.092  -0.331/-0.408 -0.017
+  E3 stop vs spread · 6x                                -0.326/-0.387 -0.040  -0.496/-0.504 -0.012  -0.199/-0.284 -0.033  -0.231/-0.296 -0.056  -0.221/-0.308 -0.023  -0.032/-0.117 -0.097  -0.365/-0.420 -0.025
+  post-hoc combo · start 09:30 + stop 3 %               -0.269/-0.310 -0.017  -0.461/-0.430 +0.028  -0.145/-0.179 +0.021  -0.177/-0.189 -0.003  -0.172/-0.211 +0.024  +0.002/-0.022 -0.057  -0.308/-0.327 +0.023
+  post-hoc combo · stop 3 % + spread 6x                 -0.292/-0.381 -0.046  -0.473/-0.492 -0.006  -0.172/-0.282 -0.037  -0.203/-0.292 -0.063  -0.195/-0.306 -0.025  -0.018/-0.122 -0.112  -0.330/-0.414 -0.028
+  cells: train mean / test mean net R per trade, then the paired lower bound against B in the same setting
+
+written /home/user/day-trading-bot/research/paper-exercise/reports/rules_audit_results.json
