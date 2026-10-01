@@ -814,9 +814,12 @@ def expire_pending(conn: sqlite3.Connection, day: str) -> int:
 
 
 # ----------------------------------------------------------- the tape
-def record_bars(conn: sqlite3.Connection, bars_by_symbol: dict) -> int:
-    """bars_by_symbol: symbol -> iterable of (ts, o, h, l, c, v[, bid, ask])."""
-    before = conn.execute("SELECT COUNT(*) FROM bars").fetchone()[0]
+def record_bars(conn: sqlite3.Connection, bars_by_symbol: dict, count: bool = True) -> int:
+    """bars_by_symbol: symbol -> iterable of (ts, o, h, l, c, v[, bid, ask]).
+
+    count=False skips the two whole-table COUNT(*)s and returns -1: the live
+    desk writes every rebuild and never reads the number (2026-09-30)."""
+    before = conn.execute("SELECT COUNT(*) FROM bars").fetchone()[0] if count else 0
     for sym, rows in bars_by_symbol.items():
         for r in rows:
             bid, ask = (r[6], r[7]) if len(r) >= 8 else (None, None)
@@ -833,6 +836,8 @@ def record_bars(conn: sqlite3.Connection, bars_by_symbol: dict) -> int:
                 "bid=COALESCE(excluded.bid, bars.bid), ask=COALESCE(excluded.ask, bars.ask) "
                 "WHERE excluded.volume >= bars.volume",
                 (sym, r[0], r[1], r[2], r[3], r[4], r[5], bid, ask))
+    if not count:
+        return -1
     return conn.execute("SELECT COUNT(*) FROM bars").fetchone()[0] - before
 
 

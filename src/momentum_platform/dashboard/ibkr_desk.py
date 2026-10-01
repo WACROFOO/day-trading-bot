@@ -748,6 +748,7 @@ class IbkrDesk:
 
     def refresh_session(self) -> dict:
         t0 = time.monotonic()
+        self._phase = {}
         try:
             return self._refresh_session()
         finally:
@@ -755,7 +756,14 @@ class IbkrDesk:
             if took > 5.0:
                 # Above the 3-second cadence this is the number that decides
                 # whether a decision reaches the runner young enough to trade.
-                self.log(f"  rebuild took {took:.1f}s")
+                # The phases say WHERE (2026-09-30: 5-49 s on eight names
+                # while the same build measured 0.55 s offline): gathering the
+                # records, the scanners and detector, the ledger writes the
+                # runner shares, or publishing to the page.
+                ph = self._phase
+                parts = " · ".join(f"{k} {ph[k]:.1f}" for k in ("collect", "build", "journal", "publish")
+                                   if k in ph)
+                self.log(f"  rebuild took {took:.1f}s" + (f" ({parts})" if parts else ""))
 
     def _pull_headlines(self, symbols: List[str]) -> None:
         """Headlines are an HTTP call to Alpaca's news endpoint (30 s socket
@@ -797,6 +805,7 @@ class IbkrDesk:
     def _refresh_session(self) -> dict:
         """Rebuild from memory: reference + minute history (for minutes the
         live store does not cover) + complete ten-second candles."""
+        self._t_refresh0 = time.perf_counter()
         s = self.stream
         records: List[dict] = []
         now = self.clock()
@@ -865,11 +874,20 @@ class IbkrDesk:
         records += self._halts
         h = s.health
         status = "live" if h.state == "LIVE" else h.state.lower()
+        ph = getattr(self, "_phase", None)
+        if ph is None:
+            ph = self._phase = {}
+        tb = time.perf_counter()
+        ph["collect"] = tb - getattr(self, "_t_refresh0", tb)
+        timings: dict = {}
         session = build_session_from_records(
             records, session_id="ibkr-" + "-".join(self.symbols[:3]),
             source_name="IBKR · TWS read-only · live", data_status=status,
             volume_floor_scale=1.0, trading_date=self.session_day(),
-            journal=_journal(), journal_since=getattr(self, "_started", None))
+            journal=_journal(), journal_since=getattr(self, "_started", None), timings=timings)
+        ph["build"] = timings.get("build", time.perf_counter() - tb)
+        ph["journal"] = timings.get("journal", 0.0)
+        tp = time.perf_counter()
         session["live"] = True
         session["streaming"] = True
         session["refreshSeconds"] = self.rebuild
@@ -926,6 +944,7 @@ class IbkrDesk:
             "metrics": {sym: meta.get("metrics") for sym, meta in session["symbols"].items()
                         if meta.get("metrics")},
         })
+        ph["publish"] = time.perf_counter() - tp
         return session
 
     def scan(self, add: bool = True) -> dict:

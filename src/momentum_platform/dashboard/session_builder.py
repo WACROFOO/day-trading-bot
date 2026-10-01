@@ -14,6 +14,7 @@ server-side reasons verbatim.
 from __future__ import annotations
 
 import json
+import time as _time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
@@ -152,6 +153,7 @@ def build_session_from_records(
     trading_date: str | None = None,
     journal=None,
     journal_since=None,
+    timings: dict | None = None,
 ) -> dict:
     """Build the dashboard session.
 
@@ -176,6 +178,7 @@ def build_session_from_records(
     """Build a session from normalized records. Replay fixtures and live
     provider pulls both land here, so the scanner behaviour is identical."""
 
+    _t0, _jt = _time.perf_counter(), 0.0
     symbols: dict[str, dict] = {}
     news_queue: list[dict] = []
     halt_queue: list[dict] = []
@@ -381,8 +384,10 @@ def build_session_from_records(
                 _res = evaluate_cascade(_inputs) if _meta else None
                 allowed = bool(_res and _res.plan_allowed)
                 if journal is not None and _res is not None:
+                    _tj = _time.perf_counter()
                     _journal_decision(journal, rec, bar, plan, _res, _inputs, _snap,
                                       _meta, session_id, source_name, data_status, journal_since)
+                    _jt += _time.perf_counter() - _tj
                 if allowed:
                     plans.append({
                         "planId": plan.plan_id, "symbol": plan.symbol,
@@ -523,6 +528,7 @@ def build_session_from_records(
                        "value": g.value, "reason": g.reason} for g in res.gates],
         }
 
+    _tj = _time.perf_counter()
     if journal is not None and frames:
         # R1, the denominator: every symbol on the board with its verdict,
         # stamped with the last bar this build saw. On the live desk that is
@@ -541,6 +547,10 @@ def build_session_from_records(
         # live desk with the fake broker and opening a second connection —
         # which is exactly what the runner does.
         journal.commit()
+    _jt += _time.perf_counter() - _tj
+    if timings is not None:
+        timings["journal"] = round(_jt, 3)
+        timings["build"] = round(_time.perf_counter() - _t0 - _jt, 3)
 
     return {
         "sessionId": session_id,
@@ -739,14 +749,32 @@ def _journal_board(journal, ts, session_id, symbols, cascade_by_symbol) -> None:
 
 
 
+#: What this process already wrote per ledger connection: (symbol, ts) ->
+#: (volume, bid, ask) for bars, symbol -> quote tuple for quotes. The live desk
+#: rebuilds every 3 s from the whole session since 04:00 and used to re-UPSERT
+#: every bar of the day each time (2026-09-30: 5-49 s rebuilds on eight
+#: names); only a new bar, or the current minute's growing aggregate, changes.
+_TAPE_SEEN: dict = {}
+
+
 def _journal_tape(journal, bar_records, symbols) -> None:
     from journal import ledger as _L
+    # Keyed by id() with the connection held in the entry: a connection that
+    # was garbage-collected can hand its id to a new one, which would then be
+    # told its bars were already written.
+    seen = _TAPE_SEEN.get(id(journal))
+    if seen is None or seen["conn"] is not journal:
+        seen = _TAPE_SEEN[id(journal)] = {"conn": journal, "bars": {}, "quotes": {}}
     by_sym: dict = {}
     latest: dict = {}
     for rec in bar_records:
-        by_sym.setdefault(rec["symbol"], []).append(
-            (rec["ts"], rec["open"], rec["high"], rec["low"], rec["close"], rec["volume"],
-             rec.get("bid"), rec.get("ask")))
+        key = (rec["symbol"], rec["ts"])
+        sig = (rec["volume"], rec.get("bid"), rec.get("ask"), rec["high"], rec["low"], rec["close"])
+        if seen["bars"].get(key) != sig:
+            by_sym.setdefault(rec["symbol"], []).append(
+                (rec["ts"], rec["open"], rec["high"], rec["low"], rec["close"], rec["volume"],
+                 rec.get("bid"), rec.get("ask")))
+            seen["bars"][key] = sig
         if rec.get("bid") is not None or rec.get("ask") is not None:
             latest[rec["symbol"]] = {"bid": rec.get("bid"), "ask": rec.get("ask"),
                                      "bid_size": rec.get("bid_size"),
@@ -758,8 +786,14 @@ def _journal_tape(journal, bar_records, symbols) -> None:
             latest[sym] = {"bid": meta.get("iexBid"), "ask": meta.get("iexAsk"),
                            "bid_size": meta.get("iexBidSize"), "ask_size": meta.get("iexAskSize"),
                            "ts": meta.get("iexLastTs") or latest.get(sym, {}).get("ts")}
-    _L.record_bars(journal, by_sym)
-    _L.record_quotes(journal, latest)
+    changed = {sym: q for sym, q in latest.items()
+               if seen["quotes"].get(sym) != tuple(sorted(q.items(), key=lambda kv: kv[0]))}
+    if by_sym:
+        _L.record_bars(journal, by_sym, count=False)
+    if changed:
+        _L.record_quotes(journal, changed)
+        for sym, q in changed.items():
+            seen["quotes"][sym] = tuple(sorted(q.items(), key=lambda kv: kv[0]))
 
 
 def _newest_bar_ts(bar, meta) -> bool:
