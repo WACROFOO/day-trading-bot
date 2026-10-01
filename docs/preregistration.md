@@ -983,6 +983,25 @@ refuse. Still negative in both periods: harm reduction, not an edge. **Undo:**
 with the volume gate red, their mean realised R is below the mean of the trades
 taken with it green.
 
+**The rules audit (2026-10-01) — no rule changes; A15 built OFF; seven defects fixed.**
+Every operating rule (5, E, F, G) was measured one at a time on ten years
+(`scripts/rules_audit.py`, preregistered in `research/edge-hunt/PREREGISTRATION.md`,
+addenda 2026-10-01 and 2026-10-01b). After an adversarial review showed the
+backtest's 1-minute bar reading was the most favourable one for the first
+run's three passes, a change had to pass under both the as-run and a
+corrected reading: none of the 43 preregistered variants does. **A15
+candidate** — no new entries before 09:30 and stops of at least 3 % of price
+— passes both (test −0.293 / −0.304 R a trade against −0.477 / −0.475) but
+was chosen after seeing 2024-2026: CONTAMINATED, `A15_CANDIDATE = False` in
+`src/execution/runner.py` until ≥ 200 prospective paper trades confirm it
+(`exercise.py whatif --start 09:30 --stop-pct 3`). Defects fixed: a risk veto
+or a trader refusal left an order row that blocked every later entry; the
+6-entry cap was a 5-entry cap; IBKR warning 2161 capping a buy limit below
+the trigger (BIYA 2026-09-30) is now cancelled; a partly streamed minute no
+longer replaces IBKR's complete minute; refusal tallies count rules, not
+strings; decisions store the chart values their gates were judged on.
+Detail: `research/paper-exercise/reports/2026-10-01-rules-audit.md`.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and

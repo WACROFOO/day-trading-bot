@@ -1,0 +1,74 @@
+INDICATOR AUDIT · Alpaca SIP 1-minute cache · 300 sessions sampled (seed 20260926), 0 not cached · 2693 symbol-days with >= 40 bars · 10022 plans armed 07:00-11:20 ET (4018 pre-market, 6004 regular)
+Outcomes are backtest_recent's (A10 re-touch within 3 bars, gap_miss fills, cost model 'old', trail exit). 'allowed' = backtest_history.current_rules on the plan's red set.
+  baseline pre-market allowed by current rules: n 873, filled 630, trail net mean -0.771 R, sum -486.0 R
+  baseline regular    allowed by current rules: n 1273, filled 952, trail net mean -0.579 R, sum -551.3 R
+
+(a1) momentum_platform.indicators.chart_gates vs independent numpy/pandas recompute (first-value seed)
+  vwap  agree 10022/10022 (100.0%) · disagree 0 (float ties 0) · max |desk value - recompute| 0.00e+00 (desk rounds to 4/6 dp)
+  ema9  agree 10022/10022 (100.0%) · disagree 0 (float ties 0) · max |desk value - recompute| 0.00e+00 (desk rounds to 4/6 dp)
+  macd  agree 10022/10022 (100.0%) · disagree 0 (float ties 0) · max |desk value - recompute| 0.00e+00 (desk rounds to 4/6 dp)
+
+(a2) warm-up · bars since 04:00 ET at arm time (Alpaca omits minutes with no trade)
+  pre-market bars n 4018 · p10 19 · p25 47 · p50 114 · p75 204 · p90 262
+             MACD None (< 35 bars) 729/4018 (18.1%) · EMA9 None (< 9) 130/4018 (3.2%) · VWAP None 0/4018 (0.0%)
+             plans refused only because MACD is None: 334
+  regular    bars n 6004 · p10 38 · p25 83 · p50 161 · p75 289 · p90 364
+             MACD None (< 35 bars) 515/6004 (8.6%) · EMA9 None (< 9) 60/6004 (1.0%) · VWAP None 0/6004 (0.0%)
+             plans refused only because MACD is None: 236
+
+(a3) EMA9 / MACD seeding: first value (desk) vs SMA of the first n (TradingView)
+  pre-market EMA9 flips 9/3888 (0.2%) · MACD flips 41/3289 (1.2%) (+23 at exactly 34 bars: None vs a value) · chart-green flips 38/4018 (0.9%)
+             current-rules decision: allowed->refused 17, refused->allowed 13
+  regular    EMA9 flips 6/5944 (0.1%) · MACD flips 37/5489 (0.7%) (+21 at exactly 34 bars: None vs a value) · chart-green flips 28/6004 (0.5%)
+             current-rules decision: allowed->refused 10, refused->allowed 7
+  all        EMA9 flips 15/9832 (0.2%) · MACD flips 78/8778 (0.9%) (+44 at exactly 34 bars: None vs a value) · chart-green flips 66/10022 (0.7%)
+             current-rules decision: allowed->refused 27, refused->allowed 20
+    bars   9-19   plans   462 · EMA9 flips   13 · MACD flips    0
+    bars  20-49   plans  1219 · EMA9 flips    2 · MACD flips   51
+    bars  50-99   plans  1785 · EMA9 flips    0 · MACD flips   25
+    bars 100-max  plans  6366 · EMA9 flips    0 · MACD flips    2
+  outcome of plans the SMA seed would refuse: n 27, filled 16, trail net mean +0.370 R, sum +5.9 R
+  outcome of plans the SMA seed would allow:  n 20, filled 16, trail net mean +1.016 R, sum +16.3 R
+
+(a4) MACD semantics: desk 'hist>0 and line>signal' (hist = line - signal, so this is line>signal alone) vs 'line>0 and line>signal'
+  pre-market MACD evaluable 3289 · pass (desk) 2301/3289 (70.0%) · pass (line>0 too) 1648/3289 (50.1%) · above signal but line < 0: 653
+             current-rules decision allowed->refused 48 · n 48, filled 37, trail net mean -0.794 R, sum -29.4 R
+  regular    MACD evaluable 5489 · pass (desk) 3949/5489 (71.9%) · pass (line>0 too) 2310/5489 (42.1%) · above signal but line < 0: 1639
+             current-rules decision allowed->refused 121 · n 121, filled 99, trail net mean -0.538 R, sum -53.3 R
+  all        MACD evaluable 8778 · pass (desk) 6250/8778 (71.2%) · pass (line>0 too) 3958/8778 (45.1%) · above signal but line < 0: 2292
+             current-rules decision allowed->refused 169 · n 169, filled 136, trail net mean -0.608 R, sum -82.6 R
+
+(b) the impulse ('push') volume. _impulse_valid checks bar count and the 2% range only; no volume test.
+  pre-market impulse bars n 4018 · p50 3 · rising (2nd half >= 1st) 2527/4018 (62.9%) · above the 10 bars before 2545/3962 (64.2%) (fewer than 10 before: 314, none before: 56)
+             rising AND elevated 1713/4018 (42.6%) · current volume_ok true 2926/4018 (72.8%)
+             a 'push rising' rule would refuse 270 plans the current rules allow · n 270, filled 200, trail net mean -0.918 R, sum -183.6 R
+             a 'push elevated' rule would refuse 134 plans the current rules allow · n 134, filled 99, trail net mean -0.927 R, sum -91.7 R
+  regular    impulse bars n 6004 · p50 3 · rising (2nd half >= 1st) 3625/6004 (60.4%) · above the 10 bars before 3291/5988 (55.0%) (fewer than 10 before: 159, none before: 16)
+             rising AND elevated 2170/6004 (36.1%) · current volume_ok true 4507/6004 (75.1%)
+             a 'push rising' rule would refuse 399 plans the current rules allow · n 399, filled 292, trail net mean -0.494 R, sum -144.3 R
+             a 'push elevated' rule would refuse 276 plans the current rules allow · n 276, filled 209, trail net mean -0.573 R, sum -119.8 R
+  all        impulse bars n 10022 · p50 3 · rising (2nd half >= 1st) 6152/10022 (61.4%) · above the 10 bars before 5836/9950 (58.7%) (fewer than 10 before: 473, none before: 72)
+             rising AND elevated 3883/10022 (38.7%) · current volume_ok true 7433/10022 (74.2%)
+             a 'push rising' rule would refuse 669 plans the current rules allow · n 669, filled 492, trail net mean -0.667 R, sum -327.9 R
+             a 'push elevated' rule would refuse 410 plans the current rules allow · n 410, filled 308, trail net mean -0.687 R, sum -211.6 R
+
+(e) entry timing · the trigger bar is the bar that armed the plan; entry = prior bar high + 1c
+  pre-market trigger bar traded through the entry 3907/4018 (97.2%) · backtest re-touch in next 3 bars 2779/4018 (69.2%) · through on the trigger bar but NO re-touch 1180/4018 (29.4%)
+             trigger bar CLOSED above the A10 limit cap (entry + max(1c, 0.3%)) 1649/4018 (41.0%)
+  regular    trigger bar traded through the entry 5379/6004 (89.6%) · backtest re-touch in next 3 bars 4363/6004 (72.7%) · through on the trigger bar but NO re-touch 1367/6004 (22.8%)
+             trigger bar CLOSED above the A10 limit cap (entry + max(1c, 0.3%)) 2062/6004 (34.3%)
+  all        trigger bar traded through the entry 9286/10022 (92.7%) · backtest re-touch in next 3 bars 7142/10022 (71.3%) · through on the trigger bar but NO re-touch 2547/10022 (25.4%)
+             trigger bar CLOSED above the A10 limit cap (entry + max(1c, 0.3%)) 3711/10022 (37.0%)
+  chart gates at the break instant (proxy, see break_proxy) vs at the trigger-bar close (backtest):
+  pre-market vwap differs 235/4018 (5.8%) · ema9 differs 569/3888 (14.6%) · macd differs 152/3289 (4.6%)
+             allowed at close, refused at break: n 81, filled 45, trail net mean -0.792 R, sum -35.6 R
+             refused at close, allowed at break: n 82, filled 41, trail net mean -0.723 R, sum -29.6 R
+  regular    vwap differs 301/6004 (5.0%) · ema9 differs 914/5944 (15.4%) · macd differs 217/5489 (4.0%)
+             allowed at close, refused at break: n 108, filled 69, trail net mean -0.699 R, sum -48.2 R
+             refused at close, allowed at break: n 119, filled 55, trail net mean -0.413 R, sum -22.7 R
+  all        vwap differs 536/10022 (5.3%) · ema9 differs 1483/9832 (15.1%) · macd differs 369/8778 (4.2%)
+             allowed at close, refused at break: n 189, filled 114, trail net mean -0.736 R, sum -83.9 R
+             refused at close, allowed at break: n 201, filled 96, trail net mean -0.545 R, sum -52.4 R
+
+[19s]
+exit 0
