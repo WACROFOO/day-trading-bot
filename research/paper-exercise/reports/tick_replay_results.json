@@ -1,0 +1,57 @@
+{
+ "A  bars, as preregistered": {
+  "n": 1492,
+  "mean": -0.4774,
+  "total": -712.22,
+  "gross": -0.1101,
+  "win": 0.233,
+  "max_dd": 712.22,
+  "lose_streak": 24,
+  "worst_day": -12.03,
+  "per_month": 46.6
+ },
+ "C  bars, corrected order": {
+  "n": 1479,
+  "mean": -0.4746,
+  "total": -701.91,
+  "gross": -0.1067,
+  "win": 0.255,
+  "max_dd": 701.91,
+  "lose_streak": 18,
+  "worst_day": -12.79,
+  "per_month": 46.2
+ },
+ "T  ticks, proxy spread": {
+  "n": 1469,
+  "mean": -0.4752,
+  "total": -698.02,
+  "gross": -0.1079,
+  "win": 0.253,
+  "max_dd": 698.02,
+  "lose_streak": 23,
+  "worst_day": -12.17,
+  "per_month": 45.9
+ },
+ "T  ticks, gross": {
+  "n": 1469,
+  "mean": -0.1079,
+  "total": -158.5,
+  "gross": -0.1079,
+  "win": 0.344,
+  "max_dd": 162.19,
+  "lose_streak": 15,
+  "worst_day": -11.6,
+  "per_month": 45.9
+ },
+ "T  ticks, REAL spreads": {
+  "n": 1457,
+  "mean": -0.5107,
+  "total": -744.12,
+  "gross": -0.1112,
+  "win": 0.242,
+  "max_dd": 744.12,
+  "lose_streak": 23,
+  "worst_day": -12.14,
+  "per_month": 45.5
+ }
+}

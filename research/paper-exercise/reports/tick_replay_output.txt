@@ -1,0 +1,17 @@
+tick replay · 2577 plans replayed on 1666 symbol-days · 607 complete sessions 2024-01-02..2026-08-21
+
+  model                            n  net R/trade   total R   win %  max DD
+  A  bars, as preregistered     1492       -0.477    -712.2   23.3%   712.2
+  C  bars, corrected order      1479       -0.475    -701.9   25.5%   701.9
+  T  ticks, proxy spread        1469       -0.475    -698.0   25.3%   698.0
+  T  ticks, gross               1469       -0.108    -158.5   34.4%   162.2
+  T  ticks, REAL spreads        1457       -0.511    -744.1   24.2%   744.1
+
+  per plan, bar reading minus tick replay (gross R, plans both filled):
+    A   n  1886 · mean +0.010 · median +0.000 · fill disagreements 5
+    C   n  1886 · mean +0.012 · median +0.000 · fill disagreements 1
+    CA  n  1886 · mean +0.049 · median +0.000 · fill disagreements 1
+    H   n  1886 · mean -0.083 · median +0.000 · fill disagreements 1
+
+  spread at the fill: real median 0.0200 · proxy median 0.0217 · real/proxy median 0.85
+  real cost per trade: median 0.346 R · mean 0.399 R
