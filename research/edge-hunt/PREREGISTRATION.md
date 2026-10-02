@@ -424,3 +424,16 @@ real spread. **What it may not decide.** No rule is adopted or dropped on
 this run. A variant from the rules audit or addendum 2026-10-01c that changes
 verdict under ticks is reported as such and goes to a new preregistered run
 with the tick reading as the reference, never switched on from here.
+
+### Addendum 2026-10-02b — stage 2, the desk-time replay, before its read-out
+
+`scripts/desk_replay.py` takes every 2024+ plan that passes the live gates
+not tied to the trigger candle (7,477) and rebuilds the moment the live desk
+arms it: the close of the 10-second candle holding the first print above the
+trigger, plus 4 s of rebuild and runner latency; the chart gates and "still
+rising" judged on the half-formed minute at that moment; then the order on
+the prints as in stage 1. An eight-plan smoke test was looked at for
+plumbing. **It decides** only how far the bar-close backtest sits from the
+desk as it runs (gate flips, seconds gained, net R of B under each reading).
+**It may not decide** any rule; the 10-second-timed entry (stage 3) gets its
+own preregistration on this output.

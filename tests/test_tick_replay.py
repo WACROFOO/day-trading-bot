@@ -56,3 +56,10 @@ def test_real_cost_uses_measured_spreads():
 def test_a_stray_low_print_after_the_trigger_fills_at_the_trigger_not_below():
     out = _run([(1, 0, 5.00), (1, 200, 4.70), (5, 0, 5.40)])
     assert out["fill"] == 5.00                                            # NXL 09:30: 8.74 print, live 8.89
+
+
+def test_a_print_exactly_at_the_trigger_triggers_even_after_a_float32_round_trip():
+    t = np.array([(T0 + 1) * 1000, (T0 + 2) * 1000, (T0 + 3) * 1000], dtype=np.int64)
+    p = np.round(np.array([8.86, 8.87, 8.60], dtype=np.float32).astype(np.float64), 4)
+    out = TR.replay(t, p, 8.87, 8.61, T0, T0 + 3600)
+    assert out is not None and out["fill"] == 8.87

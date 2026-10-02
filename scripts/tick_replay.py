@@ -141,15 +141,23 @@ class Fetcher:
                 raise
         return {}
 
-    def chunk(self, sym: str, day: str, k: int, day0: int) -> tuple[np.ndarray, np.ndarray]:
-        """Prints of chunk k (CHUNK_S seconds from day0, 04:00 ET), cached."""
+    def chunk(self, sym: str, day: str, k: int, day0: int, sizes: bool = False):
+        """Prints of chunk k (CHUNK_S seconds from day0, 04:00 ET), cached.
+        Returns (t, p), or (t, p, s) with `sizes` (a file cached before sizes
+        were stored is fetched again)."""
         f = self.cache / day / f"{sym}_{k:03d}.npz"
         if f.exists():
             z = np.load(f)
-            return z["t"], z["p"]
+            # float32 on disk: 8.87 reads back as 8.8699999, which would miss a
+            # trigger at exactly 8.87. Prices are quoted to 4 decimals at most.
+            pz = np.round(z["p"].astype(np.float64), 4)
+            if not sizes:
+                return z["t"], pz
+            if "s" in z.files:
+                return z["t"], pz, z["s"]
         start, end = day0 + k * CHUNK_S, day0 + (k + 1) * CHUNK_S
         iso = lambda s: datetime.fromtimestamp(s, timezone.utc).isoformat().replace("+00:00", "Z")  # noqa: E731
-        ts, ps, token = [], [], None
+        ts, ps, ss, token = [], [], [], None
         while True:
             payload = self._get(f"/v2/stocks/{sym}/trades", {"start": iso(start), "end": iso(end), "limit": 10000,
                                                               "feed": "sip", "page_token": token})
@@ -158,16 +166,19 @@ class Fetcher:
                     continue
                 ts.append(_ms(x["t"]))
                 ps.append(x["p"])
+                ss.append(x.get("s") or 0)
             token = payload.get("next_page_token")
             if not token:
                 break
         t = np.array(ts, dtype=np.int64)
         p = np.array(ps, dtype=np.float64)
+        sz = np.array(ss, dtype=np.int64)
         o = np.argsort(t, kind="stable")
-        t, p = t[o], p[o]
+        t, p, sz = t[o], p[o], sz[o]
         f.parent.mkdir(parents=True, exist_ok=True)
-        np.savez_compressed(f, t=t, p=p.astype(np.float32))
-        return t, p.astype(np.float32)
+        np.savez_compressed(f, t=t, p=p.astype(np.float32), s=sz.astype(np.int32))
+        p = np.round(p, 4)
+        return (t, p, sz) if sizes else (t, p)
 
     def spread_at(self, sym: str, t_ms: int) -> float | None:
         """The NBBO prevailing at t (the last valid quote at or before it,
@@ -210,7 +221,7 @@ def replay_plan(fx: Fetcher, p: dict) -> dict | None:
     while k <= last_k:
         t, pr = fx.chunk(p["sym"], p["day"], int(k), day0)
         ts.append(t); ps.append(pr)
-        T, P = np.concatenate(ts), np.concatenate(ps).astype(np.float64)
+        T, P = np.concatenate(ts), np.round(np.concatenate(ps).astype(np.float64), 4)
         out = replay(T, P, p["entry"], p["stop"], t_order, flat_t)
         chunk_end = (day0 + (k + 1) * CHUNK_S) * 1000
         if out is None and len(T) and T[-1] >= (t_order + TTL_S) * 1000:

@@ -304,9 +304,17 @@ BASE = dict(fade=25.0, stop_floor=2.0, spread_k=4.0, start="07:00", end="11:20",
 
 def passes(p: dict, c: dict) -> bool:
     prev = c.get("gates") == "prev"
-    if (p["red_prev"] if prev else p["red"]):
+    if c.get("gates") == "desk":
+        # scripts/desk_replay.py: the gates as the live desk judged them, on the
+        # half-formed trigger minute at the moment it armed. No record, no plan.
+        d = p.get("desk")
+        if not d or d.get("red") is None or d["red"]:
+            return False
+        if c["fade"] is not None and d["fade"] > c["fade"]:
+            return False
+    elif (p["red_prev"] if prev else p["red"]):
         return False
-    if c["fade"] is not None and (p["fade_prev"] if prev else p["fade"]) > c["fade"]:
+    elif c["fade"] is not None and (p["fade_prev"] if prev else p["fade"]) > c["fade"]:
         return False
     if c.get("retrace") is not None and (p["retrace"] is None or p["retrace"] > c["retrace"]):
         return False
