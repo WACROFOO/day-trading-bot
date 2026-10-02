@@ -408,3 +408,19 @@ are different rules (a two-minute window, not the whole pre-market; a stop
 relative to recent volatility, not to price), but a pass by O1 or O2 is
 flagged as adjacent to a read lever. Any pass goes live only behind a switch,
 OFF, until ≥ 200 prospective paper trades confirm it.
+
+### Addendum 2026-10-02 — tick replay, written before its first read-out
+
+`scripts/tick_replay.py` replays the gate-passing plans of 2024-01-01 onward
+(2,577 plans, 1,666 symbol-days) on Alpaca SIP prints in time order: the A10
+stop-limit entry, the stop, the A3 trail moved every 5 s, the 11:30 flat. It
+reads the prevailing NBBO at the fill and at the exit. A ten-plan smoke test
+was looked at to check the plumbing; nothing else.
+
+**What it decides.** Only how the existing bar readings rank: the mean per-plan
+gap between each bar mode (A, C, CA, H) and the tick replay, and the B
+portfolio's net R per trade under ticks with the proxy spread and with the
+real spread. **What it may not decide.** No rule is adopted or dropped on
+this run. A variant from the rules audit or addendum 2026-10-01c that changes
+verdict under ticks is reported as such and goes to a new preregistered run
+with the tick reading as the reference, never switched on from here.
