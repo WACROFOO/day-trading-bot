@@ -1,0 +1,12 @@
+## 1. score AUC(max30>=10%) and top/bottom-decile P(>=10%), TEST only, by session part
+5-feature (as published)   all 07:00-11:30          n= 43618 AUC10=0.693  top10% P>=10= 50.3 (n=4362)  bottom10% P>=10=  6.5 (n=4362)  med ret30 top=-4.84 bottom=-0.43
+5-feature (as published)   pre-market 07:00-09:30   n= 17520 AUC10=0.617  top10% P>=10= 49.6 (n=1752)  bottom10% P>=10= 22.3 (n=1752)  med ret30 top=-6.84 bottom=+0.00
+5-feature (as published)   RTH 09:30-11:30          n= 26098 AUC10=0.712  top10% P>=10= 46.8 (n=2610)  bottom10% P>=10=  4.4 (n=2610)  med ret30 top=-3.78 bottom=-0.44
+4-feature (no mins)        all 07:00-11:30          n= 43618 AUC10=0.672  top10% P>=10= 49.1 (n=4362)  bottom10% P>=10=  9.8 (n=4362)  med ret30 top=-5.18 bottom=-0.21
+4-feature (no mins)        pre-market 07:00-09:30   n= 17520 AUC10=0.616  top10% P>=10= 50.7 (n=1752)  bottom10% P>=10= 22.2 (n=1752)  med ret30 top=-6.93 bottom=+0.00
+4-feature (no mins)        RTH 09:30-11:30          n= 26098 AUC10=0.711  top10% P>=10= 47.4 (n=2610)  bottom10% P>=10=  4.6 (n=2610)  med ret30 top=-3.77 bottom=-0.39
+
+## 2. dim rule: move < 4 or bar_range < 1 (TEST, 07:00-11:30)
+dimmed alerts 11728 of 43618; dimmed that reached +10% in 30 min: 1794 (15.3%); not dimmed: 32.3%
+symbol-days (test) with >=1 alert: 6378; every alert dimmed: 998; of those, >=1 alert reached +10% in 30 min: 22
+symbol-days whose FIRST alert would be dimmed: 2319 of 6378

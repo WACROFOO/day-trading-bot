@@ -1,0 +1,24 @@
+stop/trail exits analysed 1867
+  all  n 1867 · {'same': 1815, 'limit fill <=15s': 47, 'enforce': 5}
+  pm   n 744 · {'same': 711, 'limit fill <=15s': 31, 'enforce': 2}
+  rth  n 1123 · {'same': 1104, 'limit fill <=15s': 16, 'enforce': 3}
+
+enforce firings under STP LMT (exact prints): 5
+  2024-11-29 SLXN  rth level 2.7401 limit 2.71 trigger print 2.7000 enforce · race@phase2.5: W0.25s=n W0.5s=n W1.0s=n W3.0s=n
+  2025-04-07 BJDX  pm  level 9.3600 limit 9.27 trigger print 9.0700 enforce · race@phase2.5: W0.25s=n W0.5s=n W1.0s=n W3.0s=n
+  2026-01-23 DRCT  rth level 5.8899 limit 5.83 trigger print 5.7558 enforce · race@phase2.5: W0.25s=n W0.5s=n W1.0s=n W3.0s=n
+  2026-03-09 TURB  pm  level 4.4097 limit 4.35 trigger print 4.2415 enforce · race@phase2.5: W0.25s=n W0.5s=n W1.0s=n W3.0s=n
+  2026-05-22 GOVX  rth level 4.2099 limit 4.17 trigger print 4.1297 enforce · race@phase2.5: W0.25s=Y W0.5s=Y W1.0s=Y W3.0s=Y
+
+RACE = a print >= the STP LMT limit within W s after the enforce instant (HEAD sells in that window)
+  phase +0.0s: enforce actually fires 5 (limit filled first in 0)  W=0.25s 0/5  W= 0.5s 1/5  W= 1.0s 1/5  W= 3.0s 1/5
+  phase +2.5s: enforce actually fires 4 (limit filled first in 1)  W=0.25s 0/4  W= 0.5s 0/4  W= 1.0s 0/4  W= 3.0s 0/4
+  phase +5.0s: enforce actually fires 4 (limit filled first in 1)  W=0.25s 0/4  W= 0.5s 0/4  W= 1.0s 0/4  W= 3.0s 0/4
+
+wait cost if the fixed code waits W s for the ack: (last print at t_enf - at t_enf+W)/rps, + = waiting sold lower
+  phase +0.0s W=1.0s n 5 mean -0.084 med +0.000 max +0.022 min -0.399
+  phase +0.0s W=3.0s n 5 mean -0.029 med +0.000 max +0.000 min -0.100
+  phase +2.5s W=1.0s n 5 mean -0.033 med +0.000 max +0.000 min -0.100
+  phase +2.5s W=3.0s n 5 mean +0.098 med +0.136 max +0.201 min -0.046
+  phase +5.0s W=1.0s n 5 mean -0.015 med +0.000 max +0.091 min -0.099
+  phase +5.0s W=3.0s n 5 mean +0.148 med +0.025 max +0.466 min -0.069

@@ -1,0 +1,10 @@
+tile rows 174920 move<5% 74350 42.5%
+running_up rows 128960 move<5% 74350 57.7%
+severity [(('running_up', 'medium'), 89344), (('running_up', 'high'), 39616), (('squeeze_5_in_5', 'medium'), 35836), (('squeeze_10_in_10', 'medium'), 10124)]
+  04:00-07:00 17030 9.7%
+  07:00-09:30 40832 23.3%
+  09:30-11:30 62399 35.7%
+  11:30-16:00 54659 31.2%
+day chg <10% 15129 8.6%
+move<5 & chg<10 8687
+running_up rows admitted on pillars (vol5m<25k): 3111 2.4%

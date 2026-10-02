@@ -1,0 +1,94 @@
+analysed alerts 103201 train 59606 test 43595 (bad-basis symbol-days dropped: 6)
+
+3-feature deciles by TRAIN cut points — TRAIN all
+ deci       n P>=10 small% ret30  up30%  dd30
+    1    5961    7.0   60.4   -0.3   44.9   -0.9
+    2    5960   10.8   52.6   -0.6   43.8   -1.2
+    3    5960   15.1   46.8   -0.7   43.2   -1.4
+    4    5961   17.9   44.1   -1.2   40.3   -1.6
+    5    5961   22.0   39.2   -1.2   41.5   -1.9
+    6    5960   25.7   37.1   -1.8   39.7   -2.2
+    7    5961   29.1   33.2   -1.9   39.6   -2.5
+    8    5959   33.7   30.6   -2.4   39.5   -2.7
+    9    5962   35.9   27.8   -2.8   37.7   -3.1
+   10    5961   44.8   23.7   -4.0   38.1   -4.0
+
+3-feature deciles by TRAIN cut points — TEST all
+ deci       n P>=10 small% ret30  up30%  dd30
+    1    3568    8.4   58.0   -0.1   48.3   -0.9
+    2    3834   11.9   52.4   -0.4   45.4   -1.2
+    3    4034   15.2   46.6   -0.5   45.2   -1.5
+    4    3870   18.9   40.4   -0.6   44.3   -1.8
+    5    4040   23.1   38.9   -1.0   42.5   -2.0
+    6    4121   26.2   36.0   -1.5   40.2   -2.4
+    7    4387   31.4   32.0   -2.0   39.0   -2.6
+    8    4493   34.8   29.5   -2.5   36.9   -3.2
+    9    4908   40.0   27.2   -3.4   35.2   -3.6
+   10    6340   48.4   21.2   -5.1   35.3   -4.9
+
+3-feature deciles by TRAIN cut points — TEST RTH 09:30-11:30
+ deci       n P>=10 small% ret30  up30%  dd30
+    1    2382    3.4   64.3   -0.3   45.8   -0.9
+    2    2501    5.9   58.5   -0.5   43.6   -1.1
+    3    2600    9.2   50.6   -0.6   43.7   -1.4
+    4    2450   13.3   42.9   -0.6   44.2   -1.6
+    5    2492   16.7   42.4   -1.1   42.1   -1.9
+    6    2497   20.9   38.6   -1.5   39.7   -2.2
+    7    2583   24.5   35.2   -2.1   37.5   -2.3
+    8    2633   30.2   31.1   -2.4   37.4   -2.9
+    9    2694   33.7   30.5   -3.9   33.1   -3.5
+   10    3253   45.6   22.6   -4.4   36.6   -4.5
+
+3-feature deciles by TRAIN cut points — TEST PM 07:00-09:30
+ deci       n P>=10 small% ret30  up30%  dd30
+    1    1186   18.5   45.4   +0.4   53.5   -1.1
+    2    1333   23.0   41.0   +0.0   48.7   -1.4
+    3    1434   26.1   39.5   -0.2   48.0   -1.7
+    4    1420   28.6   36.1   -0.6   44.4   -2.2
+    5    1548   33.4   33.3   -1.0   43.1   -2.4
+    6    1624   34.3   31.9   -1.4   40.8   -2.8
+    7    1804   41.2   27.5   -1.8   41.1   -3.2
+    8    1860   41.3   27.3   -2.6   36.3   -3.6
+    9    2214   47.6   23.2   -2.9   37.9   -3.9
+   10    3087   51.4   19.7   -5.9   33.9   -5.6
+
+3-feature quintiles by TRAIN cut points — TRAIN all
+ quin       n P>=10 small% ret30  up30%  dd30
+    1   11921    8.9   56.5   -0.4   44.3   -1.0
+    2   11921   16.5   45.5   -0.9   41.8   -1.5
+    3   11922   23.8   38.2   -1.5   40.6   -2.0
+    4   11919   31.4   31.9   -2.1   39.6   -2.6
+    5   11923   40.4   25.7   -3.3   37.9   -3.5
+
+3-feature quintiles by TRAIN cut points — TEST all
+ quin       n P>=10 small% ret30  up30%  dd30
+    1    7402   10.2   55.1   -0.2   46.8   -1.1
+    2    7904   17.0   43.6   -0.5   44.8   -1.6
+    3    8161   24.7   37.4   -1.2   41.3   -2.2
+    4    8880   33.1   30.8   -2.2   37.9   -2.9
+    5   11248   44.7   23.8   -4.2   35.3   -4.3
+
+3-feature quintiles by TRAIN cut points — TEST RTH 09:30-11:30
+ quin       n P>=10 small% ret30  up30%  dd30
+    1    4883    4.7   61.3   -0.4   44.6   -1.0
+    2    5050   11.2   46.8   -0.6   44.0   -1.5
+    3    4989   18.8   40.5   -1.3   40.9   -2.0
+    4    5216   27.4   33.1   -2.3   37.4   -2.6
+    5    5947   40.2   26.2   -4.1   35.0   -4.0
+
+3-feature quintiles by TRAIN cut points — TEST PM 07:00-09:30
+ quin       n P>=10 small% ret30  up30%  dd30
+    1    2519   20.9   43.1   +0.2   51.0   -1.3
+    2    2854   27.3   37.8   -0.4   46.2   -1.9
+    3    3172   33.9   32.6   -1.2   41.9   -2.6
+    4    3664   41.3   27.4   -2.2   38.6   -3.4
+    5    5301   49.8   21.1   -4.4   35.5   -4.8
+3-feature RTH test AUC10 day-clustered bootstrap 95% CI [0.716, 0.737] (300 draws, 662 days)
+3-feature PM test AUC10 day-clustered bootstrap 95% CI [0.619, 0.641] (300 draws, 656 days)
+
+## dim rules on TEST 07:00-11:30
+3f quintile 1 (=deciles 1-2), unprotected                  dimmed   7402 (17.0%)  P>=10 dimmed 10.2 vs undimmed 31.3  small% dimmed 55.1  share of all +10% alerts dimmed  6.2%  sym-days all dimmed 974 (ran 13)
+3f quintile 1, not 1st alert, >=09:30                      dimmed   3937 ( 9.0%)  P>=10 dimmed  4.7 vs undimmed 30.0  small% dimmed 60.5  share of all +10% alerts dimmed  1.5%  sym-days all dimmed 0 (ran 0)
+3f decile 1, not 1st alert, >=09:30                        dimmed   1812 ( 4.2%)  P>=10 dimmed  3.6 vs undimmed 28.8  small% dimmed 63.3  share of all +10% alerts dimmed  0.5%  sym-days all dimmed 0 (ran 0)
+no-grade fallback: move<4 AND range<1, not 1st, >=09:30    dimmed   1151 ( 2.6%)  P>=10 dimmed  3.6 vs undimmed 28.4  small% dimmed 64.9  share of all +10% alerts dimmed  0.3%  sym-days all dimmed 0 (ran 0)
+TRAIN 3f quintile 1, not 1st, >=09:30: dimmed 6470 (10.9%) P>=10 dimmed 5.2 share of all +10% dimmed 2.3%

@@ -1,0 +1,5 @@
+Q1: P(-10% low) - P(+10% high) = -1.8 pts, day-clustered 95% CI [-2.7, -1.0] (1000 draws, 662 days)
+Q2: P(-10% low) - P(+10% high) = -2.5 pts, day-clustered 95% CI [-3.9, -1.2] (1000 draws, 662 days)
+Q3: P(-10% low) - P(+10% high) = -2.5 pts, day-clustered 95% CI [-4.5, -0.5] (1000 draws, 662 days)
+Q4: P(-10% low) - P(+10% high) = +2.5 pts, day-clustered 95% CI [+0.2, +4.9] (1000 draws, 662 days)
+Q5: P(-10% low) - P(+10% high) = +9.3 pts, day-clustered 95% CI [+6.3, +12.3] (1000 draws, 662 days)

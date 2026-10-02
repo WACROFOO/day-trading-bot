@@ -1,0 +1,95 @@
+analysed 103201 train 59606 test 43595 bad 6
+train quintile cut points [0.2827, 0.4293, 0.5673, 0.7151]
+alerts with a missing grade feature: 0
+
+## A. reproduce
+RTH test AUC10 3f = 0.725  (n=26085)
+RTH train AUC10 3f = 0.719  (n=36295)
+RTH test AUC10 bar_range alone = 0.704; train 0.689
+RTH test AUC10 chg alone = 0.668; move alone 0.669
+
+TEST RTH: quintile  n  P(+10 in 30m)  small%  med ret30  up30%  med dd30
+  1   4883    4.7   61.3  -0.41   44.6  -0.99
+  2   5050   11.2   46.8  -0.58   44.0  -1.48
+  3   4989   18.8   40.5  -1.28   40.9  -2.04
+  4   5216   27.4   33.1  -2.25   37.4  -2.63
+  5   5947   40.2   26.2  -4.09   35.0  -4.00
+
+TRAIN RTH: quintile  n  P(+10 in 30m)  small%  med ret30  up30%  med dd30
+  1   8301    5.2   61.7  -0.60   42.6  -0.98
+  2   7589   12.3   49.4  -1.03   40.7  -1.46
+  3   7217   19.1   41.5  -1.65   38.8  -1.94
+  4   6671   27.7   34.5  -2.52   37.1  -2.54
+  5   6517   39.0   25.5  -3.46   36.8  -3.36
+
+## B. AUC10 by calendar year, RTH only (3f grade | bar_range alone)
+  2016 n=  1524 base P10= 12.9  AUC10 3f=0.730  bar_range=0.701  Q5-Q1 P10 gap=+26.0
+  2017 n=  1944 base P10= 18.8  AUC10 3f=0.739  bar_range=0.687  Q5-Q1 P10 gap=+33.7
+  2018 n=  2387 base P10= 16.8  AUC10 3f=0.729  bar_range=0.702  Q5-Q1 P10 gap=+33.4
+  2019 n=  2390 base P10= 19.4  AUC10 3f=0.712  bar_range=0.678  Q5-Q1 P10 gap=+31.6
+  2020 n= 11138 base P10= 18.8  AUC10 3f=0.720  bar_range=0.683  Q5-Q1 P10 gap=+33.8
+  2021 n=  8292 base P10= 22.4  AUC10 3f=0.716  bar_range=0.693  Q5-Q1 P10 gap=+35.6
+  2022 n=  4201 base P10= 19.7  AUC10 3f=0.704  bar_range=0.682  Q5-Q1 P10 gap=+32.5
+  2023 n=  4419 base P10= 20.9  AUC10 3f=0.722  bar_range=0.684  Q5-Q1 P10 gap=+34.4
+  2024 n=  8237 base P10= 22.0  AUC10 3f=0.709  bar_range=0.687  Q5-Q1 P10 gap=+34.1
+  2025 n= 10662 base P10= 21.8  AUC10 3f=0.732  bar_range=0.705  Q5-Q1 P10 gap=+36.8
+  2026 n=  7186 base P10= 19.7  AUC10 3f=0.732  bar_range=0.722  Q5-Q1 P10 gap=+35.3
+
+## C. within time-of-day strata, TEST RTH (is the grade just the clock?)
+  09:30-09:45 n=  6012 base P10= 26.1 AUC10=0.676  Q1:8.6(544) Q2:14.2(1023) Q3:19.9(1299) Q4:29.5(1516) Q5:41.1(1630)
+  09:45-10:00 n=  4183 base P10= 22.2 AUC10=0.737  Q1:4.9(803) Q2:10.7(848) Q3:19.6(786) Q4:29.8(821) Q5:43.4(925)
+  10:00-10:30 n=  6718 base P10= 19.6 AUC10=0.733  Q1:4.9(1438) Q2:10.1(1342) Q3:17.2(1234) Q4:26.9(1258) Q5:38.7(1446)
+  10:30-11:30 n=  9172 base P10= 19.0 AUC10=0.742  Q1:3.4(2098) Q2:10.6(1837) Q3:18.9(1670) Q4:24.6(1621) Q5:39.1(1946)
+
+## D. one alert per symbol-day (the first RTH alert), TEST — removes heavy-alert names dominating
+  n=6017 AUC10=0.731
+
+TEST RTH first alert per symbol-day: quintile  n  P(+10 in 30m)  small%  med ret30  up30%  med dd30
+  1   1577    4.8   63.0  -0.26   46.2  -0.96
+  2   1257   12.3   45.0  -0.52   45.2  -1.53
+  3   1113   20.2   35.3  -1.08   43.8  -2.19
+  4   1113   28.2   31.5  -2.34   38.2  -2.89
+  5    957   40.4   27.3  -4.20   35.3  -4.30
+
+## E. other targets, TEST RTH
+  AUC(max30>=5%) = 0.676
+  AUC(max30>=20%) = 0.773
+  AUC(ret30>0) = 0.456   (direction; <0.5 = higher grade more often lower after 30m)
+  AUC(ret30>=+5%) = 0.610
+
+## F. from the bars, TEST RTH (alerts with no forward bar: 0)
+  AUC(min30<=-10%) = 0.782   (downside: >0.5 = higher grade falls 10% more often)
+  AUC(max CLOSE in 30m >= +10%) = 0.715   (robust to a single high print)
+  quintile  P(+10 high)  P(+10 close)  P(-10 low)  P(both)  med 30m high-low range
+  1 n= 4883    4.7    3.7    2.8    0.1    5.5
+  2 n= 5050   11.2    9.0    8.7    0.3    7.9
+  3 n= 4989   18.8   15.1   16.3    0.9   10.4
+  4 n= 5216   27.4   21.4   29.9    3.2   14.1
+  5 n= 5947   40.2   32.4   49.5   10.4   20.8
+
+## G. passing plans tagged by the grade of the latest tile alert <=30 min before arm (each plan once)
+  passing plans with no tile alert in the 30 min before arm: 749
+  train RTH: quintile  [mode A n, mean net R]  [mode C n, mean net R]  [portfolio BASE one position: n, mean net R]
+    1  A    88 -0.431   C    88 -0.439   port    86 -0.460
+    2  A   204 -0.507   C   204 -0.522   port   200 -0.505
+    3  A   339 -0.399   C   339 -0.439   port   334 -0.400
+    4  A   414 -0.407   C   412 -0.410   port   408 -0.407
+    5  A   568 -0.315   C   565 -0.337   port   548 -0.313
+  train PM: quintile  [mode A n, mean net R]  [mode C n, mean net R]  [portfolio BASE one position: n, mean net R]
+    1  A    33 -0.776   C    33 -0.789   port    33 -0.776
+    2  A    78 -0.339   C    78 -0.392   port    78 -0.339
+    3  A   122 -0.323   C   122 -0.290   port   120 -0.326
+    4  A   243 -0.502   C   243 -0.572   port   242 -0.498
+    5  A   272 -0.463   C   272 -0.486   port   268 -0.453
+  test RTH: quintile  [mode A n, mean net R]  [mode C n, mean net R]  [portfolio BASE one position: n, mean net R]
+    1  A    37 -0.564   C    37 -0.475   port    35 -0.525
+    2  A    89 -0.581   C    89 -0.519   port    88 -0.583
+    3  A   188 -0.527   C   188 -0.516   port   181 -0.535
+    4  A   250 -0.313   C   249 -0.341   port   240 -0.315
+    5  A   404 -0.363   C   401 -0.411   port   394 -0.362
+  test PM: quintile  [mode A n, mean net R]  [mode C n, mean net R]  [portfolio BASE one position: n, mean net R]
+    1  A    21 -0.272   C    21 -0.302   port    21 -0.272
+    2  A    41 -0.634   C    41 -0.602   port    41 -0.634
+    3  A   103 -0.464   C   103 -0.409   port   103 -0.464
+    4  A   160 -0.658   C   160 -0.632   port   156 -0.654
+    5  A   337 -0.654   C   337 -0.620   port   328 -0.654

@@ -1,0 +1,47 @@
+tile rows: 174920
+1. best_case (analyze.py) vs real evaluate() with float=5M verified, catalyst=True: mismatches 1 [(('WAIT', 'REJECT rising'), 1)]
+   REVIEW             78077  44.6%
+   WAIT               34410  19.7%
+   REJECT rising      29754  17.0%
+   WATCH              14705   8.4%
+   REJECT pillars     10510   6.0%
+   REJECT price        7464   4.3%
+   INCOMPLETE (no measured kill) 127192 72.7%
+2. measured float 50M, RVOL 2, gain 30%, no headline today:
+   real cascade: REJECT pillars ['2/5 — missing rvol, float, catalyst']
+   E1 second call (float+catalyst forced pass): REVIEW  -> stamp INCOMPLETE
+   second call forcing ONLY the unknown (catalyst): REJECT pillars  -> stamp REJECT (measured)
+3. outcome by stamp category (rows with 30 fwd bars)
+  [train 07-1130]
+    INCOMPLETE       n= 48441 med ret30  -1.43  P(ret30>0)  40.3  P(MFE30>=10)  23.7  P(MFE30<3)  39.5  symdays 9069
+    REJECT rising    n=  5754 med ret30  -2.78  P(ret30>0)  33.4  P(MFE30>=10)  27.3  P(MFE30<3)  36.1  symdays 1204
+    REJECT pillars   n=  3674 med ret30  +0.52  P(ret30>0)  54.4  P(MFE30>=10)  21.4  P(MFE30<3)  44.4  symdays 1889
+    REJECT price     n=  1740 med ret30  +0.60  P(ret30>0)  53.6  P(MFE30>=10)  41.6  P(MFE30<3)  30.1  symdays 511
+    REJECT any       n= 11168 med ret30  -0.95  P(ret30>0)  43.4  P(MFE30>=10)  27.6  P(MFE30<3)  37.9  symdays 3385
+  [train other]
+    INCOMPLETE       n= 23421 med ret30  -1.08  P(ret30>0)  40.2  P(MFE30>=10)  17.8  P(MFE30<3)  48.0  symdays 4750
+    REJECT rising    n=  6267 med ret30  -1.65  P(ret30>0)  35.2  P(MFE30>=10)  14.0  P(MFE30<3)  48.8  symdays 1365
+    REJECT pillars   n=  2243 med ret30  -0.18  P(ret30>0)  47.5  P(MFE30>=10)   7.5  P(MFE30<3)  57.6  symdays 976
+    REJECT price     n=  1984 med ret30  -0.60  P(ret30>0)  44.2  P(MFE30>=10)  21.2  P(MFE30<3)  40.7  symdays 411
+    REJECT any       n= 10494 med ret30  -1.13  P(ret30>0)  39.5  P(MFE30>=10)  14.0  P(MFE30<3)  49.2  symdays 2575
+  [test 07-1130]
+    INCOMPLETE       n= 32118 med ret30  -1.43  P(ret30>0)  40.2  P(MFE30>=10)  27.5  P(MFE30<3)  36.9  symdays 5824
+    REJECT rising    n=  7554 med ret30  -2.65  P(ret30>0)  34.0  P(MFE30>=10)  30.3  P(MFE30<3)  33.9  symdays 1252
+    REJECT pillars   n=  2556 med ret30  +1.02  P(ret30>0)  58.1  P(MFE30>=10)  23.9  P(MFE30<3)  38.7  symdays 1233
+    REJECT price     n=  1390 med ret30  +1.21  P(ret30>0)  55.4  P(MFE30>=10)  38.0  P(MFE30<3)  28.0  symdays 387
+    REJECT any       n= 11500 med ret30  -1.23  P(ret30>0)  41.9  P(MFE30>=10)  29.8  P(MFE30<3)  34.2  symdays 2638
+  [test other]
+    INCOMPLETE       n= 19110 med ret30  -1.40  P(ret30>0)  39.1  P(MFE30>=10)  24.8  P(MFE30<3)  41.8  symdays 3304
+    REJECT rising    n=  7856 med ret30  -1.51  P(ret30>0)  37.0  P(MFE30>=10)  18.6  P(MFE30<3)  43.4  symdays 1295
+    REJECT pillars   n=  1473 med ret30  -0.32  P(ret30>0)  45.7  P(MFE30>=10)  11.8  P(MFE30<3)  59.4  symdays 657
+    REJECT price     n=  1795 med ret30  -0.67  P(ret30>0)  44.1  P(MFE30>=10)  27.6  P(MFE30<3)  39.2  symdays 345
+    REJECT any       n= 11124 med ret30  -1.19  P(ret30>0)  39.3  P(MFE30>=10)  19.2  P(MFE30<3)  44.8  symdays 2096
+4. day-clustered bootstrap 95% CI, REJECT rising minus INCOMPLETE (07:00-11:30)
+  train: dP(ret30>0) pts [-9.1, -4.9]  d median ret30 [-1.68, -1.06]
+  test: dP(ret30>0) pts [-7.9, -4.5]  d median ret30 [-1.49, -0.96]
+5. one row per symbol-day per category (first row), 07:00-11:30
+  train INCOMPLETE     n=  9069 med ret30  -0.70  P(ret30>0)  44.2  P(MFE30>=10)  22.5  P(MFE30<3)  40.8  symdays 9069
+  train REJECT rising  n=  1204 med ret30  -2.39  P(ret30>0)  34.3  P(MFE30>=10)  22.2  P(MFE30<3)  39.9  symdays 1204
+  test INCOMPLETE     n=  5824 med ret30  -0.68  P(ret30>0)  43.9  P(MFE30>=10)  26.6  P(MFE30<3)  40.1  symdays 5824
+  test REJECT rising  n=  1252 med ret30  -1.79  P(ret30>0)  37.4  P(MFE30>=10)  32.3  P(MFE30<3)  32.8  symdays 1252
+6. pre-market tile rows 57862; gain pillar pass 94.5%  RTH rows gain pass 89.8%

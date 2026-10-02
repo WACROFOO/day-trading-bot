@@ -1,0 +1,47 @@
+plans with stage-1 outcome 2577 · filled 1886
+analysed 1873 filled trades (same filter as cost_decomp)
+
+==== (A) post-trigger drift: (exit print - last print at t_out + D) / rps, stop/trail exits
+  all                              n  1867 | D=   1s mean -0.059 med +0.000 (n 1867) | D=   2s mean -0.048 med +0.000 (n 1867) | D=   4s mean -0.059 med +0.000 (n 1867) | D=   5s mean -0.060 med -0.005 (n 1866) | D=   8s mean -0.072 med -0.037 (n 1866) | D=  10s mean -0.072 med -0.047 (n 1866) | D=17.5s mean -0.080 med -0.071 (n 1865)
+  all, off-market flag removed     n  1833 | D=   1s mean -0.009 med +0.000 (n 1833) | D=   2s mean -0.004 med +0.000 (n 1833) | D=   4s mean -0.011 med +0.000 (n 1833) | D=   5s mean -0.008 med -0.001 (n 1832) | D=   8s mean -0.018 med -0.031 (n 1832) | D=  10s mean -0.024 med -0.037 (n 1832) | D=17.5s mean -0.037 med -0.065 (n 1831)
+  pre-market                       n   744 | D=   1s mean -0.136 med +0.000 (n 744) | D=   2s mean -0.096 med +0.000 (n 744) | D=   4s mean -0.121 med +0.000 (n 744) | D=   5s mean -0.132 med +0.000 (n 743) | D=   8s mean -0.149 med -0.040 (n 743) | D=  10s mean -0.134 med -0.039 (n 743) | D=17.5s mean -0.143 med -0.071 (n 743)
+  pre-market, flag removed         n   719 | D=   1s mean -0.027 med +0.000 (n 719) | D=   2s mean -0.004 med +0.000 (n 719) | D=   4s mean -0.015 med +0.000 (n 719) | D=   5s mean -0.018 med +0.000 (n 718) | D=   8s mean -0.029 med -0.027 (n 718) | D=  10s mean -0.030 med -0.019 (n 718) | D=17.5s mean -0.050 med -0.058 (n 718)
+  regular                          n  1123 | D=   1s mean -0.008 med +0.000 (n 1123) | D=   2s mean -0.016 med -0.001 (n 1123) | D=   4s mean -0.019 med -0.009 (n 1123) | D=   5s mean -0.012 med -0.021 (n 1123) | D=   8s mean -0.021 med -0.035 (n 1123) | D=  10s mean -0.030 med -0.052 (n 1123) | D=17.5s mean -0.039 med -0.069 (n 1122)
+  regular, flag removed            n  1114 | D=   1s mean +0.003 med +0.000 (n 1114) | D=   2s mean -0.004 med -0.000 (n 1114) | D=   4s mean -0.008 med -0.007 (n 1114) | D=   5s mean -0.002 med -0.017 (n 1114) | D=   8s mean -0.010 med -0.033 (n 1114) | D=  10s mean -0.019 med -0.049 (n 1114) | D=17.5s mean -0.029 med -0.067 (n 1113)
+  per ALL trades, D=4s, incl. flagged: mean -0.0592 R · pre-market exits only, per all trades -0.0480 R
+  per ALL trades, D=4s, flag removed: mean -0.0107 R · pre-market exits only, per all trades -0.0059 R
+  per ALL trades, D=8s, incl. flagged: mean -0.0716 R · pre-market exits only, per all trades -0.0591 R
+  per ALL trades, D=8s, flag removed: mean -0.0172 R · pre-market exits only, per all trades -0.0111 R
+
+==== (B) resting STP (sell at trigger print) -> STP LMT at level - A16 offset, enforce at +17.5 s
+  all                        n  1867 · saving mean +0.0498 R median +0.0000 p5 +0.000 p95 +0.000 · per ALL 1873 trades +0.0497 R · {'same (trigger print >= limit)': 1815, 'filled at the limit later': 42, 'enforced at +17.5 s': 10}
+  regular                    n  1123 · saving mean +0.0063 R median +0.0000 p5 +0.000 p95 +0.000 · per ALL 1873 trades +0.0038 R · {'same (trigger print >= limit)': 1104, 'filled at the limit later': 12, 'enforced at +17.5 s': 7}
+  pre-market                 n   744 · saving mean +0.1155 R median +0.0000 p5 +0.000 p95 +0.000 · per ALL 1873 trades +0.0459 R · {'same (trigger print >= limit)': 711, 'filled at the limit later': 30, 'enforced at +17.5 s': 3}
+  all, flag removed          n  1833 · saving mean +0.0107 R median +0.0000 p5 +0.000 p95 +0.000 · per ALL 1873 trades +0.0105 R · {'same (trigger print >= limit)': 1800, 'filled at the limit later': 23, 'enforced at +17.5 s': 10}
+  regular, flag removed      n  1114 · saving mean +0.0001 R median +0.0000 p5 +0.000 p95 +0.000 · per ALL 1873 trades +0.0001 R · {'same (trigger print >= limit)': 1097, 'filled at the limit later': 10, 'enforced at +17.5 s': 7}
+  pre-market, flag removed   n   719 · saving mean +0.0271 R median +0.0000 p5 +0.000 p95 +0.000 · per ALL 1873 trades +0.0104 R · {'same (trigger print >= limit)': 703, 'filled at the limit later': 13, 'enforced at +17.5 s': 3}
+
+==== (C) A6 on the REAL spread at the fill (spread_in > rps/4 = fail)
+  pass: n 1548 · gross -0.129 · cost_real 0.348 · net -0.476 R/trade · sum net -737.4 R
+     pm: n 656 · net -0.531
+     rth: n 892 · net -0.436
+  fail: n 325 · gross -0.069 · cost_real 0.648 · net -0.717 R/trade · sum net -233.0 R
+     pm: n 93 · net -0.726
+     rth: n 232 · net -0.713
+
+==== (D) entry cap = trigger vs live cap (re-replayed on the same prints); per plan over all plans with a stage-1 outcome
+  check: capnow replay == cached outcome on 1873/1873
+  status {'cap0 unfilled': 85, 'cap0 incomplete': 1}
+  capnow  filled  1873 of 2577 plans · net R sum -970.4 · per plan -0.3766 · per filled trade -0.5181
+  cap0    filled  1787 of 2577 plans · net R sum -925.9 · per plan -0.3593 · per filled trade -0.5181
+  plans filled now but NOT at cap = trigger: 85 · their net R now mean +0.445 sum +37.9
+  both filled: 1787 · entry price saved by cap = trigger mean 0.0388 R
+
+==== (E) commission per round trip, Fixed vs Tiered ALL-IN marketable both legs (take 0.0030 + NSCC 0.0002 + pass-through)
+  shares 1-99: n  274 · fixed 0.050 R · tiered all-in take 0.029 R · tiered - fixed -0.021
+  shares 100-199: n  498 · fixed 0.050 R · tiered all-in take 0.050 R · tiered - fixed -0.000
+  shares 200-399: n  689 · fixed 0.073 R · tiered all-in take 0.098 R · tiered - fixed +0.025
+  shares 400-699: n  375 · fixed 0.130 R · tiered all-in take 0.175 R · tiered - fixed +0.044
+  shares 700-+: n   37 · fixed 0.200 R · tiered all-in take 0.268 R · tiered - fixed +0.068
+  ALL: fixed 0.0777 R · tiered all-in take 0.0939 R · tiered - fixed +0.0162 R/trade
+  pre-market fills: fixed 0.0793 · tiered 0.0966

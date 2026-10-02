@@ -1,0 +1,76 @@
+
+== ALL sessions (stage-3 set) - price-only fill rules · 648 sessions 2024-01-02..2026-08-21 · alpha 0.05/49
+  variant                    n    net R  gross R  cost R  win %    2024    2025    2026  lb vs D tgt fills  verdict(adoption rule)
+  D                       1721   -0.542   -0.150   0.392  22.5%  -0.578  -0.565  -0.454                  0  reference
+  P-half1R/touch          1735   -0.504   -0.136   0.368  33.8%  -0.532  -0.514  -0.447   +0.008       631  PASSES
+  P-half1R/thru           1734   -0.513   -0.144   0.369  32.8%  -0.545  -0.524  -0.451   -0.000       603  fails
+  P-half1R/thru1c         1733   -0.517   -0.147   0.370  32.3%  -0.546  -0.529  -0.459   -0.004       590  fails
+  P-half2R/touch          1722   -0.529   -0.145   0.384  23.1%  -0.549  -0.552  -0.461   -0.009       226  fails
+  P-half2R/thru           1722   -0.533   -0.149   0.384  23.0%  -0.556  -0.556  -0.464   -0.013       213  fails
+  P-half2R/thru1c         1722   -0.535   -0.150   0.385  23.0%  -0.558  -0.558  -0.465   -0.015       208  fails
+
+== sessions where every run plan has print sizes · 477 sessions 2024-01-02..2026-08-21 · alpha 0.05/49
+  variant                    n    net R  gross R  cost R  win %    2024    2025    2026  lb vs D tgt fills  verdict(adoption rule)
+  D                       1180   -0.519   -0.137   0.383  23.1%  -0.596  -0.547  -0.454                  0  reference
+  P-half1R/touch          1190   -0.486   -0.127   0.359  33.6%  -0.558  -0.496  -0.447   -0.007       429  fails
+  P-half1R/thru           1190   -0.494   -0.133   0.361  32.9%  -0.563  -0.507  -0.451   -0.014       414  fails
+  P-half1R/thru1c         1189   -0.499   -0.137   0.362  32.2%  -0.563  -0.512  -0.459   -0.018       402  fails
+  P-half1R/size           1190   -0.488   -0.128   0.360  33.4%  -0.558  -0.499  -0.447   -0.008       426  fails
+  P-half1R/size_thru      1190   -0.494   -0.133   0.361  32.8%  -0.563  -0.508  -0.451   -0.014       413  fails
+  P-half2R/touch          1181   -0.513   -0.139   0.375  23.5%  -0.564  -0.538  -0.461   -0.023       149  fails
+  P-half2R/thru           1181   -0.518   -0.142   0.376  23.4%  -0.579  -0.541  -0.464   -0.026       141  fails
+  P-half2R/thru1c         1181   -0.519   -0.143   0.376  23.4%  -0.579  -0.543  -0.465   -0.027       138  fails
+  P-half2R/size           1181   -0.513   -0.139   0.375  23.5%  -0.564  -0.538  -0.461   -0.023       149  fails
+  P-half2R/size_thru      1181   -0.518   -0.142   0.376  23.4%  -0.579  -0.541  -0.464   -0.026       141  fails
+
+== plan-level diagnostics (all 2193 run plans, P-half1R)
+   touch-only (never traded above) 39
+   ('thru fill', False) 1422
+   ('thru fill', True) 771
+   ('thru1c fill', False) 1439
+   ('thru1c fill', True) 754
+   ('touch fill', False) 1383
+   ('touch fill', True) 810
+   all: P-thru net - D net                  n  2193 mean +0.0335 median +0.0000
+   all: P-touch net - D net                 n  2193 mean +0.0439 median +0.0000
+   all: P-thru1c net - D net                n  2193 mean +0.0289 median +0.0000
+   all: cost diff D - P-touch               n  2193 mean +0.0251 median +0.0000
+   all: cost diff D - P-thru                n  2193 mean +0.0237 median +0.0000
+   all: gross diff P-touch - D              n  2193 mean +0.0188 median +0.0000
+   all: gross diff P-thru - D               n  2193 mean +0.0098 median +0.0000
+   touch fills: P-touch net - D net         n   810 mean +0.1188 median +0.2698
+   touch fills: cost diff (D - P)           n   810 mean +0.0680 median +0.0568
+   touch fills: gross diff (P - D)          n   810 mean +0.0508 median +0.2137
+   touch-only: P-touch net - D net          n    39 mean +0.5846 median +0.5833
+   touch-only: D gross                      n    39 mean -0.0653 median -0.0714
+
+  extra commission per target-split trade ($): mean 0.601 median 0.755; shares median 249
+
+== session split (portfolio, all sessions): mean net R
+   D                     pm n   846 net -0.572
+   D                    rth n   875 net -0.513
+   P-half1R/touch        pm n   847 net -0.543
+   P-half1R/touch       rth n   888 net -0.466
+   P-half1R/thru         pm n   847 net -0.555
+   P-half1R/thru        rth n   887 net -0.473
+   P-half1R/thru1c       pm n   847 net -0.556
+   P-half1R/thru1c      rth n   886 net -0.480
+   P-half2R/touch        pm n   846 net -0.562
+   P-half2R/touch       rth n   876 net -0.496
+   P-half2R/thru         pm n   846 net -0.567
+   P-half2R/thru        rth n   876 net -0.500
+touch: plans 2193, target fills 810 · per-plan mean saving R: half-spread avoided +0.0178 · 1c avoided +0.0129 · extra commission -0.0056 · net cost saving +0.0251
+thru: plans 2193, target fills 771 · per-plan mean saving R: half-spread avoided +0.0169 · 1c avoided +0.0121 · extra commission -0.0054 · net cost saving +0.0237
+precise day-paired lower bounds vs D, all 648 sessions, alpha 0.05/49 and 0.05:
+  P-half1R/touch     mean diff +0.0381  lb(0.05/49) +0.0083  lb(0.05) +0.0228
+  P-half1R/thru      mean diff +0.0286  lb(0.05/49) -0.0004  lb(0.05) +0.0135
+  P-half1R/thru1c    mean diff +0.0246  lb(0.05/49) -0.0040  lb(0.05) +0.0097
+  P-half2R/touch     mean diff +0.0131  lb(0.05/49) -0.0089  lb(0.05) +0.0021
+  P-half2R/thru      mean diff +0.0085  lb(0.05/49) -0.0134  lb(0.05) -0.0022
+target placed after the runner sees the fill (latency), all 648 sessions, vs D:
+  P-half1R/touch          n 1735 net -0.504  diff +0.0381  lb(0.05/49) +0.0083
+  P-half1R/touch+lat2.5s  n 1734 net -0.508  diff +0.0342  lb(0.05/49) +0.0049
+  P-half1R/touch+lat5s    n 1734 net -0.508  diff +0.0338  lb(0.05/49) +0.0055
+  P-half1R/thru           n 1734 net -0.513  diff +0.0286  lb(0.05/49) -0.0004
+  P-half1R/thru+lat2.5s   n 1733 net -0.517  diff +0.0246  lb(0.05/49) -0.0039
+  P-half1R/thru+lat5s     n 1731 net -0.517  diff +0.0250  lb(0.05/49) -0.0028

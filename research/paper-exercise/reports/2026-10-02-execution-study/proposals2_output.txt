@@ -1,0 +1,18 @@
+analysed 1873
+
+==== cost components by session, off-market-flagged exits removed (mean R/trade)
+  pm  all            n  749 · comm 0.079 · sp_in 0.075 · slip_in 0.040 · sp_out 0.074 · slip_out 0.152 · total 0.419
+  pm  flag removed   n  724 · comm 0.079 · sp_in 0.076 · slip_in 0.041 · sp_out 0.074 · slip_out 0.057 · total 0.327
+  rth all            n 1124 · comm 0.077 · sp_in 0.094 · slip_in 0.042 · sp_out 0.112 · slip_out 0.041 · total 0.366
+  rth flag removed   n 1115 · comm 0.077 · sp_in 0.094 · slip_in 0.042 · sp_out 0.111 · slip_out 0.033 · total 0.357
+
+==== drift tails, flag removed: (exit print - last print at t+D)/rps; POSITIVE = acting later sells lower
+  pm   D=   4s n 719 · share >0 40.9% · p75 +0.125 · p90 +0.333 · p95 +0.496 · p99 +0.838 · mean of positive part +0.1047
+  pm   D=   8s n 718 · share >0 38.7% · p75 +0.158 · p90 +0.410 · p95 +0.578 · p99 +1.182 · mean of positive part +0.1310
+  pm   D=17.5s n 718 · share >0 38.4% · p75 +0.180 · p90 +0.487 · p95 +0.753 · p99 +1.453 · mean of positive part +0.1512
+  rth  D=   4s n 1114 · share >0 39.9% · p75 +0.125 · p90 +0.324 · p95 +0.521 · p99 +1.159 · mean of positive part +0.1113
+  rth  D=   8s n 1114 · share >0 41.4% · p75 +0.168 · p90 +0.426 · p95 +0.696 · p99 +1.441 · mean of positive part +0.1428
+  rth  D=17.5s n 1113 · share >0 39.6% · p75 +0.190 · p90 +0.544 · p95 +0.903 · p99 +1.933 · mean of positive part +0.1776
+  (bid-ask bounce: the trigger print is usually at the bid, a later print may be at the ask, so the
+   mean understates the cost of delay by up to half a spread; the positive-part mean is an upper bound)
+  half spread at the exit, same trades: mean 0.097 R median 0.062

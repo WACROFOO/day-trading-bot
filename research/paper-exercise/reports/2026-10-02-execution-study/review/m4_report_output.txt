@@ -1,0 +1,48 @@
+complete sessions 607
+gate-passing plans on complete sessions with a result: 2577
+
+[band05] filled 1877 · exits moved 789 (pm 324, rth 465) · new better 241 · new worse 255
+   delta gross R on moved exits: sum +129.03 · mean +0.164 · median +0.000 · min -1.79 · max +12.73
+   delay of the exit (s): median 1.3 · p90 86.7 · max 1520
+   delta gross R per filled plan: +0.0687
+
+[band03p] filled 1883 · exits moved 67 (pm 39, rth 28) · new better 47 · new worse 12
+   delta gross R on moved exits: sum +84.62 · mean +1.263 · median +0.106 · min -0.45 · max +10.93
+   delay of the exit (s): median 7.2 · p90 174.1 · max 713
+   delta gross R per filled plan: +0.0449
+
+[dlast] filled 1883 · exits moved 1208 (pm 476, rth 732) · new better 187 · new worse 363
+   delta gross R on moved exits: sum +59.61 · mean +0.049 · median +0.000 · min -2.54 · max +10.93
+   delay of the exit (s): median 0.0 · p90 11.7 · max 1567
+   delta gross R per filled plan: +0.0317
+
+== exit slippage beyond the level (R), stopish exits, all filled plans
+   base    pm   n   755 · mean 0.161 · p50 0.000 · p90 0.099 · p99 4.288 · max 11.090
+   base    rth  n  1125 · mean 0.041 · p50 0.000 · p90 0.094 · p99 0.460 · max 6.711
+   band05  pm   n   750 · mean 0.084 · p50 0.000 · p90 0.120 · p99 1.895 · max 4.417
+   band05  rth  n  1121 · mean 0.052 · p50 0.001 · p90 0.136 · p99 0.754 · max 1.847
+   band03p pm   n   753 · mean 0.080 · p50 0.000 · p90 0.082 · p99 1.603 · max 11.090
+   band03p rth  n  1124 · mean 0.032 · p50 0.000 · p90 0.094 · p99 0.353 · max 0.894
+   dlast   pm   n   753 · mean 0.146 · p50 0.000 · p90 0.121 · p99 3.961 · max 10.818
+   dlast   rth  n  1124 · mean 0.044 · p50 0.001 · p90 0.124 · p99 0.451 · max 1.185
+
+== portfolio B (RA.BASE, mode T), re-simulated per rule
+   rule          n  gross/tr  net real/tr  total net   pm net  rth net
+   base       1457    -0.111       -0.511     -744.1   -0.557   -0.471
+   band05     1466    -0.029       -0.428     -628.0   -0.422   -0.434
+   band03p    1470    -0.058       -0.457     -671.6   -0.456   -0.458
+   dlast      1454    -0.072       -0.472     -686.3   -0.521   -0.429
+
+== overlap: look-ahead flag (out.txt heuristic, next 20 prints) vs causal band05 moving the exit
+   flagged (X=3%) 35 (pm 26) · of which band05 moves the exit 32 · delta gross R on those: sum +87.68 mean +2.740 min -0.97
+
+== band05: the 8 largest WORSENINGS (new exit lower than base)
+   2025-01-02 ATCH  rth entry 14.26 stop 13.41 · base exit 14.369 @11:08:31 lvl 14.4199 · band05 exit 12.8501 @11:13:04 (trail) · dR -1.79
+   2024-07-25 MIRA  pm entry 3.37 stop 3.3 · base exit 3.32 @09:03:15 lvl 3.33 · band05 exit 3.24 @09:03:16 (trail) · dR -1.14
+   2026-08-17 NNNN  rth entry 11.01 stop 10.1401 · base exit 12.82 @09:45:09 lvl 12.9296 · band05 exit 11.95 @09:45:12 (trail) · dR -1.00
+   2025-10-27 DZZ   rth entry 6.96 stop 6.6014 · base exit 8.25 @10:29:21 lvl 8.2514 · band05 exit 7.9 @10:29:24 (trail) · dR -0.98
+   2025-07-15 XAGE  pm entry 6.17 stop 5.82 · base exit 5.42 @08:00:00 lvl 5.82 · band05 exit 5.08 @08:00:00 (stop) · dR -0.97
+   2025-10-13 STI   pm entry 11.1 stop 10.73 · base exit 10.63 @08:00:00 lvl 10.73 · band05 exit 10.28 @08:00:01 (stop) · dR -0.95
+   2025-01-15 MASS  rth entry 2.63 stop 2.54 · base exit 2.56 @09:36:57 lvl 2.56 · band05 exit 2.49 @09:36:59 (trail) · dR -0.78
+   2025-05-15 KDLY  rth entry 9.1193 stop 8.9 · base exit 9.05 @10:08:47 lvl 9.0707 · band05 exit 8.89 @10:08:48 (trail) · dR -0.73
+   total worsenings 255

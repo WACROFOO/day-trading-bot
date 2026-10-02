@@ -1,0 +1,40 @@
+n train 59609 test 43618
+
+## 1. Proposed 'dim' rule: daily RVOL < 1.5x (FILTERS.md:162)
+train: dimmed share 50.7%   dimmed: n= 30234 P>=10  22.8 small  41.1 med ret30 -0.85   kept: n= 29375 P>=10  25.7 small  38.0 med ret30 -1.89
+   07:00-09:30: dimmed share 68.3% of 23311
+   09:30-11:30: dimmed share 39.4% of 36298
+   (5-min RVOL <1.5 instead: share 37.6%)
+test: dimmed share 41.2%   dimmed: n= 17959 P>=10  24.5 small  40.2 med ret30 -0.64   kept: n= 25659 P>=10  30.0 small  34.2 med ret30 -1.99
+   07:00-09:30: dimmed share 48.3% of 17520
+   09:30-11:30: dimmed share 36.4% of 26098
+   (5-min RVOL <1.5 instead: share 47.2%)
+
+## 2. 'above VWAP' in the running_up note vs session VWAP at the alert
+train: running_up rows below SESSION VWAP: 11401/43116 = 26.4%
+test: running_up rows below SESSION VWAP: 10174/29949 = 34.0%
+
+## 3. Price-band red: rows outside $2-20
+train: outside 2.9%  outside: n=  1740 P>=10  40.8 small  30.6 med ret30 +0.64  inside: n= 57869 P>=10  23.7 small  39.8 med ret30 -1.39
+test: outside 3.2%  outside: n=  1390 P>=10  37.4 small  28.1 med ret30 +1.11  inside: n= 42228 P>=10  27.4 small  37.0 med ret30 -1.43
+
+## 4. Move AUC10 robustness: within scanner kind, by window, day-clustered bootstrap
+move      tr:UP10m=0.653(n40017) tr:5in5=0.562(n12799) tr:10in10=0.567(n3694) te:UP10m=0.651(n28455) te:5in5=0.591(n10637) te:10in10=0.555(n3032)
+chg       tr:UP10m=0.636(n40017) tr:5in5=0.574(n12799) tr:10in10=0.565(n3694) te:UP10m=0.630(n28455) te:5in5=0.578(n10637) te:10in10=0.536(n3032)
+vol5      tr:UP10m=0.539(n40017) tr:5in5=0.506(n12799) tr:10in10=0.528(n3694) te:UP10m=0.559(n28455) te:5in5=0.537(n10637) te:10in10=0.527(n3032)
+rvol5     tr:UP10m=0.578(n39965) tr:5in5=0.494(n12520) tr:10in10=0.504(n3687) te:UP10m=0.541(n28430) te:5in5=0.476(n10497) te:10in10=0.484(n3026)
+rvol_d    tr:UP10m=0.526(n40017) tr:5in5=0.520(n12799) tr:10in10=0.536(n3694) te:UP10m=0.551(n28455) te:5in5=0.525(n10637) te:10in10=0.535(n3032)
+bar_range tr:UP10m=0.680(n40017) tr:5in5=0.604(n12799) tr:10in10=0.576(n3694) te:UP10m=0.692(n28455) te:5in5=0.651(n10637) te:10in10=0.608(n3032)
+move tr: 07:00-09:30 AUC10 0.607 (n23311)  09:30-11:30 0.661 (n36298)
+move te: 07:00-09:30 AUC10 0.614 (n17520)  09:30-11:30 0.669 (n26098)
+chg tr: 07:00-09:30 AUC10 0.541 (n23311)  09:30-11:30 0.677 (n36298)
+chg te: 07:00-09:30 AUC10 0.549 (n17520)  09:30-11:30 0.668 (n26098)
+test move    AUC10 day-clustered 95% CI [0.640, 0.654] (662 days, 300 draws)
+test chg     AUC10 day-clustered 95% CI [0.602, 0.622] (662 days, 300 draws)
+test vol5    AUC10 day-clustered 95% CI [0.549, 0.569] (662 days, 300 draws)
+test rvol5   AUC10 day-clustered 95% CI [0.518, 0.535] (662 days, 300 draws)
+test rvol_d  AUC10 day-clustered 95% CI [0.534, 0.555] (662 days, 300 draws)
+
+## 5. Small-move share (max30<3%) among rows whose MOVE column would read <5% vs >=5%
+train: move<5 share 39.3%  n= 23442 P>=10  14.8 small  48.5 med ret30 -0.88 | move>=5 n= 36167 P>=10  30.3 small  33.7 med ret30 -1.79
+test: move<5 share 35.7%  n= 15554 P>=10  16.9 small  46.2 med ret30 -0.70 | move>=5 n= 28064 P>=10  33.7 small  31.4 med ret30 -1.94

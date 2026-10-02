@@ -1,0 +1,20 @@
+base all n 1873 Σ 0.387 slip_out 0.085 · pm n 749 Σ 0.419 slip_out 0.152 · rth n 1124 Σ 0.366 slip_out 0.041
+band05 all n 1864 Σ 0.364 slip_out 0.062 · pm n 744 Σ 0.345 slip_out 0.078 · rth n 1120 Σ 0.377 slip_out 0.052
+band03p all n 1870 Σ 0.350 slip_out 0.048 · pm n 747 Σ 0.340 slip_out 0.073 · rth n 1123 Σ 0.357 slip_out 0.032
+dlast all n 1870 Σ 0.383 slip_out 0.081 · pm n 747 Σ 0.403 slip_out 0.136 · rth n 1123 Σ 0.369 slip_out 0.044
+07:10 base fill 3.0 exit 2.86 lvl 2.86 07:12:17 r -1.0 trail rejected 0
+07:10 band05 fill 3.0 exit 2.86 lvl 2.86 07:12:17 r -1.0 trail rejected 7
+07:10 band03p fill 3.0 exit 2.86 lvl 2.86 07:12:17 r -1.0 trail rejected 0
+07:10 dlast fill 3.0 exit 2.86 lvl 2.86 07:12:17 r -1.0 trail rejected 1
+08:12 base fill 4.05 exit 2.7201 lvl 3.94 08:13:49 r -12.09 stop rejected 0
+08:12 band05 fill 4.05 exit 4.12 lvl 4.12 08:14:02 r 0.64 trail rejected 30
+08:12 band03p fill 4.05 exit 2.7201 lvl 3.94 08:13:51 r -12.09 stop rejected 27
+08:12 dlast fill 4.05 exit 2.75 lvl 3.94 08:13:49 r -11.82 stop rejected 1
+base None
+band05 None
+band03p None
+dlast None
+base None
+band05 None
+band03p None
+dlast None

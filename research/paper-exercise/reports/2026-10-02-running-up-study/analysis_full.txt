@@ -1,0 +1,105 @@
+days=2608 first=2016-02-03 last=2026-08-21 events=286152
+symbol-days with >=1 tile/HOD event: 17883
+
+== A. router outcome per scanner (status, detail) ==
+  hod_momentum       delivered                                           39437
+  hod_momentum       suppressed cooldown                                 13030
+  running_up         delivered                                           128960
+  running_up         suppressed consolidated_under_hod_momentum          14435
+  running_up         suppressed cooldown                                 469
+  squeeze_10_in_10   delivered                                           10124
+  squeeze_10_in_10   suppressed consolidated_under_running_up            7530
+  squeeze_10_in_10   suppressed consolidated_under_hod_momentum          4983
+  squeeze_10_in_10   suppressed consolidated_under_squeeze_5_in_5        2866
+  squeeze_10_in_10   suppressed consolidated_under_running_down          105
+  squeeze_5_in_5     delivered                                           35836
+  squeeze_5_in_5     suppressed consolidated_under_running_up            21782
+  squeeze_5_in_5     suppressed consolidated_under_hod_momentum          6595
+
+running_up emitted 143864; delivered 128960; consolidated under another scanner 14435 (10.0%); cooldown 469
+  consolidated-under breakdown: [('consolidated_under_hod_momentum', 14435)]
+  at_hod among delivered: Counter({False: 122620, True: 6340})
+  at_hod among consolidated: Counter({False: 11960, True: 2475})
+  consolidated running_up with no Running Up tile row for that name in the next 10 min: 12090 of 14435
+
+== B. tile-visible events (delivered running_up / squeeze_*): 174920 ==
+  by scanner: [('running_up', 128960), ('squeeze_5_in_5', 35836), ('squeeze_10_in_10', 10124)]
+  by window (ET): [('am', 62399), ('pre', 57862), ('late', 54659)]
+  day change (from prev close) at alert:
+    0-5%       3182   1.8%
+    10-20%    30924  17.7%
+    20-50%    69849  39.9%
+    5-10%      6976   4.0%
+    50%+      59018  33.7%
+    <0%        4971   2.8%
+  cascade verdict at alert (float unknown, no news — the desk's common case):
+    ('REJECT', 'pillars')          167456  95.7%
+    ('REJECT', 'price')              7464   4.3%
+  pillar gate value:
+    2/5       89558
+    3/5       67388
+    1/5       10510
+    —          7464
+  gain>=10%: 159791 (91.4%)   RVOL(daily)>=5: 74458 (42.6%)   both: 70559 (40.3%)   either: 163690 (93.6%)   price $2-20: 95.7%
+  -> pillars gate (need 4/5) would PASS if float AND catalyst both passed: 'either' share; if only float passed: 'both' share; if neither: never.
+
+== C. forward 30-min outcome from the alert bar's close (gross, no costs, no entry rule) ==
+all tile-visible                       n=167376  ret30 med  -1.28% mean  -0.21%  P(ret30>0) 40.4%  MFE30 med  4.08%  MAE30 med  -5.00%  P(MFE>=5%) 43.9%  P(MAE<=-5%) 50.0%
+  scanner running_up                   n=122729  ret30 med  -1.13% mean  -0.21%  P(ret30>0) 40.7%  MFE30 med  3.68%  MAE30 med  -4.47%  P(MFE>=5%) 40.5%  P(MAE<=-5%) 45.1%
+  scanner squeeze_5_in_5               n= 34767  ret30 med  -1.80% mean  -0.19%  P(ret30>0) 39.8%  MFE30 med  5.37%  MAE30 med  -6.37%  P(MFE>=5%) 52.1%  P(MAE<=-5%) 61.5%
+  scanner squeeze_10_in_10             n=  9880  ret30 med  -2.44% mean  -0.27%  P(ret30>0) 38.6%  MFE30 med  6.46%  MAE30 med  -8.04%  P(MFE>=5%) 57.5%  P(MAE<=-5%) 70.3%
+running_up consolidated (NOT in tile)  n= 14204  ret30 med  -1.43% mean  -0.21%  P(ret30>0) 41.1%  MFE30 med  5.40%  MAE30 med  -6.07%  P(MFE>=5%) 52.5%  P(MAE<=-5%) 57.4%
+  by 10-min (or 5-min) move at alert:
+    move 3-4%                          n= 46333  ret30 med  -0.68% mean  -0.19%  P(ret30>0) 42.1%  MFE30 med  2.73%  MAE30 med  -3.23%  P(MFE>=5%) 29.9%  P(MAE<=-5%) 29.8%
+    move 4-5%                          n= 23802  ret30 med  -1.05% mean  -0.30%  P(ret30>0) 40.8%  MFE30 med  3.41%  MAE30 med  -4.15%  P(MFE>=5%) 37.1%  P(MAE<=-5%) 40.3%
+    move 5-7.5%                        n= 52671  ret30 med  -1.57% mean  -0.30%  P(ret30>0) 39.7%  MFE30 med  4.49%  MAE30 med  -5.50%  P(MFE>=5%) 46.7%  P(MAE<=-5%) 54.9%
+    move 7.5-10%                       n= 15777  ret30 med  -2.25% mean  -0.37%  P(ret30>0) 38.5%  MFE30 med  5.56%  MAE30 med  -6.97%  P(MFE>=5%) 53.3%  P(MAE<=-5%) 65.2%
+    move 10%+                          n= 28793  ret30 med  -2.72% mean  +0.09%  P(ret30>0) 39.3%  MFE30 med  7.62%  MAE30 med  -8.84%  P(MFE>=5%) 61.9%  P(MAE<=-5%) 73.1%
+  by day change at alert:
+    chg <0%                            n=  4390  ret30 med  -0.62% mean  +0.05%  P(ret30>0) 43.5%  MFE30 med  3.13%  MAE30 med  -3.73%  P(MFE>=5%) 34.6%  P(MAE<=-5%) 36.3%
+    chg 0-5%                           n=  2922  ret30 med  +0.20% mean  +1.70%  P(ret30>0) 51.3%  MFE30 med  2.95%  MAE30 med  -2.62%  P(MFE>=5%) 33.4%  P(MAE<=-5%) 22.5%
+    chg 5-10%                          n=  6612  ret30 med  +0.27% mean  +1.74%  P(ret30>0) 52.2%  MFE30 med  3.12%  MAE30 med  -2.71%  P(MFE>=5%) 35.4%  P(MAE<=-5%) 21.3%
+    chg 10-20%                         n= 29850  ret30 med  -0.51% mean  +0.41%  P(ret30>0) 44.1%  MFE30 med  3.03%  MAE30 med  -3.50%  P(MFE>=5%) 33.7%  P(MAE<=-5%) 32.7%
+    chg 20-50%                         n= 67366  ret30 med  -1.36% mean  -0.24%  P(ret30>0) 39.4%  MFE30 med  3.83%  MAE30 med  -4.89%  P(MFE>=5%) 41.8%  P(MAE<=-5%) 48.9%
+    chg 50%+                           n= 56236  ret30 med  -2.50% mean  -0.85%  P(ret30>0) 37.3%  MFE30 med  5.75%  MAE30 med  -7.35%  P(MFE>=5%) 54.2%  P(MAE<=-5%) 66.3%
+  by window:
+    window pre                         n= 57862  ret30 med  -1.44% mean  +0.45%  P(ret30>0) 41.5%  MFE30 med  5.86%  MAE30 med  -6.32%  P(MFE>=5%) 54.6%  P(MAE<=-5%) 59.7%
+    window am                          n= 62395  ret30 med  -1.41% mean  -0.63%  P(ret30>0) 39.6%  MFE30 med  3.86%  MAE30 med  -4.87%  P(MFE>=5%) 41.7%  P(MAE<=-5%) 48.8%
+    window late                        n= 47119  ret30 med  -1.04% mean  -0.47%  P(ret30>0) 39.9%  MFE30 med  3.04%  MAE30 med  -4.05%  P(MFE>=5%) 33.7%  P(MAE<=-5%) 39.6%
+  by cascade gate state at alert:
+    killed_by pillars                  n=160467  ret30 med  -1.33% mean  -0.36%  P(ret30>0) 40.0%  MFE30 med  4.04%  MAE30 med  -5.01%  P(MFE>=5%) 43.6%  P(MAE<=-5%) 50.1%
+    killed_by rising                   n=0
+    killed_by price                    n=  6909  ret30 med  -0.02% mean  +3.35%  P(ret30>0) 48.8%  MFE30 med  5.09%  MAE30 med  -4.71%  P(MFE>=5%) 50.8%  P(MAE<=-5%) 47.5%
+    not killed                         n=0
+  by pillar inputs the desk can measure:
+    gain>=10 & RVOL>=5                 n= 65735  ret30 med  -1.80% mean  -0.80%  P(ret30>0) 37.6%  MFE30 med  4.33%  MAE30 med  -5.67%  P(MFE>=5%) 45.7%  P(MAE<=-5%) 55.6%
+    exactly one of gain/RVOL           n= 91031  ret30 med  -1.18% mean  -0.03%  P(ret30>0) 40.9%  MFE30 med  4.02%  MAE30 med  -4.89%  P(MFE>=5%) 43.5%  P(MAE<=-5%) 49.0%
+    neither gain>=10 nor RVOL>=5       n= 10610  ret30 med  +0.33% mean  +1.92%  P(ret30>0) 52.7%  MFE30 med  3.25%  MAE30 med  -2.72%  P(MFE>=5%) 36.8%  P(MAE<=-5%) 23.3%
+    gain>=10 only                      n= 87717  ret30 med  -1.19% mean  +0.01%  P(ret30>0) 41.0%  MFE30 med  4.09%  MAE30 med  -4.94%  P(MFE>=5%) 44.1%  P(MAE<=-5%) 49.5%
+    RVOL>=5 only                       n=  3314  ret30 med  -1.02% mean  -1.10%  P(ret30>0) 38.4%  MFE30 med  2.59%  MAE30 med  -3.77%  P(MFE>=5%) 28.3%  P(MAE<=-5%) 35.6%
+  by Layer 2 at alert:
+    VWAP & EMA9 & MACD all true        n= 83384  ret30 med  -1.18% mean  -0.02%  P(ret30>0) 41.5%  MFE30 med  4.17%  MAE30 med  -4.91%  P(MFE>=5%) 44.6%  P(MAE<=-5%) 49.2%
+    any Layer 2 false/unknown          n= 83992  ret30 med  -1.38% mean  -0.39%  P(ret30>0) 39.2%  MFE30 med  3.99%  MAE30 med  -5.08%  P(MFE>=5%) 43.2%  P(MAE<=-5%) 50.7%
+  running_up only, by at_hod:
+    at HOD (branch _hod)               n=  6237  ret30 med  -0.27% mean  +1.05%  P(ret30>0) 47.2%  MFE30 med  4.33%  MAE30 med  -3.93%  P(MFE>=5%) 45.5%  P(MAE<=-5%) 41.2%
+    below HOD                          n=116492  ret30 med  -1.17% mean  -0.28%  P(ret30>0) 40.3%  MFE30 med  3.65%  MAE30 med  -4.50%  P(MFE>=5%) 40.3%  P(MAE<=-5%) 45.3%
+
+== D. best-case cascade verdict (float verified <20M AND catalyst today assumed) ==
+  REVIEW            78077  44.6%
+  WAIT              34411  19.7%
+  REJECT rising     29753  17.0%
+  WATCH             14705   8.4%
+  REJECT pillars    10510   6.0%
+  REJECT price       7464   4.3%
+  best-case REVIEW                     n= 75259  ret30 med  -1.30% mean  -0.26%  P(ret30>0) 40.5%  MFE30 med  4.06%  MAE30 med  -4.95%  P(MFE>=5%) 43.7%  P(MAE<=-5%) 49.6%
+  best-case WAIT                       n= 33130  ret30 med  -1.52% mean  -0.65%  P(ret30>0) 37.7%  MFE30 med  3.66%  MAE30 med  -4.98%  P(MFE>=5%) 40.6%  P(MAE<=-5%) 49.8%
+  best-case WATCH                      n= 14702  ret30 med  -1.07% mean  +0.67%  P(ret30>0) 43.4%  MFE30 med  5.84%  MAE30 med  -6.12%  P(MFE>=5%) 54.5%  P(MAE<=-5%) 58.0%
+  best-case REJECT pillars             n=  9946  ret30 med  +0.29% mean  +1.68%  P(ret30>0) 52.5%  MFE30 med  3.17%  MAE30 med  -2.70%  P(MFE>=5%) 36.0%  P(MAE<=-5%) 23.0%
+  best-case REJECT rising              n= 27430  ret30 med  -2.04% mean  -1.60%  P(ret30>0) 35.0%  MFE30 med  4.12%  MAE30 med  -5.82%  P(MFE>=5%) 44.0%  P(MAE<=-5%) 57.3%
+  best-case REJECT price               n=  6909  ret30 med  -0.02% mean  +3.35%  P(ret30>0) 48.8%  MFE30 med  5.09%  MAE30 med  -4.71%  P(MFE>=5%) 50.8%  P(MAE<=-5%) 47.5%
+
+== E. noise: tile rows per symbol-day ==
+  symbol-days with a tile row: 16957; rows per symbol-day median 6.0 p90 27.0 max 81
+  rows per session-day: median 46.0
+  first tile row of the symbol-day     n= 16823  ret30 med  -0.36% mean  +1.35%  P(ret30>0) 46.8%  MFE30 med  4.24%  MAE30 med  -4.18%  P(MFE>=5%) 45.5%  P(MAE<=-5%) 43.3%
+  later tile rows                      n=150553  ret30 med  -1.39% mean  -0.38%  P(ret30>0) 39.6%  MFE30 med  4.06%  MAE30 med  -5.08%  P(MFE>=5%) 43.8%  P(MAE<=-5%) 50.7%

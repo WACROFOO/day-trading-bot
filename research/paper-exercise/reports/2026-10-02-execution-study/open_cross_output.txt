@@ -1,0 +1,7 @@
+filled 1886 · pre-market fills 760 · still held at 09:30:00 32
+  of those, exited 09:30:00-09:30:59: 18 · exited before 09:35: 20
+  exit in 09:30 minute: n 18 gross r mean +0.127 median -0.110 min -1.002 share r<=-1.5: 0.0%
+  pm fill, exit pre-market: n 728 gross r mean -0.215 median -0.469 min -12.090 share r<=-1.5: 2.7%
+  regular fill: n 1126 gross r mean -0.073 median -0.385 min -7.211 share r<=-1.5: 0.3%
+  pm exits before 09:30: stop exits n 48 · slip past initial stop (R) mean 0.916 p90 2.362 max 11.090
+  regular fills: stop exits n 44 · slip past initial stop (R) mean 0.051 p90 0.097 max 0.835
