@@ -465,3 +465,23 @@ only, so there is no train period:** ≥ 200 trades; mean net R better than D
 in EACH of 2024, 2025 and 2026; day-paired bootstrap lower bound > 0 at
 α = 0.05 / 49. A pass goes live only behind a switch that stays OFF until
 ≥ 200 prospective paper trades confirm it.
+
+### Addendum 2026-10-02d — reaction speed (arming latency and loop period), before any run
+
+**Question (owner, 2026-10-02):** how much would acting faster than the 10-s
+candle + 5-s loop improve results, pre-market and regular hours?
+**Base:** the stage-3 D trades (desk-time plans passing the live gates, a
+measured D fill), on SIP prints, real spreads, $40 / $2,000, `rules_audit.portfolio`.
+**Two knobs, a 4 × 5 grid, every cell re-simulated:**
+- arming: 10-s candle close + 4 s (live, measured median 3-4 s plan→runner),
+  10-s close + 1 s, 5-s candle close + 2.5 s, the crossing print + 1 s;
+- loop period (pre-market trigger sampling, the pre-market monitored stop,
+  and the A3 trail moves): 1, 2, 5 (live), 10 s, and continuous as a bound.
+Pre-market (fill before 09:30) exits are monitored: sampled at the loop
+period, filled at the last print at the sample (the cost model adds half the
+real spread + 1 cent). Regular-hours stops rest at the broker and trigger on
+the first print through them; only the trail moves at the loop period.
+Gates stay as the desk judged them at its 10-s moment, so only timing moves.
+**It decides** only execution cadence (no selection rule): a faster setting is
+worth building if it improves net R per trade in each of 2024, 2025 and 2026
+in the session it targets. Reported per session and per year.
