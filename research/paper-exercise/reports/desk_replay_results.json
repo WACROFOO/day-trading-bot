@@ -1,0 +1,57 @@
+{
+ "T  bar-close arm, ticks, proxy": {
+  "n": 1469,
+  "mean": -0.4752,
+  "total": -698.02,
+  "gross": -0.1079,
+  "win": 0.253,
+  "max_dd": 698.02,
+  "lose_streak": 23,
+  "worst_day": -12.17,
+  "per_month": 45.9
+ },
+ "D  desk-time arm, ticks, proxy": {
+  "n": 1675,
+  "mean": -0.5057,
+  "total": -847.09,
+  "gross": -0.1406,
+  "win": 0.232,
+  "max_dd": 847.09,
+  "lose_streak": 19,
+  "worst_day": -14.25,
+  "per_month": 52.3
+ },
+ "D  desk-time arm, ticks, gross": {
+  "n": 1675,
+  "mean": -0.1406,
+  "total": -235.53,
+  "gross": -0.1406,
+  "win": 0.322,
+  "max_dd": 237.53,
+  "lose_streak": 17,
+  "worst_day": -13.34,
+  "per_month": 52.3
+ },
+ "T  bar-close arm, REAL spread": {
+  "n": 1457,
+  "mean": -0.5107,
+  "total": -744.12,
+  "gross": -0.1112,
+  "win": 0.242,
+  "max_dd": 744.12,
+  "lose_streak": 23,
+  "worst_day": -12.14,
+  "per_month": 45.5
+ },
+ "D  desk-time arm, REAL spread": {
+  "n": 1659,
+  "mean": -0.5338,
+  "total": -885.56,
+  "gross": -0.1429,
+  "win": 0.225,
+  "max_dd": 885.56,
+  "lose_streak": 19,
+  "worst_day": -14.09,
+  "per_month": 51.8
+ }
+}

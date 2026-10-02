@@ -16,5 +16,6 @@ says **SYNTHETIC FIXTURE** in its second line.
 | `rules_audit_output*.txt`, `rules_audit_results.json`, `indicator_audit_output.txt` | the raw outputs behind it |
 | `rules_audit_open_output.txt`, `rules_audit_open_results.json` | addendum 2026-10-01c: three opening-risk candidates (stop vs recent range, opening lockout, plans per name) after the NXL loss — none passes; the first plan of the day is the least-bad cohort but still negative |
 | `tick_replay_output.txt`, `tick_replay_results.json` | stage 1 of the tick replay (2026-10-02): the B portfolio's 2,577 gate-passing 2024+ plans filled and exited on SIP prints with the real spread — bars and ticks agree; real costs about 0.40 R a trade |
+| `desk_replay_output.txt`, `desk_replay_results.json` | stage 2 (2026-10-02): the same plans armed the way the live desk arms them, mid-minute (median 36 s before the close), gates on the half-formed minute — 243 plans pass only at desk time, 165 only at the close; B is worse at desk time: −0.534 against −0.511 R a trade with real spreads |
 | `ablation_live_costs*.txt` | the ten-year ablation at live costs (2026-09-29/30) |
 | `2026-09-26-premarket-history.md`, `2026-09-25-full-assessment.md` | earlier assessments |

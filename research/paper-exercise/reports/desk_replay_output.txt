@@ -1,0 +1,11 @@
+desk replay · 7477 candidate plans on 648 complete sessions 2024-01-02..2026-08-21
+  armed while the minute formed: 7477 · no last-sale print above the trigger: 0
+  order sent before the trigger minute closed: median 36 s (p10 6 s, p90 46 s)
+  gates at the bar close vs at desk time: both pass 2412 · bar only 165 · desk only 243 · neither 4657
+
+  model                                  n  net R/trade   total R   win %  max DD
+  T  bar-close arm, ticks, proxy      1469       -0.475    -698.0   25.3%   698.0
+  D  desk-time arm, ticks, proxy      1675       -0.506    -847.1   23.2%   847.1
+  D  desk-time arm, ticks, gross      1675       -0.141    -235.5   32.2%   237.5
+  T  bar-close arm, REAL spread       1457       -0.511    -744.1   24.2%   744.1
+  D  desk-time arm, REAL spread       1659       -0.534    -885.6   22.5%   885.6
