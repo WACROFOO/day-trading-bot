@@ -485,3 +485,43 @@ Gates stay as the desk judged them at its 10-s moment, so only timing moves.
 **It decides** only execution cadence (no selection rule): a faster setting is
 worth building if it improves net R per trade in each of 2024, 2025 and 2026
 in the session it targets. Reported per session and per year.
+
+### Addendum 2026-10-02e — runner + 10-second micro pullback + 5-minute confirmation, before any run
+
+**Question (owner, 2026-10-02, after AMOD):** enter names the Running Up
+scanner flags as climbing, even with no 1-minute pullback, at a 10-second
+micro pullback, confirmed by the 5-minute chart. How does it perform before
+costs, and what does each cost component take in a real trade?
+
+**Sample, fixed now.** Symbol-days of 2024-01-02 → 2026-08-21 with at least
+one `running_up` alert 07:00–11:30 at $2–20 in the replay of the live
+scanner classes (`research/paper-exercise/reports/2026-10-02-running-up-study/`,
+`alerts.pkl` in the session scratchpad). 300 drawn with `random.Random(20261002)`
+from the sorted list. Ticks: Alpaca SIP, first alert's 10-minute chunk to 11:30.
+
+**Setup S (primary), every element point-in-time:**
+- *runner*: armed from a `running_up` alert bar's close for 10 minutes;
+- *5-minute confirmation*: the last COMPLETED 5-minute bar (from the cached
+  1-minute bars, 04:00 on) closes above its 5-minute EMA9, and 5-minute MACD
+  (12, 26, 9) line > signal;
+- *10-second micro pullback*: the 6 ten-second bars before the pause hold
+  ≥ 3 green and span ≥ 1 % (lowest low → highest high); then a pause of 1–3
+  bars, none above that high, low not under the leg's midpoint;
+- *entry*: buy stop-limit at the last pause bar's high + 1¢ (cap + max(1¢, 0.3 %)),
+  live 20 s from that bar's close; *stop*: pause low − 1¢;
+- *exit*: the live A3 trail (1 R, moved every 5 s), flat 11:30; one position
+  per symbol-day at a time.
+
+**Reported beside it, deciding nothing:** S without the 5-minute confirmation
+(N5); S with a fixed exit at +2 R / stop (X2); a random-entry baseline — for
+each S trade, 5 entries at random 10-second bar closes inside the same
+runner windows, same stop %, same exit.
+
+**Costs, per trade, decomposed:** IBKR Fixed commission at $40 risk / $2,000
+cap; half the real NBBO spread at the fill and at the exit; entry slippage
+(fill − trigger); exit slippage (level − exit print); the 1¢-a-side model
+charge shown separately, because it may double-count slippage. Cost-reduction
+cuts (spread ÷ stop, stop %, price, session) are post hoc and labelled so.
+
+**It decides nothing live.** It is an assessment. Anything it suggests needs
+its own preregistered run on other days, then the OFF-switch path.
