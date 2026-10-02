@@ -43,9 +43,21 @@ ROUNDUP_WORDS = [
     "inflation report", "fed raises", "fed cuts", "fomc", "market update", "sector update",
     "investor sentiment",
 ]
+# A Nasdaq/NYSE listing notice: compliance regained (AMOD 2026-10-02, an 8-K
+# under Item 8.01) or a deficiency. Administrative, not economic value; it is
+# tested FIRST because "nasdaq " is a roundup word and swallowed the company's
+# own notice as a market wrap.
+LISTING_WORDS = [
+    "listing qualifications", "minimum bid", "bid price requirement", "bid price rule",
+    "regains compliance", "regained compliance", "confirming compliance", "nasdaq compliance",
+    "compliance with nasdaq", "compliance with the nasdaq", "listing rule", "continued listing",
+    "deficiency notice", "delisting notice", "notice of delisting",
+]
 DILUTIVE_WORDS = [
     "offering", "placement", "shelf", "s-3", "dilut", "warrant", "resale",
-    "registered direct", "atm program", "convertible",
+    "registered direct", "atm program", "convertible", "securities purchase agreement",
+    "pipe deal", "pipe financing", "pipe transaction", "closes pipe", "pipe offering",
+    "unregistered sales",
 ]
 HARD_WORDS = [
     "fda", "approval", "breakthrough", "phase 1", "phase 2", "phase 3", "clinical",
@@ -61,7 +73,8 @@ REACTION_WORDS = [
     "why is", "why are", "why did", "here's why", "here is why", "what's going on",
     "surging", "soaring", "skyrocket", "jumps", "jumped", "jumping", "rallies", "rallying",
     "is up today", "shares are up", "shares rose", "shares climb", "climbing", "rocketing",
-    "spiking", "explodes", "on the move", "trading higher", "trading up",
+    "spiking", "explodes", "on the move", "trading higher", "trading up", "spike",
+    "what you should know", "what to know",
 ]
 SOFT_WORDS = [
     "partnership", "agreement", "mou", "collaboration", "analyst", "price target",
@@ -70,6 +83,9 @@ SOFT_WORDS = [
 ]
 
 RULES = [
+    ("listing", "Listing notice", LISTING_WORDS,
+     "An exchange listing notice — compliance regained or a deficiency. Administrative, "
+     "not economic value: it lifts or flags a delisting risk; the chart carries the case."),
     ("roundup", "Market roundup", ROUNDUP_WORDS,
      "A list of names, not a story about this one. Not a catalyst; find the company's "
      "own headline."),

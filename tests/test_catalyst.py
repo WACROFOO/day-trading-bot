@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from momentum_platform.catalyst import (  # noqa: E402
-    DILUTIVE_WORDS, HARD_WORDS, REACTION_WORDS, ROUNDUP_WORDS, SOFT_WORDS, assess, classify,
+    DILUTIVE_WORDS, HARD_WORDS, LISTING_WORDS, REACTION_WORDS, ROUNDUP_WORDS, SOFT_WORDS, assess, classify,
     flame, news_verdict,
 )
 from momentum_platform.datasources.sec_source import (  # noqa: E402
@@ -127,6 +127,7 @@ def test_python_and_javascript_grade_the_same_words():
             r'grade:\s*"(\w+)".*?words:\s*\[(.*?)\]', block.group(1), re.S):
         found[grade] = [w.strip().strip('"') for w in words.split(",") if w.strip()]
 
+    assert found["listing"] == LISTING_WORDS
     assert found["roundup"] == ROUNDUP_WORDS
     assert found["dilutive"] == DILUTIVE_WORDS
     assert found["hard"] == HARD_WORDS
@@ -134,7 +135,7 @@ def test_python_and_javascript_grade_the_same_words():
     assert found["soft"] == SOFT_WORDS
     # the families are tried in the same order on both sides
     order = re.findall(r'grade:\s*"(\w+)"', block.group(1))
-    assert order == ["roundup", "dilutive", "hard", "reaction", "soft"]
+    assert order == ["listing", "roundup", "dilutive", "hard", "reaction", "soft"]
 
 
 # -- the one word ---------------------------------------------------------------
@@ -452,3 +453,22 @@ def test_a_market_roundup_is_not_a_catalyst():
     real = assess("NTRB", "Nutriband receives FDA clearance for AVERSA patch",
                   published=now - timedelta(minutes=30), now=now)
     assert real.grade.grade == "hard" and real.flame_color == "red" and real.verdict() == "QUALIFIED"
+
+
+def test_amod_2026_10_02_headlines_are_graded_for_what_they_are():
+    """AMOD's card read WEAK on a reaction piece while the news was an 8-K."""
+    assert classify("Bitcoin Boost Gives Alpha Modus (AMOD) Stock 61% Spike After Hours: "
+                    "What You Should Know").grade == "reaction"
+    assert classify("SEC 8-K · Item 8.01 other events — On October 1, 2026, Alpha Modus Holdings, Inc. "
+                    "received a letter from the Listing Qualifications Department of the Nasdaq Stock "
+                    "Market").grade == "listing"                     # not a roundup ("nasdaq ")
+    assert classify("finviz: Bitcoin PIPE close and Nasdaq compliance 8-K lift AMOD 74% pre-market").grade == "listing"
+    assert classify("Alpha Modus Closes PIPE Deal, Receives 3,170 Bitcoin").grade == "dilutive"
+    assert classify("the Company entered into a securities purchase agreement with investors").grade == "dilutive"
+    assert classify("Acme Bio pipeline update").grade != "dilutive"   # 'pipe' alone is not a word here
+
+
+def test_a_listing_notice_is_not_a_roundup_for_gate_3():
+    from momentum_platform.dashboard.session_builder import is_roundup
+    assert not is_roundup("Alpha Modus Holdings receives Nasdaq notice confirming compliance with minimum bid price rule")
+    assert is_roundup("12 Information Technology Stocks Moving In Friday's Pre-Market Session")

@@ -1028,6 +1028,23 @@ sold and how much is working, once, not every 5 s); a sell still working
 period until it fills; `watch.py` prints SELL SENT, not a P&L, until the
 broker confirms the fill. Execution only; reasoned, not measured.
 
+**Amendment A17 — two more headline sources and three word families (owner, 2026-10-02).**
+AMOD's card read WEAK on "Bitcoin Boost Gives Alpha Modus (AMOD) Stock 61% Spike After
+Hours: What You Should Know" while the news itself was an 8-K (Item 8.01, accepted 08:35
+ET: a Nasdaq Listing Qualifications letter confirming bid-price compliance) that the
+desk's only feed (Alpaca/Benzinga) never carried. Now: the desk also reads each
+symbol's 8-K/6-K filings of the last 36 h with the first sentence of the item body, and
+finviz's dated "why is it moving" line when finviz flags it a catalyst
+(`datasources/filings_news.py`, every 10 minutes per symbol, off the worker). Words
+(`catalyst.py`, mirrored in app.js): a **listing** family tested first ("nasdaq " is a
+roundup word and swallowed the company's own notice — gate 3 no longer reads it as a
+roundup); PIPE / securities purchase agreement / unregistered sales are **dilutive**;
+"spike", "what you should know", "what to know" are **reaction** pieces. Effect on
+verdicts: more own headlines are seen; a listing notice reads WEAK (not a roundup), a
+PIPE headline DILUTIVE. The one-word verdict and the pillar logic are unchanged; the
+card adds one line reading every own headline of 24 h ("Not strong: … Found: …").
+Decisions before the next desk start keep their rules hash.
+
 **Opening-risk candidates (2026-10-01, addendum 2026-10-01c) — none adopted.**
 After the NXL loss (a plan built on two pre-market candles, filled at 09:30:23
 into an 82¢ opening minute, stopped five seconds later at −1.41 R), three

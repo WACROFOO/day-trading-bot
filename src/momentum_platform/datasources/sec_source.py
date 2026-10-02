@@ -113,6 +113,23 @@ class SecClient:
                 "proxy or VPN that might block sec.gov." % reason
             ) from None
 
+    def _get_text(self, url: str) -> str:
+        """A filing document as text (HTML), same throttle and User-Agent."""
+        self._throttle()
+        req = urllib.request.Request(url, headers={"User-Agent": self.user_agent,
+                                                   "Accept-Encoding": "gzip, deflate"})
+        try:
+            with urllib.request.urlopen(req, timeout=self.timeout, context=ssl_context()) as resp:
+                raw = resp.read()
+                if resp.headers.get("Content-Encoding") == "gzip":
+                    import gzip
+                    raw = gzip.decompress(raw)
+                return raw.decode("utf-8", errors="replace")
+        except urllib.error.HTTPError as exc:
+            raise SecError("SEC returned HTTP %d for %s" % (exc.code, url)) from None
+        except urllib.error.URLError as exc:
+            raise SecError("Could not reach SEC EDGAR (%s)." % exc.reason) from None
+
     # -- ticker -> CIK --------------------------------------------------------
 
     def _cache_path(self) -> Path:

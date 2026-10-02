@@ -353,10 +353,16 @@ function makePane(hostId, daily) {
   const macdLine = chart.addLineSeries(macdLineOpts("#2962ff"));
   const macdSignal = chart.addLineSeries(macdLineOpts("#ff6d00"));
 
-  /* OHLC legend, TradingView style: follows the crosshair, rests on the last bar. */
+  /* OHLC legend, TradingView style: follows the crosshair, rests on the last bar.
+     OFF since 2026-10-02 (owner: "remove from the charts all unnecessary figures and
+     numbers in the top of the charts grids as they serve for nothing"). The price
+     axis, the HOD line and the header already carry the numbers that matter; the
+     series colours are named by the legend chips in each card's title bar. Set
+     CHART_VALUE_LEGEND = true to bring the line back. */
+  const CHART_VALUE_LEGEND = false;
   const legend = document.createElement("div");
   legend.className = "tv-legend";
-  host.appendChild(legend);
+  if (CHART_VALUE_LEGEND) host.appendChild(legend);
   let lastRows = [], lastVols = [], lastInd = {};
   /* Two legend lines, as TradingView draws them: OHLC + change + volume on
      the first, every indicator's value at the crosshair on the second, in
@@ -364,6 +370,7 @@ function makePane(hostId, daily) {
      with a number; "which line is the 9?" is a question a chart should not
      make you ask. */
   const showLegend = (row, vol, idx) => {
+    if (!CHART_VALUE_LEGEND) return;
     if (!row) { legend.textContent = ""; return; }
     const chg = row.open ? (row.close - row.open) / row.open * 100 : 0;
     const c = row.close >= row.open ? "u" : "d";
@@ -730,7 +737,9 @@ function newsFor(sym, nowMs) {
   const own = visible.filter(n => !n.sharedTag);
   const cause = own.filter(n => classifyCatalyst(n.headline, n.category).grade !== "reaction");
   const pool = cause.length ? cause : (own.length ? own : visible);
-  const n = pool[pool.length - 1];
+  // The newest PUBLISHED, as catalyst.news_verdict picks it — not the last to
+  // arrive: SEC filings and finviz lines arrive in their own refresh, out of order.
+  const n = pool.reduce((a, b) => new Date(b.publishedAt) >= new Date(a.publishedAt) ? b : a);
   const ageMin = (nowMs - new Date(n.publishedAt).getTime()) / 60000;
   const flame = ageMin <= 120 ? "red" : ageMin <= 720 ? "orange" : ageMin <= 1440 ? "yellow" : null;
   return { item: n, ageMin, flame, shared: !!n.sharedTag };
@@ -1367,6 +1376,14 @@ function renderHeader(frame) {
      soft     — attention without quantifiable value (analyst, partnership)
      dilutive — supply is increasing (offering, placement, shelf) */
 const CATALYST_RULES = [
+  // An exchange listing notice (AMOD 2026-10-02: Nasdaq bid-price compliance in an
+  // 8-K). Tested first: "nasdaq " is a roundup word and used to swallow it.
+  { grade: "listing", label: "Listing notice",
+    words: ["listing qualifications", "minimum bid", "bid price requirement", "bid price rule",
+            "regains compliance", "regained compliance", "confirming compliance", "nasdaq compliance",
+            "compliance with nasdaq", "compliance with the nasdaq", "listing rule", "continued listing",
+            "deficiency notice", "delisting notice", "notice of delisting"],
+    note: "An exchange listing notice — compliance regained or a deficiency. Administrative, not economic value: it lifts or flags a delisting risk; the chart carries the case." },
   // A market wrap that lists twelve names "moving in Thursday's session" is
   // not news about the company. It used to earn a red flame and a News PASS.
   { grade: "roundup", label: "Market roundup",
@@ -1382,7 +1399,9 @@ const CATALYST_RULES = [
     note: "A list of names or the market's day, not a story about this one. Not a catalyst; find the company's own headline." },
   { grade: "dilutive", label: "Dilutive",
     words: ["offering", "placement", "shelf", "s-3", "dilut", "warrant", "resale",
-            "registered direct", "atm program", "convertible"],
+            "registered direct", "atm program", "convertible", "securities purchase agreement",
+            "pipe deal", "pipe financing", "pipe transaction", "closes pipe", "pipe offering",
+            "unregistered sales"],
     note: "Supply is increasing. Ross treats this as risk context, not a green light — read the size before anything else." },
   { grade: "hard", label: "Hard catalyst",
     words: ["fda", "approval", "breakthrough", "phase 1", "phase 2", "phase 3", "clinical",
@@ -1394,7 +1413,8 @@ const CATALYST_RULES = [
     words: ["why is", "why are", "why did", "here's why", "here is why", "what's going on",
             "surging", "soaring", "skyrocket", "jumps", "jumped", "jumping", "rallies", "rallying",
             "is up today", "shares are up", "shares rose", "shares climb", "climbing", "rocketing",
-            "spiking", "explodes", "on the move", "trading higher", "trading up"],
+            "spiking", "explodes", "on the move", "trading higher", "trading up", "spike",
+            "what you should know", "what to know"],
     note: "A story about the move, not its cause. Not a catalyst; the reason, if any, is in the body and the desk cannot read it." },
   { grade: "soft", label: "Soft catalyst",
     words: ["partnership", "agreement", "mou", "collaboration", "analyst", "price target",
@@ -1431,6 +1451,42 @@ function catalystVerdict(nf, sourceOk) {
   return "WEAK";
 }
 
+/* One line under the verdict word, for the owner (2026-10-02): is the news
+   strong enough, and why — read from EVERY own headline of the last 24 h (wire,
+   SEC filing, finviz "why"), not only the freshest. Display only: the pillar and
+   the ledger still read the one word. */
+function catalystSummary(sym, nowMs, cv) {
+  const items = ((SYMS[sym] && SYMS[sym].news) || []).filter(n =>
+    new Date(n.firstObservedAt).getTime() <= nowMs && !n.sharedTag &&
+    nowMs - new Date(n.publishedAt).getTime() <= 1440 * 60000);
+  const rank = { hard: 0, dilutive: 1, listing: 2, soft: 3 };
+  const found = [];
+  let ignored = 0;
+  for (const n of items) {
+    const c = classifyCatalyst(n.headline, n.category);
+    if (c.grade === "roundup" || c.grade === "reaction") { ignored++; continue; }
+    found.push({ c, n });
+  }
+  found.sort((a, b) => ((rank[a.c.grade] ?? 9) - (rank[b.c.grade] ?? 9)) ||
+                       (new Date(b.n.publishedAt) - new Date(a.n.publishedAt)));
+  const answer = { STRONG: "Strong enough: a fresh hard catalyst.",
+                   WEAK: "Not strong: no hard catalyst — the chart must carry it.",
+                   DILUTIVE: "No: the news is a supply event.",
+                   NONE: "No: no company news in 24 h.",
+                   UNKNOWN: "Unknown: no news feed." }[cv] || "";
+  const src = n => n.category === "sec_filing" ? "SEC" : n.category === "finviz_why" ? "finviz" : "wire";
+  const seen = new Set(), parts = [];
+  for (const { c, n } of found) {
+    if (seen.has(c.label)) continue;
+    seen.add(c.label);
+    parts.push(c.label.toLowerCase() + " (" + src(n) + ", " + fmtAge(nowMs - new Date(n.publishedAt).getTime()) + ")");
+    if (parts.length === 3) break;
+  }
+  const warn = cv !== "DILUTIVE" && found.some(f => f.c.grade === "dilutive") ? " ⚠ dilution in the news." : "";
+  return answer + (parts.length ? " Found: " + parts.join(" · ") + "." : "") + warn +
+    (ignored ? " Ignored " + ignored + " roundup/reaction piece" + (ignored > 1 ? "s" : "") + "." : "");
+}
+
 function technicalScore(ctx) {
   const T = S.pillarThresholds, { last, chg, row, meta } = ctx;
   return [
@@ -1449,6 +1505,7 @@ function renderCatalyst(host, ctx) {
   const verdictEl = el("div", "cat-verdict " + cv, CATALYST_VERDICTS[cv].label);
   verdictEl.title = CATALYST_VERDICTS[cv].meaning;
   host.appendChild(verdictEl);
+  host.appendChild(el("div", "cat-summary", catalystSummary(ctx.sym, deskNow(), cv)));
   if (!nf) {
     const head = el("div", "cat-head");
     const nfc = el("span", "flame-chip none");

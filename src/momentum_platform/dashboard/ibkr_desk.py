@@ -77,6 +77,7 @@ class _ScreenerView:
         return self.desk.screener_current()
 
 
+EXTRA_NEWS_EVERY = 600.0     # SEC filings + finviz "why" per symbol at most every 10 minutes
 HISTORY_SLOW_S = 15.0        # a refresh this slow with no bars is a timeout, not a quiet name
 HISTORY_SLOW_MAX = 3         # in a row, before the refresh backs off
 HISTORY_BACKOFF_S = 300.0
@@ -146,6 +147,10 @@ class IbkrDesk:
         self._news_note: Optional[str] = None
         self._news_at: Optional[datetime] = None      # last headline pull
         self._news_thread: Optional[threading.Thread] = None   # the pull runs off the worker (2026-09-24)
+        # SEC 8-K/6-K filings and finviz's "why is it moving" line, per symbol at most
+        # every EXTRA_NEWS_EVERY seconds (filings_news.py; AMOD 2026-10-02).
+        self._extra_news_at: dict = {}
+        self._sec_client = None
         self._started: Optional[datetime] = None       # set once, at bootstrap
         self._halt_state: Dict[str, str] = {}         # sym -> halted | trading
         # Every halt transition seen this session, re-offered on every
@@ -802,13 +807,14 @@ class IbkrDesk:
         time; only the MERGE touches desk state, and it is queued onto the
         worker like every other cross-thread result."""
         if not self.scan_in_thread:                  # tests, and the bootstrap path: inline
-            self._merge_headlines(*self._fetch_headlines(symbols)); return
+            recs, note = self._fetch_headlines(symbols)
+            self._merge_headlines(list(recs) + self._fetch_extra_news(symbols), note); return
         t = self._news_thread
         if t is not None and t.is_alive():
             return                                   # the previous pull is still on the wire
         def run():
             recs, note = self._fetch_headlines(symbols)
-            self.submit(self._merge_headlines, recs, note)
+            self.submit(self._merge_headlines, list(recs) + self._fetch_extra_news(symbols), note)
         self._news_thread = threading.Thread(target=run, name="desk-headlines", daemon=True)
         self._news_thread.start()
 
@@ -818,6 +824,34 @@ class IbkrDesk:
             return news_records(symbols)
         except Exception as exc:                     # noqa: BLE001
             return [], f"headlines refresh failed: {exc}"
+
+    def _fetch_extra_news(self, symbols: List[str]) -> list:
+        """SEC 8-K/6-K filings (with the first sentence of the item) and finviz's
+        dated "why is it moving" line, as news records. Off the worker, once per
+        symbol per EXTRA_NEWS_EVERY; off entirely when the desk's SEC lookups are
+        (tests). A source that fails is skipped, never guessed."""
+        if not getattr(self, "sec", False):
+            return []
+        from ..datasources import filings_news as FN
+        from ..datasources.sec_source import SecClient
+        if getattr(self, "_sec_client", None) is None:
+            self._sec_client = SecClient()
+        if not hasattr(self, "_extra_news_at"):
+            self._extra_news_at = {}
+        out, now_m = [], time.monotonic()
+        for sym in list(symbols):
+            if now_m - self._extra_news_at.get(sym, -1e9) < EXTRA_NEWS_EVERY:
+                continue
+            self._extra_news_at[sym] = now_m
+            try:
+                out += FN.sec_records(sym, self._sec_client)
+            except Exception:                              # noqa: BLE001
+                pass
+            try:
+                out += FN.finviz_record(sym, FN.finviz_page(sym))
+            except Exception:                              # noqa: BLE001
+                pass
+        return out
 
     def _merge_headlines(self, recs: list, note: Optional[str]) -> None:
         """On the worker: dedupe on (symbol, provider_id), keep the source note."""

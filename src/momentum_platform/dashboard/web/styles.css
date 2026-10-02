@@ -469,6 +469,7 @@ body.resizing .gutter{pointer-events:auto}
 .flame-chip.none{color:var(--ink-faint);background:#12181f;border-color:var(--line)}
 .cat-verdict{font:700 11px/1 var(--mono);letter-spacing:.8px;padding:6px 9px;border-radius:4px;margin:2px 0 6px;
   border:1px solid var(--line);color:var(--ink-dim);background:#12181f}
+.cat-summary{font-size:11px;line-height:1.35;color:var(--ink,#c7d2de);margin:0 0 6px}
 .cat-verdict.STRONG{color:#0b0f14;background:var(--up);border-color:transparent}
 .cat-verdict.WEAK{color:#0b0f14;background:var(--hi);border-color:transparent}
 .cat-verdict.DILUTIVE{color:#0b0f14;background:var(--down);border-color:transparent}

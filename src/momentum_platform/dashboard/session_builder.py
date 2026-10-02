@@ -839,8 +839,10 @@ def is_roundup(headline: str, category: str = "") -> bool:
     decides whether gate 3 reads "news today", and since amendment A2 that gate
     flags rather than kills.
     """
-    from ..catalyst import ROUNDUP_WORDS
+    from ..catalyst import LISTING_WORDS, ROUNDUP_WORDS
     hay = f"{headline or ''} {category or ''}".lower()
+    if any(w in hay for w in LISTING_WORDS):
+        return False                      # the company's own listing notice, not a market wrap
     if any(w in hay for w in ROUNDUP_WORDS):
         return True
     lead = (headline or "").split(":")[0].split(" - ")[0]
