@@ -1,0 +1,48 @@
+runner + 10-s micro pullback + 5-min confirmation · addendum 2026-10-02e · sample 300 of 5979 symbol-days 2024-01-02..2026-08-21 (seed 20261002) · prints missing 0
+
+GROSS R per trade (no costs; fills and exits on SIP prints, slippage against the prints included)
+  S    runner + 5-min + 10-s, trail  n  1474 · mean -0.193 · median -0.425 · win 33.5% · avg win +1.41 · avg loss -1.00 · total -284.7
+  N5   without the 5-min confirmation  n  2430 · mean -0.197 · median -0.500 · win 32.1% · avg win +1.38 · avg loss -0.94 · total -477.5
+  X2   S with +2 R target / stop       n  1301 · mean -0.248 · median -1.000 · win 34.2% · avg win +1.99 · avg loss -1.41 · total -323.3
+  RND  random entries, same windows    n  7210 · mean -0.109 · median -0.430 · win 34.6% · avg win +1.40 · avg loss -0.91 · total -783.6
+  S 2024  n   388 · mean -0.171 · median -0.462 · win 32.7% · avg win +1.36 · avg loss -0.92 · total -66.5
+  S 2025  n   724 · mean -0.233 · median -0.400 · win 34.1% · avg win +1.32 · avg loss -1.04 · total -168.5
+  S 2026  n   362 · mean -0.138 · median -0.431 · win 33.1% · avg win +1.63 · avg loss -1.01 · total -49.8
+  S pre-market  n   705 · mean -0.127 · median -0.429 · win 35.3% · avg win +1.43 · avg loss -0.98 · total -89.4
+  S regular     n   769 · mean -0.254 · median -0.416 · win 31.9% · avg win +1.38 · avg loss -1.02 · total -195.3
+  S exits: {'stop': 263, 'trail': 1209, 'flat': 0, 'end': 2}
+
+COSTS on the 1465 S trades with a quote at fill and exit — R per trade (mean | median), and $ mean
+  commission       0.235 | 0.200   $  4.18
+  half_spread_in   0.396 | 0.167   $  5.58
+  half_spread_out  0.448 | 0.169   $  6.31
+  model_1c         0.436 | 0.400   $  8.07
+  entry_slip       0.074 | 0.000   $  0.80  (inside gross)
+  exit_slip        0.334 | 0.003   $  4.57  (inside gross)
+  commission + half spreads: mean 1.079 R · with the 1c model charge 1.515 R
+  NET R per trade: -1.273 (spreads + commission) · -1.709 (with the 1c charge)
+  shares median 363 · 1 R in $ median 22.98 (notional cap binds on 79% of trades)
+  stop % of price median 1.15 · spread in median $0.020
+
+POST HOC cuts (labelled: chosen after seeing the data; they decide nothing)
+  spread/stop 0-0.1            n   67 · gross +0.102 · cost 0.191 · net -0.089
+  spread/stop 0.1-0.25         n  446 · gross -0.153 · cost 0.389 · net -0.542
+  spread/stop 0.25-0.5         n  456 · gross +0.037 · cost 0.661 · net -0.625
+  spread/stop 0.5-99           n  496 · gross -0.484 · cost 2.202 · net -2.686
+  stop % 0-1                   n  627 · gross -0.398 · cost 1.798 · net -2.196
+  stop % 1-2                   n  531 · gross -0.040 · cost 0.644 · net -0.685
+  stop % 2-3                   n  201 · gross -0.108 · cost 0.403 · net -0.511
+  stop % 3-99                  n  106 · gross +0.074 · cost 0.282 · net -0.208
+  price $2-5                   n  709 · gross -0.151 · cost 0.760 · net -0.910
+  price $5-10                  n  434 · gross -0.190 · cost 1.166 · net -1.356
+  price $10-20.5               n  317 · gross -0.290 · cost 1.679 · net -1.969
+
+THE MEDIAN-COST TRADE, as IBKR would bill it
+  2026-04-20 CMPS · buy stop 9.28, stop 9.24 (0.43 %) · 215 shares · 1 R = $8.60 · fill 9.2800 · exit 9.2800 (trail)
+  spread at fill $0.020 · at exit $0.010
+    commission       $   2.15  = 0.250 R
+    half_spread_in   $   2.15  = 0.250 R
+    half_spread_out  $   1.07  = 0.125 R
+    model_1c         $   4.30  = 0.500 R
+    entry_slip       $   0.00  = 0.000 R
+    exit_slip        $   1.08  = 0.125 R
