@@ -1,205 +1,495 @@
 //@version=6
-indicator("Ross-Style Momentum Scanner + Risk Bands", shorttitle = "Ross Approx + Bands", overlay = true, max_labels_count = 200)
+indicator("Ross-Style Momentum Scanner v2 — desk mirror", shorttitle = "Ross Approx v2", overlay = true, max_labels_count = 200)
 
-// This is a transparent approximation of the public Warrior/Ross criteria.
-// It does not reproduce Warrior Trading's proprietary server-side scanner logic.
+// ─────────────────────────────────────────────────────────────────────────────
+// What this is
+// ─────────────────────────────────────────────────────────────────────────────
+// A transparent approximation of the public Warrior/Ross criteria, kept in step
+// with the momentum workstation (src/momentum_platform) so a chart and the desk
+// say the same thing about the same symbol. It does not reproduce Warrior
+// Trading's proprietary server-side scanner logic. Every threshold is an input.
+//
+// v2 (2026-10) — what changed against the first script, and why:
+//   • RVOL is measured against the SAME CLOCK TIME of prior sessions. Dividing
+//     today's volume by whole prior days reads a fraction of 1x all premarket,
+//     so the 5x pillar could never pass before the open and the Five Pillars
+//     list sat empty on real runners. The daily measure is kept as a fallback
+//     and the dashboard says which one it used.
+//   • Running Up is a 10-minute UPTREND (up >=3% over 10 min, a fresh 10-minute
+//     high in the last 3, price above the window VWAP), one alert per leg — not
+//     a 2-minute spike.
+//   • HOD Momentum needs an advance of 0.25% over the prior high (HOD Momo does
+//     not alert on every high-of-day print), a >=10% day and recent volume.
+//   • Liquidity gate: 25,000 shares in the last five minutes OR three of the
+//     five pillars. Thin premarket tape never reaches a share floor written for
+//     the regular session.
+//   • The plan is the FIRST PULLBACK, not the signal bar: an impulse of >=2
+//     green bars spanning >=2%, a pullback of 1–4 bars that makes no new high,
+//     a trigger over the previous bar's high; entry trigger high + $0.01, stop
+//     pullback low − $0.01, target 2R, and whether pullback volume was lighter
+//     than the impulse.
+//   • A GO / WAIT / PASS verdict with the same rules as the desk's verdict card.
+//   • Float: shares outstanding under the cap PROVES float under the cap (PASS,
+//     labelled SO); over the cap it proves nothing (UNKNOWN, never FAIL).
+//     Unknown never counts as a pass.
+//   • Two price bands: the Confirmed $2–20 pillar, and the desk's wider
+//     discovery band ($1–30) as a separate flag.
+//
+// Chart requirements: enable Extended Trading Hours (the session starts at
+// 04:00 ET here, as on the desk) and use a 1-minute chart for the literal
+// mapping; 5-minute works. The RVOL baseline needs prior sessions on the chart
+// — the dashboard shows how many it has.
+//
+// Evidence labels: the pillar thresholds are Confirmed course values; every
+// momentum, liquidity and planning number below is an Approximation.
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Inputs
 // ─────────────────────────────────────────────────────────────────────────────
-string GROUP_PILLARS = "1. Five Pillars"
-float minPrice       = input.float(2.00, "Minimum price", minval = 0.01, step = 0.25, group = GROUP_PILLARS)
-float maxPrice       = input.float(20.00, "Maximum price", minval = 0.01, step = 1.00, group = GROUP_PILLARS)
-float minGainPct     = input.float(10.0, "Minimum gain from prior close (%)", minval = 0.0, step = 0.5, group = GROUP_PILLARS)
-float minDailyRvol   = input.float(5.0, "Minimum daily relative volume", minval = 0.1, step = 0.25, group = GROUP_PILLARS)
-int   dailyVolLength = input.int(20, "Daily-volume average length", minval = 5, maxval = 100, group = GROUP_PILLARS)
-float maxFloatM      = input.float(20.0, "Maximum float/supply proxy (millions)", minval = 0.1, step = 1.0, group = GROUP_PILLARS)
-float manualFloatM   = input.float(0.0, "Manual float in millions (0 = shares-outstanding proxy)", minval = 0.0, step = 0.1, group = GROUP_PILLARS,
-     tooltip = "TradingView does not reliably provide true float for every symbol. Enter the verified float here for single-chart use. Leave at 0 in Pine Screener mode.")
-bool  allowUnknownFloat = input.bool(false, "Allow candidate when float data is unavailable", group = GROUP_PILLARS)
-bool  catalystConfirmed = input.bool(false, "News/catalyst confirmed manually", group = GROUP_PILLARS,
-     tooltip = "Pine cannot determine whether Warrior's flame/news criterion is present. Confirm news separately, then enable this for the chart symbol.")
+string GROUP_PILLARS = "1. Five Pillars (Confirmed course values)"
+float minPrice     = input.float(2.00, "Pillar price minimum ($)", minval = 0.01, step = 0.25, group = GROUP_PILLARS)
+float maxPrice     = input.float(20.00, "Pillar price maximum ($)", minval = 0.01, step = 1.00, group = GROUP_PILLARS)
+float minGainPct   = input.float(10.0, "Minimum gain from prior close (%)", minval = 0.0, step = 0.5, group = GROUP_PILLARS)
+float minRvol      = input.float(5.0, "Minimum relative volume (x)", minval = 0.1, step = 0.25, group = GROUP_PILLARS)
+float maxFloatM    = input.float(20.0, "Maximum float (millions)", minval = 0.1, step = 1.0, group = GROUP_PILLARS)
+float manualFloatM = input.float(0.0, "Verified float in millions (0 = shares-outstanding bound)", minval = 0.0, step = 0.1, group = GROUP_PILLARS,
+     tooltip = "TradingView's fundamental is shares OUTSTANDING, an upper bound on float, never float itself. Under the cap it proves float under the cap; over it, it proves nothing and the pillar reads UNKNOWN. Enter the float you verified for single-chart use; leave 0 in Pine Screener.")
+bool catalystConfirmed = input.bool(false, "News / catalyst confirmed manually", group = GROUP_PILLARS,
+     tooltip = "Pine cannot read news. Confirm the catalyst yourself; it is the fifth pillar and counts toward the 3-of-5 liquidity gate.")
 
-string GROUP_MOMO = "2. Momentum approximations"
-float minFiveMinRvol = input.float(2.0, "Minimum 5-minute relative volume", minval = 0.1, step = 0.25, group = GROUP_MOMO)
-float runningUpPct   = input.float(3.0, "Running Up: minimum move (%)", minval = 0.1, step = 0.25, group = GROUP_MOMO)
-int   runningUpMins  = input.int(2, "Running Up: lookback (minutes)", minval = 1, maxval = 30, group = GROUP_MOMO)
-float lowFloatMaxM   = input.float(20.0, "Low-float ceiling (millions)", minval = 0.1, step = 1.0, group = GROUP_MOMO)
-float mediumFloatMaxM = input.float(100.0, "Medium-float ceiling (millions)", minval = 1.0, step = 5.0, group = GROUP_MOMO)
-float highRvol       = input.float(5.0, "High relative-volume threshold", minval = 0.1, step = 0.25, group = GROUP_MOMO)
-float mediumRvol     = input.float(2.0, "Medium relative-volume threshold", minval = 0.1, step = 0.25, group = GROUP_MOMO)
-float formerMomoGain = input.float(50.0, "Former-momo proxy: prior daily gain (%)", minval = 10.0, step = 5.0, group = GROUP_MOMO)
+string GROUP_DESK = "2. Desk discovery band (operator setting)"
+float deskMinPrice = input.float(1.00, "Desk band minimum ($)", minval = 0.01, step = 0.25, group = GROUP_DESK)
+float deskMaxPrice = input.float(30.00, "Desk band maximum ($)", minval = 0.01, step = 1.00, group = GROUP_DESK,
+     tooltip = "What the desk ADMITS. Wider than the pillar so a runner just outside $2–20 is still seen, with its price pillar shown as FAIL.")
 
-string GROUP_RISK = "3. Entry, stop and target bands"
-string signalSource = input.string("Five Pillars HOD", "Band trigger", options = ["Five Pillars HOD", "HOD Momentum", "Running Up", "Any momentum signal"], group = GROUP_RISK)
-float entryOffset    = input.float(0.01, "Entry above signal-bar high ($)", minval = 0.0, step = 0.01, group = GROUP_RISK)
-string stopMethod    = input.string("Signal candle low", "Stop method", options = ["Signal candle low", "ATR"], group = GROUP_RISK)
-float stopOffset     = input.float(0.01, "Stop below signal-bar low ($)", minval = 0.0, step = 0.01, group = GROUP_RISK)
-int   atrLength      = input.int(14, "ATR length", minval = 2, group = GROUP_RISK)
-float atrStopMult    = input.float(1.0, "ATR stop multiple", minval = 0.1, step = 0.1, group = GROUP_RISK)
-float rewardR        = input.float(2.0, "Target reward/risk multiple", minval = 0.25, step = 0.25, group = GROUP_RISK)
-float bandHalfWidth  = input.float(0.02, "Band half-width ($)", minval = 0.0, step = 0.01, group = GROUP_RISK)
-bool  showRiskBands  = input.bool(true, "Show entry / stop / target bands", group = GROUP_RISK)
+string GROUP_RVOL = "3. Relative volume"
+string rvolMode      = input.string("Time of day", "RVOL measure", options = ["Time of day", "Daily"], group = GROUP_RVOL,
+     tooltip = "Time of day: today's volume since 04:00 ET against the median that prior sessions had traded by the same clock time. Daily: today against the mean of prior full days — understates every part-day and cannot reach 5x before the open.")
+int baselineSessions = input.int(10, "Baseline: prior sessions", minval = 2, maxval = 30, group = GROUP_RVOL)
+int dailyVolLength   = input.int(20, "Daily measure: average length (days)", minval = 5, maxval = 100, group = GROUP_RVOL)
 
-string GROUP_DISPLAY = "4. Display"
+string GROUP_MOMO = "4. Momentum events (Approximation)"
+float runUpPct      = input.float(3.0, "Running Up: minimum move over the window (%)", minval = 0.1, step = 0.25, group = GROUP_MOMO)
+int   runUpMins     = input.int(10, "Running Up: window (minutes)", minval = 2, maxval = 30, group = GROUP_MOMO)
+int   runUpFreshMin = input.int(3, "Running Up: fresh high within (minutes)", minval = 1, maxval = 10, group = GROUP_MOMO)
+float hodAdvancePct = input.float(0.25, "HOD: minimum advance over prior high (%)", minval = 0.0, step = 0.05, group = GROUP_MOMO)
+float hodMinGainPct = input.float(10.0, "HOD: minimum gain on the day (%)", minval = 0.0, step = 0.5, group = GROUP_MOMO)
+float hodMinRvol5m  = input.float(3.0, "HOD: minimum 5-minute relative volume (x)", minval = 0.1, step = 0.25, group = GROUP_MOMO)
+float minVolume5m   = input.float(25000.0, "Liquidity: minimum shares in the last 5 minutes", minval = 0, step = 1000, group = GROUP_MOMO)
+int   minPillars    = input.int(3, "Liquidity: or at least this many pillars (of 5)", minval = 1, maxval = 5, group = GROUP_MOMO)
+float eventMinPrice = input.float(1.0, "Events: minimum price ($)", minval = 0.01, step = 0.25, group = GROUP_MOMO)
+float lowFloatMaxM    = input.float(20.0, "Branch label: low-float ceiling (M)", minval = 0.1, step = 1.0, group = GROUP_MOMO)
+float mediumFloatMaxM = input.float(100.0, "Branch label: medium-float ceiling (M)", minval = 1.0, step = 5.0, group = GROUP_MOMO)
+float highRvolMin     = input.float(5.0, "Branch label: high relative-volume threshold (x)", minval = 0.1, step = 0.25, group = GROUP_MOMO)
+
+string GROUP_PLAN = "5. First-pullback plan (Approximation)"
+int   minImpulseBars     = input.int(2, "Impulse: minimum green bars", minval = 1, maxval = 10, group = GROUP_PLAN)
+int   maxImpulseBars     = input.int(6, "Impulse: bars remembered", minval = 2, maxval = 20, group = GROUP_PLAN)
+float minImpulseRangePct = input.float(2.0, "Impulse: minimum range (%)", minval = 0.1, step = 0.25, group = GROUP_PLAN)
+int   maxPullbackBars    = input.int(4, "Pullback: maximum bars before the setup expires", minval = 1, maxval = 10, group = GROUP_PLAN)
+float entryBuffer        = input.float(0.01, "Entry above trigger high ($)", minval = 0.0, step = 0.01, group = GROUP_PLAN)
+float stopBuffer         = input.float(0.01, "Stop below pullback low ($)", minval = 0.0, step = 0.01, group = GROUP_PLAN)
+float rewardR            = input.float(2.0, "Target reward/risk multiple", minval = 0.25, step = 0.25, group = GROUP_PLAN)
+int   expireArmedAfter   = input.int(5, "Armed plan expires after (bars)", minval = 1, maxval = 30, group = GROUP_PLAN)
+float bandHalfWidth      = input.float(0.02, "Band half-width ($)", minval = 0.0, step = 0.01, group = GROUP_PLAN)
+bool  showPlanBands      = input.bool(true, "Show entry / stop / target bands", group = GROUP_PLAN)
+
+string GROUP_DISPLAY = "6. Display"
 bool showDashboard = input.bool(true, "Show dashboard", group = GROUP_DISPLAY)
 bool showSignals   = input.bool(true, "Show signal markers", group = GROUP_DISPLAY)
-bool tintCandidate = input.bool(true, "Tint chart when technical pillars pass", group = GROUP_DISPLAY)
+bool tintCandidate = input.bool(true, "Tint chart when the four technical pillars pass", group = GROUP_DISPLAY)
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Data requests — three unique request calls, suitable for Pine Screener limits.
+// Data requests — two request calls in total, inside Pine Screener limits.
 // ─────────────────────────────────────────────────────────────────────────────
-[priorCloseD, currentDailyVolume, averageDailyVolume, prior52WeekHigh, bestDailyGain120] = request.security(
-     syminfo.tickerid,
-     "1D",
-     [close[1], volume, ta.sma(volume[1], dailyVolLength), ta.highest(high[1], 252), ta.highest(100.0 * (close / close[1] - 1.0), 120)],
-     gaps = barmerge.gaps_off,
-     lookahead = barmerge.lookahead_off)
-
-[volume5m, averageVolume5m] = request.security(
-     syminfo.tickerid,
-     "5",
-     [volume, ta.sma(volume[1], 20)],
-     gaps = barmerge.gaps_off,
-     lookahead = barmerge.lookahead_off)
+[priorCloseD, averageDailyVolume, prior52WeekHigh] = request.security(
+     syminfo.tickerid, "1D",
+     [close[1], ta.sma(volume[1], dailyVolLength), ta.highest(high[1], 252)],
+     gaps = barmerge.gaps_off, lookahead = barmerge.lookahead_off)
 
 float sharesOutstanding = request.financial(syminfo.tickerid, "TOTAL_SHARES_OUTSTANDING", "FQ", gaps = barmerge.gaps_off)
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Five Pillars
+// Session clock — the desk's day runs 04:00–20:00 ET
 // ─────────────────────────────────────────────────────────────────────────────
-float gainPct     = not na(priorCloseD) and priorCloseD > 0 ? 100.0 * (close / priorCloseD - 1.0) : na
-float dailyRvol   = not na(averageDailyVolume) and averageDailyVolume > 0 ? currentDailyVolume / averageDailyVolume : na
-float fiveMinRvol = not na(averageVolume5m) and averageVolume5m > 0 ? volume5m / averageVolume5m : na
-float supplyM     = manualFloatM > 0 ? manualFloatM : (not na(sharesOutstanding) ? sharesOutstanding / 1000000.0 : na)
-
-bool priceOk  = close >= minPrice and close <= maxPrice
-bool gainOk   = not na(gainPct) and gainPct >= minGainPct
-bool rvolOk   = not na(dailyRvol) and dailyRvol >= minDailyRvol
-bool floatOk  = (not na(supplyM) and supplyM <= maxFloatM) or (na(supplyM) and allowUnknownFloat)
-int pillarScore = (priceOk ? 1 : 0) + (gainOk ? 1 : 0) + (rvolOk ? 1 : 0) + (floatOk ? 1 : 0)
-
-// Warrior's public documentation says its Five Pillars scanner does not enforce news.
-// Therefore the technical candidate is intentionally separate from manual catalyst confirmation.
-bool technicalFivePillarCandidate = pillarScore == 4
-bool fullFivePillarCandidate      = technicalFivePillarCandidate and catalystConfirmed
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Momentum approximations
-// ─────────────────────────────────────────────────────────────────────────────
-bool newTradingDay = ta.change(time("1D")) != 0
-var float intradayHigh = na
-float highBeforeThisBar = newTradingDay or na(intradayHigh) ? na : intradayHigh
-if newTradingDay or na(intradayHigh)
-    intradayHigh := high
-else
-    intradayHigh := math.max(intradayHigh, high)
-
-bool newHod = not na(highBeforeThisBar) and high > highBeforeThisBar and close > highBeforeThisBar
-bool aboveAverageMomentum = not na(fiveMinRvol) and fiveMinRvol >= minFiveMinRvol
-bool hodMomentum = newHod and aboveAverageMomentum and close > open
+string TZ = "America/New_York"
+int BUCKETS = 192                                  // 16 hours in five-minute buckets
+int dayKey  = year(time, TZ) * 1000 + dayofyear(time, TZ)
+bool newDay = na(dayKey[1]) ? true : dayKey != dayKey[1]
+int etMinute   = hour(time, TZ) * 60 + minute(time, TZ)
+int sinceOpen  = etMinute - 4 * 60
+int bucket     = sinceOpen >= 0 ? math.min(BUCKETS - 1, math.floor(sinceOpen / 5.0)) : -1
 
 float chartSeconds = timeframe.in_seconds()
-int runBars = math.max(1, int(math.ceil(runningUpMins * 60.0 / chartSeconds)))
-int bars5   = math.max(1, int(math.ceil(5.0 * 60.0 / chartSeconds)))
-int bars10  = math.max(1, int(math.ceil(10.0 * 60.0 / chartSeconds)))
-float runningMovePct = bar_index >= runBars and close[runBars] > 0 ? 100.0 * (close / close[runBars] - 1.0) : na
-float move5Pct       = bar_index >= bars5 and close[bars5] > 0 ? 100.0 * (close / close[bars5] - 1.0) : na
-float move10Pct      = bar_index >= bars10 and close[bars10] > 0 ? 100.0 * (close / close[bars10] - 1.0) : na
-
-bool runningUp  = not na(runningMovePct) and runningMovePct >= runningUpPct and aboveAverageMomentum
-bool squeeze5   = not na(move5Pct) and move5Pct >= 5.0 and aboveAverageMomentum
-bool squeeze10  = not na(move10Pct) and move10Pct >= 10.0 and aboveAverageMomentum
-bool breakout52 = not na(prior52WeekHigh) and high >= prior52WeekHigh and high[1] < prior52WeekHigh
-bool formerMomo = not na(bestDailyGain120) and bestDailyGain120 >= formerMomoGain
-
-bool lowFloat    = not na(supplyM) and supplyM <= lowFloatMaxM
-bool mediumFloat = not na(supplyM) and supplyM > lowFloatMaxM and supplyM <= mediumFloatMaxM
-bool medRelVol   = not na(fiveMinRvol) and fiveMinRvol >= mediumRvol
-bool highRelVol  = not na(fiveMinRvol) and fiveMinRvol >= highRvol
-
-// Transparent approximations of the named HOD sub-strategies.
-bool lowFloatMedRvol          = newHod and lowFloat and medRelVol
-bool lowFloatHighRvol         = newHod and lowFloat and highRelVol
-bool lowFloatHighRvolOver20   = lowFloatHighRvol and close > 20
-bool lowFloatVolatilityHunter = newHod and lowFloat and aboveAverageMomentum and ta.atr(atrLength) / close * 100.0 >= 3.0
-bool formerMomoHod            = newHod and formerMomo and aboveAverageMomentum
-bool mediumFloatMedOver20     = newHod and mediumFloat and medRelVol and close > 20
-bool mediumFloatHighOver20    = newHod and mediumFloat and highRelVol and close > 20
-bool mediumFloatHighUnder20   = newHod and mediumFloat and highRelVol and close <= 20
-bool squeeze52Week            = breakout52 and aboveAverageMomentum
-bool anyHodSubStrategy = lowFloatMedRvol or lowFloatHighRvol or lowFloatHighRvolOver20 or lowFloatVolatilityHunter or formerMomoHod or mediumFloatMedOver20 or mediumFloatHighOver20 or mediumFloatHighUnder20 or squeeze5 or squeeze10 or squeeze52Week
-
-bool fivePillarHod = technicalFivePillarCandidate and newHod and aboveAverageMomentum
+int bars5     = math.max(1, int(math.ceil(5.0 * 60.0 / chartSeconds)))
+int bars10    = math.max(1, int(math.ceil(10.0 * 60.0 / chartSeconds)))
+int barsWin   = math.max(1, int(math.ceil(runUpMins * 60.0 / chartSeconds)))
+int barsFresh = math.max(1, int(math.ceil(runUpFreshMin * 60.0 / chartSeconds)))
+bool extendedChart = syminfo.session == session.extended
+bool fineChart     = chartSeconds <= 300
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Entry, stop and target bands
+// Cumulative session volume and the time-of-day baseline
 // ─────────────────────────────────────────────────────────────────────────────
-bool chosenRiskSignal = switch signalSource
-    "Five Pillars HOD"   => fivePillarHod
-    "HOD Momentum"       => hodMomentum or anyHodSubStrategy
-    "Running Up"         => runningUp
-    => fivePillarHod or hodMomentum or anyHodSubStrategy or runningUp or squeeze5 or squeeze10
+var float cumVol = 0.0
+var array<float> todayCurve = array.new<float>(BUCKETS, 0.0)   // cumulative volume by bucket, today
+// Completed sessions, one 192-bucket curve each, in a flat ring buffer.
+int maxSessions = baselineSessions
+var array<float> histCurves = array.new<float>(maxSessions * BUCKETS, 0.0)
+var int histRows = 0
+var int histHead = 0
+var int lastBucket = -1
+var int lastCommittedKey = na
 
-bool newRiskSignal = chosenRiskSignal and not chosenRiskSignal[1]
-float atrValue = ta.atr(atrLength)
-var float entryLevel = na
-var float stopLevel = na
-var float targetLevel = na
-var string bandStatus = "Waiting"
+if newDay
+    // Commit the finished session once (idempotent against intrabar re-runs).
+    int prevKey = dayKey[1]
+    if not na(prevKey) and cumVol > 0 and lastBucket >= 0 and (na(lastCommittedKey) or lastCommittedKey != prevKey)
+        if lastBucket < BUCKETS - 1
+            for i = lastBucket + 1 to BUCKETS - 1
+                array.set(todayCurve, i, cumVol)
+        for i = 0 to BUCKETS - 1
+            array.set(histCurves, histHead * BUCKETS + i, array.get(todayCurve, i))
+        histHead := (histHead + 1) % maxSessions
+        histRows := math.min(histRows + 1, maxSessions)
+        lastCommittedKey := prevKey
+    array.fill(todayCurve, 0.0)
+    cumVol := 0.0
+    lastBucket := -1
 
-if newTradingDay
-    entryLevel := na
-    stopLevel := na
-    targetLevel := na
-    bandStatus := "Waiting"
+float cumBefore = cumVol
+cumVol := cumVol + volume
 
-if newRiskSignal
-    entryLevel := high + entryOffset
-    float candleStop = low - stopOffset
-    float atrStop = entryLevel - atrValue * atrStopMult
-    stopLevel := stopMethod == "ATR" ? atrStop : candleStop
-    float initialRisk = math.max(entryLevel - stopLevel, syminfo.mintick)
-    targetLevel := entryLevel + initialRisk * rewardR
-    bandStatus := "Armed"
-else if not na(entryLevel) and bandStatus == "Armed"
-    if low <= stopLevel
-        bandStatus := "Stopped"
-    else if high >= targetLevel
-        bandStatus := "Target hit"
-    else if high >= entryLevel
-        bandStatus := "Triggered"
-else if not na(entryLevel) and bandStatus == "Triggered"
-    if low <= stopLevel
-        bandStatus := "Stopped"
-    else if high >= targetLevel
-        bandStatus := "Target hit"
+if bucket >= 0
+    if lastBucket >= 0 and bucket > lastBucket + 1
+        for i = lastBucket + 1 to bucket - 1
+            array.set(todayCurve, i, cumBefore)             // no prints in those buckets: carry forward
+    array.set(todayCurve, bucket, cumVol)
+    lastBucket := math.max(lastBucket, bucket)
 
-float entryLower = showRiskBands and not na(entryLevel) ? entryLevel - bandHalfWidth : na
-float entryUpper = showRiskBands and not na(entryLevel) ? entryLevel + bandHalfWidth : na
-float stopLower  = showRiskBands and not na(stopLevel) ? stopLevel - bandHalfWidth : na
-float stopUpper  = showRiskBands and not na(stopLevel) ? stopLevel + bandHalfWidth : na
-float targetLower = showRiskBands and not na(targetLevel) ? targetLevel - bandHalfWidth : na
-float targetUpper = showRiskBands and not na(targetLevel) ? targetLevel + bandHalfWidth : na
+// Median of what prior sessions had traded by this bucket, over the sessions
+// that HAD traded by then (a session still at zero is left out rather than
+// dragging every multiple to infinity).
+float baseline = na
+int sessionsAvailable = histRows
+if sessionsAvailable > 0 and bucket >= 0
+    array<float> seen = array.new<float>()
+    for r = 0 to sessionsAvailable - 1
+        float v = array.get(histCurves, r * BUCKETS + bucket)
+        if v > 0
+            array.push(seen, v)
+    if array.size(seen) > 0
+        baseline := array.median(seen)
+
+float rvolTod   = not na(baseline) and baseline > 0 ? cumVol / baseline : na
+float rvolDaily = not na(averageDailyVolume) and averageDailyVolume > 0 ? cumVol / averageDailyVolume : na
+bool  usingTod  = rvolMode == "Time of day" and not na(rvolTod)
+float rvolUsed  = usingTod ? rvolTod : rvolDaily
+string rvolLabel = usingTod ? "time of day" : "daily"
+
+// Five-minute volume and relative volume (the desk's rvol_5m: the current
+// five-minute window against the mean of the prior twenty completed windows).
+float vol5m    = math.sum(volume, bars5)
+float avgVol5m = ta.sma(volume, bars5 * 20)[bars5] * bars5
+float rvol5m   = not na(avgVol5m) and avgVol5m > 0 ? vol5m / avgVol5m : na
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Pine Screener outputs — these are deliberately the first ten plot() calls.
+// Five Pillars
 // ─────────────────────────────────────────────────────────────────────────────
-plot(pillarScore, "Pillar score (0-4)", display = display.data_window)
+float gainPct = not na(priorCloseD) and priorCloseD > 0 ? 100.0 * (close / priorCloseD - 1.0) : na
+bool  floatVerified = manualFloatM > 0
+float supplyM = floatVerified ? manualFloatM : (not na(sharesOutstanding) ? sharesOutstanding / 1000000.0 : na)
+bool  soBound = not floatVerified and not na(supplyM)
+
+bool priceOk = close >= minPrice and close <= maxPrice
+bool gainOk  = not na(gainPct) and gainPct >= minGainPct
+bool rvolOk  = not na(rvolUsed) and rvolUsed >= minRvol
+// Verified float compares directly. Shares outstanding is an upper bound:
+// under the cap it PROVES float under the cap; over the cap it proves nothing.
+bool floatOk      = not na(supplyM) and supplyM < maxFloatM
+bool floatUnknown = na(supplyM) or (soBound and supplyM >= maxFloatM)
+bool inDeskBand   = close >= deskMinPrice and close <= deskMaxPrice
+
+int  techScore     = (priceOk ? 1 : 0) + (gainOk ? 1 : 0) + (rvolOk ? 1 : 0) + (floatOk ? 1 : 0)
+int  pillarsPassed = techScore + (catalystConfirmed ? 1 : 0)
+bool technicalCandidate = techScore == 4
+bool fullCandidate      = technicalCandidate and catalystConfirmed
+
+// Liquidity gate: the share floor OR the pillars. Approximation — the course
+// never states a premarket volume rule.
+bool volOnly = vol5m >= minVolume5m
+bool liquid  = volOnly or pillarsPassed >= minPillars
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Momentum events
+// ─────────────────────────────────────────────────────────────────────────────
+// Rising edge that re-arms after the condition has failed N times: one alert
+// per leg, as the desk does.
+f_edge(bool qualifies, int rearmAfter) =>
+    var bool armed = true
+    var int fails = 0
+    bool fire = false
+    if qualifies
+        if armed
+            fire := true
+            armed := false
+        fails := 0
+    else
+        fails += 1
+        if fails >= rearmAfter
+            armed := true
+    fire
+
+// Session high before this bar, and the HOD rule: an advance of at least
+// hodAdvancePct over the prior high — HOD Momo does not fire on every print.
+var float sessHigh = na
+if newDay
+    sessHigh := na
+float priorHigh = sessHigh
+sessHigh := na(sessHigh) ? high : math.max(sessHigh, high)
+float advanceNeeded = not na(priorHigh) ? math.max(syminfo.mintick, priorHigh * hodAdvancePct / 100.0) : na
+bool  newHod = not na(priorHigh) and high > priorHigh + advanceNeeded
+
+// In thin tape the recent-RVOL check is the same wall as the share floor; the
+// pillars stand in for both, never for the new high or the gain.
+bool hodRvolOk = (not na(rvol5m) and rvol5m >= hodMinRvol5m) or (liquid and not volOnly)
+bool bigFloat  = not na(supplyM) and supplyM > mediumFloatMaxM     // known and larger than every captured band
+bool hodMomentum = newHod and not na(gainPct) and gainPct >= hodMinGainPct and hodRvolOk and close >= eventMinPrice and liquid and not bigFloat
+bool fivePillarHod = technicalCandidate and hodMomentum
+
+// Branch label, the way the desk tags the row: float band · RVOL band · price side.
+string hodBranch = (na(supplyM) ? "?F" : supplyM <= lowFloatMaxM ? "LF" : "MF") + "·" +
+     ((not na(rvol5m) ? rvol5m : (not na(rvolUsed) ? rvolUsed : 0.0)) >= highRvolMin ? "HR" : "MR") + "·" +
+     (close >= 20 ? "20+" : "<20")
+
+// Running Up: a live uptrend over the window, not a spike.
+float refPrice   = bar_index >= barsWin ? close[barsWin] : na
+float movePct    = not na(refPrice) and refPrice > 0 ? 100.0 * (close / refPrice - 1.0) : na
+float windowHigh = ta.highest(high, barsWin)
+float freshHigh  = ta.highest(high, barsFresh)
+float winPV      = math.sum(close * volume, barsWin)
+float winV       = math.sum(volume, barsWin)
+float vwapWin    = winV > 0 ? winPV / winV : na
+bool moveOk  = not na(movePct) and movePct >= runUpPct
+bool freshOk = not na(freshHigh) and not na(windowHigh) and freshHigh >= windowHigh
+bool vwapOk  = not na(vwapWin) and close >= vwapWin
+bool runningUpNow  = moveOk and freshOk and vwapOk and liquid and close >= eventMinPrice
+bool runningUpFire = f_edge(runningUpNow, 3)
+
+// Squeezes (Confirmed branch names, Approximation thresholds): share floor only.
+float move5Pct  = bar_index >= bars5 and close[bars5] > 0 ? 100.0 * (close / close[bars5] - 1.0) : na
+float move10Pct = bar_index >= bars10 and close[bars10] > 0 ? 100.0 * (close / close[bars10] - 1.0) : na
+bool squeeze5Fire  = f_edge(not na(move5Pct) and move5Pct >= 5.0 and volOnly and close >= eventMinPrice, 3)
+bool squeeze10Fire = f_edge(not na(move10Pct) and move10Pct >= 10.0 and volOnly and close >= eventMinPrice, 3)
+
+// 52-week breakout: session high over the prior 252-session high, once per day.
+var int breakoutDay = na
+bool breakout52Now = not na(prior52WeekHigh) and sessHigh > prior52WeekHigh and volOnly
+bool breakout52Fire = false
+if breakout52Now and (na(breakoutDay) or breakoutDay != dayKey)
+    breakout52Fire := true
+    breakoutDay := dayKey
+
+// A momentum event in the last five minutes is what the verdict calls "live".
+var int lastMomoTime = na
+if hodMomentum or runningUpFire or squeeze5Fire or squeeze10Fire
+    lastMomoTime := time
+bool momoRecent = not na(lastMomoTime) and (time - lastMomoTime) <= 5 * 60 * 1000
+
+// ─────────────────────────────────────────────────────────────────────────────
+// First-pullback plan — the desk's detector, on closed bars
+// ─────────────────────────────────────────────────────────────────────────────
+// 0 seeking impulse · 1 in pullback · 2 armed · 3 triggered · 4 stopped · 5 target hit · 6 expired
+var int pbState = 0
+var array<float> impO = array.new<float>()
+var array<float> impH = array.new<float>()
+var array<float> impL = array.new<float>()
+var array<float> impV = array.new<float>()
+var array<float> pbH  = array.new<float>()
+var array<float> pbL  = array.new<float>()
+var array<float> pbV  = array.new<float>()
+var float planEntry = na
+var float planStop  = na
+var float planTarget = na
+var float planRisk  = na
+var float planTrigHigh = na
+var bool  planVolOk = false
+var int   armedAge  = 0
+
+if barstate.isconfirmed
+    bool resetAll = newDay or pbState >= 4
+    if resetAll
+        array.clear(impO)
+        array.clear(impH)
+        array.clear(impL)
+        array.clear(impV)
+        array.clear(pbH)
+        array.clear(pbL)
+        array.clear(pbV)
+        pbState := 0
+        armedAge := 0
+        if newDay
+            planEntry := na
+            planStop := na
+            planTarget := na
+            planRisk := na
+            planTrigHigh := na
+            planVolOk := false
+    bool greenBar = close > open
+    if pbState == 0
+        if greenBar
+            array.push(impO, open)
+            array.push(impH, high)
+            array.push(impL, low)
+            array.push(impV, volume)
+            if array.size(impO) > maxImpulseBars
+                array.shift(impO)
+                array.shift(impH)
+                array.shift(impL)
+                array.shift(impV)
+        else
+            bool impulseValid = false
+            if array.size(impO) >= minImpulseBars
+                float firstOpen = array.get(impO, 0)
+                if firstOpen > 0
+                    impulseValid := 100.0 * (array.max(impH) - firstOpen) / firstOpen >= minImpulseRangePct
+            if impulseValid
+                pbState := 1
+                array.clear(pbH)
+                array.clear(pbL)
+                array.clear(pbV)
+                array.push(pbH, high)
+                array.push(pbL, low)
+                array.push(pbV, volume)
+            else
+                array.clear(impO)
+                array.clear(impH)
+                array.clear(impL)
+                array.clear(impV)
+    else if pbState == 1
+        float structureLow = array.min(pbL)
+        float lastPbHigh   = array.last(pbH)
+        if high > lastPbHigh
+            // Trigger bar: the first new high over the previous candle.
+            planTrigHigh := lastPbHigh
+            planEntry := lastPbHigh + entryBuffer
+            planStop := structureLow - stopBuffer
+            planRisk := math.max(planEntry - planStop, syminfo.mintick)
+            planTarget := planEntry + rewardR * planRisk
+            planVolOk := array.avg(pbV) < array.avg(impV)
+            pbState := 2
+            armedAge := 0
+        else
+            array.push(pbH, high)
+            array.push(pbL, low)
+            array.push(pbV, volume)
+            if array.size(pbH) > maxPullbackBars
+                // Five or six candles of pullback is lost interest: start over.
+                array.clear(impO)
+                array.clear(impH)
+                array.clear(impL)
+                array.clear(impV)
+                array.clear(pbH)
+                array.clear(pbL)
+                array.clear(pbV)
+                pbState := 0
+                if greenBar
+                    array.push(impO, open)
+                    array.push(impH, high)
+                    array.push(impL, low)
+                    array.push(impV, volume)
+            else if array.min(pbL) < structureLow and low < array.min(impL)
+                array.clear(impO)
+                array.clear(impH)
+                array.clear(impL)
+                array.clear(impV)
+                array.clear(pbH)
+                array.clear(pbL)
+                array.clear(pbV)
+                pbState := 0
+    else if pbState == 2
+        armedAge += 1
+        if low <= planStop
+            pbState := 4
+        else if high >= planEntry
+            pbState := 3
+        else if armedAge > expireArmedAfter
+            pbState := 6
+    else if pbState == 3
+        if low <= planStop
+            pbState := 4
+        else if high >= planTarget
+            pbState := 5
+
+bool planLive   = pbState == 2 or pbState == 3
+bool planArmedNow = pbState == 2 and pbState[1] != 2
+bool showPlan   = showPlanBands and pbState >= 2 and not na(planEntry)
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Verdict — the desk's verdict card, same rules
+// ─────────────────────────────────────────────────────────────────────────────
+// Blockers (PASS = reject). Halt state and spread are not readable in Pine.
+bool blockScore  = techScore <= 2
+bool block52w    = planLive and not na(prior52WeekHigh) and planTarget > prior52WeekHigh and close < prior52WeekHigh
+bool blockVolume = planLive and not planVolOk
+int blockers = (blockScore ? 1 : 0) + (block52w ? 1 : 0) + (blockVolume ? 1 : 0)
+// Waits.
+bool waitScore = techScore == 3
+bool waitPlan  = not planLive
+bool waitChase = planLive and close > planEntry + planRisk
+bool waitMomo  = not momoRecent
+int waits = (waitScore ? 1 : 0) + (waitPlan ? 1 : 0) + (waitChase ? 1 : 0) + (waitMomo ? 1 : 0)
+string verdict = blockers > 0 ? "PASS" : waits > 0 ? "WAIT" : "GO"
+int shortBy = blockers + waits
+
+string verdictWhy = (blockScore ? "Only " + str.tostring(techScore) + "/4 technical pillars — a normal reject. " : "") +
+     (block52w ? "52-week high sits between entry and the 2R target. " : "") +
+     (blockVolume ? "Pullback volume was heavier than the impulse — sellers, not a pause. " : "") +
+     (blockers == 0 and waitScore ? "3/4 technical pillars — one condition still missing. " : "") +
+     (blockers == 0 and waitPlan ? "No confirmed first pullback yet; nothing to place a structural stop against. " : "") +
+     (blockers == 0 and waitChase ? "Price is already more than 1R beyond the trigger — chasing inverts reward/risk. " : "") +
+     (blockers == 0 and waitMomo ? "No live momentum event in the last five minutes. " : "") +
+     (shortBy == 0 ? "Four pillars, a confirmed pullback and 2R of room. Spread and halt state are not checked here." : "")
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Pine Screener outputs — the first ten keep their order from v1
+// ─────────────────────────────────────────────────────────────────────────────
+plot(techScore, "Pillar score (0-4)", display = display.data_window)
 plot(close, "Price", display = display.data_window)
 plot(gainPct, "Gain from prior close %", display = display.data_window)
-plot(dailyRvol, "Daily RVOL", display = display.data_window)
-plot(fiveMinRvol, "5-minute RVOL", display = display.data_window)
-plot(supplyM, "Float/supply proxy M", display = display.data_window)
-plot(technicalFivePillarCandidate ? 1 : 0, "Technical 4/4 candidate", display = display.data_window)
+plot(rvolUsed, "RVOL (used)", display = display.data_window)
+plot(rvol5m, "5-minute RVOL", display = display.data_window)
+plot(supplyM, "Float/supply M", display = display.data_window)
+plot(technicalCandidate ? 1 : 0, "Technical 4/4 candidate", display = display.data_window)
 plot(fivePillarHod ? 1 : 0, "Five Pillars HOD", display = display.data_window)
-plot(hodMomentum or anyHodSubStrategy ? 1 : 0, "HOD Momentum", display = display.data_window)
-plot(runningUp ? 1 : 0, "Running Up", display = display.data_window)
+plot(hodMomentum ? 1 : 0, "HOD Momentum", display = display.data_window)
+plot(runningUpFire ? 1 : 0, "Running Up", display = display.data_window)
+// New in v2.
+plot(pillarsPassed, "Pillars passed (0-5)", display = display.data_window)
+plot(rvolTod, "RVOL time of day", display = display.data_window)
+plot(rvolDaily, "RVOL daily", display = display.data_window)
+plot(baseline, "Volume expected by now (shares)", display = display.data_window)
+plot(sessionsAvailable, "Baseline sessions", display = display.data_window)
+plot(cumVol, "Volume today (shares)", display = display.data_window)
+plot(vol5m, "Volume 5 minutes (shares)", display = display.data_window)
+plot(liquid ? 1 : 0, "Liquidity gate", display = display.data_window)
+plot(inDeskBand ? 1 : 0, "In desk band", display = display.data_window)
+plot(planLive ? 1 : 0, "Plan armed or triggered", display = display.data_window)
+plot(verdict == "GO" ? 2 : verdict == "WAIT" ? 1 : 0, "Verdict (2 GO, 1 WAIT, 0 PASS)", display = display.data_window)
 
-entryLoPlot = plot(entryLower, "Entry band lower", color = color.new(color.aqua, 0), linewidth = 1, style = plot.style_linebr)
-entryHiPlot = plot(entryUpper, "Entry band upper", color = color.new(color.aqua, 0), linewidth = 1, style = plot.style_linebr)
-stopLoPlot = plot(stopLower, "Stop band lower", color = color.new(color.red, 0), linewidth = 1, style = plot.style_linebr)
-stopHiPlot = plot(stopUpper, "Stop band upper", color = color.new(color.red, 0), linewidth = 1, style = plot.style_linebr)
+// ─────────────────────────────────────────────────────────────────────────────
+// Plan bands
+// ─────────────────────────────────────────────────────────────────────────────
+float entryLower  = showPlan ? planEntry - bandHalfWidth : na
+float entryUpper  = showPlan ? planEntry + bandHalfWidth : na
+float stopLower   = showPlan ? planStop - bandHalfWidth : na
+float stopUpper   = showPlan ? planStop + bandHalfWidth : na
+float targetLower = showPlan ? planTarget - bandHalfWidth : na
+float targetUpper = showPlan ? planTarget + bandHalfWidth : na
+entryLoPlot  = plot(entryLower, "Entry band lower", color = color.new(color.aqua, 0), linewidth = 1, style = plot.style_linebr)
+entryHiPlot  = plot(entryUpper, "Entry band upper", color = color.new(color.aqua, 0), linewidth = 1, style = plot.style_linebr)
+stopLoPlot   = plot(stopLower, "Stop band lower", color = color.new(color.red, 0), linewidth = 1, style = plot.style_linebr)
+stopHiPlot   = plot(stopUpper, "Stop band upper", color = color.new(color.red, 0), linewidth = 1, style = plot.style_linebr)
 targetLoPlot = plot(targetLower, "Target band lower", color = color.new(color.lime, 0), linewidth = 1, style = plot.style_linebr)
 targetHiPlot = plot(targetUpper, "Target band upper", color = color.new(color.lime, 0), linewidth = 1, style = plot.style_linebr)
 fill(entryLoPlot, entryHiPlot, color.new(color.aqua, 82), title = "ENTRY zone")
@@ -211,62 +501,100 @@ fill(targetLoPlot, targetHiPlot, color.new(color.lime, 82), title = "TARGET zone
 // ─────────────────────────────────────────────────────────────────────────────
 plotshape(showSignals and fivePillarHod, title = "Five Pillars HOD marker", style = shape.labelup, location = location.belowbar, color = color.lime, text = "5P HOD", textcolor = color.black, size = size.tiny)
 plotshape(showSignals and hodMomentum and not fivePillarHod, title = "HOD marker", style = shape.triangleup, location = location.belowbar, color = color.aqua, text = "HOD", textcolor = color.black, size = size.tiny)
-plotshape(showSignals and runningUp and not hodMomentum, title = "Running Up marker", style = shape.circle, location = location.belowbar, color = color.orange, text = "RUN", textcolor = color.black, size = size.tiny)
-plotshape(showSignals and squeeze5, title = "5% in 5 minutes marker", style = shape.diamond, location = location.abovebar, color = color.yellow, text = "5/5", textcolor = color.black, size = size.tiny)
-plotshape(showSignals and squeeze10, title = "10% in 10 minutes marker", style = shape.diamond, location = location.abovebar, color = color.fuchsia, text = "10/10", textcolor = color.white, size = size.tiny)
-bgcolor(tintCandidate and technicalFivePillarCandidate ? color.new(color.lime, 92) : na, title = "Technical candidate tint")
+plotshape(showSignals and runningUpFire and not hodMomentum, title = "Running Up marker", style = shape.circle, location = location.belowbar, color = color.orange, text = "UP·10m", textcolor = color.black, size = size.tiny)
+plotshape(showSignals and squeeze5Fire, title = "5% in 5 minutes marker", style = shape.diamond, location = location.abovebar, color = color.yellow, text = "5in5", textcolor = color.black, size = size.tiny)
+plotshape(showSignals and squeeze10Fire, title = "10% in 10 minutes marker", style = shape.diamond, location = location.abovebar, color = color.fuchsia, text = "10in10", textcolor = color.white, size = size.tiny)
+plotshape(showSignals and planArmedNow, title = "Plan armed marker", style = shape.flag, location = location.abovebar, color = color.aqua, text = "PLAN", textcolor = color.black, size = size.tiny)
+bgcolor(tintCandidate and technicalCandidate ? color.new(color.lime, 92) : na, title = "Technical candidate tint")
 
-alertcondition(technicalFivePillarCandidate and not technicalFivePillarCandidate[1], "Technical Five Pillars candidate", "{{exchange}}:{{ticker}} now passes the four technical Ross-style pillars. Check news manually. Price: {{close}}")
-alertcondition(fullFivePillarCandidate and not fullFivePillarCandidate[1], "Full Five Pillars candidate", "{{exchange}}:{{ticker}} passes the configured Five Pillars, including manual catalyst confirmation. Price: {{close}}")
-alertcondition(fivePillarHod, "Five Pillars HOD alert", "{{exchange}}:{{ticker}} Ross-style Five Pillars HOD approximation at {{close}}")
-alertcondition(hodMomentum or anyHodSubStrategy, "HOD Momentum alert", "{{exchange}}:{{ticker}} HOD momentum approximation at {{close}}")
-alertcondition(runningUp, "Running Up alert", "{{exchange}}:{{ticker}} Running Up approximation at {{close}}")
-alertcondition(squeeze5, "Squeeze: 5% in 5 minutes", "{{exchange}}:{{ticker}} moved at least 5% in approximately 5 minutes. Price: {{close}}")
-alertcondition(squeeze10, "Squeeze: 10% in 10 minutes", "{{exchange}}:{{ticker}} moved at least 10% in approximately 10 minutes. Price: {{close}}")
-alertcondition(breakout52, "52-week breakout", "{{exchange}}:{{ticker}} is breaking the prior 52-week high. Price: {{close}}")
+alertcondition(technicalCandidate and not technicalCandidate[1], "Technical Five Pillars candidate", "{{exchange}}:{{ticker}} passes the four technical Ross-style pillars (RVOL measured at this time of day). Check news. Price {{close}}")
+alertcondition(fullCandidate and not fullCandidate[1], "Full Five Pillars candidate", "{{exchange}}:{{ticker}} passes all five configured pillars, news confirmed manually. Price {{close}}")
+alertcondition(fivePillarHod, "Five Pillars HOD alert", "{{exchange}}:{{ticker}} Five Pillars candidate making a new high with momentum at {{close}}")
+alertcondition(hodMomentum, "HOD Momentum alert", "{{exchange}}:{{ticker}} new high of day with momentum at {{close}}")
+alertcondition(runningUpFire, "Running Up alert", "{{exchange}}:{{ticker}} Running Up: 10-minute uptrend, fresh high, above VWAP at {{close}}")
+alertcondition(squeeze5Fire, "Squeeze: 5% in 5 minutes", "{{exchange}}:{{ticker}} up at least 5% in about 5 minutes at {{close}}")
+alertcondition(squeeze10Fire, "Squeeze: 10% in 10 minutes", "{{exchange}}:{{ticker}} up at least 10% in about 10 minutes at {{close}}")
+alertcondition(breakout52Fire, "52-week breakout", "{{exchange}}:{{ticker}} is above its prior 52-week high at {{close}}")
+alertcondition(planArmedNow, "First pullback armed", "{{exchange}}:{{ticker}} first pullback confirmed: plan armed at {{close}}. Entry, stop and target are on the chart.")
+alertcondition(verdict == "GO" and verdict[1] != "GO", "Verdict GO", "{{exchange}}:{{ticker}} verdict GO: four pillars, a confirmed pullback and 2R of room at {{close}}")
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Dashboard
+// Dashboard — the desk's verdict card
 // ─────────────────────────────────────────────────────────────────────────────
 f_passText(bool condition) => condition ? "PASS" : "FAIL"
 f_passColor(bool condition) => condition ? color.new(color.lime, 10) : color.new(color.red, 10)
 f_num(float value, string pattern) => na(value) ? "N/A" : str.tostring(value, pattern)
+f_vol(float v) => na(v) ? "N/A" : v >= 1000000.0 ? str.tostring(v / 1000000.0, "#.#") + "M" : v >= 1000.0 ? str.tostring(v / 1000.0, "#") + "K" : str.tostring(v, "#")
 
-var table dashboard = table.new(position.top_right, 3, 12, bgcolor = color.new(color.white, 5), frame_color = color.new(color.gray, 40), frame_width = 1)
+color C_WARN = color.new(color.orange, 10)
+color C_HEAD = color.new(color.blue, 45)
+color C_INFO = color.new(color.gray, 60)
+
+string floatStatus = floatOk ? "PASS" : floatUnknown ? "UNKNOWN" : "FAIL"
+color  floatColor  = floatOk ? color.new(color.lime, 10) : floatUnknown ? C_WARN : color.new(color.red, 10)
+string floatText   = na(supplyM) ? "unknown" : f_num(supplyM, "#.#") + "M" + (floatVerified ? " (yours)" : " SO")
+string liqText     = volOnly ? "LIQUID · volume" : liquid ? "LIQUID · " + str.tostring(pillarsPassed) + "/5 pillars" : "THIN"
+string momoText    = hodMomentum ? "HOD " + hodBranch : runningUpFire ? "Running Up 10m" : squeeze10Fire ? "10 in 10" : squeeze5Fire ? "5 in 5" : momoRecent ? "last < 5 min" : "none"
+string planText    = pbState == 2 ? "Armed" : pbState == 3 ? "Triggered" : pbState == 4 ? "Stopped" : pbState == 5 ? "Target hit" : pbState == 6 ? "Expired" :
+     pbState == 1 ? "Pullback · " + str.tostring(array.size(pbH)) + " bar" + (array.size(pbH) == 1 ? "" : "s") :
+     array.size(impO) > 0 ? "Impulse · " + str.tostring(array.size(impO)) + " green" : "Seeking impulse"
+color verdictColor = verdict == "GO" ? color.new(color.lime, 10) : verdict == "WAIT" ? C_WARN : color.new(color.red, 10)
+string baselineText = usingTod ? f_vol(cumVol) + " vs " + f_vol(baseline) + " by now · " + str.tostring(sessionsAvailable) + " sess" :
+     (rvolMode == "Time of day" ? "no baseline yet · daily measure" : "today vs mean full day")
+
+var table dashboard = table.new(position.top_right, 3, 18, bgcolor = color.new(color.white, 5), frame_color = color.new(color.gray, 40), frame_width = 1)
 if barstate.islast and showDashboard
-    table.cell(dashboard, 0, 0, "FILTER", text_color = color.white, bgcolor = color.new(color.blue, 45))
-    table.cell(dashboard, 1, 0, "VALUE", text_color = color.white, bgcolor = color.new(color.blue, 45))
-    table.cell(dashboard, 2, 0, "STATUS", text_color = color.white, bgcolor = color.new(color.blue, 45))
-    table.cell(dashboard, 0, 1, "Price")
-    table.cell(dashboard, 1, 1, "$" + f_num(close, "#.##"))
+    table.cell(dashboard, 0, 0, "FILTER", text_color = color.white, bgcolor = C_HEAD)
+    table.cell(dashboard, 1, 0, "VALUE", text_color = color.white, bgcolor = C_HEAD)
+    table.cell(dashboard, 2, 0, "STATUS", text_color = color.white, bgcolor = C_HEAD)
+    table.cell(dashboard, 0, 1, "Price $" + f_num(minPrice, "#") + "–" + f_num(maxPrice, "#"))
+    table.cell(dashboard, 1, 1, "$" + f_num(close, "#.##") + (inDeskBand ? "" : " · outside desk band"))
     table.cell(dashboard, 2, 1, f_passText(priceOk), bgcolor = f_passColor(priceOk))
     table.cell(dashboard, 0, 2, "Gain vs close")
-    table.cell(dashboard, 1, 2, f_num(gainPct, "#.##") + "%")
+    table.cell(dashboard, 1, 2, f_num(gainPct, "#.#") + "%")
     table.cell(dashboard, 2, 2, f_passText(gainOk), bgcolor = f_passColor(gainOk))
-    table.cell(dashboard, 0, 3, "Daily RVOL")
-    table.cell(dashboard, 1, 3, f_num(dailyRvol, "#.##") + "x")
+    table.cell(dashboard, 0, 3, "RVOL · " + rvolLabel)
+    table.cell(dashboard, 1, 3, f_num(rvolUsed, "#.##") + "x", tooltip = baselineText)
     table.cell(dashboard, 2, 3, f_passText(rvolOk), bgcolor = f_passColor(rvolOk))
-    table.cell(dashboard, 0, 4, "Float/supply")
-    table.cell(dashboard, 1, 4, f_num(supplyM, "#.##") + "M")
-    table.cell(dashboard, 2, 4, f_passText(floatOk), bgcolor = f_passColor(floatOk))
-    table.cell(dashboard, 0, 5, "News")
-    table.cell(dashboard, 1, 5, catalystConfirmed ? "Confirmed" : "Manual check")
-    table.cell(dashboard, 2, 5, f_passText(catalystConfirmed), bgcolor = f_passColor(catalystConfirmed))
-    table.cell(dashboard, 0, 6, "Technical score")
-    table.cell(dashboard, 1, 6, str.tostring(pillarScore) + "/4")
-    table.cell(dashboard, 2, 6, f_passText(technicalFivePillarCandidate), bgcolor = f_passColor(technicalFivePillarCandidate))
-    table.cell(dashboard, 0, 7, "5m RVOL")
-    table.cell(dashboard, 1, 7, f_num(fiveMinRvol, "#.##") + "x")
-    table.cell(dashboard, 2, 7, f_passText(aboveAverageMomentum), bgcolor = f_passColor(aboveAverageMomentum))
-    table.cell(dashboard, 0, 8, "HOD / Running")
-    table.cell(dashboard, 1, 8, hodMomentum ? "HOD" : runningUp ? "Running Up" : "None")
-    table.cell(dashboard, 2, 8, hodMomentum or runningUp ? "ACTIVE" : "WAIT")
-    table.cell(dashboard, 0, 9, "Entry")
-    table.cell(dashboard, 1, 9, na(entryLevel) ? "N/A" : "$" + f_num(entryLevel, "#.##"), bgcolor = color.new(color.aqua, 80))
-    table.cell(dashboard, 2, 9, bandStatus)
-    table.cell(dashboard, 0, 10, "Stop")
-    table.cell(dashboard, 1, 10, na(stopLevel) ? "N/A" : "$" + f_num(stopLevel, "#.##"), bgcolor = color.new(color.red, 80))
-    table.cell(dashboard, 2, 10, stopMethod)
-    table.cell(dashboard, 0, 11, "Target")
-    table.cell(dashboard, 1, 11, na(targetLevel) ? "N/A" : "$" + f_num(targetLevel, "#.##"), bgcolor = color.new(color.lime, 80))
-    table.cell(dashboard, 2, 11, f_num(rewardR, "#.##") + "R")
+    table.cell(dashboard, 0, 4, "RVOL baseline", text_color = color.gray)
+    table.cell(dashboard, 1, 4, baselineText, text_color = color.gray)
+    table.cell(dashboard, 2, 4, usingTod ? (sessionsAvailable >= baselineSessions ? "FULL" : "THIN") : "FALLBACK", bgcolor = usingTod and sessionsAvailable >= baselineSessions ? C_INFO : C_WARN)
+    table.cell(dashboard, 0, 5, "Float / supply")
+    table.cell(dashboard, 1, 5, floatText)
+    table.cell(dashboard, 2, 5, floatStatus, bgcolor = floatColor)
+    table.cell(dashboard, 0, 6, "News")
+    table.cell(dashboard, 1, 6, catalystConfirmed ? "Confirmed" : "Manual check")
+    table.cell(dashboard, 2, 6, f_passText(catalystConfirmed), bgcolor = f_passColor(catalystConfirmed))
+    table.cell(dashboard, 0, 7, "Technical score")
+    table.cell(dashboard, 1, 7, str.tostring(techScore) + "/4 · " + str.tostring(pillarsPassed) + "/5 with news")
+    table.cell(dashboard, 2, 7, f_passText(technicalCandidate), bgcolor = f_passColor(technicalCandidate))
+    table.cell(dashboard, 0, 8, "5-minute tape")
+    table.cell(dashboard, 1, 8, f_vol(vol5m) + " · " + f_num(rvol5m, "#.#") + "x")
+    table.cell(dashboard, 2, 8, liqText, bgcolor = liquid ? color.new(color.lime, 10) : color.new(color.red, 10))
+    table.cell(dashboard, 0, 9, "Momentum event")
+    table.cell(dashboard, 1, 9, momoText)
+    table.cell(dashboard, 2, 9, momoRecent ? "ACTIVE" : "WAIT", bgcolor = momoRecent ? color.new(color.lime, 10) : C_WARN)
+    table.cell(dashboard, 0, 10, "First pullback")
+    table.cell(dashboard, 1, 10, planText)
+    table.cell(dashboard, 2, 10, planLive ? (planVolOk ? "light pullback" : "HEAVY pullback") : "—", bgcolor = planLive ? (planVolOk ? color.new(color.lime, 10) : color.new(color.red, 10)) : C_INFO)
+    table.cell(dashboard, 0, 11, "Entry")
+    table.cell(dashboard, 1, 11, na(planEntry) or pbState < 2 ? "N/A" : "$" + f_num(planEntry, "#.##"), bgcolor = color.new(color.aqua, 80))
+    table.cell(dashboard, 2, 11, pbState >= 2 ? "trigger high + $" + f_num(entryBuffer, "#.##") : "—")
+    table.cell(dashboard, 0, 12, "Stop")
+    table.cell(dashboard, 1, 12, na(planStop) or pbState < 2 ? "N/A" : "$" + f_num(planStop, "#.##"), bgcolor = color.new(color.red, 80))
+    table.cell(dashboard, 2, 12, pbState >= 2 ? "pullback low − $" + f_num(stopBuffer, "#.##") + " · risk $" + f_num(planRisk, "#.##") : "—")
+    table.cell(dashboard, 0, 13, "Target")
+    table.cell(dashboard, 1, 13, na(planTarget) or pbState < 2 ? "N/A" : "$" + f_num(planTarget, "#.##"), bgcolor = color.new(color.lime, 80))
+    table.cell(dashboard, 2, 13, f_num(rewardR, "#.##") + "R")
+    table.cell(dashboard, 0, 14, "VERDICT", text_color = color.white, bgcolor = C_HEAD)
+    table.cell(dashboard, 1, 14, verdict + (shortBy > 0 ? " · " + str.tostring(shortBy) + " short" : ""), text_color = color.white, bgcolor = verdictColor, tooltip = verdictWhy)
+    table.cell(dashboard, 2, 14, verdict == "GO" ? "candidate + structure" : verdict == "WAIT" ? "watch, do not enter" : "reject", text_color = color.white, bgcolor = verdictColor, tooltip = verdictWhy)
+    table.cell(dashboard, 0, 15, "Chart", text_color = color.gray)
+    table.cell(dashboard, 1, 15, (extendedChart ? "extended hours ✓" : "EXTENDED HOURS OFF") + " · " + timeframe.period + (fineChart ? "" : " (use 1–5 min)"), text_color = color.gray)
+    table.cell(dashboard, 2, 15, extendedChart and fineChart ? "OK" : "FIX", bgcolor = extendedChart and fineChart ? C_INFO : C_WARN)
+    table.cell(dashboard, 0, 16, "Desk band $" + f_num(deskMinPrice, "#") + "–" + f_num(deskMaxPrice, "#"), text_color = color.gray)
+    table.cell(dashboard, 1, 16, inDeskBand ? "admitted" : "outside", text_color = color.gray)
+    table.cell(dashboard, 2, 16, "operator setting", text_color = color.gray, bgcolor = C_INFO)
+    table.cell(dashboard, 0, 17, "Evidence", text_color = color.gray)
+    table.cell(dashboard, 1, 17, "pillars Confirmed · rest Approximation", text_color = color.gray)
+    table.cell(dashboard, 2, 17, "not advice", text_color = color.gray, bgcolor = C_INFO)

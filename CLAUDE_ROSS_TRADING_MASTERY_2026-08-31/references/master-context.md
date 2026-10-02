@@ -82,24 +82,34 @@ The downloadable application bundle contains scanner UI and protected API routes
 
 ## TradingView implementation status
 
-The bundled `assets/ross_style_momentum_scanner.pine` is a Pine v6 clean-room approximation with:
+The bundled `assets/ross_style_momentum_scanner.pine` is **v2 (October 2026)**,
+a Pine v6 clean-room approximation kept in step with the platform; its input
+defaults are pinned to the platform's constants and `config/desk-profile.json`
+by `tests/test_pine_mirror.py`. It carries:
 
-- technical Five Pillars scoring;
-- manual catalyst confirmation;
-- HOD Momentum, Running Up, squeeze, 52-week breakout, and former-runner proxies;
-- Pine Screener outputs;
-- alerts;
-- a PASS/FAIL dashboard;
-- cyan entry, red stop, and green target bands.
+- technical Five Pillars scoring with RVOL measured against the same clock
+  time of the prior 10 sessions (daily measure as a labelled fallback);
+- float as verified figure or shares-outstanding upper bound with a third
+  UNKNOWN state; manual catalyst confirmation as the fifth pillar;
+- the desk's discovery band ($1–30) as a separate flag;
+- the 25,000-share / 3-of-5-pillar liquidity gate;
+- HOD Momentum with the 0.25% advance rule and branch label; Running Up as a
+  10-minute uptrend (3%, fresh high within 3 minutes, above window VWAP), one
+  alert per leg; 5-in-5, 10-in-10, 52-week breakout;
+- the first-pullback plan (impulse ≥2 green bars ≥2%, pullback 1–4 bars,
+  trigger over the prior bar's high; entry +$0.01, stop −$0.01, 2R; light-
+  volume check; expiry after five armed bars);
+- a GO / WAIT / PASS verdict with the desk's rules;
+- Pine Screener outputs (first ten columns unchanged from v1), alerts, a
+  dashboard mirroring the desk's verdict card, and entry/stop/target bands.
 
-Default planning model:
+Not readable in Pine, and said so on the dashboard: spread, halt state, news.
+The former-momentum proxy of v1 was dropped; the platform has none.
 
-- entry above signal-bar high by $0.01;
-- stop below signal-bar low by $0.01, or configurable ATR stop;
-- target at 2R;
-- band half-width of $0.02.
-
-The script has received structural review but must be compiled in TradingView before being called production-ready.
+The script has received line-by-line review and a parity test, but it has
+not been compiled in TradingView here. Compile it there before calling it
+production-ready; the first ten plots are unchanged so a saved Pine Screener
+keeps working.
 
 ## YouTube-corpus knowledge merged (September 1, 2026)
 

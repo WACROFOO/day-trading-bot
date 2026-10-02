@@ -24,7 +24,7 @@
 ## TradingView implementation
 
 - `references/tradingview-setup.md` — installation, Pine Screener and alert instructions.
-- `assets/ross_style_momentum_scanner.pine` — transparent Pine Script v6 approximation with dashboard, alerts and entry/stop/target bands.
+- `assets/ross_style_momentum_scanner.pine` — transparent Pine Script v6 approximation (v2): the desk's mirror, with time-of-day RVOL, the liquidity gate, the 10-minute Running Up, the first-pullback plan, a GO/WAIT/PASS verdict, dashboard, alerts and bands.
 
 ## Coverage statement
 
