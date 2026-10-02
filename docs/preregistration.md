@@ -1035,7 +1035,7 @@ ET: a Nasdaq Listing Qualifications letter confirming bid-price compliance) that
 desk's only feed (Alpaca/Benzinga) never carried. Now: the desk also reads each
 symbol's 8-K/6-K filings of the last 36 h with the first sentence of the item body, and
 finviz's dated "why is it moving" line when finviz flags it a catalyst
-(`datasources/filings_news.py`, every 10 minutes per symbol, off the worker). Words
+(`src/momentum_platform/datasources/filings_news.py`, every 10 minutes per symbol, off the worker). Words
 (`catalyst.py`, mirrored in app.js): a **listing** family tested first ("nasdaq " is a
 roundup word and swallowed the company's own notice — gate 3 no longer reads it as a
 roundup); PIPE / securities purchase agreement / unregistered sales are **dilutive**;
