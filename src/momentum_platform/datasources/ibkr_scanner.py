@@ -28,7 +28,13 @@ PROFILE_BUCKETS = 192
 PROFILE_BUCKET_MINUTES = 5
 
 SCAN_CODES = ("TOP_PERC_GAIN", "HOT_BY_VOLUME", "TOP_VOLUME_RATE", "TOP_TRADE_RATE", "MOST_ACTIVE")
-LOCATIONS = ("STK.NASDAQ.NMS", "STK.NASDAQ.SCM")     # Global (Select) Market, Capital Market
+# NASDAQ Global (Select) Market, Capital Market, and NYSE American (AMEX).
+# AMEX added 2026-10-02 with the Network B subscription: SDEV (primaryExchange
+# AMEX) was on the gap-scan watchlist twice on 2026-10-01 and dropped on error
+# 420, and the live scanner never searched AMEX at all. A failed query is
+# counted and logged, never fatal (scan_union).
+LOCATIONS = ("STK.NASDAQ.NMS", "STK.NASDAQ.SCM", "STK.AMEX")
+LOCATION_NAMES = "NASDAQ + AMEX"
 ROWS_PER_SCAN = 50
 DELAYED_TYPES = (3, 4)
 
@@ -228,7 +234,7 @@ def build_ibkr_screener(ib, min_price: float, max_price: float, min_gain: float 
     """The screener payload the page renders: same shape as the Alpaca/Yahoo
     screener, source "ibkr", with honest notes about what a scan union is."""
     say = log or (lambda m: None)
-    say(f"  scanning NASDAQ: {len(SCAN_CODES) * len(LOCATIONS)} queries, ${min_price:g}-{max_price:g}")
+    say(f"  scanning {LOCATION_NAMES}: {len(SCAN_CODES) * len(LOCATIONS)} queries, ${min_price:g}-{max_price:g}")
     found = scan_union(ib, min_price, max_price, log=log)
     meta = found.get("__meta__", {"ran": 0, "failed": 0})
     say(f"  scan union: {len(found) - 1} names from {meta['ran']} queries")
@@ -239,7 +245,7 @@ def build_ibkr_screener(ib, min_price: float, max_price: float, min_gain: float 
     # alerts from identical data.
     kept.sort(key=lambda r: (-r["change_pct"], r["symbol"]))
     total = meta["ran"] + meta["failed"]
-    notes.insert(0, f"Union of {meta['ran']}/{total} NASDAQ scans ({', '.join(SCAN_CODES)}, "
+    notes.insert(0, f"Union of {meta['ran']}/{total} {LOCATION_NAMES} scans ({', '.join(SCAN_CODES)}, "
                     f"{ROWS_PER_SCAN} rows each) — a discovery set, not an exhaustive list.")
     if meta["failed"]:
         notes.append(f"{meta['failed']} scan queries failed; see the server log.")

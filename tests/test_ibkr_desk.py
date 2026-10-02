@@ -33,18 +33,18 @@ class Clock:
 
 # -- scanner union ---------------------------------------------------------------
 
-def test_scan_union_runs_ten_queries_in_the_band_and_merges_symbols():
+def test_scan_union_runs_every_code_on_every_location_and_merges_symbols():
     ib = FakeIB(scans={"TOP_PERC_GAIN": ["AAA", "BBB"], "HOT_BY_VOLUME": ["BBB", "CCC"]},
                 names={"AAA": "Alpha Corp"})
     found = sc.scan_union(ib, 1.0, 20.0)
-    assert len(ib.scan_calls) == 10
+    assert len(ib.scan_calls) == len(sc.SCAN_CODES) * len(sc.LOCATIONS) == 15     # NASDAQ x2 + AMEX
     assert {c[0] for c in ib.scan_calls} == set(sc.SCAN_CODES)
     assert {c[1] for c in ib.scan_calls} == set(sc.LOCATIONS)
     assert all(c[2] == 1.0 and c[3] == 20.0 and c[4] == 50 for c in ib.scan_calls)
     assert set(found) - {"__meta__"} == {"AAA", "BBB", "CCC"}
     assert found["BBB"]["scans"] == ["TOP_PERC_GAIN", "HOT_BY_VOLUME"]
     assert found["AAA"]["name"] == "Alpha Corp"
-    assert found["__meta__"]["ran"] == 10 and found["__meta__"]["failed"] == 0 and found["__meta__"]["excluded"] == {}
+    assert found["__meta__"]["ran"] == 15 and found["__meta__"]["failed"] == 0 and found["__meta__"]["excluded"] == {}
 
 
 def test_screener_rows_come_from_live_snapshots_and_drop_delayed_names():
