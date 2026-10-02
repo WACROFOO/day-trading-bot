@@ -572,13 +572,41 @@ def cmd_ah_exit(args) -> int:
         # the runner's reprotect places a fresh stop.
         if o["stop_id"] and hasattr(t, "cancel_order_id"):
             try:
-                if t.cancel_order_id(int(o["stop_id"])):
+                sid = int(o["stop_id"])
+                if not t.cancel_order_id(sid):
+                    # Not found working. Filled means the STOP closed the position;
+                    # not found means it cannot be ruled out. Selling on either can
+                    # make a short (execution study 2026-10-02, M1 review).
+                    st = t.stop_leg_state(sid)
+                    if st.get("status") == "Filled":
+                        print(f"{BAD}stop leg {sid} already FILLED — the stop closed this position; NOT selling. "
+                              f"The runner's sync records the stop's fill{END}")
+                        L.add_order_event(conn, o["order_id"], f"manual exit ABORTED: stop leg {sid} already filled")
+                        conn.commit()
+                        return 1
+                    if st.get("found") is False:
+                        print(f"{BAD}stop leg {sid} is not visible to this connection — NOT selling: if it still "
+                              f"rests at the broker, a sale here makes a short. Cancel it in TWS first, then re-run{END}")
+                        L.add_order_event(conn, o["order_id"], f"manual exit ABORTED: stop leg {sid} not visible")
+                        conn.commit()
+                        return 1
+                else:
                     gone = False
+                    st = None
                     for _ in range(6):
                         t.ib.sleep(0.5)
-                        st = next((x.orderStatus.status for x in t.ib.trades() if x.order.orderId == int(o["stop_id"])), None)
-                        if st in (None, "Cancelled", "ApiCancelled", "Inactive", "Filled"):
-                            gone = True; break
+                        leg = t.stop_leg_state(sid)
+                        st = leg.get("status")
+                        if st == "Filled" or (leg.get("filled") or 0) >= (int(o["filled_qty"] or o["shares"])):
+                            print(f"{BAD}stop leg {sid} FILLED during the cancel — the stop closed the position; "
+                                  f"NOT selling{END}")
+                            L.add_order_event(conn, o["order_id"], f"manual exit ABORTED: stop leg {sid} filled during the cancel")
+                            conn.commit()
+                            return 1
+                        if leg.get("cancel_confirmed"):
+                            gone = True
+                            qty = int(o["filled_qty"] or o["shares"]) - int(leg.get("filled") or 0)
+                            break
                     if not gone:
                         # A stop the broker will not release is a sell in flight
                         # (IBKR: "triggered"). Selling on top of it sells twice.

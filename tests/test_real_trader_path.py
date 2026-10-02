@@ -195,3 +195,37 @@ def test_a_cap_above_the_trigger_is_left_alone(trader):
     parent.log.append(SimpleNamespace(errorCode=2161, message="... cap your Limit Order to 5.01 ..."))
     trader.sync()
     assert cancelled == [] and not rec.cap_cancelled
+
+
+def test_every_stop_the_trader_builds_triggers_on_the_last_price(trader):
+    """M4 (execution study 2026-10-02): triggerMethod 2 (Last), set explicitly."""
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    from execution.ibkr_trader import TRIGGER_LAST
+    rth = datetime(2026, 9, 8, 10, 15, tzinfo=ZoneInfo("America/New_York"))
+    trader.place_bracket(intent(), now=rth)
+    trader.place_stop("TEST", 100, 4.75)
+    stops = [t.order for t in trader.ib.placed if t.order.orderType in ("STP", "STP LMT")]
+    assert len(stops) == 3 and all(getattr(o, "triggerMethod", None) == TRIGGER_LAST == 2 for o in stops)
+
+
+def test_a_cancel_counts_as_confirmed_only_on_the_servers_word(trader):
+    """M1: ib_async writes PendingCancel locally, and Cancelled with no broker message
+    when the order was Inactive; only error 202 from the server confirms a cancel."""
+    from types import SimpleNamespace as NS
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    rth = datetime(2026, 9, 8, 10, 15, tzinfo=ZoneInfo("America/New_York"))
+    rec = trader.place_bracket(intent(), now=rth)
+    leg = next(t for t in trader.ib.placed if t.order.orderId == rec.stop_id)
+    leg.orderStatus.filled = 0
+    leg.orderStatus.status = "Cancelled"                                   # written locally, no code
+    leg.log.append(NS(status="Cancelled", errorCode=0, message=""))
+    st = trader.stop_leg_state(rec.stop_id)
+    assert st["status"] == "Cancelled" and st["cancel_confirmed"] is False
+    trader.order_errors = {rec.stop_id: [(202, "Order Canceled - reason:")]}
+    assert trader.stop_leg_state(rec.stop_id)["cancel_confirmed"] is True
+    trader.order_errors = {rec.stop_id: [(10148, "OrderId that needs to be cancelled can not be cancelled")]}
+    st = trader.stop_leg_state(rec.stop_id)
+    assert st["cannot_cancel"] is True and st["cancel_confirmed"] is False
+    assert trader.stop_leg_state(99999)["found"] is False

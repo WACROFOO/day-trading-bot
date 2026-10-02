@@ -1045,6 +1045,20 @@ PIPE headline DILUTIVE. The one-word verdict and the pillar logic are unchanged;
 card adds one line reading every own headline of 24 h ("Not strong: … Found: …").
 Decisions before the next desk start keep their rules hash.
 
+**The stop of last resort sells only on a confirmed cancel; shorts are detected (2026-10-02).**
+The execution study's adversarial review (M1) reproduced, at 92c404d, a double sale:
+`enforce_stops` cancelled the stop leg and sold in the same pass, ignoring whether
+IBKR had released the leg. With the leg already filled it sold 166 more shares; in a
+simulated race 82 of 200 runs ended short, and the reconcile skipped negative
+positions, so the short was invisible. Now: pass 1 sends the cancel and sells
+nothing; later passes sell only on the server's confirmation (error 202), and only
+the shares the leg did not sell; a filled or uncancellable leg is never sold again;
+an unconfirmed cancel alerts every loop, blocks entries and names `ah-exit` after
+`ENFORCE_ACK_LOOPS`. Any negative broker position reads SHORT and blocks entries.
+`ah-exit` refuses to sell on a leg that filled or that it cannot see. Every stop the
+trader builds now sets `triggerMethod = 2` (Last) explicitly (IBKR's default for
+US stocks; review M4). Execution safety only; no selection rule moves.
+
 **Opening-risk candidates (2026-10-01, addendum 2026-10-01c) — none adopted.**
 After the NXL loss (a plan built on two pre-market candles, filled at 09:30:23
 into an 82¢ opening minute, stopped five seconds later at −1.41 R), three

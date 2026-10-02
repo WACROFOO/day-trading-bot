@@ -70,6 +70,13 @@ from .intent import (SIDE, EntryIntent, PlacedOrder, entry_limit, in_regular_hou
 HOST = os.environ.get("IBKR_PAPER_HOST", "127.0.0.1")
 PORT = int(os.environ.get("IBKR_PAPER_PORT", "4002"))
 CLIENT = int(os.environ.get("IBKR_EXEC_CLIENT_ID", "31"))
+# Every stop the trader builds triggers on the LAST price, set explicitly (IBKR
+# triggerMethod 2). It is IBKR's documented default for US stocks; pinning it
+# guards against a preset or default changing under the bot (execution study
+# 2026-10-02, M4: the alternatives — bid/ask, double, midpoint — all fire later
+# in a fall for a sell). Regular hours only in practice: pre-market positions
+# carry no broker stop on this account.
+TRIGGER_LAST = 2
 
 PAPER_PREFIX = "DU"
 
@@ -409,6 +416,7 @@ class PaperTrader:
         # it; the runner cancels it after ENTRY_TTL_MINUTES untriggered.
         parent = StopLimitOrder(SIDE, intent.shares, entry_limit(intent.trigger), intent.trigger)
         parent.orderId = self.ib.client.getReqId()
+        parent.triggerMethod = TRIGGER_LAST
         parent.transmit = False
         parent.tif = "DAY"
         parent.outsideRth = ext
@@ -429,6 +437,7 @@ class PaperTrader:
 
         stop_leg = StopOrder("SELL", intent.shares, intent.stop)
         stop_leg.orderId = self.ib.client.getReqId()
+        stop_leg.triggerMethod = TRIGGER_LAST
         stop_leg.parentId = parent.orderId
         # An OCA group only means something with TWO exit legs. With the stop
         # alone it did nothing for the bracket and forbade every later
@@ -638,6 +647,28 @@ class PaperTrader:
         self.ib.placeOrder(t.contract, t.order)
         return True
 
+    def stop_leg_state(self, order_id: int) -> dict:
+        """The broker's word on one order, for a decision that must not guess.
+        `cancel_confirmed` only on the SERVER's confirmation — error 202 for this
+        id, or a Cancelled log entry carrying code 202 — never on a status
+        ib_async writes locally: it writes PendingCancel on sending, and
+        Cancelled with no broker message when the order was Inactive. A sell
+        on top of a stop still in flight makes a short (execution study
+        2026-10-02, M1: 82 of 200 simulated races ended short at 92c404d)."""
+        if self.ib is None:
+            raise RuntimeError("not connected")
+        t = next((x for x in self.ib.trades() if x.order.orderId == order_id), None)
+        codes = [c for c, _ in getattr(self, "order_errors", {}).get(int(order_id), [])]
+        confirmed = 202 in codes
+        if t is not None and not confirmed:
+            confirmed = any(getattr(e, "status", "") in ("Cancelled", "ApiCancelled")
+                            and getattr(e, "errorCode", 0) == 202 for e in (getattr(t, "log", None) or []))
+        return {"found": t is not None,
+                "status": t.orderStatus.status if t is not None else None,
+                "filled": float(t.orderStatus.filled or 0) if t is not None else None,
+                "cancel_confirmed": bool(confirmed),
+                "cannot_cancel": any(c in (10148, 161) for c in codes)}
+
     def cancel_order_id(self, order_id: int) -> bool:
         """Cancel one resting order by id. True when it was found and the
         cancel was sent. The manual exit cancels the stop leg before it
@@ -675,6 +706,7 @@ class PaperTrader:
         stock = Stock(symbol, "SMART", "USD")
         self.ib.qualifyContracts(stock)
         order = StopOrder("SELL", qty, round(stop_price, 2))
+        order.triggerMethod = TRIGGER_LAST
         order.orderId = self.ib.client.getReqId() if getattr(self.ib, "client", None) else 0
         order.tif = "DAY"
         order.transmit = True

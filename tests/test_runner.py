@@ -633,19 +633,30 @@ def test_the_brokers_resting_stop_level_corrects_the_ledgers_trail(journal):
 
 
 
-def test_a_resting_stop_the_bid_has_passed_for_fifteen_seconds_is_enforced_by_the_runner(journal):
-    """WHLR 2026-09-23: stop resting at 7.34, tape at 7.05 then 6.99, no fill
-    for fifty minutes. After STOP_ENFORCE_SECONDS below the level the runner
-    cancels the leg and sells at market; the row is ExitPending, reason
-    stop_enforced. A bid back above the level resets the clock."""
+class _Enforcing:
+    """A trader that answers for its stop leg the way IBKR does: a cancel is
+    sent, then confirmed (or not) by the server; the leg may fill meanwhile."""
+    def __init__(self, base):
+        self.base = base
+        self.cancelled, self.sold = [], []
+        self.cancel_returns = True
+        self.leg = {"found": True, "status": "Submitted", "filled": 0.0, "cancel_confirmed": False,
+                    "cannot_cancel": False}
+
+    def install(self, t):
+        t.cancel_order_id = lambda oid: (self.cancelled.append(oid), self.cancel_returns)[1]
+        t.stop_leg_state = lambda oid: dict(self.leg)
+        def exit_market(symbol, qty, now=None):
+            self.sold.append((symbol, qty)); t.last_exit_order_id = 4242; return 4242
+        t.exit_market = exit_market
+        return t
+
+
+def _enforce_setup(journal):
     from datetime import datetime, timedelta, timezone
-    class EnforcingTrader(FakeTrader):
-        def __init__(self):
-            super().__init__(); self.cancelled = []; self.sold = []
-        def cancel_order_id(self, oid): self.cancelled.append(oid); return True
-        def exit_market(self, symbol, qty, now=None):
-            self.sold.append((symbol, qty)); self.last_exit_order_id = 4242; return 4242
-    t = EnforcingTrader()
+    t = FakeTrader()
+    e = _Enforcing(t)
+    e.install(t)
     r, rec = _take_and_fill(journal, t)
     o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
     stop = float(o["stop"])
@@ -654,19 +665,104 @@ def test_a_resting_stop_the_bid_has_passed_for_fifteen_seconds_is_enforced_by_th
     q = {"bid": stop - 0.05, "ask": stop - 0.03}
     r.quote = lambda s: q
     assert r.enforce_stops() == []                          # first sighting: the clock starts
-    clock["t"] += timedelta(seconds=10)
-    assert r.enforce_stops() == [] and t.sold == []         # 10 s: not yet
-    q["bid"] = stop + 0.20                                  # the bid recovers: the clock resets
-    assert r.enforce_stops() == []
-    q["bid"] = stop - 0.05
-    assert r.enforce_stops() == []
     clock["t"] += timedelta(seconds=16)
-    lines = r.enforce_stops()
-    assert len(lines) == 1 and "no fill from the broker" in lines[0] and "MKT" in lines[0], lines
-    assert t.cancelled == [rec.stop_id] and t.sold == [(rec.symbol, int(o["shares"]))]
+    return r, rec, o, e, clock, q
+
+
+def test_a_resting_stop_the_bid_has_passed_for_fifteen_seconds_is_enforced_in_two_passes(journal):
+    """WHLR 2026-09-23: stop resting at 7.34, tape at 7.05 then 6.99, no fill for
+    fifty minutes. After STOP_ENFORCE_SECONDS below the level the runner sends the
+    cancel and sells NOTHING in that pass; it sells only once the broker has
+    confirmed the cancel (M1, execution study 2026-10-02: a sale in the same pass
+    made 166-share shorts when the leg filled in the gap)."""
+    from datetime import timedelta
+    r, rec, o, e, clock, q = _enforce_setup(journal)
+    (line,) = r.enforce_stops()
+    assert "cancel sent" in line and e.cancelled == [rec.stop_id] and e.sold == []
+    clock["t"] += timedelta(seconds=5)
+    (line,) = r.enforce_stops()                             # no confirmation yet: nothing sold, alert
+    assert "CANCEL UNACKED" in line and e.sold == []
+    e.leg.update(status="Cancelled", cancel_confirmed=True)
+    clock["t"] += timedelta(seconds=5)
+    (line,) = r.enforce_stops()
+    assert "confirmed" in line and "MKT" in line and e.sold == [(rec.symbol, int(o["shares"]))]
     o2 = journal.execute("SELECT status, exit_reason, exit_order_id FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()
     assert (o2["status"], o2["exit_reason"], o2["exit_order_id"]) == ("ExitPending", "stop_enforced", 4242)
-    assert r.enforce_stops() == []                          # ExitPending rows are left alone
+    assert r.enforce_stops() == [] and len(e.sold) == 1    # sold exactly once
+
+
+def test_a_bid_back_above_the_level_resets_the_enforce_clock(journal):
+    from datetime import timedelta
+    r, rec, o, e, clock, q = _enforce_setup(journal)
+    q["bid"] = float(o["stop"]) + 0.20
+    assert r.enforce_stops() == [] and e.cancelled == []
+
+
+def test_a_leg_that_already_filled_is_never_sold_twice(journal):
+    """M1 review: with the leg already Filled, HEAD sold 166 more shares."""
+    r, rec, o, e, clock, q = _enforce_setup(journal)
+    e.cancel_returns = False
+    e.leg.update(status="Filled", filled=float(o["shares"]))
+    (line,) = r.enforce_stops()
+    assert "NOT selling" in line and e.sold == []
+
+
+def test_a_leg_that_fills_during_the_cancel_window_is_not_sold_again(journal):
+    from datetime import timedelta
+    r, rec, o, e, clock, q = _enforce_setup(journal)
+    r.enforce_stops()                                        # cancel sent
+    e.leg.update(status="Filled", filled=float(o["shares"]))
+    clock["t"] += timedelta(seconds=5)
+    (line,) = r.enforce_stops()
+    assert "FILLED during the cancel" in line or "filled during the cancel" in line
+    assert e.sold == []
+
+
+def test_a_partly_filled_leg_leaves_only_the_rest_to_sell(journal):
+    from datetime import timedelta
+    r, rec, o, e, clock, q = _enforce_setup(journal)
+    r.enforce_stops()
+    part = int(o["shares"]) // 2
+    e.leg.update(status="Cancelled", filled=float(part), cancel_confirmed=True)
+    clock["t"] += timedelta(seconds=5)
+    r.enforce_stops()
+    assert e.sold == [(rec.symbol, int(o["shares"]) - part)]
+
+
+def test_a_locally_written_cancel_is_not_a_confirmation(journal):
+    from datetime import timedelta
+    r, rec, o, e, clock, q = _enforce_setup(journal)
+    r.enforce_stops()
+    e.leg.update(status="Cancelled", cancel_confirmed=False)   # ib_async's own word, no server 202
+    for _ in range(3):
+        clock["t"] += timedelta(seconds=5)
+        r.enforce_stops()
+    assert e.sold == []
+
+
+def test_an_unconfirmed_cancel_blocks_new_entries_and_names_the_human_path(journal):
+    from datetime import timedelta
+    from execution.runner import ENFORCE_ACK_LOOPS
+    r, rec, o, e, clock, q = _enforce_setup(journal)
+    r.enforce_stops()
+    for _ in range(ENFORCE_ACK_LOOPS):
+        clock["t"] += timedelta(seconds=5)
+        lines = r.enforce_stops()
+    assert "ah-exit" in lines[0] and e.sold == []
+    r.reconcile_positions()
+    assert any("CANCEL UNACKED" in x for x in r.unreconciled)   # entries refused while it stands
+
+
+def test_a_short_at_the_broker_is_flagged_and_blocks_entries(journal):
+    """M1 review: with the broker at -166 the reconcile used to print nothing."""
+    from types import SimpleNamespace as NS
+    t = FakeTrader()
+    r, rec = _take_and_fill(journal, t)
+    t.ib = NS(positions=lambda: [NS(position=-166, contract=NS(symbol="ABCD"))], trades=lambda: [],
+              fills=lambda: [], executions=lambda: [])
+    lines = r.reconcile_positions()
+    assert any(x.startswith("SHORT ABCD x166") for x in lines)
+    assert any(x.startswith("SHORT") for x in r.unreconciled)
 
 
 

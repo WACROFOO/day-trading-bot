@@ -44,6 +44,8 @@ from .intent import ET, refusals
 # fire, at 7.31. A resting stop the tape has passed by this long is not a
 # stop. The runner then cancels it and sells at market itself.
 STOP_ENFORCE_SECONDS = 15.0
+# Loops a cancel may stay unconfirmed before the alert names the human path.
+ENFORCE_ACK_LOOPS = 6
 from momentum_platform.sessions import REGULAR_END
 from .policy import premarket_allowed, premarket_shape
 
@@ -534,15 +536,24 @@ class Runner:
             out.append(f"STOP COVERS {r['stop_qty']:g} OF {r['filled_qty']:g} {r['symbol']} "
                        f"(order #{r['order_id']}) — the uncovered shares have no exit")
         ib = getattr(self.trader, "ib", None)
+        alerts = list((getattr(self, "_enforce_alerts", None) or {}).values())
         if ib is None or not hasattr(ib, "positions"):
             self.conn.commit()
-            self.unreconciled = [x for x in out if x.startswith("STOP COVERS")]
-            return out
+            self.unreconciled = [x for x in out if x.startswith("STOP COVERS")] + alerts
+            return out + alerts
         out += self._resolve_gone_entries(ib)
         working = ("Submitted", "PreSubmitted", "monitored", "Triggered")
         for pos in ib.positions():
             qty = int(getattr(pos, "position", 0) or 0)
-            if qty <= 0:
+            if qty < 0:
+                # The runner only ever buys to open: a short here is a double sale
+                # (a stop that filled under a runner or hand sale). Until
+                # 2026-10-02 this loop skipped it and nothing said so (M1 review:
+                # broker -166, reconcile silent). Fail closed: entries stop.
+                out.append(f"SHORT {pos.contract.symbol} x{-qty} at the broker — a double sale; no entries until a "
+                           f"human buys {-qty} back (TWS) and the broker reads flat")
+                continue
+            if qty == 0:
                 continue
             sym = pos.contract.symbol
             rows = self.conn.execute(
@@ -591,8 +602,8 @@ class Runner:
                                   f"(stop status {r['stop_status']!r}) — a human must place one")
                     out.append(f"NO WORKING EXIT {sym} x{qty} (order #{r['order_id']})")
         self.conn.commit()
-        self.unreconciled = [x for x in out if x.split(" ")[0] in ("UNTRACKED", "QUANTITY", "STOP")]
-        return out
+        self.unreconciled = [x for x in out if x.split(" ")[0] in ("UNTRACKED", "QUANTITY", "STOP", "SHORT")] + alerts
+        return out + alerts
 
     def _resolve_gone_entries(self, ib) -> list[str]:
         """An unfilled entry the ledger still calls alive that the broker no
@@ -898,19 +909,45 @@ class Runner:
     # ------------------------------------------------- the stop of last resort
     def enforce_stops(self, seconds: float = STOP_ENFORCE_SECONDS) -> list[str]:
         """TRADE only. A resting stop whose level the desk's bid has been
-        below for `seconds` without the broker filling it has failed. The
-        runner cancels that leg and sells at market (regular hours) or at
-        bid − 0.10 (extended hours). Recorded as exit reason `stop_enforced`,
-        ExitPending until the fill is read. A stale or missing quote does
-        nothing: one more loop of exposure beats a sale at a guessed price."""
+        below for `seconds` without the broker filling it has failed (WHLR
+        2026-09-23: fifty minutes). The runner then takes the exit over, in TWO
+        passes, because a stop the broker has not released is a sell in flight:
+
+          pass 1  cancel the leg and wait — nothing is sold in this loop;
+          pass 2+ read the broker: the leg FILLED (in full) -> sell nothing, sync
+                  closes the row on the stop's fill; the cancel CONFIRMED by the
+                  server -> sell what the leg did not sell, once, at market in
+                  regular hours or at bid - offset outside them; no confirmation
+                  -> sell nothing, alert every loop and block new entries.
+
+        Until 2026-10-02 both happened in one pass and the cancel's answer was
+        ignored; the execution study (M1) reproduced 166 shares sold on a leg
+        that had already filled, and 82 shorts in 200 simulated races. A long
+        whose stop will not cancel has a bounded loss; a short does not.
+        Recorded as exit reason `stop_enforced`, ExitPending until the fill is
+        read. A stale or missing quote does nothing."""
         if self.mode != "TRADE":
             return []
         below = getattr(self, "_below_since", None)
         if below is None:
             below = self._below_since = {}
+        pending = getattr(self, "_enforce_pending", None)
+        if pending is None:
+            pending = self._enforce_pending = {}
+        alerts = getattr(self, "_enforce_alerts", None)
+        if alerts is None:
+            alerts = self._enforce_alerts = {}
         done: list[str] = []
         now = self.now()
-        for o in L.open_protected(self.conn):
+        rows = {o["order_id"]: o for o in L.open_protected(self.conn)}
+        for oid in [k for k in pending if k not in rows]:             # closed meanwhile (the stop filled)
+            pending.pop(oid, None); alerts.pop(oid, None)
+        for oid, o in rows.items():
+            if oid in pending:
+                line = self._enforce_decide(o, pending, alerts, now)
+                if line:
+                    done.append(line)
+                continue
             # a leg whose status was never read back ("") is still a resting
             # stop the ledger relies on; only a human-flagged or monitored row is skipped
             if (o["stop_status"] or "") not in ("", "Submitted", "PreSubmitted", "Triggered"):
@@ -921,37 +958,105 @@ class Runner:
                 continue
             bid = float(q["bid"])
             if bid > level - 0.01:
-                below.pop(o["order_id"], None)
+                below.pop(oid, None)
                 continue
-            since = below.setdefault(o["order_id"], now)
+            since = below.setdefault(oid, now)
             held_for = (now - since).total_seconds()
             if held_for < seconds:
                 continue
-            qty = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
-            if o["stop_id"] and hasattr(self.trader, "cancel_order_id"):
-                try:
-                    self.trader.cancel_order_id(int(o["stop_id"]))
-                except Exception as exc:                        # noqa: BLE001
-                    L.add_order_event(self.conn, o["order_id"], f"enforce_stops: cancelling stop leg {o['stop_id']} raised {exc!r}")
-            if in_regular_hours(now) and hasattr(self.trader, "exit_market"):
-                exit_id = self.trader.exit_market(o["symbol"], qty, now=now)
-                px, how = None, "MKT"
-            else:
-                px = self.trader.exit_limit(o["symbol"], qty, bid, offset=exit_offset(bid, q.get("ask")),
-                                            outside_rth=True)
-                exit_id = getattr(self.trader, "last_exit_order_id", None)
-                how = f"LMT {px}"
-            L.record_exit(self.conn, o["order_id"], reason="stop_enforced", price=px,
-                          ts=now, confirmed=False, exit_order_id=exit_id)
-            self._mark_exit_sent(o["parent_id"], exit_id)
-            L.add_order_event(self.conn, o["order_id"],
-                              f"enforce_stops: bid {bid} has been below the resting stop {level} for {held_for:.0f}s and the "
-                              f"broker did not fill it; stop leg {o['stop_id']} cancelled, SELL {how} x{qty} sent (order {exit_id})")
-            done.append(f"{o['symbol']} x{qty}: bid {bid:.2f} below the resting stop {level:.2f} for {held_for:.0f}s, "
-                        f"no fill from the broker — stop cancelled, SELL {how} sent (order {exit_id})")
-            below.pop(o["order_id"], None)
+            below.pop(oid, None)
+            if not o["stop_id"] or not hasattr(self.trader, "cancel_order_id") \
+                    or not hasattr(self.trader, "stop_leg_state"):
+                alerts[oid] = (f"STOP NOT ENFORCEABLE {o['symbol']} (order #{oid}): bid {bid} under the resting stop "
+                               f"{level} for {held_for:.0f}s and the leg cannot be read — a human sells: "
+                               f"exercise.py ah-exit {oid} --confirm --market")
+                _event_once(self.conn, oid, alerts[oid])
+                done.append(alerts[oid])
+                continue
+            try:
+                sent = self.trader.cancel_order_id(int(o["stop_id"]))
+            except Exception as exc:                        # noqa: BLE001
+                _event_once(self.conn, oid, f"enforce_stops: cancelling stop leg {o['stop_id']} raised {exc!r}; "
+                                            f"NOT selling")
+                continue
+            if not sent:
+                # Not found working: filled already, or gone. Never sell on that.
+                st = self._leg_state(int(o["stop_id"]))
+                why = (f"stop leg {o['stop_id']} is {st.get('status') or 'not found'} at the broker — NOT selling "
+                       f"(a sale on top of it would make a short); sync closes the row on the stop's fill")
+                _event_once(self.conn, oid, "enforce_stops: " + why)
+                if (st.get("status") or "") != "Filled":
+                    alerts[oid] = f"STOP LEG UNKNOWN {o['symbol']} (order #{oid}): {why}"
+                done.append(f"{o['symbol']}: {why}")
+                continue
+            pending[oid] = {"stop_id": int(o["stop_id"]), "sent_at": now, "loops": 0, "bid": bid, "level": level}
+            L.add_order_event(self.conn, oid,
+                              f"enforce_stops: bid {bid} has been below the resting stop {level} for {held_for:.0f}s "
+                              f"and the broker did not fill it; cancel sent for stop leg {o['stop_id']} — nothing is "
+                              f"sold until the broker confirms it")
+            done.append(f"{o['symbol']}: bid {bid:.2f} below the resting stop {level:.2f} for {held_for:.0f}s, no fill "
+                        f"from the broker — cancel sent, waiting for the broker's confirmation before selling")
         self.conn.commit()
         return done
+
+    def _leg_state(self, stop_id: int) -> dict:
+        try:
+            return self.trader.stop_leg_state(stop_id) or {}
+        except Exception as exc:                            # noqa: BLE001
+            return {"status": None, "error": repr(exc)}
+
+    def _enforce_decide(self, o, pending: dict, alerts: dict, now) -> Optional[str]:
+        """Pass 2 of enforce_stops for one row: read the leg, then sell only
+        what a server-confirmed cancel left unsold."""
+        oid, p = o["order_id"], pending[o["order_id"]]
+        st = self._leg_state(p["stop_id"])
+        held = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
+        leg_filled = int(st.get("filled") or 0)
+        if (st.get("status") == "Filled") or leg_filled >= held:
+            pending.pop(oid, None); alerts.pop(oid, None)
+            L.add_order_event(self.conn, oid, f"enforce_stops: stop leg {p['stop_id']} FILLED during the cancel — "
+                                              f"nothing sold by the runner; sync closes the row on the stop's fill")
+            return f"{o['symbol']}: the stop filled during the cancel — nothing sold twice"
+        if st.get("cannot_cancel"):
+            pending.pop(oid, None)
+            alerts[oid] = (f"STOP IN FLIGHT {o['symbol']} (order #{oid}): IBKR says stop leg {p['stop_id']} cannot be "
+                           f"cancelled (filled or filling) — NOT selling; it closes on the stop's fill")
+            _event_once(self.conn, oid, alerts[oid])
+            return alerts[oid]
+        if not st.get("cancel_confirmed"):
+            p["loops"] += 1
+            human = (f"; after {p['loops']} loops a human decides: exercise.py ah-exit {oid} --confirm --market"
+                     if p["loops"] >= ENFORCE_ACK_LOOPS else "")
+            alerts[oid] = (f"CANCEL UNACKED {o['symbol']} (order #{oid}): stop leg {p['stop_id']} status "
+                           f"{st.get('status')}, no confirmation from the broker — NOT selling{human}")
+            _event_once(self.conn, oid, alerts[oid])
+            return alerts[oid]
+        qty = held - leg_filled
+        pending.pop(oid, None); alerts.pop(oid, None)
+        if qty <= 0:
+            return None
+        q = self.quote(o["symbol"]) if self.quote else None
+        if in_regular_hours(now) and hasattr(self.trader, "exit_market"):
+            exit_id = self.trader.exit_market(o["symbol"], qty, now=now)
+            px, how = None, "MKT"
+        else:
+            if not q or q.get("bid") is None:
+                alerts[oid] = (f"STOP CANCELLED, NO QUOTE {o['symbol']} (order #{oid}): the leg is cancelled and no fresh "
+                               f"bid exists to price the sale — a human sells: exercise.py ah-exit {oid} --confirm")
+                _event_once(self.conn, oid, alerts[oid])
+                return alerts[oid]
+            bid = float(q["bid"])
+            px = self.trader.exit_limit(o["symbol"], qty, bid, offset=exit_offset(bid, q.get("ask")),
+                                        outside_rth=True)
+            exit_id = getattr(self.trader, "last_exit_order_id", None)
+            how = f"LMT {px}"
+        L.record_exit(self.conn, oid, reason="stop_enforced", price=px, ts=now, confirmed=False,
+                      exit_order_id=exit_id)
+        self._mark_exit_sent(o["parent_id"], exit_id)
+        part = f" (the leg had sold {leg_filled})" if leg_filled else ""
+        L.add_order_event(self.conn, oid, f"enforce_stops: the broker confirmed the cancel of stop leg {p['stop_id']}; "
+                                          f"SELL {how} x{qty} sent (order {exit_id}){part}")
+        return (f"{o['symbol']} x{qty}: stop leg cancelled (confirmed) — SELL {how} sent (order {exit_id}){part}")
 
     # ------------------------------------------------- re-protection
     def reprotect(self) -> list[str]:
