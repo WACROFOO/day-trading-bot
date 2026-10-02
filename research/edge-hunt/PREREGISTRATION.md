@@ -437,3 +437,31 @@ plumbing. **It decides** only how far the bar-close backtest sits from the
 desk as it runs (gate flips, seconds gained, net R of B under each reading).
 **It may not decide** any rule; the 10-second-timed entry (stage 3) gets its
 own preregistration on this output.
+
+### Addendum 2026-10-02c — stage 3 (10-second entries) and the partial exit, before any run
+
+**Base.** Every plan the live desk would send at desk time (stage 2, gates
+judged on the half-formed minute), replayed on SIP prints. Reference **D**:
+the A10 stop-limit at the trigger, the plan's 1-minute stop, the A3 trail,
+the 11:30 flat. Costs: the REAL spread at each fill (prevailing NBBO), half
+of it plus 1 cent per marketable side, IBKR fixed commission per order (a
+limit target leg pays no spread, only its commission). $40 risk, $2,000 cap,
+one position, the daily limits — `rules_audit.portfolio`.
+
+**Three deciding variants (K = 49, α = 0.05 / 49).** All keep the plan's
+1-minute stop and 1 R = trigger − stop.
+
+| id | variant |
+|---|---|
+| S3-dip | after the desk arms, wait for a 10-second micro pullback (1–3 closed 10-s candles with no new high, lows above the stop) and buy the break of the last one's high + 1¢ (same stop-limit, cap +0.3 %); a 4th candle without a new high resets; 3 minutes from the arm, then cancelled |
+| S3-confirm | skip a false break: the order goes in only if the 10-s candle AFTER the crossing candle closes at or above the entry; sent at that candle's close + 4 s |
+| P-half2R | the D entry; half the shares sold by limit at +2 R, the rest on the A3 trail; a stop before +2 R takes all |
+
+**Reported, never deciding:** P-half1R (half at +1 R), S3-dip with P-half2R,
+and every variant under the proxy spread.
+
+**Adoption rule — stricter than before, because ticks exist for 2024-2026
+only, so there is no train period:** ≥ 200 trades; mean net R better than D
+in EACH of 2024, 2025 and 2026; day-paired bootstrap lower bound > 0 at
+α = 0.05 / 49. A pass goes live only behind a switch that stays OFF until
+≥ 200 prospective paper trades confirm it.
