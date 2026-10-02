@@ -298,3 +298,26 @@ def test_a_partly_filled_exit_is_not_a_quantity_mismatch(journal):
     assert any(f"exit partly filled: {shares - held} of {shares} sold, {held} still held" in e for e in ev)
     r.reconcile_positions()                                                  # the same fact is written once
     assert sum("exit partly filled" in e[0] for e in journal.execute("SELECT text FROM order_events")) == 1
+
+
+def test_a_veto_at_the_premarket_touch_is_refused_with_its_own_reason(journal):
+    """AMOD 2026-10-02 08:57: the veto left the plan armed and it later read 'the ask did not reach'."""
+    import pytest
+    from journal.risk import RiskVeto
+    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08", a1_accepted="yes")
+    t = FakeTrader()
+
+    def vetoed(intent):
+        raise RiskVeto("day locked: 3 consecutive losses")
+    t.place_entry_monitored = vetoed
+    quotes = {"PMX": dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:10Z")}
+    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
+               quote=lambda s: quotes.get(s))
+    r.step()
+    did = list(r.armed)[0]
+    quotes["PMX"]["ask"] = round(a_trigger(r), 2)
+    with pytest.raises(RiskVeto):
+        r.fire_armed()
+    row = journal.execute("SELECT outcome, refusal_reasons_json FROM decisions WHERE decision_id=?", (did,)).fetchone()
+    assert row["outcome"] == "REFUSED" and "risk gate vetoed at the touch: day locked" in row["refusal_reasons_json"]
+    assert r.armed == {}

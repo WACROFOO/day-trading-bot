@@ -452,7 +452,18 @@ class Runner:
                     outcome, reasons = "REFUSED", [f"one position at a time (preregistration §2): "
                                                    f"{L.positions_alive(self.conn)} order(s) alive or unresolved"]
                 else:
-                    outcome, reasons = self._send(row, intent, a["shape"], decision_clock(row))
+                    try:
+                        outcome, reasons = self._send(row, intent, a["shape"], decision_clock(row))
+                    except RiskVeto as exc:
+                        # The gate latched between the arm and the touch (AMOD 2026-10-02
+                        # 08:57: the third loss locked the day). The veto propagated and
+                        # left the plan armed, so it read "the ask did not reach the
+                        # trigger" three minutes later — with the ask at 2.92 over a 2.89
+                        # trigger. The decision now says why, and the veto still rises.
+                        L.set_outcome(self.conn, did, "REFUSED", [f"risk gate vetoed at the touch: {exc.reason}"])
+                        self.conn.commit()
+                        del self.armed[did]
+                        raise
                     if outcome == "TAKEN":
                         reasons = [f"tape reached {intent.trigger:.2f} (ask {float(ask):.2f}) after "
                                    f"{waited * 60:.0f}s; monitored entry sent"]
