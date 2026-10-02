@@ -1,0 +1,302 @@
+{
+ "D": {
+  "stats": {
+   "n": 1721,
+   "mean": -0.5418,
+   "total": -932.35,
+   "gross": -0.1496,
+   "win": 0.225,
+   "max_dd": 932.35,
+   "lose_streak": 19,
+   "worst_day": -14.09,
+   "per_month": 53.8
+  },
+  "years": {
+   "2024": {
+    "n": 588,
+    "mean": -0.5775,
+    "total": -339.59,
+    "gross": -0.1601,
+    "win": 0.226,
+    "max_dd": 342.76,
+    "lose_streak": 14,
+    "worst_day": -14.09,
+    "per_month": 49.0
+   },
+   "2025": {
+    "n": 707,
+    "mean": -0.5651,
+    "total": -399.5,
+    "gross": -0.1881,
+    "win": 0.212,
+    "max_dd": 399.5,
+    "lose_streak": 19,
+    "worst_day": -11.89,
+    "per_month": 58.9
+   },
+   "2026": {
+    "n": 426,
+    "mean": -0.4537,
+    "total": -193.26,
+    "gross": -0.071,
+    "win": 0.246,
+    "max_dd": 193.34,
+    "lose_streak": 16,
+    "worst_day": -4.71,
+    "per_month": 53.2
+   }
+  },
+  "lb": NaN,
+  "verdict": "reference"
+ },
+ "S3-dip": {
+  "stats": {
+   "n": 1421,
+   "mean": -0.452,
+   "total": -642.33,
+   "gross": -0.0659,
+   "win": 0.255,
+   "max_dd": 642.33,
+   "lose_streak": 19,
+   "worst_day": -10.88,
+   "per_month": 44.4
+  },
+  "years": {
+   "2024": {
+    "n": 492,
+    "mean": -0.5028,
+    "total": -247.36,
+    "gross": -0.1069,
+    "win": 0.248,
+    "max_dd": 248.21,
+    "lose_streak": 17,
+    "worst_day": -5.47,
+    "per_month": 41.0
+   },
+   "2025": {
+    "n": 574,
+    "mean": -0.4902,
+    "total": -281.39,
+    "gross": -0.1117,
+    "win": 0.249,
+    "max_dd": 281.39,
+    "lose_streak": 19,
+    "worst_day": -10.88,
+    "per_month": 47.8
+   },
+   "2026": {
+    "n": 355,
+    "mean": -0.3199,
+    "total": -113.57,
+    "gross": 0.0651,
+    "win": 0.276,
+    "max_dd": 114.03,
+    "lose_streak": 17,
+    "worst_day": -6.48,
+    "per_month": 44.4
+   }
+  },
+  "lb": -0.004243982475233775,
+  "verdict": "keep D"
+ },
+ "S3-confirm": {
+  "stats": {
+   "n": 1004,
+   "mean": -0.5493,
+   "total": -551.46,
+   "gross": -0.1393,
+   "win": 0.221,
+   "max_dd": 552.57,
+   "lose_streak": 21,
+   "worst_day": -12.14,
+   "per_month": 31.4
+  },
+  "years": {
+   "2024": {
+    "n": 347,
+    "mean": -0.6338,
+    "total": -219.93,
+    "gross": -0.1839,
+    "win": 0.222,
+    "max_dd": 225.35,
+    "lose_streak": 21,
+    "worst_day": -11.73,
+    "per_month": 28.9
+   },
+   "2025": {
+    "n": 428,
+    "mean": -0.5693,
+    "total": -243.67,
+    "gross": -0.1749,
+    "win": 0.213,
+    "max_dd": 243.67,
+    "lose_streak": 17,
+    "worst_day": -12.14,
+    "per_month": 35.7
+   },
+   "2026": {
+    "n": 229,
+    "mean": -0.3837,
+    "total": -87.87,
+    "gross": -0.0052,
+    "win": 0.236,
+    "max_dd": 88.98,
+    "lose_streak": 14,
+    "worst_day": -4.02,
+    "per_month": 28.6
+   }
+  },
+  "lb": -0.12448729498131955,
+  "verdict": "keep D"
+ },
+ "P-half2R": {
+  "stats": {
+   "n": 1722,
+   "mean": -0.5287,
+   "total": -910.37,
+   "gross": -0.1449,
+   "win": 0.231,
+   "max_dd": 910.37,
+   "lose_streak": 19,
+   "worst_day": -14.09,
+   "per_month": 53.8
+  },
+  "years": {
+   "2024": {
+    "n": 588,
+    "mean": -0.5495,
+    "total": -323.13,
+    "gross": -0.1431,
+    "win": 0.235,
+    "max_dd": 325.72,
+    "lose_streak": 14,
+    "worst_day": -14.09,
+    "per_month": 49.0
+   },
+   "2025": {
+    "n": 708,
+    "mean": -0.5519,
+    "total": -390.76,
+    "gross": -0.182,
+    "win": 0.218,
+    "max_dd": 390.76,
+    "lose_streak": 19,
+    "worst_day": -11.89,
+    "per_month": 59.0
+   },
+   "2026": {
+    "n": 426,
+    "mean": -0.4612,
+    "total": -196.48,
+    "gross": -0.0857,
+    "win": 0.249,
+    "max_dd": 196.56,
+    "lose_streak": 16,
+    "worst_day": -4.71,
+    "per_month": 53.2
+   }
+  },
+  "lb": -0.008897355500540683,
+  "verdict": "keep D"
+ },
+ "P-half1R": {
+  "stats": {
+   "n": 1735,
+   "mean": -0.5037,
+   "total": -873.84,
+   "gross": -0.1356,
+   "win": 0.338,
+   "max_dd": 873.84,
+   "lose_streak": 16,
+   "worst_day": -14.09,
+   "per_month": 54.2
+  },
+  "years": {
+   "2024": {
+    "n": 592,
+    "mean": -0.5325,
+    "total": -315.27,
+    "gross": -0.143,
+    "win": 0.336,
+    "max_dd": 315.85,
+    "lose_streak": 10,
+    "worst_day": -14.09,
+    "per_month": 49.3
+   },
+   "2025": {
+    "n": 713,
+    "mean": -0.5138,
+    "total": -366.31,
+    "gross": -0.1599,
+    "win": 0.331,
+    "max_dd": 366.9,
+    "lose_streak": 16,
+    "worst_day": -11.89,
+    "per_month": 59.4
+   },
+   "2026": {
+    "n": 430,
+    "mean": -0.4471,
+    "total": -192.26,
+    "gross": -0.0852,
+    "win": 0.353,
+    "max_dd": 192.69,
+    "lose_streak": 11,
+    "worst_day": -4.54,
+    "per_month": 53.8
+   }
+  },
+  "lb": 0.008274175618180734,
+  "verdict": "(PASSES \u2014 switch OFF until 200 prospective trades, reported only)"
+ },
+ "S3-dip+P2R": {
+  "stats": {
+   "n": 1423,
+   "mean": -0.4362,
+   "total": -620.75,
+   "gross": -0.0632,
+   "win": 0.261,
+   "max_dd": 620.75,
+   "lose_streak": 19,
+   "worst_day": -10.88,
+   "per_month": 44.5
+  },
+  "years": {
+   "2024": {
+    "n": 493,
+    "mean": -0.4777,
+    "total": -235.5,
+    "gross": -0.0946,
+    "win": 0.256,
+    "max_dd": 236.74,
+    "lose_streak": 17,
+    "worst_day": -5.47,
+    "per_month": 41.1
+   },
+   "2025": {
+    "n": 575,
+    "mean": -0.4743,
+    "total": -272.72,
+    "gross": -0.11,
+    "win": 0.252,
+    "max_dd": 272.72,
+    "lose_streak": 19,
+    "worst_day": -10.88,
+    "per_month": 47.9
+   },
+   "2026": {
+    "n": 355,
+    "mean": -0.317,
+    "total": -112.53,
+    "gross": 0.0562,
+    "win": 0.282,
+    "max_dd": 112.99,
+    "lose_streak": 17,
+    "worst_day": -6.48,
+    "per_month": 44.4
+   }
+  },
+  "lb": 0.012565566475776472,
+  "verdict": "(PASSES \u2014 switch OFF until 200 prospective trades, reported only)"
+ }
+}
