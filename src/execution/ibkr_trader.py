@@ -512,6 +512,7 @@ class PaperTrader:
                 ex = by_id.get(rec.exit_order_id)
                 if ex is not None:
                     rec.exit_status = ex.orderStatus.status
+                    rec.exit_filled_qty = float(getattr(ex.orderStatus, "filled", 0) or 0)
                 if (ex is not None and ex.orderStatus.status == "Filled"
                         and ex.orderStatus.avgFillPrice and ex.orderStatus.avgFillPrice > 0):
                     rec.exit_price = ex.orderStatus.avgFillPrice

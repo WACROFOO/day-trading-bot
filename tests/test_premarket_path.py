@@ -250,3 +250,51 @@ def test_an_exit_the_bid_ran_below_is_repriced_not_resent(journal):
 
 def test_chase_never_touches_market_exits_or_log_only(journal):
     assert Runner(journal, mode="LOG_ONLY", dollar_risk=20.0).chase_exits() == []
+
+
+def test_a_marketable_exit_still_working_is_stepped_down_after_the_stale_period(journal):
+    from datetime import timedelta
+    from execution.intent import EXIT_STALE_SECONDS
+    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08", a1_accepted="yes")
+    t = FakeTrader()
+    reprices = []
+    t.last_exit_order_id = 91
+    t.reprice_exit = lambda oid, px: reprices.append((oid, px)) or True
+    quotes = {"PMX": dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:10Z")}
+    clock = [NOW()]
+    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=lambda: clock[0], max_age_s=3600,
+               quote=lambda s: quotes.get(s))
+    _fill(journal, r, t, quotes)
+    quotes["PMX"].update(bid=5.90, ask=5.92)
+    r.watch_stops()                                                          # SELL LMT 5.84
+    clock[0] = clock[0] + timedelta(seconds=EXIT_STALE_SECONDS - 1)
+    quotes["PMX"].update(bid=5.86, ask=5.88)
+    assert r.chase_exits() == [] and reprices == []                          # marketable, not yet stale
+    clock[0] = clock[0] + timedelta(seconds=2)
+    (line,) = r.chase_exits()                                                # stale: one offset under 5.84
+    assert reprices == [(91, 5.78)] and "still working" in journal.execute(
+        "SELECT text FROM order_events ORDER BY id DESC LIMIT 1").fetchone()[0]
+
+
+def test_a_partly_filled_exit_is_not_a_quantity_mismatch(journal):
+    from types import SimpleNamespace as NS
+    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08", a1_accepted="yes")
+    t = FakeTrader()
+    t.last_exit_order_id = 83
+    quotes = {"PMX": dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:10Z")}
+    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
+               quote=lambda s: quotes.get(s))
+    _fill(journal, r, t, quotes)
+    quotes["PMX"].update(bid=5.90, ask=5.92)
+    r.watch_stops()
+    shares = int(t.monitored[0].shares)
+    held = 20
+    t.placed[0].exit_filled_qty = shares - held                              # IBKR: part sold, rest working
+    t.ib = NS(positions=lambda: [NS(position=held, contract=NS(symbol="PMX"))], trades=lambda: [],
+              fills=lambda: [], executions=lambda: [])
+    lines = r.reconcile_positions()
+    assert not any("MISMATCH" in x for x in lines) and r.unreconciled == []
+    ev = [e[0] for e in journal.execute("SELECT text FROM order_events").fetchall()]
+    assert any(f"exit partly filled: {shares - held} of {shares} sold, {held} still held" in e for e in ev)
+    r.reconcile_positions()                                                  # the same fact is written once
+    assert sum("exit partly filled" in e[0] for e in journal.execute("SELECT text FROM order_events")) == 1

@@ -98,6 +98,11 @@ EXIT_OFFSET_PCT = 1.0
 EXIT_OFFSET_MIN = 0.03
 EXIT_OFFSET_MAX = 0.10
 EXIT_CHASE_SECONDS = 5.0
+# A sent exit still working this long is re-priced to bid - offset even when the
+# bid has not fallen under its limit: an exit must complete (AMOD 2026-10-02:
+# 200 shares of a partly filled sell sat at 2.43 while the bot only watched for
+# the bid to drop). Reasoned, not measured.
+EXIT_STALE_SECONDS = 10.0
 
 
 def entry_limit(trigger: float) -> float:
@@ -405,6 +410,9 @@ class PlacedOrder:
     exit_order_id: Optional[int] = None
     exit_confirmed: bool = True
     exit_status: Optional[str] = None            # the broker's word on the sent exit
+    # How many shares the sent exit has sold so far. A sell can fill in part and
+    # keep working (AMOD 2026-10-02 08:25: 466 of 666 at 2.43, 200 left).
+    exit_filled_qty: Optional[float] = None
     intent: Optional[EntryIntent] = None
     events: list[str] = field(default_factory=list)
 

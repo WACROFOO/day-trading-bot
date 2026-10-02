@@ -32,8 +32,8 @@ from typing import Callable, NamedTuple, Optional
 from journal import ledger as L
 
 from .bridge import bar_seconds, decision_clock, intent_from_decision
-from .intent import (ENTRY_TTL_MINUTES, EXIT_CHASE_SECONDS, SPREAD_K, TRAIL_R, exit_offset,
-                     in_regular_hours)
+from .intent import (ENTRY_TTL_MINUTES, EXIT_CHASE_SECONDS, EXIT_STALE_SECONDS, SPREAD_K, TRAIL_R,
+                     exit_offset, in_regular_hours)
 from .ibkr_trader import OrderRefused, PaperTrader
 from journal.risk import RiskVeto
 from .intent import ET, refusals
@@ -113,6 +113,15 @@ class Acted(NamedTuple):
     backfill: bool = False      # armed on history loaded at the desk's start; diagnostic cohort
 
 Quote = Callable[[str], Optional[dict]]     # symbol -> {bid, ask, bid_size, ask_size, ts}
+
+
+def _event_once(conn, order_id: int, text: str) -> None:
+    """An order event, unless it repeats the row's last one: the reconcile runs
+    every loop and a standing condition is one fact, not one row per 5 s."""
+    last = conn.execute("SELECT text FROM order_events WHERE order_id=? ORDER BY id DESC LIMIT 1",
+                        (order_id,)).fetchone()
+    if last is None or last[0] != text:
+        L.add_order_event(conn, order_id, text)
 
 
 class Runner:
@@ -533,11 +542,22 @@ class Runner:
                 out.append(f"UNTRACKED position {sym} x{qty} at the broker — no ledger row; "
                            f"exit by hand (exercise.py stuck)")
                 continue
-            covered = sum(int(r["filled_qty"] or r["shares"]) for r in rows)
+            # A sell already sent and partly filled leaves fewer shares at the
+            # broker than the row's fill: that is the exit working, not a
+            # mismatch (AMOD 2026-10-02 08:25: 466 of 666 sold, 200 working).
+            by_parent = {p.parent_id: p for p in getattr(self.trader, "placed", [])}
+            sold = {r["order_id"]: int((getattr(by_parent.get(r["parent_id"]), "exit_filled_qty", None) or 0))
+                    if r["status"] == "ExitPending" else 0 for r in rows}
+            covered = sum(int(r["filled_qty"] or r["shares"]) - sold[r["order_id"]] for r in rows)
+            for r in rows:
+                if sold[r["order_id"]] > 0:
+                    _event_once(self.conn, r["order_id"],
+                                f"exit partly filled: {sold[r['order_id']]} of {int(r['filled_qty'] or r['shares'])} "
+                                f"sold, {qty} still held with the sell working (order {r['exit_order_id']})")
             if covered != qty:
                 for r in rows:
-                    L.add_order_event(self.conn, r["order_id"],
-                                      f"quantity mismatch: broker holds {qty}, ledger covers {covered}")
+                    _event_once(self.conn, r["order_id"],
+                                f"quantity mismatch: broker holds {qty}, ledger covers {covered}")
                 out.append(f"QUANTITY MISMATCH {sym}: broker {qty}, ledger {covered}")
             for r in rows:
                 has_exit = (r["status"] == "ExitPending"
@@ -796,9 +816,17 @@ class Runner:
             if not q or q.get("bid") is None:
                 continue
             bid, was = float(q["bid"]), float(o["exit_price"])
-            if bid >= was:
+            off = exit_offset(bid, q.get("ask"))
+            stale = (now - sent).total_seconds() >= EXIT_STALE_SECONDS
+            if bid < was:
+                px = round(bid - off, 2)            # the bid ran under the limit: follow it
+            elif stale:
+                # A marketable sell still working after EXIT_STALE_SECONDS (a
+                # partial fill, a thin book): one more offset under whichever is
+                # lower, the limit or the bid, every stale period until it fills.
+                px = round(min(bid, was) - off, 2)
+            else:
                 continue
-            px = round(bid - exit_offset(bid, q.get("ask")), 2)
             try:
                 moved = self.trader.reprice_exit(int(o["exit_order_id"]), px)
             except Exception as exc:                            # noqa: BLE001
@@ -807,9 +835,10 @@ class Runner:
             if not moved:
                 continue
             L.reprice_exit(self.conn, o["order_id"], price=px, ts=now)
+            why = f"bid {bid} under the unfilled SELL LMT {was}" if bid < was else \
+                f"SELL LMT {was} still working after {EXIT_STALE_SECONDS:.0f} s (bid {bid})"
             L.add_order_event(self.conn, o["order_id"],
-                              f"chase_exits (A16): bid {bid} under the unfilled SELL LMT {was}; "
-                              f"re-priced to {px} (order {o['exit_order_id']})")
+                              f"chase_exits (A16): {why}; re-priced to {px} (order {o['exit_order_id']})")
             done.append(f"{o['symbol']} SELL LMT {was:.2f} -> {px:.2f} (bid {bid:.2f}, not filled)")
         self.conn.commit()
         return done

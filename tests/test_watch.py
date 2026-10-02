@@ -71,3 +71,26 @@ def test_the_cli_prints_a_past_day_once(tmp_path):
                          cwd=ROOT, capture_output=True, text=True, timeout=60)
     assert out.returncode == 0, out.stderr
     assert out.stdout.startswith("WATCH · 2026-09-01") and "KILLED" in out.stdout and "so far:" in out.stdout
+
+
+def test_a_sent_exit_reads_as_sent_until_the_broker_fills_it(tmp_path):
+    """AMOD 2026-10-02 08:25: the feed printed a P&L for a sell that then filled 466 of 666."""
+    db = tmp_path / "j.sqlite"
+    c = L.connect(db)
+    build_session(FIXTURE, journal=c)
+    did = [r["decision_id"] for r in L.decisions(c, plan_allowed=1)][0]
+    oid = L.record_order(c, did, symbol="ABCD", account="DU1", session="premarket", parent_id=901,
+                         stop_id=None, target_id=None, trigger=5.0, stop=4.8, target=None, shares=100,
+                         dollar_risk=20.0, protected=False)
+    c.execute("UPDATE decisions SET outcome='TAKEN' WHERE decision_id=?", (did,))
+    L.record_fill(c, oid, fill_price=5.01, fill_ts="2026-09-01T13:41:05Z")
+    L.record_exit(c, oid, reason="monitored_stop", price=4.74, ts="2026-09-01T13:45:00Z", confirmed=False,
+                  exit_order_id=83)
+    c.commit()
+    w = W.Watcher(W.connect_ro(db), "2026-09-01")
+    text = "\n".join(line for _, line in w.poll())
+    assert "SELL SENT" in text and "LMT 4.74" in text and " R" not in text.split("SELL SENT")[1].split("\n")[0]
+    L.confirm_exit(c, oid, price=4.77, ts="2026-09-01T13:45:05Z")
+    c.commit()
+    done = "\n".join(line for _, line in w.poll())
+    assert "EXIT" in done and "@ 4.77" in done and "-1.20 R" in done

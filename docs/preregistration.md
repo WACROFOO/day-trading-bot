@@ -1016,6 +1016,18 @@ selection rule moves, no cohort starts. All four numbers are reasoned, not
 measured (Approximation). **Undo:** `EXIT_OFFSET_MIN = EXIT_OFFSET_MAX = 0.10`
 and drop the `chase_exits` call in `scripts/exercise.py`.
 
+**A16 amended — partial exits and a stale chase (2026-10-02, during the session).**
+AMOD 08:25: the monitored stop sent SELL LMT 2.43 x666; IBKR filled 466 and
+left 200 working. The runner read only "Filled", so the reconcile reported a
+quantity mismatch every loop (blocking new entries) and the chase, which moved
+a sell only when the bid fell under it, never touched the remaining 200 while
+the bid sat above 2.43. Now: `PlacedOrder.exit_filled_qty` carries the sent
+exit's partial fill and the reconcile counts it (an event says how much is
+sold and how much is working, once, not every 5 s); a sell still working
+`EXIT_STALE_SECONDS` (10 s) is stepped one offset under min(limit, bid) each
+period until it fills; `watch.py` prints SELL SENT, not a P&L, until the
+broker confirms the fill. Execution only; reasoned, not measured.
+
 **Opening-risk candidates (2026-10-01, addendum 2026-10-01c) — none adopted.**
 After the NXL loss (a plan built on two pre-market candles, filled at 09:30:23
 into an 82¢ opening minute, stopped five seconds later at −1.41 R), three

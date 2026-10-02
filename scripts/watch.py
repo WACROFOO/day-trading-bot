@@ -158,11 +158,18 @@ class Watcher:
             if o["fill_price"] and (prev is None or prev[1] != o["fill_price"]):
                 new.append((et_clock(o["fill_ts"]), f"{et_clock(o['fill_ts']):>8}  {o['symbol']:<6} {'FILLED':<10} "
                             f"{qty:g} @ {o['fill_price']:.2f}  (trigger {o['trigger']:.2f}, stop {o['stop']:.2f})"))
-            if o["exit_price"] and (prev is None or prev[2] != o["exit_price"]):
-                pnl = (o["exit_price"] - (o["fill_price"] or o["exit_price"])) * (qty or 0)
-                r = f" · {pnl / o['planned_risk']:+.2f} R" if o["planned_risk"] else ""
-                new.append((et_clock(o["exit_ts"]), f"{et_clock(o['exit_ts']):>8}  {o['symbol']:<6} {'EXIT':<10} "
-                            f"@ {o['exit_price']:.2f}  {o['exit_reason'] or ''} · ${pnl:+.2f}{r}"))
+            if o["exit_price"] and (prev is None or prev[2] != o["exit_price"] or prev[0] != o["status"]):
+                if o["status"] == "ExitPending":
+                    # SENT, not filled (AMOD 2026-10-02 08:25 printed a P&L for a
+                    # sell that then filled 466 of 666): the limit is a plan.
+                    new.append((et_clock(o["exit_ts"]), f"{et_clock(o['exit_ts']):>8}  {o['symbol']:<6} "
+                                f"{'SELL SENT':<10} LMT {o['exit_price']:.2f} x{qty:g}  {o['exit_reason'] or ''}"
+                                f" · waiting for the broker's fill"))
+                else:
+                    pnl = (o["exit_price"] - (o["fill_price"] or o["exit_price"])) * (qty or 0)
+                    r = f" · {pnl / o['planned_risk']:+.2f} R" if o["planned_risk"] else ""
+                    new.append((et_clock(o["exit_ts"]), f"{et_clock(o['exit_ts']):>8}  {o['symbol']:<6} {'EXIT':<10} "
+                                f"@ {o['exit_price']:.2f}  {o['exit_reason'] or ''} · ${pnl:+.2f}{r}"))
             if not o["fill_price"] and o["status"] not in ("intent", "submitted", "Submitted", "PreSubmitted") \
                     and (prev is None or prev[0] != o["status"]):
                 new.append((et_clock(o["placed_at"]), f"{et_clock(o['placed_at']):>8}  {o['symbol']:<6} "
