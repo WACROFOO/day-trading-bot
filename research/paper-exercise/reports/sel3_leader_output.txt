@@ -1,0 +1,15 @@
+L — the leader (addendum 2026-10-03) · plans in 09:30-11:20 51940 · ranked (gate-passing) 3876 · rank <= 2: 2212 · not qualifying: 25
+  variant = B on plans ranked <= 2 by % gain; reference = B, same window; costs live $40/$2,000
+  mode A · train 2016-22          variant n   975 gross -0.035 net -0.395 win(gross) 34%  |  reference n  1380 gross -0.033 net -0.407 win(gross) 35%  |  diff net +0.012 · lb -0.034
+  mode A · 2023                   variant n   135 gross +0.128 net -0.226 win(gross) 36%  |  reference n   196 gross +0.106 net -0.260 win(gross) 36%  |  diff net +0.034 · lb -0.095
+  mode A · 2024-26 (report only)  variant n   470 gross -0.061 net -0.381 win(gross) 34%  |  reference n   956 gross -0.024 net -0.383 win(gross) 36%  |  diff net +0.003 · lb -0.088
+  mode C · train 2016-22          variant n   974 gross -0.062 net -0.422 win(gross) 34%  |  reference n  1369 gross -0.054 net -0.428 win(gross) 34%  |  diff net +0.007 · lb -0.042
+  mode C · 2023                   variant n   134 gross +0.118 net -0.236 win(gross) 34%  |  reference n   195 gross +0.114 net -0.253 win(gross) 34%  |  diff net +0.017 · lb -0.150
+  mode C · 2024-26 (report only)  variant n   466 gross -0.091 net -0.412 win(gross) 34%  |  reference n   942 gross -0.036 net -0.396 win(gross) 36%  |  diff net -0.015 · lb -0.110
+  DECISION L: NOT a candidate
+  mode A · train 2016-22 · reference trades by rank: not qualifying n 11 gross +0.144 · rank 1 n 640 gross -0.027 · rank 2 n 289 gross -0.099 · rank 3-5 n 316 gross -0.039 · rank 6+ n 124 gross +0.092
+  mode A · 2023 · reference trades by rank: rank 1 n 70 gross +0.188 · rank 2 n 60 gross +0.006 · rank 3-5 n 59 gross +0.158 · rank 6+ n 7 gross -0.294
+  mode A · 2024-26 (report only) · reference trades by rank: not qualifying n 5 gross -0.362 · rank 1 n 217 gross -0.016 · rank 2 n 218 gross -0.067 · rank 3-5 n 347 gross -0.047 · rank 6+ n 169 gross +0.077
+  mode C · train 2016-22 · reference trades by rank: not qualifying n 11 gross +0.144 · rank 1 n 638 gross -0.036 · rank 2 n 290 gross -0.163 · rank 3-5 n 306 gross -0.038 · rank 6+ n 124 gross +0.053
+  mode C · 2023 · reference trades by rank: rank 1 n 69 gross +0.215 · rank 2 n 60 gross -0.042 · rank 3-5 n 59 gross +0.201 · rank 6+ n 7 gross -0.281
+  mode C · 2024-26 (report only) · reference trades by rank: not qualifying n 5 gross -0.355 · rank 1 n 213 gross -0.069 · rank 2 n 212 gross -0.080 · rank 3-5 n 346 gross -0.041 · rank 6+ n 166 gross +0.080

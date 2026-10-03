@@ -1,0 +1,11 @@
+P — the green pause (addendum 2026-10-03) · sessions 2208 (400 probe days excluded) · plans coded 74699 · pause 69128 · armed only by the pause 13564
+  variant = B on the pause detector's plans; reference = B on the coded detector's plans; 07:00-11:20
+  mode A · train 2016-22          variant n  1628 gross -0.093 net -0.483 win(gross) 33%  |  reference n  1569 gross -0.049 net -0.438 win(gross) 34%  |  diff net -0.044 · lb -0.085
+  mode A · 2023                   variant n   298 gross -0.003 net -0.388 win(gross) 34%  |  reference n   287 gross +0.094 net -0.294 win(gross) 38%  |  diff net -0.093 · lb -0.203
+  mode A · 2024-26 (report only)  variant n  1279 gross -0.093 net -0.455 win(gross) 32%  |  reference n  1274 gross -0.111 net -0.481 win(gross) 32%  |  diff net +0.026 · lb -0.025
+  mode C · train 2016-22          variant n  1609 gross -0.115 net -0.504 win(gross) 33%  |  reference n  1564 gross -0.071 net -0.461 win(gross) 34%  |  diff net -0.043 · lb -0.084
+  mode C · 2023                   variant n   292 gross -0.021 net -0.407 win(gross) 33%  |  reference n   281 gross +0.069 net -0.317 win(gross) 35%  |  diff net -0.089 · lb -0.205
+  mode C · 2024-26 (report only)  variant n  1259 gross -0.088 net -0.450 win(gross) 33%  |  reference n  1261 gross -0.107 net -0.478 win(gross) 33%  |  diff net +0.027 · lb -0.027
+  DECISION P: NOT a candidate
+  mode A · plans only the pause arms, gate-passing and filled (all years, no portfolio): n 931 · gross -0.079 · net -0.456
+  mode C · plans only the pause arms, gate-passing and filled (all years, no portfolio): n 928 · gross -0.090 · net -0.467
