@@ -525,3 +525,34 @@ cuts (spread ÷ stop, stop %, price, session) are post hoc and labelled so.
 
 **It decides nothing live.** It is an assessment. Anything it suggests needs
 its own preregistered run on other days, then the OFF-switch path.
+
+### Addendum 2026-10-03 — the leader (SEL-3) and the green pause, before any run
+
+From the reverse-engineering review of 2026-10-02 (two proposals that survived
+adversarial review). Engine: `scripts/rules_audit.py` plans and portfolio,
+rule set B (`BASE`), $40 / $2,000, live cost model, bar-order modes A and C,
+both required. Train 2016–2022 decides; 2023 must agree in sign; 2024–2026 is
+reported only (already read for leaders by F8 and for B by the rules audit).
+Day-paired bootstrap, one-sided α = 0.05 / 4 (two tests × two modes).
+Script: `scripts/sel3_pause.py`.
+
+**L — the leader.** At each plan's arming bar (bars stamped ≤ the plan bar),
+rank the plan's name by % gain over the previous close among the day's
+universe names (the 09:30-gap list, known at the open) that are up ≥ 10 %,
+$1–20, ≥ 50,000 shares since 04:00. Window 09:30–11:20 only (before 09:30 the
+universe itself is hindsight). Variant L2: B restricted to plans ranked ≤ 2;
+reference: B in the same window. **Candidate** (built OFF, 200 prospective
+paper trades) only if, in both modes: L2 train gross ≥ +0.17 R a trade AND
+the train lower bound of (L2 − reference, net) > 0 AND the 2023 difference
+> 0. Otherwise the rank becomes a display column and nothing else.
+
+**P — the green pause.** Detector variant: the impulse continues only on a
+green bar that makes a new impulse high; any other bar — a green bar with a
+lower high included — starts the pullback. Everything else as coded. Plans
+rebuilt on every session EXCEPT the 400 days of the 2026-10-02 exploratory
+probe (`random.Random(20261002).sample(sorted(universe), 400)`), which were
+read. B portfolio, 07:00–11:20. **Candidate** only if, in both modes: train
+net better than the coded detector with lower bound > 0 AND 2023 difference
+> 0. Otherwise the question "the bot needs a red candle" is closed on the
+1-minute chart; the plans only the variant arms are reported (count, gross,
+net).
