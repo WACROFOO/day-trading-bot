@@ -212,6 +212,11 @@ def build_session_from_records(
                 "iexLastTs": rec.get("iex_last_ts"),
                 "lastSource": rec.get("last_source", "iex"),
                 "dailyBars": rec.get("daily_bars", []),
+                "stockType": rec.get("stock_type"),
+                "isFundOrEtf": rec.get("is_fund_or_etf"),
+                "minTick": rec.get("min_tick"),
+                "splitChecked": bool(rec.get("split_checked")),
+                "splitRatio": rec.get("split_ratio"),
                 "news": [],
             }
         elif kind == "news":
@@ -491,6 +496,7 @@ def build_session_from_records(
             "last": snap.last,
             "changePct": _num(snap.change_from_close_pct),
             "volumeToday": int(snap.volume_today or 0),
+            "volumePremarket": int(getattr(snap, "volume_premarket", 0) or 0),
             "volume5m": None if snap.volume_5m is None else int(snap.volume_5m),
             "rvol": _num(snap.rvol),
             "rvolDaily": _num(snap.rvol_daily),
@@ -610,7 +616,8 @@ def cascade_inputs(meta: dict, halt: Optional[str] = None,
     if snap is not None:
         m = {"last": snap.last, "changePct": snap.change_from_close_pct,
              "sessionHigh": snap.session_high, "rvol": snap.rvol,
-             "volumeToday": snap.volume_today}
+             "volumeToday": snap.volume_today,
+             "volumePremarket": getattr(snap, "volume_premarket", None)}
     else:
         m = meta.get("metrics") or {}
     quality = meta.get("floatQuality", "unknown")
@@ -626,6 +633,14 @@ def cascade_inputs(meta: dict, halt: Optional[str] = None,
         catalyst_verdict=_news_verdict(meta.get("news") or [], snap,
                                        bool(meta.get("newsSourceOk", True))),
         catalyst_source_ok=bool(meta.get("newsSourceOk", True)),
+        # Gates 5-8 (review 2026-10-03: never passed before). None stays UNKNOWN.
+        is_fund_or_etf=meta.get("isFundOrEtf"),
+        tick_size=meta.get("minTick"),
+        split_checked=bool(meta.get("splitChecked")),
+        split_ratio_clean_integer=meta.get("splitRatio"),
+        buyout_announced=(_buyout_today(meta.get("news") or [], meta.get("tradingDate"))
+                          if meta.get("newsSourceOk", True) else None),
+        premarket_volume=(m.get("volumePremarket") or None),
         session_volume=m.get("volumeToday"),
         rvol=m.get("rvol"),
         halted=(halt == "halted"),
@@ -879,6 +894,41 @@ def _news_verdict(news: list, snap, source_ok: bool) -> str:
     if now is not None and now.tzinfo is None:
         now = now.replace(tzinfo=timezone.utc)
     return news_verdict(news, now=now, source_ok=source_ok)[0]
+
+
+def _buyout_today(news: list, trading_date) -> bool:
+    """Gate 8: one of the company's own headlines since 16:00 ET yesterday says
+    it is being acquired (catalyst.BUYOUT_TARGET_WORDS — target phrases only)."""
+    from ..catalyst import buyout_in
+    return buyout_in([i.get("headline") or "" for i in _todays_own(news, trading_date)])
+
+
+def _todays_own(news: list, trading_date) -> list:
+    """The symbol's own items (not shared tags) published since 16:00 ET of the
+    previous calendar day; every item when the day is unknown."""
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    try:
+        day = datetime.fromisoformat(str(trading_date)).date() if trading_date else None
+    except (TypeError, ValueError):
+        day = None
+    out = []
+    for item in news or []:
+        if item.get("sharedTag"):
+            continue
+        if day is None:
+            out.append(item); continue
+        pub = item.get("publishedAt") or item.get("published_at")
+        try:
+            p = datetime.fromisoformat(str(pub).replace("Z", "+00:00"))
+        except (TypeError, ValueError):
+            continue
+        if p.tzinfo is None:
+            p = p.replace(tzinfo=timezone.utc)
+        cutoff = datetime.combine(day, datetime.min.time(), tzinfo=et).replace(hour=16) - timedelta(days=1)
+        if p.astimezone(et) >= cutoff:
+            out.append(item)
+    return out
 
 
 def _catalyst_today(news: list, trading_date) -> bool:

@@ -941,3 +941,52 @@ def test_an_order_refused_by_the_trader_does_not_hold_the_position_slot(journal)
     r.step()
     assert journal.execute("SELECT COUNT(*) FROM orders").fetchone()[0] >= 1
     assert L.positions_alive(journal) == 0
+
+
+def test_expiry_reason_says_what_the_quote_did():
+    """AMOD 2026-10-02 07:45: trigger 2.56, limit 2.57, the stock traded 2.60-2.71
+    for the three minutes, and the reason read "the plan's break did not come"."""
+    import types
+    row = {"symbol": "AMOD", "trigger": 2.56}
+    r = types.SimpleNamespace(quote=None)
+    reason = lambda q: Runner._expiry_reason(types.SimpleNamespace(quote=(lambda s: q)), row, 3)   # noqa: E731
+    assert "ran past the limit 2.57 (ask 2.62)" in reason({"bid": 2.61, "ask": 2.62})
+    assert "did not come (ask 2.5)" in reason({"bid": 2.49, "ask": 2.50})
+    assert "between trigger 2.56 and limit 2.57" in reason({"bid": 2.55, "ask": 2.565})
+    assert "no quote at expiry" in Runner._expiry_reason(r, row, 3)
+
+
+def test_the_opening_handoff_enforces_after_one_loop_with_a_limit(journal):
+    """M7 (execution study 2026-10-02): at 09:30 a pre-market position's watch
+    ends and a resting STP takes over, but IBKR activates STP and MKT only after
+    the opening print. Until 09:32 the stop of last resort acts after one loop,
+    still cancel-first, and sells with a LIMIT, never a MKT."""
+    from datetime import datetime, timedelta, timezone
+    t = FakeTrader()
+    e = _Enforcing(t)
+    e.install(t)
+    limits = []
+    def exit_limit(symbol, qty, bid, offset=0.10, outside_rth=False):
+        limits.append((symbol, qty, outside_rth)); t.last_exit_order_id = 777; return round(bid - offset, 2)
+    t.exit_limit = exit_limit
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    clock = {"t": datetime(2026, 9, 1, 13, 30, 5, tzinfo=timezone.utc)}         # 09:30:05 ET
+    r.now = lambda: clock["t"]
+    r.quote = lambda s: {"bid": float(o["stop"]) - 0.05, "ask": float(o["stop"]) - 0.03}
+    assert r.enforce_stops() == []                          # first sighting
+    clock["t"] += timedelta(seconds=5)
+    (line,) = r.enforce_stops()                             # 5 s, not 15: cancel sent, nothing sold
+    assert "cancel sent" in line and e.sold == [] and limits == []
+    e.leg.update(status="Cancelled", cancel_confirmed=True)
+    clock["t"] += timedelta(seconds=5)
+    (line,) = r.enforce_stops()
+    assert "LMT" in line and e.sold == [] and limits == [(rec.symbol, int(o["shares"]), True)]
+
+
+def test_after_the_handoff_the_regular_rule_is_back():
+    from datetime import datetime, timezone
+    from execution.runner import in_opening_handoff
+    assert in_opening_handoff(datetime(2026, 9, 1, 13, 31, 59, tzinfo=timezone.utc))
+    assert not in_opening_handoff(datetime(2026, 9, 1, 13, 32, 0, tzinfo=timezone.utc))
+    assert not in_opening_handoff(datetime(2026, 9, 1, 13, 29, 59, tzinfo=timezone.utc))

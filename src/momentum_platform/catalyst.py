@@ -142,6 +142,23 @@ def classify(headline: str, category: str = "") -> Grade:
 # Ross's pillar is "news today" (FILTERS.md gate 3); which families count is
 # this desk's Approximation, and the ledger records the word on every decision
 # so the split can be measured instead of argued.
+# -- buyout (cascade gate 8) ---------------------------------------------------
+# Only phrases that make THIS company the target. "XYZ to acquire ABC" tagged to
+# the acquirer is not a pinned price, so "acquire" and "merger" alone never
+# fire: a false buyout kill throws away a live name. Desk-only (not mirrored in
+# app.js: the card shows the gate the server computed).
+BUYOUT_TARGET_WORDS = [
+    "to be acquired", "agrees to be acquired", "agreed to be acquired",
+    "to be taken private", "take-private", "take private", "go-private", "going private",
+    "go private transaction",
+]
+
+
+def buyout_in(headlines: Sequence[str]) -> bool:
+    """True when one of the company's own headlines says it is being bought."""
+    return any(w in (h or "").lower() for h in headlines for w in BUYOUT_TARGET_WORDS)
+
+
 CATALYST_VERDICTS = {
     "STRONG":   "This company's own headline, hard family, inside 12 hours. "
                 "The news pillar passes; the chart decides the entry.",

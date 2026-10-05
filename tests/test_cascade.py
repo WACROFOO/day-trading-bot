@@ -23,6 +23,7 @@ def good(**over) -> Inputs:
         symbol="TEST", last=6.00, prev_close=4.00, change_pct=50.0,
         session_high=6.20, float_shares=4_000_000, float_verified=True,
         catalyst_today=True, is_fund_or_etf=False, tick_size=0.01,
+        split_checked=True, buyout_announced=False,
         above_vwap=True, above_ema9=True, macd_positive_and_above_signal=True,
         session_volume=3_000_000, rvol=8.0, in_session_window=True,
     )

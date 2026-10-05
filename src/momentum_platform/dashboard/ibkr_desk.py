@@ -133,6 +133,7 @@ class IbkrDesk:
         self._reference: Dict[str, dict] = {}
         self._reference_day: Dict[str, str] = {}      # session day each reference was built for
         self._float_inputs: Dict[str, tuple] = {}     # (sec profile, ibkr float) kept for the rollover
+        self._facts: Dict[str, dict] = {}             # instrument type, tick, split test (instrument_facts.py)
         self._minutes: Dict[str, List[dict]] = {}
         # Time-of-day RVOL baseline per symbol, and the session day it was
         # built for. One historical request per symbol per day, spent in the
@@ -467,8 +468,7 @@ class IbkrDesk:
                 self.log(f"  {sym}: minute history failed: {exc}")
                 self._minutes[sym] = []
             sec = sec_profile(sym) if self.sec else {}
-            if self.sec:
-                self._finviz_float(sym)
+            self._instrument_facts(sym, c)
             fl = float_from_ibkr(self.stream.ib, c) if self.fundamentals is not False else {}
             self._set_reference(sym, c, bars, sec=sec, ibkr_float=fl)
             r = self._reference[sym]
@@ -509,9 +509,30 @@ class IbkrDesk:
             self._reference[sym]["float_shares"] = ov["float"]
             self._reference[sym]["float_quality"] = "verified"
             self._reference[sym]["float_source"] = ov["source"]
+        facts = self._facts.get(sym)
+        if facts and facts.get("day") == day:
+            self._reference[sym].update({k: v for k, v in facts.items() if k != "day"})
         self._reference_day[sym] = day
 
-    def _finviz_float(self, sym: str) -> None:
+    def _instrument_facts(self, sym: str, c) -> None:
+        """Gates 5-7's inputs, once per symbol per session day (review 2026-10-03:
+        the desk never passed them). IBKR for the type and tick; with network
+        lookups allowed (`sec`), finviz for the float and the split test's
+        previous close, which reads the same page once."""
+        from ..datasources.instrument_facts import ibkr_instrument, split_facts
+        day = self.session_day()
+        facts = {"day": day}
+        facts.update(ibkr_instrument(self.stream.ib, c))
+        if self.sec:
+            page = self._finviz_float(sym)
+            facts.update(split_facts(sym, (page or {}).get("prev_close_fv")))
+        self._facts[sym] = facts
+        bits = [f"type {facts.get('stock_type') or '?'}", f"tick {facts.get('min_tick') or '?'}",
+                "split " + (f"{facts['split_ratio']:g}x" if facts.get("split_ratio")
+                            else ("none" if facts.get("split_checked") else "not checked"))]
+        self.log(f"  {sym}: " + " · ".join(bits))
+
+    def _finviz_float(self, sym: str) -> Optional[dict]:
         """Look up finviz's float for a name that joined after the gap scan.
 
         2026-10-01, NXL: it joined at 08:3x from the live scanner, so the
@@ -520,21 +541,27 @@ class IbkrDesk:
         `pillars: missing float`. finviz said 0.65M. The gap scan's own source,
         asked once per joining name; a miss leaves the SEC fallback as before."""
         day = self.session_day()
-        if _float_override(sym, day):
-            return
+        pages = getattr(self, "_finviz_pages", None)
+        if pages is None:
+            pages = self._finviz_pages = {}
+        if (sym, day) in pages:                     # one request per symbol per day
+            return pages[(sym, day)]
         try:
             import sys
             scripts = os.path.join(_repo_root(), "scripts")
             if scripts not in sys.path:
                 sys.path.append(scripts)
             import premarket_stars
-            shares = premarket_stars.finviz(sym).get("float")
+            page = premarket_stars.finviz(sym)
         except Exception as exc:                                  # noqa: BLE001
-            self.log(f"  {sym}: finviz float lookup failed: {exc}")
-            return
-        if shares and shares > 0:
+            self.log(f"  {sym}: finviz lookup failed: {exc}")
+            return None
+        shares = (page or {}).get("float")
+        if shares and shares > 0 and not _float_override(sym, day):
             _remember_float_override(sym, day, float(shares), "finviz on join")
             self.log(f"  {sym}: finviz float {shares / 1e6:.2f}M (looked up on join)")
+        pages[(sym, day)] = page
+        return page
 
     def session_day(self) -> str:
         """The trading day the desk shows (ISO date), by the 04:00 ET rule."""
@@ -560,6 +587,7 @@ class IbkrDesk:
             except Exception as exc:
                 self.log(f"  {sym}: daily history refresh failed: {exc}")
                 bars = self._reference.get(sym, {}).get("daily_bars", [])
+            self._instrument_facts(sym, c)
             self._set_reference(sym, c, bars)
             self.log(f"  {sym}: reference rolled to session {day}")
             return sym

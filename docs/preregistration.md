@@ -1059,6 +1059,26 @@ an unconfirmed cancel alerts every loop, blocks entries and names `ah-exit` afte
 trader builds now sets `triggerMethod = 2` (Last) explicitly (IBKR's default for
 US stocks; review M4). Execution safety only; no selection rule moves.
 
+**Three fixes from the 2026-10-03 review (2026-10-05) — no selection rule moves.**
+(1) Gates 5-8 get their inputs. The desk never passed the split test, the
+instrument type, the tick size or the buyout check: gate 5 read PASS untested,
+gate 8 PASS with no headline read, gates 6-7 UNKNOWN on every name. Now, once
+per symbol per session day: IBKR contract details give `stockType` (funds, ETFs,
+ETNs, warrants, units, preferreds fail gate 6) and `minTick` (gate 7); finviz's
+previous close against Yahoo's runs `split_check` (gate 5, CLAUDE.md rule 6 — a
+clean integer ratio kills, an untested name reads UNKNOWN); the company's own
+headlines since 16:00 ET yesterday are read for target phrases only ("to be
+acquired", "going private": `catalyst.BUYOUT_TARGET_WORDS`, gate 8; UNKNOWN with
+no headline source). Pre-market volume is counted from the desk's own bars for
+the Layer 3 ceiling warning. `penny_theme` and `live_theme` stay unwired: no
+source defines a theme. (2) The 09:30 handoff (execution study M7): until 09:32
+ET the stop of last resort acts after one 5-s loop instead of 15 s and sells
+with a limit, because IBKR's STP and MKT are inactive until the opening print;
+the cancel is still confirmed first. (3) An expired entry says what the quote
+did ("ran past the limit", "did not come", "sat between"), not always "did not
+come" (AMOD 2026-10-02 07:45). Code: `src/momentum_platform/datasources/instrument_facts.py`,
+`src/execution/runner.py`; tests `tests/test_instrument_facts.py`, `tests/test_runner.py`.
+
 **Opening-risk candidates (2026-10-01, addendum 2026-10-01c) — none adopted.**
 After the NXL loss (a plan built on two pre-market candles, filled at 09:30:23
 into an 82¢ opening minute, stopped five seconds later at −1.41 R), three

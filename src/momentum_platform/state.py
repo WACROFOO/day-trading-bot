@@ -149,6 +149,7 @@ class HotState:
             snap.session_high = None
             snap.session_low = None
             snap.volume_today = 0.0
+            snap.volume_premarket = 0.0
             snap.regular_open = None
             state.minute_bars.clear()
             state._building = None
@@ -174,6 +175,8 @@ class HotState:
         snap.last = price
         if session in (Session.PREMARKET, Session.REGULAR, Session.AFTER_HOURS):
             snap.volume_today += volume
+            if session == Session.PREMARKET:
+                snap.volume_premarket += volume
             snap.session_high = high if snap.session_high is None else max(snap.session_high, high)
             snap.session_low = low if snap.session_low is None else min(snap.session_low, low)
         if session == Session.REGULAR and snap.regular_open is None:

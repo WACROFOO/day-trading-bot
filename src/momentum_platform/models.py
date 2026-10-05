@@ -65,6 +65,7 @@ class SymbolSnapshot:
     session_high: Optional[float] = None
     session_low: Optional[float] = None
     volume_today: float = 0.0
+    volume_premarket: float = 0.0              # 04:00-09:30 ET only (FILTERS.md Layer 3 ceiling)
     volume_5m: Optional[float] = None
     avg_daily_volume: Optional[float] = None   # baseline for simple daily RVOL
     # Median cumulative volume prior sessions had traded by each five-minute

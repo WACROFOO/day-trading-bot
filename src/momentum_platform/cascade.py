@@ -150,8 +150,9 @@ class Inputs:
     catalyst_source_ok: bool = True               # False: the desk has no headline feed at all
     is_fund_or_etf: Optional[bool] = None
     tick_size: Optional[float] = None
-    buyout_announced: bool = False
+    buyout_announced: Optional[bool] = None       # None = no headline source: not checked
     split_ratio_clean_integer: Optional[float] = None   # from split_check()
+    split_checked: bool = False                   # split_check() ran (finviz vs Yahoo prev close)
     penny_theme: bool = False                     # softens the $2 floor
     # Layer 2 / Layer 3
     above_vwap: Optional[bool] = None
@@ -354,9 +355,14 @@ def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None,
                  f"ratio {i.split_ratio_clean_integer:g}",
                  f"The gap is the split ({i.split_ratio_clean_integer:g}x), "
                  "not a move.", kills=True))
-    else:
+    elif i.split_checked:
         add(Gate("split", "Reverse split", GateState.PASS,
                  "gap is not arithmetic"))
+    else:
+        # It used to read PASS here whatever was known: the desk never ran the
+        # test (review 2026-10-03), so "not arithmetic" was asserted, not measured.
+        add(Gate("split", "Reverse split", GateState.UNKNOWN, "not checked"))
+        warnings.append("Reverse split not checked — run the split test (CLAUDE.md rule 6).")
 
     # -- gate 6 · instrument ------------------------------------------------
     if killed_by:
@@ -384,10 +390,12 @@ def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None,
     # -- gate 8 · buyout ----------------------------------------------------
     if killed_by:
         gates.append(skipped("buyout", "Buyout"))
+    elif i.buyout_announced is None:
+        add(Gate("buyout", "Buyout", GateState.UNKNOWN, "no headline source"))
     else:
         add(Gate("buyout", "Buyout",
                  GateState.FAIL if i.buyout_announced else GateState.PASS,
-                 "announced" if i.buyout_announced else "none",
+                 "announced" if i.buyout_announced else "none in today's headlines",
                  "Acquisition announced — the price is pinned and volatility "
                  "is gone.", kills=True))
 

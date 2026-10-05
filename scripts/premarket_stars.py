@@ -29,7 +29,7 @@ The order of operations copies his, which is a REJECT CASCADE, not a score:
      a stock priced at $1."                                (ZfwTJAMLroA 12:49)
 
 So float and price kill a name before anything else is looked at.  A 0-100
-score is deliberately NOT produced: `reports/2026-08-score-basket.md` measured
+score is deliberately NOT produced: `research/momentum-replication/reports/2026-08-score-basket.md` measured
 the pillar score against equal weight and found it carries NEGATIVE
 information — it lost 16 of 16 matched pairs.  Gates, then eyes.
 
@@ -279,6 +279,7 @@ def split_check(sym, prev_close_fv):
         return out
     if yf_prev and prev_close_fv and yf_prev > 0:
         ratio = prev_close_fv / yf_prev
+        out['checked'] = True                  # both prices read: "no split" is now measured
         near = round(ratio)
         if near >= 2 and abs(ratio - near) < 0.02:
             out['split_today'] = near

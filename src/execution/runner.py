@@ -46,6 +46,20 @@ from .intent import ET, refusals
 STOP_ENFORCE_SECONDS = 15.0
 # Loops a cancel may stay unconfirmed before the alert names the human path.
 ENFORCE_ACK_LOOPS = 6
+#: The 09:30 handoff (execution study M7, 2026-10-02). At 09:30 a pre-market
+#: position stops being watched by the runner and gets a resting STP, but IBKR
+#: activates STP and MKT orders only after the primary exchange's opening
+#: print. Until 09:32 ET the stop of last resort therefore acts after one loop
+#: instead of STOP_ENFORCE_SECONDS, and sells with a LIMIT (which takes part in
+#: the opening cross) rather than a MKT (which does not exist before it).
+#: The cancel is still confirmed before any sale (two-pass, e58a9d2).
+OPENING_HANDOFF_END = (9, 32)
+HANDOFF_ENFORCE_SECONDS = 5.0
+
+
+def in_opening_handoff(now: datetime) -> bool:
+    t = now.astimezone(ET).time()
+    return (9, 30) <= (t.hour, t.minute) < OPENING_HANDOFF_END
 from momentum_platform.sessions import REGULAR_END
 from .policy import premarket_allowed, premarket_shape
 
@@ -895,9 +909,7 @@ class Runner:
                 except Exception as exc:                        # noqa: BLE001
                     L.add_order_event(self.conn, r["order_id"], f"expire_entries: cancel raised {exc!r}; left to the broker")
                     continue
-            L.mark_dead(self.conn, r["order_id"], "Cancelled",
-                        f"entry not triggered within {ttl_minutes} minutes of placing (A10): cancelled by the runner; "
-                        f"the plan's break at {r['trigger']} did not come")
+            L.mark_dead(self.conn, r["order_id"], "Cancelled", self._expiry_reason(r, ttl_minutes))
             for p in getattr(self.trader, "placed", []):
                 if p.parent_id == r["parent_id"]:
                     p.status = "Cancelled"
@@ -905,6 +917,33 @@ class Runner:
             done.append(f"{r['symbol']} entry {r['trigger']:.2f} not reached in {ttl_minutes} min — cancelled, NOT_FILLED")
         self.conn.commit()
         return done
+
+    def _expiry_reason(self, r, ttl_minutes: int) -> str:
+        """Why an entry expired, from the quote at expiry. "The break did not
+        come" was written even when it came and ran past the limit (AMOD
+        2026-10-02 07:45: trigger 2.56, limit 2.57, the stock traded 2.60-2.71
+        for the whole three minutes)."""
+        from .intent import entry_limit
+        head = f"entry not filled within {ttl_minutes} minutes of placing (A10): cancelled by the runner; "
+        trig = float(r["trigger"])
+        cap = entry_limit(trig)
+        q = None
+        try:
+            q = self.quote(r["symbol"]) if self.quote else None
+        except Exception:                                   # noqa: BLE001
+            q = None
+        ask = (q or {}).get("ask")
+        last = (q or {}).get("last")
+        px = ask if ask is not None else last
+        if px is None:
+            return head + f"no quote at expiry — trigger {trig:g}, limit {cap:g}"
+        px = float(px)
+        what = "ask" if ask is not None else "last"
+        if px > cap:
+            return head + f"the break came and ran past the limit {cap:g} ({what} {px:g}); A10 does not chase"
+        if px < trig:
+            return head + f"the plan's break at {trig:g} did not come ({what} {px:g})"
+        return head + f"{what} {px:g} sat between trigger {trig:g} and limit {cap:g} without a fill"
 
     # ------------------------------------------------- the stop of last resort
     def enforce_stops(self, seconds: float = STOP_ENFORCE_SECONDS) -> list[str]:
@@ -962,7 +1001,8 @@ class Runner:
                 continue
             since = below.setdefault(oid, now)
             held_for = (now - since).total_seconds()
-            if held_for < seconds:
+            wait = min(seconds, HANDOFF_ENFORCE_SECONDS) if in_opening_handoff(now) else seconds
+            if held_for < wait:
                 continue
             below.pop(oid, None)
             if not o["stop_id"] or not hasattr(self.trader, "cancel_order_id") \
@@ -1036,7 +1076,7 @@ class Runner:
         if qty <= 0:
             return None
         q = self.quote(o["symbol"]) if self.quote else None
-        if in_regular_hours(now) and hasattr(self.trader, "exit_market"):
+        if in_regular_hours(now) and not in_opening_handoff(now) and hasattr(self.trader, "exit_market"):
             exit_id = self.trader.exit_market(o["symbol"], qty, now=now)
             px, how = None, "MKT"
         else:
