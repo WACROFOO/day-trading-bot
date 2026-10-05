@@ -556,3 +556,36 @@ net better than the coded detector with lower bound > 0 AND 2023 difference
 > 0. Otherwise the question "the bot needs a red candle" is closed on the
 1-minute chart; the plans only the variant arms are reported (count, gross,
 net).
+
+### Addendum 2026-10-05 — green-run continuation, 10-second timing, 1-minute risk, before any run
+
+**Question (owner, 2026-10-05, SAIQ and JAGX):** a name climbing in green
+1-minute candles with every live gate green never gets a plan, because the
+detector needs a red candle. Can the 10-second chart time an entry there?
+**Why this is not a repeat:** addendum 2026-10-02e applied no Layer 2 gate and
+no stop floor and stopped at the 10-second low (costs ~1 R a trade); F3 sampled
+only days with a filled 1-minute plan. Here every live gate applies and the
+1-minute bar sets the stop. Script: `scripts/green_run.py`.
+
+**Setup S.** Context, on the last COMPLETED 1-minute bar (cached SIP bars from
+04:00): it and the bar before are green, it makes a new high of day, close
+above session VWAP and the 9 EMA, MACD (12,26,9) line > signal, ≤ 25 % off the
+high. Timing: the runup_micro 10-second pause (6-bar leg ≥ 3 green, span ≥ 1 %;
+1-3 bars without a new high, low above the leg's midpoint). Entry: buy
+stop-limit at the pause high + 1¢ (cap A10), live 20 s. **Stop: the low of
+that completed 1-minute bar − 1¢.** Refused when the stop is < 2 % of price
+(A13) or < 4× the proxy spread (A6), or the price is outside $2–20. Exit: A3
+trail 1 R every 5 s, flat 11:30, one position per symbol-day. Sample: the 300
+symbol-days of addendum 2026-10-02e (2024-26), already fetched. Real NBBO
+spreads at fill and exit, $40 / $2,000.
+
+**Reported beside it:** S10 (stop at the 10-second pause low, same floors);
+RND, 5 random entries per S trade at 10-second closes inside the same
+green-run windows, same stop %.
+
+**Decision.** Built live on paper (switch, prospective) only if ALL hold: n ≥
+100; net mean > 0 with its day-clustered one-sided 95 % lower bound > 0; and
+the gross lower bound of (S − RND) > 0. Otherwise the green run is logged on
+the desk (no orders) and not traded. This sample's years were read by
+2026-10-02e (with a different setup), so a pass is still confirmed
+prospectively before any size change.
