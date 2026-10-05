@@ -603,3 +603,19 @@ the 600 alone; regular hours (09:30–11:20) reported separately and given the
 weight, because the 09:30-gap universe flatters pre-market entries. If it
 passes, it is traded on paper behind a switch and confirmed on 200 prospective
 trades; if it fails, it stays a logged signal on the desk.
+
+### Addendum 2026-10-05b — green-run continuation on 600 new days, before any run
+
+Addendum 2026-10-05 found setup S positive before costs (+0.103 R, better than
+random, lower bound +0.020) and negative after (−0.063, lower bound −0.225) on
+144 trades. **Setup S is frozen exactly as written there** (`scripts/green_run.py`,
+commit 20aa85f). New sample: 600 symbol-days drawn with `random.Random(20261005)`
+from the same population (2024-01-02 → 2026-08-21 `running_up` alerts at $2–20)
+with the first 300 excluded (`green_run.py sample2`); ticks fetched the same way.
+
+**Decision, on the 600 new days alone:** a paper switch (prospective, OFF until
+200 live trades confirm) only if n ≥ 200, the net mean's day-clustered one-sided
+95 % lower bound > 0, AND the gross lower bound of (S − random) > 0. Reported
+beside it, deciding nothing: regular hours only (free of the 09:30-gap
+hindsight that flatters pre-market entries), the pooled 900 days, S10.
+Otherwise the green run stays a desk log with no orders.
