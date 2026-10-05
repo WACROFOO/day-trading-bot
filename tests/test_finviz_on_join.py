@@ -92,3 +92,26 @@ def test_a_name_whose_float_is_over_the_cap_is_kept_off_before_joining(tmp_path,
     d = _Stub()
     assert d._add_now(["ALEC", "OK"]) == ["OK"]
     assert any("ALEC 82M" in m for m in d.logs)
+
+
+def test_finviz_shares_outstanding_stands_in_when_float_is_missing(monkeypatch, tmp_path):
+    """SAIQ 2026-10-05: finviz float blank, shares outstanding 4.49M -> the
+    float pillar can pass on the upper bound instead of reading UNKNOWN."""
+    monkeypatch.setenv("FLOAT_OVERRIDES", str(tmp_path / "f.json"))
+    monkeypatch.setattr(D, "reference_record", lambda sym, bars, **kw: {"float_shares": None, "float_quality": "unknown"})
+
+    class _Stub:
+        _set_reference = D.IbkrDesk._set_reference
+        session_day = lambda self: "2026-10-05"
+        stream = types.SimpleNamespace(_tickers={})
+        clock = None
+        profile_days = 0
+
+        def __init__(self):
+            self._float_inputs, self._reference, self._reference_day, self._profiles = {}, {}, {}, {}
+            self._facts = {"SAIQ": {"day": "2026-10-05", "finviz_shares_out": 4.49e6}}
+
+    d = _Stub()
+    d._set_reference("SAIQ", types.SimpleNamespace(), [])
+    r = d._reference["SAIQ"]
+    assert r["float_shares"] == 4.49e6 and r["float_quality"] == "shares_outstanding_proxy"

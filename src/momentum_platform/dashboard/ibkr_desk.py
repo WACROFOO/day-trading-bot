@@ -512,6 +512,16 @@ class IbkrDesk:
         facts = self._facts.get(sym)
         if facts and facts.get("day") == day:
             self._reference[sym].update({k: v for k, v in facts.items() if k != "day"})
+            # SAIQ 2026-10-05: finviz shows no float, only shares outstanding
+            # (4.49M), and SEC had nothing, so the float read UNKNOWN and the
+            # pillar count killed it. Shares outstanding is an UPPER BOUND on
+            # float: under 20M it proves the float is under 20M; over, the
+            # cascade asks a human (float_is_shares_outstanding).
+            so = facts.get("finviz_shares_out")
+            if so and self._reference[sym].get("float_shares") is None:
+                self._reference[sym]["float_shares"] = so
+                self._reference[sym]["float_quality"] = "shares_outstanding_proxy"
+                self._reference[sym]["float_source"] = "finviz shares outstanding (upper bound)"
         self._reference_day[sym] = day
 
     def _instrument_facts(self, sym: str, c) -> None:
@@ -526,6 +536,8 @@ class IbkrDesk:
         if self.sec:
             page = self._finviz_float(sym)
             facts.update(split_facts(sym, (page or {}).get("prev_close_fv")))
+            if not (page or {}).get("float") and (page or {}).get("shares_out"):
+                facts["finviz_shares_out"] = float(page["shares_out"])
         self._facts[sym] = facts
         mt = facts.get("min_tick")
         tick = "?" if not mt else (f"0.01 at $1+ (IBKR minTick {mt:g})" if mt < 0.01 else f"{mt:g}")
