@@ -606,6 +606,15 @@ trades; if it fails, it stays a logged signal on the desk.
 
 ### Addendum 2026-10-05b — green-run continuation on 600 new days, before any run
 
+> **Superseded, recorded in place (2026-10-05 18:40 UTC).** This entry was
+> written by the same session after a container restart, two minutes after
+> addendum 2026-10-06 above had been committed (53d40b3) and its sample drawn.
+> It duplicates it and misstates the seed: the sample actually drawn, fetched
+> and read is 2026-10-06's, `random.Random(20261006)`
+> (`research/paper-exercise/reports/green_run_sample2.json`, unchanged by this
+> entry). **2026-10-06 governs**; its decision rule is the one applied. Nothing
+> below was used.
+
 Addendum 2026-10-05 found setup S positive before costs (+0.103 R, better than
 random, lower bound +0.020) and negative after (−0.063, lower bound −0.225) on
 144 trades. **Setup S is frozen exactly as written there** (`scripts/green_run.py`,
