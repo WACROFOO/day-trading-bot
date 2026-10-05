@@ -589,3 +589,17 @@ the gross lower bound of (S − RND) > 0. Otherwise the green run is logged on
 the desk (no orders) and not traded. This sample's years were read by
 2026-10-02e (with a different setup), so a pass is still confirmed
 prospectively before any size change.
+
+### Addendum 2026-10-06 — green-run continuation, replication on 600 new symbol-days, before any run
+
+Addendum 2026-10-05 is unchanged in every rule and parameter. It was positive
+before costs (+0.103 R, beats random) and negative after (−0.063 net, lower
+bound −0.225) on 144 trades. This asks whether that holds on new days.
+**Sample:** 600 symbol-days drawn with `random.Random(20261006)` from the
+5,679 runner symbol-days of 2024–2026 NOT in the first 300
+(`research/paper-exercise/reports/green_run_sample2.json`). Ticks fetched
+before the read. **Decision:** the same three conditions as 2026-10-05, read on
+the 600 alone; regular hours (09:30–11:20) reported separately and given the
+weight, because the 09:30-gap universe flatters pre-market entries. If it
+passes, it is traded on paper behind a switch and confirmed on 200 prospective
+trades; if it fails, it stays a logged signal on the desk.

@@ -135,8 +135,44 @@ def day_lb(a, b, alpha=ALPHA, draws=10000, seed=20261005):
     return float(np.quantile(diff, alpha))
 
 
+SAMPLE2 = OUT / "green_run_sample2.json"
+
+
+def cmd_sample2(args) -> int:
+    """Addendum 2026-10-06: 600 new runner symbol-days, none of the first 300."""
+    import pickle
+    alerts = pickle.load(open(args.alerts, "rb"))[0]
+    first = {(r["day"], r["sym"]) for r in json.loads(RM.SAMPLE.read_text())["rows"]}
+    by = {}
+    for a in alerts:
+        if a["scanner"] != "running_up" or a["day"] < "2024-01-01" or not a.get("price_band"):
+            continue
+        if (a["day"], a["sym"]) in first:
+            continue
+        by.setdefault((a["day"], a["sym"]), []).append(int(a["epoch"]))
+    keys = sorted(by)
+    pick = sorted(random.Random(20261006).sample(keys, min(600, len(keys))))
+    rows = [{"day": d, "sym": s, "alerts": sorted(by[(d, s)])} for d, s in pick]
+    SAMPLE2.write_text(json.dumps({"seed": 20261006, "population": len(keys), "rows": rows}, indent=0))
+    print(f"population {len(keys)} (first 300 excluded) · sample {len(rows)}")
+    return 0
+
+
+def cmd_fetch(args) -> int:
+    rows = json.loads(Path(args.sample).read_text())["rows"]
+    fx = RM._fetcher()
+    for n, r in enumerate(rows, 1):
+        day0, ks = RM._chunks(r)
+        for k in ks:
+            fx.chunk(r["sym"], r["day"], k, day0)
+        if n % 25 == 0:
+            print(f"{n}/{len(rows)} symbol-days · requests {fx.requests}", flush=True)
+    print(f"done · requests {fx.requests}")
+    return 0
+
+
 def cmd_run(args) -> int:
-    meta = json.loads(RM.SAMPLE.read_text())
+    meta = json.loads(Path(args.sample).read_text())
     fx = RM._fetcher()
     qc = json.loads(RM.QUOTES.read_text()) if RM.QUOTES.exists() else {}
     res = {"1m": [], "10s": []}
@@ -192,8 +228,8 @@ def cmd_run(args) -> int:
         pr(f"  stop % median {np.median([100 * x['rps'] / x['fill'] for x in q]):.2f}")
         lbn = day_lb(nets, [(d, 0.0) for d, _ in nets])
         pr(f"  net mean, day-clustered one-sided 95% lower bound: {lbn:+.3f}")
-    (OUT / "green_run_output.txt").write_text("\n".join(L) + "\n")
-    (OUT / "green_run_results.json").write_text(json.dumps({"S": S, "S10": [x["r"] for x in res["10s"]],
+    (OUT / f"green_run{args.tag}_output.txt").write_text("\n".join(L) + "\n")
+    (OUT / f"green_run{args.tag}_results.json").write_text(json.dumps({"S": S, "S10": [x["r"] for x in res["10s"]],
                                                             "RND": [v for _, v in rnd]}, default=float))
     return 0
 
@@ -201,9 +237,12 @@ def cmd_run(args) -> int:
 def main(argv=None) -> int:
     import argparse
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["run"])
+    ap.add_argument("cmd", choices=["run", "sample2", "fetch"])
+    ap.add_argument("--sample", default=str(RM.SAMPLE))
+    ap.add_argument("--tag", default="")
+    ap.add_argument("--alerts")
     a = ap.parse_args(argv)
-    return cmd_run(a)
+    return {"run": cmd_run, "sample2": cmd_sample2, "fetch": cmd_fetch}[a.cmd](a)
 
 
 if __name__ == "__main__":
