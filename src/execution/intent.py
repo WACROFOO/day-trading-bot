@@ -14,7 +14,10 @@ same number:
 
 The replication study measured realised risk at a median 1.52x planned, and
 reading results in planned R made losses look catastrophic that were merely
-bad (-1.7408 R planned against -1.0818 R realised on the same trades). An
+bad (-1.7408 R planned against -1.0818 R realised on the same trades). Under
+A10 (stop-limit at the trigger, cap +0.3 %) the 2024-26 tick replay measured a
+median of 1.025x: fill - trigger median 0.025 R
+(research/paper-exercise/reports/2026-10-02-execution-study/cost_decomposition_output.txt). An
 executor that records only the planned figure cannot ever measure its own
 slippage, so `PlacedOrder` keeps room for both from the first order.
 """
@@ -429,7 +432,8 @@ class PlacedOrder:
 
     @property
     def slippage_ratio(self) -> Optional[float]:
-        """realised / planned. The study's median was 1.52."""
+        """realised / planned. The replication study's median was 1.52 (market
+        fills); under A10 the 2024-26 tick replay measured 1.025."""
         planned, real = self.planned_risk, self.realised_risk
         if real is None or planned <= 0:
             return None

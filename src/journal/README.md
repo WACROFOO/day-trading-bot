@@ -7,7 +7,7 @@ rather than from anything held in a process.
 
 | Module | What |
 |---|---|
-| `ledger.py` | the schema and the writes: `decisions`, `actuals`, `orders`, `bars`, `bars_10s`, `quote_ticks`, `board_snapshots`, `candidates`, `decision_revisions`, `exercise_state`. `bars_10s` is deliberately NOT in `bars`: the grader selects every row of `bars` |
+| `ledger.py` | the schema and the writes: `decisions`, `actuals`, `orders`, `bars`, `bars_10s`, `quote_ticks`, `board_snapshots`, `candidates`, `decision_revisions`, `exercise_state`, `green_run_signals`. `bars_10s` is deliberately NOT in `bars`: the grader selects every row of `bars`. `green_run_signals` is setup S's shadow log (one row per pause, `record_green_run`); the runner never reads it and `tests/test_green_run.py` traces that at the SQLite authorizer |
 | `replay.py` | **R11.** Re-runs the cascade on each decision's stored `inputs_json` and compares. Three outcomes: `reproduced` (the current rules give the recorded answer), `superseded` (an older rule set does, and it is named), `diverged` (no rule set ever run does — the log lost something, and that is a defect) |
 | `actuals.py` | what the tape did after each decision: MFE, MAE, first_hit. A bar touching stop and target is credited to the **stop** |
 | `controls.py` | the same rows under alternative exit rules, in R, so the strategy can be compared with doing nothing |

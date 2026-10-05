@@ -157,12 +157,14 @@ class BarStore:
                     done.add(m)
         return out
 
-    def candles_10s(self, symbol: str) -> List[Bar]:
+    def candles_10s(self, symbol: str, since: Optional[int] = None) -> List[Bar]:
         """Every complete ten-second candle in the store (both halves present),
-        oldest first — the chart's history, independent of the emit-once set."""
+        oldest first — the chart's history, independent of the emit-once set.
+        `since` (epoch seconds) keeps only candles starting at or after it, for
+        a caller that needs the last few without aggregating the whole day."""
         book = self._bars.get(symbol, {})
         out = []
-        for start in sorted({k // 10 * 10 for k in book}):
+        for start in sorted({k // 10 * 10 for k in book if since is None or k >= since}):
             if start in book and start + 5 in book:
                 bar = self._aggregate(symbol, start, 10)
                 if bar is not None:

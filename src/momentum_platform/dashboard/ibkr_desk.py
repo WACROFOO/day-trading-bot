@@ -144,6 +144,13 @@ class IbkrDesk:
         self.profile_days = int(prof["cadence"]["volumeProfileDays"])
         self._buf10s: List[object] = []        # closed 10s candles awaiting a batched write
         self._10s_warned = False
+        # Setup S, the green-run continuation: evaluated on every closed 10 s
+        # candle and LOGGED to the ledger's green_run_signals — never a
+        # decision, never an order (addendum 2026-10-05: "logged on the desk
+        # (no orders) and not traded"). Off with green_run_log = False.
+        self.green_run_log = True
+        self._green_pending: List[object] = []
+        self._green_warned = False
         self._news: List[dict] = []
         self._news_note: Optional[str] = None
         self._news_at: Optional[datetime] = None      # last headline pull
@@ -614,6 +621,7 @@ class IbkrDesk:
         s.poll_tickers()
         self._recover_stalled_bars()
         self.publisher.publish_closed_10s(s.store, s.symbols, sink=self._keep_10s)
+        self._green_run()
         h = s.check()
         key = (h.state, h.generation, h.subscriptions, h.market_data_type)
         if key != self._last_state:
@@ -633,6 +641,9 @@ class IbkrDesk:
         exactly that).
         """
         self._buf10s.append(bar)
+        pending = getattr(self, "_green_pending", None)
+        if pending is not None:
+            pending.append(bar)                 # evaluated after the drain, in `_green_run`
         if len(self._buf10s) < 30:
             return
         self._flush_10s()
@@ -652,6 +663,99 @@ class IbkrDesk:
             if not self._10s_warned:
                 self._10s_warned = True
                 self.log(f"  10s bars not persisted: {exc}")
+
+    # -- green run: setup S, logged, never traded ----------------------------------
+
+    #: A candle that closed longer ago than this is history (the start-up
+    #: backfill, a name joining mid-session, a stalled feed catching up): no
+    #: live desk could have acted on it, so it is not a shadow of a live entry.
+    GREEN_MAX_LAG_S = 30.0
+    #: The live quote stands in for the spread only while it is this fresh.
+    GREEN_QUOTE_LAG_S = 15.0
+
+    def _green_run(self) -> int:
+        """Evaluate setup S (`momentum_platform.green_run`) on each ten-second
+        candle this tick drained, and log SIGNAL / REFUSED pauses to the
+        ledger's `green_run_signals` (once per pause; `ledger.record_green_run`).
+
+        Read-only in every direction that matters: it reads the store, the
+        minute history and the ticker, writes one log table, and returns. It
+        creates no decision, so the runner never sees it. A failure is logged
+        once and never raised — a research log must not take the desk down.
+        Returns the rows written or changed."""
+        pending = getattr(self, "_green_pending", None)
+        if not pending:
+            return 0
+        self._green_pending = []
+        if not getattr(self, "green_run_log", True) or self.stream is None:
+            return 0
+        conn = _journal()
+        if conn is None:
+            return 0
+        try:
+            from .. import green_run as GR
+            from journal import ledger as _L
+            now = self.clock()
+            start = session_start(now)
+            by_sym: Dict[str, list] = {}
+            for bar in pending:
+                lag = (now - bar.ts).total_seconds() - 10
+                if lag <= self.GREEN_MAX_LAG_S and bar.ts >= start:
+                    by_sym.setdefault(bar.symbol, []).append(bar)
+            n = 0
+            for sym, drained in by_sym.items():
+                cache: dict = {}
+                for bar in sorted(drained, key=lambda b: b.ts):
+                    ev, lag = self._green_eval(GR, sym, bar, start, now, cache)
+                    if ev is not None and ev.status in ("SIGNAL", "REFUSED"):
+                        if _L.record_green_run(conn, ev, data_status="live", lag_s=round(lag, 1)) != "seen":
+                            n += 1
+            if n:
+                conn.commit()
+            return n
+        except Exception as exc:                          # noqa: BLE001
+            if not self._green_warned:
+                self._green_warned = True
+                self.log(f"  green-run log failed (no effect on the desk): {exc}")
+            return 0
+
+    def _green_eval(self, GR, sym: str, bar, start: datetime, now: datetime, cache: dict):
+        """Setup S at the close of `bar`, on what the desk held at that close.
+
+        Cheap first: the pause needs only the last nine non-empty ten-second
+        candles, so the last ten minutes are aggregated (the whole session
+        only for a tape too thin to hold nine). The minutes — every candle of
+        the session merged with the IBKR history — are built only when there
+        is a pause, about one close in many."""
+        lag = (now - bar.ts).total_seconds() - 10
+        if not bar.volume or bar.volume <= 0:
+            return None, lag            # no trade in it: the research never had such a bar
+        store, k = self.stream.store, int(bar.ts.timestamp())
+        t0 = int(start.timestamp())
+        tail = [c for c in store.candles_10s(sym, since=max(t0, k - 600)) if c.ts <= bar.ts]
+        bars10 = GR.bars10_from_candles(tail)
+        if len(bars10) < GR.LEG_BARS + GR.MAX_PAUSE:
+            bars10 = GR.bars10_from_candles([c for c in store.candles_10s(sym, since=t0) if c.ts <= bar.ts])
+        if not bars10 or bars10[-1][0] != k:
+            return None, lag
+        pause, _ = GR.find_pause(bars10)
+        if pause is None:
+            return None, lag
+        start_iso = start.isoformat(timespec="seconds").replace("+00:00", "Z")
+        bar_iso = bar.ts.astimezone(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
+        if "recs" not in cache:
+            cache["recs"] = [r for r in store_records(store, sym) if r["ts"] >= start_iso]
+        upto = [r for r in cache["recs"] if r["ts"] <= bar_iso]
+        t_close = k + 10
+        mins = [m for m in self._minutes.get(sym, []) if m["ts"] >= start_iso]
+        minutes = GR.minutes_from_records(merge_minutes(mins, upto), until=t_close)
+        spread = None
+        if lag <= self.GREEN_QUOTE_LAG_S:
+            t = self.stream._tickers.get(sym)
+            bid, ask = (_num(getattr(t, "bid", None)), _num(getattr(t, "ask", None))) if t is not None else (None, None)
+            if bid and ask and ask > bid > 0:
+                spread = round(ask - bid, 4)
+        return GR.evaluate(sym, minutes, bars10, live_spread=spread), lag
 
     def _recover_stalled_bars(self) -> bool:
         """Re-request the bar streams when quotes arrive but bars have stopped.
