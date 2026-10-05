@@ -1,0 +1,20 @@
+plans with stage-1 outcome 2577 · cache only: True
+0.3% replay vs cached outcome: agree 2557 · differ 0
+cost proxy for fills without a recorded spread: median spread_in 0.020
+
+  cap        filled incompl   fill-trig c p50/p90/p99 gross/fill  net/fill  net/plan  net sum
+  trig         1800      21            0.00/0.00/0.00    -0.1227   -0.3820   -0.2690   -687.6
+  0.15%        1866      20            0.07/1.00/2.00    -0.1207   -0.3817   -0.2785   -712.2
+  0.3% live    1886      20            0.62/2.00/4.00    -0.1197   -0.3808   -0.2808   -718.1
+  0.5%         1907      24            1.00/3.01/7.00    -0.1206   -0.3806   -0.2843   -725.9
+  1.0%         1973      25           1.50/7.00/14.08    -0.1299   -0.3887   -0.3005   -767.0
+  2.0%         2053      29          2.00/12.00/25.48    -0.1394   -0.3974   -0.3202   -815.8
+  marginal fills at 0.5% (unfilled at 0.3 %): n 21 · gross mean +0.973 · median +0.667
+  marginal fills at 1.0% (unfilled at 0.3 %): n 85 · gross mean +0.949 · median +0.636
+  marginal fills at 2.0% (unfilled at 0.3 %): n 164 · gross mean +0.809 · median +0.500
+  fills LOST at trig (filled at 0.3 %): n 85 · their gross at 0.3 % mean +0.908 · median +0.658
+  fills LOST at 0.15% (filled at 0.3 %): n 20 · their gross at 0.3 % mean +0.844 · median +0.676
+
+real	0m18.288s
+user	0m40.577s
+sys	0m4.949s

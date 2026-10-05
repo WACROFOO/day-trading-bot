@@ -1,0 +1,38 @@
+plans 88823 · pass BASE 6132 · with outcome 2577 · filled 1886
+analysed 1873 filled trades (same filter as cost_decomp)
+
+==== (a) $ risk at the fill vs the $40 target, current sizing (shares from trigger - stop)
+  planned $  : p50 39.930 · p90 40.000 · p95 40.000 · p99 40.079 · max 40.310 · mean 39.886
+  at-fill $  : p50 40.850 · p90 44.400 · p95 45.579 · p99 46.620 · max 48.840 · mean 41.525
+  at-fill - planned $: p50 1.000 · p90 4.440 · p95 5.672 · p99 6.660 · max 8.880 · mean 1.638
+  at-fill > $40: 56.4% · > $42 (RISK_TOLERANCE 1.05): 34.8% · > $44: 12.3%
+  exit kinds: {'stop': 92, 'trail': 1775, 'flat': 6}
+  exits at the INITIAL stop (the trail never moved it; the only trades that carried the at-fill risk to the exit): n 92
+     seconds fill->exit for them: p50 18.5 · p90 142.0
+     of which filled above the trigger: 22
+
+==== all-in $ result per trade at current sizing (print P&L - Fixed commission - half spread in & out)
+  mean $-15.13 · std $50.12 · net R (pnl / planned $) mean -0.3792
+  losing trades n 1359: loss $ p50 35.480 · p90 51.318 · p95 58.091 · p99 127.815 · max 493.644 · mean 35.820
+     loss > $40: 508 trades (27.12% of all)
+     loss > $42: 437 trades (23.33% of all)
+     loss > $50: 161 trades (8.60% of all)
+     loss > $60: 57 trades (3.04% of all)
+     loss > $80: 26 trades (1.39% of all)
+     loss > $120: 16 trades (0.85% of all)
+  trades losing > $42 (n 437): their entry-slip $ mean 1.69 · exit-slip-below-level $ mean 9.86 · loss mean 57.44
+
+==== (b) pessimistic sizing variants (same trades, same fills/exits; only the share count changes)
+  variant                                              sh med  $ mean   $ std     $ p1    $ min  >$40  >$42  R/plan$   R/$40
+  V0 live: trigger-stop                                   242  -15.13   50.12   -95.11  -493.64   508   437  -0.3792 -0.3782
+  V1 cap-stop (worst entry the A10 limit allows)          220  -13.74   45.52   -86.78  -444.69   349   267  -0.3808 -0.3436
+  V2 V1 + spread + 1c comm/sh                             185  -11.09   38.12   -75.19  -382.13    77    50  -0.3863 -0.2772
+  V3 V2 + 2c exit-slip reserve (measured p90 2.02c)       169  -10.12   34.47   -66.70  -336.51    47    38  -0.3886 -0.2530
+
+==== (b2) daily loss budget: live binary gate (3 R gross, 3 losses, 6 orders) vs sizing to the remaining budget
+  binary gate (live)         trades 1457 · $ mean/trade -14.80 · days 607 · worst day $-473.93 · p1 day $-242.89 · days < -$120 53 · days < -$140 26 · total $-21568
+  size to remaining budget   trades 1459 · $ mean/trade -14.75 · days 607 · worst day $-473.93 · p1 day $-242.89 · days < -$120 54 · days < -$140 25 · total $-21513
+
+real	0m12.784s
+user	0m13.915s
+sys	0m6.234s

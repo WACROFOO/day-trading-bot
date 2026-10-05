@@ -1,0 +1,4 @@
+n 1873 · at-fill risk / planned risk: p50 1.025 · p90 1.111 · p99 1.167 · max 1.222
+initial-stop exits filled above the trigger: n 22 · entry-slip $ carried to the stop: sum 72.57 · mean 3.30 · max 5.71
+V0: gross R/planned$ -0.1184 · commission R 0.0777 · half-spreads R 0.1831 · net -0.3792
+V2: gross R/planned$ -0.1184 · commission R 0.0847 · half-spreads R 0.1831 · net -0.3863

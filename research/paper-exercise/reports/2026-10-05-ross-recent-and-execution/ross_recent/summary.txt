@@ -1,0 +1,248 @@
+ROSS CAMERON, JUNE-JULY 2026 RECAP TRADES ON THE SIP TAPE vs OUR TWO SETUPS
+rows: the extraction handed to this run (his words; video id + timestamp each); bars and prints: Alpaca SIP
+files: trades.py (rows) · fetch_bars.py · analyze.py · summarize.py · ledger.csv / ledger.json (one line per row)
+
+ROWS 253: UNLOCATED 149 · LOCATED 67 · NO_TICKER 31 · PRICE_NEVER_PRINTED 4 · TICKER_MISMATCH 2
+  UNLOCATED: no stated entry price or clock time 142; no SIP bars for this ticker/day 4; no print within 2 min of stated 07:00 1; stated 8.29 printed, but not inside 12:00-12:00 1; no print within 2 min of stated 07:20 1
+    2026-06-18 CDTI       Zf2p9c1qHjg [00:04:38] UNLOCATED: no SIP bars for this ticker/day
+    2026-06-18 CDTI       Zf2p9c1qHjg [00:05:11] UNLOCATED: no SIP bars for this ticker/day
+    2026-06-18 CDTI       Zf2p9c1qHjg [00:06:08] UNLOCATED: no SIP bars for this ticker/day
+    2026-07-01 CF         iZ-mXl0ga3U [00:03:16] TICKER_MISMATCH: context price 5.5 never printed (day range 107.50-110.35)
+    2026-07-01 CF         iZ-mXl0ga3U [00:04:07] TICKER_MISMATCH: context price 5.5 never printed (day range 107.50-110.35)
+    2026-07-01 GEM        iZ-mXl0ga3U [00:04:34] PRICE_NEVER_PRINTED: stated 10.0 never printed 04:00-16:00 (range 50.57-51.32)
+    2026-07-02 CX         3dXvK41dpd4 [00:03:40] PRICE_NEVER_PRINTED: stated 5.76 never printed 04:00-16:00 (range 12.21-12.54)
+    2026-07-24 ZCMD       CA8i4Rc2bUY [00:02:59] PRICE_NEVER_PRINTED: stated 5.5 never printed 04:00-16:00 (range 1.30-2.44)
+    2026-07-24 EHGO       CA8i4Rc2bUY [00:05:20] PRICE_NEVER_PRINTED: stated 3.0 never printed 04:00-16:00 (range 1.84-2.63)
+    2026-07-14 JTI        ut9nmRP3ENY [00:07:26] UNLOCATED: no SIP bars for this ticker/day
+
+LOCATED 67 rows = 56 distinct (day, ticker, minute) moments (one move is often told twice: big + small account, or two videos)
+  method: price 37; price+bounds 17; time~ 5; time 4; time+price 3; time~+price 1
+  tiers: A stated clock time 13 · B price visited once, inside <= 5 min 16 · C ambiguous (price visited again >10 min later, or held in range > 5 min) 38
+  his outcome, located rows: win 43; loss 21; not stated 2; scratch 1
+  his outcome, all rows:     win 131; loss 78; not stated 39; scratch 5
+  outside the $2-20 band both setups require: 6 rows (MTEK 1.7, VIVS 1.8, VIVS 1.91, STI 26.0, ILLR 1.9, DFNS 39.0)
+  CAVEATS: (1) recap videos: wins come with prices and clock times, losses are often aggregated ('a couple losses', 'gave back 11,000') without either, so located rows over-represent wins. (2) The task's price rule takes the FIRST minute holding the price; for a stock rising all morning that is by construction a new-high minute, which inflates 'above VWAP', 'new high' and S's chance of firing (S needs a new 1-min high). The new-high-matched chance corrects the S comparison; tier A (clock time) is the unbiased read of context.
+
+==============================================================================================================
+ALL LOCATED ROWS (task rule: stated time, else first minute 04:00-12:00 holding the stated price)
+==============================================================================================================
+CONTEXT AT HIS ENTRY (point-in-time: VWAP from 04:00, high of day through the minute before his)
+  hod% = distance under the prior high of day (negative = above it, i.e. a new high)
+  all     n  67 · pre-market 61/67 (91%) · above VWAP 66/67 (99%) · $2-20 61/67 (91%) · his minute made a new high of day 59/67 (88%)
+          medians: gain vs prev close +119.6% · hod% -3.8 · minutes since first +10% print +18.0
+  wins    n  43 · pre-market 42/43 (98%) · above VWAP 42/43 (98%) · $2-20 39/43 (91%) · his minute made a new high of day 39/43 (91%)
+          medians: gain vs prev close +98.1% · hod% -5.3 · minutes since first +10% print +5.0
+  losses  n  21 · pre-market 16/21 (76%) · above VWAP 21/21 (100%) · $2-20 19/21 (90%) · his minute made a new high of day 18/21 (86%)
+          medians: gain vs prev close +140.9% · hod% -2.6 · minutes since first +10% print +60.0
+  other   n   3 · pre-market 3/3 (100%) · above VWAP 3/3 (100%) · $2-20 3/3 (100%) · his minute made a new high of day 2/3 (67%)
+          medians: gain vs prev close +259.4% · hod% -13.1 · minutes since first +10% print +102.0
+
+OUR 1-MINUTE PLAN (rules_audit.plans_for_symbol_day; armed = trigger bar start in [his minute - 5, his minute]; passes = RA.passes(p, RA.BASE))
+  all     armed nearby 23/67 (34%) (chance 29%) · passed every gate 4/67 (6%) (chance 4%, new-high-matched 5%)
+          passing plans, mode C 'base' gross R: n 3 · mean +1.56 R · median -0.37 R · total +4.7 R · win 33% · unfilled 1
+  wins    armed nearby 13/43 (30%) (chance 29%) · passed every gate 3/43 (7%) (chance 5%, new-high-matched 7%)
+          passing plans, mode C 'base' gross R: n 2 · mean +2.87 R · median +2.87 R · total +5.7 R · win 50% · unfilled 1
+  losses  armed nearby 8/21 (38%) (chance 29%) · passed every gate 0/21 (0%) (chance 1%, new-high-matched 1%)
+  other   armed nearby 2/3 (67%) (chance 33%) · passed every gate 1/3 (33%) (chance 7%, new-high-matched 7%)
+          passing plans, mode C 'base' gross R: n 1 · mean -1.04 R · median -1.04 R · total -1.0 R · win 0% · unfilled 0
+  why the armed plan failed (a plan can fail several): macd 12; volume 11; price 6; stop<2% 3; stop<4x spread 3; ema9 2; vwap 1; fade>25% 1
+
+GREEN-RUN S (green_run gates + runup_micro 10-s pause, 07:00-11:30; near = a fire in [his minute - 3 min, his minute + 1 min])
+  rows with an S window: 65 of 67 (no window: outside 07:00-11:30 2)
+  all     n  65 · S fired near his entry 12/65 (18%) · chance: any 4-min window 5%, minutes matched on new-high 15% · S fires 1.99/h in these windows
+          S near his entry, gross R: n 10 · mean +0.74 R · median +0.80 R · total +7.4 R · win 70% · unfilled 2 · his outcome on those: win 9, not stated 2, loss 1
+  wins    n  41 · S fired near his entry 9/41 (22%) · chance: any 4-min window 6%, minutes matched on new-high 17% · S fires 2.53/h in these windows
+          S near his entry, gross R: n 7 · mean +0.99 R · median +0.80 R · total +6.9 R · win 86% · unfilled 2 · his outcome on those: win 9
+  losses  n  21 · S fired near his entry 1/21 (5%) · chance: any 4-min window 3%, minutes matched on new-high 8% · S fires 0.89/h in these windows
+          S near his entry, gross R: n 1 · mean -0.63 R · median -0.63 R · total -0.6 R · win 0% · unfilled 0 · his outcome on those: loss 1
+  other   n   3 · S fired near his entry 2/3 (67%) · chance: any 4-min window 5%, minutes matched on new-high 36% · S fires 2.25/h in these windows
+          S near his entry, gross R: n 2 · mean +0.53 R · median +0.53 R · total +1.1 R · win 50% · unfilled 0 · his outcome on those: not stated 2
+  a 10-s pause near him refused by an S gate: 1 (price) · S fired 3-20 min BEFORE his entry: 4 rows
+
+==============================================================================================================
+RELIABLE LOCATIONS ONLY (tiers A + B)
+==============================================================================================================
+CONTEXT AT HIS ENTRY (point-in-time: VWAP from 04:00, high of day through the minute before his)
+  hod% = distance under the prior high of day (negative = above it, i.e. a new high)
+  all     n  29 · pre-market 23/29 (79%) · above VWAP 28/29 (97%) · $2-20 26/29 (90%) · his minute made a new high of day 22/29 (76%)
+          medians: gain vs prev close +98.1% · hod% -0.3 · minutes since first +10% print +40.0
+  wins    n  17 · pre-market 16/17 (94%) · above VWAP 16/17 (94%) · $2-20 15/17 (88%) · his minute made a new high of day 14/17 (82%)
+          medians: gain vs prev close +73.2% · hod% +0.0 · minutes since first +10% print +5.0
+  losses  n  11 · pre-market 6/11 (55%) · above VWAP 11/11 (100%) · $2-20 10/11 (91%) · his minute made a new high of day 8/11 (73%)
+          medians: gain vs prev close +125.2% · hod% -1.2 · minutes since first +10% print +180.0
+  other   n   1 · pre-market 1/1 (100%) · above VWAP 1/1 (100%) · $2-20 1/1 (100%) · his minute made a new high of day 0/1 (0%)
+          medians: gain vs prev close +352.3% · hod% +8.3 · minutes since first +10% print +102.0
+
+OUR 1-MINUTE PLAN (rules_audit.plans_for_symbol_day; armed = trigger bar start in [his minute - 5, his minute]; passes = RA.passes(p, RA.BASE))
+  all     armed nearby 9/29 (31%) (chance 29%) · passed every gate 3/29 (10%) (chance 3%, new-high-matched 4%)
+          passing plans, mode C 'base' gross R: n 3 · mean +1.56 R · median -0.37 R · total +4.7 R · win 33% · unfilled 0
+  wins    armed nearby 6/17 (35%) (chance 29%) · passed every gate 2/17 (12%) (chance 4%, new-high-matched 4%)
+          passing plans, mode C 'base' gross R: n 2 · mean +2.87 R · median +2.87 R · total +5.7 R · win 50% · unfilled 0
+  losses  armed nearby 2/11 (18%) (chance 27%) · passed every gate 0/11 (0%) (chance 0%, new-high-matched 1%)
+  other   armed nearby 1/1 (100%) (chance 44%) · passed every gate 1/1 (100%) (chance 22%, new-high-matched 22%)
+          passing plans, mode C 'base' gross R: n 1 · mean -1.04 R · median -1.04 R · total -1.0 R · win 0% · unfilled 0
+  why the armed plan failed (a plan can fail several): macd 3; volume 3; price 2; stop<2% 1; stop<4x spread 1; vwap 1; ema9 1; fade>25% 1
+
+GREEN-RUN S (green_run gates + runup_micro 10-s pause, 07:00-11:30; near = a fire in [his minute - 3 min, his minute + 1 min])
+  rows with an S window: 29 of 29
+  all     n  29 · S fired near his entry 3/29 (10%) · chance: any 4-min window 4%, minutes matched on new-high 9% · S fires 1.48/h in these windows
+          S near his entry, gross R: n 2 · mean +0.27 R · median +0.27 R · total +0.5 R · win 50% · unfilled 1 · his outcome on those: win 2, not stated 1
+  wins    n  17 · S fired near his entry 2/17 (12%) · chance: any 4-min window 5%, minutes matched on new-high 12% · S fires 1.77/h in these windows
+          S near his entry, gross R: n 1 · mean +0.80 R · median +0.80 R · total +0.8 R · win 100% · unfilled 1 · his outcome on those: win 2
+  losses  n  11 · S fired near his entry 0/11 (0%) · chance: any 4-min window 3%, minutes matched on new-high 5% · S fires 0.82/h in these windows
+  other   n   1 · S fired near his entry 1/1 (100%) · chance: any 4-min window 6%, minutes matched on new-high 8% · S fires 3.75/h in these windows
+          S near his entry, gross R: n 1 · mean -0.27 R · median -0.27 R · total -0.3 R · win 0% · unfilled 0 · his outcome on those: not stated 1
+  a 10-s pause near him refused by an S gate: 0 () · S fired 3-20 min BEFORE his entry: 1 rows
+
+==============================================================================================================
+CLOCK-TIME LOCATIONS ONLY (tier A: the context read without the price-rule bias)
+==============================================================================================================
+CONTEXT AT HIS ENTRY (point-in-time: VWAP from 04:00, high of day through the minute before his)
+  hod% = distance under the prior high of day (negative = above it, i.e. a new high)
+  all     n  13 · pre-market 10/13 (77%) · above VWAP 12/13 (92%) · $2-20 13/13 (100%) · his minute made a new high of day 6/13 (46%)
+          medians: gain vs prev close +149.0% · hod% +8.3 · minutes since first +10% print +73.0
+  wins    n   7 · pre-market 6/7 (86%) · above VWAP 6/7 (86%) · $2-20 7/7 (100%) · his minute made a new high of day 4/7 (57%)
+          medians: gain vs prev close +149.0% · hod% +12.1 · minutes since first +10% print +49.0
+  losses  n   5 · pre-market 3/5 (60%) · above VWAP 5/5 (100%) · $2-20 5/5 (100%) · his minute made a new high of day 2/5 (40%)
+          medians: gain vs prev close +143.9% · hod% +6.7 · minutes since first +10% print +180.0
+  other   n   1 · pre-market 1/1 (100%) · above VWAP 1/1 (100%) · $2-20 1/1 (100%) · his minute made a new high of day 0/1 (0%)
+          medians: gain vs prev close +352.3% · hod% +8.3 · minutes since first +10% print +102.0
+
+OUR 1-MINUTE PLAN (rules_audit.plans_for_symbol_day; armed = trigger bar start in [his minute - 5, his minute]; passes = RA.passes(p, RA.BASE))
+  all     armed nearby 5/13 (38%) (chance 30%) · passed every gate 3/13 (23%) (chance 4%, new-high-matched 4%)
+          passing plans, mode C 'base' gross R: n 3 · mean +1.56 R · median -0.37 R · total +4.7 R · win 33% · unfilled 0
+  wins    armed nearby 3/7 (43%) (chance 29%) · passed every gate 2/7 (29%) (chance 5%, new-high-matched 5%)
+          passing plans, mode C 'base' gross R: n 2 · mean +2.87 R · median +2.87 R · total +5.7 R · win 50% · unfilled 0
+  losses  armed nearby 1/5 (20%) (chance 30%) · passed every gate 0/5 (0%) (chance 0%, new-high-matched 0%)
+  other   armed nearby 1/1 (100%) (chance 44%) · passed every gate 1/1 (100%) (chance 22%, new-high-matched 22%)
+          passing plans, mode C 'base' gross R: n 1 · mean -1.04 R · median -1.04 R · total -1.0 R · win 0% · unfilled 0
+  why the armed plan failed (a plan can fail several): macd 1; stop<2% 1; stop<4x spread 1; vwap 1; ema9 1; fade>25% 1
+
+GREEN-RUN S (green_run gates + runup_micro 10-s pause, 07:00-11:30; near = a fire in [his minute - 3 min, his minute + 1 min])
+  rows with an S window: 13 of 13
+  all     n  13 · S fired near his entry 1/13 (8%) · chance: any 4-min window 3%, minutes matched on new-high 3% · S fires 1.16/h in these windows
+          S near his entry, gross R: n 1 · mean -0.27 R · median -0.27 R · total -0.3 R · win 0% · unfilled 0 · his outcome on those: not stated 1
+  wins    n   7 · S fired near his entry 0/7 (0%) · chance: any 4-min window 3%, minutes matched on new-high 3% · S fires 0.98/h in these windows
+  losses  n   5 · S fired near his entry 0/5 (0%) · chance: any 4-min window 2%, minutes matched on new-high 2% · S fires 0.90/h in these windows
+  other   n   1 · S fired near his entry 1/1 (100%) · chance: any 4-min window 6%, minutes matched on new-high 8% · S fires 3.75/h in these windows
+          S near his entry, gross R: n 1 · mean -0.27 R · median -0.27 R · total -0.3 R · win 0% · unfilled 0 · his outcome on those: not stated 1
+  a 10-s pause near him refused by an S gate: 0 () · S fired 3-20 min BEFORE his entry: 1 rows
+
+==============================================================================================================
+DISTINCT ENTRY MOMENTS (first row of each day/ticker/minute kept)
+  n 56 · 1-min plan armed nearby 19/56 (34%) · passed 4/56 (7%) · S near 10/54 (19%) (chance 5%, matched 16%)
+  S near, gross R: n 9 · mean +0.73 R · median +0.80 R · total +6.6 R · win 67%
+  1-min plan passed + filled, mode C gross R: n 3 · mean +1.56 R · median -0.37 R · total +4.7 R · win 33%
+
+==============================================================================================================
+WARM-UP: bars printed since 04:00 before his minute. green_run.minute_context arms only from bar index 30; indicators.macd needs 35 closes (else the 1-min plan's MACD gate is red)
+  all      n  67 · < 30 bars (S cannot arm) 32/67 (48%) · < 35 bars (no MACD) 32/67 (48%) · median bars 45
+  wins     n  43 · < 30 bars (S cannot arm) 22/43 (51%) · < 35 bars (no MACD) 22/43 (51%) · median bars 29
+  losses   n  21 · < 30 bars (S cannot arm) 9/21 (43%) · < 35 bars (no MACD) 9/21 (43%) · median bars 67
+  tier A+B n  29 · < 30 bars (S cannot arm) 10/29 (34%) · < 35 bars (no MACD) 10/29 (34%) · median bars 55
+  armed plans refused on MACD: 12, of which inside the 35-bar warm-up: 10
+
+POST-HOC DIAGNOSTIC S0 (diag_warmup.py: S with the 30-bar warm-up removed, all else equal; chosen after seeing the data, decides nothing)
+  all located  n  65 · S0 near 29/65 (45%) (chance 8%, matched 30%) · S0 gross R near: n 25 · mean +0.83 R · median +0.80 R · total +20.7 R · win 64%
+  tier A+B     n  29 · S0 near 7/29 (24%) (chance 6%, matched 17%) · S0 gross R near: n 5 · mean +0.51 R · median +0.78 R · total +2.5 R · win 60%
+  wins         n  41 · S0 near 18/41 (44%) (chance 9%, matched 31%) · S0 gross R near: n 15 · mean +0.83 R · median +0.80 R · total +12.4 R · win 73%
+  losses       n  21 · S0 near 8/21 (38%) (chance 6%, matched 26%) · S0 gross R near: n 7 · mean +1.08 R · median +2.24 R · total +7.6 R · win 57%
+  S/S0 stop width at the fires near his entries (1-min bar low - 1c): median 27.1% of price, max 49.1%
+
+SENSITIVITY, NOT COUNTED ABOVE: CA8i4Rc2bUY rows re-dated to 2026-07-23 (their prices never printed on 07-24; both printed 07-23, the day Ts7C0flv-1g recaps ZCMD and EHGO entries)
+  2026-07-23 ZCMD 09:08 tier C · his loss at 5.5 · plan armed True passed True R(C) -1.0286 · S ok near False · AMBIGUOUS: price held in range 15 min (09:08-09:23)
+  2026-07-23 EHGO 04:12 tier C · his win at 3.0 · plan armed False passed None R(C) None · S outside 07:00-11:30 near None · AMBIGUOUS: price visited 3 times >10 min apart inside the window, at 04:12 09:06 09:29
+
+PER LOCATED ROW (t = tier; plan: - none armed, arm = armed but a gate failed, PASS = every gate; S: near / - / n/a)
+  day        sym   min   t his           $px  gain%  vwap   hod%  m10 plan   planR S        S R  p(S) pm(S)  video [ts]
+  2026-06-01 MTEK  08:40 B win          1.70   37.1 above    1.7    0 -            -              0.0   0.0  eMRYIeDWZkQ [00:11:06]
+  2026-06-01 MASK  09:08 C win          5.50   53.6 above   -3.8  308 PASS         near   +0.29 0.138 0.455  eMRYIeDWZkQ [00:13:46]
+  2026-06-10 DSY   07:44 B win          3.10   68.5 above  -14.8    3 -            -            0.204 0.571  ltdLO7sAzow [00:07:42]
+  2026-06-15 JRSH  08:25 A win          4.14   19.7 below   13.0    5 -            -              0.0   0.0  KlIE5mjS2dM [00:02:33]
+  2026-06-23 ICCM  08:11 C win          6.99   17.9 above   -3.4    1 -            -            0.061 0.333  10ogBWqgprI [00:04:52]
+  2026-07-01 TC    07:00 A loss         7.56  308.6 above   10.0  180 -            -              0.0   0.0  iZ-mXl0ga3U [00:01:44]
+  2026-07-09 VRAX  07:32 C win          6.55  106.0 above  -21.1    2 -            -            0.055 0.231  49ykxodJcFc [00:03:51]
+  2026-07-09 VRAX  07:39 C loss         8.00  151.6 above   -0.6    9 arm          -            0.055 0.231  49ykxodJcFc [00:04:22]
+  2026-07-09 VRAX  08:57 C win         10.00  214.5 above   -0.6   87 -            near   +3.23 0.118   0.4  49ykxodJcFc [00:05:07]
+  2026-07-09 VRAX  09:07 C loss        12.00  277.4 above   -0.4   97 -            -            0.173   0.5  49ykxodJcFc [00:05:40]
+  2026-07-13 PLSM  07:59 C win          6.52   68.9 above  -24.7   57 arm          -              0.0   0.0  RZbM0qXOFbc [00:05:09]
+  2026-07-13 PLSM  08:02 C loss         9.30  140.9 above   -1.5   60 arm          -              0.0   0.0  RZbM0qXOFbc [00:06:59]
+  2026-07-13 PLSM  08:02 C loss         9.57  147.9 above   -4.5   60 arm          -              0.0   0.0  RZbM0qXOFbc [00:07:08]
+  2026-07-13 VEEE  09:30 A win         12.00  149.0 above    5.5   40 PASS   -0.37 -              0.0   0.0  RZbM0qXOFbc [00:09:41]
+  2026-07-15 VIVS  08:06 C win          1.80  115.6 above  -14.7    1 -            -              0.0   0.0  TzpOIMOrU7I [00:04:01]
+  2026-07-15 VIVS  08:07 C scratch      3.00  259.4 above  -21.5    2 -            -              0.0   0.0  TzpOIMOrU7I [00:04:10]
+  2026-07-15 VIVS  08:07 C loss         3.00  259.4 above  -21.5    2 -            -              0.0   0.0  TzpOIMOrU7I [00:04:25]
+  2026-07-22 LABT  08:05 C win          5.65  203.8 above  -54.8    3 -            -              0.0   0.0  -QZ8buLplck [00:06:46]
+  2026-07-24 MSS   09:02 C loss         4.25   65.4 above  -14.2    2 -            -              0.0   0.0  b-iczURZwJY [00:04:37]
+  2026-07-27 VTIX  09:17 B win          3.50   32.6 above  -36.7    0 -            -              0.0   0.0  83Yuliq1vHA [00:05:48]
+  2026-06-02 BJDX  07:19 A win          6.80  213.4 above   19.8   49 -            -              0.0   0.0  hQCwquA6O7E [00:08:43]
+  2026-06-09 AZI   07:48 C win          4.98  340.7 above  -20.6  201 -            near   +1.49 0.248 0.692  znf0QIW8KRE [00:15:46]
+  2026-06-11 EDHL  07:20 B win          5.65   61.4 above   -7.8    5 -            near   +0.80 0.143 0.375  vcfpJWEqaTU [00:09:02]
+  2026-06-11 EDHL  07:21 C win          8.40  140.0 above   -9.1    6 -            near   +0.80 0.143 0.375  vcfpJWEqaTU [00:09:59]
+  2026-06-11 EDHL  08:57 A not stated  15.83  352.3 above    8.3  102 PASS   -1.04 near   -0.27 0.064 0.075  vcfpJWEqaTU [00:11:06]
+  2026-06-26 ZDAI  07:53 B loss         4.45  107.0 above  -25.4   12 -            -              0.0   0.0  hUb-n3kzqjI [00:02:44]
+  2026-06-26 SDOT  04:46 C win         10.00   61.8 above  -11.4    2 -            n/a                       hUb-n3kzqjI [00:09:22]
+  2026-06-29 UPC   04:00 C win          9.85  232.8 above    2.4    0 -            n/a                       tQ7cYcI2tNk [00:08:00]
+  2026-07-07 CLRO  09:07 A loss         8.86   26.6 above    6.7   18 -            -            0.107 0.081  Dpba4GF0KhY [00:03:33]
+  2026-07-07 CLRO  09:07 C win          9.40   34.3 above    1.1   18 -            -            0.107 0.081  Dpba4GF0KhY [00:04:11]
+  2026-07-09 VRAX  07:32 B win          6.30   98.1 above  -16.4    2 -            -            0.055 0.231  miyJZq-5uIg [00:03:37]
+  2026-07-13 PLSM  08:02 C loss         9.50  146.1 above   -3.7   60 arm          -              0.0   0.0  S2sOq-stPgA [00:05:15]
+  2026-07-13 PLSM  08:02 C loss         9.50  146.1 above   -3.7   60 arm          -              0.0   0.0  S2sOq-stPgA [00:05:15b]
+  2026-07-13 VEEE  09:08 C win         11.00  128.2 above   -0.6   18 -            -              0.0   0.0  S2sOq-stPgA [00:07:57]
+  2026-07-15 ERNA  07:50 C win          9.37   54.6 above   11.8    0 -            -              0.0   0.0  8IYunlNOVmM [00:05:35]
+  2026-07-15 VIVS  08:06 C win          1.91  128.8 above  -21.7    1 -            -              0.0   0.0  8IYunlNOVmM [00:07:30]
+  2026-07-20 BIYA  07:00 C win          7.50   81.2 above   -5.3  180 -            -            0.083 0.333  mDQEtmG0PCw [00:02:31]
+  2026-07-28 INLF  10:32 B loss         7.80  137.8 above   -2.6  392 -            -              0.0   0.0  1ml6zHikpsE [00:04:44]
+  2026-06-04 STI   08:37 A win         17.70  251.2 above    0.0  155 arm          -            0.061 0.083  A7acrZyX9VU [00:04:47]
+  2026-06-04 STI   09:15 C loss        26.00  415.9 above   -4.0  193 arm          -              0.0   0.0  A7acrZyX9VU [00:05:18]
+  2026-06-11 EDHL  07:20 C win          6.83   95.1 above  -30.3    5 -            near   +0.80 0.143 0.375  5UBYoh6J2e0 [00:08:19]
+  2026-06-11 FGL   08:02 B win          3.45   86.5 above   -4.2    4 arm          -              0.0   0.0  5UBYoh6J2e0 [00:09:31]
+  2026-06-16 UPC   07:18 C win          4.00   28.2 above   -6.1    7 arm          -              0.0   0.0  c814DtTOGDg [00:04:26]
+  2026-06-22 NXTS  08:47 C win          9.75   91.9 above   -5.5   25 -            -            0.129 0.333  wxcUcYbUtDw [00:11:14]
+  2026-06-22 NXTS  09:11 B loss        11.44  125.2 above   -1.2   49 -            -            0.178 0.444  wxcUcYbUtDw [00:12:10]
+  2026-06-26 SDOT  09:30 A loss        11.50   86.1 above   35.6  286 arm          -              0.0   0.0  P5qdiBNct1c [00:03:45]
+  2026-06-30 VWAV  08:03 B win          8.00   73.2 above   -5.3    2 arm          -              0.0   0.0  PnuyhYGHuUY [00:07:33]
+  2026-06-30 SVRE  08:33 C win          6.98  156.6 above   -4.0    3 -            -              0.0   0.0  PnuyhYGHuUY [00:08:59]
+  2026-06-30 SVRE  08:46 A loss         8.00  194.1 above   -5.4   16 -            -              0.0   0.0  PnuyhYGHuUY [00:09:39]
+  2026-06-30 JEM   08:59 B win          3.70  242.6 above    8.6  299 -            -            0.059   0.5  PnuyhYGHuUY [00:11:23]
+  2026-07-07 SILO  08:11 B win          8.81   41.6 above  -35.3    0 -            -              0.0   0.0  550XNdh4y5k [00:06:58]
+  2026-07-07 CLRO  08:50 C loss         8.50   21.4 above   -3.4    1 -            near   -0.63 0.116   0.5  550XNdh4y5k [00:07:32]
+  2026-07-10 GMM   08:41 C win          5.40  191.9 above   -0.4  281 arm          -            0.059   0.5  uTyfk4UvsUw [00:09:56]
+  2026-07-14 NXTC  07:13 A win          8.40  285.3 above   12.1   73 PASS   +6.10 -            0.063 0.045  ut9nmRP3ENY [00:06:42]
+  2026-07-16 RUBI  08:31 C win          6.15   65.3 above  -55.5    0 -            -              0.0   0.0  2UpK6vs0MVQ [00:03:06]
+  2026-07-20 BIYA  07:41 A win          7.12   72.0 above    8.1  221 -            -            0.061 0.053  x0qg5eGF7zc [00:04:52]
+  2026-07-28 INLF  10:33 A loss         8.00  143.9 above   -0.3  393 -            -              0.0   0.0  Zj0DYfQilso [00:05:21]
+  2026-07-28 INLF  10:32 B loss         7.70  134.8 above   -1.3  392 -            -              0.0   0.0  Zj0DYfQilso [00:06:49]
+  2026-06-10 GCDT  07:23 C win          2.50  273.1 above   -6.8  171 arm          -              0.0   0.0  YDCycC3xVMA [00:13:23]
+  2026-06-10 CLWT  08:00 C not stated   2.59  102.3 above  -13.1  152 arm          near   +1.33 0.075   1.0  YDCycC3xVMA [00:22:47]
+  2026-06-17 UTSI  07:45 C win          6.50  119.6 above  -45.1    3 -            -              0.0   0.0  9aVNE3mJJBk [00:07:06]
+  2026-06-25 ANY   08:58 B loss         3.90   32.2 above   -2.7   57 -            -              0.0   0.0  A7Gnw1CMExI [00:06:28]
+  2026-06-25 ILLR  09:09 B win          1.90  147.0 above  -33.6   39 arm          near     unf 0.167 0.214  A7Gnw1CMExI [00:07:48]
+  2026-06-25 ILLR  09:09 C win          2.50  225.1 above  -75.8   39 arm          near     unf 0.167 0.214  A7Gnw1CMExI [00:08:55]
+  2026-07-22 LABT  08:05 A win          3.01   61.9 above   17.5    3 -            -              0.0   0.0  YkEOx0ZWlWc [00:04:40]
+  2026-07-29 NCRA  08:03 C win          2.85   99.3 above   -1.8  243 arm          near   -0.47  0.18   0.5  SuY-q_OWMHw [00:08:19]
+  2026-07-29 DFNS  09:30 B loss        39.00   62.5 above    8.2  330 arm          -              0.0   0.0  SuY-q_OWMHw [00:10:54]
+
+FIVE INSTRUCTIVE CASES (fields straight from the ledger; S0 from diag_warmup.json)
+  2026-07-14 NXTC — the 1-min plan agrees with him · ut9nmRP3ENY [00:06:42] · tier A
+    him: break back over 8.40 on the curl · px 8.4 · win 19000 · tape minute 07:13 bar o/h/l/c 7.78/9.5/7.76/9.03 · 73 bars since first print 06:00 · gain 285.3% · VWAP 6.5522 · hod% 12.13
+    1-min plan: armed 07:12 trigger 7.77 stop 7.57 (2.57%) · red [] · fade 18.5% · stop/spread 5.29 · passes True · mode C R 6.1005
+    S: no fire near · 2 fires in 07:00-08:13 · chance 0.063
+  2026-06-04 STI — the gates refuse his best-paid trade · A7acrZyX9VU [00:04:47] · tier A
+    him: break of PM high 17.70 · px 17.7 · win 59000 · tape minute 08:37 bar o/h/l/c 16.93/18.22/16.85/17.9 · 156 bars since first print 06:00 · gain 251.2% · VWAP 13.6773 · hod% 0.0
+    1-min plan: armed 08:33 trigger 16.2 stop 15.94 (1.6%) · red [macd] · fade 8.5% · stop/spread 2.62 · passes False · mode C R 6.6154
+    S: no fire near · 2 fires in 08:17-09:37 · chance 0.061
+  2026-07-22 LABT — both setups blind in the first 30 bars · YkEOx0ZWlWc [00:04:40] · tier A
+    him: break through 3.60, adds into squeeze · px None · win 20000 · tape minute 08:05 bar o/h/l/c 3.012/6.98/2.99/4.66 · 5 bars since first print 05:44 · gain 61.9% · VWAP 2.8683 · hod% 17.47
+    1-min plan: none armed in the 5 min before (plans that day 9, passing 1)
+    S: no fire near · 0 fires in 07:45-09:05 · chance 0.0
+    S0 (warm-up removed, post hoc): fired 08:04:20 entry 2.95 stop 1.73 (41.36%) · 1.631 R
+  2026-06-26 ZDAI — the same blindness keeps us out of his FOMO loss · hUb-n3kzqjI [00:02:44] · tier B
+    him: pullback after 4.70 high, big size (FOMO) · px 4.45 · loss -25000 · tape minute 07:53 bar o/h/l/c 3.44/4.7/3.44/4.367 · 9 bars since first print 07:41 · gain 107.0% · VWAP 3.0081 · hod% -25.35
+    1-min plan: none armed in the 5 min before (plans that day 7, passing 0)
+    S: no fire near · 0 fires in 07:33-08:53 · chance 0.0
+    S0 (warm-up removed, post hoc): fired 07:53:30 entry 3.95 stop 2.67 (32.41%) · -0.414 R
+  2026-06-11 EDHL — S fires with him, on a 45 % stop · vcfpJWEqaTU [00:09:02] · tier B
+    him: squeeze after bottoming-tail dip, scale in · px 5.65 · win 30000 · tape minute 07:20 bar o/h/l/c 5.25/7.7/4.92/6.53 · 55 bars since first print 04:05 · gain 61.4% · VWAP 4.4705 · hod% -7.82
+    1-min plan: none armed in the 5 min before (plans that day 9, passing 3)
+    S: fired 07:20:40 entry 7.3 stop 3.99 (45.34%) · fill 7.3 exit 9.95 (trail) · 0.801 R · chance 0.143 / matched 0.375

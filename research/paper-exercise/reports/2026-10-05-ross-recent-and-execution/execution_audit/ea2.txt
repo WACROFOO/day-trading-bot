@@ -1,0 +1,18 @@
+==== trades losing more than $40 all-in at live sizing: n 508 · Σ overshoot $7684
+  distance fill->level beyond $40 (entry slip on initial-stop exits)     Σ $       71 · mean $   0.14
+  exit slip below level                                                  Σ $     4363 · mean $   8.59
+  commission                                                             Σ $     1680 · mean $   3.31
+  half spreads in+out                                                    Σ $     5127 · mean $  10.09
+  distance under $40 (offsets)                                           Σ $    -3556 · mean $  -7.00
+  losses > $60: n 57 · plan armed pre-market 28
+
+==== notional ($2,000): bound by funds at the trigger 0/1873 · sized value at the LIMIT price > $2,000: 3 · at the fill > $2,000: 2
+  stop % of price: p1 2.02 · p10 2.23 · p50 3.32 · risk-sized notional = $40 / stop% → p50 $1,206
+
+==== daily budget variants (one position, 6 orders, 3-loss streak, 3 R day; $ all-in = print P&L - Fixed comm - half spreads)
+  variant                                                    trades  $/trade  $ total worst day   p1 day days<-120 days<-160
+  G0 live: trigger sizing, gate on gross planned R             1457   -14.80   -21568   -473.93  -242.89        53        15
+  G1 trigger sizing, gate on all-in $                          1436   -14.78   -21227   -473.93  -212.86        52        11
+  G2 trigger sizing, all-in $ gate, size to remaining budget   1436   -14.61   -20987   -473.93  -212.05        46        11
+  G3 V2 pessimistic sizing, live gate                          1457   -10.88   -15856   -369.54  -167.82        15         8
+  G4 V2 sizing, all-in $ gate, size to remaining budget        1451   -10.92   -15839   -369.54  -159.52        13         7
