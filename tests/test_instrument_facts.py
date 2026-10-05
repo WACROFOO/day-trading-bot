@@ -132,3 +132,10 @@ def test_premarket_volume_counts_only_the_premarket():
         bar = Bar(symbol="AAA", timeframe="1m", ts=ts, open=5, high=5, low=5, close=5, volume=v)
         snap = hot.apply(MarketUpdate("AAA", ts, price=5, size=v, bar=bar, data_status=DataStatus.REPLAY))
     assert snap.volume_premarket == 3000.0 and snap.volume_today == 8000.0
+
+
+def test_gate_7_judges_the_increment_at_the_price():
+    assert SB._effective_tick(0.0001, 5.0) == 0.01
+    assert SB._effective_tick(0.0001, 0.8) == 0.0001
+    assert SB._effective_tick(0.05, 5.0) == 0.05
+    assert SB._effective_tick(None, 5.0) is None

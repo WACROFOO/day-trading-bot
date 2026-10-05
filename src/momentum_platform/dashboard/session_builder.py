@@ -635,7 +635,7 @@ def cascade_inputs(meta: dict, halt: Optional[str] = None,
         catalyst_source_ok=bool(meta.get("newsSourceOk", True)),
         # Gates 5-8 (review 2026-10-03: never passed before). None stays UNKNOWN.
         is_fund_or_etf=meta.get("isFundOrEtf"),
-        tick_size=meta.get("minTick"),
+        tick_size=_effective_tick(meta.get("minTick"), m.get("last")),
         split_checked=bool(meta.get("splitChecked")),
         split_ratio_clean_integer=meta.get("splitRatio"),
         buyout_announced=(_buyout_today(meta.get("news") or [], meta.get("tradingDate"))
@@ -894,6 +894,17 @@ def _news_verdict(news: list, snap, source_ok: bool) -> str:
     if now is not None and now.tzinfo is None:
         now = now.replace(tzinfo=timezone.utc)
     return news_verdict(news, now=now, source_ok=source_ok)[0]
+
+
+def _effective_tick(min_tick, last):
+    """IBKR's contract `minTick` is the contract's smallest increment (0.0001 for
+    most small caps, a sub-dollar allowance). At $1 and above quotes move in
+    $0.01 (Reg NMS Rule 612), which is what gate 7 should judge."""
+    if not min_tick:
+        return None
+    if last is not None and last >= 1.0 and min_tick < 0.01:
+        return 0.01
+    return float(min_tick)
 
 
 def _buyout_today(news: list, trading_date) -> bool:

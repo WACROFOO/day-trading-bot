@@ -527,7 +527,9 @@ class IbkrDesk:
             page = self._finviz_float(sym)
             facts.update(split_facts(sym, (page or {}).get("prev_close_fv")))
         self._facts[sym] = facts
-        bits = [f"type {facts.get('stock_type') or '?'}", f"tick {facts.get('min_tick') or '?'}",
+        mt = facts.get("min_tick")
+        tick = "?" if not mt else (f"0.01 at $1+ (IBKR minTick {mt:g})" if mt < 0.01 else f"{mt:g}")
+        bits = [f"type {facts.get('stock_type') or '?'}", f"tick {tick}",
                 "split " + (f"{facts['split_ratio']:g}x" if facts.get("split_ratio")
                             else ("none" if facts.get("split_checked") else "not checked"))]
         self.log(f"  {sym}: " + " · ".join(bits))
@@ -1110,6 +1112,12 @@ class IbkrDesk:
         from momentum_platform.scanners.five_pillars import FLOAT_MAX_SHARES
         day, over = self.session_day(), []
         for s in list(wanted):
+            # 2026-10-05: QTEX (59M, known from the gap scan) was kept out while
+            # ALEC (82M) and SABS (82M) came in, because their float was only
+            # looked up after joining. Look it up first (one finviz request per
+            # name per day, cached) so the rule is the same for every name.
+            if self.sec and not _float_override(s, day):
+                self._finviz_float(s)
             ov = _float_override(s, day)
             if ov and ov["float"] >= FLOAT_MAX_SHARES:
                 wanted.remove(s)

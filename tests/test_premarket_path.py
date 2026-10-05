@@ -321,3 +321,21 @@ def test_a_veto_at_the_premarket_touch_is_refused_with_its_own_reason(journal):
     row = journal.execute("SELECT outcome, refusal_reasons_json FROM decisions WHERE decision_id=?", (did,)).fetchone()
     assert row["outcome"] == "REFUSED" and "risk gate vetoed at the touch: day locked" in row["refusal_reasons_json"]
     assert r.armed == {}
+
+
+def test_an_armed_plan_the_price_ran_past_says_so(journal):
+    """ALEC 2026-10-05 07:36: 'the ask did not reach the trigger 2.57 (last ask 2.9)'."""
+    from datetime import timedelta
+    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08", a1_accepted="yes")
+    t = FakeTrader()
+    quotes = {"PMX": dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:10Z")}
+    clock = {"t": NOW()}
+    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=lambda: clock["t"], max_age_s=3600,
+               quote=lambda s: quotes.get(s))
+    r.step()
+    did = list(r.armed)[0]
+    quotes["PMX"]["ask"] = round(a_trigger(r) * 1.05, 2)
+    clock["t"] += timedelta(minutes=3, seconds=5)
+    r.fire_armed()
+    row = journal.execute("SELECT refusal_reasons_json FROM decisions WHERE decision_id=?", (did,)).fetchone()
+    assert "ran past the limit" in row["refusal_reasons_json"] and "did not reach" not in row["refusal_reasons_json"]

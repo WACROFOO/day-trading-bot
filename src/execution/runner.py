@@ -457,8 +457,17 @@ class Runner:
             outcome, reasons = None, []
             if waited >= ENTRY_TTL_MINUTES:
                 outcome = "REFUSED"
-                reasons = [f"A10: the ask did not reach the trigger {intent.trigger:.2f} within "
-                           f"{ENTRY_TTL_MINUTES} min pre-market (last ask {ask}); no order sent"]
+                cap = entry_limit(intent.trigger)
+                if ask is not None and float(ask) > cap:
+                    # ALEC 2026-10-05 07:36: "did not reach the trigger 2.57 (last ask 2.9)" —
+                    # it had reached it and run past the limit. A10 does not chase.
+                    why = (f"the price ran past the limit {cap:.2f} without the ask sitting in "
+                           f"{intent.trigger:.2f}-{cap:.2f} at a 5-s check (last ask {ask}); A10 does not chase")
+                elif ask is None:
+                    why = f"no ask quoted at expiry (trigger {intent.trigger:.2f})"
+                else:
+                    why = f"the ask did not reach the trigger {intent.trigger:.2f} (last ask {ask})"
+                reasons = [f"A10: {why}; {ENTRY_TTL_MINUTES} min pre-market, no order sent"]
             elif ask is not None and intent.trigger <= float(ask) <= entry_limit(intent.trigger):
                 if not self.entries_enabled:
                     outcome, reasons = "REFUSED", ["day locked by the risk gate — no new entries"]
