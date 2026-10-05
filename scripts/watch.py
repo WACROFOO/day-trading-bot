@@ -9,6 +9,11 @@ filters kill (price under $2, pillars, still rising...) never reaches the
 executor, so it never appears there; only the ledger has it. This prints
 both, in time order, in plain words.
 
+GREEN-RUN rows are setup S (the green-run continuation, addendum 2026-10-05):
+the desk LOGS it on every closed 10-second candle and never trades it. One
+line per pause: entry/stop and why, or which rule refused it. A shadow, not a
+plan — nothing there was ever offered to the executor.
+
 READ-ONLY: it opens the ledger read-only and never writes, sends or cancels
 anything. Ctrl-C stops the watch, never the bot. Standard library only, so it
 runs against any version of the repo:
@@ -102,6 +107,7 @@ class Watcher:
         self.conn, self.day, self.history = conn, day, history
         self.seen_decisions: dict[str, str] = {}
         self.seen_orders: dict[int, tuple] = {}
+        self.seen_green: dict[tuple, str] = {}
         self.last_event = 0
         self.history_count = 0
         self.locked = None
@@ -118,6 +124,44 @@ class Watcher:
             why = WHY.get(out, "")
         tag = " [history]" if str(row["data_status"] or "").endswith("-backfill") else ""
         return f"{str(row['ts_et'])[11:16]:>8}  {row['symbol']:<6} {word:<10} {plan:>11}  {_short(why, 170)}{tag}"
+
+    @staticmethod
+    def _green_line(g) -> str:
+        """Setup S, logged not traded: the levels and why, or the rule that refused it."""
+        plan = f"{g['entry']:.2f}/{g['stop']:.2f}" if g["entry"] and g["stop"] else "—"
+        if g["status"] == "SIGNAL":
+            spread = f"${g['spread']:.3f} {g['spread_source']}" if g["spread"] is not None else "?"
+            why = (f"green 1-min run (2 green, new high, > VWAP & 9 EMA, MACD > signal) + 10-s pause · "
+                   f"stop = 1-min bar low, {g['stop_pct']:.1f}% · spread {spread} · SHADOW: no order")
+            word = "GREEN-RUN"
+        else:
+            try:
+                why = " · ".join(_short(r, 90) for r in json.loads(g["refusals_json"] or "[]")) or "?"
+            except ValueError:
+                why = "?"
+            why = f"green run refused — {why}"
+            word = "GR REFUSED"
+        arms = f" [{g['n_arms']} closes]" if (g["n_arms"] or 1) > 1 else ""
+        return f"{str(g['ts_et'])[11:16]:>8}  {g['symbol']:<6} {word:<10} {plan:>11}  {_short(why, 170)}{arms}"
+
+    def _green(self) -> list[tuple[str, str]]:
+        try:
+            rows = self.conn.execute(
+                "SELECT symbol, pause_id, ts_et, status, entry, stop, stop_pct, spread, spread_source, "
+                "refusals_json, n_arms FROM green_run_signals WHERE substr(ts_et,1,10)=? ORDER BY ts_et",
+                (self.day,)).fetchall()
+        except sqlite3.OperationalError as exc:
+            if "no such table" in str(exc):
+                return []                          # a ledger from before the green-run log
+            raise
+        out = []
+        for g in rows:
+            key = (g["symbol"], g["pause_id"])
+            if self.seen_green.get(key) == g["status"]:
+                continue
+            self.seen_green[key] = g["status"]
+            out.append((str(g["ts_et"])[11:19], self._green_line(g)))
+        return out
 
     def poll(self) -> list[tuple[str, str]]:
         """[(sort key, line)] for everything new since the last poll."""
@@ -180,6 +224,7 @@ class Watcher:
                 (self.day, self.last_event)).fetchall():
             self.last_event = max(self.last_event, e["id"])
             new.append((et_clock(e["ts"]), f"{et_clock(e['ts']):>8}  {e['symbol']:<6} {'event':<10} {_short(e['text'], 170)}"))
+        new += self._green()
         lock = self.conn.execute("SELECT locked, reason FROM risk_day WHERE date=?", (self.day,)).fetchone()
         if lock and lock["locked"] and self.locked != lock["reason"]:
             self.locked = lock["reason"]
@@ -192,7 +237,8 @@ class Watcher:
             c[out] = c.get(out, 0) + 1
         return (f"so far: {c.get('SUPPRESSED', 0)} killed by the stock filters · {c.get('REFUSED', 0)} refused by "
                 f"the executor · {c.get('TAKEN', 0) + c.get('CLAIMED', 0)} sent · "
-                f"{len([o for o in self.seen_orders.values() if o[1]])} filled")
+                f"{len([o for o in self.seen_orders.values() if o[1]])} filled · "
+                f"{sum(1 for v in self.seen_green.values() if v == 'SIGNAL')} green-run signal(s) logged, never traded")
 
 
 def main(argv=None) -> int:

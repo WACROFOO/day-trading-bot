@@ -4,7 +4,7 @@ The desk's server, event stream and browser page.
 
 | Module | What |
 |---|---|
-| `ibkr_desk.py` | ONE worker thread owning both IBKR connections; rebuilds the session in memory every 3 s |
+| `ibkr_desk.py` | ONE worker thread owning both IBKR connections; rebuilds the session in memory every 3 s. On each closed 10-second candle it also evaluates setup S (`../green_run.py`) and logs it to the ledger's `green_run_signals` — a shadow log, no decision, no order |
 | `server.py` | HTTP: the page, `/api/v1/stream`, `/health`, `/screener`, `/desk/add` |
 | `stream.py` | server-sent events: quote, bar10s, bar1m, health, screener, session, resync |
 | `session_builder.py` | turns reference data, history and live candles into the session the page renders |

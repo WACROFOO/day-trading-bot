@@ -7,6 +7,7 @@ verdict. **It does not trade** — no order path exists in this package and
 | Module | What |
 |---|---|
 | `pullback.py` | the first-pullback state machine: impulse -> pullback -> ARMED -> TRIGGERED. Plans freeze when armed and never repaint |
+| `green_run.py` | setup S, the green-run continuation (addendum 2026-10-05 of `research/edge-hunt/PREREGISTRATION.md`), for the desk's **shadow log**: 1-minute context, 10-second pause, entry/stop, refusals — one reasoned `Check` per condition. Parity with the frozen `scripts/green_run.py` is a test (`tests/test_green_run.py`). Logged to `green_run_signals`, never a decision, never an order; `score()` is the after-the-close bar replay `exercise.py green-runs` uses |
 | `engine.py` | builds a session from reference data, history and live candles |
 | `formulas.py` | RVOL and the derived measures, with their denominators named |
 | `models.py` · `state.py` · `store.py` | records, per-symbol state, persistence |

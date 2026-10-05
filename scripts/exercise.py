@@ -19,6 +19,13 @@
         account is DU*, and runs the end-of-day flatten at the hard stop.
         The desk must be running with JOURNAL_DB pointing at the same file.
 
+    python3 scripts/exercise.py green-runs [--date D] [--db PATH]
+        After the close: setup S (the green-run continuation, addendum
+        2026-10-05) is LOGGED by the desk, never traded. Score each logged
+        pause on the ledger's own 10-second / 1-minute bars — filled within
+        20 s at the A10 cap or not, then the A3 1 R trail (approximate on
+        10-second bars, and the output says how) — in gross R, with a total.
+
 The report is laid out the way .claude/skills/trading-report-design says a
 document must be: provenance first, funnel with denominators, rejects
 visible, verdict last, limitations always. A number here without its
@@ -1036,6 +1043,106 @@ def cmd_missed(args) -> int:
     return 0
 
 
+def _epoch_of(iso: str) -> int:
+    return int(datetime.fromisoformat(str(iso).replace("Z", "+00:00")).timestamp())
+
+
+def green_run_scores(conn, day: str) -> list[dict]:
+    """Setup S's logged pauses of one ET day, each scored on the ledger's own
+    tape the way the research engine scored it (`scripts/green_run.py`
+    run_day): every SIGNAL close of the pause is an order live 20 s, the
+    first that fills is the trade, and while a trade is open on the symbol
+    later closes are skipped (one position at a time per symbol)."""
+    from momentum_platform import green_run as G
+    rows = L.green_run_rows(conn, day)
+    at = lambda hm: int(datetime.fromisoformat(f"{day}T{hm}:00").replace(tzinfo=L.ET).timestamp())  # noqa: E731
+    d0, d1, flat = at("04:00"), at("20:00"), at(G.WINDOW_ET[1])
+    one_min = bars.from_ledger(conn)
+    tapes: dict = {}
+    busy: dict = {}
+    out = []
+    for r in rows:
+        sym = r["symbol"]
+        if sym not in tapes:
+            ten = G.bars10_from_candles([b for b in L.bars_10s_from_ledger(conn, sym).get(sym, [])
+                                         if d0 <= _epoch_of(b[0]) < d1])
+            mins = [(_epoch_of(b[0]), *b[1:]) for b in one_min.get(sym, []) if d0 <= _epoch_of(b[0]) < d1]
+            tapes[sym] = (ten, mins)
+        ten, mins = tapes[sym]
+        res = {"row": r, "score": None, "tried": 0, "skipped": 0}
+        if r["status"] == "SIGNAL":
+            for a in (x for x in r["arms"] if x["status"] == "SIGNAL"):
+                t_arm = _epoch_of(a["ts"])
+                if t_arm < busy.get(sym, 0):
+                    res["skipped"] += 1
+                    continue
+                s = G.score(a["entry"], a["stop"], t_arm, ten, mins, flat_t=flat)
+                res["tried"] += 1
+                res["score"] = s
+                if s["filled"]:
+                    s["arm"] = a
+                    busy[sym] = s["exit_t"]
+                    break
+        out.append(res)
+    return out
+
+
+def cmd_green_runs(args) -> int:
+    """After the close: score each green-run pause the desk logged, on the
+    ledger's own 10-second (and 1-minute) bars. Gross R, no costs. Setup S was
+    logged, never traded — these are what its orders WOULD have done."""
+    from collections import Counter
+    from momentum_platform import green_run as G
+    conn = L.connect(_db(args))
+    day = args.date
+    if day is None:
+        row = conn.execute("SELECT MAX(substr(ts_et,1,10)) FROM green_run_signals").fetchone()
+        day = row[0] if row and row[0] else None
+    if day is None:
+        print("no green-run signals in the ledger"); return 1
+    res = green_run_scores(conn, day)
+    if not res:
+        print(f"no green-run signals on {day}"); return 1
+    sig = [x for x in res if x["row"]["status"] == "SIGNAL"]
+    ref = [x for x in res if x["row"]["status"] == "REFUSED"]
+    print(f"\n{BOLD}GREEN-RUN SHADOW · {day}{END}  {len(res)} pause(s) logged: {len(sig)} SIGNAL · {len(ref)} REFUSED"
+          f" · ledger {_db(args)}")
+    print(f"{DIM}{G.SETUP} · logged on the desk, NEVER traded: no order was sent for any row{END}")
+    print(f"  {'ET':>8} {'sym':<6}{'entry':>8}{'stop':>8}{'stop%':>7} {'spread':<13}{'arms':>5}  "
+          f"{'filled':<7}{'fill':>8}{'exit':>8}  {'how':<12}{'R':>7}")
+    rs = []
+    for x in sig:
+        r, s = x["row"], x["score"]
+        spread = f"${r['spread']:.3f} {r['spread_source'][:5]}" if r["spread"] is not None else "—"
+        lead = (f"  {r['ts_et'][11:19]:>8} {r['symbol']:<6}{r['entry']:>8.2f}{r['stop']:>8.2f}{r['stop_pct']:>7.2f} "
+                f"{spread:<13}{r['n_arms']:>5}  ")
+        if s is None:
+            print(lead + f"{'—':<7}{'':>8}{'':>8}  {'position open' if x['skipped'] else '—':<12}{'—':>7}")
+            continue
+        if not s["filled"]:
+            print(lead + f"{'no':<7}{'':>8}{'':>8}  {s['how']:<12}{'—':>7}")
+            continue
+        rs.append(s["r"])
+        print(lead + f"{'yes':<7}{s['fill']:>8.3f}{s['exit']:>8.3f}  {s['how']:<12}{s['r']:>+7.2f}"
+              + (f"  {DIM}({s['minutes_from_1m']} min on 1-min bars){END}" if s["minutes_from_1m"] else ""))
+    n_f = len(rs)
+    tot = sum(rs)
+    print(f"\n{BOLD}TOTAL{END}  {len(sig)} SIGNAL pause(s) · {n_f} filled · gross {tot:+.2f} R"
+          + (f" · mean {tot / n_f:+.3f} R per filled trade · {sum(1 for v in rs if v > 0)}/{n_f} won" if n_f else ""))
+    if ref:
+        why = Counter(c.split(":")[0] for x in ref for c in x["row"]["refusals"])
+        print(f"REFUSED by rule: " + " · ".join(f"{k} {v}" for k, v in why.most_common()))
+    print(f"\n{DIM}APPROXIMATE, on bars: the research scored SIP prints; this scores the ledger's 10-second candles. "
+          f"Fill: a candle reaching the entry inside {G.TTL_ENTRY_S} s fills at the entry, its open or the A10 cap "
+          f"(+{G.CAP_PCT:g}%) — a print jumping past the entry is not seen. Exit: the A3 1 R trail moves every "
+          f"{G.TRAIL_EVERY_S} s live, here only at each 10-second close, and a candle's low is tested before its "
+          f"high raises the stop; a minute with no 10-second candle is walked on its 1-minute bar. Flat "
+          f"{G.WINDOW_ET[1]} ET. GROSS R: no commission, no spread. On the research sample those cost commission "
+          f"0.062 + half spreads 0.057 and 0.069 R a trade at a median 5.01% stop, and S failed on them "
+          f"(research/paper-exercise/reports/green_run_output.txt). Shadow days are a log, not a test.{END}\n")
+    return 0
+
+
 def cmd_review(args) -> int:
     """Everything so far, across sessions. The continuous-improvement view:
     which gate kills most, which refusal dominates, how the strategy stands
@@ -1156,6 +1263,8 @@ def main(argv=None) -> int:
     ms = sub.add_parser("missed", help="what the plans not taken went on to do, per row and per reason")
     ms.add_argument("--day", help="ET date, e.g. 2026-09-22 (default: the latest day in the ledger)")
     ms.add_argument("--all", action="store_true", help="also list killed plans whose trigger was never touched")
+    gr = sub.add_parser("green-runs", help="after the close: score the green-run pauses the desk logged (shadow, gross R)")
+    gr.add_argument("--date", "--day", dest="date", help="ET date (default: the latest day in the log)")
     wi = sub.add_parser("whatif", help="replay the selective rule (A13) on past sessions before it trades")
     wi.add_argument("--since", help="first ET date (default: the last session only)")
     wi.add_argument("--stop-pct", type=float, default=2.0)
@@ -1186,6 +1295,7 @@ def main(argv=None) -> int:
     return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
             "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck, "review": cmd_review,
             "missed": cmd_missed, "whatif": cmd_whatif, "defect": cmd_defect, "reset-unprotected": cmd_reset_unprotected,
+            "green-runs": cmd_green_runs,
             "open-phase-c": cmd_open_phase_c,
             "ah-exit": cmd_ah_exit, "accept-a1": cmd_accept_a1,
             "retag-backfill": cmd_retag_backfill}[args.cmd](args)

@@ -248,6 +248,39 @@ CREATE TABLE IF NOT EXISTS actuals (
     trigger_hit INTEGER, trigger_hit_ts TEXT,     -- did price ever reach the entry?
     bars_available INTEGER NOT NULL, computed_at TEXT NOT NULL
 );
+
+-- Setup S, the green-run continuation (research/edge-hunt/PREREGISTRATION.md
+-- addendum 2026-10-05, frozen in scripts/green_run.py 20aa85f), LOGGED, NEVER
+-- TRADED: it failed its cost condition, and the addendum's rule is "logged on
+-- the desk (no orders)". Its own table on purpose. The runner reads
+-- `decisions`; nothing it calls selects from here, and
+-- tests/test_green_run.py fails if that changes.
+--
+-- One row per PAUSE: the symbol plus the 10-second bar that set the high the
+-- pause sits under (`pause_id`, UTC ISO). Every later 10-second close that
+-- re-arms the same pause is appended to `arms_json` rather than written as a
+-- new row; a REFUSED pause that later passes is upgraded in place.
+CREATE TABLE IF NOT EXISTS green_run_signals (
+    symbol TEXT NOT NULL,
+    pause_id TEXT NOT NULL,
+    ts_et TEXT NOT NULL,                 -- the arm: close of the last pause bar, ET ISO
+    session TEXT NOT NULL,               -- premarket | regular | none
+    status TEXT NOT NULL,                -- SIGNAL | REFUSED
+    entry REAL, stop REAL, stop_pct REAL,
+    spread REAL, spread_source TEXT,     -- live | proxy
+    proxy_spread REAL,
+    minute_ts TEXT,                      -- the 1-minute context bar (start, UTC ISO)
+    reasons_json TEXT NOT NULL,          -- every condition: name, ok, value, why
+    refusals_json TEXT NOT NULL,         -- the failed ones, '[]' for a SIGNAL
+    arms_json TEXT NOT NULL,             -- [{ts, status, entry, stop}] each close that armed it
+    n_arms INTEGER NOT NULL DEFAULT 1,
+    data_status TEXT,                    -- live | live-backfill (closed before the desk started)
+    lag_s REAL,                          -- evaluation clock minus the candle's close
+    setup TEXT NOT NULL,
+    recorded_at TEXT NOT NULL, updated_at TEXT NOT NULL,
+    PRIMARY KEY (symbol, pause_id)
+);
+CREATE INDEX IF NOT EXISTS ix_green_run_ts ON green_run_signals(ts_et);
 """
 
 
@@ -1224,6 +1257,74 @@ def record_candidates(conn: sqlite3.Connection, ts, source: str, rows) -> int:
         n += cur.rowcount
     conn.commit()
     return n
+
+
+# ------------------------------------------------ green run (shadow, no orders)
+def _utc_iso(epoch: int) -> str:
+    return datetime.fromtimestamp(int(epoch), timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def record_green_run(conn: sqlite3.Connection, ev, *, data_status: str = "live",
+                     lag_s: Optional[float] = None) -> str:
+    """Log one setup-S evaluation (`momentum_platform.green_run.Evaluation`).
+
+    Only SIGNAL and REFUSED are written: the chart said yes, and either every
+    risk rule did too or one said no and the row says which. Once per pause:
+    the first close writes the row, a later close of the same pause is
+    appended to `arms_json` (a repeat of a close already there is a no-op),
+    and a REFUSED pause that later passes becomes a SIGNAL with the passing
+    close's levels. Returns new | rearm | upgraded | seen | skipped.
+
+    A log, not a decision: nothing here is offered to the runner.
+    """
+    if ev.status not in ("SIGNAL", "REFUSED"):
+        return "skipped"
+    pid, ts = _utc_iso(ev.pause_id), _et(ev.t_arm)
+    arm = {"ts": ts, "status": ev.status, "entry": ev.entry, "stop": ev.stop}
+    reasons = _json([{"name": c.name, "ok": c.ok, "value": c.value, "why": c.why} for c in ev.checks])
+    refusals = _json(ev.refusals())
+    minute = _utc_iso(ev.minute_t) if ev.minute_t is not None else None
+    now = _now()
+    row = conn.execute("SELECT status, arms_json FROM green_run_signals WHERE symbol=? AND pause_id=?",
+                       (ev.symbol, pid)).fetchone()
+    if row is None:
+        conn.execute("""INSERT INTO green_run_signals (symbol, pause_id, ts_et, session, status, entry, stop,
+            stop_pct, spread, spread_source, proxy_spread, minute_ts, reasons_json, refusals_json, arms_json,
+            n_arms, data_status, lag_s, setup, recorded_at, updated_at)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,?)""",
+                     (ev.symbol, pid, ts, session_of(ts), ev.status, ev.entry, ev.stop, ev.stop_pct, ev.spread,
+                      ev.spread_source, ev.proxy_spread, minute, reasons, refusals, _json([arm]),
+                      data_status, lag_s, ev.setup, now, now))
+        return "new"
+    arms = json.loads(row["arms_json"] or "[]")
+    if any(a.get("ts") == ts for a in arms):
+        return "seen"
+    arms.append(arm)
+    if row["status"] == "REFUSED" and ev.status == "SIGNAL":
+        conn.execute("""UPDATE green_run_signals SET ts_et=?, session=?, status='SIGNAL', entry=?, stop=?,
+            stop_pct=?, spread=?, spread_source=?, proxy_spread=?, minute_ts=?, reasons_json=?, refusals_json=?,
+            arms_json=?, n_arms=?, data_status=?, lag_s=?, updated_at=? WHERE symbol=? AND pause_id=?""",
+                     (ts, session_of(ts), ev.entry, ev.stop, ev.stop_pct, ev.spread, ev.spread_source,
+                      ev.proxy_spread, minute, reasons, refusals, _json(arms), len(arms), data_status, lag_s,
+                      now, ev.symbol, pid))
+        return "upgraded"
+    conn.execute("UPDATE green_run_signals SET arms_json=?, n_arms=?, updated_at=? WHERE symbol=? AND pause_id=?",
+                 (_json(arms), len(arms), now, ev.symbol, pid))
+    return "rearm"
+
+
+def green_run_rows(conn: sqlite3.Connection, day: Optional[str] = None) -> list[dict]:
+    """The shadow log, oldest first; `day` is an ET date (YYYY-MM-DD)."""
+    q, args = "SELECT * FROM green_run_signals", ()
+    if day:
+        q, args = q + " WHERE substr(ts_et,1,10)=?", (day,)
+    out = []
+    for r in conn.execute(q + " ORDER BY ts_et, symbol", args):
+        d = dict(r)
+        for k in ("reasons_json", "refusals_json", "arms_json"):
+            d[k[:-5]] = json.loads(d[k] or "[]")
+        out.append(d)
+    return out
 
 
 def set_new_stop_leg(conn: sqlite3.Connection, order_id: int, *, stop_id: int, level: float,
