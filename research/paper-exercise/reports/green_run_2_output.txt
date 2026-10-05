@@ -1,0 +1,17 @@
+green-run continuation · addendum 2026-10-05 · 600 symbol-days 2024-01-02..2026-08-21 (the runup_micro sample) · gates: new high of day on 2 green 1-min bars, above VWAP and 9 EMA, MACD > signal, <= 25% off the high, stop >= 2%, stop >= 4x proxy spread · 10-s pause, entry = pause high + 1c
+
+GROSS R per trade (no costs)
+  S    stop at the 1-min bar low     n   288 · mean -0.133 · median -0.369 · win 31.9% · avg win +0.88 · avg loss -0.61 · total -38.3
+  S10  stop at the 10-s pause low    n   193 · mean -0.098 · median -0.429 · win 31.6% · avg win +1.09 · avg loss -0.65 · total -18.9
+  RND  random entries, same windows  n  1428 · mean -0.088 · median -0.303 · win 35.9% · avg win +0.93 · avg loss -0.66 · total -125.5
+  S 2024  n   109 · mean -0.157 · median -0.381 · win 31.2% · avg win +0.79 · avg loss -0.59 · total -17.1
+  S 2025  n   116 · mean -0.080 · median -0.302 · win 34.5% · avg win +0.95 · avg loss -0.62 · total -9.3
+  S 2026  n    63 · mean -0.189 · median -0.412 · win 28.6% · avg win +0.87 · avg loss -0.61 · total -11.9
+  S pre-market  n   117 · mean +0.003 · median -0.250 · win 36.8% · avg win +1.02 · avg loss -0.59 · total +0.4
+  S regular     n   171 · mean -0.226 · median -0.415 · win 28.7% · avg win +0.75 · avg loss -0.62 · total -38.6
+  S minus random, gross, day-clustered one-sided 95% lower bound: -0.125
+
+COSTS on 287 trades with quotes: commission 0.060 R · half_spread_in 0.055 R · half_spread_out 0.069 R
+  NET R per trade -0.318 (median -0.563, total -91.3, win 28%)
+  stop % median 5.61
+  net mean, day-clustered one-sided 95% lower bound: -0.406
