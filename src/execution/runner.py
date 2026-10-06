@@ -240,7 +240,9 @@ class Runner:
         cap = getattr(self.trader, "net_liq", None) if self.mode == "TRADE" else None
         if self.account_size:
             cap = min(cap, self.account_size) if cap else self.account_size
-        intent = intent_from_decision(row, self.dollar_risk, max_notional=cap)
+        # The quote first: A18 sizes from the spread in force at the decision.
+        q0 = self.quote(row["symbol"]) if self.quote else None
+        intent = intent_from_decision(row, self.dollar_risk, max_notional=cap, spread=_spread(q0))
         clock = decision_clock(row)
         reasons = refusals(intent, now=clock)
 
@@ -254,7 +256,6 @@ class Runner:
         now = self.now()
         bar_end = clock + timedelta(seconds=bar_seconds(row))
         published = _parse_ts(dict(row).get("recorded_at"))
-        q0 = self.quote(intent.symbol) if self.quote else None
         self._clocks = {
             "bar_end": bar_end.isoformat(timespec="seconds"),
             "published": published.isoformat(timespec="seconds") if published else None,
@@ -392,7 +393,8 @@ class Runner:
             self.conn, row["decision_id"], symbol=intent.symbol, session=intent.session,
             trigger=intent.trigger, stop=intent.stop, target=intent.target,
             shares=intent.shares, dollar_risk=self.dollar_risk,
-            rules_hash=self.rules_hash, code_commit=self.code_commit)
+            rules_hash=self.rules_hash, code_commit=self.code_commit,
+            sizing_reserve=intent.sizing_reserve, sizing_spread=intent.sizing_spread)
         self.conn.commit()
         try:
             if shape == "monitored":
@@ -477,6 +479,10 @@ class Runner:
                     outcome, reasons = "REFUSED", [f"one position at a time (preregistration §2): "
                                                    f"{L.positions_alive(self.conn)} order(s) alive or unresolved"]
                 else:
+                    # A18: the order leaves now, so it is sized from the spread in
+                    # force now, not the one read when the plan was armed.
+                    intent = intent_from_decision(row, self.dollar_risk, max_notional=intent.max_notional,
+                                                  spread=_spread(q))
                     try:
                         outcome, reasons = self._send(row, intent, a["shape"], decision_clock(row))
                     except RiskVeto as exc:
@@ -1368,6 +1374,14 @@ def _versions() -> tuple[Optional[str], Optional[str]]:
         return DP.fingerprint().get("hash"), DP.build_commit()
     except Exception:                                   # noqa: BLE001
         return None, None
+
+
+def _spread(q: Optional[dict]) -> Optional[float]:
+    """ask − bid from a desk quote, or None when either side is missing or crossed."""
+    if not q or q.get("bid") is None or q.get("ask") is None:
+        return None
+    sp = float(q["ask"]) - float(q["bid"])
+    return round(sp, 4) if sp > 0 else None
 
 
 def _bid_ask(quote: Optional[Quote], symbol: str) -> tuple[float, float]:

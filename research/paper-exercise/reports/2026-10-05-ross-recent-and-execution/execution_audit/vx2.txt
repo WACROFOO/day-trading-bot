@@ -1,0 +1,19 @@
+trades 1873 · decision-time spread proxy known 1873
+  arming-bar proxy spread p50 0.0217 · fill spread p50 0.0200 · proxy < fill spread on 36.5%
+
+(1) P1 sizing, fill spread (audit) vs decision-time proxy spread
+  V0 live                      $ mean  -15.13 · std  50.12 · p1   -95.11 · min  -493.64 · >$40  508 · >$42  437 · R/plan$ -0.3792 · R/$40 -0.3782
+  V2 fill spread (audit)       $ mean  -11.09 · std  38.12 · p1   -75.19 · min  -382.13 · >$40   77 · >$42   50 · R/plan$ -0.3863 · R/$40 -0.2772
+  V2 decision proxy spread     $ mean  -11.52 · std  37.85 · p1   -70.10 · min  -365.69 · >$40  118 · >$42   89 · R/plan$ -0.3850 · R/$40 -0.2880
+
+(2) daily gate: G0 as the audit modelled it, G0 live-faithful (real fills embed the spread), G1, G2
+  G0 audit: gate on print P&L / planned                trades 1457 · $/trade  -14.80 · days 607 · worst  -473.93 · p1  -242.89 · days<-120 53 · days<-160 15
+  G0f live-faithful: (print - half spreads) / planned  trades 1444 · $/trade  -14.86 · days 607 · worst  -473.93 · p1  -227.11 · days<-120 52 · days<-160 13
+  G1 all-in $ gate                                     trades 1436 · $/trade  -14.78 · days 607 · worst  -473.93 · p1  -212.86 · days<-120 52 · days<-160 11
+  G2 all-in $ gate + remaining                         trades 1436 · $/trade  -14.61 · days 607 · worst  -473.93 · p1  -212.05 · days<-120 46 · days<-160 11
+  G3f V2(decision spread) + live-faithful gate         trades 1444 · $/trade  -11.30 · days 607 · worst  -365.69 · p1  -158.83 · days<-120 16 · days<-160 6
+  G4d V2(decision spread) + $ gate + remaining         trades 1448 · $/trade  -11.27 · days 607 · worst  -365.69 · p1  -158.83 · days<-120 16 · days<-160 6
+
+real	0m21.147s
+user	0m4.639s
+sys	0m10.791s

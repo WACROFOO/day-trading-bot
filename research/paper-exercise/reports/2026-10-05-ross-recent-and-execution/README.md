@@ -20,6 +20,7 @@ Paper only. No claim of edge.
 | `ross_recent/ledger.json` | one row per extracted trade, with his quote, its timestamp and the extraction confidence |
 | `ross_recent/*.py`, `ross_recent/diag_warmup.*` | the scripts as run, and the first-30-bar diagnostic |
 | `execution_audit/cw.txt`, `ea1.txt`–`ea3.txt`, `*.py` | the verifier's re-runs: realised loss vs the $40 target, the cap-width sweep, sizing from the worst allowed fill |
+| `execution_audit/vx2.py`, `vx2.txt` | the second verifier's check with the spread known at the decision (the arming bar's), not the fill's: the source of the 89 / 16 / −$365.69 figures below. Re-run 2026-10-06 and saved; it had only been printed |
 
 ## 1 · The ChatGPT design against our code
 

@@ -14,23 +14,36 @@ import sqlite3
 from datetime import datetime
 from typing import Optional
 
-from .intent import EntryIntent, shares_for, sized_for
+from .intent import WORST_FILL_SIZING, EntryIntent, entry_limit, shares_for, sized_for, sizing_reserve
 
 
 def intent_from_decision(row: sqlite3.Row | dict, dollar_risk: float,
                          target: Optional[float] = None,
-                         max_notional: Optional[float] = None) -> EntryIntent:
+                         max_notional: Optional[float] = None,
+                         spread: Optional[float] = None,
+                         worst_fill: Optional[bool] = None) -> EntryIntent:
     """Size the plan and carry the verdict. Does not judge; `refusals` does.
 
     The stop defines the size; the account bounds it. With `max_notional`
-    the share count is the smaller of the two, and the note says which."""
+    the share count is the smaller of the two, and the note says which.
+    Under A18 (`worst_fill`, default the live switch) the size is divided by
+    the worst fill's risk: (entry limit − stop) + `spread` + commission."""
     r = dict(row)
-    trigger, stop = float(r["trigger"]), float(r["stop"])
-    shares, by = sized_for(round(trigger, 2), round(stop, 2), dollar_risk, max_notional)
+    trigger, stop = round(float(r["trigger"]), 2), round(float(r["stop"]), 2)
+    worst = WORST_FILL_SIZING if worst_fill is None else worst_fill
+    reserve = sizing_reserve(trigger, spread) if worst and trigger > stop > 0 else 0.0
+    shares, by = sized_for(trigger, stop, dollar_risk, max_notional, reserve=reserve)
+    note = f"decision {r['decision_id']}"
+    if reserve:
+        sp = f"spread {spread:.2f}" if spread is not None and spread > 0 else "no spread read"
+        note += (f" · sized from the worst fill (A18): limit {entry_limit(trigger):.2f} − stop {stop:.2f}"
+                 f" + {sp} + 0.01 commission = ${trigger - stop + reserve:.4f}/sh")
+    if by == "funds":
+        note += " · sized by funds, not risk"
     return EntryIntent(
         symbol=r["symbol"],
-        trigger=round(trigger, 2),
-        stop=round(stop, 2),
+        trigger=trigger,
+        stop=stop,
         shares=shares,
         dollar_risk=dollar_risk,
         max_notional=max_notional,
@@ -38,8 +51,10 @@ def intent_from_decision(row: sqlite3.Row | dict, dollar_risk: float,
         plan_allowed=bool(r["plan_allowed"]),
         verdict=r["verdict"] or "",
         session=r["session"] if r["session"] in ("regular", "premarket") else "none",
-        note=f"decision {r['decision_id']}" + (" · sized by funds, not risk" if by == "funds" else ""),
+        note=note,
         ref=str(r["decision_id"]),
+        sizing_reserve=reserve,
+        sizing_spread=spread if spread is not None and spread > 0 else None,
     )
 
 

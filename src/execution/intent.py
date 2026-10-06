@@ -176,6 +176,10 @@ class EntryIntent:
     # known (LOG_ONLY, or no account read). The stop defines the size; the
     # account bounds it — see `sized_for`.
     max_notional: Optional[float] = None
+    # A18: the per-share reserve the size was divided by on top of
+    # (trigger − stop), and the spread it was read from (None = no quote).
+    sizing_reserve: float = 0.0
+    sizing_spread: Optional[float] = None
 
     @property
     def notional(self) -> float:
@@ -326,13 +330,36 @@ SPREAD_K = 4.0
 # broker keeps holding the stop, so the trade stays protected between loops.
 TRAIL_R = 1.0
 
+# Amendment A18 (owner, 2026-10-06; docs/preregistration.md §5): size from the
+# worst fill the order allows, not from the trigger. A10 lets the entry fill up
+# to `entry_limit(trigger)`, the round trip pays the spread, and IBKR Fixed
+# charges $0.005 a share each way, so the per-share risk the size is computed
+# from is (limit − stop) + spread at the decision + $0.01. On the 1,873 replayed
+# fills of 2024-26 (research/paper-exercise/reports/2026-10-05-ross-recent-and-
+# execution/execution_audit/vx2.txt) losses over $42 fall from 437 to 89 and the
+# worst trade from −$493.64 to −$365.69, for −0.006 R a trade (the $1 commission
+# minimum on smaller orders). It narrows losses; it does not change expectancy.
+# A new sizing cohort: trades before and after are not pooled. False restores
+# sizing from the trigger.
+WORST_FILL_SIZING = True
+COMMISSION_RESERVE_PER_SHARE = 0.01
+
+
+def sizing_reserve(trigger: float, spread: Optional[float]) -> float:
+    """A18: dollars per share added to (trigger − stop) before sizing — the
+    entry limit's headroom, the spread (0 when no quote was read) and the
+    round-trip commission."""
+    sp = spread if spread is not None and spread > 0 else 0.0
+    return round((entry_limit(trigger) - trigger) + sp + COMMISSION_RESERVE_PER_SHARE, 4)
+
 
 def sized_for(trigger: float, stop: float, dollar_risk: float,
-              max_notional: Optional[float] = None) -> tuple[int, str]:
+              max_notional: Optional[float] = None, reserve: float = 0.0) -> tuple[int, str]:
     """Shares and how they were bounded: 'risk' (the stop sized it) or 'funds'
     (the account could not hold the risk-sized position; fewer shares, and so
-    LESS than the stated dollar risk — never more)."""
-    n = shares_for(trigger, stop, dollar_risk)
+    LESS than the stated dollar risk — never more). `reserve` is A18's
+    per-share allowance for the worst allowed fill."""
+    n = shares_for(trigger, stop, dollar_risk, reserve=reserve)
     if max_notional is None or trigger <= 0 or n <= 0:
         return n, "risk"
     fit = int(max_notional // trigger)
@@ -341,13 +368,15 @@ def sized_for(trigger: float, stop: float, dollar_risk: float,
     return n, "risk"
 
 
-def shares_for(trigger: float, stop: float, dollar_risk: float) -> int:
+def shares_for(trigger: float, stop: float, dollar_risk: float, reserve: float = 0.0) -> int:
     """The only sizing rule: the stop defines the size.
 
     Core invariant, carried from the mastery bundle — the scanner discovers a
     candidate, the chart defines the setup, the stop defines the size, the
     market decides the result. Never sized from buying power, which on this
     paper account reads $14,291 against $2,143 of equity and is fiction.
+    `reserve` (A18) widens the per-share risk the size is divided by; it never
+    moves the stop.
     """
     rps = trigger - stop
     if rps <= 0 or dollar_risk <= 0:
@@ -357,7 +386,7 @@ def shares_for(trigger: float, stop: float, dollar_risk: float) -> int:
     # 500. On a $100 risk against a 20c stop that is one share; on a tighter
     # stop it is worse, and it is silent every time. Prices are on a penny
     # grid, so scaling to tenths of a cent makes the division exact.
-    rps_mils = round(rps * 1000)
+    rps_mils = round((rps + max(reserve, 0.0)) * 1000)
     if rps_mils <= 0:
         return 0
     return int(round(dollar_risk * 1000)) // rps_mils

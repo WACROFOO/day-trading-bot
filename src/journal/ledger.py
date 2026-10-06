@@ -343,7 +343,14 @@ _ADDED_COLUMNS = {
                # the resting stop leg's quantity, from the broker (item 13c)
                ("stop_qty", "REAL"),
                # a human named this fill's exit as a code defect's (A3 kill rule, 2026-09-22)
-               ("defect_note", "TEXT")),
+               ("defect_note", "TEXT"),
+               # A18 (2026-10-06): the per-share reserve the size was divided by on top
+               # of (trigger − stop), and the spread it was read from. NULL or 0 = sized
+               # from the trigger (the cohort before A18); the two are never pooled.
+               ("sizing_reserve", "REAL"), ("sizing_spread", "REAL"),
+               # IBKR's commission report per side, in dollars (2026-10-06): the
+               # planned R the gate reads leaves it out, net R does not.
+               ("commission_in", "REAL"), ("commission_out", "REAL")),
     "actuals": (("trigger_hit", "INTEGER"), ("trigger_hit_ts", "TEXT")),
 }
 
@@ -546,7 +553,8 @@ def record_order(conn: sqlite3.Connection, decision_id: str, *, symbol: str,
 def record_intent(conn: sqlite3.Connection, decision_id: str, *, symbol: str, session: str,
                   trigger: float, stop: float, target: Optional[float], shares: int,
                   dollar_risk: float, rules_hash: Optional[str] = None,
-                  code_commit: Optional[str] = None) -> int:
+                  code_commit: Optional[str] = None, sizing_reserve: Optional[float] = None,
+                  sizing_spread: Optional[float] = None) -> int:
     """The durable intent, written and COMMITTED before anything is sent.
 
     Audit 2026-09-08 F4: a ledger row written after the send is not an
@@ -559,10 +567,11 @@ def record_intent(conn: sqlite3.Connection, decision_id: str, *, symbol: str, se
     cur = conn.execute("""
         INSERT INTO orders (decision_id, symbol, account, session, parent_id, stop_id,
             target_id, trigger, stop, target, shares, dollar_risk, planned_risk, protected,
-            status, rules_hash, code_commit, placed_at, updated_at)
-        VALUES (?,?,?,?,NULL,NULL,NULL,?,?,?,?,?,?,0,'intent',?,?,?,?)""",
+            status, rules_hash, code_commit, sizing_reserve, sizing_spread, placed_at, updated_at)
+        VALUES (?,?,?,?,NULL,NULL,NULL,?,?,?,?,?,?,0,'intent',?,?,?,?,?,?)""",
         (decision_id, symbol, "", session, trigger, stop, target, shares, dollar_risk,
-         round((trigger - stop) * shares, 2), rules_hash, code_commit, _now(), _now()))
+         round((trigger - stop) * shares, 2), rules_hash, code_commit, sizing_reserve, sizing_spread,
+         _now(), _now()))
     conn.execute("UPDATE decisions SET outcome='CLAIMED', acted_at=? WHERE decision_id=?",
                  (_now(), decision_id))
     return int(cur.lastrowid)

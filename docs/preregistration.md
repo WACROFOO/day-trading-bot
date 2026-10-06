@@ -1079,6 +1079,25 @@ did ("ran past the limit", "did not come", "sat between"), not always "did not
 come" (AMOD 2026-10-02 07:45). Code: `src/momentum_platform/datasources/instrument_facts.py`,
 `src/execution/runner.py`; tests `tests/test_instrument_facts.py`, `tests/test_runner.py`.
 
+**Amendment A18 — size from the worst allowed fill (owner, 2026-10-06; a new sizing cohort).**
+Shares were $40 ÷ (trigger − stop). The order may fill up to the A10 limit, the
+round trip pays the spread, and IBKR Fixed charges $0.005 a share each way, so
+on the 1,873 replayed fills of 2024-26, 437 (23.33 %) lost more than $42 all-in
+(`research/paper-exercise/reports/2026-10-05-ross-recent-and-execution/execution_audit/ea1.txt`). Now shares = $40 ÷ ((entry limit − stop) + spread at the decision +
+$0.01) (`execution.intent.sizing_reserve`, `WORST_FILL_SIZING`): the spread is
+the desk quote read before sizing; a pre-market plan is sized again at the touch
+from the spread then; an unquoted spread counts 0 (a regular-hours entry without
+a fresh quote is refused anyway). Measured on the same fills with the arming
+bar's spread (`research/paper-exercise/reports/2026-10-05-ross-recent-and-execution/execution_audit/vx2.txt`):
+losses over $42 437 → 89, worst trade −$493.64 → −$365.69, days worse than
+−$120 52 → 16 of 607, R per planned dollar −0.3792 → −0.3850 (the $1 commission
+minimum on smaller orders). **It narrows losses; it does not change the
+expectancy**, and it was read on 2024-26, which has been read many times.
+Planned R stays (trigger − stop) × shares, so the risk gate's −3 R is the same
+number of R and fewer dollars. Every order row records `sizing_reserve` and
+`sizing_spread`; rows with none are the earlier cohort, and the two are never
+pooled. **Undo:** `WORST_FILL_SIZING = False`. Tests `tests/test_worst_fill_sizing.py`.
+
 **Opening-risk candidates (2026-10-01, addendum 2026-10-01c) — none adopted.**
 After the NXL loss (a plan built on two pre-market candles, filled at 09:30:23
 into an 82¢ opening minute, stopped five seconds later at −1.41 R), three
