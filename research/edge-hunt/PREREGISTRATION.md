@@ -719,3 +719,33 @@ this addendum, in both modes. A pass relaxes a gate the method states, so it goe
 to the owner with the data and is built OFF until 200 prospective trades; a fail
 closes the question. Reported: how many B plans are refused by the warm-up alone,
 per window and per period.
+
+### Addendum 2026-10-06c — re-anchor a run-past entry instead of dropping it, before any run
+
+**Question (owner, 2026-10-06, IPDN 08:01):** the plan armed at 5.28 / 4.83 and was
+dropped because the ask ran past the A10 limit (5.30) between two 5-second checks;
+the owner took the move by hand. *"Don't we need to adapt the SL and TP instead of
+neglecting the entry?"* Measured so far: widening the cap alone made net R per fill
+worse (−0.3808 at +0.3 % → −0.3974 at +2 %) while the fills it added read +0.809 R
+gross at +2 % (`research/paper-exercise/reports/2026-10-05-ross-recent-and-execution/execution_audit/cw.txt`) —
+there the size and the trail stayed anchored to the trigger. Not tested: keeping the
+stop where the chart put it and sizing from the price actually paid.
+
+**Variant RA (re-anchor).** Same plans, same trigger, stop, TTL (3 minutes) and exit as
+live. The first print at or above the trigger inside the TTL decides: at or under the
+A10 limit (+0.3 %) → the live fill, unchanged; above it but at most **+2 %** over the
+trigger → bought at that print, **shares = $40 ÷ (print − stop)**, the A3 trail at
+1 × (print − stop), the stop unchanged; above +2 % → nothing, and the next print is
+judged the same way until the TTL ends. No profit target (A3). Costs: IBKR Fixed both
+sides, half the spread in and (on a stop-type exit) out — the cached spread where the
+plan filled live, the median cached spread otherwise; $2,000 notional cap.
+
+**Data and decision.** Primary: the 2,577 B plans with a stage-1 tick outcome, 2024-26
+SIP prints (`data/cache/ticks`), plan by plan against live, net dollars ÷ $40. RA is
+built (OFF, then 200 prospective paper trades — these years are not pristine) only if
+(1) the day-clustered one-sided 95 % lower bound of (RA − live) net per plan is > 0,
+AND (2) the re-anchored trades alone have a net mean > 0, AND (3) on 1-minute bars
+2016-2023 (`rules_audit` cache, a bar opening above the limit and within +2 % is the
+re-anchored fill at its open, reading C) the mean of (RA − live) is > 0. Otherwise the
+2¢ band stays and the run-past plan stays a REFUSED row with its reason. Script:
+`scripts/reanchor.py`.
