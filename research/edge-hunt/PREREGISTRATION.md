@@ -628,3 +628,94 @@ with the first 300 excluded (`green_run.py sample2`); ticks fetched the same way
 beside it, deciding nothing: regular hours only (free of the 09:30-gap
 hindsight that flatters pre-market entries), the pooled 900 days, S10.
 Otherwise the green run stays a desk log with no orders.
+
+### Addendum 2026-10-06b — E1, the first 5-minute candle to make a new high; B30, the MACD warm-up; before any run
+
+Written and committed before `scripts/five_minute.py` exists or runs. Engine:
+`scripts/rules_audit.py` — its 2,608-session cache (24,831 symbol-days,
+`data/cache/history`, 1-minute SIP bars 04:00-16:00 with pre-market volume), its
+plans for B (`data/cache/rules_audit_plans.pkl`), `fill_retouch`, `run_exit`,
+`cost_live`, the day-paired bootstrap; rule set B (`BASE`), $40 / $2,000, cost
+model "live"; bar-order modes A and C, both required, as in addendum 2026-10-01b.
+Periods: train 2016-02 → 2022-12 (1,701 sessions); gate 2023 (245); holdout
+2024-01 → 2026-08 (662), read for other rules many times, never for these two.
+
+**Question (owner, 2026-10-06):** "adapt handling the green uptrending 1 min bars
+without a proper pullback in the one minute chart." The desk's detector needs a
+red 1-minute candle; on a straight green run it arms nothing. The method's answer
+is the 5-minute chart: *"the one minute is fine what's the first five minute candle
+to make a new high it'll be over 65 so your entry is 65 your stop is the low at
+60"* (`Xdw5azEqs6o` [00:12:38]); *"a five minute pullback ... right at the volume
+weighted average price ... right at the nine moving average ... a really good
+opportunity for the first five minute candle to make a new high"* (`5X_ZcifasBg`
+[00:14:44]); *"it hasn't had a five minute pullback yet we need a five minute
+pullback i don't wanna take a premature five minute breakout"* (`qCRNRcU2h7E`
+[00:28:14]). And its warning: parabolic names that go *"from you know 7 to 14 on without a five
+minute pullback"* and then *"it just Fades back down"* (`t-_T5MTl1FI` [00:34:09]). Not a repeat:
+addendum 2026-10-03 P changed the 1-minute pullback's definition and the 10-second
+tests (2026-10-02e, 10-05, 10-06) timed entries inside the run; nothing has
+measured the 5-minute pullback.
+
+**E1 — setup.** Five-minute candles aligned to the ET clock (:00, :05, …), built
+from the cached 1-minute bars (first open, max high, min low, last close, summed
+volume; a slot with no prints has no candle). `FirstPullbackDetector`'s rules on
+those candles, with its defaults: an impulse of ≥ 2 consecutive green candles
+(last 6 kept) spanning ≥ 2 % from the first open; the first candle that closes ≤
+its open starts the pullback; up to 4 pullback candles; a pullback whose low
+breaks the impulse's low resets. **The order rests during the next candle**, not
+after it: at the close of each pullback candle a buy stop-limit is placed at that
+candle's high + 1¢ (A10 cap +0.3 %, 1¢ minimum), stop at the pullback's lowest low
+− 1¢, live for 5 minutes (the next candle). If it does not fill and that candle
+makes no new high, it is re-placed at the new candle's high; a candle that trades
+above the previous one's high ends the setup (filled or not — a gap past the cap is
+no fill, as in B). Fills, exits and costs are B's: `fill_retouch` from the order
+time, A3 trail 1 R on 1-minute bars, flat 11:30, `cost_live`.
+**Gates at each placement**, from the 1-minute bars up to the pullback candle's
+close, exactly as the live desk computes them (`indicators.chart_gates`): price
+$2-20, above VWAP, above the 9 EMA, MACD histogram > 0; pullback volume (mean of
+the pullback candles) < impulse volume (mean of the impulse candles); ≤ 25 % off
+the high; stop ≥ 2 % of price (A13); stop ≥ 4× the proxy spread (A6); placed
+07:00-11:20. **The owner's case, required for E1:** inside the impulse there is a
+run of ≥ 4 consecutive green 1-minute bars whose last bar made a new high of day.
+One position, the slot held from the order to the exit (an unfilled E1 order holds
+it 5 minutes); daily limits as B.
+
+**E1 — decision, sequential, every stage in both modes:**
+1. Train: n ≥ 200; net mean R a trade > 0 with its day-clustered one-sided 95 %
+   lower bound > 0; the regular-hours subset (orders 09:30-11:20) net mean > 0,
+   because the 09:30-gap universe flatters pre-market entries; and the gross lower
+   bound of (E1 − random) > 0. Random: per E1 trade, 20 market entries at the open
+   of random 1-minute bars in the same window (pre-market · 09:30-10:30 ·
+   10:30-11:30) of the same symbol-day, the same stop in % of price, the same
+   exit, the same costs; seed 20261006.
+2. 2023: net mean > 0.
+3. Holdout: §4's five conditions (α = 0.42 %).
+A trade's own costs decide, not a fixed line: the 0.40 R mean cost measured on
+the 1-minute trades (`research/paper-exercise/reports/2026-10-02-execution-study/cost_decomposition_output.txt`,
+`mod.addon`) shrinks in R as the stop widens, and 5-minute stops are wider.
+All three stages pass → E1 is built as a paper order source behind a switch, OFF
+until 200 prospective paper trades confirm it (the holdout years are not
+pristine, §3). Any stage fails → E1 is never an order: the desk shows the state
+("EXTENDED — waiting for the first 5-minute candle to make a new high"), nothing
+more. Every period is reported whatever the decision; the decision is the first
+failing stage. **Reported, deciding nothing:** E1 without the owner's-case
+condition; E1 with VWAP as its only chart gate; B ∪ E1 against B (one position,
+whichever arms first; day-paired lower bound on the holdout); E1 trades by
+pullback count (1st, 2nd, 3rd+).
+
+**B30 — the warm-up blind spot.** The desk's MACD needs 35 one-minute bars from
+04:00 (`indicators.MACD_MIN`); before that the gate reads None and B refuses the
+plan. The 2026-10-05 rebuild placed 3 of 13 tier-A and 10 of 29 tier-A+B entries of
+Ross's June-July trades before a stock's 30th bar
+(`research/paper-exercise/reports/2026-10-05-ross-recent-and-execution/README.md`).
+On his platform the MACD carries the previous days' bars, so it exists from the
+first print; the cache holds no previous-day bars for most names, so that cannot
+be replayed. **Variant B30:** B, except that a plan armed with fewer than 35 bars
+whose ONLY red gate is MACD is allowed (VWAP, 9 EMA, volume and every other rule
+still apply). **Decision:** addendum 2026-10-01's adoption rule against B
+(train and holdout better, ≥ 200 holdout trades, 2 of 3 holdout years, day-paired
+lower bound on the holdout > 0), at one-sided α = 0.05 / 2 for the two tests of
+this addendum, in both modes. A pass relaxes a gate the method states, so it goes
+to the owner with the data and is built OFF until 200 prospective trades; a fail
+closes the question. Reported: how many B plans are refused by the warm-up alone,
+per window and per period.
