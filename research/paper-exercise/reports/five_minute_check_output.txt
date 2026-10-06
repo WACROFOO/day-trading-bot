@@ -1,0 +1,27 @@
+five_minute_check · diagnostic, written after the addendum 2026-10-06b run, deciding nothing · mode C · gross R
+
+1. B's trades, train 2016-2022: n 1899 · B gross -0.064 · random same windows +0.218
+   pre-market   n   676 · B -0.071 · random +0.286
+   09:30-10:30  n   948 · B -0.043 · random +0.170
+   10:30-11:30  n   275 · B -0.116 · random +0.212
+
+2. no conditioning: 800 random symbol-days of the 2016-2022 universe, 20 random bars per window
+   stop 3% · pre-market +0.284 (n 13380) · 09:30-10:30 -0.065 (n 14080) · 10:30-11:30 -0.070 (n 14080)
+   stop 5% · pre-market +0.140 (n 13380) · 09:30-10:30 -0.079 (n 14080) · 10:30-11:30 -0.062 (n 14080)
+
+3. E1 primary, train 2016-2022: n 96 · E1 gross -0.032
+   09:30-10:30  n  59 · E1 +0.071 · random whole window +0.370 · random before the E1 order +0.750
+   pre-market   n  30 · E1 -0.266 · random whole window +0.435 · random before the E1 order +0.875
+   10:30-11:30  n   7 · E1 +0.101 · random whole window +0.573 · random before the E1 order +1.254
+
+4. funnel, all periods: 291291 E1 placements · 32173 in the owner's case (a straight green 1-minute run inside the 5-minute impulse) · refused by, first rule that fired:
+   window              11075
+   price                 647
+   vwap                 4930
+   ema9                 8841
+   macd                 4702
+   volume               1194
+   fade                    0
+   stop < 2%             244
+   stop < 4x spread      102
+   pass every rule       438  (one position, the daily limits and the fill then leave the trades above)

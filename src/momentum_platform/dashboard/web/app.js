@@ -1864,6 +1864,18 @@ function renderVerdict(frame, ctx) {
         : "no plan — no confirmed first pullback yet"));
   }
   host.appendChild(planLine);
+  // The 5-minute state (owner, 2026-10-06): why a straight green 1-minute run
+  // has no plan, and the method's 5-minute trigger once a 5-minute candle pauses.
+  // Computed by the server at the newest minute, so shown only at the live edge.
+  // Display only: E1 failed its preregistered test (addendum 2026-10-06b).
+  const fm = S.fiveMinute && S.fiveMinute[sym];
+  if (fm && !plan && FRAMES.length && frame.t >= FRAMES[FRAMES.length - 1].t) {
+    const f = el("div", "vplan");
+    f.appendChild(el("b", null, (fm.state === "EXTENDED" ? "EXTENDED" : "5-MIN PULLBACK") + "  "));
+    f.appendChild(el("span", "muted", fm.text));
+    f.title = "5-minute state · display only, no order · E1 failed its preregistered test (addendum 2026-10-06b)";
+    host.appendChild(f);
+  }
 
   const why = el("div", "why");
   const rows = sv
@@ -2725,6 +2737,7 @@ function refreshSession() {
     mergeSymbols(next.symbols || {});
     S.plans = next.plans; S.builtAt = next.builtAt; S.provider = next.provider || S.provider;
     S.cascade = next.cascade || S.cascade; S.suppressedPlans = next.suppressedPlans || [];
+    S.fiveMinute = next.fiveMinute || {};
     S.sessionStart = next.sessionStart || S.sessionStart;
     S.feedLagSeconds = next.feedLagSeconds;
     if (next.tradingDate && next.tradingDate !== S.tradingDate) newTradingDay(next.tradingDate);

@@ -539,6 +539,14 @@ def build_session_from_records(
                        "value": g.value, "reason": g.reason} for g in res.gates],
         }
 
+    # The 5-minute state (owner, 2026-10-06): a straight green 1-minute run arms
+    # no plan, and the card said only "no confirmed first pullback". It now says
+    # EXTENDED, or names the first-5-minute-candle-to-make-a-new-high trigger.
+    # Display only — E1 failed its preregistered test (addendum 2026-10-06b) —
+    # and logged once per state, live states only, for scripts/watch.py.
+    five_minute_by_symbol = _five_minute_states(symbols, bars_by_symbol, frames, data_status, journal,
+                                                journal_since)
+
     _tj = _time.perf_counter()
     if journal is not None and frames:
         # R1, the denominator: every symbol on the board with its verdict,
@@ -592,7 +600,44 @@ def build_session_from_records(
         # number is the first thing to look at if the desk shows no plans.
         "suppressedPlans": suppressed_plans,
         "cascade": cascade_by_symbol,
+        "fiveMinute": five_minute_by_symbol,
     }
+
+
+def _five_minute_states(symbols, bars_by_symbol, frames, data_status, journal, journal_since) -> dict:
+    """Each name's 5-minute display state at the end of this build. The live desk
+    judges at the wall clock (the newest minute may still be forming); a replay at
+    the close of its last minute. A state that began before `journal_since` (the
+    desk's start) is shown, never logged: no live desk saw it begin."""
+    from .. import five_minute as FM
+    live = str(data_status or "").startswith("live")
+    if live:
+        now_t = int(datetime.now(UTC).timestamp())
+    elif frames:
+        now_t = int(frames[-1]["t"]) + 60
+    else:
+        return {}
+    since_t = None
+    if journal_since is not None:
+        try:
+            since_t = int(journal_since.timestamp()) if hasattr(journal_since, "timestamp") else int(journal_since)
+        except (TypeError, ValueError):
+            since_t = None
+    out = {}
+    for sym in symbols:
+        rows = [tuple(b) for b in bars_by_symbol.get(sym) or []]
+        st = FM.state_at(rows, now_t)
+        if not st.state:
+            continue
+        out[sym] = {"state": st.state, "since": st.since, "trigger": st.trigger, "stop": st.stop,
+                    "stopPct": st.stop_pct, "greenRun": st.green_run, "nPull": st.n_pull, "text": st.text()}
+        if journal is not None and (since_t is None or st.since >= since_t):
+            try:
+                from journal import ledger as _L
+                _L.record_five_minute_state(journal, sym, st, data_status=str(data_status))
+            except Exception:                              # noqa: BLE001 — a display log never takes the desk down
+                pass
+    return out
 
 
 def cascade_inputs(meta: dict, halt: Optional[str] = None,

@@ -60,6 +60,7 @@ HANDOFF_ENFORCE_SECONDS = 5.0
 def in_opening_handoff(now: datetime) -> bool:
     t = now.astimezone(ET).time()
     return (9, 30) <= (t.hour, t.minute) < OPENING_HANDOFF_END
+from momentum_platform.indicators import MACD_MIN
 from momentum_platform.sessions import REGULAR_END
 from .policy import premarket_allowed, premarket_shape
 
@@ -108,6 +109,18 @@ SELECTIVE_MAX_PLAN_INDEX = None
 A15_CANDIDATE = False
 A15_START = "09:30"
 A15_MIN_STOP_PCT = 3.0
+
+#: B30 CANDIDATE, OFF (addendum 2026-10-06b; research/paper-exercise/reports/
+#: five_minute_output.txt). A plan armed before the desk holds the 35 one-minute
+#: bars a MACD needs reads MACD UNKNOWN and is refused. Allowing it when MACD is
+#: the only chart gate not yet computable passed the preregistered per-trade rule
+#: in both bar readings (lower bound +0.003 / +0.007 R) — but the 514-519 trades it
+#: adds lose 0.26 R each after costs and total R falls in three of the four
+#: period x reading cells: the mean rose because the added trades lose LESS than
+#: B's average, not because they make money. It relaxes a gate the method states,
+#: so it stays OFF; the refusals name the warm-up and `exercise.py missed` scores
+#: them prospectively. True allows such a plan.
+B30_WARMUP_MACD = False
 
 MODES = ("LOG_ONLY", "TRADE")
 
@@ -337,8 +350,14 @@ class Runner:
             from journal import layer2 as Z
             states = Z.sub_gates(row["gates_json"], row["volume_ok"])
             named = Z.describe(states, only=("vwap", "ema9", "macd"))
-            reasons.append(f"Layer 2 not green: {named or 'chart gate red'} (verdict {row['verdict']}) "
-                           f"— chart gates must all be true at entry")
+            warm = _macd_warmup(row, states)
+            if not (warm is not None and B30_WARMUP_MACD):
+                why = (f"Layer 2 not green: {named or 'chart gate red'} (verdict {row['verdict']}) "
+                       f"— chart gates must all be true at entry")
+                if warm is not None:
+                    why += (f" · the MACD needs {MACD_MIN} one-minute bars and the desk held {warm} "
+                            f"(warm-up; B30 candidate, OFF)")
+                reasons.append(why)
         if self.mode == "TRADE" and SELECTIVE:
             reasons.extend(self._selective(row, intent))
         if self.mode == "TRADE" and A15_CANDIDATE:
@@ -1387,6 +1406,20 @@ def _versions() -> tuple[Optional[str], Optional[str]]:
         return DP.fingerprint().get("hash"), DP.build_commit()
     except Exception:                                   # noqa: BLE001
         return None, None
+
+
+def _macd_warmup(row, states: dict) -> Optional[int]:
+    """B30: the bar count when MACD is the only chart gate the desk could not
+    compute and the plan armed inside the warm-up (fewer than MACD_MIN bars);
+    None otherwise, and None when the row recorded no bar count (fail closed)."""
+    if states.get("macd") != "UNKNOWN" or states.get("vwap") != "PASS" or states.get("ema9") != "PASS":
+        return None
+    try:
+        import json as _json
+        n = (_json.loads(dict(row).get("chart_json") or "{}") or {}).get("bars")
+    except (TypeError, ValueError):
+        return None
+    return int(n) if isinstance(n, (int, float)) and n < MACD_MIN else None
 
 
 def _spread(q: Optional[dict]) -> Optional[float]:

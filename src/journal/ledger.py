@@ -281,6 +281,26 @@ CREATE TABLE IF NOT EXISTS green_run_signals (
     PRIMARY KEY (symbol, pause_id)
 );
 CREATE INDEX IF NOT EXISTS ix_green_run_ts ON green_run_signals(ts_et);
+
+-- The 5-minute state of a name whose 1-minute chart gives no pullback
+-- (`momentum_platform.five_minute`; owner, 2026-10-06). DISPLAY ONLY: E1, the
+-- entry it describes, failed its preregistered test (research/edge-hunt/
+-- PREREGISTRATION.md addendum 2026-10-06b), so nothing here is an order and
+-- the runner never reads this table (tests/test_five_minute_desk.py). One row
+-- per state as it begins: an EXTENDED run once, each 5-minute pullback trigger
+-- once.
+CREATE TABLE IF NOT EXISTS five_minute_states (
+    state_key TEXT PRIMARY KEY,          -- symbol|since|state|trigger
+    symbol TEXT NOT NULL,
+    ts_et TEXT NOT NULL,                 -- when the state began (ET ISO)
+    state TEXT NOT NULL,                 -- EXTENDED | 5M PULLBACK
+    trigger REAL, stop REAL, stop_pct REAL,
+    green_run INTEGER, n_pull INTEGER,
+    text TEXT NOT NULL,
+    data_status TEXT,
+    recorded_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ix_five_minute_ts ON five_minute_states(ts_et);
 """
 
 
@@ -1360,6 +1380,29 @@ def green_run_rows(conn: sqlite3.Connection, day: Optional[str] = None) -> list[
             d[k[:-5]] = json.loads(d[k] or "[]")
         out.append(d)
     return out
+
+
+def record_five_minute_state(conn: sqlite3.Connection, symbol: str, st, *,
+                             data_status: Optional[str] = None) -> str:
+    """Log a `five_minute.FiveMinuteState` once, as it begins. Returns new | seen
+    | skipped. A display log: nothing here reaches the runner."""
+    if not getattr(st, "state", None) or st.since is None:
+        return "skipped"
+    key = f"{symbol}|{st.since}|{st.state}|{st.trigger}"
+    cur = conn.execute("""INSERT OR IGNORE INTO five_minute_states (state_key, symbol, ts_et, state, trigger, stop,
+                          stop_pct, green_run, n_pull, text, data_status, recorded_at)
+                          VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
+                       (key, symbol, _et(st.since), st.state, st.trigger, st.stop, st.stop_pct, st.green_run,
+                        st.n_pull, st.text(), data_status, _now()))
+    return "new" if cur.rowcount else "seen"
+
+
+def five_minute_rows(conn: sqlite3.Connection, day: Optional[str] = None) -> list[dict]:
+    """The 5-minute display log, oldest first; `day` is an ET date."""
+    q, args = "SELECT * FROM five_minute_states", ()
+    if day:
+        q, args = q + " WHERE substr(ts_et,1,10)=?", (day,)
+    return [dict(r) for r in conn.execute(q + " ORDER BY ts_et, symbol", args)]
 
 
 def set_new_stop_leg(conn: sqlite3.Connection, order_id: int, *, stop_id: int, level: float,

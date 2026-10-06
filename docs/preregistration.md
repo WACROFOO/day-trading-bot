@@ -1111,6 +1111,19 @@ left days worse than −$120 at 52 of 607 either way
 (`research/paper-exercise/reports/2026-10-05-ross-recent-and-execution/execution_audit/vx2.txt`).
 Tests `tests/test_commission.py`.
 
+**E1 and B30, read (2026-10-06, addendum 2026-10-06b) — E1 never trades; B30 built OFF.**
+E1, the first 5-minute candle to make a new high after a straight green 1-minute run
+(the owner's question of 2026-10-06), failed stage 1 in both bar readings: train net
+−0.293 / −0.297 R a trade on 96 trades, below random entries in the same windows. The
+desk now shows the state instead of nothing — **EXTENDED**, then **5-MIN PB** with the
+trigger and stop — on the card and in `scripts/watch.py`, from
+`src/momentum_platform/five_minute.py` and the ledger table `five_minute_states`, which
+the runner never reads. B30 (a plan whose only red gate is a MACD still inside its
+35-bar warm-up) passed the per-trade rule in both readings but adds trades that lose
+0.26 R each after costs; `runner.B30_WARMUP_MACD = False`, and its refusals name the
+warm-up so `exercise.py missed` scores them prospectively. No selection rule moves.
+Detail: `research/paper-exercise/reports/2026-10-06-five-minute-and-warmup.md`.
+
 **Opening-risk candidates (2026-10-01, addendum 2026-10-01c) — none adopted.**
 After the NXL loss (a plan built on two pre-market candles, filled at 09:30:23
 into an 82¢ opening minute, stopped five seconds later at −1.41 R), three

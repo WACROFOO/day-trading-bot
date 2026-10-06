@@ -116,6 +116,7 @@ class Watcher:
         self.seen_decisions: dict[str, str] = {}
         self.seen_orders: dict[int, tuple] = {}
         self.seen_green: dict[tuple, str] = {}
+        self.seen_five: set = set()
         self.last_event = 0
         self.history_count = 0
         self.locked = None
@@ -169,6 +170,29 @@ class Watcher:
                 continue
             self.seen_green[key] = g["status"]
             out.append((str(g["ts_et"])[11:19], self._green_line(g)))
+        return out
+
+    def _five(self) -> list[tuple[str, str]]:
+        """The 5-minute display states (`momentum_platform.five_minute`): a straight
+        green 1-minute run reads EXTENDED, a 5-minute pullback names its trigger.
+        Display only — E1 failed its preregistered test; never an order."""
+        try:
+            rows = self.conn.execute(
+                "SELECT state_key, symbol, ts_et, state, trigger, stop, text FROM five_minute_states "
+                "WHERE substr(ts_et,1,10)=? ORDER BY ts_et", (self.day,)).fetchall()
+        except sqlite3.OperationalError as exc:
+            if "no such table" in str(exc):
+                return []                          # a ledger from before the 5-minute display
+            raise
+        out = []
+        for r in rows:
+            if r["state_key"] in self.seen_five:
+                continue
+            self.seen_five.add(r["state_key"])
+            word = "EXTENDED" if r["state"] == "EXTENDED" else "5-MIN PB"
+            plan = f"{r['trigger']:.2f}/{r['stop']:.2f}" if r["trigger"] and r["stop"] else "—"
+            out.append((str(r["ts_et"])[11:19],
+                        f"{str(r['ts_et'])[11:16]:>8}  {r['symbol']:<6} {word:<10} {plan:>11}  {_short(r['text'], 170)}"))
         return out
 
     def poll(self) -> list[tuple[str, str]]:
@@ -244,6 +268,7 @@ class Watcher:
             self.last_event = max(self.last_event, e["id"])
             new.append((et_clock(e["ts"]), f"{et_clock(e['ts']):>8}  {e['symbol']:<6} {'event':<10} {_short(e['text'], 170)}"))
         new += self._green()
+        new += self._five()
         lock = self.conn.execute("SELECT locked, reason FROM risk_day WHERE date=?", (self.day,)).fetchone()
         if lock and lock["locked"] and self.locked != lock["reason"]:
             self.locked = lock["reason"]
