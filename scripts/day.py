@@ -540,6 +540,12 @@ def after_close(conn, today: str, dry: bool) -> None:
     # A failure here never touches the trading day — it is said, with the command.
     try:
         import day_export
+        db_file = conn.execute("PRAGMA database_list").fetchone()[2] or ""
+        if not db_file or Path(db_file).resolve() != DB.resolve() or os.environ.get("DAY_EXPORT", "1") != "1":
+            # A test's ledger, a replay, or switched off: never ship it to the repo
+            # (2026-10-06: the suite pushed four fixture days before this guard).
+            note("daily export skipped: not the day's ledger")
+            return
         meta = day_export.export(conn, today, day_export.OUT_ROOT / today)
         good(f"export: research/daily/{today} · " + " · ".join(f"{k} {v}" for k, v in meta["counts"].items()))
         if os.environ.get("DAY_EXPORT_PUSH", "1") == "1":
