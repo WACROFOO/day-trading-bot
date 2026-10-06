@@ -1,0 +1,12 @@
+RA · addendum 2026-10-06c · ceiling +2 % · $40 / $2,000 · IBKR Fixed + half spreads
+ticks 2024-26: B plans with a stage-1 outcome 2577 (cache only)
+live replay vs the cached stage-1 outcome: agree 2516 · differ 0
+plans compared 2516 · live net -709.3 R (-0.2819 a plan) · RA net -728.8 R (-0.2897 a plan)
+(1) RA − live per plan: mean -0.0078 R · day-clustered one-sided 95 % lower bound -0.0239
+(2) re-anchored trades n 1025 · gross -0.185 · net -0.385 R · win 24.8% · median paid 1.37 % over the trigger
+    of which live would have filled later on a return: 872 · their live net -0.430 vs RA -0.522
+    of which live never filled: 153 · RA net +0.397
+
+(3) 1-minute bars 2016-2023, reading C: plans 3555 · RA − live mean +0.0101 R a plan · re-anchored 974 · their net -0.370 vs live -0.407
+
+DECISION: ✗ (1) lower bound > 0 · ✗ (2) re-anchored net > 0 · ✓ (3) bars 2016-23 > 0  → the 2¢ band stays
