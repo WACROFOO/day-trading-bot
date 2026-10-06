@@ -749,3 +749,29 @@ AND (2) the re-anchored trades alone have a net mean > 0, AND (3) on 1-minute ba
 re-anchored fill at its open, reading C) the mean of (RA − live) is > 0. Otherwise the
 2¢ band stays and the run-past plan stays a REFUSED row with its reason. Script:
 `scripts/reanchor.py`.
+
+### Addendum 2026-10-06d — the detector's blackout, the one-bar impulse, and a 04:00 start, before any run
+
+**Found on IPDN 2026-10-06** (SIP bars replayed through the desk's own detector,
+`FirstPullbackDetector`): the 08:01 plan was never sent (A10 ran past), yet the detector
+held it TRIGGERED until its 2 R target printed at 08:12, so the 08:09-08:12 push could not
+become the impulse of the 08:13 pullback; and the 08:14 push was ONE green bar (6.08 →
+6.82), under the two-bar minimum, so the 08:15-08:18 pullback armed nothing. Separately
+the owner asks for an earlier start: *"the opening of premarket generaly holds good
+uptrends and setups"*. Orders now start at 07:00 (`intent.PREMARKET_START`).
+
+**Variants, each against B (the live rules), one at a time:**
+- **D1 no blackout** — once a plan is frozen the machine searches again at once (the
+  plan's fate is the executor's); the trigger bar, if green, starts the next impulse.
+- **D2 one-bar impulse** — `min_impulse_bars = 1` (the 2 % range minimum unchanged).
+- **D12** — both.
+- **W4 04:00 start** — B with plans and orders from 04:00 instead of 07:00.
+
+**Engine and decision.** `scripts/rules_audit.py`'s cache, B's gates, fill, exit, costs,
+one position and daily limits, plans rebuilt for every variant and for B with the same
+code; bar readings A and C. Adopted only under addendum 2026-10-01's rule in BOTH
+readings — train (2016-2023) and holdout (2024-2026) net mean per trade better than B,
+≥ 200 holdout trades, better in 2 of 3 holdout years, day-paired lower bound on the
+holdout > 0 at one-sided α = 0.05 / 4 — AND, added after B30, **total net R not worse
+than B's in train and in the holdout** (a mean per trade can rise while the money falls).
+A pass is built OFF until 200 prospective paper trades. Script: `scripts/detector_variants.py`.
