@@ -767,6 +767,19 @@ class Runner:
                     L.add_order_event(self.conn, r["order_id"],
                                       f"trail level {row_trail} corrected to {p.trail_stop}: the broker's resting level")
                     n += 1
+        # IBKR's commission per side, as the reports arrive (they can trail the
+        # execution by a loop, and a partly filled exit adds to its side later).
+        # Read-only measurement: nothing trades on it.
+        ids = [k for k, p in by_parent.items() if k and (getattr(p, "commission_in", None) is not None
+                                                         or getattr(p, "commission_out", None) is not None)]
+        if ids:
+            marks = ",".join("?" * len(ids))
+            for r in self.conn.execute(f"SELECT order_id, parent_id FROM orders WHERE fill_price IS NOT NULL "
+                                       f"AND parent_id IN ({marks})", ids).fetchall():
+                p = by_parent[r["parent_id"]]
+                if L.set_commissions(self.conn, r["order_id"], commission_in=getattr(p, "commission_in", None),
+                                     commission_out=getattr(p, "commission_out", None)):
+                    n += 1
         for r in L.pending_exits(self.conn):
             p = by_parent.get(r["parent_id"])
             if p is None:

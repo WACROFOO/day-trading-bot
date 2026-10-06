@@ -1098,6 +1098,19 @@ number of R and fewer dollars. Every order row records `sizing_reserve` and
 `sizing_spread`; rows with none are the earlier cohort, and the two are never
 pooled. **Undo:** `WORST_FILL_SIZING = False`. Tests `tests/test_worst_fill_sizing.py`.
 
+**IBKR's commission is recorded (2026-10-06) — measurement only, no rule moves.**
+The fills carry the spread and the slippage; the commission was the one cost no
+column held, so `exercise.py report` read "planned R, no costs". The trader now
+reads IBKR's commission report on every execution, per side
+(`ibkr_trader._commission`: a side whose report has not arrived reads None, not a
+partial sum); the ledger keeps `commission_in` / `commission_out`; the report
+prints R on the fills and net R after commission side by side, and `watch.py`
+adds the net to the exit line, or on its own line when the report trails the
+fill. The risk gate still sums R on the fills: the audit's all-in-dollar gate
+left days worse than −$120 at 52 of 607 either way
+(`research/paper-exercise/reports/2026-10-05-ross-recent-and-execution/execution_audit/vx2.txt`).
+Tests `tests/test_commission.py`.
+
 **Opening-risk candidates (2026-10-01, addendum 2026-10-01c) — none adopted.**
 After the NXL loss (a plan built on two pre-market candles, filled at 09:30:23
 into an 82¢ opening minute, stopped five seconds later at −1.41 R), three

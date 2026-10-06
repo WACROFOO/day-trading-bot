@@ -81,6 +81,14 @@ def _short(text: str, n: int) -> str:
     return text if len(text) <= n else text[: n - 1] + "…"
 
 
+def _net(pnl: float, comm: float, planned_risk) -> str:
+    """' · IBKR commission $2.00 → net $-41.20 · -1.03 R': the fills already carry
+    the spread and slippage; the commission is the one cost they do not."""
+    net = pnl - comm
+    r = f" · {net / planned_risk:+.2f} R" if planned_risk else ""
+    return f" · IBKR commission ${comm:.2f} → net ${net:+.2f}{r}"
+
+
 def kill_reason(row) -> str:
     gate = row["killed_by"] or "?"
     try:
@@ -190,10 +198,13 @@ class Watcher:
         self.history_count = hist
         for o in self.conn.execute(
                 "SELECT o.order_id, o.symbol, o.status, o.shares, o.filled_qty, o.trigger, o.stop, o.fill_price, "
-                "o.fill_ts, o.exit_price, o.exit_ts, o.exit_reason, o.planned_risk, o.placed_at FROM orders o "
+                "o.fill_ts, o.exit_price, o.exit_ts, o.exit_reason, o.planned_risk, o.placed_at, "
+                "o.commission_in, o.commission_out FROM orders o "
                 "JOIN decisions d USING(decision_id) WHERE substr(d.ts_et,1,10)=? ORDER BY o.order_id",
                 (self.day,)).fetchall():
-            state = (o["status"], o["fill_price"], o["exit_price"])
+            comm = (round(o["commission_in"] + o["commission_out"], 2)
+                    if o["commission_in"] is not None and o["commission_out"] is not None else None)
+            state = (o["status"], o["fill_price"], o["exit_price"], comm)
             prev = self.seen_orders.get(o["order_id"])
             if prev == state:
                 continue
@@ -213,7 +224,15 @@ class Watcher:
                     pnl = (o["exit_price"] - (o["fill_price"] or o["exit_price"])) * (qty or 0)
                     r = f" · {pnl / o['planned_risk']:+.2f} R" if o["planned_risk"] else ""
                     new.append((et_clock(o["exit_ts"]), f"{et_clock(o['exit_ts']):>8}  {o['symbol']:<6} {'EXIT':<10} "
-                                f"@ {o['exit_price']:.2f}  {o['exit_reason'] or ''} · ${pnl:+.2f}{r}"))
+                                f"@ {o['exit_price']:.2f}  {o['exit_reason'] or ''} · ${pnl:+.2f}{r} on the fills"
+                                + (_net(pnl, comm, o["planned_risk"]) if comm is not None
+                                   else " · IBKR commission not reported yet")))
+            elif (o["exit_price"] and o["status"] not in ("ExitPending", "ExitFailed") and comm is not None
+                    and prev is not None and prev[3] is None):
+                # the commission report trails the fill; the net arrives on its own line, once
+                pnl = (o["exit_price"] - (o["fill_price"] or o["exit_price"])) * (qty or 0)
+                new.append((et_clock(o["exit_ts"]), f"{et_clock(o['exit_ts']):>8}  {o['symbol']:<6} {'NET':<10} "
+                            f"${pnl:+.2f} on the fills" + _net(pnl, comm, o["planned_risk"])))
             if not o["fill_price"] and o["status"] not in ("intent", "submitted", "Submitted", "PreSubmitted") \
                     and (prev is None or prev[0] != o["status"]):
                 new.append((et_clock(o["placed_at"]), f"{et_clock(o['placed_at']):>8}  {o['symbol']:<6} "

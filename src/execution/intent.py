@@ -445,6 +445,10 @@ class PlacedOrder:
     # How many shares the sent exit has sold so far. A sell can fill in part and
     # keep working (AMOD 2026-10-02 08:25: 466 of 666 at 2.43, 200 left).
     exit_filled_qty: Optional[float] = None
+    # IBKR's commission report per side, dollars; None until every execution
+    # on that side has one (2026-10-06).
+    commission_in: Optional[float] = None
+    commission_out: Optional[float] = None
     intent: Optional[EntryIntent] = None
     events: list[str] = field(default_factory=list)
 

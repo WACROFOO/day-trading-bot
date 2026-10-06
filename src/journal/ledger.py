@@ -684,6 +684,23 @@ def refresh_fill(conn: sqlite3.Connection, order_id: int, *, fill_price: float,
     return True
 
 
+def set_commissions(conn: sqlite3.Connection, order_id: int, *, commission_in: Optional[float] = None,
+                    commission_out: Optional[float] = None) -> bool:
+    """IBKR's reported commission per side. A side the broker has not reported
+    keeps what the row had; True when anything changed."""
+    row = conn.execute("SELECT commission_in, commission_out FROM orders WHERE order_id=?",
+                       (order_id,)).fetchone()
+    if row is None:
+        raise KeyError(order_id)
+    new_in = commission_in if commission_in is not None else row["commission_in"]
+    new_out = commission_out if commission_out is not None else row["commission_out"]
+    if (new_in, new_out) == (row["commission_in"], row["commission_out"]):
+        return False
+    conn.execute("UPDATE orders SET commission_in=?, commission_out=?, updated_at=? WHERE order_id=?",
+                 (new_in, new_out, _now(), order_id))
+    return True
+
+
 def record_exit(conn: sqlite3.Connection, order_id: int, *, reason: str,
                 price: Optional[float], ts, confirmed_by: Optional[str] = None,
                 confirmed: bool = True, exit_order_id: Optional[int] = None) -> None:
@@ -1124,7 +1141,8 @@ def trade_rows(conn: sqlite3.Connection) -> list[dict]:
     None. Until 2026-09-22 neither `report` nor `review` printed this, and
     "how did the trades do" had no answer in any tool output."""
     rows = conn.execute("""SELECT order_id, symbol, fill_ts, fill_price, exit_ts, exit_price, exit_reason,
-                                  exit_confirmed_by, status, shares, filled_qty, planned_risk, stop, trail_stop
+                                  exit_confirmed_by, status, shares, filled_qty, planned_risk, stop, trail_stop,
+                                  commission_in, commission_out, sizing_reserve
                            FROM orders WHERE fill_price IS NOT NULL ORDER BY fill_ts""").fetchall()
     out = []
     for r in rows:
@@ -1132,6 +1150,13 @@ def trade_rows(conn: sqlite3.Connection) -> list[dict]:
         closed = r["exit_price"] is not None and r["status"] not in ("ExitPending", "ExitFailed")
         pnl = round((r["exit_price"] - r["fill_price"]) * qty, 2) if closed else None
         rr = round(pnl / r["planned_risk"], 2) if closed and r["planned_risk"] else None
+        # Net of IBKR's reported commission (2026-10-06). The fills already
+        # carry the spread and slippage; commission is the cost they do not.
+        # None unless BOTH sides were reported: half a commission is not a net.
+        comm = (round(r["commission_in"] + r["commission_out"], 2)
+                if closed and r["commission_in"] is not None and r["commission_out"] is not None else None)
+        net = round(pnl - comm, 2) if comm is not None else None
+        net_r = round(net / r["planned_risk"], 2) if net is not None and r["planned_risk"] else None
         # Stop slippage (2026-09-25, GRML: trailed stop 16.22, filled 15.99):
         # exit price minus the stop level in force, for stop-type exits; and
         # the median 1-minute range of the 30 bars before the fill — the
@@ -1143,6 +1168,7 @@ def trade_rows(conn: sqlite3.Connection) -> list[dict]:
                 else None)
         rps = (r["planned_risk"] / r["shares"]) if r["planned_risk"] and r["shares"] else None
         out.append({**dict(r), "qty": qty, "closed": closed, "pnl": pnl, "r": rr,
+                    "commission": comm, "net_pnl": net, "net_r": net_r,
                     "stop_slip": slip, "stop_slip_r": round(slip / rps, 2) if slip is not None and rps else None,
                     "range30": median_range_before(conn, r["symbol"], r["fill_ts"]), "rps": rps})
     return out

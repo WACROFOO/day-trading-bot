@@ -64,12 +64,22 @@ def print_trades(conn, last: int | None = None) -> None:
     if closed:
         tot = round(sum(r["r"] or 0.0 for r in closed), 2)
         wins = sum(1 for r in closed if (r["r"] or 0) > 0)
-        head += f" · {wins} won · net {tot:+.2f} R (planned R, no costs)"
+        # The fills carry the spread and the slippage; IBKR's commission is the
+        # one cost they do not, and it is read from the broker's own reports.
+        head += f" · {wins} won · {tot:+.2f} R on the fills, before commission"
+        known = [r for r in closed if r.get("net_r") is not None]
+        if known:
+            net = round(sum(r["net_r"] for r in known), 2)
+            fee = round(sum(r["commission"] for r in known), 2)
+            head += (f" · {net:+.2f} R after ${fee:.2f} IBKR commission on {len(known)} of {len(closed)}"
+                     + ("" if len(known) == len(closed) else " (the rest have no commission report)"))
+        else:
+            head += " · no IBKR commission report recorded yet"
     print(f"\n{head}")
     if not rows:
         print("  no fills"); return
     print(f"  {'#':>3} {'day':<10} {'in':>5} {'sym':<6}{'qty':>5}{'fill':>8}{'out':>6}{'exit':>8}  {'reason':<14}{'$':>9}{'R':>7}"
-          f"{'slip':>7}{'rng30':>7}")
+          f"{'comm':>7}{'net R':>7}{'slip':>7}{'rng30':>7}")
     for r in rows:
         if r["closed"]:
             out_t, px = r["exit_ts"][11:16], f"{r['exit_price']:.2f}"
@@ -79,10 +89,14 @@ def print_trades(conn, last: int | None = None) -> None:
         else:
             out_t, px, pnl, rr = "—", "—", "—", "—"
             reason = {"ExitPending": "sell working", "ExitFailed": "HELD, no exit"}.get(r["status"], "HELD")
+        comm = f"{r['commission']:.2f}" if r.get("commission") is not None else "—"
+        net_r = f"{r['net_r']:+.2f}" if r.get("net_r") is not None else "—"
         slip = f"{r['stop_slip']:+.2f}" if r.get("stop_slip") is not None else "—"
         rng = f"{r['range30']:.2f}" if r.get("range30") is not None else "—"
         print(f"  {r['order_id']:>3} {r['fill_ts'][:10]:<10} {r['fill_ts'][11:16]:>5} {r['symbol']:<6}{r['qty']:>5}"
-              f"{r['fill_price']:>8.2f}{out_t:>6}{px:>8}  {reason:<14}{pnl:>9}{rr:>7}{slip:>7}{rng:>7}")
+              f"{r['fill_price']:>8.2f}{out_t:>6}{px:>8}  {reason:<14}{pnl:>9}{rr:>7}{comm:>7}{net_r:>7}{slip:>7}{rng:>7}")
+    print(f"  {DIM}R = P&L ÷ planned risk (trigger − stop) × shares. comm = IBKR's reported commission, both sides "
+          f"(— = not reported). net R = (P&L − comm) ÷ planned risk.{END}")
     slips = [r for r in rows if r.get("stop_slip_r") is not None]
     if slips:
         tot = sum(r["stop_slip_r"] for r in slips)

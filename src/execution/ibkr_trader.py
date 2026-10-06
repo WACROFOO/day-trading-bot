@@ -124,6 +124,26 @@ def _fill_time(trade):
     return None
 
 
+def _commission(trades) -> Optional[float]:
+    """IBKR's commission on the executions of `trades`, in dollars, summed.
+
+    None while nothing has executed, or while any execution's commission report
+    has not arrived yet (ib_async keeps a blank report, execId '', until it
+    does): a partial sum would read as the whole cost. The next sync fills it."""
+    total, seen = 0.0, False
+    for t in trades:
+        for f in (getattr(t, "fills", None) or []):
+            cr = getattr(f, "commissionReport", None)
+            if cr is None or not getattr(cr, "execId", ""):
+                return None
+            c = float(getattr(cr, "commission", 0.0) or 0.0)
+            if not (0.0 <= c < 1e6):            # UNSET_DOUBLE is not a commission
+                return None
+            total += c
+            seen = True
+    return round(total, 4) if seen else None
+
+
 def _capped_below(trade, trigger: float):
     """The cap price IBKR put on a buy limit (warning 2161), when it is below
     `trigger`; else None. Read from orderStatus.mktCapPrice, or from the
@@ -513,6 +533,12 @@ class PaperTrader:
                 rec.fill_price = filled
                 rec.fill_time = _fill_time(trade)
                 rec.events.append(f"filled {filled} vs trigger {rec.trigger}")
+            # IBKR's own commission, per side (2026-10-06). The fill prices
+            # already carry the spread and the slippage; commission is the one
+            # cost they do not, and until now nothing recorded it.
+            c_in = _commission([trade])
+            if c_in is not None:
+                rec.commission_in = c_in
 
             # A sent-but-unconfirmed exit (monitored stop, hard-stop flatten):
             # the fill, when IBKR reports it, is the exit price. Until then the
@@ -534,6 +560,9 @@ class PaperTrader:
 
             # The exit legs. A filled stop or target is the trade's end and
             # its P&L; without reading them the ledger never learns either.
+            exit_side = []
+            if rec.exit_order_id and by_id.get(rec.exit_order_id) is not None:
+                exit_side.append(by_id[rec.exit_order_id])
             for leg_id, why in ((rec.stop_id, "stop"), (rec.target_id, "target")):
                 leg = by_id.get(leg_id) if leg_id else None
                 if leg is None and leg_id:
@@ -541,6 +570,8 @@ class PaperTrader:
                     leg = next((t for t in all_trades
                                 if getattr(t.order, "parentId", 0) == rec.parent_id
                                 and t.order.orderType == ("STP" if why == "stop" else "LMT")), None)
+                if leg is not None:
+                    exit_side.append(leg)
                 if (leg is not None and rec.exit_price is None
                         and leg.orderStatus.status == "Filled"
                         and leg.orderStatus.avgFillPrice
@@ -553,6 +584,10 @@ class PaperTrader:
                     t = leg.log[-1].time if leg.log else None
                     rec.exit_time = t.isoformat() if t else None
                     rec.events.append(f"exit {why} at {rec.exit_price}")
+            uniq = list({id(t): t for t in exit_side}.values())
+            c_out = _commission(uniq)
+            if c_out is not None:
+                rec.commission_out = c_out
 
             stop = by_id.get(rec.stop_id) if rec.stop_id else None
             if stop is not None:
