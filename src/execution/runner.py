@@ -352,11 +352,13 @@ class Runner:
             named = Z.describe(states, only=("vwap", "ema9", "macd"))
             warm = _macd_warmup(row, states)
             if not (warm is not None and B30_WARMUP_MACD):
-                why = (f"Layer 2 not green: {named or 'chart gate red'} (verdict {row['verdict']}) "
-                       f"— chart gates must all be true at entry")
                 if warm is not None:
-                    why += (f" · the MACD needs {MACD_MIN} one-minute bars and the desk held {warm} "
-                            f"(warm-up; B30 candidate, OFF)")
+                    # the warm-up first, so a shortened line (watch.py) still says it
+                    why = (f"Layer 2 not green: MACD warm-up — the desk held {warm} of the {MACD_MIN} one-minute "
+                           f"bars a MACD needs (B30 candidate, OFF); VWAP and 9 EMA green")
+                else:
+                    why = (f"Layer 2 not green: {named or 'chart gate red'} (verdict {row['verdict']}) "
+                           f"— chart gates must all be true at entry")
                 reasons.append(why)
         if self.mode == "TRADE" and SELECTIVE:
             reasons.extend(self._selective(row, intent))

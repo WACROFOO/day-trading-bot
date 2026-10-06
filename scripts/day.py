@@ -535,6 +535,20 @@ def after_close(conn, today: str, dry: bool) -> None:
                 note(f"  - {b}")
         else:
             warn(f"phase {st['phase']} → {nxt} gates are ALL clear — run: python3 scripts/exercise.py advance")
+    # The daily learning loop (owner, 2026-10-06): the day's ledger and log go to the
+    # repo; the cloud review reads them after the close and writes the day's review.
+    # A failure here never touches the trading day — it is said, with the command.
+    try:
+        import day_export
+        meta = day_export.export(conn, today, day_export.OUT_ROOT / today)
+        good(f"export: research/daily/{today} · " + " · ".join(f"{k} {v}" for k, v in meta["counts"].items()))
+        if os.environ.get("DAY_EXPORT_PUSH", "1") == "1":
+            if day_export.push(today):
+                good("export pushed for the daily review")
+            else:
+                warn("export NOT pushed — run by hand: python3 scripts/day_export.py --push")
+    except Exception as exc:                          # noqa: BLE001
+        warn(f"daily export failed ({exc!r}) — run by hand: python3 scripts/day_export.py --push")
 
 
 def _backfill(day: str) -> Optional[int]:

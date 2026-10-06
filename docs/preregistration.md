@@ -1124,6 +1124,19 @@ the runner never reads. B30 (a plan whose only red gate is a MACD still inside i
 warm-up so `exercise.py missed` scores them prospectively. No selection rule moves.
 Detail: `research/paper-exercise/reports/2026-10-06-five-minute-and-warmup.md`.
 
+**The daily learning loop, spotter alerts, the 04:00 log (2026-10-06) — no rule moves.**
+After the 11:30 hard stop `scripts/day.py` exports the day (decisions, orders, bars,
+the bot's log with secrets redacted, the owner's journal rows) to `research/daily/<day>/`
+and pushes it; `scripts/daily_review.py` scores every plan on the day's bars by the rule
+that refused it and accumulates the rejected-or-OFF candidates (B30 warm-up, RA run-past,
+W4 before 07:00, E1 5-minute trigger) in `research/daily/cohorts.csv` toward their 200
+prospective trades; a cloud routine runs it after each close. It learns and never edits a
+rule: a cohort reaching 200 goes to a preregistered decision. `scripts/watch.py` rings and
+notifies on a plan refused only by the MACD warm-up, a plan that ran past its band,
+EXTENDED, 5-MIN PB, and the bot's own fills and exits; the owner decides. The desk may
+start at 04:00 (`day.py --early`); orders still start at 07:00, so 04:00-07:00 plans are
+logged REFUSED and scored. All entry rules in order: `docs/entry-rules.md`.
+
 **Opening-risk candidates (2026-10-01, addendum 2026-10-01c) — none adopted.**
 After the NXL loss (a plan built on two pre-market candles, filled at 09:30:23
 into an 82¢ opening minute, stopped five seconds later at −1.41 R), three

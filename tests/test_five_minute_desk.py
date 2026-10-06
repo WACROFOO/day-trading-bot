@@ -163,7 +163,7 @@ def test_b30_is_off_and_the_refusal_names_the_warm_up():
     c = _warmup_journal(bars=20)
     done = Runner(c, mode="TRADE", dollar_risk=20.0, trader=_T(), now=NOW, max_age_s=3600, quote=FRESH).step()
     l2 = [x for a in done for x in a.reasons if x.startswith("Layer 2")]
-    assert l2 and all("desk held 20" in x and "B30 candidate, OFF" in x for x in l2)
+    assert l2 and all("MACD warm-up" in x and "held 20 of the 35" in x and "B30 candidate, OFF" in x for x in l2)
 
 
 def test_b30_on_lets_only_a_warm_up_macd_through(monkeypatch):

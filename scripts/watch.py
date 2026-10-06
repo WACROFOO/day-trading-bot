@@ -285,6 +285,36 @@ class Watcher:
                 f"{sum(1 for v in self.seen_green.values() if v == 'SIGNAL')} green-run signal(s) logged, never traded")
 
 
+# Spotter alerts (owner, 2026-10-06): the cases the rules cannot take but the owner
+# might — a plan refused only on the MACD warm-up, a plan that ran past its entry band,
+# a straight green run (EXTENDED), a 5-minute pullback trigger — plus the bot's own
+# fills and exits. Sound and a desktop notification; the owner decides, nothing is sent.
+ALERTS = (("MACD warm-up", "MACD warm-up only"), ("ran past the limit", "ran past the entry band"),
+          (" EXTENDED ", "EXTENDED green run"), (" 5-MIN PB ", "5-minute pullback trigger"),
+          (" FILLED ", "bot filled"), (" EXIT ", "bot exit"))
+
+
+def alert_kind(line: str):
+    for needle, kind in ALERTS:
+        if needle in line:
+            return kind
+    return None
+
+
+def notify(kind: str, line: str) -> None:
+    """macOS: a notification with a sound. Elsewhere: the terminal bell."""
+    text = " ".join(line.split())[:180].replace('"', "'")
+    if sys.platform == "darwin":
+        try:
+            import subprocess
+            subprocess.Popen(["osascript", "-e", f'display notification "{text}" with title "{kind}" sound name "Glass"'],
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return
+        except OSError:
+            pass
+    print("\a", end="", flush=True)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--db", default=None, help="ledger path (default: $JOURNAL_DB or data/journal.sqlite)")
@@ -292,6 +322,7 @@ def main(argv=None) -> int:
     ap.add_argument("--history", action="store_true", help="also list plans armed on history loaded at start")
     ap.add_argument("--once", action="store_true", help="print the day so far and exit")
     ap.add_argument("--every", type=float, default=3.0, help="seconds between polls (default 3)")
+    ap.add_argument("--quiet", action="store_true", help="no spotter alerts (sound + notification)")
     args = ap.parse_args(argv)
     db = Path(args.db) if args.db else default_db()
     conn = connect_ro(db)
@@ -302,11 +333,16 @@ def main(argv=None) -> int:
     print(f"WATCH · {day} · ledger {db} · read-only" + (" · following — Ctrl-C stops the watch, never the bot"
                                                          if follow else ""))
     print(f"{'ET':>8}  {'symbol':<6} {'what':<10} {'trig/stop':>11}  why")
+    first = True
     try:
         while True:
             try:
                 for _, line in w.poll():
                     print(line, flush=True)
+                    kind = alert_kind(line)
+                    if kind and follow and not first and not args.quiet:
+                        notify(kind, line)          # the day so far, printed at start, never rings
+                first = False
             except sqlite3.OperationalError as exc:              # the bot is mid-write: try again
                 print(f"  (ledger busy: {exc}; retrying)", flush=True)
             if not follow:

@@ -18,6 +18,8 @@ results/
 !research/megaday-study/data/*.csv
 !research/trade-journal/*.csv
 !research/trade-log/*.csv
+!research/daily/*.csv
+!research/daily/*/*.csv
 # The first-pullback edge study: its tables ARE the deliverable (brief sect.
 # 30 asks for them by name). The 121MB bar cache under data/cache/ is NOT —
 # it is regenerable from the provider and is excluded below.
