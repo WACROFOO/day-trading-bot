@@ -1,0 +1,28 @@
+addendum 2026-10-06d · 2608 sessions · plans armed 04:00-11:30, rebuilt per variant · costs live
+  B 103948 plans · D1 137756 plans · D2 131020 plans · D12 192965 plans
+
+=== reading A ===
+  B   train n 2246 net -0.411 total -923.6 R · holdout n 1492 net -0.477 total -712.2 R
+  D1 no blackout       train n 3259 net -0.465 total -1513.9 R · holdout n 1910 net -0.525 total -1003.1 R · lb -0.099 · yrs -0.51 -0.51 -0.57
+      ✗ train better · ✗ test better · ✓ >=200 test trades · ✗ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✗ train total not worse · ✗ holdout total not worse  → keep B
+  D2 one-bar impulse   train n 2634 net -0.442 total -1163.8 R · holdout n 1664 net -0.471 total -783.1 R · lb -0.045 · yrs -0.47 -0.50 -0.43
+      ✗ train better · ✓ test better · ✓ >=200 test trades · ✓ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✗ train total not worse · ✗ holdout total not worse  → keep B
+  D12 both             train n 3819 net -0.472 total -1801.5 R · holdout n 2138 net -0.500 total -1070.0 R · lb -0.085 · yrs -0.45 -0.53 -0.53
+      ✗ train better · ✗ test better · ✓ >=200 test trades · ✗ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✗ train total not worse · ✗ holdout total not worse  → keep B
+  W4 04:00 start       train n 2317 net -0.407 total -942.4 R · holdout n 1642 net -0.457 total -750.4 R · lb -0.013 · yrs -0.48 -0.46 -0.42
+      ✓ train better · ✓ test better · ✓ >=200 test trades · ✓ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✗ train total not worse · ✗ holdout total not worse  → keep B
+      trades 04:00-07:00: n 436 · net -0.293 · gross +0.079
+
+=== reading C ===
+  B   train n 2231 net -0.436 total -973.0 R · holdout n 1479 net -0.475 total -701.9 R
+  D1 no blackout       train n 3198 net -0.490 total -1566.9 R · holdout n 1889 net -0.547 total -1032.6 R · lb -0.129 · yrs -0.54 -0.53 -0.58
+      ✗ train better · ✗ test better · ✓ >=200 test trades · ✗ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✗ train total not worse · ✗ holdout total not worse  → keep B
+  D2 one-bar impulse   train n 2614 net -0.464 total -1213.9 R · holdout n 1655 net -0.477 total -789.1 R · lb -0.060 · yrs -0.53 -0.50 -0.37
+      ✗ train better · ✗ test better · ✓ >=200 test trades · ✓ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✗ train total not worse · ✗ holdout total not worse  → keep B
+  D12 both             train n 3726 net -0.491 total -1831.2 R · holdout n 2118 net -0.511 total -1083.0 R · lb -0.104 · yrs -0.46 -0.55 -0.52
+      ✗ train better · ✗ test better · ✓ >=200 test trades · ✗ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✗ train total not worse · ✗ holdout total not worse  → keep B
+  W4 04:00 start       train n 2298 net -0.431 total -989.7 R · holdout n 1625 net -0.457 total -742.5 R · lb -0.018 · yrs -0.52 -0.45 -0.37
+      ✓ train better · ✓ test better · ✓ >=200 test trades · ✓ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✗ train total not worse · ✗ holdout total not worse  → keep B
+      trades 04:00-07:00: n 436 · net -0.320 · gross +0.053
+
+DECISION (both readings): D1 no blackout fails · D2 one-bar impulse fails · D12 both fails · W4 04:00 start fails
