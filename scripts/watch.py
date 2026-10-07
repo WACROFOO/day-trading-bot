@@ -287,10 +287,11 @@ class Watcher:
 
 # Spotter alerts (owner, 2026-10-06): the cases the rules cannot take but the owner
 # might — a plan refused only on the MACD warm-up, a plan that ran past its entry band,
-# a straight green run (EXTENDED), a 5-minute pullback trigger — plus the bot's own
-# fills and exits. Sound and a desktop notification; the owner decides, nothing is sent.
+# a straight green run (EXTENDED) — plus the bot's own fills and exits. Sound and a desktop notification; the owner decides, nothing is sent.
 ALERTS = (("MACD warm-up", "MACD warm-up only"), ("ran past the limit", "ran past the entry band"),
-          (" EXTENDED ", "EXTENDED green run"), (" 5-MIN PB ", "5-minute pullback trigger"),
+          (" EXTENDED ", "EXTENDED green run"),
+          # 5-MIN PB is printed, never rung: every 5-minute candle on every name made it
+          # a notification storm (owner, 2026-10-07), and E1 failed its test.
           (" FILLED ", "bot filled"), (" EXIT ", "bot exit"))
 
 
