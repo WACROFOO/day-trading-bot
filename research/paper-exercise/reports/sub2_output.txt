@@ -1,0 +1,15 @@
+addendum 2026-10-07b · 2024-01-02 → 2026-08-21 · sub-$2 universe 1933 symbol-days on 582 sessions · sub-$2 plans 9331 · B plans 37421 · costs live (no spread tier under $2)
+
+=== reading A ===
+  B ($2 floor)  n 1492 · net -0.477 · total -712.2 R
+  P1 ($1 floor) n 1827 · net -0.571 · total -1043.5 R · lb -0.120
+  sub-$2 trades it adds: n 447 · gross -0.197 · net -0.818 · won 16%
+  ✗ mean better · ✗ total not worse · ✗ 2 of 3 years · ✗ lower bound > 0 · ✗ added trades net > 0
+
+=== reading C ===
+  B ($2 floor)  n 1479 · net -0.475 · total -701.9 R
+  P1 ($1 floor) n 1809 · net -0.575 · total -1040.3 R · lb -0.129
+  sub-$2 trades it adds: n 442 · gross -0.217 · net -0.840 · won 17%
+  ✗ mean better · ✗ total not worse · ✗ 2 of 3 years · ✗ lower bound > 0 · ✗ added trades net > 0
+
+DECISION: P1 fails → the $2 floor stays
