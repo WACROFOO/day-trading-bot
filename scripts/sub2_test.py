@@ -87,7 +87,13 @@ def bars() -> int:
     uni = json.loads(UNIVERSE.read_text())
     BARS.mkdir(parents=True, exist_ok=True)
     for k, (day, syms) in enumerate(sorted(uni.items()), 1):
-        H.fetch_day(c, day, sorted(syms), BARS)
+        for attempt in range(5):
+            try:
+                H.fetch_day(c, day, sorted(syms), BARS)
+                break
+            except Exception as exc:                      # noqa: BLE001 — a dropped connection; the day cache resumes
+                print(f"  {day}: {exc!r} — retry {attempt + 1}", flush=True)
+                time.sleep(10 * (attempt + 1))
         if k % 50 == 0:
             print(f"  {k}/{len(uni)} sessions", flush=True)
     return 0
