@@ -1,0 +1,787 @@
+[1mTrading day 2026-10-06 · 06:29 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+  [93m!![0m   starting early at 06:29 ET — the tape before 07:00 is thin, entries before 07:00 are refused (session window), and the 06:55 scheduled start will be refused by the lock
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ AIXI   26% off the pre-market high — already faded[0m
+       [2m✗ OLOX   $1.63 under $2.00[0m
+       [2m✗ WHLR   $1.38 under $2.00[0m
+       [2m✗ AIIO   $1.36 under $2.00[0m
+       [2m✗ RUBI   $0.84 under $2.00[0m
+       [2m✗ QTEX   $1.79 under $2.00[0m
+       [2m6 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [92mok[0m   2 names: JAGX SDEV
+
+[1m2. Probes[0m  (once per day)
+
+Data alignment probe   AAPL   live 4002 vs paper 4002
+       [2mboth connections read-only; nothing order-shaped is sent[0m
+  [92mok[0m   PAPER: connected 127.0.0.1:4002 client 34 read-only · accounts ['D****9781']
+       [2msingle-login mode: desk and executor share the paper session (IBKR_PORT=4002).[0m
+       [2mDecision tape and fill tape are the same tape by construction; the only[0m
+       [2mquestion left is whether that tape is real-time.[0m
+
+Sampling 20s
+    t   LIVE last      bid      ask        ts   PAPER last      bid      ask        ts
+    2           —        —        —         —            —        —        —         —
+    4           —        —        —         —            —        —        —         —
+    6           —        —        —         —            —        —        —         —
+    8           —        —        —         —            —        —        —         —
+   10           —        —        —         —            —        —        —         —
+   12           —        —        —         —            —        —        —         —
+   14           —        —        —         —            —        —        —         —
+   16           —        —        —         —            —        —        —         —
+   18           —        —        —         —            —        —        —         —
+   20           —        —        —         —            —        —        —         —
+
+VERDICT
+  [91mxx[0m   PAPER session refused market data: IBKR 10197 'No market data during competing live session'
+       [2mYour live TWS login holds the subscriptions; the paper session cannot[0m
+       [2mshare them while TWS is logged in. Two ways to test on a trading day:[0m
+       [2m  a) log OUT of TWS, keep the Gateway (paper) up, re-run this probe;[0m
+       [2m  b) run the whole desk off the paper Gateway for a day:[0m
+       [2m     IBKR_PORT=4002 python3 scripts/day.py   (with TWS logged out)[0m
+       [2mIf (a) reads realtime, the exercise should run as (b): one login, one tape.[0m
+VERDICT: competing
+       [2mrecorded in exercise_state[0m
+  [93m!![0m   paper session data: 'competing' — fills would be judged against a different tape
+       [2mClient Portal › Settings › Paper Trading Account › share real-time market data. Then re-run.[0m
+  [91mxx[0m   TWS is logged in — IBKR gives the market data to that session, not to the paper one
+       [2mlog OUT of TWS (keep the Gateway on the paper account), then run this command again[0m
+
+[1mTrading day 2026-10-06 · 06:39 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+  [93m!![0m   starting early at 06:39 ET — the tape before 07:00 is thin, entries before 07:00 are refused (session window), and the 06:55 scheduled start will be refused by the lock
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ AIXI   25% off the pre-market high — already faded[0m
+       [2m✗ OLOX   $1.66 under $2.00[0m
+       [2m✗ RUBI   $0.91 under $2.00[0m
+       [2m✗ WHLR   $1.40 under $2.00[0m
+       [2m✗ AIIO   $1.37 under $2.00[0m
+       [2m✗ QTEX   $1.78 under $2.00[0m
+       [2m6 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [92mok[0m   2 names: JAGX SDEV
+
+[1m2. Probes[0m  (once per day)
+       [2malignment probe read 'competing' earlier today — measuring again[0m
+Error 10197, reqId 4: No market data during competing live session, contract: Stock(conId=265598, symbol='AAPL', exchange='SMART', primaryExchange='NASDAQ', currency='USD', localSymbol='AAPL', tradingClass='NMS')
+
+Data alignment probe   AAPL   live 4002 vs paper 4002
+       [2mboth connections read-only; nothing order-shaped is sent[0m
+  [92mok[0m   PAPER: connected 127.0.0.1:4002 client 34 read-only · accounts ['D****9781']
+       [2msingle-login mode: desk and executor share the paper session (IBKR_PORT=4002).[0m
+       [2mDecision tape and fill tape are the same tape by construction; the only[0m
+       [2mquestion left is whether that tape is real-time.[0m
+
+Sampling 20s
+    t   LIVE last      bid      ask        ts   PAPER last      bid      ask        ts
+    2           —        —        —         —            —        —        —         —
+    4           —        —        —         —            —        —        —         —
+    6           —        —        —         —            —        —        —         —
+    8           —        —        —         —            —        —        —         —
+   10           —        —        —         —            —        —        —         —
+   12           —        —        —         —            —        —        —         —
+   14           —        —        —         —            —        —        —         —
+   16           —        —        —         —            —        —        —         —
+   18           —        —        —         —            —        —        —         —
+   20           —        —        —         —            —        —        —         —
+
+VERDICT
+  [91mxx[0m   PAPER session refused market data: IBKR 10197 'No market data during competing live session'
+       [2mYour live TWS login holds the subscriptions; the paper session cannot[0m
+       [2mshare them while TWS is logged in. Two ways to test on a trading day:[0m
+       [2m  a) log OUT of TWS, keep the Gateway (paper) up, re-run this probe;[0m
+       [2m  b) run the whole desk off the paper Gateway for a day:[0m
+       [2m     IBKR_PORT=4002 python3 scripts/day.py   (with TWS logged out)[0m
+       [2mIf (a) reads realtime, the exercise should run as (b): one login, one tape.[0m
+VERDICT: competing
+       [2mrecorded in exercise_state[0m
+  [93m!![0m   paper session data: 'competing' — fills would be judged against a different tape
+       [2mClient Portal › Settings › Paper Trading Account › share real-time market data. Then re-run.[0m
+  [91mxx[0m   TWS is logged in — IBKR gives the market data to that session, not to the paper one
+       [2mlog OUT of TWS (keep the Gateway on the paper account), then run this command again[0m
+
+[1mTrading day 2026-10-06 · 06:55 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ OLOX   $1.70 under $2.00[0m
+       [2m✗ RUBI   $0.97 under $2.00[0m
+       [2m✗ WHLR   $1.43 under $2.00[0m
+       [2m✗ QTEX   $1.79 under $2.00[0m
+       [2m✗ BJDX   $0.87 under $2.00[0m
+       [2m✗ AIIO   $1.25 under $2.00[0m
+       [2m6 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [92mok[0m   2 names: JAGX AIXI
+
+[1m2. Probes[0m  (once per day)
+       [2malignment probe read 'competing' earlier today — measuring again[0m
+
+Data alignment probe   AAPL   live 4002 vs paper 4002
+       [2mboth connections read-only; nothing order-shaped is sent[0m
+  [92mok[0m   PAPER: connected 127.0.0.1:4002 client 34 read-only · accounts ['D****9781']
+       [2msingle-login mode: desk and executor share the paper session (IBKR_PORT=4002).[0m
+       [2mDecision tape and fill tape are the same tape by construction; the only[0m
+       [2mquestion left is whether that tape is real-time.[0m
+
+Sampling 20s
+    t   LIVE last      bid      ask        ts   PAPER last      bid      ask        ts
+    2           —        —        —         —            —        —        —         —
+    4           —        —        —         —            —        —        —         —
+    6           —        —        —         —            —        —        —         —
+    8           —        —        —         —            —        —        —         —
+   10           —        —        —         —            —        —        —         —
+   12           —        —        —         —            —        —        —         —
+   14           —        —        —         —            —        —        —         —
+   16           —        —        —         —            —        —        —         —
+   18           —        —        —         —            —        —        —         —
+   20           —        —        —         —            —        —        —         —
+
+VERDICT
+  [91mxx[0m   PAPER session refused market data: IBKR 10197 'No market data during competing live session'
+       [2mYour live TWS login holds the subscriptions; the paper session cannot[0m
+       [2mshare them while TWS is logged in. Two ways to test on a trading day:[0m
+       [2m  a) log OUT of TWS, keep the Gateway (paper) up, re-run this probe;[0m
+       [2m  b) run the whole desk off the paper Gateway for a day:[0m
+       [2m     IBKR_PORT=4002 python3 scripts/day.py   (with TWS logged out)[0m
+       [2mIf (a) reads realtime, the exercise should run as (b): one login, one tape.[0m
+VERDICT: competing
+       [2mrecorded in exercise_state[0m
+  [93m!![0m   paper session data: 'competing' — fills would be judged against a different tape
+       [2mClient Portal › Settings › Paper Trading Account › share real-time market data. Then re-run.[0m
+  [91mxx[0m   TWS is logged in — IBKR gives the market data to that session, not to the paper one
+       [2mlog OUT of TWS (keep the Gateway on the paper account), then run this command again[0m
+
+[1mTrading day 2026-10-06 · 07:06 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ AIXI   28% off the pre-market high — already faded[0m
+       [2m✗ OLOX   $1.67 under $2.00[0m
+       [2m✗ RUBI   $1.20 under $2.00[0m
+       [2m✗ WHLR   $1.40 under $2.00[0m
+       [2m✗ QTEX   $1.78 under $2.00[0m
+       [2m✗ AIIO   $1.28 under $2.00[0m
+       [2m5 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [92mok[0m   1 names: JAGX
+
+[1m2. Probes[0m  (once per day)
+       [2malignment probe read 'competing' earlier today — measuring again[0m
+
+Data alignment probe   AAPL   live 4002 vs paper 4002
+       [2mboth connections read-only; nothing order-shaped is sent[0m
+  [92mok[0m   PAPER: connected 127.0.0.1:4002 client 34 read-only · accounts ['D****9781']
+       [2msingle-login mode: desk and executor share the paper session (IBKR_PORT=4002).[0m
+       [2mDecision tape and fill tape are the same tape by construction; the only[0m
+       [2mquestion left is whether that tape is real-time.[0m
+
+Sampling 20s
+    t   LIVE last      bid      ask        ts   PAPER last      bid      ask        ts
+    2           —        —        —         —            —        —        —         —
+    4           —        —        —         —            —        —        —         —
+    6           —        —        —         —            —        —        —         —
+    8           —        —        —         —            —        —        —         —
+   10           —        —        —         —            —        —        —         —
+   12           —        —        —         —            —        —        —         —
+   14           —        —        —         —            —        —        —         —
+   16           —        —        —         —            —        —        —         —
+   18           —        —        —         —            —        —        —         —
+   20           —        —        —         —            —        —        —         —
+
+VERDICT
+  [91mxx[0m   PAPER session refused market data: IBKR 10197 'No market data during competing live session'
+       [2mYour live TWS login holds the subscriptions; the paper session cannot[0m
+       [2mshare them while TWS is logged in. Two ways to test on a trading day:[0m
+       [2m  a) log OUT of TWS, keep the Gateway (paper) up, re-run this probe;[0m
+       [2m  b) run the whole desk off the paper Gateway for a day:[0m
+       [2m     IBKR_PORT=4002 python3 scripts/day.py   (with TWS logged out)[0m
+       [2mIf (a) reads realtime, the exercise should run as (b): one login, one tape.[0m
+VERDICT: competing
+       [2mrecorded in exercise_state[0m
+  [93m!![0m   paper session data: 'competing' — fills would be judged against a different tape
+       [2mClient Portal › Settings › Paper Trading Account › share real-time market data. Then re-run.[0m
+  [91mxx[0m   TWS is logged in — IBKR gives the market data to that session, not to the paper one
+       [2mlog OUT of TWS (keep the Gateway on the paper account), then run this command again[0m
+
+[1mTrading day 2026-10-06 · 07:11 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ AIXI   29% off the pre-market high — already faded[0m
+       [2m✗ OLOX   $1.63 under $2.00[0m
+       [2m✗ RUBI   $1.04 under $2.00[0m
+       [2m✗ BRN    $1.20 under $2.00[0m
+       [2m✗ WHLR   $1.38 under $2.00[0m
+       [2m✗ QTEX   $1.79 under $2.00[0m
+       [2m✗ AIIO   $1.24 under $2.00[0m
+       [2m7 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [92mok[0m   2 names: JAGX SDEV
+
+[1m2. Probes[0m  (once per day)
+       [2malignment probe read 'competing' earlier today — measuring again[0m
+
+Data alignment probe   AAPL   live 4002 vs paper 4002
+       [2mboth connections read-only; nothing order-shaped is sent[0m
+  [92mok[0m   PAPER: connected 127.0.0.1:4002 client 34 read-only · accounts ['D****9781']
+       [2msingle-login mode: desk and executor share the paper session (IBKR_PORT=4002).[0m
+       [2mDecision tape and fill tape are the same tape by construction; the only[0m
+       [2mquestion left is whether that tape is real-time.[0m
+
+Sampling 20s
+    t   LIVE last      bid      ask        ts   PAPER last      bid      ask        ts
+    2           —        —        —         —       332.98   332.94   333.15  07:11:22
+    4           —        —        —         —       332.98   332.94   333.15  07:11:22
+    6           —        —        —         —       332.98   332.94   333.15  07:11:22
+    8           —        —        —         —       332.98   332.94   333.15  07:11:22
+   10           —        —        —         —       332.98   332.94   333.15  07:11:22
+   12           —        —        —         —       332.98   332.94   333.15  07:11:22
+   14           —        —        —         —       332.98   332.94   333.15  07:11:35
+   16           —        —        —         —       332.98   332.94   333.15  07:11:35
+   18           —        —        —         —       332.98   332.94   333.15  07:11:35
+   20           —        —        —         —       332.98   332.94   333.15  07:11:35
+
+VERDICT
+  [92mok[0m   PAPER session is on real-time data (type 1) — the only session, so nothing to lag against
+       [2mDecision tape and fill tape are the same tape. Slippage is measurable.[0m
+VERDICT: realtime
+       [2mrecorded in exercise_state[0m
+  [92mok[0m   paper session is on real-time data — decision tape and fill tape agree
+       [2mstop probe: OFF — it places an order; pass --probe-orders to run it once, deliberately[0m
+  [92mok[0m   pre-market entries: ON — probe: stop queued to 09:30 — monitored exit, positions UNPROTECTED (A1 accepted by ayman.benharara 2026-09-11)
+
+[1m3. Desk + runner[0m
+       [2mIBKR data port 4002 (IBKR_PORT) · ledger /Users/ayman.benharara/day-trading-bot/data/journal.sqlite[0m
+       [2mdesk: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -m momentum_platform.dashboard.server --host 127.0.0.1 --port 8787 --ibkr JAGX,SDEV --ibkr-required[0m
+Starting the IBKR desk. Scan, quotes and history take 30-90 s the first time; the line 'desk ready' means the page is up.
+  IBKR desk connected read-only, client 27, server version 178
+  JAGX: subscribed (quote + 5-second bars); loading daily and minute history
+  JAGX: type COMMON · tick 0.01 · split none
+  IBKR fundamentals are not entitled on this account: float falls back to SEC shares outstanding (an upper bound) or reads UNKNOWN
+  JAGX: float verified 1.7M (finviz via premarket_stars.py)
+  SDEV: subscribed (quote + 5-second bars); loading daily and minute history
+  SDEV: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  SDEV: float verified 1.8M (finviz via premarket_stars.py)
+  desk ready: JAGX, SDEV — 192 minutes of history, 36 alerts so far
+  TWS reported the data connection restored — re-requesting quotes and five-second bars
+  [92mok[0m   desk is up on IBKR — feed LIVE
+       [2mrunner: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -u scripts/exercise.py --db /Users/ayman.benharara/day-trading-bot/data/journal.sqlite live --risk 40.0 --account 2000.0 --trade[0m
+       [2mkeeping the Mac awake until the day ends (caffeinate)[0m
+[2mrunning until 11:30 ET; Ctrl-C stops both[0m
+session: 192 frames, 2 symbols, 36 alerts
+workstation: http://127.0.0.1:8787/
+IBKR — TWS read-only, client 27 (desk) / 28 (scanner), market data type 1, feed LIVE.
+STREAMING — candles, quotes and health reach the page as they happen; the session rebuilds every 3s and the scanner union runs every 120s.
+  feed LIVE (gen 1, 4 lines)
+  IBKR scanner connected read-only, client 28
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+[92mok[0m DUR339781 — paper · client 31 · TRADE mode · risk gate Limits(max_daily_loss_r=3.0, consecutive_losses=3, max_entries_per_day=6)
+[2mreading /Users/ayman.benharara/day-trading-bot/data/journal.sqlite every 5s · hard stop 11:30 ET · Ctrl-C to stop[0m
+  [2m5 plan(s) armed on history loaded at start (04:15–07:05 ET, JAGX) → refused, tagged backfill, not counted; each row is in the ledger[0m
+  scan union: 356 names from 15 queries
+  11 non-stock instruments dropped before quoting
+  quoting 1-75 of 139 scan hits
+  quoting 76-139 of 139 scan hits
+  scanner: 10 names up ≥10% in the band: AIXI OLOX WHLR JAGX OPCH QTEX RYOJ BRN EJH AIIO  (55s)
+  OPCH: finviz float 147.15M (looked up on join)
+  RYOJ: finviz float 2.30M (looked up on join)
+  not added, verified float over 20M: OPCH 147M, QTEX 59M
+  AIXI: subscribed (quote + 5-second bars); loading daily and minute history
+  AIXI: type ADR · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  AIXI: float shares_outstanding_proxy 55.2M (SEC shares outstanding (upper bound))
+  OLOX: subscribed (quote + 5-second bars); loading daily and minute history
+  OLOX: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  OLOX: float verified 1.3M (finviz via premarket_stars.py)
+  WHLR: subscribed (quote + 5-second bars); loading daily and minute history
+  WHLR: type REIT · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  WHLR: float shares_outstanding_proxy 1.9M (SEC shares outstanding (upper bound))
+  RYOJ: subscribed (quote + 5-second bars); loading daily and minute history
+  RYOJ: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  RYOJ: float verified 2.3M (finviz on join)
+  AIXI, OLOX, WHLR, RYOJ joined the desk
+  feed LIVE (gen 1, 12 lines)
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  headlines: 3 new
+
+stopped
+
+desk stopping — disconnecting from IBKR
+  [93m!![0m   stopped by Ctrl-C — the day is not settled; the next start settles it
+===== START Tue Oct  6 13:30:07 CEST 2026 =====
+
+[1mTrading day 2026-10-06 · 07:30 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ OLOX   $1.61 under $2.00[0m
+       [2m✗ WHLR   $1.56 under $2.00[0m
+       [2m✗ RUBI   $0.94 under $2.00[0m
+       [2m✗ QTEX   $1.80 under $2.00[0m
+       [2m✗ AIIO   $1.27 under $2.00[0m
+       [2m✗ BRN    $1.05 under $2.00[0m
+       [2m6 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [92mok[0m   2 names: JAGX AIXI
+
+[1m2. Probes[0m  (once per day)
+  [92mok[0m   alignment probe already ran today — paper data 'realtime'
+       [2mstop probe: OFF — it places an order; pass --probe-orders to run it once, deliberately[0m
+  [92mok[0m   pre-market entries: ON — probe: stop queued to 09:30 — monitored exit, positions UNPROTECTED (A1 accepted by ayman.benharara 2026-09-11)
+
+[1m3. Desk + runner[0m
+       [2mIBKR data port 4002 (IBKR_PORT) · ledger /Users/ayman.benharara/day-trading-bot/data/journal.sqlite[0m
+       [2mdesk: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -m momentum_platform.dashboard.server --host 127.0.0.1 --port 8787 --ibkr JAGX,AIXI --ibkr-required[0m
+Starting the IBKR desk. Scan, quotes and history take 30-90 s the first time; the line 'desk ready' means the page is up.
+  IBKR desk connected read-only, client 27, server version 178
+  JAGX: subscribed (quote + 5-second bars); loading daily and minute history
+  JAGX: type COMMON · tick 0.01 · split none
+  IBKR fundamentals are not entitled on this account: float falls back to SEC shares outstanding (an upper bound) or reads UNKNOWN
+  JAGX: float verified 1.7M (finviz via premarket_stars.py)
+  AIXI: subscribed (quote + 5-second bars); loading daily and minute history
+  AIXI: type ADR · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  AIXI: float shares_outstanding_proxy 55.2M (SEC shares outstanding (upper bound))
+  desk ready: JAGX, AIXI — 211 minutes of history, 45 alerts so far
+session: 211 frames, 2 symbols, 45 alerts
+workstation: http://127.0.0.1:8787/
+IBKR — TWS read-only, client 27 (desk) / 28 (scanner), market data type 1, feed LIVE.
+STREAMING — candles, quotes and health reach the page as they happen; the session rebuilds every 3s and the scanner union runs every 120s.
+  feed LIVE (gen 1, 4 lines)
+  IBKR scanner connected read-only, client 28
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  [92mok[0m   desk is up on IBKR — feed LIVE
+       [2mrunner: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -u scripts/exercise.py --db /Users/ayman.benharara/day-trading-bot/data/journal.sqlite live --risk 40.0 --account 2000.0 --trade[0m
+       [2mkeeping the Mac awake until the day ends (caffeinate)[0m
+[2mrunning until 11:30 ET; Ctrl-C stops both[0m
+[92mok[0m DUR339781 — paper · client 31 · TRADE mode · risk gate Limits(max_daily_loss_r=3.0, consecutive_losses=3, max_entries_per_day=6)
+[2mreading /Users/ayman.benharara/day-trading-bot/data/journal.sqlite every 5s · hard stop 11:30 ET · Ctrl-C to stop[0m
+  [2m1 plan(s) armed on history loaded at start (06:30–06:30 ET, JAGX) → refused, tagged backfill, not counted; each row is in the ledger[0m
+  scan union: 374 names from 15 queries
+  12 non-stock instruments dropped before quoting
+  quoting 1-75 of 138 scan hits
+  quoting 76-138 of 138 scan hits
+  scanner: 15 names up ≥10% in the band: AIXI OLOX IPDN NXAT JAGX WHLR OPCH QTEX RYOJ AIIO  (42s)
+  IPDN: finviz float 0.48M (looked up on join)
+  NXAT: finviz float 1.97M (looked up on join)
+  OPCH: finviz float 147.15M (looked up on join)
+  not added, verified float over 20M: OPCH 147M, QTEX 59M
+  OLOX: subscribed (quote + 5-second bars); loading daily and minute history
+  OLOX: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  OLOX: float verified 1.3M (finviz via premarket_stars.py)
+  IPDN: subscribed (quote + 5-second bars); loading daily and minute history
+  IPDN: type COMMON · tick 0.01 · split none
+  IPDN: float verified 0.5M (finviz on join)
+  NXAT: subscribed (quote + 5-second bars); loading daily and minute history
+  NXAT: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  NXAT: float verified 2.0M (finviz on join)
+  WHLR: subscribed (quote + 5-second bars); loading daily and minute history
+  WHLR: type REIT · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  WHLR: float shares_outstanding_proxy 1.9M (SEC shares outstanding (upper bound))
+  OLOX, IPDN, NXAT, WHLR joined the desk
+  feed LIVE (gen 1, 12 lines)
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  07:32  IPDN   [93mREFUSED [0m 4.16/3.68  ✗ Layer 2 not green: pullback volume was not lighter than the impulse
+  headlines: 5 new
+  headlines: 1 new
+  07:46  JAGX   [93mREFUSED [0m 6.30/6.24  ✗ Layer 2 not green: below VWAP (verdict WAIT); selective (A13): stop 1.0% of price, under 2%
+  07:53  IPDN   [93mREFUSED [0m 4.46/4.24  ✗ Layer 2 not green: pullback volume was not lighter than the impulse; Layer 2 not green: below VWAP; MACD not positive and above its signal (verdict WAIT)
+  08:01  IPDN   [2mARMED   [0m 5.28/4.83  ✗ armed: waiting for the ask to reach 5.28 (pre-market, runner-triggered A10; 3 min)
+  08:01  IPDN   [93mREFUSED [0m 5.28/4.83  ✗ A10: the price ran past the limit 5.30 without the ask sitting in 5.28-5.30 at a 5-s check (last ask 5.52); A10 does not chase; 3 min pre-market, no order sent
+  headlines: 4 new
+  08:14  JAGX   [93mREFUSED [0m 6.36/6.28  ✗ Layer 2 not green: below VWAP (verdict WAIT); selective (A13): stop 1.3% of price, under 2%
+  headlines: 1 new
+  08:40  JAGX   [93mREFUSED [0m 6.41/6.33  ✗ Layer 2 not green: pullback volume was not lighter than the impulse; Layer 2 not green: below VWAP (verdict WAIT); selective (A13): stop 1.2% of price, under 2%
+  headlines: 1 new
+  09:00  IPDN   [2mARMED   [0m 6.26/6.04  ✗ armed: waiting for the ask to reach 6.26 (pre-market, runner-triggered A10; 3 min)
+  09:00  IPDN   [93mREFUSED [0m 6.26/6.04  ✗ A10: the price ran past the limit 6.28 without the ask sitting in 6.26-6.28 at a 5-s check (last ask 6.49); A10 does not chase; 3 min pre-market, no order sent
+  09:14  IPDN   [93mREFUSED [0m 6.21/6.10  ✗ Layer 2 not green: MACD not positive and above its signal (verdict WAIT); selective (A13): stop 1.8% of price, under 2%
+  09:22  IPDN   [2mARMED   [0m 6.51/6.32  ✗ armed: waiting for the ask to reach 6.51 (pre-market, runner-triggered A10; 3 min)
+  09:22  IPDN   [92mTAKEN   [0m 6.51/6.32  ✗ tape reached 6.51 (ask 6.52) after 0s; monitored entry sent
+  09:23:23  [92mTRAIL[0m    IPDN monitored level 6.32 -> 6.34 (high 6.53, 1R 0.19)
+  09:24  JAGX   [93mREFUSED [0m 6.51/6.45  ✗ one position at a time (preregistration §2): 1 order(s) alive or unresolved; selective (A13): stop 0.9% of price, under 2%
+  09:24:39  [92mTRAIL[0m    IPDN monitored level 6.34 -> 6.35 (high 6.54, 1R 0.19)
+  09:25:04  [92mTRAIL[0m    IPDN monitored level 6.35 -> 6.38 (high 6.57, 1R 0.19)
+  09:25:44  [93mSTOP[0m     IPDN x153 SELL LMT 6.3 (bid 6.36 <= stop 6.38)
+  09:25:49  [92mEXIT[0m     IPDN x153 @ 6.33 monitored_stop (-1.00 R)
+  09:40  JAGX   [93mREFUSED [0m 6.34/6.15  ✗ Layer 2 not green: below VWAP; below the 9 EMA; MACD not positive and above its signal (verdict WAIT)
+  headlines: 1 new
+  09:52  IPDN   [93mREFUSED [0m 5.88/5.41  ✗ Layer 2 not green: pullback volume was not lighter than the impulse
+
+stopped
+desk stopping — disconnecting from IBKR
+
+  [93m!![0m   stopped by Ctrl-C — the day is not settled; the next start settles it
+===== START Tue Oct  6 15:58:29 CEST 2026 =====
+
+[1mTrading day 2026-10-06 · 09:58 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ FRGT   $0.66 under $2.00[0m
+       [2m✗ AIXI   35% off the pre-market high — already faded[0m
+       [2m✗ OLOX   $1.45 under $2.00[0m
+       [2m✗ XHG    float 46.5M over 20M[0m
+       [2m✗ OPCH   $31.04 over $20[0m
+       [2m✗ PRME   float 97.4M over 20M[0m
+       [2m✗ CIRC   $0.60 under $2.00[0m
+       [2m✗ QTEX   $1.71 under $2.00[0m
+       [2m9 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [92mok[0m   2 names: IPDN JAGX
+
+[1m2. Probes[0m  (once per day)
+  [92mok[0m   alignment probe already ran today — paper data 'realtime'
+       [2mstop probe: OFF — it places an order; pass --probe-orders to run it once, deliberately[0m
+  [92mok[0m   pre-market entries: ON — probe: stop queued to 09:30 — monitored exit, positions UNPROTECTED (A1 accepted by ayman.benharara 2026-09-11)
+
+[1m3. Desk + runner[0m
+       [2mIBKR data port 4002 (IBKR_PORT) · ledger /Users/ayman.benharara/day-trading-bot/data/journal.sqlite[0m
+       [2mdesk: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -m momentum_platform.dashboard.server --host 127.0.0.1 --port 8787 --ibkr IPDN,JAGX --ibkr-required[0m
+Starting the IBKR desk. Scan, quotes and history take 30-90 s the first time; the line 'desk ready' means the page is up.
+  IBKR desk connected read-only, client 27, server version 178
+  IPDN: subscribed (quote + 5-second bars); loading daily and minute history
+  IPDN: type COMMON · tick 0.01 · split none
+  IBKR fundamentals are not entitled on this account: float falls back to SEC shares outstanding (an upper bound) or reads UNKNOWN
+  IPDN: float verified 0.5M (finviz via premarket_stars.py)
+  JAGX: subscribed (quote + 5-second bars); loading daily and minute history
+  JAGX: type COMMON · tick 0.01 · split none
+  JAGX: float verified 1.7M (finviz via premarket_stars.py)
+  desk ready: IPDN, JAGX — 359 minutes of history, 50 alerts so far
+session: 359 frames, 2 symbols, 50 alerts
+workstation: http://127.0.0.1:8787/
+IBKR — TWS read-only, client 27 (desk) / 28 (scanner), market data type 1, feed LIVE.
+STREAMING — candles, quotes and health reach the page as they happen; the session rebuilds every 3s and the scanner union runs every 120s.
+  feed LIVE (gen 1, 4 lines)
+  IBKR scanner connected read-only, client 28
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  [92mok[0m   desk is up on IBKR — feed LIVE
+       [2mrunner: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -u scripts/exercise.py --db /Users/ayman.benharara/day-trading-bot/data/journal.sqlite live --risk 40.0 --account 2000.0 --trade[0m
+       [2mkeeping the Mac awake until the day ends (caffeinate)[0m
+[2mrunning until 11:30 ET; Ctrl-C stops both[0m
+[92mok[0m DUR339781 — paper · client 31 · TRADE mode · risk gate Limits(max_daily_loss_r=3.0, consecutive_losses=3, max_entries_per_day=6)
+[2mreading /Users/ayman.benharara/day-trading-bot/data/journal.sqlite every 5s · hard stop 11:30 ET · Ctrl-C to stop[0m
+  scan union: 421 names from 15 queries
+  28 non-stock instruments dropped before quoting
+  quoting 1-75 of 122 scan hits
+  quoting 76-122 of 122 scan hits
+  scanner: 16 names up ≥10% in the band: XHG IPDN OLOX AIXI JAGX APUS AIFA OFS PRME ELMT  (43s)
+  APUS: finviz float 0.56M (looked up on join)
+  AIFA: finviz float 3.28M (looked up on join)
+  OFS: finviz float 13.32M (looked up on join)
+  not added, verified float over 20M: XHG 46M
+  OLOX: subscribed (quote + 5-second bars); loading daily and minute history
+  OLOX: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  OLOX: float verified 1.3M (finviz via premarket_stars.py)
+  AIXI: subscribed (quote + 5-second bars); loading daily and minute history
+  AIXI: type ADR · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  AIXI: float shares_outstanding_proxy 55.2M (SEC shares outstanding (upper bound))
+  APUS: subscribed (quote + 5-second bars); loading daily and minute history
+  APUS: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  APUS: float verified 0.6M (finviz on join)
+  AIFA: subscribed (quote + 5-second bars); loading daily and minute history
+  AIFA: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  AIFA: float verified 3.3M (finviz on join)
+  OFS: subscribed (quote + 5-second bars); loading daily and minute history
+  OFS: type COMMON · tick 0.01 · split none
+  OFS: float verified 13.3M (finviz on join)
+  OLOX, AIXI, APUS, AIFA, OFS joined the desk
+  feed LIVE (gen 1, 14 lines)
+  [2m3 plan(s) armed on history loaded at start (09:33–09:55 ET, AIFA, APUS, OFS) → refused, tagged backfill, not counted; each row is in the ledger[0m
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  headlines: 6 new
+  10:02  IPDN   [93mREFUSED [0m 5.51/5.39  ✗ Layer 2 not green: below VWAP; below the 9 EMA (verdict WAIT)
+  10:04  APUS   [93mREFUSED [0m 6.49/5.92  ✗ Layer 2 not green: pullback volume was not lighter than the impulse; Layer 2 not green: MACD not positive and above its signal (verdict WAIT)
+  10:10  JAGX   [93mREFUSED [0m 6.49/6.34  ✗ Layer 2 not green: pullback volume was not lighter than the impulse
+  headlines: 2 new
+  10:12  IPDN   [93mREFUSED [0m 5.42/5.24  ✗ Layer 2 not green: below VWAP; MACD not positive and above its signal (verdict WAIT)
+  10:13  AIFA   [93mREFUSED [0m 8.21/7.84  ✗ stop $0.37/sh is inside 4x the spread ($0.10)
+  10:23  APUS   [93mREFUSED [0m 6.98/6.54  ✗ Layer 2 not green: pullback volume was not lighter than the impulse
+  10:30  JAGX   [93mREFUSED [0m 6.32/6.19  ✗ Layer 2 not green: below VWAP; below the 9 EMA; MACD not positive and above its signal (verdict WAIT)
+  10:30  APUS   [93mREFUSED [0m 6.82/6.30  ✗ Layer 2 not green: pullback volume was not lighter than the impulse
+  10:38  AIFA   [93mREFUSED [0m 8.61/8.41  ✗ Layer 2 not green: pullback volume was not lighter than the impulse
+  10:46  APUS   [93mREFUSED [0m 6.19/6.07  ✗ Layer 2 not green: below VWAP; below the 9 EMA; MACD not positive and above its signal (verdict WAIT); selective (A13): stop 1.9% of price, under 2%
+  10:58  APUS   [92mTAKEN   [0m 6.36/6.19
+  10:59:31  [92mTRAIL[0m    APUS stop 6.19 -> 6.23 (high 6.40, 1R 0.17)
+  11:00:03  [92mTRAIL[0m    APUS stop 6.23 -> 6.26 (high 6.43, 1R 0.17)
+  11:00:46  [92mTRAIL[0m    APUS stop 6.26 -> 6.28 (high 6.45, 1R 0.17)
+  11:02:58  [92mEXIT[0m     APUS x190 @ 6.25 trail (-0.76 R)
+  [93mHARD STOP[0m flattened: ['flat confirmed from broker position state']
+
+stopped
+desk stopping — disconnecting from IBKR
+
+
+[1mAfter the hard stop[0m
+  [92mok[0m   actuals: 91 computed, 0 without tape
+  [92mok[0m   replay: 1285/1658 reproduce
+  [92mok[0m   report: research/paper-exercise/reports/2026-10-06.md
+       [2mphase C → D blocked by:[0m
+       [2m  - phase D read-out needs 60 taken trades; have 17[0m
+  [92mok[0m   export: research/daily/2026-10-06 · decisions 91 · orders 2 · order_events 9 · five_minute 57 · green_run 11 · manual 0 · bars 3841 · log_lines 509
+  git pull -q --rebase origin claude/playbook-pullback-explanation-tg5c33 failed: error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+  [93m!![0m   export NOT pushed — run by hand: python3 scripts/day_export.py --push
+===== START Wed Oct  7 12:01:18 CEST 2026 =====
+
+[1mTrading day 2026-10-07 · 06:01 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+  [93m!![0m   starting early at 06:01 ET — the tape before 07:00 is thin, entries before 07:00 are refused (session window), and the 06:55 scheduled start will be refused by the lock
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ MTEN   $1.46 under $2.00[0m
+       [2m✗ MI     $1.68 under $2.00[0m
+       [2m✗ WETO   $1.15 under $2.00[0m
+       [2m5 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [92mok[0m   2 names: BIYA SXTC
+
+[1m2. Probes[0m  (once per day)
+Error 10197, reqId 4: No market data during competing live session, contract: Stock(conId=265598, symbol='AAPL', exchange='SMART', primaryExchange='NASDAQ', currency='USD', localSymbol='AAPL', tradingClass='NMS')
+
+Data alignment probe   AAPL   live 4002 vs paper 4002
+       [2mboth connections read-only; nothing order-shaped is sent[0m
+  [92mok[0m   PAPER: connected 127.0.0.1:4002 client 34 read-only · accounts ['D****9781']
+       [2msingle-login mode: desk and executor share the paper session (IBKR_PORT=4002).[0m
+       [2mDecision tape and fill tape are the same tape by construction; the only[0m
+       [2mquestion left is whether that tape is real-time.[0m
+
+Sampling 20s
+    t   LIVE last      bid      ask        ts   PAPER last      bid      ask        ts
+    2           —        —        —         —            —        —        —         —
+    4           —        —        —         —            —        —        —         —
+    6           —        —        —         —            —        —        —         —
+    8           —        —        —         —            —        —        —         —
+   10           —        —        —         —            —        —        —         —
+   12           —        —        —         —            —        —        —         —
+   14           —        —        —         —            —        —        —         —
+   16           —        —        —         —            —        —        —         —
+   18           —        —        —         —            —        —        —         —
+   20           —        —        —         —            —        —        —         —
+
+VERDICT
+  [91mxx[0m   PAPER session refused market data: IBKR 10197 'No market data during competing live session'
+       [2mYour live TWS login holds the subscriptions; the paper session cannot[0m
+       [2mshare them while TWS is logged in. Two ways to test on a trading day:[0m
+       [2m  a) log OUT of TWS, keep the Gateway (paper) up, re-run this probe;[0m
+       [2m  b) run the whole desk off the paper Gateway for a day:[0m
+       [2m     IBKR_PORT=4002 python3 scripts/day.py   (with TWS logged out)[0m
+       [2mIf (a) reads realtime, the exercise should run as (b): one login, one tape.[0m
+VERDICT: competing
+       [2mrecorded in exercise_state[0m
+  [93m!![0m   paper session data: 'competing' — fills would be judged against a different tape
+       [2mClient Portal › Settings › Paper Trading Account › share real-time market data. Then re-run.[0m
+  [91mxx[0m   TWS is logged in — IBKR gives the market data to that session, not to the paper one
+       [2mlog OUT of TWS (keep the Gateway on the paper account), then run this command again[0m
+===== START Wed Oct  7 12:50:57 CEST 2026 =====
+
+[1mTrading day 2026-10-07 · 06:50 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+  [93m!![0m   starting early at 06:50 ET — the tape before 07:00 is thin, entries before 07:00 are refused (session window), and the 06:55 scheduled start will be refused by the lock
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ MTEN   $1.46 under $2.00[0m
+       [2m✗ MI     $1.70 under $2.00[0m
+       [2m✗ WETO   $1.17 under $2.00[0m
+       [2m7 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [92mok[0m   4 names: BIYA SXTC LPCN SDEV
+
+[1m2. Probes[0m  (once per day)
+       [2malignment probe read 'competing' earlier today — measuring again[0m
+
+Data alignment probe   AAPL   live 4002 vs paper 4002
+       [2mboth connections read-only; nothing order-shaped is sent[0m
+  [92mok[0m   PAPER: connected 127.0.0.1:4002 client 34 read-only · accounts ['D****9781']
+       [2msingle-login mode: desk and executor share the paper session (IBKR_PORT=4002).[0m
+       [2mDecision tape and fill tape are the same tape by construction; the only[0m
+       [2mquestion left is whether that tape is real-time.[0m
+
+Sampling 20s
+    t   LIVE last      bid      ask        ts   PAPER last      bid      ask        ts
+    2           —        —        —         —       335.08   334.76   335.09  06:51:02
+    4           —        —        —         —       335.08   334.76   335.09  06:51:04
+    6           —        —        —         —       335.08   334.76   335.00  06:51:06
+    8           —        —        —         —       335.08   334.76   335.00  06:51:06
+   10           —        —        —         —       335.08   334.76   335.00  06:51:06
+   12           —        —        —         —       335.08   334.76   335.00  06:51:06
+   14           —        —        —         —       335.08   334.76   335.00  06:51:06
+   16           —        —        —         —       335.08   334.76   335.00  06:51:06
+   18           —        —        —         —       335.08   334.76   335.00  06:51:06
+   20           —        —        —         —       335.08   334.76   335.00  06:51:06
+
+VERDICT
+  [92mok[0m   PAPER session is on real-time data (type 1) — the only session, so nothing to lag against
+       [2mDecision tape and fill tape are the same tape. Slippage is measurable.[0m
+VERDICT: realtime
+       [2mrecorded in exercise_state[0m
+  [92mok[0m   paper session is on real-time data — decision tape and fill tape agree
+       [2mstop probe: OFF — it places an order; pass --probe-orders to run it once, deliberately[0m
+  [92mok[0m   pre-market entries: ON — probe: stop queued to 09:30 — monitored exit, positions UNPROTECTED (A1 accepted by ayman.benharara 2026-09-11)
+
+[1m3. Desk + runner[0m
+       [2mIBKR data port 4002 (IBKR_PORT) · ledger /Users/ayman.benharara/day-trading-bot/data/journal.sqlite[0m
+       [2mdesk: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -m momentum_platform.dashboard.server --host 127.0.0.1 --port 8787 --ibkr BIYA,SXTC,LPCN,SDEV --ibkr-required[0m
+Starting the IBKR desk. Scan, quotes and history take 30-90 s the first time; the line 'desk ready' means the page is up.
+  IBKR desk connected read-only, client 27, server version 178
+  BIYA: subscribed (quote + 5-second bars); loading daily and minute history
+  BIYA: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  IBKR fundamentals are not entitled on this account: float falls back to SEC shares outstanding (an upper bound) or reads UNKNOWN
+  BIYA: float verified 2.7M (finviz via premarket_stars.py)
+  SXTC: subscribed (quote + 5-second bars); loading daily and minute history
+  SXTC: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  SXTC: float verified 1.0M (finviz via premarket_stars.py)
+  LPCN: subscribed (quote + 5-second bars); loading daily and minute history
+  LPCN: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  LPCN: float verified 7.9M (finviz via premarket_stars.py)
+  SDEV: subscribed (quote + 5-second bars); loading daily and minute history
+  SDEV: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  SDEV: float verified 1.8M (finviz via premarket_stars.py)
+  desk ready: BIYA, SXTC, LPCN, SDEV — 172 minutes of history, 67 alerts so far
+  TWS reported the data connection restored — re-requesting quotes and five-second bars
+  [92mok[0m   desk is up on IBKR — feed LIVE
+       [2mrunner: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -u scripts/exercise.py --db /Users/ayman.benharara/day-trading-bot/data/journal.sqlite live --risk 40.0 --account 2000.0 --trade[0m
+       [2mkeeping the Mac awake until the day ends (caffeinate)[0m
+[2mrunning until 11:30 ET; Ctrl-C stops both[0m
+[92mok[0m DUR339781 — paper · client 31 · TRADE mode · risk gate Limits(max_daily_loss_r=3.0, consecutive_losses=3, max_entries_per_day=6)
+[2mreading /Users/ayman.benharara/day-trading-bot/data/journal.sqlite every 5s · hard stop 11:30 ET · Ctrl-C to stop[0m
+  [2m14 plan(s) armed on history loaded at start (04:20–06:37 ET, BIYA, LPCN, SXTC) → refused, tagged backfill, not counted; each row is in the ledger[0m
+session: 172 frames, 4 symbols, 67 alerts
+workstation: http://127.0.0.1:8787/
+IBKR — TWS read-only, client 27 (desk) / 28 (scanner), market data type 1, feed LIVE.
+STREAMING — candles, quotes and health reach the page as they happen; the session rebuilds every 3s and the scanner union runs every 120s.
+  feed LIVE (gen 1, 8 lines)
+  IBKR scanner connected read-only, client 28
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  scan union: 345 names from 15 queries
+  20 non-stock instruments dropped before quoting
+  quoting 1-75 of 130 scan hits
+  quoting 76-130 of 130 scan hits
+  scanner: 11 names up ≥10% in the band: BIYA SXTC MTEN LPCN MI NCPL SDEV RECT DLPN NPT  (51s)
+  NCPL: finviz float 4.38M (looked up on join)
+  RECT: finviz float 3.33M (looked up on join)
+  MTEN: subscribed (quote + 5-second bars); loading daily and minute history
+  MTEN: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  MTEN: float verified 6.1M (finviz via premarket_stars.py)
+  MI: subscribed (quote + 5-second bars); loading daily and minute history
+  MI: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  MI: float verified 0.5M (finviz via premarket_stars.py)
+  NCPL: subscribed (quote + 5-second bars); loading daily and minute history
+  NCPL: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  NCPL: float verified 4.4M (finviz on join)
+  RECT: subscribed (quote + 5-second bars); loading daily and minute history
+  RECT: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  RECT: float verified 3.3M (finviz on join)
+  MTEN, MI, NCPL, RECT joined the desk
+  feed LIVE (gen 1, 16 lines)
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  headlines: 3 new
+  [93m!![0m   a trading day is already running on this ledger (day.py pid 11111) — nothing started, nothing touched
+       [2mit is most likely the 06:55 launchd job. Watch it with:[0m
+       [2m  tail -f ~/Library/Logs/day-trading-bot/day.out.log[0m
+       [2mto stop it deliberately:  kill -INT 11111[0m
+  06:56  LPCN   [93mREFUSED [0m 2.98/2.88  ✗ bar is outside the 07:00-16:00 ET session window (session 'none'); nothing is traded there; Layer 2 not green: pullback volume was not lighter than the impulse
+  TWS reported the data connection restored — re-requesting quotes and five-second bars
+  07:07  BIYA   [93mREFUSED [0m 2.44/2.38  ✗ Layer 2 not green: below VWAP; MACD not positive and above its signal (verdict WAIT)
+  07:12  LPCN   [93mREFUSED [0m 3.23/3.10  ✗ Layer 2 not green: pullback volume was not lighter than the impulse; Layer 2 not green: MACD not positive and above its signal (verdict WAIT)
+  07:21  BIYA   [93mREFUSED [0m 2.38/2.33  ✗ Layer 2 not green: below VWAP; below the 9 EMA (verdict WAIT)
+  07:26  LPCN   [2mARMED   [0m 3.67/3.55  ✗ armed: waiting for the ask to reach 3.67 (pre-market, runner-triggered A10; 3 min)
+  07:26  LPCN   [92mTAKEN   [0m 3.67/3.55  ✗ tape reached 3.67 (ask 3.67) after 10s; monitored entry sent
+  07:27:00  [92mTRAIL[0m    LPCN monitored level 3.55 -> 3.57 (high 3.69, 1R 0.12)
+  07:27:05  [92mTRAIL[0m    LPCN monitored level 3.57 -> 3.61 (high 3.73, 1R 0.12)
+  07:27:45  [92mTRAIL[0m    LPCN monitored level 3.61 -> 3.62 (high 3.74, 1R 0.12)
+  07:29:01  [92mTRAIL[0m    LPCN monitored level 3.62 -> 3.67 (high 3.79, 1R 0.12)
+  07:29:06  [92mTRAIL[0m    LPCN monitored level 3.67 -> 3.72 (high 3.84, 1R 0.12)
+  07:29:11  [92mTRAIL[0m    LPCN monitored level 3.72 -> 3.76 (high 3.88, 1R 0.12)
+  07:29:21  [92mTRAIL[0m    LPCN monitored level 3.76 -> 3.78 (high 3.90, 1R 0.12)
+  07:29:31  [92mTRAIL[0m    LPCN monitored level 3.78 -> 3.80 (high 3.92, 1R 0.12)
+  07:29:36  [92mTRAIL[0m    LPCN monitored level 3.80 -> 3.85 (high 3.97, 1R 0.12)
+  07:30:16  [92mTRAIL[0m    LPCN monitored level 3.85 -> 3.86 (high 3.98, 1R 0.12)
+  07:30:21  [93mSTOP[0m     LPCN x266 SELL LMT 3.81 (bid 3.85 <= stop 3.86)
+  07:30:26  [92mEXIT[0m     LPCN x266 @ 3.83 monitored_stop (+1.33 R)
+  headlines: 1 new
+  07:54  LPCN   [93mREFUSED [0m 3.62/3.52  ✗ Layer 2 not green: pullback volume was not lighter than the impulse; Layer 2 not green: MACD not positive and above its signal (verdict WAIT)
+  headlines: 4 new
+
+stopped
+desk stopping — disconnecting from IBKR
+
+  [93m!![0m   stopped by Ctrl-C — the day is not settled; the next start settles it
+===== START Wed Oct  7 15:08:24 CEST 2026 =====
+
+[1mTrading day 2026-10-07 · 09:08 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ BIYA   93% off the pre-market high — already faded[0m
+       [2m✗ SXTC   68% off the pre-market high — already faded[0m
+       [2m✗ MI     $1.90 under $2.00[0m
+       [2m✗ MTEN   $1.31 under $2.00[0m
+       [2m✗ LPCN   31% off the pre-market high — already faded[0m
+       [2m✗ NCPL   $1.31 under $2.00[0m
+       [2m6 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [93m!![0m   gap scan returned nothing — the desk's own scanner picks (start.sh --ibkr behaviour)
+
+[1m2. Probes[0m  (once per day)
+  [92mok[0m   alignment probe already ran today — paper data 'realtime'
+       [2mstop probe: OFF — it places an order; pass --probe-orders to run it once, deliberately[0m
+  [92mok[0m   pre-market entries: ON — probe: stop queued to 09:30 — monitored exit, positions UNPROTECTED (A1 accepted by ayman.benharara 2026-09-11)
+
+[1m3. Desk + runner[0m
+       [2mIBKR data port 4002 (IBKR_PORT) · ledger /Users/ayman.benharara/day-trading-bot/data/journal.sqlite[0m
+       [2mdesk: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -m momentum_platform.dashboard.server --host 127.0.0.1 --port 8787 --ibkr  --ibkr-required[0m
+Starting the IBKR desk. Scan, quotes and history take 30-90 s the first time; the line 'desk ready' means the page is up.
+  IBKR desk connected read-only, client 27, server version 178
+  IBKR scanner connected read-only, client 28
+  no symbols given: the scanner picks the desk (30-90 s the first time)
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  scan union: 380 names from 15 queries
+  21 non-stock instruments dropped before quoting
+  quoting 1-75 of 129 scan hits
+  quoting 76-129 of 129 scan hits
+  scanner: 10 names up ≥10% in the band: SXTC LGCL BIYA MTEN LPCN MI NCPL NEOG CCEL WETO  (49s)
+  SXTC: subscribed (quote + 5-second bars); loading daily and minute history
+  SXTC: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  IBKR fundamentals are not entitled on this account: float falls back to SEC shares outstanding (an upper bound) or reads UNKNOWN
+  SXTC: float verified 1.0M (finviz via premarket_stars.py)
+  LGCL: subscribed (quote + 5-second bars); loading daily and minute history
+  LGCL: finviz float 0.05M (looked up on join)
+  LGCL: type COMMON · tick 0.01 · split none
+  LGCL: float verified 0.1M (finviz on join)
+  BIYA: subscribed (quote + 5-second bars); loading daily and minute history
+  BIYA: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  BIYA: float verified 2.7M (finviz via premarket_stars.py)
+  MTEN: subscribed (quote + 5-second bars); loading daily and minute history
+  MTEN: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  MTEN: float verified 6.1M (finviz via premarket_stars.py)
+  LPCN: subscribed (quote + 5-second bars); loading daily and minute history
+  LPCN: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  LPCN: float verified 7.9M (finviz via premarket_stars.py)
+  MI: subscribed (quote + 5-second bars); loading daily and minute history
+  MI: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  MI: float verified 0.5M (finviz via premarket_stars.py)
+  NCPL: subscribed (quote + 5-second bars); loading daily and minute history
+  NCPL: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  NCPL: float verified 4.4M (finviz via premarket_stars.py)
+  NEOG: subscribed (quote + 5-second bars); loading daily and minute history
+  NEOG: finviz float 216.01M (looked up on join)
+  NEOG: type COMMON · tick 0.01 · split none
+  NEOG: float verified 216.0M (finviz on join)
+  desk ready: SXTC, LGCL, BIYA, MTEN, LPCN, MI, NCPL, NEOG — 310 minutes of history, 181 alerts so far
+  [92mok[0m   desk is up on IBKR — feed LIVE
+       [2mrunner: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -u scripts/exercise.py --db /Users/ayman.benharara/day-trading-bot/data/journal.sqlite live --risk 40.0 --account 2000.0 --trade[0m
+       [2mkeeping the Mac awake until the day ends (caffeinate)[0m
+[2mrunning until 11:30 ET; Ctrl-C stops both[0m
+session: 310 frames, 8 symbols, 181 alerts
+workstation: http://127.0.0.1:8787/
+IBKR — TWS read-only, client 27 (desk) / 28 (scanner), market data type 1, feed LIVE.
+STREAMING — candles, quotes and health reach the page as they happen; the session rebuilds every 3s and the scanner union runs every 120s.
+  feed LIVE (gen 1, 16 lines)
+[92mok[0m DUR339781 — paper · client 31 · TRADE mode · risk gate Limits(max_daily_loss_r=3.0, consecutive_losses=3, max_entries_per_day=6)
+[2mreading /Users/ayman.benharara/day-trading-bot/data/journal.sqlite every 5s · hard stop 11:30 ET · Ctrl-C to stop[0m
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  headlines: 9 new
+  headlines: 1 new
+  headlines: 3 new
+  headlines: 1 new
+  headlines: 1 new
+  [93mHARD STOP[0m flattened: ['flat confirmed from broker position state']
+
+stopped
+desk stopping — disconnecting from IBKR
+
+
+[1mAfter the hard stop[0m
+  [92mok[0m   actuals: 106 computed, 1 without tape
+  [92mok[0m   replay: 1392/1765 reproduce
+  [92mok[0m   report: research/paper-exercise/reports/2026-10-07.md
+       [2mphase C → D blocked by:[0m
+       [2m  - phase D read-out needs 60 taken trades; have 18[0m
+  [92mok[0m   export: research/daily/2026-10-07 · decisions 107 · orders 1 · order_events 12 · five_minute 100 · green_run 2 · manual 0 · bars 3790 · log_lines 268
+  git pull -q --rebase origin claude/playbook-pullback-explanation-tg5c33 failed: error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+  [93m!![0m   export NOT pushed — run by hand: python3 scripts/day_export.py --push

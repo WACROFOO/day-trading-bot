@@ -1,0 +1,10 @@
+id,order_id,ts,text,symbol
+83,21,2026-10-06T13:23:23+00:00,"trail (A3, monitored): high 6.53 since fill, watch level 6.32 -> 6.34",IPDN
+84,21,2026-10-06T13:24:39+00:00,"trail (A3, monitored): high 6.54 since fill, watch level 6.34 -> 6.35",IPDN
+85,21,2026-10-06T13:25:04+00:00,"trail (A3, monitored): high 6.57 since fill, watch level 6.35 -> 6.38",IPDN
+86,21,2026-10-06T13:25:44+00:00,watch_stops: bid 6.36 <= stop 6.38; SELL LMT 6.3 x153 sent (order 90); fill not yet confirmed,IPDN
+87,21,2026-10-06T13:25:49+00:00,exit confirmed filled at 6.33,IPDN
+88,22,2026-10-06T14:59:06+00:00,fill updated: avg 6.38 × 190 — realised risk 36.1,APUS
+89,22,2026-10-06T14:59:33+00:00,"trail (A3): high 6.4 since fill, stop 6.19 -> 6.23 (1R/sh = 0.17)",APUS
+90,22,2026-10-06T15:00:06+00:00,"trail (A3): high 6.4326 since fill, stop 6.23 -> 6.26 (1R/sh = 0.17)",APUS
+91,22,2026-10-06T15:00:48+00:00,"trail (A3): high 6.45 since fill, stop 6.26 -> 6.28 (1R/sh = 0.17)",APUS
