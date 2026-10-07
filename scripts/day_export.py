@@ -120,7 +120,7 @@ def push(day: str) -> bool:
     branch = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=ROOT, capture_output=True,
                             text=True).stdout.strip()
     cmds = [["git", "add", rel], ["git", "commit", "-q", "-m", f"Daily export {day} (decisions, orders, bars, log)"],
-            ["git", "pull", "-q", "--rebase", "origin", branch], ["git", "push", "-q", "origin", branch]]
+            ["git", "pull", "-q", "--rebase", "--autostash", "origin", branch], ["git", "push", "-q", "origin", branch]]
     for c in cmds:
         r = subprocess.run(c, cwd=ROOT, capture_output=True, text=True)
         if r.returncode != 0 and not (c[1] == "commit" and "nothing to commit" in (r.stdout + r.stderr)):
