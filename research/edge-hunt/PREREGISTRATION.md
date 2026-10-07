@@ -794,3 +794,24 @@ lower bound on the holdout > 0 at one-sided α = 0.05) AND total net R not worse
 in train and holdout. Reported: the bounce trades BX adds, alone. A pass relaxes two
 gates the method states: to the owner, built OFF, 200 prospective trades. Script:
 `scripts/bounce_exemption.py`.
+
+### Addendum 2026-10-07b — a $1 price floor instead of $2, on a sub-$2 gapper universe, before any run
+
+**Question (owner, 2026-10-07):** "test removing the price under $2 rule" — the two daily
+reviews' biggest misses were sub-$2 (MI, OLOX). The ten-year cache cannot answer it: its
+universe opened at $2-20, so its 1,698 sub-$2 plans are names that faded below $2.
+**New universe**, built from Alpaca SIP daily bars of every US equity asset (active and
+inactive), 2024-01-02 → 2026-08-21: a symbol-day whose open is $1.00-1.99, ≥ 10 % over the
+previous close, previous 20 days' dollar volume ≥ $250k (the cache's own criteria, price
+aside); a day whose open ÷ previous close is within 2 % of an integer ≥ 2 is dropped (a
+reverse split). 1-minute bars 04:00-16:00 as the cache's (`backtest_history.fetch_day`),
+plans by the live detector (`detector_variants.plans_for`, config B), gates as B with the
+price gate's floor at $1.00.
+**Variant P1** = B's 2024-26 plans ∪ the new sub-$2 plans, one portfolio, readings A and C.
+**Decision**, holdout years only (no train period exists for this universe): P1's mean net
+R a trade better than B's, total net R not worse, better in 2 of 3 years, the day-paired
+one-sided 95 % lower bound of (P1 − B) > 0, AND the sub-$2 trades P1 adds have a positive
+net mean — in BOTH readings. Pass → the floor goes to the owner OFF, scored prospectively
+(the daily review's `killed:price` refusals) to 200 trades. Fail → $2 stays. Limitations
+stated now: the spread proxy has no tier under $2 (it applies its $2-5 spreads); IBKR's $1
+minimum commission weighs more on cheap names. Script: `scripts/sub2_test.py`.
