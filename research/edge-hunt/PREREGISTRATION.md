@@ -775,3 +775,22 @@ readings — train (2016-2023) and holdout (2024-2026) net mean per trade better
 holdout > 0 at one-sided α = 0.05 / 4 — AND, added after B30, **total net R not worse
 than B's in train and in the holdout** (a mean per trade can rise while the money falls).
 A pass is built OFF until 200 prospective paper trades. Script: `scripts/detector_variants.py`.
+
+### Addendum 2026-10-07 — the bounce exemption (VWAP and still-rising off in a bounce), before any run
+
+**Question (owner, 2026-10-07, LGCL 09:34):** the plan at 2.80 / 2.59 was killed by
+"still rising" (38 % off a 4.50 pre-market high) and was below VWAP; it ran to 3.52 by
+09:36 (SIP). *"Test removing the VWAP check during bounces."*
+**Variants against B** (`rules_audit` plan cache, B's gates, fill, exit, costs, one
+position, daily limits; readings A and C):
+- **BX — bounce exemption:** a plan armed more than 25 % off the day's high (a bounce)
+  skips the VWAP gate AND the still-rising gate; every other rule unchanged (9 EMA, MACD,
+  pullback volume, stops, spread, window). Plans within 25 % are judged as B.
+- **BV — VWAP off in bounces only:** the same plans skip VWAP but keep still-rising.
+  Since still-rising refuses every bounce, BV equals B by construction; reported to show it.
+**Decision:** addendum 2026-10-06d's rule — addendum 2026-10-01's in BOTH readings
+(train and holdout mean better, ≥ 200 holdout trades, 2 of 3 holdout years, day-paired
+lower bound on the holdout > 0 at one-sided α = 0.05) AND total net R not worse than B's
+in train and holdout. Reported: the bounce trades BX adds, alone. A pass relaxes two
+gates the method states: to the owner, built OFF, 200 prospective trades. Script:
+`scripts/bounce_exemption.py`.
