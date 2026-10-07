@@ -1,0 +1,19 @@
+addendum 2026-10-07 · 88823 plans (rules_audit cache, 07:00-11:30) · costs live · bounce = > 25 % off the high
+
+=== reading A ===
+  B   train n 2246 net -0.411 total -923.6 R · holdout n 1492 net -0.477 total -712.2 R
+  BX  train n 2541 net -0.423 total -1076.1 R · holdout n 1747 net -0.514 total -897.7 R · lb -0.061
+      trades it adds: n 729 · gross -0.117 · net -0.543 · won 20%
+      ✗ train better · ✗ test better · ✓ >=200 test trades · ✗ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✗ train total not worse · ✗ holdout total not worse  → keep B
+  BV  train n 2246 net -0.411 total -923.6 R · holdout n 1492 net -0.477 total -712.2 R · lb +0.000
+      ✗ train better · ✗ test better · ✓ >=200 test trades · ✗ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✓ train total not worse · ✓ holdout total not worse  → keep B
+
+=== reading C ===
+  B   train n 2231 net -0.436 total -973.0 R · holdout n 1479 net -0.475 total -701.9 R
+  BX  train n 2522 net -0.442 total -1114.5 R · holdout n 1733 net -0.510 total -884.0 R · lb -0.061
+      trades it adds: n 723 · gross -0.123 · net -0.549 · won 23%
+      ✗ train better · ✗ test better · ✓ >=200 test trades · ✗ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✗ train total not worse · ✗ holdout total not worse  → keep B
+  BV  train n 2231 net -0.436 total -973.0 R · holdout n 1479 net -0.475 total -701.9 R · lb +0.000
+      ✗ train better · ✗ test better · ✓ >=200 test trades · ✗ 2 of 3 test years · ✗ paired lower bound > 0 · ✓ drawdown ok · ✓ train total not worse · ✓ holdout total not worse  → keep B
+
+DECISION (both readings): BX fails · BV fails
