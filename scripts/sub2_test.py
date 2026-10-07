@@ -47,7 +47,7 @@ def universe() -> int:
     for status in ("active", "inactive"):
         assets += c._get(c.trading_base, "/v2/assets", {"status": status, "asset_class": "us_equity"})
     syms = sorted({a["symbol"] for a in assets if a.get("exchange") in ("NASDAQ", "NYSE", "AMEX", "ARCA", "BATS")
-                   and "/" not in a["symbol"] and "." not in a["symbol"]})
+                   and a["symbol"].isalpha() and a["symbol"].isupper() and len(a["symbol"]) <= 5})
     print(f"{len(syms)} symbols", flush=True)
     found: dict = defaultdict(dict)
     for i in range(0, len(syms), 100):
