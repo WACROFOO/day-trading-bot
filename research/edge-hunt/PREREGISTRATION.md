@@ -815,3 +815,40 @@ net mean — in BOTH readings. Pass → the floor goes to the owner OFF, scored 
 (the daily review's `killed:price` refusals) to 200 trades. Fail → $2 stays. Limitations
 stated now: the spread proxy has no tier under $2 (it applies its $2-5 spreads); IBKR's $1
 minimum commission weighs more on cheap names. Script: `scripts/sub2_test.py`.
+
+### Addendum 2026-10-08 — F9, daily momentum on liquid stocks (new-high breakout, chandelier exit), before any run
+
+**Why (owner, 2026-10-08):** every 1-minute small-cap configuration loses before costs
+(−0.118 R gross on the 2024-26 tick replay) and costs another 0.387 R a trade
+(`research/paper-exercise/reports/2026-10-02-execution-study/cost_decomposition_output.txt`).
+Costs scale with cents per share against the stop; a multi-day stop on a liquid stock
+makes them small. This tests momentum on the daily chart. It is a new family (F9),
+not a Ross rule, stated as a hypothesis. Script: `scripts/daily_momentum.py`.
+
+**Data.** Alpaca SIP daily bars, split- and dividend-adjusted, 2015-01-02 → 2026-08-21, every
+US equity asset active or delisted (survivorship: delisted names included as far as the
+feed carries them); funds, ETFs, warrants, units, rights and preferreds dropped by name.
+**Universe on day d** (known at d's close): close ≥ $10; 50-day mean dollar volume ≥ $20M;
+≥ 260 sessions of history.
+**Signal at d's close:** the close is the highest close of the last 252 sessions AND close
+> 50-day SMA > 200-day SMA.
+**Trade:** buy at d+1's open. Risk unit R = 3 × ATR(20) at d; initial stop = entry − R.
+Exit: the first close below (highest close since entry − R), sold at the next open
+(a gap through it is taken at that open). No target, no time stop; an open trade at the
+data's end is closed at the last close and flagged. One trade per symbol at a time.
+**Portfolio:** at most 10 open positions; when signals exceed free slots, the highest
+126-session return first. Shares = $40 ÷ R (≥ 1).
+**Costs, per side:** IBKR Fixed ($0.005 a share, $1 minimum, 1 % cap) plus 0.05 % of price
+for half the spread and opening-auction slippage (an Approximation for $10+ names with
+$20M+ a day — stated, not measured; a 0.15 % sensitivity is reported, deciding nothing).
+**Random baseline:** per portfolio trade, 20 entries on the same date in random symbols of
+that day's universe (no new-high or trend condition), same R definition, exit and costs;
+seed 20261008.
+**Periods:** train 2016-01 → 2022-12; 2023 reported; holdout 2024-01 → 2026-08-21.
+**Decision (all must hold):** holdout net mean R a trade > 0 with its one-sided 95 % lower
+bound > 0 (bootstrap clustered by entry month); ≥ 200 holdout trades; positive in 2 of 3
+holdout years; the lower bound of (trade − its random baseline) > 0 on the holdout; train
+net mean > 0. **Reported, deciding nothing:** SPY buy-and-hold over the same periods (the
+market's own drift — a long-only test in a rising decade must beat it, not zero), the
+0.15 % cost sensitivity, holding time, R per year. Pass → a paper-only implementation is
+designed and preregistered separately. Fail → recorded; nothing is built.
