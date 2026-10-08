@@ -1265,8 +1265,27 @@ function renderPillarsBoard(frame) {
     .forEach(h => head.appendChild(el("span", null, h)));
   host.appendChild(head);
   if (!rows.length) { host.appendChild(el("div", "empty", "No symbols on the desk.")); return; }
+  // Names down on the day are not candidates (owner, 2026-10-08: "the pillars
+  // check is showing negative tickers — why?"). The desk keeps every name it
+  // added subscribed all day, faded or not; the board now folds the red ones
+  // into one line under the list instead of ranking them as if in play. The
+  // selected name always keeps its row.
+  const red = rows.filter(r => r.row.changePct != null && r.row.changePct < 0 && r.sym !== state.selected);
+  const shown = rows.filter(r => red.indexOf(r) === -1);
+  const fold = () => {
+    if (!red.length) return;
+    const f = el("div", "pb-fold");
+    f.appendChild(el("span", "lab", "▼ " + red.length + " red on the day — not candidates:"));
+    red.forEach(r => {
+      const b = el("span", "pb-fold-sym", r.sym + " " + pct(r.row.changePct));
+      b.title = "down " + pct(r.row.changePct) + " vs the previous close · " + r.passed + "/5 pillars — click to read it";
+      b.onclick = () => { select(r.sym, "pillars-board"); render(); };
+      f.appendChild(b);
+    });
+    host.appendChild(f);
+  };
   if (compact) {
-    rows.forEach(r => {
+    shown.forEach(r => {
       const tr = el("div", "pb-row" + (state.selected === r.sym ? " sel" : ""));
       const symCell = el("b", null, r.sym);
       symCell.title = [r.meta.name, r.meta.exchange, r.meta.country,
@@ -1290,9 +1309,10 @@ function renderPillarsBoard(frame) {
       tr.onclick = () => { select(r.sym, "pillars-board"); render(); };
       host.appendChild(tr);
     });
+    fold();
     return;
   }
-  rows.forEach(r => {
+  shown.forEach(r => {
     const tr = el("div", "pb-row" + (state.selected === r.sym ? " sel" : ""));
     const symCell = el("b", null, r.sym);
     symCell.title = [r.meta.name, r.meta.exchange, r.meta.country].filter(Boolean).join(" · ");
@@ -1320,6 +1340,7 @@ function renderPillarsBoard(frame) {
     tr.onclick = () => { select(r.sym, "pillars-board"); render(); };
     host.appendChild(tr);
   });
+  fold();
 }
 
 /* ── context panels ─────────────────────────────────────────────────── */
@@ -2048,9 +2069,11 @@ function tapeAge() {
 function loadTape() {
   // A page saved to disk, or a desk that does not answer, has no tape: said,
   // like the replay says it — the card never sits on "loading" forever.
-  const none = () => applyTape({ state: "OFF", symbol: null, prints: [], gaps: [], notes: [], facts: null,
-    message: S.streaming ? "the desk did not answer for the tape — it retries with the next event"
-                         : "no tape in this replay: a saved or recorded page carries no prints" });
+  const none = why => applyTape({ state: "OFF", symbol: null, prints: [], gaps: [], notes: [], facts: null,
+    message: why === 404 && (S.streaming || S.live)
+      ? "this desk was started before the Time & Sales existed — restart it to run the update"
+      : S.streaming ? "the desk did not answer for the tape — it retries with the next event"
+      : "no tape in this replay: a saved or recorded page carries no prints" });
   fetch("/api/v1/tape", { cache: "no-store" }).then(r => r.ok ? r.json() : Promise.reject(r.status))
     .then(applyTape).catch(none);
 }
@@ -2478,6 +2501,19 @@ function watchCards(frame) {
 /* The banner for what blinds the desk: a competing login (10197), names
    dropped for want of a data permission (AMEX), a desk that stops answering. */
 let HEALTH_FAILS = 0, HEALTH_FAIL_SINCE = null, COMPETING_BEEPED = false;
+/* The desk process running older code than the page it served (owner,
+   2026-10-08: after an update without a restart the new page met the old
+   desk — no tape, no news on the new layout, and nothing on screen said why).
+   A desk from before this check sends no build at all; that absence is the
+   signal. */
+let STALE_DESK = null;
+function checkDeskBuild(h) {
+  if (!h || !(S.streaming || S.live)) return;
+  const mine = window.__APP_BUILD__;
+  if (!("appBuildAtStart" in h)) STALE_DESK = "a build from before 2026-10-08";
+  else if (mine && h.appBuildAtStart && h.appBuildAtStart !== mine) STALE_DESK = "app " + h.appBuildAtStart;
+  else STALE_DESK = null;
+}
 function renderDeskAlerts(provider) {
   const host = document.getElementById("deskAlerts"); if (!host) return;
   host.textContent = "";
@@ -2495,10 +2531,15 @@ function renderDeskAlerts(provider) {
   if (HEALTH_FAILS >= 3) {
     lines.push(["bad", "the desk is not answering since " + HEALTH_FAIL_SINCE + " — the page shows its last data"]);
   }
+  if (STALE_DESK) {
+    lines.push(["bad", "RESTART THE DESK — it is running older code (" + STALE_DESK + ") than this page (app " +
+                (window.__APP_BUILD__ || "?") + "): Ctrl+C in its terminal, then start it the usual way. " +
+                "Until then the tape and parts of the decision card are missing."]);
+  }
   lines.forEach(([cls, text]) => host.appendChild(el("div", "desk-alert " + cls, text)));
   host.hidden = !lines.length;
 }
-function healthOk(h) { HEALTH_FAILS = 0; HEALTH_FAIL_SINCE = null; renderDeskAlerts(h && h.provider); }
+function healthOk(h) { HEALTH_FAILS = 0; HEALTH_FAIL_SINCE = null; checkDeskBuild(h); renderDeskAlerts(h && h.provider); }
 function healthFailed() {
   HEALTH_FAILS++;
   if (!HEALTH_FAIL_SINCE) HEALTH_FAIL_SINCE = new Date().toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false });
@@ -3658,6 +3699,13 @@ function render() {
   const ctx = renderHeader(frame);
   renderCharts(frame); renderQuote(frame, ctx); renderL2(frame, ctx);
   renderVerdict(frame, ctx); renderTimeline(state.frame); renderPillarsBoard(frame);
+  // A desk that ships no decision cards (started before 2026-10-08) still
+  // shows the news on the default desk: the quote card that carried it is
+  // in the tray now.
+  if (!cardFor(state.selected) && placedCards().indexOf("quote") === -1) {
+    const vh = $("#verdictCard");
+    if (vh) { const box = el("div", "dc-cat"); renderCatalyst(box, ctx); vh.appendChild(box); }
+  }
   renderTape();
   watchCards(frame);
   syncRiskInput();

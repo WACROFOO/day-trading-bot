@@ -730,3 +730,8 @@ a.cat2-headline:hover{text-decoration:underline}
 .ts-gap.hist{color:var(--ink-faint);border-top-color:var(--line)}
 .ts-note,.ts-legend{flex:none;font-size:9px;line-height:1.35;color:var(--ink-faint);margin-top:3px}
 .empty.one-line{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pb-fold{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;margin-top:5px;padding-top:4px;
+  border-top:1px dashed var(--line);font:9.5px var(--mono);color:var(--ink-faint)}
+.pb-fold .lab{font:9px var(--sans);color:var(--ink-faint)}
+.pb-fold-sym{color:var(--down);cursor:pointer;opacity:.8}
+.pb-fold-sym:hover{opacity:1;text-decoration:underline}

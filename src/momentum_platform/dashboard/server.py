@@ -272,8 +272,27 @@ def _keys() -> dict:
     return {"owner": owner, "viewer": viewer}
 
 
+def app_build(path: Path = WEB / "app.js") -> str:
+    """The short hash the page shows for its app.js (djb2 over UTF-16 code
+    units, as `scripts/app_build.py` and the page compute it)."""
+    units = path.read_text(encoding="utf-8").encode("utf-16-le")
+    h = 5381
+    for i in range(0, len(units), 2):
+        h = ((h << 5) + h + (units[i] | (units[i + 1] << 8))) & 0xFFFFFFFF
+    return format(h, "x")[:6]
+
+
 def make_handler(fixture, live: "LiveSession | None" = None, screener: "ScreenerLoop | None" = None):
     holder = live or LiveSession(fixture)
+    # The page's files are read from disk on every request; this process's
+    # Python is not. After an update without a restart the page ran new code
+    # against an old desk — no tape, no news on the new layout, nothing said
+    # (owner, 2026-10-08). The build this desk STARTED on goes out with the
+    # health, and the page says "restart the desk" when the two differ.
+    try:
+        build_at_start = app_build()
+    except OSError:
+        build_at_start = None
     if screener is None and getattr(holder, "screener", None) is not None:
         screener = holder.screener
     hub = getattr(holder, "hub", None)              # IBKR desk: server-sent events
@@ -362,6 +381,7 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                     from .. import desk_profile
                     payload["desk"] = desk_profile.fingerprint()
                 payload["role"] = role
+                payload["appBuildAtStart"] = build_at_start
                 return self._json(payload)
             if path == "/api/v1/stream":
                 if hub is None:

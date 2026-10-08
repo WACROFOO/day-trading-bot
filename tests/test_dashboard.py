@@ -1445,3 +1445,34 @@ def test_ui_the_header_carries_the_quote_in_two_lines(page):
         assert word in second, word
     labels = page.eval_on_selector_all("#symStats .lab", "els => els.map(e => e.textContent)")
     assert labels.count("rvol") == 1, "one RVOL; the daily one only when it differs"
+
+
+def test_ui_the_board_folds_names_down_on_the_day(page):
+    """Owner, 2026-10-08: "the pillars check is showing negative tickers —
+    why?" The desk keeps every name it added all day; a name down on the day
+    is not a candidate, so the board folds it into one line under the list —
+    clickable, and given its row back while it is the selected name."""
+    page.evaluate("() => localStorage.clear()")
+    page.reload()
+    page.wait_for_timeout(800)
+    _seek(page, 124)
+    page.evaluate("""() => {
+      const S = window.__SESSION__, sym = 'JMXP';
+      if (S.symbols[sym].metrics) S.symbols[sym].metrics.changePct = -3.2;
+      const iS = S.rowColumns.indexOf('symbol'), iC = S.rowColumns.indexOf('changePct');
+      S.frames.forEach(f => Object.values(f.lists || {}).forEach(rows => rows.forEach(r => {
+        if (r[iS] === sym) r[iC] = -3.2; })));
+    }""")
+    page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
+    page.wait_for_timeout(300)
+    fold = page.locator("[data-card=pillars-board] .pb-fold")
+    assert fold.count() == 1 and "red on the day" in fold.inner_text()
+    assert "JMXP -3.2%" in fold.inner_text()
+    syms = page.eval_on_selector_all("[data-card=pillars-board] .pb-row:not(.head) b", "els => els.map(e => e.textContent)")
+    assert "JMXP" not in syms
+    folded = page.locator("[data-card=pillars-board] .pb-fold-sym").count()
+    assert len(syms) + folded == len(page.evaluate("Object.keys(window.__SESSION__.symbols)"))
+    page.locator("[data-card=pillars-board] .pb-fold-sym").first.click()
+    page.wait_for_timeout(300)
+    assert page.locator("#symTicker").inner_text() == "JMXP"
+    assert page.locator("[data-card=pillars-board] .pb-row.sel").count() == 1, "the selected name keeps its row"

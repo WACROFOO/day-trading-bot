@@ -570,3 +570,33 @@ def test_the_page_asks_for_the_tape_only_when_it_needs_to(desk_server):
         pg.wait_for_timeout(700)
         assert posts == ["AAA", "AAA"], "a tape found on another name is asked for again"
         browser.close()
+
+
+def test_a_desk_running_older_code_than_its_page_says_restart(desk_server):
+    """Owner, 2026-10-08: after an update without a restart the new page met
+    the old desk — no tape, no news on the new layout, and nothing said why.
+    The desk sends the build it started on; a desk from before this check
+    sends none. Either way the page names it: RESTART THE DESK."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    port = desk_server["port"]
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+        pg = browser.new_page(viewport={"width": 1500, "height": 900})
+        r, body = _get(port, "/api/v1/health")
+        h = json.loads(body)
+        assert r.status == 200 and h["appBuildAtStart"], "the desk names the build it started on"
+        pg.goto(f"http://127.0.0.1:{port}/")
+        pg.wait_for_function("window.DeskLive && window.DeskLive.state === 'open' && window.__APP_BUILD__", timeout=5000)
+        assert pg.evaluate("window.__APP_BUILD__") == h["appBuildAtStart"], "same files, same build"
+        pg.wait_for_timeout(5600)                       # one health poll
+        assert "RESTART THE DESK" not in (pg.text_content("#deskAlerts") or "")
+
+        def old_desk(route):                            # a desk started before the check existed
+            body = dict(h)
+            body.pop("appBuildAtStart")
+            route.fulfill(status=200, content_type="application/json", body=json.dumps(body))
+        pg.route("**/api/v1/health", old_desk)
+        pg.wait_for_timeout(5600)
+        assert "RESTART THE DESK" in pg.text_content("#deskAlerts")
+        browser.close()

@@ -134,6 +134,16 @@ needs only the Level 1 data the desk already uses, as IBKR's documentation was
 reported by a web search on 2026-10-08 — if the tag reads ERROR with an
 entitlement message, that report was wrong for this account.
 
+**After an update, restart the desk.** The page reads its files from disk on
+every load; the desk's Python only at start. A desk left running after
+`bash scripts/update.sh` serves the new page against old code — no tape, parts
+of the card missing — and since 2026-10-08 the page says so in red: **RESTART
+THE DESK**. Ctrl+C in its terminal, then start it the usual way.
+
+The Five Pillars check lists every name the desk is holding; names **down on
+the day** fold into one red line under it ("red on the day — not
+candidates"). Click one to read it; the selected name always keeps its row.
+
 **A red banner at the top** names what blinds the desk: a competing login
 (10197 — your live TWS, IBKR Mobile or Client Portal on the same username took
 the market data), names dropped for want of a data permission (AMEX), or the
