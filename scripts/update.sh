@@ -15,7 +15,7 @@ warn() { printf '  %swarn%s %s\n' "$Y" "$O" "$*"; }
 bad()  { printf '  %sxx%s   %s\n' "$R" "$O" "$*"; }
 note() { printf '       %s%s%s\n' "$D" "$*" "$O"; }
 
-BRANCH="${1:-claude/ross-trading-mastery-setup-q4cz29}"
+BRANCH="${1:-claude/playbook-pullback-explanation-tg5c33}"   # the working branch (CLAUDE.md, "Git")
 printf '\n%sUpdating the desk%s  %s%s%s\n\n' "$B" "$O" "$D" "$BRANCH" "$O"
 
 if ! git rev-parse --git-dir >/dev/null 2>&1; then
