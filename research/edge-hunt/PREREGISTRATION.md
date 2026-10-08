@@ -868,3 +868,19 @@ split- and dividend-adjusted back from today, so the $10 floor reads an adjusted
 later forward splitter (NVDA reads $0.79 in 2016) is excluded early and a later reverse
 splitter included early — a lookahead that removes winners and adds losers, stated, not
 corrected. Reported, deciding nothing: trades in names whose bars end before 2026-08.
+
+**Outcome 2026-10-08 — F9 fails** (`research/paper-exercise/reports/daily_momentum_output.txt`).
+Holdout 2024-01 → 2026-08-20: 218 trades, gross −0.108, **net −0.174 R a trade** (lower bound
+−0.364), 33 % winners, negative in all three years (−0.093 / −0.160 / −0.295); the same-day
+random entries made +0.091 (trade − random lower bound −0.443). Train 2017-01 → 2022: 455 trades,
+net −0.504, random +0.117. Costs are not the cause: the holdout is negative gross, and
+costs are 0.066 R a trade, a sixth of the 1-minute bot's 0.387. **Data defect found after
+the run and measured, not corrected** (`daily_momentum_check_output.txt`, deciding nothing):
+the feed stitches some acquired tickers to a successor and adjusts some spin-offs the wrong
+way (NVS 401.34 → 71.67 on 2019-04-09). Two train trades (BHVN, CCXI) carry −160.6 R that
+never happened. Without the 9 trades whose holding window holds an overnight jump > 50 %,
+train is −0.174; the holdout has none, so the verdict stands. Also measured, deciding
+nothing: every signal with no position cap reads holdout +0.132 gross / +0.063 net. The
+126-day ranking takes the worst slice (+200 % runners: −0.169 gross on the holdout).
+Correction to the data note: corporate actions are populated from 2020, and the delisted
+names they add end mostly in 2022 or later. Nothing is built.

@@ -1,0 +1,22 @@
+F9 · addendum 2026-10-08 · 3830 symbols kept · 2414 sessions 2017-01-12 → 2026-08-20
+universe: close ≥ $10, 50-day $ volume ≥ $20M · signal: 252-day closing high, close > SMA50 > SMA200 · R = 3 ATR(20) · ≤ 10 positions · costs IBKR Fixed + 0.05%/side
+
+  train 2016-2022    n   455 · gross -0.441 · net -0.504 R (lb -0.976) · win 37% · held 22 d median · total -229.5 R (-38.2/yr)
+                     random same day +0.117 · trade − random lb -1.092 · costs 0.15 %/side -0.525
+  2023               n    73 · gross -0.055 · net -0.128 R (lb -0.433) · win 33% · held 23 d median · total -9.4 R (-9.4/yr)
+                     random same day +0.100 · trade − random lb -0.533 · costs 0.15 %/side -0.163
+  holdout 2024-2026  n   218 · gross -0.108 · net -0.174 R (lb -0.364) · win 33% · held 16 d median · total -38.0 R (-12.7/yr)
+                     random same day +0.091 · trade − random lb -0.443 · costs 0.15 %/side -0.195
+    2024             n    77 · gross -0.031 · net -0.093 R (lb -0.363) · win 35% · held 18 d median · total -7.2 R (-7.2/yr)
+                     random same day +0.029 · trade − random lb -0.378 · costs 0.15 %/side -0.110
+    2025             n    80 · gross -0.084 · net -0.160 R (lb -0.593) · win 29% · held 15 d median · total -12.8 R (-12.8/yr)
+                     random same day +0.025 · trade − random lb -0.569 · costs 0.15 %/side -0.193
+    2026             n    61 · gross -0.239 · net -0.295 R (lb -0.462) · win 36% · held 14 d median · total -18.0 R (-18.0/yr)
+                     random same day +0.258 · trade − random lb -0.728 · costs 0.15 %/side -0.306
+  trades still open at the data's end (closed at the last close): 54
+  trades in names whose bars end before 2026-08 (delisted or acquired): 150 · net +0.117 R · symbols ending early 826 of 3830
+
+SPY buy-and-hold (context): train +114.3% · 2023 +25.5% · holdout +67.1%
+strategy at $40 a trade on a $2,000 account, ignoring the notional cap: train -458.9% · holdout -76.0% (simple, not compounded)
+
+DECISION: ✗ holdout net > 0 · ✗ holdout lb > 0 · ✓ ≥ 200 holdout trades · ✗ 2 of 3 years · ✗ beats random (lb > 0) · ✗ train net > 0  → FAIL

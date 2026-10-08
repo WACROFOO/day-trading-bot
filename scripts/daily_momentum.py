@@ -298,7 +298,7 @@ def run() -> int:
            f"{np.mean([t['net'] > 0 for t in ts]):.0%} · held {np.median([t['days'] for t in ts]):.0f} d median · "
            f"total {sum(t['net'] for t in ts):+.1f} R ({sum(t['net'] for t in ts) / max(1, yrs):+.1f}/yr)")
         pr(f"  {'':<18} random same day {rnd:+.3f} · trade − random lb {lbd:+.3f} · costs 0.15 %/side {hi:+.3f}")
-        return {"n": len(ts), "net": n_, "lb": lb, "lbd": lbd}
+        return {"n": len(ts), "net": float(n_), "lb": float(lb), "lbd": float(lbd)}
 
     tr = [t for t in trades if t["day"] < TRAIN_END]
     g23 = [t for t in trades if t["day"][:4] == "2023"]
@@ -326,13 +326,15 @@ def run() -> int:
     pr(f"strategy at $40 a trade on a $2,000 account, ignoring the notional cap: train "
        f"{sum(t['net'] for t in tr) * RISK / 2000:+.1%} · holdout {sum(t['net'] for t in ho) * RISK / 2000:+.1%} (simple, not compounded)")
     yrs_pos = sum(1 for y in ("2024", "2025", "2026") if np.mean([t["net"] for t in ho if t["day"][:4] == y] or [-1]) > 0)
-    checks = {"holdout net > 0": s_ho.get("net", -1) > 0, "holdout lb > 0": s_ho.get("lb", -1) > 0,
-              "≥ 200 holdout trades": s_ho.get("n", 0) >= 200, "2 of 3 years": yrs_pos >= 2,
-              "beats random (lb > 0)": s_ho.get("lbd", -1) > 0, "train net > 0": s_tr.get("net", -1) > 0}
+    checks = {"holdout net > 0": bool(s_ho.get("net", -1) > 0), "holdout lb > 0": bool(s_ho.get("lb", -1) > 0),
+              "≥ 200 holdout trades": bool(s_ho.get("n", 0) >= 200), "2 of 3 years": bool(yrs_pos >= 2),
+              "beats random (lb > 0)": bool(s_ho.get("lbd", -1) > 0), "train net > 0": bool(s_tr.get("net", -1) > 0)}
     pr("\nDECISION: " + " · ".join(f"{'✓' if v else '✗'} {k}" for k, v in checks.items()) +
        ("  → PASS: design a paper implementation, preregistered separately" if all(checks.values()) else "  → FAIL"))
     OUT.write_text("\n".join(lines) + "\n")
-    (OUT.with_suffix(".json")).write_text(json.dumps({"checks": checks, "train": s_tr, "holdout": s_ho}, indent=1))
+    keep = ("sym", "day", "entry_d", "exit_d", "gross", "net", "days", "open_at_end", "rnd_net")
+    (OUT.with_suffix(".json")).write_text(json.dumps({"checks": checks, "train": s_tr, "holdout": s_ho, "trades": [
+        {k: (float(t[k]) if isinstance(t[k], (np.floating, float)) else t[k]) for k in keep} for t in trades]}, indent=1))
     return 0
 
 
