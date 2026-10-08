@@ -599,4 +599,13 @@ def test_a_desk_running_older_code_than_its_page_says_restart(desk_server):
         pg.route("**/api/v1/health", old_desk)
         pg.wait_for_timeout(5600)
         assert "RESTART THE DESK" in pg.text_content("#deskAlerts")
+        # the banner adds a row; it never takes the desk's (owner's screenshot:
+        # the whole desk collapsed under it, the charts a strip at the bottom)
+        banner = pg.locator("#deskAlerts").bounding_box()
+        grid = pg.locator("#grid").bounding_box()
+        chart = pg.locator("[data-card=chart-1m]").bounding_box()
+        assert banner["height"] < 120, banner
+        assert abs(grid["y"] - (banner["y"] + banner["height"])) < 4, "the desk starts right under the banner"
+        assert grid["height"] > 600 and chart["height"] > 250, (grid, chart)
+        assert pg.evaluate("document.body.scrollHeight <= window.innerHeight + 2")
         browser.close()

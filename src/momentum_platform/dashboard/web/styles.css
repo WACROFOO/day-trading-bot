@@ -32,7 +32,14 @@ button,select,input{font:inherit;color:inherit}
 kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--line);
   border-bottom-width:2px;border-radius:3px;padding:1px 4px;margin-right:2px;color:var(--ink-dim)}
 :focus-visible{outline:2px solid var(--focus);outline-offset:1px;border-radius:4px}
-.shell{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+/* Named areas, not positions (owner's screenshot, 2026-10-08): with three
+   rows for four children, a visible alert banner took the desk's 1fr row and
+   the whole desk collapsed under it. Each part is pinned to its own row; a
+   hidden banner's row is empty and takes no height. */
+.shell{height:100vh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;
+  grid-template-areas:"top" "alerts" "main" "status"}
+.shell>.topbar{grid-area:top} .shell>.desk-alerts{grid-area:alerts}
+.shell>.grid{grid-area:main} .shell>.statusbar{grid-area:status}
 
 /* ── top bar ─────────────────────────────────────────────────────────── */
 /* One slim row: every pixel above the charts is a pixel the charts lose. */
