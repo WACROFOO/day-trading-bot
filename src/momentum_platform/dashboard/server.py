@@ -293,6 +293,11 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
         build_at_start = app_build()
     except OSError:
         build_at_start = None
+    # The commit too: a change to the desk's Python leaves the page's hash as
+    # it was. scripts/day.py compares it with the checkout and names a stale
+    # desk to a second launch, with the command that restarts it.
+    from .. import desk_profile as _dp
+    code_at_start = _dp.build_commit()
     if screener is None and getattr(holder, "screener", None) is not None:
         screener = holder.screener
     hub = getattr(holder, "hub", None)              # IBKR desk: server-sent events
@@ -382,6 +387,7 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                     payload["desk"] = desk_profile.fingerprint()
                 payload["role"] = role
                 payload["appBuildAtStart"] = build_at_start
+                payload["codeAtStart"] = code_at_start
                 return self._json(payload)
             if path == "/api/v1/stream":
                 if hub is None:

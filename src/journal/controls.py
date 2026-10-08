@@ -22,12 +22,14 @@ DEFINITIONS, stated after the 2026-09-21 external review asked for them
               decision bar whose HIGH touches it (`actuals.compute`). A plan
               the tape never touched is not in any series ("untriggered").
   "close"     `actuals.c_close` = the close of the LAST bar the desk recorded
-              for that symbol on the decision's ET date. The desk stops
-              writing bars when `scripts/day.py` ends at the 11:30 ET hard
-              stop, so in a normal session this is the 11:30 cutoff, NOT the
-              16:00 market close. If the desk was stopped earlier or ran
-              later, it is that moment instead; the report prints the last
-              bar time so the reader can tell.
+              for that symbol on the decision's ET date. The day's desk stops
+              writing at 11:31:30 ET — the 11:30 hard stop plus the runner's
+              90-s flatten, when `scripts/day.py` used to stop it; since
+              2026-10-08 it stays up after that and writes nothing
+              (DESK_RECORD_UNTIL) — so in a normal session this is the
+              hard-stop cutoff, NOT the 16:00 market close. If the desk
+              stopped earlier, it is that moment instead; the report prints
+              the last bar time so the reader can tell.
   hold_close  keeps NO stop. It is exposure from the trigger to the cutoff
               with nothing in between. So the +6.3 R against the strategy's
               +0.46 R in the 2026-09-21 pack is the effect of removing the

@@ -1202,6 +1202,21 @@ one: Level 2 history does not exist in any source available, and the only
 prints (the F3 trade subset) were turned into 10-second bars
 (`research/edge-hunt/PREREGISTRATION.md`, data table).
 
+**The desk at any hour (2026-10-08) — no rule moves; the recorded window is
+pinned.** The owner asked for the platform whenever the day command runs. The
+runner keeps its window, unchanged. The desk now comes up before 06:55, after
+the hard stop and on closed days, so what reaches the ledger is no longer
+bounded by when `scripts/day.py` stopped the desk; it is bounded by
+`DESK_RECORD_UNTIL`. The day's desk writes until 11:31:30 ET — the hard stop
+plus the runner's 90-s flatten, the moment the command used to stop it
+(between 11:31:30 and about 11:31:45, by the loop's 15-s step) — and a desk
+outside the bot's day writes nothing: no decision, bar, quote, board row, halt
+or 5-minute state. "close" in every control series (`src/journal/controls.py`)
+is therefore the last bar written by 11:31:30, as before to within those 15
+seconds, and the day is settled a minute later on a ledger nothing writes to.
+The owner's calls and stated risk are saved at any hour; the runner reads
+neither.
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**

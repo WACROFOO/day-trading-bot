@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """One command for the trading day. Ross's morning, automated.
 
-    python3 scripts/day.py            # do whatever this moment of the day needs
-    python3 scripts/day.py --dry-run  # say what it would do, touch nothing
+    python3 scripts/day.py                 # do whatever this moment of the day needs
+    python3 scripts/day.py --dry-run       # say what it would do, touch nothing
+    python3 scripts/day.py --restart-desk  # the running desk, again, on the code on disk
 
 His sequence is scan → watch → setup → trade → review, and the pieces
 already exist as separate tools. This file only puts them in order and
@@ -19,6 +20,11 @@ reads the clock:
   after 11:30     actuals from the ledger's own bars, replay check, controls,
                   the day's report written to research/paper-exercise/reports/,
                   sessions_done += 1.
+  any other time  the desk alone (owner, 2026-10-08: the platform whenever the
+                  command runs): after the day, before 06:55, on closed days.
+                  No runner, and the desk writes nothing to the exercise
+                  ledger. It stays up until Ctrl-C; at the next trading day's
+                  06:55 this same run pulls the branch and starts that day.
 
 What this file does NOT do, on purpose:
   - log in to TWS or the Gateway (2FA; a human does that, once, before 06:55)
@@ -53,7 +59,11 @@ from momentum_platform.sessions import REGULAR_START  # noqa: E402
 PREMARKET_OPEN = datetime.strptime("06:55", "%H:%M").time()
 REPORTS = ROOT / "research" / "paper-exercise" / "reports"
 DB = Path(os.environ.get("JOURNAL_DB") or L.DEFAULT_DB)
-PROBE_ONCE = ROOT / "data" / "probe-orders.once"    # touch it the evening before; consumed at start
+PROBE_ONCE = ROOT / "data" / "probe-orders.once"    # touch it the evening before; consumed when a day starts
+# The desk outside the bot's day (owner, 2026-10-08). The bot's window is unchanged.
+RUNNER_FLATTEN_S = 90          # the runner's hard-stop flatten, given before it is stopped
+RECORD_SETTLE_S = 60           # a desk build begun before its recording cutoff has ended inside this
+FORCED_PORT = (os.environ.get("IBKR_PORT") or "").strip()   # as launched; a detected port is not carried over
 
 DIM, BOLD, OK, BAD, WARN, END = "\033[2m", "\033[1m", "\033[92m", "\033[91m", "\033[93m", "\033[0m"
 
@@ -402,14 +412,24 @@ def ibkr_port(env: dict | None = None) -> tuple[str, str]:
     return IBKR_PORTS[0], "nothing listening; default"
 
 
-def start_desk(symbols: list[str], dry: bool):
+def start_desk(symbols: list[str], dry: bool, record_until: Optional[str] = None):
+    """The desk, on IBKR. `record_until` is when it stops writing to the
+    exercise ledger (DESK_RECORD_UNTIL): an ISO instant for the bot's day,
+    "0" for the desk alone, None for no cutoff (a rehearsal, stopped with it)."""
     cmd = [sys.executable, "-m", "momentum_platform.dashboard.server", "--host", "127.0.0.1",
            "--port", os.environ.get("DESK_PORT", "8787"), "--ibkr", ",".join(symbols),
            "--ibkr-required"]
     note("desk: " + " ".join(cmd))
+    if record_until == "0":
+        note("desk: writes nothing to the exercise ledger (DESK_RECORD_UNTIL=0)")
+    elif record_until:
+        note(f"desk: writes to the exercise ledger until {datetime.fromisoformat(record_until):%H:%M:%S} ET")
     if dry:
         return None
     env = {**os.environ, "JOURNAL_DB": str(DB), "PYTHONPATH": str(ROOT / "src")}
+    env.pop("DESK_RECORD_UNTIL", None)
+    if record_until is not None:
+        env["DESK_RECORD_UNTIL"] = record_until
     return subprocess.Popen(cmd, cwd=ROOT, env=env)
 
 
@@ -436,6 +456,11 @@ def desk_is_on_ibkr(proc, timeout_s: int = 420) -> bool:
                 # "ok ... (feed OFFLINE)" was printed on 2026-09-21: an ok beside
                 # the word OFFLINE. The desk is up; the feed is a separate fact.
                 (good if state == "LIVE" else warn)(f"desk is up on IBKR — feed {state}")
+                rec = h.get("provider", {}).get("recordUntil")
+                if rec is not None and rec.startswith("1970"):
+                    note("it writes nothing to the exercise ledger — your calls and your risk are saved")
+                elif rec is not None:
+                    note(f"it writes to the exercise ledger until {datetime.fromisoformat(rec):%H:%M:%S} ET")
                 return True
         except Exception:                                 # noqa: BLE001
             pass
@@ -535,9 +560,25 @@ def after_close(conn, today: str, dry: bool) -> None:
                 note(f"  - {b}")
         else:
             warn(f"phase {st['phase']} → {nxt} gates are ALL clear — run: python3 scripts/exercise.py advance")
-    # The daily learning loop (owner, 2026-10-06): the day's ledger and log go to the
-    # repo; the cloud review reads them after the close and writes the day's review.
-    # A failure here never touches the trading day — it is said, with the command.
+    export_day(conn, today)
+
+
+def _settle(conn, day: str, dry: bool) -> None:
+    """The after-close block, where a desk goes on after it: a failure is said
+    with its command and never takes the platform down (the next start settles
+    a day it finds ungraded)."""
+    try:
+        after_close(conn, day, dry)
+    except Exception as exc:                          # noqa: BLE001
+        bad(f"the after-close block failed ({exc!r}) — settle by hand: python3 scripts/day.py --settle {day}")
+
+
+def export_day(conn, day: str) -> None:
+    """The daily learning loop (owner, 2026-10-06): the day's ledger and log go to
+    the repo; the cloud review reads them after the close and writes the day's
+    review. A failure here never touches the trading day — it is said, with the
+    command."""
+    hand = f"python3 scripts/day_export.py --day {day} --push"
     try:
         import day_export
         db_file = conn.execute("PRAGMA database_list").fetchone()[2] or ""
@@ -546,15 +587,15 @@ def after_close(conn, today: str, dry: bool) -> None:
             # (2026-10-06: the suite pushed four fixture days before this guard).
             note("daily export skipped: not the day's ledger")
             return
-        meta = day_export.export(conn, today, day_export.OUT_ROOT / today)
-        good(f"export: research/daily/{today} · " + " · ".join(f"{k} {v}" for k, v in meta["counts"].items()))
+        meta = day_export.export(conn, day, day_export.OUT_ROOT / day)
+        good(f"export: research/daily/{day} · " + " · ".join(f"{k} {v}" for k, v in meta["counts"].items()))
         if os.environ.get("DAY_EXPORT_PUSH", "1") == "1":
-            if day_export.push(today):
+            if day_export.push(day):
                 good("export pushed for the daily review")
             else:
-                warn("export NOT pushed — run by hand: python3 scripts/day_export.py --push")
+                warn(f"export NOT pushed — run by hand: {hand}")
     except Exception as exc:                          # noqa: BLE001
-        warn(f"daily export failed ({exc!r}) — run by hand: python3 scripts/day_export.py --push")
+        warn(f"daily export failed ({exc!r}) — run by hand: {hand}")
 
 
 def _backfill(day: str) -> Optional[int]:
@@ -614,8 +655,22 @@ def day_lock(path: Path = DAY_LOCK):
     the newcomer — and the running desk's socket dropped ("socket dropped",
     four connect failures, reconnect gen 2 in its health log). A second copy
     is not merely refused, it can knock the live one offline. So the second
-    copy must never reach the Gateway at all."""
+    copy must never reach the Gateway at all.
+
+    A run that starts the next trading day in place (`rollover`) hands its
+    held descriptor across the exec in DAY_LOCK_FD: the lock is never let go,
+    so the 06:55 scheduled start cannot slip in between."""
     import fcntl
+    inherited = os.environ.pop("DAY_LOCK_FD", None)
+    if inherited:
+        try:
+            fd = os.fdopen(int(inherited), "a+")
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)      # already ours: the same open file
+            os.set_inheritable(fd.fileno(), False)
+            fd.seek(0); fd.truncate(); fd.write(str(os.getpid())); fd.flush()
+            return fd, None
+        except (OSError, ValueError):
+            pass
     fd = open(path, "a+")
     try:
         fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -626,6 +681,357 @@ def day_lock(path: Path = DAY_LOCK):
         return None, pid
     fd.seek(0); fd.truncate(); fd.write(str(os.getpid())); fd.flush()
     return fd, None
+
+
+# ------------------------------------------------- the platform at any hour
+# Owner, 2026-10-08: "make the platform available whenever I launch the
+# command; don't limit it to the window." The desk comes up at any hour and on
+# closed days and stays up until Ctrl-C. The BOT keeps its window: the runner
+# runs 06:55-11:30 ET as before, and a desk outside that window writes nothing
+# to the exercise ledger, so the report, the replay check and settle measure
+# exactly what they measured when the desk stopped with the runner.
+
+RESTART_MARK = Path(str(DB) + ".desk.restart")
+
+
+def desk_url() -> str:
+    return f"http://127.0.0.1:{os.environ.get('DESK_PORT', '8787')}/"
+
+
+def record_until(day) -> str:
+    """When the day's desk stops writing to the exercise ledger: the hard stop
+    plus the runner's flatten, the moment this command used to stop the desk
+    together with the runner. "close" in every control series is the last bar
+    the desk wrote (journal/controls.py), so it keeps the meaning it had."""
+    return (datetime.combine(day, HARD_STOP, tzinfo=ET) + timedelta(seconds=RUNNER_FLATTEN_S)).isoformat()
+
+
+def next_day_start(now: datetime) -> datetime:
+    """The first 06:55 ET of a trading day strictly after `now`."""
+    d = now.date()
+    for _ in range(15):                    # bounded: a calendar that closes every day must not hang
+        start = datetime.combine(d, PREMARKET_OPEN, tzinfo=ET)
+        if start > now and not why_closed(d):
+            return start
+        d += timedelta(days=1)
+    return datetime.combine(now.date() + timedelta(days=1), PREMARKET_OPEN, tzinfo=ET)
+
+
+def desk_only_symbols(conn, args) -> list[str]:
+    """Names for the desk outside the bot's day: --symbols, else the last board
+    the day's desk recorded, else none (the desk's own scanner picks)."""
+    if args.symbols:
+        return [s.strip().upper() for s in args.symbols.split(",") if s.strip()]
+    try:
+        rows = conn.execute("SELECT DISTINCT symbol FROM board_snapshots WHERE ts_et = "
+                            "(SELECT MAX(ts_et) FROM board_snapshots) ORDER BY symbol").fetchall()
+    except Exception:                                 # noqa: BLE001 — a ledger from before the table
+        rows = []
+    return [r[0] for r in rows]
+
+
+def desk_health(timeout: float = 3.0) -> Optional[dict]:
+    import urllib.request
+    try:
+        with urllib.request.urlopen(desk_url() + "api/v1/health", timeout=timeout) as r:
+            return json.loads(r.read().decode())
+    except Exception:                                 # noqa: BLE001
+        return None
+
+
+def _git(*a: str) -> subprocess.CompletedProcess:
+    return subprocess.run(["git", "-C", str(ROOT), *a], capture_output=True, text=True, timeout=120)
+
+
+def desk_staleness(h: dict) -> Optional[str]:
+    """Why the running desk is on older code than this checkout, or None.
+
+    The page's files are read from disk on every load; the desk's Python is
+    what it started on (2026-10-08: an updated page on an old desk showed no
+    tape and no news). `codeAtStart` is the commit the desk started on."""
+    code = h.get("codeAtStart")
+    if not code:
+        return "it started before this check existed"
+    why = []
+    try:
+        from momentum_platform.dashboard.server import app_build
+        page = app_build()
+    except Exception:                                 # noqa: BLE001
+        page = None
+    if page and h.get("appBuildAtStart") and h["appBuildAtStart"] != page:
+        why.append(f"page {h['appBuildAtStart']}, now {page}")
+    try:
+        head = _git("rev-parse", "--short", "HEAD").stdout.strip()
+        if head and head != code and _git("diff", "--quiet", code, head, "--", "src").returncode == 1:
+            why.append(f"src/ changed since {code} (now {head})")
+    except Exception:                                 # noqa: BLE001
+        pass
+    return "; ".join(why) or None
+
+
+def open_page(url: str, args) -> None:
+    """The page in the browser, for a run started by hand — never for the
+    scheduled one (no terminal), and not with --no-open."""
+    if getattr(args, "no_open", False) or not sys.stdout.isatty():
+        return
+    try:
+        import webbrowser
+        webbrowser.open(url)
+    except Exception:                                 # noqa: BLE001
+        pass
+
+
+def report_running(other: str, args) -> int:
+    """A second launch while a day runs. Nothing starts — a second desk on
+    client 27 knocks the first one offline (2026-09-21) — but the platform is
+    one link away, and a desk on older code is named, with its fix."""
+    warn(f"a trading day is already running on this ledger (day.py pid {other}) — "
+         f"nothing started, nothing touched")
+    url = desk_url()
+    h = desk_health()
+    if h is None:
+        note(f"its desk does not answer at {url} yet — starting, or waiting for the Gateway")
+    else:
+        good(f"the platform is up: {url}  (feed {(h.get('provider') or {}).get('state', '?')})")
+        why = desk_staleness(h)
+        if why:
+            warn(f"that desk runs older code than this checkout — {why}")
+            note("restart it on this code (the bot keeps running):  python3 scripts/day.py --restart-desk")
+        open_page(url, args)
+    note("it is most likely the 06:55 launchd job. Watch it with:")
+    note("  tail -f ~/Library/Logs/day-trading-bot/day.out.log")
+    note("to stop it deliberately:  kill -INT " + other)
+    return 0
+
+
+def find_desk_pids(run=subprocess.run) -> list[int]:
+    """The desk this command started on DESK_PORT — by its command line, so
+    a day.py from before this function is found too."""
+    port = os.environ.get("DESK_PORT", "8787")
+    try:
+        out = run(["pgrep", "-f", f"momentum_platform.dashboard.server --host 127.0.0.1 --port {port} "],
+                  capture_output=True, text=True, timeout=10).stdout
+    except Exception:                                 # noqa: BLE001 — no pgrep
+        return []
+    return [int(x) for x in out.split() if x.isdigit() and int(x) != os.getpid()]
+
+
+def restart_desk(kill=os.kill, find=find_desk_pids, health=desk_health, sleep=time.sleep,
+                 wait_s: float = 420.0) -> int:
+    """--restart-desk: stop the running desk; the day.py that started it starts
+    it again on the code now on disk. The runner is its own process and is not
+    touched. Refused when no day.py runs, since nothing would start it again."""
+    held, other = day_lock(DAY_LOCK)
+    if held is not None:
+        held.close()
+        warn("no trading day is running on this ledger — nothing to restart. Bring the platform up with:")
+        note("  python3 scripts/day.py")
+        return 1
+    pids = find()
+    if not pids:
+        warn(f"day.py pid {other} runs, but no desk of it answers on {desk_url()} — "
+             "it may be between restarts; watch its log")
+        return 1
+    RESTART_MARK.write_text(datetime.now(timezone.utc).isoformat())
+    for pid in pids:
+        kill(pid, signal.SIGINT)
+    good(f"desk pid {' '.join(map(str, pids))} stopped — day.py pid {other} starts it again on this "
+         f"checkout's code; the runner keeps running")
+    head = _git("rev-parse", "--short", "HEAD").stdout.strip()
+    deadline = time.monotonic() + wait_s
+    try:
+        while time.monotonic() < deadline:
+            sleep(5)
+            h = health()
+            if h is not None and "codeAtStart" in h and (not head or h["codeAtStart"] == head):
+                good(f"the desk is back on {h['codeAtStart'] or 'this checkout'}: {desk_url()} — reload the page")
+                return 0
+    except KeyboardInterrupt:
+        return 0
+    warn(f"the desk is not back after {wait_s / 60:.0f} min — watch the day's log")
+    return 1
+
+
+def restart_asked(max_age_s: float = 300.0) -> bool:
+    """A --restart-desk in the last five minutes, consumed. The desk's exit is
+    then a restart, not an outage: not counted, no Gateway warning."""
+    try:
+        age = time.time() - RESTART_MARK.stat().st_mtime
+        RESTART_MARK.unlink()
+    except OSError:
+        return False
+    return age <= max_age_s
+
+
+def _nap(seconds: float) -> None:
+    """Sleep, waking within a second of a Ctrl-C."""
+    end = time.monotonic() + seconds
+    while not STOP["requested"] and time.monotonic() < end:
+        time.sleep(min(1.0, max(0.0, end - time.monotonic())))
+
+
+def _stop_proc(p) -> None:
+    if p is None:
+        return
+    if p.poll() is None:
+        p.send_signal(signal.SIGINT)
+    try:
+        p.wait(timeout=30)
+    except subprocess.TimeoutExpired:
+        p.kill()
+
+
+def _gateway_up(until: datetime) -> bool:
+    """The desk alone waits for an IBKR API port with no time limit: the next
+    trading day's start or Ctrl-C ends the wait. True once one answers."""
+    host = os.environ.get("IBKR_HOST", "127.0.0.1")
+    told = False
+    while not STOP["requested"] and datetime.now(ET) < until:
+        if not FORCED_PORT:
+            os.environ.pop("IBKR_PORT", None)
+        port, _how = ibkr_port()
+        if wait_for_gateway(host, port, 0):
+            return True
+        if not told:
+            warn(f"no IBKR API port answers (tried {port}) — the desk starts when the Gateway does "
+                 f"(paper account, TWS logged out)")
+            told = True
+        _nap(15)
+    return False
+
+
+def _calls_mark(conn, day: Optional[str]) -> Optional[int]:
+    """The newest of your calls of `day` (manual_decisions is append-only)."""
+    if not day:
+        return None
+    try:
+        return conn.execute("SELECT COALESCE(MAX(id), 0) FROM manual_decisions WHERE substr(ts_et,1,10)=?",
+                            (day,)).fetchone()[0]
+    except Exception:                                 # noqa: BLE001 — a ledger from before the table
+        return None
+
+
+def _export_late_calls(conn, day: Optional[str], mark: Optional[int]) -> None:
+    """Calls you log after the day's export (about 11:32 ET) go out too: the
+    day is exported again when the desk-only run ends."""
+    if mark is None or _calls_mark(conn, day) == mark:
+        return
+    note(f"you logged calls on {day} after its export — exporting the day again")
+    export_day(conn, day)
+
+
+def pull_code(run=subprocess.run, sleep=time.sleep, tries: int = 6) -> bool:
+    """What the scheduled job does before each day (scripts/install_daily.sh):
+    pull the branch, and run what is on disk when the pull fails. A run that
+    lives across days does it before each rollover, so a morning still starts
+    on that morning's code."""
+    branch = run(["git", "-C", str(ROOT), "rev-parse", "--abbrev-ref", "HEAD"],
+                 capture_output=True, text=True).stdout.strip()
+    for i in range(tries):
+        r = run(["git", "-C", str(ROOT), "pull", "-q", "origin", branch], capture_output=True, text=True,
+                timeout=120)
+        if r.returncode == 0:
+            good(f"pulled {branch}")
+            return True
+        if i + 1 < tries:
+            sleep(10)
+    warn("pull failed — running what is on disk")
+    return False
+
+
+def rollover(args, execv=None, pull=pull_code) -> int:
+    """Start the next trading day in this same process, on the code now on
+    disk. The lock goes across the exec as an inherited descriptor; the flags
+    of this launch (--symbols, --early, --probe-orders) do not."""
+    held = getattr(args, "_day_lock", None)
+    if held is None:
+        return 0
+    say(f"\n{BOLD}Next trading day{END} — starting it in this same run")
+    pull()
+    os.set_inheritable(held.fileno(), True)
+    os.environ["DAY_LOCK_FD"] = str(held.fileno())
+    if not FORCED_PORT:
+        os.environ.pop("IBKR_PORT", None)
+    argv = [sys.executable, str(Path(__file__).resolve()), "--no-open"]
+    sys.stdout.flush(); sys.stderr.flush()
+    try:
+        (execv or os.execv)(sys.executable, argv)
+    except OSError as exc:
+        bad(f"could not start the next day ({exc}) — run: python3 scripts/day.py")
+        return 1
+    return 0                                          # reached only with a test's execv
+
+
+def desk_only(args, conn, why: str, desk=None, symbols: Optional[list] = None,
+              day: Optional[str] = None) -> int:
+    """The desk alone, until the next trading day's 06:55 ET or Ctrl-C.
+
+    No runner, and the desk writes nothing to the exercise ledger
+    (DESK_RECORD_UNTIL=0); your calls and your risk are saved as at any other
+    time. `desk` is the day's own desk when the day just ended: it carries on,
+    past its recording cutoff, and is replaced only if it exits. At the next
+    trading day's start this same run starts that day, holding the lock
+    throughout, so an evening launch never costs the morning its start."""
+    until = next_day_start(datetime.now(ET))
+    say(f"\n{BOLD}Desk only{END}  ({why}) — the bot does not trade; nothing goes into the exercise ledger")
+    note(f"until {until:%a %d %b %H:%M} ET, when this run starts that trading day · Ctrl-C stops it")
+    if symbols is None:
+        symbols = desk_only_symbols(conn, args)
+    fresh = desk is None or desk.poll() is not None
+    if fresh:
+        if not args.dry_run:
+            port, how = ibkr_port()                   # the desk reads IBKR_PORT; 7496 when unset
+            note(f"IBKR data port {port} ({how})")
+        desk = start_desk(symbols, args.dry_run, record_until="0")
+        if desk is None:                              # a dry run, or a test's stub
+            if args.dry_run:
+                say(f"\n{DIM}dry run — nothing started{END}")
+            return 0
+    cur = {"desk": desk}
+    STOP["requested"] = False
+
+    def stop(*_):
+        STOP["requested"] = True
+        p = cur["desk"]
+        if p and p.poll() is None:
+            p.send_signal(signal.SIGINT)
+    signal.signal(signal.SIGINT, stop); signal.signal(signal.SIGTERM, stop)
+    if not fresh or desk_is_on_ibkr(desk):
+        good(f"the platform: {desk_url()}")
+        if fresh:
+            open_page(desk_url(), args)
+    elif not STOP["requested"]:
+        warn(f"the desk is not on IBKR yet — it is started again once the Gateway answers ({desk_url()})")
+    calls = _calls_mark(conn, day)
+    started, deaths = time.monotonic(), 0
+    while True:
+        if STOP["requested"]:
+            _stop_proc(cur["desk"])
+            _export_late_calls(conn, day, calls)
+            say("stopped by Ctrl-C — the platform is down; the same command brings it back")
+            return 0
+        if datetime.now(ET) >= until:
+            _stop_proc(cur["desk"])
+            _export_late_calls(conn, day, calls)
+            return rollover(args)
+        p = cur["desk"]
+        if p.poll() is not None:
+            if restart_asked():
+                deaths = 0
+            else:
+                # Not in a tight loop: a desk that keeps dying waits 1, 2, 4 ... 15 min.
+                deaths = deaths + 1 if time.monotonic() - started < 600 else 1
+                wait = min(900, 30 * 2 ** deaths)
+                warn(f"desk exited with {p.returncode} — starting it again in {wait // 60} min, "
+                     f"once the Gateway answers")
+                _nap(wait)
+            if _gateway_up(until):
+                cur["desk"] = start_desk(symbols, False, record_until="0")
+                started = time.monotonic()
+                if desk_is_on_ibkr(cur["desk"]):
+                    good(f"the platform is back: {desk_url()}")
+            continue
+        _nap(15)
 
 
 def main(argv=None) -> int:
@@ -648,24 +1054,18 @@ def main(argv=None) -> int:
     ap.add_argument("--rehearsal", type=int, metavar="MINUTES", default=0,
                     help="closed-market rehearsal: start the desk and the runner (forced LOG_ONLY) "
                          "for this many minutes, then stop. Not counted as a session; no probes.")
+    ap.add_argument("--restart-desk", action="store_true",
+                    help="stop the running day's desk so that day starts it again on the code now on "
+                         "disk (after scripts/update.sh); the runner is not touched")
+    ap.add_argument("--no-open", action="store_true", help="do not open the page in the browser")
     args = ap.parse_args(argv)
+    if args.restart_desk:
+        return restart_desk()
     if not args.dry_run and not args.settle:
-        held, other = day_lock()
+        held, other = day_lock(DAY_LOCK)
         if held is None:
-            warn(f"a trading day is already running on this ledger (day.py pid {other}) — "
-                 f"nothing started, nothing touched")
-            note("it is most likely the 06:55 launchd job. Watch it with:")
-            note("  tail -f ~/Library/Logs/day-trading-bot/day.out.log")
-            note("to stop it deliberately:  kill -INT " + other)
-            return 0
+            return report_running(other, args)
         args._day_lock = held           # held for the life of this process
-    # The scheduled day cannot take a flag. A file the owner creates the
-    # evening before stands in for --probe-orders, once: it is consumed here
-    # so the probe cannot run on a day nobody asked for it.
-    if not args.probe_orders and PROBE_ONCE.exists():
-        args.probe_orders = True
-        PROBE_ONCE.unlink()
-        note(f"stop probe: ON for today — {PROBE_ONCE.name} found and removed")
 
     now = datetime.now(ET)
     today = now.date().isoformat()
@@ -697,22 +1097,33 @@ def main(argv=None) -> int:
         mode = "LOG_ONLY"
         warn(f"REHEARSAL for {args.rehearsal} min — {closed or 'market open'} · forced LOG_ONLY · not a session")
     elif closed:
-        warn(f"{closed} — the market is closed; nothing to do")
+        warn(f"{closed} — the market is closed; the bot does not run today")
         note("2026-09-07 taught this: the chain ran all morning on Labor Day, feed STALE, nothing said why.")
-        return 0
+        return desk_only(args, conn, f"{closed}")
     if not args.rehearsal and now.time() >= HARD_STOP:
-        after_close(conn, today, args.dry_run); return 0
+        _settle(conn, today, args.dry_run)
+        return desk_only(args, conn, "after the bot's day", day=today)
     if not args.rehearsal and now.time() < PREMARKET_OPEN and not args.early:
         # One login only (docs/day-runbook.md): the paper GATEWAY is up, TWS
         # stays logged out. The old text said "start TWS and the Gateway",
         # which is the 10197 competing-session trap this desk moved away from.
-        warn(f"before {PREMARKET_OPEN:%H:%M} ET — Gateway up on paper, TWS logged out; "
-             f"run this again at {PREMARKET_OPEN:%H:%M}, or pass --early to start now"); return 0
+        warn(f"before {PREMARKET_OPEN:%H:%M} ET — Gateway up on paper, TWS logged out; the day starts at "
+             f"{PREMARKET_OPEN:%H:%M} in this same run, or pass --early to start now")
+        return desk_only(args, conn, "before the day")
     if args.early and now.time() < PREMARKET_OPEN:
         _ph = L.get_state(conn).get("phase", "A")
         warn(f"starting early at {now:%H:%M} ET — the tape before 07:00 is thin, entries before 07:00 are refused "
              f"(session window){' and phase ' + _ph + ' refuses pre-market entries anyway' if _ph != 'C' else ''}, "
              f"and the {PREMARKET_OPEN:%H:%M} scheduled start will be refused by the lock")
+
+    # The scheduled day cannot take a flag. A file the owner creates the
+    # evening before stands in for --probe-orders, once: it is consumed here,
+    # when a day starts, so the probe cannot run on a day nobody asked for it
+    # (and an evening launch of the desk alone does not use it up).
+    if not args.probe_orders and not args.rehearsal and PROBE_ONCE.exists():
+        args.probe_orders = True
+        PROBE_ONCE.unlink()
+        note(f"stop probe: ON for today — {PROBE_ONCE.name} found and removed")
 
     say(f"\n{BOLD}1. Watchlist{END}  (gap scan — STAR then WATCH; rejects named)")
     rows: list[dict] = []          # the gap scan's rows; empty when --symbols bypasses it
@@ -775,7 +1186,10 @@ def main(argv=None) -> int:
     say(f"\n{BOLD}3. Desk + runner{END}")
     port, how = ibkr_port()
     note(f"IBKR data port {port} ({how}) · ledger {DB}")
-    desk = start_desk(symbols, args.dry_run)
+    # The day's desk writes to the exercise ledger until the moment the day
+    # used to stop it; it stays up after that (owner, 2026-10-08).
+    rec_until = None if args.rehearsal else record_until(now.date())
+    desk = start_desk(symbols, args.dry_run, record_until=rec_until)
     if not args.dry_run and not desk_is_on_ibkr(desk):
         bad("the desk did not come up on IBKR — stopping the day")
         note(f"Gateway logged in on the paper account? API enabled on port {port}? "
@@ -785,7 +1199,7 @@ def main(argv=None) -> int:
             desk.send_signal(signal.SIGINT)
         return 1
     runner = start_runner(mode, risk, args.dry_run, *([account] if account else []))
-    keep_awake(args.dry_run)
+    awake = keep_awake(args.dry_run)
     if args.dry_run:
         say(f"\n{DIM}dry run — nothing started{END}"); return 0
 
@@ -804,7 +1218,9 @@ def main(argv=None) -> int:
 
     deadline = (datetime.now(ET) + timedelta(minutes=args.rehearsal)) if args.rehearsal else None
     say(f"{DIM}running until {deadline:%H:%M} ET (rehearsal); Ctrl-C stops both{END}" if deadline
-        else f"{DIM}running until {HARD_STOP:%H:%M} ET; Ctrl-C stops both{END}")
+        else f"{DIM}the bot runs until {HARD_STOP:%H:%M} ET, the desk after it too; Ctrl-C stops both{END}")
+    good(f"the platform: {desk_url()}")
+    open_page(desk_url(), args)
     from execution.intent import PREMARKET_START
     while (datetime.now(ET) < deadline) if deadline else (datetime.now(ET).time() < HARD_STOP):
         if STOP["requested"]:
@@ -825,17 +1241,20 @@ def main(argv=None) -> int:
             # exited and the day ended with it, blind until a human restarted it
             # 50 minutes later. The recorder is restarted once the Gateway's port
             # answers again; the runner keeps managing any open position meanwhile.
-            desk_restarts += 1
-            if desk_restarts > DESK_RESTARTS_MAX:
-                bad(f"desk exited {desk_restarts} times — stopping the day"); stop(); return 1
-            warn(f"desk exited with {desk.returncode} — waiting for the Gateway, then restarting "
-                 f"({desk_restarts}/{DESK_RESTARTS_MAX}); the runner keeps watching any open position")
+            if restart_asked():
+                note("desk restarting on the code now on disk (--restart-desk); the runner keeps running")
+            else:
+                desk_restarts += 1
+                if desk_restarts > DESK_RESTARTS_MAX:
+                    bad(f"desk exited {desk_restarts} times — stopping the day"); stop(); return 1
+                warn(f"desk exited with {desk.returncode} — waiting for the Gateway, then restarting "
+                     f"({desk_restarts}/{DESK_RESTARTS_MAX}); the runner keeps watching any open position")
             port, how = ibkr_port()
             if not wait_for_gateway(os.environ.get("IBKR_HOST", "127.0.0.1"), port, GATEWAY_WAIT_S):
                 bad(f"the Gateway on port {port} did not come back within {GATEWAY_WAIT_S // 60} min — stopping the day")
                 note("if the Gateway shows the paper-trading disclaimer, click it, then run this command again")
                 stop(); return 1
-            desk = start_desk(symbols, False)
+            desk = start_desk(symbols, False, record_until=rec_until)
             if not desk_is_on_ibkr(desk):
                 bad("the desk did not come back up on IBKR — stopping the day"); stop(); return 1
             continue
@@ -862,14 +1281,21 @@ def main(argv=None) -> int:
         note("not counted as a session")
         return 0
     # give the runner its hard-stop flatten (TRADE mode) before closing it
-    time.sleep(90)
-    stop()
-    for p in (runner, desk):
-        if p:
-            try: p.wait(timeout=30)
-            except subprocess.TimeoutExpired: p.kill()
-    after_close(conn, today, False)
-    return 0
+    time.sleep(RUNNER_FLATTEN_S)
+    _stop_proc(runner)
+    if awake is not None:
+        awake.terminate()               # the bot's day is over; the desk alone does not hold the Mac awake
+    # The desk stays up (owner, 2026-10-08) and stopped writing to the ledger
+    # at `rec_until`; a build begun just before that ends within
+    # RECORD_SETTLE_S. The day is settled on a ledger nothing writes to.
+    settle_at = datetime.fromisoformat(rec_until) + timedelta(seconds=RECORD_SETTLE_S)
+    while datetime.now(ET) < settle_at and not STOP["requested"]:
+        time.sleep(5)
+    _settle(conn, today, False)
+    if STOP["requested"]:               # Ctrl-C after the hard stop: settled, and everything stops
+        _stop_proc(desk)
+        return 0
+    return desk_only(args, conn, "after the bot's day", desk=desk, symbols=symbols, day=today)
 
 
 if __name__ == "__main__":

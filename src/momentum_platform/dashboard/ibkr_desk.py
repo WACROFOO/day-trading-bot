@@ -203,6 +203,20 @@ class IbkrDesk:
         self._next_tape = 0.0
         self._tape_sent = -1
         self.log: Callable[[str], None] = lambda m: print(m, flush=True)
+        # The exercise's window (owner, 2026-10-08): scripts/day.py keeps the
+        # desk up outside the bot's day and says, in DESK_RECORD_UNTIL, when
+        # this desk stops writing to the ledger. Your calls and your risk are
+        # not the exercise's: they are saved at any hour.
+        self.record_until, why = _record_until(os.environ.get("DESK_RECORD_UNTIL"))
+        if why:
+            self.log(f"  DESK_RECORD_UNTIL: {why}")
+
+    def recording(self) -> bool:
+        """Does this desk write to the exercise ledger now? Always, for a desk
+        started by hand; until DESK_RECORD_UNTIL, for one scripts/day.py
+        started."""
+        until = getattr(self, "record_until", None)
+        return until is None or self.clock() < until
 
     # -- lifecycle --------------------------------------------------------------
 
@@ -658,7 +672,13 @@ class IbkrDesk:
         failure here is logged once and never raised — losing research data
         must not take the desk down (2026-09-15: one unknown symbol did
         exactly that).
+
+        Past the recording window a candle is neither kept nor read for the
+        green run; what was buffered before it is written at once.
         """
+        if not self.recording():
+            self._flush_10s()
+            return
         self._buf10s.append(bar)
         pending = getattr(self, "_green_pending", None)
         if pending is not None:
@@ -1116,7 +1136,8 @@ class IbkrDesk:
             records, session_id="ibkr-" + "-".join(self.symbols[:3]),
             source_name="IBKR · TWS read-only · live", data_status=status,
             volume_floor_scale=1.0, trading_date=self.session_day(),
-            journal=_journal(), journal_since=getattr(self, "_started", None), timings=timings)
+            journal=_journal(), journal_since=getattr(self, "_started", None), timings=timings,
+            record=self.recording())
         ph["build"] = timings.get("build", time.perf_counter() - tb)
         ph["journal"] = timings.get("journal", 0.0)
         tp = time.perf_counter()
@@ -1300,6 +1321,9 @@ class IbkrDesk:
         d["competingSince"] = cs.isoformat() if cs is not None else None
         tape = getattr(self, "tape", None)
         d["tape"] = tape.status() if tape is not None else None
+        until = getattr(self, "record_until", None)
+        d["recordUntil"] = until.isoformat() if until is not None else None
+        d["recording"] = self.recording()
         return d
 
     def add_symbols(self, symbols) -> list:
@@ -1379,6 +1403,30 @@ def _num(v):
 
 # ---------------------------------------------------------------- journal
 _JOURNAL = None
+NEVER = datetime(1970, 1, 1, tzinfo=UTC)
+
+
+def _record_until(text) -> "tuple[Optional[datetime], Optional[str]]":
+    """DESK_RECORD_UNTIL as the instant this desk stops writing to the
+    exercise ledger, with a line to log when the value needs one.
+
+    unset or empty  -> None: writes for as long as it runs (a desk by hand)
+    "0"             -> the epoch: writes nothing (scripts/day.py, outside the day)
+    ISO with offset -> that instant (scripts/day.py, the bot's day)
+    anything else   -> the epoch, said: a value nobody can read must not let
+                       an after-hours desk into the ledger"""
+    text = (text or "").strip()
+    if not text:
+        return None, None
+    if text == "0":
+        return NEVER, "0 — this desk writes nothing to the exercise ledger"
+    try:
+        until = datetime.fromisoformat(text)
+    except ValueError:
+        until = None
+    if until is None or until.tzinfo is None:
+        return NEVER, f"{text!r} not understood (need an ISO time with its offset) — writing NOTHING"
+    return until, None
 
 
 def _journal():

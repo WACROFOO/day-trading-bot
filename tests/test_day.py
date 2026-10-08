@@ -255,7 +255,7 @@ def test_rehearsal_runs_on_a_closed_market_forced_log_only_and_is_not_a_session(
         def poll(self): return None
         def send_signal(self, *_): pass
         def wait(self, timeout=None): pass
-    monkeypatch.setattr(d, "start_desk", lambda syms, dry: started.append(("desk", syms)) or P())
+    monkeypatch.setattr(d, "start_desk", lambda syms, dry, record_until="unset": started.append(("desk", syms, record_until)) or P())
     monkeypatch.setattr(d, "desk_is_on_ibkr", lambda proc, timeout_s=150: True)
     monkeypatch.setattr(d, "start_runner", lambda mode, risk, dry: started.append(("runner", mode)) or P())
     # the loop must terminate: make the deadline already past on the second look
@@ -267,7 +267,7 @@ def test_rehearsal_runs_on_a_closed_market_forced_log_only_and_is_not_a_session(
     monkeypatch.setattr(FrozenDT, "now", classmethod(lambda cls, tz=None: ticking(tz)))
     rc = d.main(["--rehearsal", "1", "--symbols", "AAPL"])
     assert rc == 0
-    assert ("desk", ["AAPL"]) in started
+    assert ("desk", ["AAPL"], None) in started, "a rehearsal's desk has no cutoff: it stops with the rehearsal"
     assert ("runner", "LOG_ONLY") in started
     assert L.get_state(L.connect(tmp_path / "j.sqlite"))["sessions_done"] == 0
 
@@ -301,23 +301,33 @@ def test_settle_counts_the_named_day_not_the_wall_clock_day(journal, tmp_path, m
 def test_the_probe_once_file_stands_in_for_the_flag_and_is_consumed(tmp_path, monkeypatch):
     """The scheduled day takes no flags. `data/probe-orders.once`, created the
     evening before, turns the stop probe on for that one start and is removed
-    so it cannot fire again on a day nobody asked for."""
-    import subprocess
+    so it cannot fire again on a day nobody asked for. Since 2026-10-08 the
+    command also runs the desk alone (closed days, evenings): such a launch
+    leaves the file for the day that runs."""
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
     flag = tmp_path / "probe-orders.once"
     flag.write_text("")
     monkeypatch.setattr(day, "PROBE_ONCE", flag)
-    # --dry-run on a closed calendar day: argument handling runs, nothing else does.
-    monkeypatch.setattr(day, "why_closed", lambda d: "test holiday")
     monkeypatch.setattr(day, "DB", tmp_path / "j.sqlite")
     seen = []
     monkeypatch.setattr(day, "note", lambda m: seen.append(m))
-    rc = day.main(["--dry-run"])
-    assert rc == 0
-    assert not flag.exists(), "the file is consumed at start"
+    # a closed day: the desk alone — the file waits
+    monkeypatch.setattr(day, "why_closed", lambda d: "test holiday")
+    assert day.main(["--dry-run"]) == 0
+    assert flag.exists() and not any("stop probe: ON for today" in m for m in seen), seen
+    # a trading day at 07:30 ET, dry: the day starts and uses it up
+    frozen = datetime(2026, 10, 8, 7, 30, tzinfo=ZoneInfo("America/New_York"))
+
+    class FrozenDT(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return frozen if tz else frozen.replace(tzinfo=None)
+    monkeypatch.setattr(day, "datetime", FrozenDT)
+    monkeypatch.setattr(day, "why_closed", lambda d: None)
+    assert day.main(["--dry-run", "--symbols", "AAPL"]) == 0
+    assert not flag.exists(), "the file is consumed when the day starts"
     assert any("stop probe: ON for today" in m for m in seen), seen
-    rc = day.main(["--dry-run"])
-    assert not any("stop probe: ON for today" in m for m in seen[len(seen) - 1:]) or True
-    assert not flag.exists()
 
 
 def test_a_second_day_on_the_same_ledger_is_refused_before_it_reaches_the_gateway(tmp_path):

@@ -13,9 +13,10 @@ the morning command measures this and blocks real orders until it reads
 ## Is the market open?
 
 The command checks the NYSE calendar (`src/momentum_platform/holidays.py`)
-and refuses to start on a weekend or holiday, naming which. 7 September
+and does not run the bot on a weekend or holiday, naming which. 7 September
 2026 was Labor Day; the chain ran all morning on a stale feed before this
-check existed.
+check existed. Since 2026-10-08 it brings up the desk alone on those days
+(see "Any hour — the platform" below).
 
 ## One login, one tape (the design since 8 September)
 
@@ -66,17 +67,60 @@ What it does, in Ross's order (`scripts/day.py`):
 |---|---|---|
 | 1 | gap scan → watchlist: STAR then WATCH, rejects named; its finviz floats are handed to the desk so Layer 0 and Layer 1 agree on float | `scripts/premarket_stars.py` → the daily float file under `data/` |
 | 2 | two probes, once per day: is the paper account on the live tape (`scripts/alignment_probe.py`, single-login mode); does a pre-market stop hold (`scripts/premarket_probe.py`, at 07:00 ET). Both verdicts recorded | `exercise_state` |
-| 3 | desk starts on the watchlist, journaling every rebuild | `JOURNAL_DB` → `src/journal/ledger.py` |
+| 3 | desk starts on the watchlist, journaling every rebuild until 11:31:30 ET | `JOURNAL_DB` → `src/journal/ledger.py` · `DESK_RECORD_UNTIL` |
 | 4 | runner starts in the phase's mode (A = log only) | `docs/preregistration.md` §3 |
-| 5 | hard stop 11:30: runner flattens (TRADE mode) | `PARAMETERS.md` §2 · `src/execution/intent.py` |
+| 5 | hard stop 11:30: runner flattens (TRADE mode) and is stopped 90 s later; the desk stays up | `PARAMETERS.md` §2 · `src/execution/intent.py` |
 | 6 | actuals, replay check, controls, report, sessions_done += 1 | one file per day in `research/paper-exercise/reports/` |
 
 Leave it running. `Ctrl-C` stops both processes cleanly. Missed the
-morning? Run the same command after 11:30 and it does step 6 only.
+morning? Run the same command after 11:30: it does step 6, then brings up
+the desk.
 
 Browser desk: `http://127.0.0.1:8787`. The bottom-right verdict is the
 server's cascade word; a killed name reads `suppressed · KILLED` on the
 Entry line, never `ARMED`.
+
+## Any hour — the platform (since 2026-10-08)
+
+The same command brings the desk up at any hour, closed days included, and it
+stays up until Ctrl-C. Only the desk: **the bot keeps its window**.
+
+| when you run it | what happens |
+|---|---|
+| a trading day, 06:55–11:30 ET | the day above; at 11:30 the runner flattens and is stopped 90 s later, the day is settled, and the desk carries on |
+| after 11:30 | step 6 for the day, then the desk |
+| before 06:55 | the desk now; the day starts at 06:55 in the same run (`--early` still starts the day at once) |
+| weekend or NYSE holiday | the desk, the closure named, no bot |
+| while a day already runs | nothing new starts — a second desk on client 27 knocks the first offline (2026-09-21). It prints the desk's link (and opens it, from a terminal) and says when that desk runs older code than the checkout, with the command below |
+
+A desk outside the bot's day:
+
+- **writes nothing to the exercise ledger** — no decision, bar, quote, board
+  row, halt or 5-minute state (`DESK_RECORD_UNTIL=0`). The day's own desk
+  writes until **11:31:30 ET**, the hard stop plus the runner's 90-s flatten:
+  the moment this command used to stop it. The report, the replay check and
+  settle therefore measure what they measured before, and "close" in the
+  control series keeps its meaning (`src/journal/controls.py`). The day is
+  settled a minute after that, on a ledger nothing writes to;
+- **saves your calls and your risk at any hour**. Calls logged after the day's
+  export (about 11:32 ET) are exported again for that day when the desk-only
+  run ends, at Ctrl-C or at the next morning's start;
+- **does not keep the Mac awake** — the caffeinate hold ends with the bot's
+  day. A desk that drops (sleep, the Gateway's restart) is started again once
+  the Gateway answers; if it keeps failing, 1, 2, 4 … up to 15 min apart;
+- **hands over to the next trading day by itself** at 06:55 ET in the same
+  run: the desk stops, the branch is pulled as the scheduled job does, and the
+  day starts on that code with the lock held throughout — the scheduled 06:55
+  job finds the lock and steps aside. Flags from your launch (`--symbols`,
+  `--early`, `--probe-orders`) apply to that launch only, and
+  `data/probe-orders.once` waits for the day that runs.
+
+**After an update:** `bash scripts/update.sh`, then
+`python3 scripts/day.py --restart-desk`. It stops the running desk; the day
+that started it starts it again on the new code — the runner is not touched —
+and the command waits until the desk answers on the new commit. A day started
+before this existed restarts its desk the same way. With no day running it
+says so: run `python3 scripts/day.py`.
 
 ## Reading the desk (since 2026-10-08)
 
@@ -138,7 +182,8 @@ entitlement message, that report was wrong for this account.
 every load; the desk's Python only at start. A desk left running after
 `bash scripts/update.sh` serves the new page against old code — no tape, parts
 of the card missing — and since 2026-10-08 the page says so in red: **RESTART
-THE DESK**. Ctrl+C in its terminal, then start it the usual way.
+THE DESK**. `python3 scripts/day.py --restart-desk` restarts it without
+stopping the bot (above, "Any hour").
 
 The Five Pillars check lists every name the desk is holding; names **down on
 the day** fold into one red line under it ("red on the day — not
@@ -179,7 +224,8 @@ reconstructed — the fixture's header says so.
 | `python3 scripts/exercise.py missed --day 2026-09-24` (KILLED PLANS BY GATE) | since 2026-09-24 evening: every Layer 1 kill scored per window, price split at $2 and $20, the sub-$2 cohort split by the penny-theme flag read from the ledger's gap-scan rows; a third exit column BE+2R (breakeven after +1 R, fixed target) beside fixed and trail everywhere |
 | `Error 10089` / `Error 420 … No market data permissions for AMEX STK` | the account has no real-time data permission for NYSE American (AMEX) names; the desk drops the name (APUS, 2026-09-25) and, since that evening, never re-subscribes it. Nothing to do unless you want AMEX names on the desk, in which case add the NYSE American real-time subscription in IBKR Account Management → Market Data Subscriptions; NASDAQ names are unaffected |
 | `minute history: 3 refreshes in a row timed out … paused for 5 min` | IBKR's history farm is not answering; the desk stops asking for five minutes so the decisions keep flowing on the live bars. Nothing to do |
-| Ctrl-C | ends the day (since 2026-09-25 evening the desk is not restarted after it); the day is settled at the next start. Before 06:55 the day command now waits up to 20 min for the Gateway's API port instead of failing |
+| Ctrl-C | ends the day (since 2026-09-25 evening the desk is not restarted after it); the day is settled at the next start. After 11:30 it stops the desk alone: nothing is left to settle. Once the day has started, the command waits up to 20 min for the Gateway's API port instead of failing |
+| `python3 scripts/day.py --restart-desk` | after `bash scripts/update.sh` while a day or the desk alone runs: that run's desk restarts on the new code; the runner is not touched (2026-10-08) |
 | `python3 scripts/backtest_history.py --sample 300` then without `--sample` | the desk's own rules over the 25,716 gapper-days 2016–2026 WITH pre-market volume (Alpaca SIP, the headline keys in `.env`), net of costs, per year and per window, a walk-forward optimizer, and `--ledger data/journal.sqlite` for forecast vs actuals on your live trades. Runs on the Mac; the cloud side has no feed with pre-market volume |
 | the desk dies mid-morning | since 2026-09-24 evening `day.py` waits for the Gateway port (up to 20 min) and restarts the desk itself, up to five times; the runner keeps managing any open position. If the Gateway shows the paper-trading disclaimer, click it |
 | `IBKR_PORT=4002 python3 scripts/day.py --probe-orders` | the only way the day command runs the pre-market stop probe, which places and cancels an unfillable paper bracket. Off by default: an observational day dispatches nothing order-shaped |
@@ -194,8 +240,11 @@ reconstructed — the fixture's header says so.
 ### Watching a day the agent started
 
 Nothing appears in a terminal: the day runs in the background. Its lock
-refuses a second `day.py` ("a trading day is already running … pid N"), and
-`kill -INT N` is the only clean way to stop it early.
+refuses a second `day.py` ("a trading day is already running … pid N") — since
+2026-10-08 that answer gives the desk's link and names a desk on older code —
+and `kill -INT N` is the only clean way to stop it early. The agent's run no
+longer ends at 11:32: the desk stays up and the run starts the next trading
+day itself.
 
 | to see | run (in the repo, any terminal) |
 |---|---|

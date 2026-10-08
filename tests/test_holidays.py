@@ -25,9 +25,11 @@ def test_early_closes_are_1300():
     assert cal.regular_end(date(2026, 11, 30)) == time(16, 0)
 
 
-def test_the_day_command_names_the_closure_and_starts_nothing(tmp_path, monkeypatch):
+def test_the_day_command_names_the_closure_and_never_starts_the_bot(tmp_path, monkeypatch, capsys):
     """Frozen to 2026-09-07 07:30 ET. On the real day the chain ran all
-    morning on a stale feed and nothing said why."""
+    morning on a stale feed and nothing said why. Since 2026-10-08 the desk
+    comes up on a closed day too (the owner's platform at any hour), alone:
+    no runner, and it writes nothing to the exercise ledger."""
     src = (ROOT / "scripts/day.py").read_text()
     assert "why_closed(now.date())" in src
     # exercise the branch directly
@@ -43,8 +45,11 @@ def test_the_day_command_names_the_closure_and_starts_nothing(tmp_path, monkeypa
             return frozen if tz else frozen.replace(tzinfo=None)
     monkeypatch.setattr(day, "datetime", FrozenDT)
     monkeypatch.setattr(day, "DB", tmp_path / "j.sqlite")
+    monkeypatch.setattr(day, "DAY_LOCK", tmp_path / "j.sqlite.day.lock")
+    monkeypatch.setenv("IBKR_PORT", "4002")             # no port probing from a test
     started = []
-    monkeypatch.setattr(day, "start_desk", lambda *a, **k: started.append("desk"))
+    monkeypatch.setattr(day, "start_desk", lambda *a, **k: started.append(("desk", k.get("record_until"))))
     monkeypatch.setattr(day, "start_runner", lambda *a, **k: started.append("runner"))
     assert day.main([]) == 0
-    assert started == []
+    assert started == [("desk", "0")], "the desk alone, writing nothing; never the runner"
+    assert "NYSE holiday — the market is closed; the bot does not run today" in capsys.readouterr().out

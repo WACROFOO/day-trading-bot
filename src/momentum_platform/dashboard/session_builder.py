@@ -167,6 +167,7 @@ def build_session_from_records(
     journal=None,
     journal_since=None,
     timings: dict | None = None,
+    record: bool = True,
 ) -> dict:
     """Build the dashboard session.
 
@@ -187,11 +188,18 @@ def build_session_from_records(
     full live session showed: two names up 35-75% on 80x relative volume, and
     zero alerts all day. Relative-volume gates are unaffected: both sides of
     those ratios come from the same venue.
+
+    `record=False` writes nothing to the exercise — no decision, halt, board,
+    bar, quote or 5-minute state — and still reads `journal` for the cards
+    (your risk, your calls, the bot's view). scripts/day.py keeps the desk up
+    outside the bot's day (owner, 2026-10-08) and that desk must not add to
+    the ledger the day's report, replay and settle measure.
     """
     """Build a session from normalized records. Replay fixtures and live
     provider pulls both land here, so the scanner behaviour is identical."""
 
     _t0, _jt = _time.perf_counter(), 0.0
+    writer = journal if record else None      # every exercise write goes through this
     symbols: dict[str, dict] = {}
     news_queue: list[dict] = []
     halt_queue: list[dict] = []
@@ -372,9 +380,9 @@ def build_session_from_records(
             hot.set_halt(rec["symbol"], rec["status"])
             previous = halt_state.get(rec["symbol"], "trading")
             halt_state[rec["symbol"]] = rec["status"]
-            if previous != rec["status"] and journal is not None:
+            if previous != rec["status"] and writer is not None:
                 _hs = hot.symbols.get(rec["symbol"])
-                _journal_halt(journal, rec, _hs.snapshot.last if _hs else None)
+                _journal_halt(writer, rec, _hs.snapshot.last if _hs else None)
             if previous != rec["status"]:
                 # Halt transitions come from an official status source and are
                 # never suppressed by cooldown or consolidation.
@@ -419,9 +427,9 @@ def build_session_from_records(
                                          chart=_cg)
                 _res = evaluate_cascade(_inputs) if _meta else None
                 allowed = bool(_res and _res.plan_allowed)
-                if journal is not None and _res is not None:
+                if writer is not None and _res is not None:
                     _tj = _time.perf_counter()
-                    _journal_decision(journal, rec, bar, plan, _res, _inputs, _snap,
+                    _journal_decision(writer, rec, bar, plan, _res, _inputs, _snap,
                                       _meta, session_id, source_name, data_status, journal_since,
                                       chart={"last": bar.close, "vwap": _cg.get("vwap"),
                                              "ema9": _cg.get("ema9"), "macd_hist": _cg.get("macd_hist"),
@@ -496,9 +504,9 @@ def build_session_from_records(
         previous = halt_state.get(rec["symbol"], "trading")
         halt_state[rec["symbol"]] = rec["status"]
         if previous != rec["status"]:
-            if journal is not None:
+            if writer is not None:
                 _hs = hot.symbols.get(rec["symbol"])
-                _journal_halt(journal, rec, _hs.snapshot.last if _hs else None)
+                _journal_halt(writer, rec, _hs.snapshot.last if _hs else None)
             if frames:
                 frames[-1]["halts"] = dict(halt_state)
                 frames[-1]["alerts"].append({
@@ -511,8 +519,8 @@ def build_session_from_records(
                                  "passed": True, "evidence": "confirmed"}],
                     "values": {"last": _num(hot.get(rec["symbol"]).snapshot.last, 4)},
                 })
-    if journal is not None:
-        journal.commit()
+    if writer is not None:
+        writer.commit()
 
     # Every desk name carries its own numbers. The Five Pillars board used to
     # scavenge them out of whatever ranked list a symbol happened to reach, so
@@ -581,28 +589,28 @@ def build_session_from_records(
     # EXTENDED, or names the first-5-minute-candle-to-make-a-new-high trigger.
     # Display only — E1 failed its preregistered test (addendum 2026-10-06b) —
     # and logged once per state, live states only, for scripts/watch.py.
-    five_minute_by_symbol = _five_minute_states(symbols, bars_by_symbol, frames, data_status, journal,
+    five_minute_by_symbol = _five_minute_states(symbols, bars_by_symbol, frames, data_status, writer,
                                                 journal_since)
 
     _tj = _time.perf_counter()
-    if journal is not None and frames:
+    if writer is not None and frames:
         # R1, the denominator: every symbol on the board with its verdict,
         # stamped with the last bar this build saw. On the live desk that is
         # now; on a replay it is the end of the fixture, and the row says so
         # through its timestamp rather than pretending to be mid-session.
-        _journal_board(journal, frames[-1]["ts"], session_id, symbols, cascade_by_symbol)
+        _journal_board(writer, frames[-1]["ts"], session_id, symbols, cascade_by_symbol)
         # The tape itself, and the latest quote per name. Bars let actuals run
         # on a real session with no fixture; quotes are the runner's NBBO at
         # fill time. Neither is a decision, so neither touches `decisions`.
-        _journal_tape(journal, bar_records, symbols)
-    if journal is not None:
+        _journal_tape(writer, bar_records, symbols)
+    if writer is not None:
         # COMMIT. The runner is a separate process reading this file; without
         # this, every write above stayed inside the desk's own connection and
         # the runner saw an empty ledger. The fixture tests never noticed
         # because they read through the same connection. Found by driving the
         # live desk with the fake broker and opening a second connection —
         # which is exactly what the runner does.
-        journal.commit()
+        writer.commit()
     _jt += _time.perf_counter() - _tj
     if timings is not None:
         timings["journal"] = round(_jt, 3)

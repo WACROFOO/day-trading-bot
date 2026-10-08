@@ -82,6 +82,7 @@ else
   warn "no .env found — run 'bash scripts/setup.sh' to add your keys"
 fi
 
-printf '\n%sStart the desk:%s  bash scripts/start.sh\n' "$B" "$O"
-printf '%sAlready running? Stop it (Ctrl+C) and start it again:%s the page loads the new files at\n' "$B" "$O"
-printf 'once, the desk runs its new code only after a restart (the page says RESTART THE DESK until then).\n\n'
+printf '\n%sThe platform:%s  IBKR_PORT=4002 python3 scripts/day.py   (any hour; Ctrl+C stops it)\n' "$B" "$O"
+printf '%sAlready running?%s  python3 scripts/day.py --restart-desk   (the desk restarts on the new\n' "$B" "$O"
+printf 'code, the bot keeps running). The page loads the new files at once; the desk runs its new\n'
+printf 'code only after a restart, and the page says RESTART THE DESK until then.\n\n'

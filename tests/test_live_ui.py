@@ -72,6 +72,16 @@ def test_health_carries_the_provider_block_and_streaming_flag(desk_server):
     assert h["provider"]["state"] in ("LIVE", "STALE")
 
 
+def test_health_names_the_code_the_desk_started_on_and_its_recording_window(desk_server):
+    """scripts/day.py reads both: a second launch names a desk on older code
+    (2026-10-08), and the day's start confirms what the desk will record."""
+    from momentum_platform import desk_profile
+    r, body = _get(desk_server["port"], "/api/v1/health")
+    h = json.loads(body)
+    assert h["codeAtStart"] == desk_profile.build_commit()
+    assert h["provider"]["recording"] is True and h["provider"]["recordUntil"] is None   # a desk by hand
+
+
 def test_stream_endpoint_replays_from_last_event_id(desk_server):
     desk, port = desk_server["desk"], desk_server["port"]
     ev = desk.hub.publish("health", {"state": "LIVE"})
