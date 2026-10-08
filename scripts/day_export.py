@@ -149,7 +149,13 @@ def push(day: str) -> bool:
     cmds = [["git", "add", rel], ["git", "commit", "-q", "-m", f"Daily export {day} (decisions, orders, bars, log)"],
             ["git", "pull", "-q", "--rebase", "--autostash", "origin", branch], ["git", "push", "-q", "origin", branch]]
     for c in cmds:
-        r = subprocess.run(c, cwd=ROOT, capture_output=True, text=True)
+        try:
+            # Bounded: since 2026-10-08 an export can run before the next day starts, and
+            # a git that hangs on the network must not hold the morning.
+            r = subprocess.run(c, cwd=ROOT, capture_output=True, text=True, timeout=120)
+        except subprocess.TimeoutExpired:
+            print(f"  {' '.join(c)} timed out after 120 s")
+            return False
         if r.returncode != 0 and not (c[1] == "commit" and "nothing to commit" in (r.stdout + r.stderr)):
             print(f"  {' '.join(c)} failed: {(r.stderr or r.stdout).strip()[:300]}")
             return False

@@ -33,6 +33,7 @@ from momentum_platform.dashboard.ibkr_desk import IbkrDesk, _record_until  # noq
 from test_live_chain import T0, pullback_minutes  # noqa: E402
 
 ET = ZoneInfo("America/New_York")
+AFTERNOON = datetime(2026, 10, 8, 14, 0, tzinfo=ET)          # a call logged after the day's export
 # Every table the desk writes for the exercise. Your calls (manual_decisions)
 # and your risk (desk_settings) are not on this list: they are saved at any hour.
 EXERCISE = ("decisions", "decision_revisions", "board_snapshots", "halts", "bars", "bars_10s",
@@ -40,9 +41,13 @@ EXERCISE = ("decisions", "decision_revisions", "board_snapshots", "halts", "bars
 
 
 @pytest.fixture(autouse=True)
-def _handlers():
-    """day.py installs SIGINT/SIGTERM handlers; give the suite its own back."""
+def _handlers(monkeypatch):
+    """day.py installs SIGINT/SIGTERM handlers; give the suite its own back.
+    And nothing here may open a browser tab or replace the test process."""
     old = signal.getsignal(signal.SIGINT), signal.getsignal(signal.SIGTERM)
+    monkeypatch.setattr(day, "open_page", lambda *a, **k: None)
+    monkeypatch.setattr(day.os, "execv", lambda *a: pytest.fail("os.execv in a test"))
+    day.STOP["requested"] = False
     yield
     signal.signal(signal.SIGINT, old[0]); signal.signal(signal.SIGTERM, old[1])
     day.STOP["requested"] = False
@@ -291,8 +296,9 @@ def test_restart_desk_needs_a_running_day_and_asks_its_desk_to_restart(tmp_path,
     held, _ = day.day_lock(tmp_path / "j.sqlite.day.lock")
     try:
         head = day._git("rev-parse", "--short", "HEAD").stdout.strip()
+        up = {"mode": "live", "streaming": True, "codeAtStart": head}
         rc = day.restart_desk(kill=lambda pid, sig: killed.append((pid, sig)), find=lambda: [4242],
-                              health=lambda: {"codeAtStart": head}, sleep=lambda s: None)
+                              health=lambda: up, sleep=lambda s: None, imports=lambda: None)
         assert rc == 0 and killed == [(4242, signal.SIGINT)]
         assert (tmp_path / "j.sqlite.desk.restart").exists(), "the day reads it: a restart, not an outage"
         assert "back on" in capsys.readouterr().out
@@ -348,10 +354,10 @@ def test_the_desk_alone_hands_over_to_the_next_day_and_ships_late_calls(tmp_path
                         started.append(record_until) or Proc())
     monkeypatch.setattr(day, "desk_is_on_ibkr", lambda p, timeout_s=420: True)
     monkeypatch.setattr(day, "export_day", lambda c, d: exported.append(d))
-    monkeypatch.setattr(day, "rollover", lambda args: rolled.append(True) or 7)
+    monkeypatch.setattr(day, "rollover", lambda args, before=None: before() or rolled.append(True) or 7)
 
     def nap(_s):                     # the afternoon: a call logged, then the night passes
-        L.record_manual(conn, "AAA", "closed", price=4.2); conn.commit()
+        L.record_manual(conn, "AAA", "closed", price=4.2, at=AFTERNOON); conn.commit()
         clock.t = datetime(2026, 10, 9, 6, 55, tzinfo=ET)
     monkeypatch.setattr(day, "_nap", nap)
     assert day.desk_only(_args(), conn, "after the bot's day", day="2026-10-08") == 7
@@ -432,39 +438,104 @@ def test_the_lock_crosses_the_exec_without_being_let_go(tmp_path, monkeypatch):
     fourth.close()
 
 
-def test_rollover_pulls_then_execs_this_script_with_the_lock(tmp_path, monkeypatch):
+def test_the_scheduled_job_rolls_over_in_place_with_the_lock(tmp_path, monkeypatch):
     held, _ = day.day_lock(tmp_path / "j.sqlite.day.lock")
     monkeypatch.setattr(day, "FORCED_PORT", "")
     monkeypatch.setenv("IBKR_PORT", "4002")              # detected yesterday, not forced
     monkeypatch.delenv("DAY_LOCK_FD", raising=False)
-    execs, pulls = [], []
+    execs, steps = [], []
+
+    def execv(path, argv):
+        execs.append((argv, os.environ.get("DAY_LOCK_FD"), os.get_inheritable(held.fileno()),
+                      os.environ.get("IBKR_PORT")))
     try:
-        rc = day.rollover(SimpleNamespace(_day_lock=held), execv=lambda path, argv: execs.append(argv),
-                          pull=lambda: pulls.append(True))
-        assert rc == 0 and pulls == [True]
-        argv = execs[0]
+        rc = day.rollover(SimpleNamespace(_day_lock=held), execv=execv, terminal=False,
+                          network=lambda: steps.append("network") or True,
+                          before=lambda: steps.append("late calls"), pull=lambda: steps.append("pull"))
+        assert rc == 0 and steps == ["network", "late calls", "pull"]
+        argv, fd, inheritable, port = execs[0]
         assert argv[1].endswith("scripts/day.py") and argv[2:] == ["--no-open"], "no --symbols, --early, --probe-orders"
-        assert os.environ["DAY_LOCK_FD"] == str(held.fileno()) and os.get_inheritable(held.fileno())
-        assert "IBKR_PORT" not in os.environ
+        assert fd == str(held.fileno()) and inheritable and port is None
+        assert "DAY_LOCK_FD" not in os.environ, "never left for another process to adopt"
     finally:
-        os.environ.pop("DAY_LOCK_FD", None)
         held.close()
 
 
-def test_the_morning_pull_runs_what_is_on_disk_when_it_fails():
+def test_a_terminal_run_starts_the_day_in_the_background_with_the_jobs_log(tmp_path, monkeypatch, capsys):
+    """Review 2026-10-08: rolled over in place, the day would run in the
+    terminal window — closing it (SIGHUP) would end the day mid-session, and
+    the daily export would find no line of the day in the job's log."""
+    held, _ = day.day_lock(tmp_path / "j.sqlite.day.lock")
+    monkeypatch.setattr(day, "LOG_DIR", tmp_path / "logs")
+    monkeypatch.delenv("DAY_LOCK_FD", raising=False)
+    spawned = []
+
+    def spawn(argv, **kw):
+        spawned.append((argv, kw, os.environ.get("DAY_LOCK_FD")))
+        return SimpleNamespace(pid=4242)
+    try:
+        rc = day.rollover(SimpleNamespace(_day_lock=held), spawn=spawn, terminal=True,
+                          network=lambda: True, pull=lambda: None)
+        assert rc == 0
+        argv, kw, fd = spawned[0]
+        assert argv[2:] == ["--no-open"] and fd == str(held.fileno())
+        assert kw["start_new_session"] is True and kw["pass_fds"] == (held.fileno(),)
+        assert kw["stdout"].name == str(tmp_path / "logs" / "day.out.log")
+        assert kw["stdin"] == day.subprocess.DEVNULL
+        out = capsys.readouterr().out
+        assert "pid 4242" in out and "kill -INT 4242" in out and "day.out.log" in out
+    finally:
+        held.close()
+
+
+def test_ctrl_c_during_the_morning_pull_starts_no_day(tmp_path, monkeypatch):
+    held, _ = day.day_lock(tmp_path / "j.sqlite.day.lock")
+
+    def pull():
+        day.STOP["requested"] = True                     # Ctrl-C while git works
+    try:
+        rc = day.rollover(SimpleNamespace(_day_lock=held), terminal=False, network=lambda: True, pull=pull,
+                          execv=lambda *a: pytest.fail("the day started after Ctrl-C"),
+                          spawn=lambda *a, **k: pytest.fail("the day started after Ctrl-C"))
+        assert rc == 0
+    finally:
+        held.close()
+
+
+def test_the_morning_pull_is_the_jobs_and_runs_what_is_on_disk_when_it_fails():
     calls = []
 
     def run(cmd, **kw):
-        calls.append(cmd)
+        calls.append((cmd, kw.get("timeout")))
         ok = cmd[3] == "rev-parse"
         return SimpleNamespace(returncode=0 if ok else 1, stdout="claude/branch\n" if ok else "")
-    assert day.pull_code(run=run, sleep=lambda s: None, tries=3) is False
-    assert [c[3] for c in calls] == ["rev-parse", "pull", "pull", "pull"]
-    assert calls[1][-2:] == ["origin", "claude/branch"]
+    assert day.pull_code(run=run) is False
+    assert [c[0][3] for c in calls] == ["rev-parse", "pull"], "once, as scripts/install_daily.sh does"
+    assert calls[1][0][-2:] == ["origin", "claude/branch"] and calls[1][1] == 120
+
+    def hangs(cmd, **kw):
+        raise day.subprocess.TimeoutExpired(cmd, kw.get("timeout"))
+    assert day.pull_code(run=hangs) is False
 
     def ok(cmd, **kw):
         return SimpleNamespace(returncode=0, stdout="claude/branch\n")
-    assert day.pull_code(run=ok, sleep=lambda s: None) is True
+    assert day.pull_code(run=ok) is True
+
+
+def test_the_network_wait_is_the_jobs_two_minutes_and_ends_on_ctrl_c(monkeypatch):
+    import socket
+    tries = []
+
+    def no_dns(*a, **k):
+        tries.append(1)
+        raise OSError("no DNS")
+    monkeypatch.setattr(socket, "getaddrinfo", no_dns)
+    naps = []
+    assert day.wait_for_network(nap=naps.append) is False
+    assert len(tries) == 12 and naps == [10] * 11
+    tries.clear()
+    day.STOP["requested"] = True
+    assert day.wait_for_network(nap=naps.append) is False and len(tries) == 1
 
 
 def _day_harness(monkeypatch, tmp_path, desk_polls=None, start=(11, 29)):
@@ -509,3 +580,140 @@ def test_a_restart_you_asked_for_is_not_counted_as_an_outage(tmp_path, monkeypat
     out = capsys.readouterr().out
     assert "desk restarting on the code now on disk" in out and "desk exited with" not in out
     assert len(desks) == 2 and desks[1].record_until == "2026-10-08T11:31:30-04:00", "same cutoff after a restart"
+
+
+def test_restart_desk_leaves_a_desk_that_is_still_coming_up_or_code_that_cannot_start(tmp_path, monkeypatch,
+                                                                                     capsys):
+    """Review 2026-10-08: a desk killed while it boots reads to the day as a
+    desk that failed to start — "stopping the day"; and a restart onto code
+    that cannot import leaves the day with no desk at all."""
+    monkeypatch.setattr(day, "DAY_LOCK", tmp_path / "j.sqlite.day.lock")
+    monkeypatch.setattr(day, "RESTART_MARK", tmp_path / "j.sqlite.desk.restart")
+    held, _ = day.day_lock(tmp_path / "j.sqlite.day.lock")
+    killed = []
+    try:
+        for booting in (None, {"mode": "live", "streaming": False}, {"mode": "replay", "streaming": True}):
+            assert day.restart_desk(kill=lambda *a: killed.append(a), find=lambda: [4242],
+                                    health=lambda: booting, imports=lambda: None) == 1
+        assert "not up yet" in capsys.readouterr().out
+        up = {"mode": "live", "streaming": True, "codeAtStart": "abc"}
+        assert day.restart_desk(kill=lambda *a: killed.append(a), find=lambda: [4242], health=lambda: up,
+                                imports=lambda: "SyntaxError: invalid syntax") == 1
+        assert "does not import (SyntaxError" in capsys.readouterr().out
+        assert killed == [] and not (tmp_path / "j.sqlite.desk.restart").exists()
+    finally:
+        held.close()
+
+
+def test_the_code_check_imports_the_desk_from_this_checkout():
+    assert day.code_imports() is None
+
+
+def test_the_desk_search_matches_day_py_desks_and_not_start_sh_ones(monkeypatch):
+    import re
+    seen = []
+
+    class Popen:
+        def __init__(self, cmd, cwd=None, env=None):
+            seen.append(" ".join(cmd))
+    monkeypatch.setattr(day.subprocess, "Popen", Popen)
+    monkeypatch.delenv("DESK_PORT", raising=False)
+    day.start_desk(["AAA", "BBB"], False)
+    day.start_desk([], False)                                   # the scanner picks: an empty --ibkr
+    pattern = re.compile(day.DESK_CMD_RE.format(port="8787"))
+    assert all(pattern.search(cmd) for cmd in seen), seen
+    start_sh = "python3 -m momentum_platform.dashboard.server --host 127.0.0.1 --port 8787 --ibkr AAA"
+    assert not pattern.search(start_sh)
+
+
+def test_a_restart_you_asked_for_that_fails_never_ends_the_day(tmp_path, monkeypatch, capsys):
+    """Review 2026-10-08: the day used to stop — runner included — when the
+    restarted desk did not come up. Now it is an outage like any other."""
+    _, desks, runner, handed = _day_harness(monkeypatch, tmp_path, desk_polls=[None, 0], start=(11, 20))
+    monkeypatch.setattr(day, "after_close", lambda conn, d, dry: None)
+    ups = iter([True, False, True])                       # first boot, the asked restart, the outage restart
+    monkeypatch.setattr(day, "desk_is_on_ibkr", lambda p, timeout_s=420: next(ups))
+    (tmp_path / "j.sqlite.desk.restart").write_text("x")
+    assert day.main(["--symbols", "AAA"]) == 0
+    out = capsys.readouterr().out
+    assert "handled as an outage" in out and "stopping the day" not in out
+    assert len(desks) == 3 and desks[1].signals == [signal.SIGINT]
+    assert runner.signals == [signal.SIGINT], "the runner is stopped once, at the end of its day"
+    assert handed and handed[0]["desk"] is desks[2]
+
+
+def test_the_backoff_never_runs_past_the_mornings_start(tmp_path, monkeypatch):
+    _at(monkeypatch, tmp_path, datetime(2026, 10, 9, 6, 50, tzinfo=ET))       # five minutes before the day
+    conn = L.connect(tmp_path / "j.sqlite")
+    naps = []
+
+    def nap(s):
+        naps.append(s)
+        day.STOP["requested"] = True
+    monkeypatch.setattr(day, "_nap", nap)
+    monkeypatch.setattr(day, "_gateway_up", lambda until: False)
+    for _ in range(3):                                    # a desk that keeps dying: the backoff grows
+        naps.clear(); day.STOP["requested"] = False
+        assert day.desk_only(_args(), conn, "before the day", desk=Proc(polls=[None, 3])) == 0
+        assert naps and max(naps) <= 300, naps
+
+
+def test_a_relaunch_after_the_day_does_not_settle_it_again(tmp_path, monkeypatch):
+    """Review 2026-10-08: each relaunch after 11:30 re-ran the after-close
+    block — a report saying "session 2" for a day counted once, and a new
+    export commit every time."""
+    _at(monkeypatch, tmp_path, datetime(2026, 10, 8, 14, 0, tzinfo=ET))
+    monkeypatch.setattr(day, "REPORTS", tmp_path / "reports")
+    settled = []
+    monkeypatch.setattr(day, "after_close", lambda conn, d, dry: settled.append(d))
+    _capture_desk_only(monkeypatch)
+    assert day.main([]) == 0 and settled == ["2026-10-08"], "no report yet: settled"
+    (tmp_path / "reports").mkdir()
+    (tmp_path / "reports" / "2026-10-08.md").write_text("# report")
+    assert day.main([]) == 0 and settled == ["2026-10-08"], "settled already: not again"
+
+
+def test_a_report_written_again_keeps_the_session_number_it_was_counted_as(tmp_path, monkeypatch):
+    monkeypatch.setattr(day, "REPORTS", tmp_path)
+    conn = L.connect(":memory:")
+    L.set_state(conn, sessions_done=3, last_session_date="2026-10-08")
+    assert "session 3 ·" in day.write_report(conn, "2026-10-08", "x").read_text()
+    assert "session 4 ·" in day.write_report(conn, "2026-10-09", "x").read_text()
+
+
+def test_late_calls_go_out_ten_minutes_after_the_newest_one(tmp_path, monkeypatch):
+    conn = L.connect(tmp_path / "j.sqlite")
+    sent = []
+    monkeypatch.setattr(day, "export_day", lambda c, d: sent.append(d))
+    clock = {"t": 1000.0}
+    monkeypatch.setattr(day.time, "monotonic", lambda: clock["t"])
+    late = day.LateCalls(conn, "2026-10-08")
+    late.check()
+    assert sent == []
+    L.record_manual(conn, "AAA", "took", price=4.0, shares=100, stop=3.8, at=AFTERNOON); conn.commit()
+    late.check(); clock["t"] += 300; late.check()
+    assert sent == [], "a burst of calls is not one push each"
+    clock["t"] += 301; late.check()
+    assert sent == ["2026-10-08"]
+    late.check(final=True)
+    assert sent == ["2026-10-08"], "nothing new: nothing sent"
+    L.record_manual(conn, "AAA", "closed", price=4.4, at=AFTERNOON); conn.commit()
+    late.check(final=True)
+    assert sent == ["2026-10-08", "2026-10-08"]
+    assert day.LateCalls(conn, None).sent is None, "no day (closed, before the day): nothing to send"
+
+
+def test_an_earlier_day_that_fails_to_settle_does_not_keep_the_platform_down(tmp_path, monkeypatch, capsys):
+    _at(monkeypatch, tmp_path, datetime(2026, 10, 10, 11, 0, tzinfo=ET))      # a Saturday
+    monkeypatch.setattr(day, "settle_unsettled", lambda *a: (_ for _ in ()).throw(RuntimeError("locked")))
+    calls = _capture_desk_only(monkeypatch)
+    assert day.main([]) == 0 and calls and "settling an earlier day failed" in capsys.readouterr().out
+
+
+def test_a_restart_mark_left_behind_is_void_when_a_desk_starts(tmp_path, monkeypatch):
+    mark = tmp_path / "j.sqlite.desk.restart"
+    monkeypatch.setattr(day, "RESTART_MARK", mark)
+    monkeypatch.setattr(day.subprocess, "Popen", lambda *a, **k: None)
+    mark.write_text("x")
+    day.start_desk(["AAA"], False)
+    assert not mark.exists(), "a real crash after it must still be counted"

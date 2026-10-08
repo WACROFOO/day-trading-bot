@@ -265,7 +265,7 @@ def test_rehearsal_runs_on_a_closed_market_forced_log_only_and_is_not_a_session(
         calls["n"] += 1
         return real_now(tz) + timedelta(minutes=calls["n"] * 5)
     monkeypatch.setattr(FrozenDT, "now", classmethod(lambda cls, tz=None: ticking(tz)))
-    rc = d.main(["--rehearsal", "1", "--symbols", "AAPL"])
+    rc = d.main(["--rehearsal", "1", "--symbols", "AAPL", "--no-open"])
     assert rc == 0
     assert ("desk", ["AAPL"], None) in started, "a rehearsal's desk has no cutoff: it stops with the rehearsal"
     assert ("runner", "LOG_ONLY") in started

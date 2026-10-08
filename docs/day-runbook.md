@@ -88,7 +88,7 @@ stays up until Ctrl-C. Only the desk: **the bot keeps its window**.
 | when you run it | what happens |
 |---|---|
 | a trading day, 06:55–11:30 ET | the day above; at 11:30 the runner flattens and is stopped 90 s later, the day is settled, and the desk carries on |
-| after 11:30 | step 6 for the day, then the desk |
+| after 11:30 | step 6 for the day — once: a day already settled is not settled again — then the desk |
 | before 06:55 | the desk now; the day starts at 06:55 in the same run (`--early` still starts the day at once) |
 | weekend or NYSE holiday | the desk, the closure named, no bot |
 | while a day already runs | nothing new starts — a second desk on client 27 knocks the first offline (2026-09-21). It prints the desk's link (and opens it, from a terminal) and says when that desk runs older code than the checkout, with the command below |
@@ -103,24 +103,33 @@ A desk outside the bot's day:
   control series keeps its meaning (`src/journal/controls.py`). The day is
   settled a minute after that, on a ledger nothing writes to;
 - **saves your calls and your risk at any hour**. Calls logged after the day's
-  export (about 11:32 ET) are exported again for that day when the desk-only
-  run ends, at Ctrl-C or at the next morning's start;
+  export (about 11:32 ET) are exported again for that day ten minutes after
+  the newest one, and at the end of the desk-only run for any left;
 - **does not keep the Mac awake** — the caffeinate hold ends with the bot's
   day. A desk that drops (sleep, the Gateway's restart) is started again once
   the Gateway answers; if it keeps failing, 1, 2, 4 … up to 15 min apart;
-- **hands over to the next trading day by itself** at 06:55 ET in the same
-  run: the desk stops, the branch is pulled as the scheduled job does, and the
-  day starts on that code with the lock held throughout — the scheduled 06:55
-  job finds the lock and steps aside. Flags from your launch (`--symbols`,
-  `--early`, `--probe-orders`) apply to that launch only, and
-  `data/probe-orders.once` waits for the day that runs.
+- **hands over to the next trading day by itself** at 06:55 ET, as the
+  scheduled job would: the desk stops, up to two minutes for the network,
+  one pull of the branch, then the day on that code — with the lock held
+  throughout, so the scheduled 06:55 job finds it and steps aside. From the
+  scheduled job the day carries on in the same process and log. **From a
+  terminal the day starts in the background** in its own session, writing to
+  `~/Library/Logs/day-trading-bot/day.out.log`, and the terminal command ends
+  with the day's pid (`kill -INT` it to stop the day): a closed window would
+  otherwise end the day mid-session, and the daily export reads the day from
+  that log. Flags from your launch (`--symbols`, `--early`, `--probe-orders`)
+  apply to that launch only, and `data/probe-orders.once` waits for the day
+  that runs. Ctrl-C during the hand-over starts no day.
 
 **After an update:** `bash scripts/update.sh`, then
 `python3 scripts/day.py --restart-desk`. It stops the running desk; the day
 that started it starts it again on the new code — the runner is not touched —
-and the command waits until the desk answers on the new commit. A day started
-before this existed restarts its desk the same way. With no day running it
-says so: run `python3 scripts/day.py`.
+and the command waits until the desk answers on the new commit. It refuses
+while the desk is still coming up (the day would read that as a desk that
+failed to start) and when the new code does not import; a restart that does
+not come up is handled as an outage, never as the end of the day. A day
+started before this existed restarts its desk the same way. With no day
+running it says so: run `python3 scripts/day.py`.
 
 ## Reading the desk (since 2026-10-08)
 

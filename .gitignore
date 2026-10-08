@@ -92,6 +92,7 @@ data/sec_cache/
 
 # Process locks beside the ledger (day.py, exercise.py). Local state, never history.
 data/*.lock
+data/*.desk.restart
 !research/ross-trades/results/
 
 # Workflow agents' isolated git worktrees (temporary checkouts, never content)
