@@ -5,15 +5,20 @@
     python scripts/catalyst_score.py --scan            # today's movers
     python scripts/catalyst_score.py ABCD --days 30    # widen the filing window
 
-For each symbol it answers three questions:
+For each symbol it prints the desk card's own catalyst read
+(`momentum_platform.catalyst.card_read`, rules in
+knowledge-base/strategies/CATALYST.md), so the terminal and the desk never
+grade the same headlines differently:
 
-    1. Is there news, and how old is it?   -> flame (Confirmed: age only)
-    2. What kind of news is it?            -> hard / soft / dilutive
-    3. Is the company selling shares?      -> SEC filings
+    STRONG / MODERATE / WEAK   the grade, its one-line reason and rule id
+    type · age · source        FDA, earnings, contract… · today 07:02 pre-market
+    the headline, two lines
+    flags                      offering in today's news, a 424B in the last 30
+                               days, a shelf on file, a foreign filer (rule 7)
 
-The third is the one a headline alone will never tell you. A fresh, exciting
-headline sitting on top of a live 424B takedown means the float is growing
-while you hold it — the desk calls that AVOID, no matter how red the flame.
+A fresh headline on top of a recent 424B takedown means the float is growing
+while you hold it; the flag says so in red whatever the grade. (Until
+2026-10-08 any 424B inside the 90-day window read AVOID, however old.)
 
 News comes from Alpaca (free tier). Filings come from SEC EDGAR (free, no
 account). Either source can be missing; the output says which, and missing
@@ -30,9 +35,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from momentum_platform.catalyst import (  # noqa: E402
-    FLAME_BAND, VERDICT_MEANING, assess,
-)
+from momentum_platform.catalyst import card_read  # noqa: E402
 from momentum_platform.datasources.alpaca_source import (  # noqa: E402
     AlpacaError, client_from_env as alpaca_from_env,
 )
@@ -41,9 +44,8 @@ from momentum_platform.datasources.sec_source import (  # noqa: E402
 )
 
 G, Y, R, D, B, O = "\033[92m", "\033[93m", "\033[91m", "\033[2m", "\033[1m", "\033[0m"
-FLAME_PAINT = {"red": R, "orange": Y, "yellow": Y, "none": D}
-VERDICT_PAINT = {"QUALIFIED": G, "WATCH": Y, "CAUTION": Y, "AVOID": R,
-                 "PASS": D, "UNKNOWN": Y}
+GRADE_PAINT = {"STRONG": G, "MODERATE": Y, "WEAK": R, "UNKNOWN": Y}
+FLAG_PAINT = {"bad": R, "warn": Y, "ok": G, "info": D}
 
 
 def symbols_from_watchlist(stdout: str) -> list:
@@ -79,6 +81,39 @@ def latest_news(client, symbol: str, lookback_hours: int) -> tuple:
         except ValueError:
             when = None
     return newest.get("headline"), when, " ".join(newest.get("symbols") or [])
+
+
+def news_items(client, symbol: str, lookback_hours: int) -> list:
+    """Every headline for `symbol` in the window, in the desk's record shape —
+    so `card_read` grades them exactly as the desk card does."""
+    from momentum_platform.dashboard.session_builder import shared_tag
+    start = (datetime.now(timezone.utc) - timedelta(hours=lookback_hours))
+    items = client.news([symbol], start=start.strftime("%Y-%m-%dT%H:%M:%SZ"), limit=50) or []
+    out = []
+    for n in items:
+        ts, head = n.get("created_at"), n.get("headline") or ""
+        if not ts or not head:
+            continue
+        tags = list(n.get("symbols") or [symbol])
+        out.append({"headline": head, "publishedAt": ts, "firstObservedAt": ts, "category": "",
+                    "tagged": tags, "sharedTag": shared_tag(head, symbol, tags), "url": n.get("url")})
+    return out
+
+
+def _wrap(text: str, width: int = 92, lines: int = 2) -> list:
+    words, out, cur = (text or "").split(), [], ""
+    for w in words:
+        if len(cur) + len(w) + 1 > width:
+            out.append(cur); cur = w
+            if len(out) == lines:
+                break
+        else:
+            cur = (cur + " " + w).strip()
+    if len(out) < lines and cur:
+        out.append(cur)
+    if len(out) == lines and len(" ".join(out)) < len(text or ""):
+        out[-1] = out[-1][: width - 1] + "…"
+    return out
 
 
 def main(argv=None) -> int:
@@ -131,65 +166,56 @@ def main(argv=None) -> int:
     sec = None if args.no_filings else sec_from_env()
 
     exit_code = 0
+    from zoneinfo import ZoneInfo
+    today = datetime.now(ZoneInfo("America/New_York")).date().isoformat()
     for symbol in symbols:
-        headline = when = None
-        category = ""
-        news_note = ""
-        news_checked = alpaca is not None
+        items, news_note = [], ""
+        news_ok = alpaca is not None
         if alpaca is not None:
             try:
-                headline, when, category = latest_news(alpaca, symbol, args.news_hours)
-                if headline is None:
+                items = news_items(alpaca, symbol, args.news_hours)
+                if not items:
                     news_note = f"no headline in the last {args.news_hours}h"
             except AlpacaError as exc:
                 news_note = f"news lookup failed: {exc}"
-                news_checked = False
+                news_ok = False
                 exit_code = 1
 
-        filings = []
-        filings_note = ""
+        filings, filings_note, filings_ok = [], "", False
         if sec is not None:
             try:
-                filings = sec.recent_filings(symbol, since_days=args.days)
+                # A shelf stays usable for three years: read a full year of forms.
+                filings = sec.recent_filings(symbol, since_days=max(args.days, 365), limit=80)
+                filings_ok = True
                 if not filings:
-                    filings_note = ("EDGAR returned nothing — supply risk UNVERIFIED, "
-                                    "not clean")
+                    filings_note = "EDGAR returned nothing — supply risk UNVERIFIED, not clean"
             except SecError as exc:
                 filings_note = f"filings lookup failed: {exc}"
                 exit_code = 1
         else:
             filings_note = "filings skipped (--no-filings) — supply risk UNVERIFIED"
 
-        read = assess(symbol, headline=headline, published=when,
-                      category=category, filings=filings,
-                      news_checked=news_checked)
-        verdict = read.verdict()
-
-        paint = VERDICT_PAINT.get(verdict, "")
-        flame_paint = FLAME_PAINT.get(read.flame_color, D)
-        print(f"{B}{symbol:<6}{O} {paint}{verdict:<10}{O} "
-              f"{flame_paint}flame {read.flame_color:<6}{O} "
-              f"{D}{FLAME_BAND[read.flame_color]}{O}  {read.grade.label}")
-        print(f"       {D}{VERDICT_MEANING[verdict]}{O}")
-        if headline:
-            age = f"{read.age_min/60:.1f}h ago" if read.age_min is not None else "undated"
-            print(f"       {headline[:96]}  {D}({age}){O}")
-        elif news_note:
+        # The desk card's own read (catalyst.card_read; rules in
+        # knowledge-base/strategies/CATALYST.md), so this terminal and the desk
+        # can never grade the same headlines differently.
+        card = card_read(items, trading_date=today, source_ok=news_ok,
+                         filings=filings, filings_checked=filings_ok)
+        paint = GRADE_PAINT.get(card["grade"], "")
+        print(f"{B}{symbol:<6}{O} {paint}{card['grade']:<9}{O} "
+              f"{D}{card['type']} · {card['age']}{(' · ' + card['source']) if card['source'] else ''}{O}")
+        print(f"       {card['reason']}  {D}[{card['rule']}]{O}")
+        for line in _wrap(card["headline"] or ""):
+            print(f"       {line}")
+        if not card["headline"] and news_note:
             print(f"       {Y}{news_note}{O}")
-
-        if read.dilution_filings:
-            for f in read.dilution_filings[:4]:
-                print(f"       {R}filing{O} {f['form']:<8} {f['filed']}  "
-                      f"{D}{f['age_days']}d ago{O}")
-        elif filings:
-            forms = ", ".join(sorted({f["form"] for f in filings})[:6])
-            print(f"       {D}filings seen, none dilutive: {forms}{O}")
+        for f in card["flags"]:
+            if f["id"] in ("split", "filings_unchecked"):
+                continue                      # the CLI runs no split test; the note below says so
+            print(f"       {FLAG_PAINT.get(f['level'], '')}{f['text']}{O}")
         if filings_note:
             print(f"       {Y}{filings_note}{O}")
-        for note in read.notes:
-            print(f"       {D}{note}{O}")
         print()
-
+    print(f"{D}Split test: not run here — scripts/premarket_stars.py runs it (CLAUDE.md rule 6).{O}")
     print(f"{D}The scanner discovers a candidate; the chart defines the setup; "
           f"the stop defines the size.{O}")
     print(f"{D}This tool only does the first half of the first step.{O}\n")

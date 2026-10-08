@@ -1163,6 +1163,38 @@ fewer, so a 4/5 built on such a headline is now 3/5 and killed on `pillars`
 (A5). Decisions before the next desk start keep their rules hash; R11
 classifies the difference as superseded, not diverged.
 
+**Gate 3 defects fixed (2026-10-08; gate 3 input, flag-only under A2; the
+`pillars` count moves) — the rule as written, restored; nothing tuned.**
+Found while assessing the desk as a manual tool
+(`docs/desk-assessment-2026-10-08.md`), none of them from fills or outcomes, so
+§7's ban on tuning gates does not reach them; they are recorded here because
+they change what the bot's pillar count sees. (1) "Dated today" was never
+applied: `_catalyst_today` read `meta["tradingDate"]`, which no symbol carried,
+so any own headline in the desk's two-day fetch passed. The builder now stamps
+every symbol with the session's day. (2) The cutoff was 16:00 ET of the
+previous *calendar* day, so Friday's after-close news fell out on a Monday; it
+is now the previous *trading* day (`catalyst.news_cutoff`). (3) Headline words
+matched as substrings ("window" read as a market wrap, "disorder" as hard
+news); they match as whole words now. (4) An SEC filing with nothing readable
+behind its form and item codes (a 6-K, an 8-K "other events" with no body
+sentence) graded WEAK and passed the news pillar; it is an unread filing now
+and does not count. Effect on verdicts: names whose only "catalyst" was older
+than the last close, or an unread filing, count one pillar fewer — a 4/5 built
+on such a headline is now 3/5 and killed on `pillars` (A5). The desk card's new
+STRONG / MODERATE / WEAK grade (`knowledge-base/strategies/CATALYST.md`) is
+display only and moves nothing. Decisions before the next desk start keep their
+rules hash.
+
+**The desk card and the owner's calls (2026-10-08) — no rule moves.** The card
+now shows one verdict word with the reason that decides it and the level to
+watch, the bot's gates as lamps, the bot's own order for the plan as numbers to
+type (`momentum_platform.order_math`, which `execution.intent` re-exports
+unchanged), and the runner's answer from the ledger. "I took it / I passed /
+I closed it" write `manual_decisions`, which the runner never reads; the day's
+export carries them (`desk_calls.csv`) and the daily review scores them beside
+the bot's plans. Manual positions are the owner's, placed by hand outside this
+code: no order path was added and the guard tests stand.
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**

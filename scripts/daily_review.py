@@ -98,6 +98,72 @@ def simulate(bars, t_order: datetime, entry: float, stop: float, ttl_min: int = 
     return (fwd[-1][4] - fill) / rps if fwd else None, "end of data"
 
 
+def held_r(bars, t_entry: datetime, entry: float, stop: float):
+    """(gross R, how) of a position already filled at `entry` at `t_entry`,
+    exited by the bot's own rule: the A3 trail 1 R under the high, flat 11:30."""
+    rps = entry - stop
+    if rps <= 0:
+        return None, "bad levels"
+    level, high = stop, entry
+    fwd = [b for b in bars if b[0] > t_entry.replace(second=0, microsecond=0)]
+    for t, o, h, l, c in fwd:
+        if t.time() >= FLAT:
+            return (o - entry) / rps, "flat 11:30"
+        if l <= level:
+            return (min(level, o) - entry) / rps, "stop" if level == stop else "trail"
+        high = max(high, h)
+        level = max(level, high - rps)
+    return ((fwd[-1][4] - entry) / rps, "end of data") if fwd else (None, "no bars after the fill")
+
+
+def desk_calls_section(calls: list, bars: dict, rows: list) -> list:
+    """The owner's calls from the desk's buttons, scored beside the bot's plans
+    (owner, 2026-10-08: "score my manual calls next to the bot's"). A `took`
+    is scored on its own close when one was recorded, else on the bot's exit
+    rule; a `passed` on what the card's plan would have done. Gross R, upper
+    bounds, same caveats as above."""
+    out = [f"## Your calls on the desk — {len(calls)} recorded", ""]
+    if not calls:
+        return out + ["None. The desk's buttons (I took it / I passed / I closed it) write them.", ""]
+    closes = {}
+    for c in calls:
+        if c.get("action") == "closed":
+            closes.setdefault(c["symbol"], []).append(c)
+    out += ["| ET | symbol | your call | the card said | result (gross R) | the bot near then |",
+            "|---|---|---|---|---|---|"]
+    for c in calls:
+        if c.get("action") == "closed":
+            continue
+        sym, t = c["symbol"], et(c["ts_et"])
+        said = f"{c.get('verdict') or '—'}: {(c.get('reason') or '')[:60]}"
+        res = "—"
+        if c.get("action") == "took":
+            px, stp = num(c.get("price")), num(c.get("stop"))
+            exit_ = next((x for x in closes.get(sym, []) if et(x["ts_et"]) >= t), None)
+            if px and stp and px > stp:
+                if exit_ and num(exit_.get("price")):
+                    res = f"{(num(exit_['price']) - px) / (px - stp):+.2f} (your close {num(exit_['price']):.2f})"
+                else:
+                    r, how = held_r(bars.get(sym, []), t, px, stp)
+                    res = "—" if r is None else f"{r:+.2f} on the bot's exit ({how}; no close recorded)"
+        else:
+            try:
+                setup = json.loads(c.get("card_json") or "{}").get("setup") or {}
+            except ValueError:
+                setup = {}
+            trig, stp = num(setup.get("trigger")), num(setup.get("stop"))
+            if trig and stp:
+                r, how = simulate(bars.get(sym, []), t, trig, stp)
+                res = f"if taken: {'—' if r is None else f'{r:+.2f}'} ({how})"
+            else:
+                res = "no plan on the card"
+        near = [r for r in rows if r[1] == sym and abs((et(f"{c['ts_et'][:11]}{r[0]}:00{c['ts_et'][19:]}") - t)
+                                                       .total_seconds()) <= 900]
+        bot = "; ".join(f"{r[0]} {r[4]}" for r in near) or "no plan within 15 min"
+        out.append(f"| {c['ts_et'][11:16]} | {sym} | {c['action']} | {said} | {res} | {bot} |")
+    return out + [""]
+
+
 def cohort_of(d: dict) -> str:
     if d["outcome"] == "SUPPRESSED":
         return "killed:" + (d.get("killed_by") or "?")
@@ -190,6 +256,9 @@ def review(day: str) -> str:
         if not near:
             L.append("    - the bot armed no plan on this name — the detector or the watchlist missed it")
     L.append("")
+
+    calls = read(dd, "desk_calls.csv") if (dd / "desk_calls.csv").exists() else []
+    L += desk_calls_section(calls, bars, rows)
 
     # cohort ledger
     cf = DAILY / "cohorts.csv"

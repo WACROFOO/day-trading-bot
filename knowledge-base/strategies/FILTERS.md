@@ -47,8 +47,8 @@ trick, and it is why this runs on published metrics.
 | # | gate | kill if | |
 |---|---|---|---|
 | 1 | **price** | outside **$2.00 – 20.00** | preferred **$2.50 – 9** — but a **soft floor under a penny theme**, see below |
-| 2 | **float** | over **20M** | sweet spot **< 10M**; **< 5M in a cold market** |
-| 3 | **catalyst** | none dated **today** **AND no live theme** | a running theme substitutes — see below. **Paper exercise only:** flagged, not killed, by owner amendment A2 (`docs/preregistration.md` §5, 2026-09-17) after five sessions in which a desk with no headline feed killed 254 names here; the method's rule is unchanged |
+| 2 | **float** | over **20M** | sweet spot **< 10M**; **< 5M in a cold market**. **Paper exercise only:** flagged, not killed, by owner amendment A5 (`docs/preregistration.md` §5, 2026-09-21); a pillar count kills instead — at least 4 of price, gain ≥ 10 %, RVOL ≥ 5×, float < 20M, news today. That count uses the 5× scanner dial, which Layer 3 below calls a dial, not a gate: the amendment's choice, recorded, not the method's rule |
+| 3 | **catalyst** | none dated **today** **AND no live theme** | a running theme substitutes — see below. **Paper exercise only:** flagged, not killed, by owner amendment A2 (`docs/preregistration.md` §5, 2026-09-17) after five sessions in which a desk with no headline feed killed 254 names here; the method's rule is unchanged. "Today" = after 16:00 ET of the previous **trading** day. The desk's strength grade (STRONG / MODERATE / WEAK) is display, rule by rule in `CATALYST.md` |
 | 4 | **still rising** | more than **25 %** off the pre-market high | *"stair stepping down… I'm not a buyer"* |
 | 5 | **reverse split** | the gap is *arithmetic* | see below — the split alone is not the veto |
 | 6 | **instrument** | fund / ETF | ADRs are fine — he trades them |

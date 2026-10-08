@@ -18,7 +18,9 @@ Everything here supports SELECTION. Nothing here sizes or places an order.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
+from functools import lru_cache
 from datetime import datetime, timezone
 from typing import List, Optional, Sequence
 
@@ -127,11 +129,49 @@ UNCLASSIFIED = Grade(
     "treating it as a reason.")
 
 
+@lru_cache(maxsize=64)
+def _pattern(words: Sequence[str]) -> "re.Pattern":
+    """Whole-word matching, from the left. A plain substring test read "window"
+    as a market wrap ("dow "), "disorder" as hard news ("order") and "nonprofit"
+    as a profit headline (catalyst map, 2026-10-08). A word must start after a
+    non-alphanumeric character; it may carry a suffix ("orders", "awarded").
+    "dow " and "nasdaq " keep their trailing space, which is how the list says
+    "the index on its own, not a ticker tag" — "(Nasdaq: ABCD)" stays out."""
+    return re.compile("|".join(r"(?<![a-z0-9])" + re.escape(w) for w in words))
+
+
+_RULE_PATTERNS = None
+
+
+def matches(words: Sequence[str], hay: str) -> bool:
+    """True when one of `words` occurs in `hay` (lower case) as a whole word."""
+    return bool(_pattern(tuple(words)).search(hay))
+
+
+# An SEC filing turned into a headline with nothing readable behind the form
+# and item codes: a 6-K carries no item codes at all ("SEC 6-K · 6-K"), and
+# an 8-K under "other events" or "Regulation FD" with no body sentence says
+# nothing either. It used to grade Unclassified, read WEAK and PASS the news
+# pillar. What the desk could not read is not news; it is a filing to open.
+_UNREAD_ITEMS = re.compile(
+    r"^sec [\w/-]+ · (?:[\w/-]+|(?:item (?:7\.01|8\.01|9\.01)[^;—]*(?:; )?)+)$")
+UNREAD_FILING = Grade(
+    "filing", "Unread filing",
+    "An SEC filing with nothing readable behind its form and item codes. Open it; "
+    "the desk cannot tell what it says, so it is not counted as news.")
+
+
 def classify(headline: str, category: str = "") -> Grade:
-    """Grade a headline. Dilutive first, then hard, then soft."""
-    hay = f"{headline or ''} {category or ''}".lower()
-    for grade, label, words, note in RULES:
-        if any(w in hay for w in words):
+    """Grade a headline. Listing, roundup, dilutive, hard, reaction, soft."""
+    global _RULE_PATTERNS
+    if _RULE_PATTERNS is None:
+        _RULE_PATTERNS = [(g, lab, _pattern(tuple(w)), note) for g, lab, w, note in RULES]
+    head = (headline or "").strip().lower()
+    if (category or "") == "sec_filing" and _UNREAD_ITEMS.match(head):
+        return UNREAD_FILING
+    hay = f"{head} {(category or '').lower()}"
+    for grade, label, pat, note in _RULE_PATTERNS:
+        if pat.search(hay):
             return Grade(grade, label, note)
     return UNCLASSIFIED
 
@@ -156,7 +196,7 @@ BUYOUT_TARGET_WORDS = [
 
 def buyout_in(headlines: Sequence[str]) -> bool:
     """True when one of the company's own headlines says it is being bought."""
-    return any(w in (h or "").lower() for h in headlines for w in BUYOUT_TARGET_WORDS)
+    return any(matches(BUYOUT_TARGET_WORDS, (h or "").lower()) for h in headlines)
 
 
 CATALYST_VERDICTS = {
@@ -170,7 +210,7 @@ CATALYST_VERDICTS = {
                 "against; read the size before anything else.",
     "UNKNOWN":  "No headline feed on this desk. Nothing ruled in or out.",
 }
-NOT_A_CATALYST = ("roundup", "reaction")
+NOT_A_CATALYST = ("roundup", "reaction", "filing")
 
 
 def _iso(ts) -> Optional[datetime]:
@@ -332,3 +372,221 @@ def assess(symbol: str,
     if not read.filings:
         read.notes.append("No filings checked or none returned — supply risk unverified.")
     return read
+
+
+# =============================================================================
+# The desk's two-line catalyst read — knowledge-base/strategies/CATALYST.md
+# =============================================================================
+# One grade a trader can act on without reading the headline twice: STRONG,
+# MODERATE or WEAK (UNKNOWN only when the desk has no headline feed at all).
+# Every branch below carries the id of its rule in CATALYST.md, where each rule
+# names its origin: the corpus (path, video id, timestamp) or "Approximation"
+# for this desk's own boundary. The grade is DISPLAY: the cascade's gate 3 and
+# the pillar count still decide on `catalyst_today`, and nothing here sizes or
+# places an order.
+
+TYPE_RULES = [
+    # (type, words) — the first match names the headline's type. Shown, not graded.
+    ("FDA", ["fda", "approval", "breakthrough", "phase 1", "phase 2", "phase 3", "clinical", "pdufa"]),
+    ("earnings", ["earnings", "revenue", "guidance", "profit", "results of operations"]),
+    ("contract", ["contract", "awarded", "award", "order", "purchase agreement"]),
+    ("deal", ["acquisition", "acquire", "merger", "buyout"]),
+    ("patent", ["patent"]),
+    ("uplist", ["uplist", "nasdaq listing"]),
+    ("analyst", ["analyst", "price target", "upgrade", "initiated"]),
+    ("partnership", ["partnership", "agreement", "mou", "collaboration"]),
+]
+#: Soft-family words that carry attention but no counterparty and no value:
+#: the "PR without substance" type (rule C5).
+PR_WORDS = ["appoint", "names", "joins", "announces", "conference", "presentation",
+            "short interest", "reverse split"]
+#: A 424B/FWP this recent is a sale into the market now; older is history.
+TAKEDOWN_RECENT_DAYS = 30           # Approximation (rule C11)
+FOREIGN_FORMS = {"6-K", "20-F", "40-F", "F-1", "F-3"}   # CLAUDE.md rule 7
+HEADLINE_MAX = 180                  # characters; the card clamps to two lines
+
+
+def _type_of(headline: str, grade: str) -> str:
+    hay = (headline or "").lower()
+    if grade == "dilutive":
+        return "offering/dilution"
+    if grade == "filing":
+        return "filing"
+    if grade == "listing":
+        return "listing notice"
+    for name, words in TYPE_RULES:
+        if matches(words, hay):
+            return name
+    return "PR"
+
+
+def news_cutoff(trading_date) -> Optional[datetime]:
+    """16:00 ET of the trading day before `trading_date`: news published after
+    it is "dated today" (FILTERS.md gate 3; the overnight extension is rule C2,
+    an Approximation). Weekends and NYSE holidays are skipped, so Friday's
+    after-close news is still Monday's catalyst."""
+    from datetime import date as _date, timedelta
+    from zoneinfo import ZoneInfo
+    from .holidays import is_trading_day
+    if not trading_date:
+        return None
+    try:
+        day = trading_date if isinstance(trading_date, _date) else _date.fromisoformat(str(trading_date)[:10])
+    except ValueError:
+        return None
+    prev = day - timedelta(days=1)
+    for _ in range(10):
+        if is_trading_day(prev):
+            break
+        prev -= timedelta(days=1)
+    return datetime(prev.year, prev.month, prev.day, 16, 0, tzinfo=ZoneInfo("America/New_York"))
+
+
+def _age_label(pub: datetime, trading_date, cutoff: Optional[datetime]) -> tuple:
+    """('today_pre' | 'today' | 'after_close' | 'prior' | 'older', words)."""
+    from zoneinfo import ZoneInfo
+    et = pub.astimezone(ZoneInfo("America/New_York"))
+    day = str(trading_date)[:10] if trading_date else None
+    if day and et.date().isoformat() == day:
+        if et.hour < 9 or (et.hour == 9 and et.minute < 30):
+            return "today_pre", f"today {et:%H:%M} · pre-market"
+        return "today", f"today {et:%H:%M}"
+    from datetime import date as _date
+    gap = (_date.fromisoformat(day) - cutoff.date()).days if (day and cutoff is not None) else None
+    prior = "yesterday" if gap == 1 else (f"{cutoff:%a}" if cutoff is not None else "")
+    if cutoff is not None and et >= cutoff:
+        when = f"{et:%H:%M}" if et.date() == cutoff.date() else f"{et:%a %H:%M}"
+        return "after_close", f"after {prior}'s close · {when}"
+    if cutoff is not None and et.date() == cutoff.date():
+        return "prior", f"{prior} {et:%H:%M}"
+    if cutoff is not None:
+        days = (cutoff.date() - et.date()).days + 1
+        return "older", f"{days} days old"
+    return "older", f"{et:%Y-%m-%d %H:%M}"
+
+
+def _clip(text: str, n: int = HEADLINE_MAX) -> str:
+    t = re.sub(r"\s+", " ", text or "").strip()
+    return t if len(t) <= n else t[: n - 1].rstrip() + "…"
+
+
+def card_read(items, *, now: Optional[datetime] = None, trading_date=None,
+              source_ok: bool = True, filings: Optional[Sequence[dict]] = None,
+              filings_checked: bool = False, split_checked: bool = False,
+              split_ratio: Optional[float] = None) -> dict:
+    """The catalyst block of the desk card: grade, one-line reason, type, age,
+    the headline (clipped), its source and the flags. Rule ids refer to
+    knowledge-base/strategies/CATALYST.md."""
+    now = now or datetime.now(timezone.utc)
+    cutoff = news_cutoff(trading_date)
+    flags: List[dict] = []
+
+    def flag(fid: str, text: str, level: str = "warn", rule: str = "") -> None:
+        flags.append({"id": fid, "text": text, "level": level, "rule": rule})
+
+    # -- the candidates: the company's own headlines the desk had seen by now (C1)
+    own = []
+    for it in items or []:
+        pub = _iso(it.get("publishedAt"))
+        seen = _iso(it.get("firstObservedAt") or it.get("publishedAt"))
+        if pub is None or pub > now or (seen is not None and seen > now) or it.get("sharedTag"):
+            continue
+        g = classify(it.get("headline") or "", it.get("category") or "")
+        if g.grade in ("roundup", "reaction"):
+            continue
+        bucket, words = _age_label(pub, trading_date, cutoff)
+        own.append({"item": it, "grade": g, "pub": pub, "bucket": bucket, "age": words,
+                    "today": cutoff is None or pub >= cutoff,
+                    "type": _type_of(it.get("headline") or "", g.grade),
+                    "buyout": buyout_in([it.get("headline") or ""])})
+    own.sort(key=lambda c: c["pub"], reverse=True)
+    today = [c for c in own if c["today"]]
+
+    # -- flags first: they hold whatever the grade decides (C6, C7, C9-C12)
+    for c in today:
+        if c["grade"].grade == "dilutive":
+            flag("dilution_news", f"offering/dilution in today's news: \"{_clip(c['item'].get('headline') or '', 70)}\"",
+                 "bad", "C6")
+            break
+    if any(c["buyout"] for c in today):
+        flag("buyout", "buyout headline — the price pins near the deal (FILTERS.md gate 8)", "bad", "C7")
+    fl = list(filings or [])
+    foreign = sorted({f.get("form") for f in fl if f.get("form") in FOREIGN_FORMS}
+                     | {"6-K" for c in own if (c["item"].get("headline") or "").startswith("SEC 6-K")})
+    if foreign:
+        flag("foreign_filer", f"foreign issuer ({', '.join(foreign)}): no S-3/424B tripwire — "
+             "check EDGAR by hand (CLAUDE.md rule 7)", "warn", "C12")
+    take = [f for f in fl if f.get("form") in TAKEDOWN_FORMS]
+    recent = [f for f in take if (f.get("age_days") if f.get("age_days") is not None else 9999) <= TAKEDOWN_RECENT_DAYS]
+    if recent:
+        f = min(recent, key=lambda x: x.get("age_days", 9999))
+        flag("takedown", f"{f['form']} filed {f.get('age_days')} d ago — shares are being sold", "bad", "C11")
+    elif take:
+        f = min(take, key=lambda x: x.get("age_days", 9999))
+        flag("takedown_old", f"{f['form']} on file ({f.get('age_days')} d) — an earlier sale", "info", "C11")
+    shelves = [f for f in fl if f.get("form") in SHELF_FORMS]
+    if shelves:
+        f = min(shelves, key=lambda x: x.get("age_days", 9999))
+        flag("shelf", f"{f['form']} shelf on file ({f.get('filed')}) — can issue at any time", "warn", "C10")
+    if not filings_checked:
+        flag("filings_unchecked", "filings not checked — dilution unverified", "info", "C10")
+    if split_ratio:
+        flag("split", f"the gap is a {split_ratio:g}-for-1 reverse split, not a move", "bad", "C13")
+    elif split_checked:
+        flag("split", "split test: the gap is not arithmetic", "ok", "C13")
+    else:
+        flag("split", "split test not run (CLAUDE.md rule 6)", "info", "C13")
+
+    # -- the grade ------------------------------------------------------------
+    def out(grade, reason, rule, c=None, typ=None):
+        it = (c or {}).get("item") or {}
+        return {
+            "grade": grade, "reason": reason, "rule": rule,
+            "type": typ or (c or {}).get("type") or "none found",
+            "age": (c or {}).get("age") or "—", "ageBucket": (c or {}).get("bucket"),
+            "headline": _clip(it.get("headline") or "") or None,
+            "publishedAt": it.get("publishedAt"),
+            "source": ("SEC" if it.get("category") == "sec_filing" else
+                       "finviz" if it.get("category") == "finviz_why" else ("wire" if it else None)),
+            "url": it.get("url"),
+            "cutoff": cutoff.isoformat() if cutoff else None,
+            "flags": flags,
+        }
+
+    if not source_ok:
+        return out("UNKNOWN", "no headline feed on this desk — nothing ruled in or out", "C0", None, "—")
+    catalysts = [c for c in today if c["grade"].grade not in ("dilutive", "filing")]
+    hard = [c for c in catalysts if c["grade"].grade == "hard" and not c["buyout"]]
+    if hard:
+        c = hard[0]
+        return out("STRONG", f"{c['type']} — the company's own news, dated today: quantifiable value", "C3", c)
+    if any(c["buyout"] for c in catalysts):
+        c = next(c for c in catalysts if c["buyout"])
+        return out("WEAK", "buyout target — the price is pinned near the deal; no momentum left", "C7", c, "deal")
+    soft = [c for c in catalysts if c["grade"].grade == "soft"
+            and c["type"] in ("analyst", "partnership", "patent", "uplist", "contract", "deal", "earnings", "FDA")]
+    if soft:
+        c = soft[0]
+        return out("MODERATE", f"{c['type']} — attention, no stated value: the chart has to carry it", "C4", c)
+    older_hard = [c for c in own if not c["today"] and c["grade"].grade == "hard" and not c["buyout"]
+                  and c["bucket"] in ("prior",)]
+    if older_hard:
+        c = older_hard[0]
+        return out("MODERATE", f"yesterday's {c['type']} — day-2 interest, not fresh news", "C8", c)
+    pr = [c for c in catalysts if c["grade"].grade in ("soft", "listing")]
+    if pr:
+        c = pr[0]
+        why = ("listing notice — administrative, not economic value" if c["grade"].grade == "listing"
+               else "PR without substance — attention, no counterparty, no value")
+        return out("WEAK", why, "C5", c, "listing notice" if c["grade"].grade == "listing" else "PR")
+    dil = [c for c in today if c["grade"].grade == "dilutive"]
+    if dil:
+        return out("WEAK", "offering/dilution — supply, not a catalyst", "C6", dil[0])
+    unread = [c for c in today if c["grade"].grade == "filing"]
+    if unread:
+        return out("WEAK", "unread SEC filing — open it; the desk cannot tell what it says", "C9", unread[0])
+    since = f"the {cutoff:%a} 16:00 close" if cutoff else "the last close"
+    if own:
+        return out("WEAK", f"no company news since {since} — the newest own headline is {own[0]['age']}",
+                   "C5", own[0], "none found")
+    return out("WEAK", f"no company news since {since} — the news pillar fails", "C5")

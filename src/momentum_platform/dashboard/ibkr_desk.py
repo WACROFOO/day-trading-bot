@@ -990,7 +990,7 @@ class IbkrDesk:
                 continue
             self._extra_news_at[sym] = now_m
             try:
-                out += FN.sec_records(sym, self._sec_client)
+                out += FN.sec_snapshot(sym, self._sec_client)   # 8-K/6-K headlines + the card's filing list
             except Exception:                              # noqa: BLE001
                 pass
             try:
@@ -1002,11 +1002,19 @@ class IbkrDesk:
     def _merge_headlines(self, recs: list, note: Optional[str]) -> None:
         """On the worker: dedupe on (symbol, provider_id), keep the source note."""
         if recs:
+            # A symbol's filing list is a snapshot, not a stream: the newest
+            # replaces the last instead of piling up every ten minutes.
+            renewed = {r["symbol"] for r in recs if r.get("type") == "filings"}
+            if renewed:
+                self._news = [r for r in self._news
+                              if not (r.get("type") == "filings" and r["symbol"] in renewed)]
             seen = {(r["symbol"], r["provider_id"]) for r in self._news}
             fresh = [r for r in recs if (r["symbol"], r["provider_id"]) not in seen]
             if fresh:
                 self._news += fresh
-                self.log(f"  headlines: {len(fresh)} new")
+                n = sum(1 for r in fresh if r.get("type", "news") == "news")
+                if n:
+                    self.log(f"  headlines: {n} new")
         self._news_note = note
 
     def _refresh_session(self) -> dict:
@@ -1148,9 +1156,33 @@ class IbkrDesk:
             "frame": tail,
             "metrics": {sym: meta.get("metrics") for sym, meta in session["symbols"].items()
                         if meta.get("metrics")},
+            # The decision cards ride every tick (2026-10-08): the verdict, the
+            # plan and the bot's answer used to wait for the once-a-minute full
+            # fetch while the price above them moved every three seconds. Only
+            # the cards that CHANGED travel (their "as of" aside, which is one
+            # field for all), so the tick stays a small fraction of the session.
+            "cards": self._changed_cards(session.get("cards") or {}),
+            "cardsAsOf": next((c.get("asOf") for c in (session.get("cards") or {}).values()), None),
+            "cardsAsOfEt": next((c.get("asOfEt") for c in (session.get("cards") or {}).values()), None),
+            "provider": session.get("provider"),
         })
         ph["publish"] = time.perf_counter() - tp
         return session
+
+    def _changed_cards(self, cards: dict) -> dict:
+        """The cards whose content moved since the last tick, by value."""
+        import json as _json
+        sent = getattr(self, "_cards_sent", None)
+        if sent is None:
+            sent = self._cards_sent = {}
+        out = {}
+        for sym, card in cards.items():
+            key = _json.dumps({k: v for k, v in card.items() if k not in ("asOf", "asOfEt")},
+                              sort_keys=True, default=str)
+            if sent.get(sym) != key:
+                sent[sym] = key
+                out[sym] = card
+        return out
 
     def scan(self, add: bool = True) -> dict:
         t0 = time.monotonic()
@@ -1201,6 +1233,13 @@ class IbkrDesk:
         d["clientId"] = self.client_id
         d["scannerClientId"] = self.scanner_client_id
         d["builtAt"] = self.built_at
+        # Names dropped for want of a real-time data permission (10089/420,
+        # AMEX): they used to leave the page with only a terminal line.
+        d["noLiveData"] = sorted(self.no_live_data)
+        # 10197 as a state, not a line in a scrolling log: set on the error,
+        # cleared on 1101/1102, so the page can name it while it lasts.
+        cs = getattr(self, "competing_since", None)
+        d["competingSince"] = cs.isoformat() if cs is not None else None
         return d
 
     def add_symbols(self, symbols) -> list:

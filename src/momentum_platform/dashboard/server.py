@@ -415,7 +415,121 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                 return self._send(asset.read_bytes(), ctype)
             self._json({"error": "not found", "path": path}, status=404)
 
+        # -- the owner's buttons (2026-10-08) ---------------------------------
+        # "I took it / I passed / I closed it" and the manual dollar risk. They
+        # write to the ledger the desk journals to — through their OWN
+        # connection, so a button never commits half of a rebuild the worker
+        # has open on the desk's — and never anywhere near the order path:
+        # this desk still sends nothing to a broker. A JSON body is required,
+        # which a cross-site form cannot send without a preflight this server
+        # never answers.
+        def do_POST(self) -> None:  # noqa: N802
+            path = urlparse(self.path).path
+            role = self._role()
+            if role is None:
+                return self._refuse()
+            if role == "viewer":
+                return self._json({"error": "this key views the desk; only the owner records calls"}, 403)
+            if (self.headers.get("Content-Type") or "").split(";")[0].strip() != "application/json":
+                return self._json({"error": "send application/json"}, 415)
+            try:
+                n = int(self.headers.get("Content-Length") or 0)
+                body = json.loads(self.rfile.read(min(n, 65536)) or b"{}")
+            except (ValueError, TypeError):
+                return self._json({"error": "body is not JSON"}, 400)
+            if path == "/api/v1/manual":
+                return self._json(*_manual_post(holder, body))
+            if path == "/api/v1/settings":
+                return self._json(*_settings_post(holder, body))
+            return self._json({"error": "not found", "path": path}, 404)
+
     return Handler
+
+
+def _manual_conn(holder):
+    """(connection, persisted?) for the owner's calls: the desk's own ledger
+    file when it journals (JOURNAL_DB), else an in-memory ledger that lives as
+    long as this server — and the reply says it is not saved."""
+    import os
+    from journal import ledger as L
+    path = os.environ.get("JOURNAL_DB")
+    if path:
+        conn = getattr(holder, "_manual_conn", None)
+        if conn is None:
+            conn = holder._manual_conn = L.connect(path)
+        return conn, True
+    conn = getattr(holder, "_manual_mem", None)
+    if conn is None:
+        conn = holder._manual_mem = L.connect(":memory:")
+    return conn, False
+
+
+def _refresh_cards(holder, conn) -> None:
+    """A replay never rebuilds by itself, so its cards are recomputed at once;
+    the live desk picks the row up on its next rebuild (seconds)."""
+    if getattr(holder, "hub", None) is not None:
+        return
+    from .cards import cards_for
+    try:
+        session = holder.current()
+        session["cards"] = cards_for(session, conn, bot_conn=None)
+    except Exception:                                     # noqa: BLE001 — the row is saved either way
+        pass
+
+
+def _manual_post(holder, body: dict) -> tuple:
+    from datetime import datetime, timezone
+    from journal import ledger as L
+    from .cards import _now_of
+    conn, saved = _manual_conn(holder)
+    session = holder.current()
+    sym = str(body.get("symbol") or "").strip().upper()
+    card = (session.get("cards") or {}).get(sym) or {}
+    v = card.get("verdict") or {}
+    setup = card.get("setup") or {}
+    plan_key = None
+    if setup.get("trigger") and setup.get("stop"):
+        plan_key = f"{sym}|{setup.get('armedAt') or setup.get('triggerBar')}|{setup['trigger']}|{setup['stop']}"
+    live = getattr(holder, "hub", None) is not None
+    at = datetime.now(timezone.utc) if live else _now_of(session)
+
+    def num(k, cast=float):
+        x = body.get(k)
+        try:
+            return None if x in (None, "") else cast(x)
+        except (TypeError, ValueError):
+            return None
+    try:
+        rid = L.record_manual(conn, sym, str(body.get("action") or ""), price=num("price"),
+                              shares=num("shares", int), stop=num("stop"), trigger=num("trigger"),
+                              verdict=v.get("word"), reason=v.get("reason"), plan_key=plan_key,
+                              note=(str(body.get("note"))[:500] if body.get("note") else None),
+                              card=card or None, at=at)
+    except ValueError as exc:
+        return {"error": str(exc)}, 400
+    _refresh_cards(holder, conn)
+    return {"id": rid, "saved": saved,
+            "note": "recorded in the ledger" if saved else
+            "recorded for this desk session only — no JOURNAL_DB, nothing is saved"}, 200
+
+
+def _settings_post(holder, body: dict) -> tuple:
+    from journal import ledger as L
+    from .cards import RISK_KEY
+    conn, saved = _manual_conn(holder)
+    risk = body.get("risk")
+    if risk in (None, ""):
+        L.set_setting(conn, RISK_KEY, None)
+    else:
+        try:
+            r = float(risk)
+        except (TypeError, ValueError):
+            return {"error": "risk must be a dollar amount"}, 400
+        if not (0 < r <= 100000):
+            return {"error": "risk must be a positive dollar amount"}, 400
+        L.set_setting(conn, RISK_KEY, r)
+    _refresh_cards(holder, conn)
+    return {"risk": L.get_setting(conn, RISK_KEY), "saved": saved}, 200
 
 
 def main(argv=None) -> int:

@@ -100,11 +100,54 @@ def filing_headline(form: str, items: List[str], sentence: Optional[str]) -> str
     return f"SEC {form} · {what}" + (f" — {sentence}" if sentence else "")
 
 
+#: Forms the desk's catalyst card reads from the same submissions download:
+#: shelf capacity, takedowns (shares sold now) and the foreign-issuer forms that
+#: mean "no S-3/424B tripwire" (CLAUDE.md rule 7).
+CARD_FORMS = ("S-3", "S-3ASR", "S-1", "F-1", "F-3", "424B1", "424B2", "424B3", "424B4",
+              "424B5", "424B7", "FWP", "6-K", "20-F", "40-F")
+CARD_DAYS = 365          # EDGAR's "recent" array; older shelves are not seen (stated on the card)
+
+
+def filings_record(symbol: str, recent: dict, cik, now: datetime) -> dict:
+    """One `filings` record: the card forms filed in the last CARD_DAYS, newest
+    first, each with its age in days and a link. Built from the submissions
+    JSON `sec_records` already downloaded — no second request."""
+    forms = recent.get("form") or []
+    dates = recent.get("filingDate") or []
+    accs = recent.get("accessionNumber") or []
+    docs = recent.get("primaryDocument") or []
+    today = now.astimezone(ET).date()
+    out = []
+    for i, form in enumerate(forms):
+        try:
+            filed = datetime.fromisoformat(dates[i]).date()
+        except (IndexError, ValueError):
+            continue
+        age = (today - filed).days
+        if age > CARD_DAYS:
+            break                                   # newest first
+        if form not in CARD_FORMS:
+            continue
+        acc = accs[i] if i < len(accs) else ""
+        doc = docs[i] if i < len(docs) else ""
+        out.append({"form": form, "filed": filed.isoformat(), "age_days": age,
+                    "url": f"https://www.sec.gov/Archives/edgar/data/{cik}/{acc.replace('-', '')}/{doc}"})
+    return {"type": "filings", "symbol": symbol, "forms": out,
+            "provider_id": f"sec-filings-{symbol}-{now.strftime('%Y%m%dT%H%M')}",
+            "checked_at": now.isoformat(timespec="seconds").replace("+00:00", "Z")}
+
+
 def sec_records(symbol: str, client, now: Optional[datetime] = None,
                 fetch_doc: Optional[Callable[[str], str]] = None) -> List[dict]:
     """News records from the symbol's 8-K/6-K filings accepted in the last
     WINDOW_HOURS. `client` is a `sec_source.SecClient`; `fetch_doc(url)` returns
     the document's HTML (defaults to the client's own throttled session)."""
+    return [r for r in sec_snapshot(symbol, client, now, fetch_doc) if r["type"] == "news"]
+
+
+def sec_snapshot(symbol: str, client, now: Optional[datetime] = None,
+                 fetch_doc: Optional[Callable[[str], str]] = None) -> List[dict]:
+    """`sec_records`' news plus one `filings` record from the same download."""
     from .sec_source import SEC_SUBMISSIONS
     now = now or datetime.now(timezone.utc)
     cik = client.cik_for(symbol)
@@ -112,7 +155,7 @@ def sec_records(symbol: str, client, now: Optional[datetime] = None,
         return []
     recent = ((client._get(SEC_SUBMISSIONS.format(cik=cik)).get("filings") or {}).get("recent") or {})
     forms = recent.get("form") or []
-    out = []
+    out = [filings_record(symbol, recent, cik, now)]
     for i, form in enumerate(forms):
         if form not in EVENT_FORMS:
             continue

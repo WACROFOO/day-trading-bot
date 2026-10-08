@@ -87,12 +87,14 @@ SELECTIVE = True
 #: the pullback volume is lighter relative to the buying volume", DP4ayEWhmvM
 #: 00:17:28) and the measured gain was 0.006-0.013 R a trade, inside noise.
 VOLUME_FLAG_ONLY = False
-SELECTIVE_MIN_STOP_PCT = 2.0
+#: A13's stop floor and price floor live in momentum_platform.order_math so the
+#: desk's order panel reads the same numbers the runner refuses on.
+from momentum_platform.order_math import SELECTIVE_MIN_PRICE, SELECTIVE_MIN_STOP_PCT  # noqa: E402
 #: 2.0 from 2026-09-30 (owner, delegated): at live costs the $5 floor adds
 #: 0.09 R a trade (−0.502 → −0.413 on 2024-2026) and halves the trades
 #: (2,266 → 1,007); this week's gappers were all $2-5 and it refused every
 #: one. $2 is FILTERS.md gate 1's own floor, so the price lever is inert.
-SELECTIVE_MIN_PRICE = 2.0
+#: (SELECTIVE_MIN_PRICE itself is imported from order_math above.)
 #: None = lever off (2026-09-29): the desk arms a plan on every qualifying bar
 #: from 04:00, backfill included, so BKYI's 08:12 plan was its 13th — "first
 #: or second plan" live meant "none after dawn", not the ablation's pullback count.

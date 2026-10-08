@@ -70,16 +70,39 @@ def test_a_decision_first_seen_stale_is_upgraded_by_the_next_live_build():
 
 # ---- catalyst dated today ---------------------------------------------------------------
 def test_catalyst_counts_only_since_yesterdays_close_and_never_a_roundup():
+    # 2026-09-08 is the Tuesday after Labor Day: the last close was Friday 09-04.
     day = "2026-09-08"
     fresh = {"publishedAt": "2026-09-08T11:30:00Z", "category": "press_release"}        # 07:30 ET today
-    overnight = {"publishedAt": "2026-09-07T21:00:00Z", "category": "news"}            # 17:00 ET yesterday
-    old = {"publishedAt": "2026-09-06T14:00:00Z", "category": "news"}                   # two days ago
+    overnight = {"publishedAt": "2026-09-07T21:00:00Z", "category": "news"}            # 17:00 ET, the holiday
+    weekend = {"publishedAt": "2026-09-06T14:00:00Z", "category": "news"}               # Sunday 10:00 ET
+    old = {"publishedAt": "2026-09-04T14:00:00Z", "category": "news"}                   # Friday 10:00 ET, before its close
     roundup = {"publishedAt": "2026-09-08T11:00:00Z", "category": "market_roundup"}
     assert SB._catalyst_today([fresh], day) is True
     assert SB._catalyst_today([overnight], day) is True
+    # Since 2026-10-08 the cutoff is the previous TRADING day's 16:00 ET: news
+    # over a weekend or a holiday is the next session's catalyst. On the old
+    # calendar-day cutoff a Monday lost Friday's after-close news.
+    assert SB._catalyst_today([weekend], day) is True
     assert SB._catalyst_today([old], day) is False
     assert SB._catalyst_today([roundup], day) is False
     assert SB._catalyst_today([], day) is False
+
+
+def test_the_catalyst_gate_reads_the_sessions_trading_date():
+    """Desk map 2026-10-08: gate 3 read meta['tradingDate'], which no symbol
+    carried, so a headline two days old passed the catalyst pillar. The builder
+    now stamps every symbol with the session's day before judging a plan."""
+    recs = [{"type": "reference", "symbol": "OLDN", "prev_close": 3.0, "float_shares": 5e6,
+             "float_quality": "verified"},
+            {"type": "news", "symbol": "OLDN", "published_at": "2026-10-05T14:00:00Z",
+             "first_observed_at": "2026-10-05T14:00:00Z", "headline": "OLDN wins $9M contract",
+             "provider_id": "n1"}]
+    recs += [{"type": "bar", "symbol": "OLDN", "ts": f"2026-10-07T13:{m:02d}:00Z", "open": 3.3, "high": 3.4,
+              "low": 3.25, "close": 3.35, "volume": 50000} for m in range(30, 40)]
+    out = SB.build_session_from_records(recs, "t", "t")
+    assert out["symbols"]["OLDN"]["tradingDate"] == "2026-10-07"
+    gate = next(g for g in out["cascade"]["OLDN"]["gates"] if g["id"] == "catalyst")
+    assert gate["state"] == "FAIL", gate        # Monday 10:00 ET news is not Wednesday's catalyst
 
 
 # ---- point-in-time quote ---------------------------------------------------------------

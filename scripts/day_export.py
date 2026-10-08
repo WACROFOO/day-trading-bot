@@ -97,7 +97,15 @@ def export(conn, day: str, out: Path, log: Path = LOG) -> dict:
         with jf.open(newline="") as fh:
             manual = [r for r in csv.DictReader(fh) if r.get("date") == day]
     n["manual"] = _csv(out / "manual_trades.csv", manual)
-    syms = sorted({r["symbol"] for r in dec} | {r["sym"].upper() for r in manual if r.get("sym")})
+    # The owner's calls from the desk's buttons (2026-10-08): took / passed /
+    # closed, each with the card the desk showed at that moment.
+    try:
+        calls = _rows(conn, "SELECT * FROM manual_decisions WHERE substr(ts_et,1,10)=? ORDER BY ts_et, id", (day,))
+    except Exception:                                   # noqa: BLE001 — a ledger from before the table
+        calls = []
+    n["desk_calls"] = _csv(out / "desk_calls.csv", calls)
+    syms = sorted({r["symbol"] for r in dec} | {r["sym"].upper() for r in manual if r.get("sym")}
+                  | {r["symbol"] for r in calls})
     d0 = datetime.fromisoformat(f"{day}T04:00:00").replace(tzinfo=L.ET).astimezone(timezone.utc)
     d1 = d0 + timedelta(hours=8)
     bars = []
@@ -112,7 +120,26 @@ def export(conn, day: str, out: Path, log: Path = LOG) -> dict:
     meta = {"day": day, "exported_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "counts": n,
             "ledger": str(conn.execute("PRAGMA database_list").fetchone()[2])}
     (out / "export.json").write_text(json.dumps(meta, indent=1))
+    _index_day(out.parent, day)
+    readme = out / "README.md"
+    if not readme.exists():
+        readme.write_text(f"# {day} — one day exported from the owner's Mac\n\n"
+                          "The files are described in `../README.md`; `review.md` is the day read on its\n"
+                          "own bars. Exported by `scripts/day_export.py` (counts in `export.json`).\n")
     return meta
+
+
+def _index_day(daily: Path, day: str) -> None:
+    """Name the new day in research/daily/README.md, the folder's index: the
+    index doctor fails a README that omits a subdirectory, and an unnamed day
+    is a day the next reader does not find."""
+    readme = daily / "README.md"
+    if not readme.exists():
+        return
+    text = readme.read_text()
+    if f"`{day}/`" in text:
+        return
+    readme.write_text(text.rstrip() + f"\n| `{day}/` | exported {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC |\n")
 
 
 def push(day: str) -> bool:

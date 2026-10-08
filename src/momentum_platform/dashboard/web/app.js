@@ -1422,10 +1422,26 @@ const CATALYST_RULES = [
             "conference", "presentation", "short interest"],
     note: "Attention without quantifiable value. It can still move a low float, but it does not justify size on its own." },
 ];
+/* Whole words from the left, as momentum_platform.catalyst.classify matches
+   since 2026-10-08: a substring test read "window" as a market wrap ("dow ")
+   and "disorder" as hard news ("order"). An SEC filing with nothing readable
+   behind its form and item codes (a 6-K, an 8-K "other events" with no body
+   sentence) is an unread filing, not news. */
+const WORD_RE = {};
+function wordRe(words) {
+  const k = words.join("|");
+  return WORD_RE[k] || (WORD_RE[k] = new RegExp(words.map(w =>
+    "(?<![a-z0-9])" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")));
+}
+const UNREAD_FILING_RE = /^sec [\w\/-]+ · (?:[\w\/-]+|(?:item (?:7\.01|8\.01|9\.01)[^;—]*(?:; )?)+)$/;
 function classifyCatalyst(headline, category) {
-  const hay = ((headline || "") + " " + (category || "")).toLowerCase();
+  const head = (headline || "").trim().toLowerCase();
+  if ((category || "") === "sec_filing" && UNREAD_FILING_RE.test(head))
+    return { grade: "filing", label: "Unread filing", note:
+      "An SEC filing with nothing readable behind its form and item codes. Open it; it is not counted as news." };
+  const hay = head + " " + (category || "").toLowerCase();
   for (const rule of CATALYST_RULES) {
-    if (rule.words.some(w => hay.indexOf(w) >= 0)) return rule;
+    if (wordRe(rule.words).test(hay)) return rule;
   }
   return { grade: "soft", label: "Unclassified", note:
     "No familiar catalyst family matched. Read the headline yourself before treating it as a reason." };
@@ -1445,7 +1461,7 @@ function catalystVerdict(nf, sourceOk) {
   if (!nf) return sourceOk === false ? "UNKNOWN" : "NONE";
   if (nf.shared || !nf.flame) return "NONE";
   const g = classifyCatalyst(nf.item.headline, nf.item.category).grade;
-  if (g === "roundup" || g === "reaction") return "NONE";
+  if (g === "roundup" || g === "reaction" || g === "filing") return "NONE";
   if (g === "dilutive") return "DILUTIVE";
   if (g === "hard" && nf.ageMin <= 720) return "STRONG";
   return "WEAK";
@@ -1635,7 +1651,8 @@ function renderQuote(frame, ctx) {
       kv(grid, src + " bid/ask", fx(meta.iexBid) + " × " + fx(meta.iexAsk));
   }
   q.appendChild(grid);
-  renderCatalyst(q, ctx);
+  const card = cardFor(ctx.sym);
+  if (card && card.catalyst) renderServerCatalyst(q, card.catalyst); else renderCatalyst(q, ctx);
   if (meta.floatQuality === "shares_outstanding_proxy")
     // Says what the pillar actually does. It used to claim the pillar fails
     // until a verified value exists, while the pill two inches away read PASS:
@@ -1735,6 +1752,8 @@ function shortGate(g) {
 }
 function renderVerdict(frame, ctx) {
   const { last, chg, hod, row, meta, nf, halted, sym } = ctx;
+  const card = cardFor(sym);
+  if (card) { renderDecisionCard(frame, ctx, card); return; }   // the server's card (2026-10-08)
   const host = $("#verdictCard"); host.textContent = "";
   const T = S.pillarThresholds;
   const plan = livePlan(sym, frame.t);
@@ -1937,6 +1956,16 @@ function syncFloatInput() {
   box.value = mine > 0 ? mine : "";
 }
 
+/* The risk box shows the risk the cards are sized on: yours once stated, else
+   the bot's, labelled. Never overwritten while you type. */
+function syncRiskInput() {
+  const box = document.getElementById("riskInput");
+  if (!box || document.activeElement === box || !S.cards) return;
+  const c = cardFor(state.selected), r = c && c.risk;
+  if (r && r.source === "yours" && r.dollars != null) box.value = String(r.dollars);
+  box.placeholder = r && r.dollars ? "$" + fx(r.dollars, 0) + " (" + r.source + ")" : "e.g. 25";
+}
+
 function renderSizing(plan, row) {
   const out = $("#sizingOut"); out.textContent = "";
   const risk = Number(state.riskDollars);
@@ -1954,6 +1983,314 @@ function renderSizing(plan, row) {
   } else {
     out.appendChild(el("div", "note", "No armed setup to size yet."));
   }
+}
+
+/* ── decision card (owner, 2026-10-08) ─────────────────────────────────
+   The server builds one card per symbol (src/momentum_platform/decision_card.py):
+   the verdict word, the one reason that decides it and the level to watch;
+   the bot's own gates as lamps, value beside threshold; the setup; the bot's
+   order for the plan as numbers to type (order_math — the runner's own
+   arithmetic); the catalyst read; and what the runner did. The browser
+   renders it and recomputes nothing: a threshold here would drift from the
+   one the bot enforces (docs/desk-assessment-2026-10-08.md). Nothing here
+   places an order: the buttons record the owner's own calls in the ledger. */
+const CARD_WORD_CLASS = { REVIEW: "go", WATCH: "watch", WAIT: "wait", NO: "pass" };
+const LAMP_SHORT = { price: "price", gain: "gain", rvol: "RVOL", float: "float", catalyst: "news", pillars: "5P",
+                     rising: "rising", structure: "split·tick", vwap: "VWAP", ema9: "9EMA", macd: "MACD",
+                     pullback: "vol↓", room: "room", tape: "tape" };
+const LAMP_CLASS = { PASS: "ok", FAIL: "no", UNKNOWN: "unk", STALE: "unk", MANUAL_CONFIRMATION_REQUIRED: "man",
+                     NOT_APPLICABLE: "na", INFO: "info" };
+function cardFor(sym) { return S.cards ? S.cards[sym] : null; }
+function atLiveEdge(frame) { return !FRAMES.length || frame.t >= FRAMES[FRAMES.length - 1].t; }
+
+function renderDecisionCard(frame, ctx, card) {
+  const host = $("#verdictCard"); host.textContent = "";
+  const v = card.verdict || {};
+  const box = el("div", "dc");
+  if (!atLiveEdge(frame)) {
+    box.appendChild(el("div", "dc-asof-note", "This card is the desk's read at " + card.asOfEt +
+      " ET; you are viewing " + etClock(frame.ts) + ". Return to the live edge to act on it."));
+  }
+  const ban = el("div", "dc-verdict " + (CARD_WORD_CLASS[v.word] || "wait"));
+  ban.appendChild(el("b", null, v.word || "—"));
+  ban.appendChild(el("span", "dc-reason", v.reason || ""));
+  ban.title = "server card · cascade " + (v.cascade || "—") + " · as of " + card.asOfEt + " ET";
+  box.appendChild(ban);
+  const lv = el("div", "dc-level");
+  if (v.level != null) {
+    lv.appendChild(el("span", "dc-arrow", "▸ "));
+    lv.appendChild(el("b", null, fx(v.level)));
+    lv.appendChild(el("span", null, " " + (v.levelLabel || "")));
+  } else {
+    lv.appendChild(el("span", "muted", "no level changes this answer"));
+  }
+  lv.appendChild(el("span", "dc-asof", "as of " + card.asOfEt));
+  box.appendChild(lv);
+  if (card.setup && card.setup.text && card.setup.text !== v.reason)
+    box.appendChild(el("div", "dc-setup", card.setup.text));
+  const bot = card.bot || {};
+  const b = el("div", "dc-bot " + (bot.tone || "info"));
+  b.appendChild(el("span", "dc-tag", "bot"));
+  b.appendChild(el("span", null, bot.text || "—"));
+  if (bot.reasons && bot.reasons.length) b.title = bot.reasons.map(r => r.raw).join("\n");
+  box.appendChild(b);
+  (card.warnings || []).forEach(w => box.appendChild(el("div", "dc-warn", "⚠ " + w.text)));
+  const chips = el("div", "dc-chips");
+  const table = el("div", "dc-lamps");
+  (card.lamps || []).forEach(l => {
+    const cls = LAMP_CLASS[l.state] || "unk";
+    const c = el("span", "vchip " + cls, LAMP_SHORT[l.id] || l.label);
+    c.title = l.label + ": " + l.state + " · " + l.value + " · " + l.rule + (l.why ? "\n" + l.why : "");
+    chips.appendChild(c);
+    const r = el("div", "dc-lamp " + cls);
+    r.appendChild(el("i", null, ""));
+    r.appendChild(el("span", "l", l.label));
+    r.appendChild(el("span", "v", l.value));
+    r.appendChild(el("span", "r", l.rule));
+    if (l.why) r.title = l.why;
+    table.appendChild(r);
+  });
+  box.appendChild(chips);
+  box.appendChild(el("div", "divider", "gates · the value beside the bot's own threshold"));
+  box.appendChild(table);
+  host.appendChild(box);
+  renderTicket(card);
+}
+
+let TOOK_FORM = null;                 // the symbol whose "I took it" form is open
+function renderTicket(card) {
+  const out = $("#sizingOut"); if (!out) return;
+  const a = document.activeElement;
+  if (a && a.tagName === "INPUT" && out.contains(a)) return;   // never fight the typist
+  out.textContent = "";
+  const t = card.ticket, pos = card.position;
+  if (pos) {
+    const p = el("div", "dc-pos" + (pos.breach ? " breach" : ""));
+    p.appendChild(el("b", null, "IN POSITION"));
+    p.appendChild(el("span", null, " since " + (pos.since || "—") + " · " + pos.shares + " sh @ " + fx(pos.entry)));
+    out.appendChild(p);
+    const lv = el("div", "dc-grid");
+    kv(lv, "stop", fx(pos.stop));
+    kv(lv, "trail (1R, A3)", fx(pos.trail));
+    kv(lv, "2R reference", fx(pos.target_2r));
+    kv(lv, "now", pos.last == null ? "—" : fx(pos.last) + " · " + (pos.r_now >= 0 ? "+" : "") + fx(pos.r_now) +
+       "R · $" + fx(pos.pnl));
+    out.appendChild(lv);
+    if (pos.breach) out.appendChild(el("div", "dc-breach", pos.breach === "2R"
+      ? "2R reached — the bot holds and trails 1R under the high (A3); your call"
+      : "price is through your " + pos.breach + " level — the bot would be out"));
+    out.appendChild(manualButtons(card, ["closed"]));
+    return;
+  }
+  if (!t) {
+    out.appendChild(el("div", "note", card.verdict && card.verdict.word === "NO"
+      ? "No order: the cascade killed this name."
+      : "No order yet: no pullback has formed, so there is no trigger and no structural stop."));
+    out.appendChild(manualButtons(card, ["passed"]));
+    return;
+  }
+  const head = el("div", "dc-order-head");
+  head.appendChild(el("b", null, "ORDER"));
+  head.appendChild(el("span", "muted", t.session === "premarket" ? "pre-market" : t.session === "regular"
+    ? "regular hours" : "no new entries now"));
+  const copy = el("button", "btn dc-copy", "copy");
+  copy.title = "Copy the order line";
+  copy.onclick = () => copyText(t.order_line, copy);
+  head.appendChild(copy);
+  out.appendChild(head);
+  out.appendChild(el("div", "dc-order-line", t.order_line));
+  const grid = el("div", "dc-grid");
+  kv(grid, "trigger", fx(t.trigger));
+  kv(grid, "limit (A10)", fx(t.limit));
+  kv(grid, "stop", fx(t.stop));
+  kv(grid, "risk / share", fx(t.risk_share) + " · " + fx(t.stop_pct, 1) + "%");
+  kv(grid, "shares", t.shares == null ? "state your risk" : String(t.shares) +
+     (t.bound_by === "funds" ? " (account-bound)" : ""));
+  kv(grid, "2R reference", fx(t.target_2r));
+  if (t.shares != null) {
+    kv(grid, "loss at stop", "$" + fx(t.loss_at_stop));
+    kv(grid, "worst case (A18)", "$" + fx(t.loss_worst));
+    kv(grid, "notional", "$" + Math.round(t.notional_worst));
+  }
+  out.appendChild(grid);
+  const checks = el("div", "dc-checks");
+  (t.checks || []).forEach(c => {
+    const x = el("div", "dc-check " + (c.ok === true ? "ok" : c.ok === false ? "no" : "unk"));
+    x.appendChild(el("i", null, c.ok === true ? "✓" : c.ok === false ? "✗" : "?"));
+    x.appendChild(el("span", null, c.label + ": " + c.value));
+    x.title = c.rule;
+    checks.appendChild(x);
+  });
+  out.appendChild(checks);
+  out.appendChild(el("div", "dc-exit", t.exit_text));
+  out.appendChild(manualButtons(card, ["took", "passed"]));
+  if (card.risk && card.risk.dollars) out.appendChild(el("div", "note", "sized on $" + fx(card.risk.dollars, 0) +
+    " a trade — " + card.risk.source + " risk"));
+}
+
+function manualButtons(card, actions) {
+  const row = el("div", "dc-manual");
+  const sym = card.symbol;
+  if (TOOK_FORM === sym && actions.indexOf("took") >= 0) { row.appendChild(tookForm(card)); return row; }
+  actions.forEach(a => {
+    const btn = el("button", "btn dc-btn " + a, { took: "I took it", passed: "I passed", closed: "I closed it" }[a]);
+    btn.onclick = () => {
+      askNotify();
+      if (a === "took") { TOOK_FORM = sym; render(); return; }
+      if (a === "closed") {
+        const last = card.position && card.position.last != null ? fx(card.position.last) : "";
+        const px = window.prompt("Exit price for " + sym + "?", last);
+        if (px) postManual({ symbol: sym, action: "closed", price: px });
+        return;
+      }
+      postManual({ symbol: sym, action: "passed" });
+    };
+    row.appendChild(btn);
+  });
+  if (card.manual) row.appendChild(el("span", "muted tiny", "last call: " + card.manual.action + " " +
+    String(card.manual.ts_et || "").slice(11, 16)));
+  return row;
+}
+function tookForm(card) {
+  const t = card.ticket || {}, f = el("div", "dc-took");
+  const inp = (val, step) => { const i = el("input"); i.type = "number"; i.step = step; i.min = "0";
+                               i.value = val == null ? "" : String(val); return i; };
+  const px = inp(t.limit, "0.01"), sh = inp(t.shares, "1"), st = inp(t.stop, "0.01");
+  [["fill", px], ["shares", sh], ["stop", st]].forEach(([l, i]) => {
+    const w = el("label"); w.appendChild(el("span", "tiny muted", l)); w.appendChild(i); f.appendChild(w); });
+  const save = el("button", "btn dc-btn took", "save"), cancel = el("button", "btn dc-btn", "cancel");
+  save.onclick = () => { TOOK_FORM = null; postManual({ symbol: card.symbol, action: "took", price: px.value,
+                                                        shares: sh.value, stop: st.value, trigger: t.trigger }); };
+  cancel.onclick = () => { TOOK_FORM = null; render(); };
+  f.appendChild(save); f.appendChild(cancel);
+  return f;
+}
+function postManual(body) {
+  return fetch("/api/v1/manual", { method: "POST", headers: { "Content-Type": "application/json" },
+                                   body: JSON.stringify(body) })
+    .then(r => r.json().then(j => ({ ok: r.ok, j })))
+    .then(({ ok, j }) => { toast(ok ? (j.note || "recorded") : "not recorded: " + (j.error || "error"), ok ? "ok" : "bad");
+                           refreshSession(); })
+    .catch(() => toast("not recorded: the desk did not answer", "bad"));
+}
+let RISK_TIMER = null;
+function postRisk(value) {
+  clearTimeout(RISK_TIMER);
+  RISK_TIMER = setTimeout(() => {
+    fetch("/api/v1/settings", { method: "POST", headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ risk: value }) })
+      .then(r => r.json().then(j => ({ ok: r.ok, j })))
+      .then(({ ok, j }) => { if (!ok) toast("risk not saved: " + (j.error || "error"), "bad"); refreshSession(); })
+      .catch(() => toast("risk not saved: the desk did not answer", "bad"));
+  }, 700);
+}
+function copyText(text, btn) {
+  const done = () => { if (btn) { btn.textContent = "copied"; setTimeout(() => { btn.textContent = "copy"; }, 1500); } };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, () => window.prompt("Copy the order:", text));
+  } else {
+    window.prompt("Copy the order:", text);
+  }
+}
+function toast(text, cls) {
+  let t = document.getElementById("deskToast");
+  if (!t) { t = el("div"); t.id = "deskToast"; document.body.appendChild(t); }
+  t.className = "desk-toast " + (cls || ""); t.textContent = text; t.hidden = false;
+  clearTimeout(toast._timer); toast._timer = setTimeout(() => { t.hidden = true; }, 3500);
+}
+function askNotify() {
+  try { if ("Notification" in window && Notification.permission === "default") Notification.requestPermission(); }
+  catch (e) { /* notifications are a convenience */ }
+}
+function notify(title, body) {
+  try { if ("Notification" in window && Notification.permission === "granted") new Notification(title, { body }); }
+  catch (e) { /* the sound and the banner still fire */ }
+}
+
+/* Alerts a manual trader must not miss, in sound and words: a manual
+   position crossing its stop, its 1R trail or 2R; a halt starting or ending
+   on any desk name. Seeded on the first paint so history is not news. */
+const BREACH = {}; const HALTS_SEEN = {}; let ALERTS_SEEDED = false;
+function watchCards(frame) {
+  const live = atLiveEdge(frame);
+  Object.keys(S.cards || {}).forEach(sym => {
+    const c = S.cards[sym], b = c.position && c.position.breach || null;
+    if (ALERTS_SEEDED && live && b && BREACH[sym] !== b) {
+      beep("critical");
+      toast(sym + ": " + (b === "2R" ? "2R reached" : "through your " + b + " level"), b === "2R" ? "ok" : "bad");
+      notify(sym + " " + (b === "2R" ? "2R reached" : b + " crossed"), "last " + fx(c.position.last));
+      const card = document.querySelector('[data-card="verdict"]');
+      if (card) { card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash"); }
+    }
+    BREACH[sym] = b;
+  });
+  Object.keys(frame.halts || {}).forEach(sym => {
+    const st = frame.halts[sym];
+    if (ALERTS_SEEDED && live && HALTS_SEEN[sym] !== undefined && HALTS_SEEN[sym] !== st) {
+      beep("critical");
+      toast(sym + (st === "halted" ? " HALTED" : " resumed"), st === "halted" ? "bad" : "ok");
+      notify(sym + (st === "halted" ? " halted" : " resumed"), "");
+    }
+    HALTS_SEEN[sym] = st;
+  });
+  ALERTS_SEEDED = true;
+}
+
+/* The banner for what blinds the desk: a competing login (10197), names
+   dropped for want of a data permission (AMEX), a desk that stops answering. */
+let HEALTH_FAILS = 0, HEALTH_FAIL_SINCE = null, COMPETING_BEEPED = false;
+function renderDeskAlerts(provider) {
+  const host = document.getElementById("deskAlerts"); if (!host) return;
+  host.textContent = "";
+  const lines = [];
+  const p = provider || S.provider || {};
+  if (p.competingSince) {
+    lines.push(["bad", "IBKR 10197 since " + etClock(p.competingSince) + ": another login on this username (TWS live, " +
+                "IBKR Mobile or Client Portal) holds the market data — the desk has NO tape. Log that session out; " +
+                "the paper Gateway stays."]);
+    if (!COMPETING_BEEPED) { COMPETING_BEEPED = true; beep("critical"); }
+  } else COMPETING_BEEPED = false;
+  if (p.noLiveData && p.noLiveData.length) {
+    lines.push(["warn", "dropped — no real-time data permission (NYSE American): " + p.noLiveData.join(", ")]);
+  }
+  if (HEALTH_FAILS >= 3) {
+    lines.push(["bad", "the desk is not answering since " + HEALTH_FAIL_SINCE + " — the page shows its last data"]);
+  }
+  lines.forEach(([cls, text]) => host.appendChild(el("div", "desk-alert " + cls, text)));
+  host.hidden = !lines.length;
+}
+function healthOk(h) { HEALTH_FAILS = 0; HEALTH_FAIL_SINCE = null; renderDeskAlerts(h && h.provider); }
+function healthFailed() {
+  HEALTH_FAILS++;
+  if (!HEALTH_FAIL_SINCE) HEALTH_FAIL_SINCE = new Date().toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false });
+  renderDeskAlerts(null);
+}
+
+/* The catalyst block, from the server's read (catalyst.card_read): the grade
+   and its reason on one line, the headline in two, then type · age · source
+   and the flags. Rules: knowledge-base/strategies/CATALYST.md. */
+function renderServerCatalyst(host, cat) {
+  host.appendChild(el("div", "divider", "catalyst"));
+  const top = el("div", "cat2-top");
+  const g = el("span", "cat2-grade " + cat.grade, cat.grade);
+  g.title = "rule " + cat.rule + " · knowledge-base/strategies/CATALYST.md";
+  top.appendChild(g);
+  const why = el("span", "cat2-reason", cat.reason);
+  why.title = cat.reason;
+  top.appendChild(why);
+  host.appendChild(top);
+  if (cat.headline) {
+    const h = el(cat.url ? "a" : "p", "cat2-headline", cat.headline);
+    if (cat.url) { h.href = cat.url; h.target = "_blank"; h.rel = "noopener noreferrer"; }
+    h.title = cat.headline;
+    host.appendChild(h);
+  }
+  const meta = [cat.type, cat.age, cat.source].filter(x => x && x !== "—");
+  if (meta.length) host.appendChild(el("div", "cat2-meta", meta.join(" · ")));
+  const flags = el("div", "cat2-flags");
+  (cat.flags || []).forEach(f => {
+    const x = el("span", "cat2-flag " + f.level, f.text); x.title = "rule " + f.rule; flags.appendChild(x); });
+  host.appendChild(flags);
 }
 
 /* ── charts ─────────────────────────────────────────────────────────── */
@@ -2738,6 +3075,7 @@ function refreshSession() {
     S.plans = next.plans; S.builtAt = next.builtAt; S.provider = next.provider || S.provider;
     S.cascade = next.cascade || S.cascade; S.suppressedPlans = next.suppressedPlans || [];
     S.fiveMinute = next.fiveMinute || {};
+    S.cards = next.cards || S.cards;
     S.sessionStart = next.sessionStart || S.sessionStart;
     S.feedLagSeconds = next.feedLagSeconds;
     if (next.tradingDate && next.tradingDate !== S.tradingDate) newTradingDay(next.tradingDate);
@@ -2781,6 +3119,12 @@ function applySessionTick(p) {
   if (p.metrics) Object.keys(p.metrics).forEach(sym => {
     if (SYMS[sym]) SYMS[sym].metrics = p.metrics[sym];
   });
+  if (p.cards) {                                  // the cards that changed ride every tick
+    S.cards = S.cards || {};
+    Object.keys(p.cards).forEach(sym => { S.cards[sym] = p.cards[sym]; });
+    if (p.cardsAsOfEt) Object.values(S.cards).forEach(c => { c.asOf = p.cardsAsOf; c.asOfEt = p.cardsAsOfEt; });
+  }
+  if (p.provider) { S.provider = p.provider; renderDeskAlerts(p.provider); }
   S.builtAt = p.builtAt;
   S.feedLagSeconds = p.feedLagSeconds;
   S.sessionStart = p.sessionStart || S.sessionStart;
@@ -2822,10 +3166,11 @@ function streamFollow() {
   let stamp = S.builtAt;
   setInterval(() => {
     fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json()).then(h => {
+      healthOk(h);
       if (h.provider) setFeedBadge(h.provider);
       if (h.desk) setRulesBadge(Object.assign({ role: h.role }, h.desk));
       if (h.builtAt && h.builtAt !== stamp) { stamp = h.builtAt; refreshSession(); }
-    }).catch(() => {});
+    }).catch(healthFailed);
   }, 5000);
 }
 function liveFollow() {
@@ -3059,6 +3404,8 @@ function render() {
   const ctx = renderHeader(frame);
   renderCharts(frame); renderQuote(frame, ctx); renderL2(frame, ctx);
   renderVerdict(frame, ctx); renderTimeline(state.frame); renderPillarsBoard(frame);
+  watchCards(frame);
+  syncRiskInput();
   syncFloatInput();     // or the box keeps the previous symbol's float and writes it onto this one
 }
 function syncTransport() { $("#scrub").value = String(state.frame); }
@@ -3091,6 +3438,7 @@ function init() {
   parked.id = "parked"; parked.hidden = true;
   document.body.appendChild(parked);
   loadLayout(); applyLayout(); applySizes(); wireLayout(); wireResizers(); renderTray();
+  renderDeskAlerts(S.provider);       // a competing login or dropped names, named from the first paint
 
   // The line under the name is the date, nothing else (owner, 2026-09-08).
   // Session id and feed mode live in its tooltip.
@@ -3170,6 +3518,7 @@ function init() {
   riskInput.value = state.riskDollars;
   riskInput.oninput = e => {
     state.riskDollars = e.target.value;
+    if (S.cards) { postRisk(e.target.value); return; }     // the server sizes with the bot's own math
     const frame = FRAMES[state.frame];
     renderSizing(activePlan(state.selected, frame.t), symbolRow(frame, state.selected));
     syncFloatInput();

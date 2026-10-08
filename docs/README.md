@@ -17,6 +17,7 @@ Design notes and operating guides for the momentum workstation.
 | `READINESS-2026-09-08.md` | **the pre-session review** — 90 audit findings judged by hand, the 26 fixed (recording path, then trading path), the ones refused and why, what is still open |
 | `ASSESSMENT-2026-09-07.md` | **the full review** — what is included, what is left, results so far (none live), how it runs, where the logs are, the improvement loop |
 | `STATUS-2026-09-06.md` | **plain-words status** — what works, what is left, what the owner does |
+| `desk-assessment-2026-10-08.md`, `desk-assessment-2026-10-08/` | **the desk as a manual decision tool** — the gap table, the evidence from 2026-10-06/07, what was built, and before/after screenshots of the card |
 | `day-runbook.md` | **run this** — the one command, what happens around it, the human-only commands |
 | `preregistration.md` | the exercise's sample size, stopping rules and failure condition — **PROPOSED until the owner sets the values, before the first order** |
 

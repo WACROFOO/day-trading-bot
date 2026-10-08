@@ -125,6 +125,19 @@ def build_session(fixture_path: str | Path, max_rows: int = 10,
 
 
 
+def _et_date_of_first_bar(bar_records: list) -> "str | None":
+    """The ET calendar date of the earliest bar, ISO; None without bars."""
+    stamps = [r.get("ts") for r in bar_records if r.get("ts")]
+    if not stamps:
+        return None
+    try:
+        from zoneinfo import ZoneInfo
+        d = datetime.fromisoformat(min(stamps).replace("Z", "+00:00"))
+        return d.astimezone(ZoneInfo("America/New_York")).date().isoformat()
+    except (ValueError, TypeError):
+        return None
+
+
 def _et_clock(ts) -> "str | None":
     """'2026-09-02T08:12:33.12Z' -> '04:12:33' for the quote card.
 
@@ -183,6 +196,7 @@ def build_session_from_records(
     news_queue: list[dict] = []
     halt_queue: list[dict] = []
     bar_records: list[dict] = []
+    filings_recs: list[dict] = []
     news_source_ok = True          # a `news_source` record from the desk says otherwise
 
     for rec in records:
@@ -221,6 +235,8 @@ def build_session_from_records(
             }
         elif kind == "news":
             news_queue.append(rec)
+        elif kind == "filings":
+            filings_recs.append(rec)
         elif kind == "halt":
             halt_queue.append(rec)
         elif kind == "bar":
@@ -230,6 +246,20 @@ def build_session_from_records(
     # never looked (A2). Every symbol carries the desk-level answer.
     for _m in symbols.values():
         _m["newsSourceOk"] = news_source_ok
+    # The SEC filing list the desk read with the 8-K/6-K headlines: shelf,
+    # takedown and foreign-issuer forms for the catalyst card. Newest read wins.
+    for rec in sorted(filings_recs, key=lambda r: r.get("checked_at") or ""):
+        if rec.get("symbol") in symbols:
+            symbols[rec["symbol"]]["filings"] = list(rec.get("forms") or [])
+            symbols[rec["symbol"]]["filingsCheckedAt"] = rec.get("checked_at")
+    # "Dated today" needs the day. Gate 3 read meta["tradingDate"], which no
+    # symbol carried (desk map, 2026-10-08), so any own headline in the 2-day
+    # fetch passed the catalyst pillar. The session's own day is set here,
+    # before any plan is judged: the desk's when it passes one, else the ET
+    # date of the first bar.
+    _td = trading_date or _et_date_of_first_bar(bar_records)
+    for _m in symbols.values():
+        _m["tradingDate"] = _td
 
     # 10-second fixtures are the single source of truth: the 1-minute bars the
     # scanner engine consumes are aggregated from them, so no chart timeframe
@@ -331,7 +361,7 @@ def build_session_from_records(
             symbols[rec["symbol"]]["news"].append({
                 "id": rec["provider_id"], "publishedAt": rec["published_at"],
                 "firstObservedAt": observed, "headline": rec["headline"],
-                "category": rec.get("category"),
+                "category": rec.get("category"), "url": rec.get("url"),
                 "tagged": list(rec.get("tagged") or [rec["symbol"]]),
                 "sharedTag": shared_tag(rec["headline"], rec["symbol"], rec.get("tagged")),
             })
@@ -524,11 +554,18 @@ def build_session_from_records(
     # and two implementations of it can disagree. They did: app.js summed four
     # booleans into a score where FILTERS.md Layer 1 kills.
     cascade_by_symbol = {}
+    _build_now = None
+    if frames:
+        try:
+            _build_now = datetime.fromisoformat(frames[-1]["ts"].replace("Z", "+00:00"))
+        except (KeyError, ValueError):
+            _build_now = None
     for sym, meta in symbols.items():
         meta.setdefault("symbol", sym)
         res = evaluate_cascade(cascade_inputs(meta, halt_state.get(sym),
                                               feed_stale=_feed_is_stale(data_status),
-                                              chart=chart_gates(bars_by_symbol.get(sym, []))))
+                                              chart=chart_gates(bars_by_symbol.get(sym, [])),
+                                              now=_build_now))
         cascade_by_symbol[sym] = {
             "verdict": res.verdict.value,
             "killedBy": res.killed_by,
@@ -571,7 +608,7 @@ def build_session_from_records(
         timings["journal"] = round(_jt, 3)
         timings["build"] = round(_time.perf_counter() - _t0 - _jt, 3)
 
-    return {
+    out = {
         "sessionId": session_id,
         "generatedFrom": source_name,
         "dataStatus": data_status,
@@ -602,6 +639,13 @@ def build_session_from_records(
         "cascade": cascade_by_symbol,
         "fiveMinute": five_minute_by_symbol,
     }
+    # The decision card (2026-10-08): verdict line, lamps, setup, the bot's own
+    # order for the plan, the catalyst read and what the runner did — one
+    # server-side read per symbol, shipped with every build so the card is as
+    # fresh as the price (docs/desk-assessment-2026-10-08.md, rows 1-9).
+    from .cards import cards_for
+    out["cards"] = cards_for(out, journal, now=_build_now)
+    return out
 
 
 def _five_minute_states(symbols, bars_by_symbol, frames, data_status, journal, journal_since) -> dict:
@@ -642,7 +686,7 @@ def _five_minute_states(symbols, bars_by_symbol, frames, data_status, journal, j
 
 def cascade_inputs(meta: dict, halt: Optional[str] = None,
                    feed_stale: bool = False, snap=None,
-                   chart: Optional[dict] = None) -> CascadeInputs:
+                   chart: Optional[dict] = None, now=None) -> CascadeInputs:
     """Adapt a session symbol record to the cascade's Inputs.
 
     Everything the cascade cannot establish is passed as None rather than
@@ -676,7 +720,7 @@ def cascade_inputs(meta: dict, halt: Optional[str] = None,
         float_verified=(quality in ("verified", "you verified")),
         catalyst_today=_catalyst_today(meta.get("news") or [], meta.get("tradingDate")),
         catalyst_verdict=_news_verdict(meta.get("news") or [], snap,
-                                       bool(meta.get("newsSourceOk", True))),
+                                       bool(meta.get("newsSourceOk", True)), now=now),
         catalyst_source_ok=bool(meta.get("newsSourceOk", True)),
         # Gates 5-8 (review 2026-10-03: never passed before). None stays UNKNOWN.
         is_fund_or_etf=meta.get("isFundOrEtf"),
@@ -899,11 +943,11 @@ def is_roundup(headline: str, category: str = "") -> bool:
     decides whether gate 3 reads "news today", and since amendment A2 that gate
     flags rather than kills.
     """
-    from ..catalyst import LISTING_WORDS, ROUNDUP_WORDS
+    from ..catalyst import LISTING_WORDS, ROUNDUP_WORDS, matches
     hay = f"{headline or ''} {category or ''}".lower()
-    if any(w in hay for w in LISTING_WORDS):
+    if matches(LISTING_WORDS, hay):
         return False                      # the company's own listing notice, not a market wrap
-    if any(w in hay for w in ROUNDUP_WORDS):
+    if matches(ROUNDUP_WORDS, hay):
         return True
     lead = (headline or "").split(":")[0].split(" - ")[0]
     if lead.count(",") >= LIST_MIN_NAMES - 1 and " and " in lead.lower():
@@ -930,12 +974,14 @@ def shared_tag(headline: str, symbol: str, tagged) -> bool:
     return symbol.upper() not in (headline or "").upper()
 
 
-def _news_verdict(news: list, snap, source_ok: bool) -> str:
+def _news_verdict(news: list, snap, source_ok: bool, now=None) -> str:
     """The one word for the symbol's news at this bar (catalyst.news_verdict),
     recorded on the decision. The clock is the snapshot's event time when
-    there is one, so a replay judges the news as the desk saw it then."""
+    there is one, so a replay judges the news as the desk saw it then; the
+    end-of-build card passes its last frame's time (a replay read "NONE" on
+    the wall clock, hours after the fixture's news)."""
     from ..catalyst import news_verdict
-    now = getattr(snap, "event_ts", None) if snap is not None else None
+    now = getattr(snap, "event_ts", None) if snap is not None else now
     if now is not None and now.tzinfo is None:
         now = now.replace(tzinfo=timezone.utc)
     return news_verdict(news, now=now, source_ok=source_ok)[0]
@@ -959,9 +1005,16 @@ def _buyout_today(news: list, trading_date) -> bool:
     return buyout_in([i.get("headline") or "" for i in _todays_own(news, trading_date)])
 
 
+def _cutoff(day):
+    """16:00 ET of the previous TRADING day (catalyst.news_cutoff). It was the
+    previous calendar day, so on a Monday Friday's after-close news fell out."""
+    from ..catalyst import news_cutoff
+    return news_cutoff(day)
+
+
 def _todays_own(news: list, trading_date) -> list:
     """The symbol's own items (not shared tags) published since 16:00 ET of the
-    previous calendar day; every item when the day is unknown."""
+    previous trading day; every item when the day is unknown."""
     from zoneinfo import ZoneInfo
     et = ZoneInfo("America/New_York")
     try:
@@ -981,7 +1034,7 @@ def _todays_own(news: list, trading_date) -> list:
             continue
         if p.tzinfo is None:
             p = p.replace(tzinfo=timezone.utc)
-        cutoff = datetime.combine(day, datetime.min.time(), tzinfo=et).replace(hour=16) - timedelta(days=1)
+        cutoff = _cutoff(day)
         if p.astimezone(et) >= cutoff:
             out.append(item)
     return out
@@ -989,7 +1042,7 @@ def _todays_own(news: list, trading_date) -> list:
 
 def _catalyst_today(news: list, trading_date) -> bool:
     """FILTERS.md gate 3: a catalyst DATED TODAY. A headline counts when it was
-    published after 16:00 ET of the previous calendar day (overnight news is
+    published after 16:00 ET of the previous trading day (overnight news is
     today's catalyst) and is not a market roundup. Anything older, or a "stocks
     moving in pre-market" list, is not a reason (audit 2026-09-08: any item in
     a 48-hour window used to pass the gate)."""
@@ -1022,7 +1075,6 @@ def _catalyst_today(news: list, trading_date) -> bool:
         p_et = p.astimezone(et)
         if day is None:
             return True
-        cutoff = datetime.combine(day, datetime.min.time(), tzinfo=et).replace(hour=16) - timedelta(days=1)
-        if p_et >= cutoff:
+        if p_et >= _cutoff(day):
             return True
     return False

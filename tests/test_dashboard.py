@@ -475,8 +475,9 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
 
 
 def test_ui_catalyst_card_grades_the_news(page):
-    """The catalyst reads at a glance: flame band, hard/soft/dilutive grade,
-    age against the 24-hour window, and what it means for the funnel."""
+    """The catalyst reads in two lines (owner, 2026-10-08): the server's grade
+    and its one-line reason, the headline clamped to two lines, then type ·
+    age · source. The grade comes from catalyst.card_read, not the browser."""
     _seek(page, 124)
     rows = page.locator("[data-card=scan-pillars] .trow")
     for i in range(rows.count()):
@@ -484,30 +485,28 @@ def test_ui_catalyst_card_grades_the_news(page):
             rows.nth(i).click()
             break
     page.wait_for_timeout(300)
-    assert "0–2h" in page.locator(".flame-chip").inner_text()
-    assert page.locator(".flame-chip .flame.red").count() == 1
-    assert "0–2h" in (page.locator(".flame-chip").get_attribute("title") or "")
-    assert page.locator(".cat-quality").inner_text() == "Hard catalyst"
-    assert page.locator(".age-bar i").count() == 1
-    read = page.locator(".cat-read").inner_text()
-    assert "5/5 candidate" in read and "chart decides" in read   # one denominator: the Five Pillars
+    server = page.evaluate("window.__SESSION__.cards.ABCD.catalyst")
+    assert page.locator(".cat2-grade").inner_text() == server["grade"] == "STRONG"
+    assert "quantifiable value" in page.locator(".cat2-reason").inner_text()
+    assert "contract" in page.locator(".cat2-headline").inner_text()
+    meta = page.locator(".cat2-meta").inner_text()
+    assert meta.startswith("contract") and "today 08:55" in meta, meta
+    assert "CATALYST.md" in (page.locator(".cat2-grade").get_attribute("title") or "")
+    clamp = page.eval_on_selector(".cat2-headline", "e => getComputedStyle(e).webkitLineClamp")
+    assert clamp == "2", clamp
 
 
 def test_ui_catalyst_flags_dilution(page):
-    """An offering headline is graded dilutive however fresh the flame is."""
+    """An offering headline is supply, not a catalyst: graded WEAK whatever its
+    age, and flagged in red."""
+    page.goto(page.url.split("?")[0] + "?symbol=CYQN")
+    page.wait_for_timeout(600)
     _seek(page, 100)
-    page.evaluate("""() => {
-      const rows = document.querySelectorAll('[data-card=scan-hod] .trow, [data-card=scan-running] .trow');
-      for (const r of rows) if (r.textContent.startsWith('CYQN')) { r.click(); return; }
-      window.__selectFallback = true;
-    }""")
-    page.wait_for_timeout(300)
-    if page.locator("#symTicker").inner_text() != "CYQN":
-        page.goto(page.url.split("?")[0] + "?symbol=CYQN")
-        page.wait_for_timeout(600)
-        _seek(page, 100)
-    assert page.locator(".cat-quality").inner_text() == "Dilutive"
-    assert "Dilution risk" in page.locator(".cat-read").inner_text()
+    assert page.locator("#symTicker").inner_text() == "CYQN"
+    assert page.locator(".cat2-grade").inner_text() == "WEAK"
+    assert "offering/dilution" in page.locator(".cat2-meta").inner_text()
+    flags = page.locator(".cat2-flag.bad").all_inner_texts()
+    assert any("offering/dilution in today's news" in f for f in flags), flags
 
 
 def test_ui_cards_swap_by_drag_and_persist(page):
@@ -592,38 +591,57 @@ def test_ui_level2_ladder_renders(page):
 
 
 def test_ui_verdict_mirrors_pine_and_decides(page):
+    """The decision card is the SERVER's (src/momentum_platform/decision_card.py):
+    one word from REVIEW / WATCH / WAIT / NO, the one reason that decides it,
+    and every gate the bot applies as a lamp — value beside threshold."""
     _seek(page, 125)
     page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
-    labels = page.eval_on_selector_all(".vlab", "els => els.map(e => e.textContent)")
-    # "Technical score" is gone: it was the browser's own sum of four booleans,
-    # the exact thing the server's cascade replaced. The rest are values.
-    assert labels == ["Price", "Gain vs close", "RVOL · daily", "Float / supply", "News",
-                      "5m RVOL", "HOD / Running", "Entry", "Stop", "Target"]
-    # The banner is the SERVER's word for the clicked symbol, from the
-    # six-state vocabulary. This test used to accept {"GO", "WAIT", "PASS"} —
-    # the browser's own matrix — and "PASS" as a verdict is the defect the
-    # card no longer has: on this desk PASS means a gate passed.
-    word = page.locator(".verdict-banner b").inner_text()
-    assert word in {"REJECT", "REVIEW", "WAIT", "WATCH", "STALE", "LOG", "MANAGE"}, word
-    assert word != "PASS"
-    # It came from the server: the banner says so, and the word is one the
-    # server actually produced for some symbol in this session.
-    assert "server cascade" in (page.get_attribute(".verdict-banner", "title") or "")
-    produced = set(page.evaluate("Object.values(window.__SESSION__.cascade || {}).map(c => c.verdict)"))
-    assert word in produced, (word, produced)
-    assert page.locator(".why-row").count() >= 1
+    sym = page.locator("#symTicker").inner_text()
+    card = page.evaluate(f"window.__SESSION__.cards[{sym!r}]")
+    word = page.locator("#verdictCard .dc-verdict b").inner_text()
+    assert word == card["verdict"]["word"], (word, card["verdict"])
+    assert word in {"REVIEW", "WATCH", "WAIT", "NO"} and word != "PASS"
+    assert page.locator("#verdictCard .dc-reason").inner_text() == card["verdict"]["reason"]
+    assert "server card" in (page.get_attribute("#verdictCard .dc-verdict", "title") or "")
+    assert page.locator("#verdictCard .dc-chips .vchip").count() == len(card["lamps"])
+    assert page.locator("#verdictCard .dc-lamp").count() == len(card["lamps"])
+    assert {l["id"] for l in card["lamps"]} >= {"price", "gain", "rvol", "float", "catalyst", "pillars",
+                                                "rising", "vwap", "ema9", "macd", "pullback", "tape"}
+    assert page.locator("#verdictCard .dc-bot").count() == 1
 
 
-def test_ui_sizing_needs_the_operators_own_risk(page):
+def test_ui_order_panel_renders_the_servers_ticket(page):
+    """The order panel prints the bot's own order for the plan (order_math): the
+    copy-ready line, trigger / limit / stop / shares, and the runner's checks.
+    Without a stated risk it sizes nothing — the desk never assumes a risk."""
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "src"))
+    from momentum_platform import order_math as OM
     _seek(page, 125)
     page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
-    assert "will not assume one for you" in page.locator(".sizing").inner_text()
-    page.locator("#riskInput").fill("25")
+    sym = page.locator("#symTicker").inner_text()
+    tk = OM.ticket(sym, 5.0, 4.8, 25.0, session="regular", bid=4.98, ask=5.0).to_dict()
+    page.evaluate("""([sym, tk]) => { const c = window.__SESSION__.cards[sym];
+      c.ticket = tk; c.position = null; c.verdict.word = "REVIEW"; }""", [sym, tk])
+    page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
     page.wait_for_timeout(250)
-    sizing = page.locator(".sizing").inner_text()
-    assert "Shares" in sizing and "Planned loss" in sizing
+    line = page.locator(".dc-order-line").inner_text()
+    assert line == tk["order_line"] and line.startswith(f"BUY {tk['shares']} {sym} STP LMT")
+    body = page.locator(".sizing").inner_text()
+    assert "limit (A10)" in body and "worst case (A18)" in body
+    assert page.locator(".dc-check").count() == len(tk["checks"])
+    assert page.locator(".dc-btn.took").count() == 1 and page.locator(".dc-btn.passed").count() == 1
+    page.locator(".dc-btn.took").click()
+    page.wait_for_timeout(150)
+    assert page.locator(".dc-took input").count() == 3, "fill, shares and stop to record the trade"
+    page.locator(".dc-took .dc-btn").nth(1).click()          # cancel
+    tk_none = dict(tk, shares=None, order_line="state your risk per trade to size this order")
+    page.evaluate("""([sym, tk]) => { window.__SESSION__.cards[sym].ticket = tk; }""", [sym, tk_none])
+    page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
+    page.wait_for_timeout(250)
+    assert "state your risk" in page.locator(".sizing").inner_text()
 
 
 def test_ui_alert_click_seeks_charts(page):

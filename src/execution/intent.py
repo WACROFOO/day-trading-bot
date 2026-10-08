@@ -46,78 +46,38 @@ SIDE = "BUY"
 RISK_TOLERANCE = 1.05
 
 
-# `PARAMETERS.md` §2: `premarket_start` 07:00, flagged era-dependent (a 2017
-# "half a dozen times a year" against 07:00 named 78 times in the July 2026
-# challenge). The extended-hours skill gives the mechanical reason for the
-# same boundary: "most retail brokers only allow from 07:00". Both point at
-# the same clock, for different reasons, so 07:00 it is.
-PREMARKET_START = time(7, 0)
+# The clock (07:00 pre-market start, 11:30 hard stop, A8's 11:20 cutoff), the
+# A10 entry (stop-limit offset, TTL), the A16 exit offset, A3's trail, A6's
+# spread factor, A13's floors and A18's worst-fill sizing live in
+# `momentum_platform.order_math`, with their reasons, so the desk's manual
+# order panel computes from the same lines the bot executes. The arrow still
+# points one way: execution imports momentum_platform, never the reverse.
+from momentum_platform.order_math import (  # noqa: E402,F401  (re-exported)
+    COMMISSION_RESERVE_PER_SHARE, ENTRY_BUFFER_MIN, ENTRY_CUTOFF, ENTRY_LIMIT_OFFSET_PCT,
+    ENTRY_TTL_MINUTES, EXIT_OFFSET_MAX, EXIT_OFFSET_MIN, EXIT_OFFSET_PCT, HARD_STOP,
+    PREMARKET_START, SPREAD_K, TRAIL_R, WORST_FILL_SIZING, entry_limit, exit_offset,
+    shares_for, sized_for, sizing_reserve,
+)
 
 SESSIONS = ("regular", "premarket")
 
-# `PARAMETERS.md` §2: `session_close` 11:30 ET "outer edge, not the centre"
-# (n=16), `midday_avoid` 11:30-15:00 "no trades". CLAUDE.md carries the same
-# line with the typical close at 11:00. This is the ENTRY cutoff, not the
-# exit: after it, no new position is opened. Exits are always permitted, so a
-# position opened at 11:29 can still be managed and flattened.
-#
-# It is enforced here because the cascade does not enforce it. An
-# out-of-window name comes back Verdict.LOG with plan_allowed True, which is
-# correct for the cascade — LOG means "record it, do not trade it", and a
-# downgrade is not a kill. But an executor reading only plan_allowed would
-# open a position at 14:00, which is the one thing §2 is most explicit about.
-HARD_STOP = time(11, 30)
-# Amendment A8 (owner decision, delegated, 2026-09-22): no NEW entry inside
-# the last ENTRY_BUFFER_MIN minutes before the hard stop. GRML was filled at
-# 11:28 and force-flattened at 11:30 — two minutes is not the strategy's
-# trade, it is a coin flip into a market exit. LOCAL_ADDITION, reasoned not
-# measured; `exercise.py missed` shows what the plans it refuses went on to do.
-ENTRY_BUFFER_MIN = 10
-ENTRY_CUTOFF = time(11, 20)
-# Amendment A10 (owner, 2026-09-23: "fix it once and for all"): the entry is
-# a buy STOP-LIMIT resting at the plan's trigger, not a plain limit. WHLR
-# 2026-09-23 09:44: trigger 8.31, tape near 7.50, the plain limit was capped
-# by IBKR to 7.87 and filled there — the pullback was bought, not the break,
-# while every simulation assumes the fill at the trigger touch. The stop
-# price is the trigger; the limit sits ENTRY_LIMIT_OFFSET_PCT above it (one
-# cent floor) so a fast tape can still fill without a chase; an entry not
-# triggered within ENTRY_TTL_MINUTES completed minutes is cancelled by the
-# runner and the decision reads NOT_FILLED. Both numbers are reasoned, not
-# measured, and are printed with every entry.
-ENTRY_LIMIT_OFFSET_PCT = 0.3
-ENTRY_TTL_MINUTES = 3
+# HARD_STOP is the ENTRY cutoff, not the exit: after it, no new position is
+# opened, and exits are always permitted. It is enforced here because the
+# cascade does not enforce it. An out-of-window name comes back Verdict.LOG
+# with plan_allowed True, which is correct for the cascade — LOG means "record
+# it, do not trade it", and a downgrade is not a kill. But an executor reading
+# only plan_allowed would open a position at 14:00, which is the one thing
+# PARAMETERS.md §2 is most explicit about.
 
-# A16 (owner, 2026-10-01: "make the pre-market exit offset scale with price and
-# spread, and check that an unfilled exit is re-sent"). The extended-hours sell
-# is a limit at bid − offset (`.claude/skills/extended-hours/SKILL.md`: "10–15¢
-# ... below the bid — it sweeps the levels up to your cap"). A fixed 10¢ is up
-# to ~1.7 R of slip on a $2 name with a 6¢ stop, so the offset is 1% of the bid
-# or one spread, whichever is wider, between 3¢ and 10¢: unchanged at $10 and
-# up, smaller on cheap names. A smaller offset may not sweep, so an exit the
-# bid has run below is re-priced every EXIT_CHASE_SECONDS on the SAME order
-# (`Runner.chase_exits`), which can never sell twice. All four numbers are
-# reasoned, not measured (Approximation), and printed with every exit.
-EXIT_OFFSET_PCT = 1.0
-EXIT_OFFSET_MIN = 0.03
-EXIT_OFFSET_MAX = 0.10
+# An unfilled extended-hours exit the bid has run below is re-priced every
+# EXIT_CHASE_SECONDS on the SAME order (`Runner.chase_exits`), which can never
+# sell twice (A16). Reasoned, not measured.
 EXIT_CHASE_SECONDS = 5.0
 # A sent exit still working this long is re-priced to bid - offset even when the
 # bid has not fallen under its limit: an exit must complete (AMOD 2026-10-02:
 # 200 shares of a partly filled sell sat at 2.43 while the bot only watched for
 # the bid to drop). Reasoned, not measured.
 EXIT_STALE_SECONDS = 10.0
-
-
-def entry_limit(trigger: float) -> float:
-    """The stop-limit's limit price for a plan whose trigger is `trigger`."""
-    return round(trigger + max(0.01, trigger * ENTRY_LIMIT_OFFSET_PCT / 100.0), 2)
-
-
-def exit_offset(bid: float, ask: Optional[float] = None) -> float:
-    """A16: how far under the bid an extended-hours limit sell is priced."""
-    spread = (ask - bid) if ask is not None and ask > bid else 0.0
-    raw = max(bid * EXIT_OFFSET_PCT / 100.0, spread)
-    return round(min(EXIT_OFFSET_MAX, max(EXIT_OFFSET_MIN, raw)), 2)
 
 
 def in_premarket(now: Optional[datetime] = None) -> bool:
@@ -313,84 +273,6 @@ def refusals(i: EntryIntent,
 
 # A sized order may overshoot the account by rounding, not by design.
 NOTIONAL_TOLERANCE = 1.02
-
-# The stop must clear the spread by this factor or the round trip eats the
-# trade. Same arithmetic as `src/momentum_platform/microflow/config.py`: with the plan's +2 R target
-# the spread costs (1/k) R per round trip, so k=4 caps that cost at 0.25 R.
-# The 10-second study used k=8 because its dips are a nickel deep; on the
-# 1-minute path the Friday counterfactual put the median spread at 25% of
-# the stop, so k=4 admits the median setup and refuses the fee-only tail —
-# the 5 of 39 trades whose spread exceeded the whole stop, and VEEE at 09:37
-# (2-cent stop against a 1-2 cent spread). Amendment A6; lower by amendment.
-SPREAD_K = 4.0
-
-# Amendment A3 (docs/preregistration.md §5): no fixed target. The protective
-# stop trails the high since the fill at TRAIL_R initial risks per share,
-# ratcheting up and never down. The runner moves the resting stop leg; the
-# broker keeps holding the stop, so the trade stays protected between loops.
-TRAIL_R = 1.0
-
-# Amendment A18 (owner, 2026-10-06; docs/preregistration.md §5): size from the
-# worst fill the order allows, not from the trigger. A10 lets the entry fill up
-# to `entry_limit(trigger)`, the round trip pays the spread, and IBKR Fixed
-# charges $0.005 a share each way, so the per-share risk the size is computed
-# from is (limit − stop) + spread at the decision + $0.01. On the 1,873 replayed
-# fills of 2024-26 (research/paper-exercise/reports/2026-10-05-ross-recent-and-
-# execution/execution_audit/vx2.txt) losses over $42 fall from 437 to 89 and the
-# worst trade from −$493.64 to −$365.69, for −0.006 R a trade (the $1 commission
-# minimum on smaller orders). It narrows losses; it does not change expectancy.
-# A new sizing cohort: trades before and after are not pooled. False restores
-# sizing from the trigger.
-WORST_FILL_SIZING = True
-COMMISSION_RESERVE_PER_SHARE = 0.01
-
-
-def sizing_reserve(trigger: float, spread: Optional[float]) -> float:
-    """A18: dollars per share added to (trigger − stop) before sizing — the
-    entry limit's headroom, the spread (0 when no quote was read) and the
-    round-trip commission."""
-    sp = spread if spread is not None and spread > 0 else 0.0
-    return round((entry_limit(trigger) - trigger) + sp + COMMISSION_RESERVE_PER_SHARE, 4)
-
-
-def sized_for(trigger: float, stop: float, dollar_risk: float,
-              max_notional: Optional[float] = None, reserve: float = 0.0) -> tuple[int, str]:
-    """Shares and how they were bounded: 'risk' (the stop sized it) or 'funds'
-    (the account could not hold the risk-sized position; fewer shares, and so
-    LESS than the stated dollar risk — never more). `reserve` is A18's
-    per-share allowance for the worst allowed fill."""
-    n = shares_for(trigger, stop, dollar_risk, reserve=reserve)
-    if max_notional is None or trigger <= 0 or n <= 0:
-        return n, "risk"
-    fit = int(max_notional // trigger)
-    if fit < n:
-        return max(fit, 0), "funds"
-    return n, "risk"
-
-
-def shares_for(trigger: float, stop: float, dollar_risk: float, reserve: float = 0.0) -> int:
-    """The only sizing rule: the stop defines the size.
-
-    Core invariant, carried from the mastery bundle — the scanner discovers a
-    candidate, the chart defines the setup, the stop defines the size, the
-    market decides the result. Never sized from buying power, which on this
-    paper account reads $14,291 against $2,143 of equity and is fiction.
-    `reserve` (A18) widens the per-share risk the size is divided by; it never
-    moves the stop.
-    """
-    rps = trigger - stop
-    if rps <= 0 or dollar_risk <= 0:
-        return 0
-    # Integer mils, not float floor division. `100 // 0.2` is 499.0, because
-    # 0.2 has no exact binary form and the true quotient lands a hair under
-    # 500. On a $100 risk against a 20c stop that is one share; on a tighter
-    # stop it is worse, and it is silent every time. Prices are on a penny
-    # grid, so scaling to tenths of a cent makes the division exact.
-    rps_mils = round((rps + max(reserve, 0.0)) * 1000)
-    if rps_mils <= 0:
-        return 0
-    return int(round(dollar_risk * 1000)) // rps_mils
-
 
 @dataclass
 class PlacedOrder:

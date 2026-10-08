@@ -115,6 +115,43 @@ class FirstPullbackDetector:
     def active_plan(self) -> Optional[PullbackPlan]:
         return self._w.plan
 
+    def progress(self) -> dict:
+        """Where the search stands, for the desk card: how many green bars the
+        current push holds and how far it has run, without exposing the
+        working state. Read-only."""
+        w = self._w
+        imp = w.impulse_bars
+        rng = 0.0
+        if imp and imp[0].open > 0:
+            rng = 100.0 * (max(b.high for b in imp) - imp[0].open) / imp[0].open
+        return {"state": w.state.value, "impulse_bars": len(imp), "impulse_pct": round(rng, 2),
+                "impulse_valid": self._impulse_valid(imp), "pullback_bars": len(w.pullback_bars),
+                "min_impulse_bars": self.min_impulse_bars, "min_impulse_pct": self.min_impulse_range_pct}
+
+    def pending(self) -> Optional[dict]:
+        """While a pullback forms, the levels the NEXT break would freeze.
+
+        Read-only, for the manual order panel (2026-10-08): a plan exists only
+        after the break, which is too late to have the order ready. The values
+        are exactly what `_freeze_plan` would use if the next bar traded over
+        the last pullback bar's high: entry = that high + entry_buffer, stop =
+        the pullback low − stop_buffer, volume_ok the same comparison. They
+        move as each pullback bar forms; nothing here arms anything."""
+        w = self._w
+        if w.state != SetupState.PULLBACK or not w.pullback_bars or not w.impulse_bars:
+            return None
+        trigger_high = w.pullback_bars[-1].high
+        low = min(b.low for b in w.pullback_bars)
+        entry = round(trigger_high + self.entry_buffer, 4)
+        stop = round(low - self.stop_buffer, 4)
+        imp = sum(b.volume for b in w.impulse_bars) / len(w.impulse_bars)
+        pul = sum(b.volume for b in w.pullback_bars) / len(w.pullback_bars)
+        return {"trigger_high": trigger_high, "entry": entry, "stop": stop,
+                "risk_share": round(entry - stop, 4), "bars": len(w.pullback_bars),
+                "max_bars": self.max_pullback_bars, "volume_ok": pul < imp,
+                "impulse_high": max(b.high for b in w.impulse_bars),
+                "trigger_bar_ts": w.pullback_bars[-1].ts}
+
     # -- helpers --------------------------------------------------------------
 
     @staticmethod

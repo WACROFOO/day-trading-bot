@@ -301,6 +301,30 @@ CREATE TABLE IF NOT EXISTS five_minute_states (
     recorded_at TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS ix_five_minute_ts ON five_minute_states(ts_et);
+
+-- The owner's own calls from the desk (2026-10-08): "I took it", "I passed",
+-- "I closed it", each with the card the desk showed at that moment, so the
+-- daily review can score the manual call beside the bot's. Never read by the
+-- runner: a manual position is the owner's, placed by hand elsewhere.
+CREATE TABLE IF NOT EXISTS manual_decisions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ts TEXT NOT NULL,                    -- UTC ISO, when the button was pressed
+    ts_et TEXT NOT NULL,                 -- the same instant, ET ISO
+    symbol TEXT NOT NULL,
+    action TEXT NOT NULL CHECK (action IN ('took', 'passed', 'closed')),
+    price REAL, shares INTEGER, stop REAL, trigger REAL,
+    verdict TEXT, reason TEXT,           -- the card's word and line at that moment
+    plan_key TEXT,                       -- decision_key of the plan shown, when there was one
+    note TEXT, card_json TEXT,
+    recorded_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ix_manual_symbol_ts ON manual_decisions(symbol, ts_et);
+
+-- Desk settings the owner states on the page (a manual dollar risk). Read by
+-- the desk only; the runner keeps exercise_state.dollar_risk.
+CREATE TABLE IF NOT EXISTS desk_settings (
+    key TEXT PRIMARY KEY, value TEXT, updated_at TEXT NOT NULL
+);
 """
 
 
@@ -1444,3 +1468,97 @@ def exit_quantity_gaps(conn: sqlite3.Connection) -> list[sqlite3.Row]:
 
 def set_filled_qty(conn: sqlite3.Connection, order_id: int, qty: float) -> None:
     conn.execute("UPDATE orders SET filled_qty=?, updated_at=? WHERE order_id=?", (qty, _now(), order_id))
+
+
+
+# ------------------------------------------------- the owner's manual calls
+MANUAL_ACTIONS = ("took", "passed", "closed")
+
+
+def record_manual(conn: sqlite3.Connection, symbol: str, action: str, *,
+                  price: Optional[float] = None, shares: Optional[int] = None,
+                  stop: Optional[float] = None, trigger: Optional[float] = None,
+                  verdict: Optional[str] = None, reason: Optional[str] = None,
+                  plan_key: Optional[str] = None, note: Optional[str] = None,
+                  card: Optional[dict] = None, at: Optional[datetime] = None) -> int:
+    """One button press, committed at once (the review reads it from another
+    process). `took` needs a price, shares and a stop; `closed` a price."""
+    from zoneinfo import ZoneInfo
+    if action not in MANUAL_ACTIONS:
+        raise ValueError(f"action {action!r} is not one of {MANUAL_ACTIONS}")
+    sym = (symbol or "").strip().upper()
+    if not sym:
+        raise ValueError("no symbol")
+    if action == "took":
+        if not price or price <= 0 or not shares or shares <= 0 or not stop or stop <= 0 or stop >= price:
+            raise ValueError("took needs a fill price, a share count and a stop below the price")
+    if action == "closed" and (not price or price <= 0):
+        raise ValueError("closed needs the exit price")
+    at = at or datetime.now(timezone.utc)
+    cur = conn.execute(
+        """INSERT INTO manual_decisions (ts, ts_et, symbol, action, price, shares, stop, trigger,
+           verdict, reason, plan_key, note, card_json, recorded_at)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+        (at.isoformat(timespec="seconds"), at.astimezone(ZoneInfo("America/New_York")).isoformat(timespec="seconds"),
+         sym, action, price, shares, stop, trigger, verdict, reason, plan_key, note,
+         json.dumps(card, default=str) if card is not None else None, _now()))
+    conn.commit()
+    return int(cur.lastrowid)
+
+
+def manual_rows(conn: sqlite3.Connection, day: Optional[str] = None,
+                symbol: Optional[str] = None) -> list[dict]:
+    """The owner's calls, oldest first; `day` is an ET date."""
+    q, args = "SELECT * FROM manual_decisions WHERE 1=1", []
+    if day:
+        q += " AND substr(ts_et, 1, 10)=?"; args.append(day)
+    if symbol:
+        q += " AND symbol=?"; args.append(symbol.upper())
+    return [dict(r) for r in conn.execute(q + " ORDER BY ts_et, id", args).fetchall()]
+
+
+def open_manual(conn: sqlite3.Connection, day: str) -> dict[str, dict]:
+    """Per symbol, the last `took` of the ET day not followed by a `closed`."""
+    out: dict[str, dict] = {}
+    for r in manual_rows(conn, day):
+        if r["action"] == "took":
+            out[r["symbol"]] = r
+        elif r["action"] == "closed":
+            out.pop(r["symbol"], None)
+    return out
+
+
+def get_setting(conn: sqlite3.Connection, key: str) -> Optional[str]:
+    r = conn.execute("SELECT value FROM desk_settings WHERE key=?", (key,)).fetchone()
+    return None if r is None else r["value"]
+
+
+def set_setting(conn: sqlite3.Connection, key: str, value) -> None:
+    conn.execute("INSERT INTO desk_settings (key, value, updated_at) VALUES (?,?,?) "
+                 "ON CONFLICT(key) DO UPDATE SET value=excluded.value, updated_at=excluded.updated_at",
+                 (key, None if value is None else str(value), _now()))
+    conn.commit()
+
+
+def bot_view(conn: sqlite3.Connection, symbol: str, day: str) -> Optional[dict]:
+    """What the runner did with this symbol's latest plan of the ET day: the
+    decision's outcome and refusal text, and the order when there is one.
+    Read-only; the desk shows it beside its own card."""
+    d = conn.execute("""SELECT decision_id, ts_et, verdict, outcome, refusal_reasons_json, trigger, stop,
+                               data_status, plan_allowed
+                        FROM decisions WHERE symbol=? AND substr(ts_et, 1, 10)=?
+                        ORDER BY ts_et DESC, recorded_at DESC LIMIT 1""", (symbol.upper(), day)).fetchone()
+    if d is None:
+        return None
+    out = dict(d)
+    try:
+        out["reasons"] = json.loads(d["refusal_reasons_json"] or "[]")
+    except (TypeError, ValueError):
+        out["reasons"] = []
+    o = conn.execute("""SELECT status, shares, fill_price, fill_ts, exit_reason, exit_price, exit_ts, trail_stop
+                        FROM orders WHERE decision_id=? ORDER BY order_id DESC LIMIT 1""",
+                     (d["decision_id"],)).fetchone()
+    out["order"] = dict(o) if o is not None else None
+    st = conn.execute("SELECT phase FROM exercise_state WHERE key='state'").fetchone()
+    out["phase"] = st["phase"] if st is not None else None
+    return out

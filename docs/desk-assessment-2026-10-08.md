@@ -86,6 +86,38 @@ Practical consequences for typing orders by hand:
   the stop leg could not trigger before 09:30 (`docs/preregistration.md` §5). The
   order panel prints this with every pre-market ticket.
 
+## What was built (Phase 2, same day)
+
+| rows | built | where |
+|---|---|---|
+| 1, 2, 4, 5 | the decision card: REVIEW / WATCH / WAIT / NO + the reason + the level (the trigger, the VWAP to reclaim, the line that puts a faded name back inside 25 %), the setup in words with the last plan's outcome, every gate as a lamp with value beside threshold, room overhead as information | `src/momentum_platform/decision_card.py`, `src/momentum_platform/dashboard/cards.py`; `pullback.py` gained read-only `pending()` and `progress()` |
+| 3 | the cards ride every live tick, only the changed ones; an "as of" stamp; a scrubbed replay says the card is the newest read | `ibkr_desk.py` `_changed_cards`; `app.js` |
+| 6 | the bot line: refused and why in plain words (the raw text on hover), armed, in, out | `journal.ledger.bot_view`, `decision_card.bot_line` |
+| 7 | the order panel from the bot's own arithmetic, moved to `src/momentum_platform/order_math.py` and re-exported unchanged by `execution.intent` (a test checks they are the same objects): copy-ready line, A10 limit, A18 size, account bound, the runner's A13/A6 checks, the honest stop (`scripts/tape.py`'s rule), the halt band, the pre-market mechanics | `order_math.ticket` |
+| 8 | "I took it" switches the card to the position: stop, 1 R trail (A3), 2 R, R and $ now; a sound, a notification and a flash when a level is crossed | `order_math.position`, `app.js` `watchCards` |
+| 9, 13 | the catalyst in two lines: grade + reason, the headline clamped, type · age · source, flags (offering today, a 424B in 30 days, a shelf, a foreign filer, the split test). The same read in `scripts/catalyst_score.py` | `catalyst.card_read`; rules with origins in `knowledge-base/strategies/CATALYST.md` |
+| 10, 11, 12 | the three catalyst defects fixed; recorded in `docs/preregistration.md` §5 because they move the bot's pillar count | `session_builder.py`, `catalyst.py` |
+| 14–17 | a banner for a competing login (10197) and for names dropped for want of a data permission; halts and resumes sound; a desk that stops answering is said | `ibkr_desk.health`, `app.js` `renderDeskAlerts` |
+| 18 | the three buttons write `manual_decisions`; the export carries `desk_calls.csv`; the review scores each call beside the bot | `server.py` POST routes (JSON only, owner key), `day_export.py`, `daily_review.py` |
+| — | a real day can be replayed at any minute | `scripts/fixture_from_export.py` |
+
+Tests: `tests/test_desk_card.py` (46), plus the rewritten card tests in
+`tests/test_dashboard.py` and `tests/test_live_ui.py`, and the desk-calls loop in
+`tests/test_daily_loop.py`. The full suite runs 1,051 tests with the browser
+tests no longer skipped (Playwright installed against the preinstalled Chromium).
+
+## More, ranked — each marked measured or opinion
+
+| # | suggestion | basis |
+|---|---|---|
+| 1 | Export each day's references (previous close, 20-day volume, the time-of-day profile), headlines, quotes and halts, so any minute replays faithfully. Without the RVOL baseline every replayed name read NO on "missing rvol" | measured today (the first replay of 2026-10-06/07) |
+| 2 | Give the decision card the slot the **simulated** Level 2 card holds by default; the order panel needs height | opinion — a layout choice, the owner's |
+| 3 | Compute the card point-in-time when a replay is scrubbed, instead of saying it is the newest read | opinion; the look-ahead itself is measured (the 09:40 screenshots) |
+| 4 | Measure gate 4 from the pre-market high as FILTERS.md states, or amend FILTERS.md: the code uses the session high, so a one-bar spike (BIYA 37.10) or a regular-hours high moves the 25 % line. A preregistered test decides | measured in the code; the effect is not measured |
+| 5 | Decide whether the pillar count should use the 5× scanner dial (A5's choice) or the 1.5× trade floor FILTERS.md calls the gate | opinion; a test decides |
+| 6 | A second IBKR username for manual orders, so they never blind the desk | IBKR documentation via a web search, not verified here |
+| 7 | The company name: IBKR's contract carries none (`longName` lives on the contract details), so the card cannot print it | measured in the code |
+
 ## What this assessment could not check
 
 - 07:30 on the fixture (it starts at 08:00); the real days stand in for it.
@@ -97,7 +129,11 @@ Practical consequences for typing orders by hand:
 
 ## Verdict
 
-The desk computes most of what a manual entry needs. It shows it in the wrong
-order, refreshes the verdict once a minute while prices refresh every three
-seconds, says nothing about the bot, and carries three catalyst defects that also
-feed the bot's pillar count. Phase 2 builds rows 1–18 above.
+Before: the desk computed most of what a manual entry needs but showed it in the
+wrong order, refreshed the verdict once a minute while prices refreshed every
+three seconds, said nothing about the bot, and carried three catalyst defects
+that also fed the bot's pillar count. After: one card answers what to do now,
+why, at what price, with the bot's own order and the bot's own answer beside it,
+and the owner's calls are scored next to the bot's. None of it is evidence of an
+edge: no configuration tested so far has positive expectancy, and the card makes
+the method legible, not profitable.

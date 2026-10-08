@@ -147,13 +147,38 @@ def cmd_open(args):
               + (' …' if len(files) > 40 else ''))
 
 
+def _git_ignored(rels, slash=True):
+    """The subset of repo-relative paths git ignores — local caches (data/cache,
+    data/sec_cache) are not part of the repository and need no index. One
+    `git check-ignore --stdin` call; without git, nothing is excluded. Directory
+    paths go with a trailing slash, or git does not match "results/" patterns."""
+    import subprocess
+    try:
+        r = subprocess.run(['git', 'check-ignore', '--stdin'],
+                           input='\n'.join(x + ('/' if slash else '') for x in rels),
+                           cwd=ROOT, capture_output=True, text=True, timeout=30)
+    except (OSError, subprocess.SubprocessError):
+        return set()
+    return {ln.strip().rstrip('/') for ln in r.stdout.splitlines() if ln.strip()}
+
+
 def cmd_doctor(args):
     """An index is stale when it does not mention its own subdirectories."""
     stale, missing = [], []
-    for dp, dn, fn in walk_dirs():
+    rows = list(walk_dirs())
+    ignored = _git_ignored([os.path.relpath(dp, ROOT) for dp, _, _ in rows])
+    for dp, dn, fn in rows:
         rel = os.path.relpath(dp, ROOT)
+        if rel in ignored or any(rel.startswith(i + os.sep) for i in ignored):
+            continue
+        dn = [d for d in dn if os.path.join(rel, d) not in ignored]
         r = os.path.join(dp, 'README.md')
-        nfiles = len([f for f in fn if not f.startswith('.')])
+        files = [f for f in fn if not f.startswith('.')]
+        if files and not os.path.exists(r):
+            # a folder whose every file git ignores is a local cache, not repo content
+            gone = _git_ignored([os.path.join(rel, f) for f in files], slash=False)
+            files = [f for f in files if os.path.join(rel, f) not in gone]
+        nfiles = len(files)
         if not os.path.exists(r):
             if nfiles:
                 missing.append(rel)

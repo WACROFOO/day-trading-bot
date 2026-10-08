@@ -386,8 +386,9 @@ def test_the_viewer_key_sees_the_desk_but_cannot_change_it(desk_server, monkeypa
 def test_the_verdict_card_renders_the_servers_cascade_not_its_own_score(desk_server):
     """The card once summed four booleans into a score where FILTERS.md Layer 1
     kills, and the browser and server disagreed on screen (IMRN 2026-09-04).
-    The banner word must be the server's, from the six-state vocabulary, and
-    'PASS' must never appear as a verdict — on this desk it means a gate passed."""
+    Since 2026-10-08 the whole card is the server's (decision_card.py): the word
+    from REVIEW / WATCH / WAIT / NO, its reason, and every red gate as a lamp.
+    'PASS' never appears as a verdict — on this desk it means a gate passed."""
     pytest.importorskip("playwright.sync_api")
     from playwright.sync_api import sync_playwright
     port = desk_server["port"]
@@ -399,19 +400,20 @@ def test_the_verdict_card_renders_the_servers_cascade_not_its_own_score(desk_ser
         pg.goto(f"http://127.0.0.1:{port}/")
         pg.wait_for_timeout(800)
         assert not errors, errors
-        assert pg.evaluate("!!(window.__SESSION__.cascade && window.__SESSION__.cascade.AAA)"), \
-            "the server must ship a cascade verdict for every symbol"
-        server_word = pg.evaluate("window.__SESSION__.cascade.AAA.verdict")
-        banner = pg.text_content("#verdictCard .verdict-banner b")
-        assert banner == server_word, (banner, server_word)
-        assert banner in {"REJECT", "REVIEW", "WAIT", "WATCH", "STALE", "LOG", "MANAGE"}
+        assert pg.evaluate("!!(window.__SESSION__.cards && window.__SESSION__.cards.AAA)"), \
+            "the server must ship a decision card for every symbol"
+        card = pg.evaluate("window.__SESSION__.cards.AAA")
+        banner = pg.text_content("#verdictCard .dc-verdict b")
+        assert banner == card["verdict"]["word"], (banner, card["verdict"])
+        assert banner in {"REVIEW", "WATCH", "WAIT", "NO"}
         assert banner != "PASS"
-        assert "server cascade" in pg.get_attribute("#verdictCard .verdict-banner", "title")
-        # every non-passing gate the server reported is named on the card
-        gates = pg.evaluate("window.__SESSION__.cascade.AAA.gates.filter(g => g.state !== 'PASS' && g.state !== 'NOT_APPLICABLE').map(g => g.label)")
-        why = pg.text_content("#verdictCard .why")
-        for g in gates:
-            assert g in why, (g, why)
+        assert "server card" in pg.get_attribute("#verdictCard .dc-verdict", "title")
+        assert pg.text_content("#verdictCard .dc-reason") == card["verdict"]["reason"]
+        # every gate the cascade could not pass is a lamp on the card, by state
+        red = [l["label"] for l in card["lamps"] if l["state"] in ("FAIL", "UNKNOWN")]
+        shown = pg.eval_on_selector_all("#verdictCard .dc-lamp .l", "els => els.map(e => e.textContent)")
+        for label in red:
+            assert label in shown, (label, shown)
         browser.close()
 
 

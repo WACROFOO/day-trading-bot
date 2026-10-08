@@ -78,6 +78,40 @@ Browser desk: `http://127.0.0.1:8787`. The bottom-right verdict is the
 server's cascade word; a killed name reads `suppressed · KILLED` on the
 Entry line, never `ARMED`.
 
+## Reading the desk card (since 2026-10-08)
+
+The card in the right column is the server's read of the selected name
+(`src/momentum_platform/decision_card.py`); the page recomputes nothing.
+
+| line | what it says |
+|---|---|
+| **REVIEW / WATCH / WAIT / NO** + reason | the one reason that decides. REVIEW = a first pullback is in front of you with every gate green: read the chart. Never "buy" |
+| ▸ level | the price that changes the answer: the trigger, the VWAP to reclaim, the line that puts a faded name back inside 25 % |
+| setup | the first-pullback machine: the push, the pullback bars, the last plan and what became of it |
+| **bot** | what the runner did with this name's latest plan (refused and why, armed, in, out) |
+| lamps | every gate the bot applies, value beside threshold (⛶ / E for the full table) |
+| **ORDER** | the bot's own order for the plan, from the bot's arithmetic: copy-ready line, limit (A10), shares (A18), the runner's checks (stop ≥ 2 %, stop ≥ 4× spread), the honest stop, the halt band. Pre-market it says IBKR holds no stop (probe 2026-09-18) |
+| I took it / I passed / I closed it | your call, written to the ledger with the card you saw; the daily review scores it beside the bot. After "I took it" the card tracks the position: stop, the 1 R trail (A3), 2 R, sound and notification when one is crossed |
+
+Your risk per trade: type it in the box under the order; it is kept in the
+ledger (`desk_settings`) and the order is sized on it. Empty = the bot's own
+risk, labelled. The desk never assumes one.
+
+**A red banner at the top** names what blinds the desk: a competing login
+(10197 — your live TWS, IBKR Mobile or Client Portal on the same username took
+the market data), names dropped for want of a data permission (AMEX), or the
+desk not answering. Placing manual orders from a session on the same IBKR
+username is what triggers 10197. IBKR's documented way to run both is a second
+username on the account (Client Portal › Users & Access Rights; its market data
+is billed separately) — a web search on 2026-10-08 reported this from IBKR's
+article 1719; verify it in Client Portal before relying on it.
+
+**Replaying a real day at a given minute:**
+`python3 scripts/fixture_from_export.py 2026-10-06 --until 07:33 --out /tmp/f.jsonl`
+then `PYTHONPATH=src python3 -m momentum_platform.dashboard.server --fixture /tmp/f.jsonl`.
+The export carries no news, quotes or halts, and the RVOL baseline is
+reconstructed — the fixture's header says so.
+
 ## Human-only commands
 
 | command | when |

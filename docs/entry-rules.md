@@ -3,7 +3,9 @@
 ```
 SOURCE · the code at the commit that adds this file: src/momentum_platform/pullback.py (the detector),
          src/momentum_platform/cascade.py (the gates), src/execution/intent.py and src/execution/runner.py
-         (the refusals and the order). Thresholds: knowledge-base/strategies/FILTERS.md wins any disagreement.
+         (the refusals and the order; since 2026-10-08 their arithmetic lives in
+         src/momentum_platform/order_math.py, which the desk's order panel reads too).
+         Thresholds: knowledge-base/strategies/FILTERS.md wins any disagreement.
 ! A rule listed here as OFF or display-only places nothing. Changing any rule goes through
   docs/preregistration.md and a test first.
 ```
@@ -32,7 +34,7 @@ Layer 1 kills: the first failure rejects the name, and no plan is published.
 |---|---|
 | feed | a stale feed: no verdict |
 | 1 price | $2.00–20.00 (`PRICE_MIN`, `PRICE_MAX`) |
-| pillars (A5) | ≥ 4 of 5: price in band · up ≥ 10 % · RVOL ≥ 5× · float < 20 M · news today (an unknown counts as a fail) |
+| pillars (A5) | ≥ 4 of 5: price in band · up ≥ 10 % · RVOL ≥ 5× · float < 20 M · news today (an unknown counts as a fail). "News today" = the company's own headline after 16:00 ET of the previous trading day; roundups, reaction pieces, offerings and unread SEC filings do not count (fixed 2026-10-08: the date was never applied before) |
 | 4 still rising | ≤ 25 % off the day's high (`FADE_MAX_PCT`) |
 | 5 reverse split | the split test ran and the ratio is a clean integer → kill. Untested reads UNKNOWN, a warning |
 | 6 instrument | IBKR's contract details say fund or ETF (the 2026-10-05 wiring maps ETNs, warrants, units and preferreds there too) → kill |
