@@ -331,11 +331,13 @@ def test_ui_chart_stack_is_the_desks_own_1m_over_5m_and_10s(page):
     assert five["y"] > big["y"] + big["height"] - 4       # below the 1m
     centre = page.locator("[data-col=center]").bounding_box()
     assert ten["y"] + ten["height"] > centre["y"] + centre["height"] - 12, "nothing under the charts"
-    for parked in ("screener", "tv-widget", "tv-widget-5m", "timeline", "level2"):
+    for parked in ("screener", "tv-widget", "tv-widget-5m", "timeline", "level2", "quote"):
         assert page.locator(f".slot [data-card={parked}]").count() == 0
-    # the decision card took the simulated Level 2's slot (owner, 2026-10-08)
+    # find / see / decide (2026-10-08): the decision card over the real tape on
+    # the right, the Five Pillars check under the scanners on the left
     right = [page.eval_on_selector(f'[data-slot={s}] .card', "e => e.dataset.card") for s in ("R1", "R2")]
-    assert right == ["pillars-board", "verdict"]
+    assert right == ["verdict", "tape"]
+    assert page.eval_on_selector('[data-slot=L4] .card', "e => e.dataset.card") == "pillars-board"
     assert page.locator('[data-slot="R3"]').count() == 0
     for card in ("chart-1m", "chart-5m", "chart-10s"):
         host = page.locator(f"[data-card={card}] .chart-host").bounding_box()
@@ -386,13 +388,15 @@ def test_ui_fits_one_viewport(page):
     assert metrics["sh"] <= metrics["ih"] + 2
 
 
-def test_ui_quote_card_sits_under_the_scanners(page):
-    quote = page.locator("[data-card=quote]").bounding_box()
+def test_ui_the_board_sits_under_the_scanners(page):
+    """FIND on the left: the Five Pillars check under the scanners; the
+    decision card is the right column's, past the charts."""
+    board = page.locator("[data-card=pillars-board]").bounding_box()
     scan = page.locator("[data-card=scan-pillars]").bounding_box()
     card = page.locator("[data-card=verdict]").bounding_box()
-    assert quote["y"] > scan["y"]
-    assert abs(quote["x"] - scan["x"]) < 4
-    assert card["x"] > quote["x"] + quote["width"]
+    assert board["y"] > scan["y"]
+    assert abs(board["x"] - scan["x"]) < 4
+    assert card["x"] > board["x"] + board["width"]
 
 
 def test_ui_flames_on_every_scanner_row(page):
@@ -411,7 +415,7 @@ def test_ui_flames_on_every_scanner_row(page):
 def test_ui_gutters_resize_panes_and_persist(page):
     """Cards are resizable, not just swappable: a gutter trades space between
     the two panes it sits between, and the sizes are remembered."""
-    before = page.locator("[data-card=pillars-board]").bounding_box()
+    before = page.locator("[data-card=verdict]").bounding_box()
     gutter = page.locator('[data-between="R1,R2"]')
     box = gutter.bounding_box()
     page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
@@ -419,10 +423,10 @@ def test_ui_gutters_resize_panes_and_persist(page):
     page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2 + 110, steps=8)
     page.mouse.up()
     page.wait_for_timeout(300)
-    after = page.locator("[data-card=pillars-board]").bounding_box()
+    after = page.locator("[data-card=verdict]").bounding_box()
     assert after["height"] > before["height"] + 60
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v9'))")
-    assert saved["sizes"]["slots"]["R1"] / saved["sizes"]["slots"]["R2"] > 1.35 / 2.05, "R1 gained on R2"
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v10'))")
+    assert saved["sizes"]["slots"]["R1"] / saved["sizes"]["slots"]["R2"] > 2.35 / 1, "R1 gained on R2"
     # the page must still fit after a resize
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
     assert metrics["sh"] <= metrics["ih"] + 2
@@ -431,7 +435,7 @@ def test_ui_gutters_resize_panes_and_persist(page):
 
 
 def test_ui_columns_resize(page):
-    """The whole right column can be widened for the decision card."""
+    """The whole right column can be widened for the decision card and the tape."""
     before = page.locator("[data-col=right]").bounding_box()
     gutter = page.locator('.gutter-h[data-cols=right]')
     box = gutter.bounding_box()
@@ -446,18 +450,18 @@ def test_ui_columns_resize(page):
     page.wait_for_timeout(300)
 
 
-def test_ui_the_pillars_check_tops_the_right_column(page):
-    """The Five Pillars check is the top card of the right column; the decision
-    card has the rest, the taller of the two since it took the simulated
-    Level 2's slot (owner, 2026-10-08): the order panel needs the height."""
+def test_ui_the_decision_card_tops_the_right_column_over_the_tape(page):
+    """DECIDE on the right (2026-10-08): the decision card — verdict, catalyst,
+    gates, the order — with most of the column, the Time & Sales under it, by
+    the 10-second chart where the eye is at the trigger."""
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
     column = page.locator("[data-col=right]").bounding_box()
-    board = page.locator("[data-card=pillars-board]").bounding_box()
     card = page.locator("[data-card=verdict]").bounding_box()
-    assert board["height"] / column["height"] > 0.3
-    assert board["y"] < card["y"] and card["height"] > board["height"]
-    assert card["height"] / column["height"] > 0.55
+    tape = page.locator("[data-card=tape]").bounding_box()
+    assert card["y"] < tape["y"] and card["height"] > tape["height"]
+    assert card["height"] / column["height"] > 0.6
+    assert tape["height"] / column["height"] > 0.22, "room for the facts and a dozen prints"
 
 
 def test_ui_bottom_right_card_is_off_the_desk(page):
@@ -472,8 +476,9 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
     items = page.eval_on_selector_all(".tray-item", "els => els.map(e => e.dataset.trayCard)")
     # 2026-09-18: the desk's live 1m/5m panes moved onto the desk and
     # TradingView's delayed widgets took their place here.
-    # 2026-10-08: the simulated Level 2 left the desk for the decision card.
-    assert sorted(items) == ["chart-daily", "level2", "screener", "timeline",
+    # 2026-10-08: the simulated Level 2 left the desk for the decision card,
+    # and the quote card for the header (its facts) and the card (the catalyst).
+    assert sorted(items) == ["chart-daily", "level2", "quote", "screener", "timeline",
                              "tv-widget", "tv-widget-5m"]
     page.locator("#btnTray").click()
     page.wait_for_timeout(150)
@@ -530,7 +535,7 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
     assert page.eval_on_selector("[data-card=pillars-board]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v9'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v10'))")
     assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
@@ -591,12 +596,14 @@ def test_ui_level2_ladder_renders(page):
     page.locator("#btnTray").click()
     page.wait_for_timeout(200)
     try:
-        assert page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot") == "R1"
+        assert page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot") == "L4"
         _seek(page, 125)
         page.locator("[data-card=scan-pillars] .trow").first.click()
         page.wait_for_timeout(250)
         assert page.locator(".ladder .lp").count() == 16
-        assert page.locator(".tape .print").count() == 10
+        # the seeded prints are gone: the real tape has its own card (2026-10-08)
+        assert page.locator("#l2Card .print").count() == 0
+        assert "Time & Sales card" in page.locator("#l2Card").inner_text()
         bids = page.eval_on_selector_all(".ladder .lp.bid", "els => els.map(e => parseFloat(e.textContent))")
         asks = page.eval_on_selector_all(".ladder .lp.ask", "els => els.map(e => parseFloat(e.textContent))")
         assert bids == sorted(bids, reverse=True)
@@ -653,18 +660,17 @@ def test_ui_order_panel_renders_the_servers_ticket(page):
     assert line == tk["order_line"] and line.startswith(f"BUY {tk['shares']} {sym} STP LMT")
     body = page.locator(".sizing").inner_text()
     assert "limit (A10)" in body and "worst case (A18)" in body
-    assert "sized on $25 a trade — your risk" in body, "whose risk sized it, in plain words"
-    page.evaluate("""([sym]) => { window.__SESSION__.cards[sym].risk.source = "the bot's"; }""", [sym])
-    page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
-    page.wait_for_timeout(250)
-    assert "— the bot's risk" in page.locator(".sizing").inner_text()
-    # the order says "not now" itself when the card is not REVIEW (2026-10-08)
+    assert "sized on your $25 a trade" in body, "whose risk sized it, in plain words"
+    # copy arms on REVIEW only, once the owner's risk sized it (owner, 2026-10-08)
+    assert page.locator(".dc-copy").is_enabled() and page.locator(".dc-order-line.armed").count() == 1
     assert page.locator(".dc-order-gate").count() == 0, "REVIEW: no 'not now' on the order"
     page.evaluate("""([sym]) => { const v = window.__SESSION__.cards[sym].verdict;
       v.word = "WAIT"; v.reason = "below the VWAP 4.17"; }""", [sym])
     page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
     page.wait_for_timeout(250)
     assert page.locator(".dc-order-gate").inner_text() == "not now — WAIT: below the VWAP 4.17"
+    assert page.locator(".dc-copy").is_disabled(), "WAIT: the copy button is not armed"
+    assert page.locator(".dc-order-line.armed").count() == 0
     page.evaluate("""([sym]) => { window.__SESSION__.cards[sym].verdict.word = "REVIEW"; }""", [sym])
     assert page.locator(".dc-check").count() == len(tk["checks"])
     assert page.locator(".dc-btn.took").count() == 1 and page.locator(".dc-btn.passed").count() == 1
@@ -677,18 +683,19 @@ def test_ui_order_panel_renders_the_servers_ticket(page):
     page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
     page.wait_for_timeout(250)
     assert "state your risk" in page.locator(".sizing").inner_text()
+    assert page.locator(".dc-copy").is_disabled(), "nothing sized, nothing to copy"
 
 
 def test_ui_alert_click_seeks_charts(page):
     """The alert timeline waits in the tray by default; put it on the desk
     (a saved layout, as a drag would leave it) and it still seeks."""
     page.evaluate("""() => {
-      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v9') || '{}');
+      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v10') || '{}');
       saved.layout = Object.assign({}, saved.layout || {
-        L1: 'scan-pillars', L2: 'scan-running', L3: 'scan-hod', L4: 'quote',
-        C1: 'chart-1m', C2: 'chart-5m', C3: 'chart-10s', R1: 'pillars-board', R2: 'verdict' });
-      saved.layout.R1 = 'timeline';
-      localStorage.setItem('momentum-workstation.layout.v9', JSON.stringify(saved));
+        L1: 'scan-pillars', L2: 'scan-running', L3: 'scan-hod', L4: 'pillars-board',
+        C1: 'chart-1m', C2: 'chart-5m', C3: 'chart-10s', R1: 'verdict', R2: 'tape' });
+      saved.layout.L4 = 'timeline';
+      localStorage.setItem('momentum-workstation.layout.v10', JSON.stringify(saved));
     }""")
     page.reload()
     page.wait_for_timeout(400)
@@ -1014,7 +1021,7 @@ def test_float_row_has_three_words_never_a_boolean():
 
 def test_ui_five_pillars_board_lists_every_desk_symbol(page):
     """The Five Pillars check: one row per desk symbol, five pillar cells with
-    PASS / FAIL / UNKNOWN, a score, sorted by score. In the right column it is
+    PASS / FAIL / UNKNOWN, a score, sorted by score. In its column it is
     the compact form (symbol, last, gain, five chips, score); dragged into a
     wide slot it is the full thirteen-column table."""
     _seek(page, 124)
@@ -1151,12 +1158,13 @@ def test_the_desk_opens_on_its_own_real_time_charts_not_the_delayed_widget():
     assert '"tv-widget"' in spare and '"tv-widget-5m"' in spare
 
     # A structurally valid older layout would restore the delayed charts.
-    assert 'LAYOUT_KEY = "momentum-workstation.layout.v9"' in app
+    assert 'LAYOUT_KEY = "momentum-workstation.layout.v10"' in app
 
     # The simulated book is not a default pane (owner, 2026-10-08): the
-    # decision card took its slot. It stays one drag away, still labelled.
-    assert '"level2"' not in default and '"verdict"' in default
-    assert '"level2"' in spare
+    # decision card took its slot, the real tape sits under it. Level 2 and
+    # the quote card stay one drag away, still labelled.
+    assert '"level2"' not in default and '"verdict"' in default and '"tape"' in default
+    assert '"level2"' in spare and '"quote"' in spare
 
 
 def test_a_chart_does_not_swallow_a_card_drag():
@@ -1340,3 +1348,93 @@ def test_a_list_row_click_selects_and_the_why_drawer_has_its_own_button():
     css = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "styles.css").read_text()
     assert ".row-why{" in css
+
+
+# ---------------------------------------------- Time & Sales (2026-10-08)
+
+def _tape_snapshot(symbol):
+    """A snapshot from the real tape model: three earlier prints from history,
+    a gap, then live prints read against the standing quote — one of them big."""
+    import sys as _sys
+    from datetime import datetime as _dt, timedelta as _td, timezone as _tz
+    _sys.path.insert(0, str(ROOT / "src"))
+    from momentum_platform.tape import TapeBook
+    t0 = _dt(2026, 9, 1, 13, 40, 0, tzinfo=_tz.utc)
+    clock = [t0]
+    b = TapeBook(symbol, source="test prints", clock=lambda: clock[0])
+    b.add_history([(t0 - _td(seconds=30 - i), 7.10, 100, "NASDAQ", "") for i in range(3)])
+    b.live_from(t0)
+    b.gap("test gap", t0)
+    b.quote(7.20, 7.21)
+    for i, (px, sz) in enumerate([(7.21, 300), (7.20, 200), (7.205, 100), (7.21, 9000)]):
+        clock[0] = t0 + _td(seconds=2 * (i + 1))
+        b.add_print(clock[0], px, sz)
+    return b.snapshot(now=clock[0] + _td(seconds=1))
+
+
+def test_ui_a_replay_says_it_has_no_tape(page):
+    """No prints were recorded with the day: the card says so, in words,
+    and the decision card's tape line too — never a simulated tape."""
+    page.evaluate("() => localStorage.clear()")
+    page.reload()
+    page.wait_for_timeout(800)
+    assert page.locator("#tapeTag").inner_text() == "OFF"
+    assert "no tape in this replay" in page.locator("#tapeCard").inner_text()
+    _seek(page, 125)
+    page.locator("[data-card=scan-pillars] .trow").first.click()
+    page.wait_for_timeout(250)
+    assert "none in this replay" in page.locator(".dc-tape").inner_text()
+
+
+def test_ui_the_tape_card_renders_the_servers_prints(page):
+    """Each print carries its side as a mark as well as a colour; a big print
+    is bold; the gap and the history boundary are said on the tape; the facts
+    are the server's, and the decision card repeats the 60-second line."""
+    _seek(page, 125)
+    page.locator("[data-card=scan-pillars] .trow").first.click()
+    page.wait_for_timeout(250)
+    sym = page.locator("#symTicker").inner_text()
+    snap = _tape_snapshot(sym)
+    page.evaluate("s => window.__applyTape(s)", snap)
+    page.wait_for_timeout(300)
+    assert page.locator("#tapeTag").inner_text() == "LIVE"
+    rows = page.locator("#tapeCard .ts-row")
+    assert rows.count() == len(snap["prints"]) == 7
+    marks = page.eval_on_selector_all("#tapeCard .ts-row .ts-m", "els => els.map(e => e.textContent)")
+    assert marks[:4] == ["▲", "·", "▼", "▲"], "newest first: the big lift, mid, the bid, the first lift"
+    assert page.locator("#tapeCard .ts-row.big").count() == 1
+    assert "9,000" in page.locator("#tapeCard .ts-row.big").inner_text()
+    assert page.locator("#tapeCard .ts-row.hist").count() == 3
+    gaps = page.locator("#tapeCard .ts-gap").all_inner_texts()
+    assert any("test gap" in g for g in gaps) and any("history" in g for g in gaps)
+    facts = page.locator("#tapeCard .ts-facts").inner_text()
+    assert f"{snap['facts']['pctAsk']:.0f}%" in facts
+    assert "Approximation" in page.locator("#tapeCard .ts-legend").inner_text()
+    line = page.locator(".dc-tape").inner_text()
+    assert f"{snap['facts']['pctAsk']:.0f}% at the ask" in line and "1 big" in line
+
+
+def test_ui_the_tape_says_when_it_is_on_another_name(page):
+    _seek(page, 125)
+    page.locator("[data-card=scan-pillars] .trow").first.click()
+    page.wait_for_timeout(250)
+    page.evaluate("s => window.__applyTape(s)", _tape_snapshot("ZZZZ"))
+    page.wait_for_timeout(300)
+    assert "the tape is on ZZZZ" in page.locator("#tapeCard").inner_text()
+    assert "the tape is on ZZZZ" in page.locator(".dc-tape").inner_text()
+
+
+def test_ui_the_header_carries_the_quote_in_two_lines(page):
+    """The quote card's facts moved into the header (2026-10-08): line one what
+    moves, line two the levels and the supply — the float with its source."""
+    _seek(page, 125)
+    page.locator("[data-card=scan-pillars] .trow").first.click()
+    page.wait_for_timeout(250)
+    top = page.locator("#symStats").inner_text().lower()
+    for word in ("spread", "vol", "rvol", "halt"):
+        assert word in top, word
+    second = page.locator("#symFacts").inner_text().lower()
+    for word in ("vwap", "hod", "pm high", "prev", "52w", "float", "range"):
+        assert word in second, word
+    labels = page.eval_on_selector_all("#symStats .lab", "els => els.map(e => e.textContent)")
+    assert labels.count("rvol") == 1, "one RVOL; the daily one only when it differs"

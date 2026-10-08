@@ -622,8 +622,11 @@ body.resizing .gutter{pointer-events:auto}
 .dc-copy{margin-left:auto;padding:2px 8px;font-size:10px}
 .dc-order-gate{font-size:11px;font-weight:600;color:#ffdf9e;border-left:2px solid var(--hi);padding-left:6px;margin:3px 0}
 .dc-order-gate.watch{color:#bcd0ff;border-left-color:var(--accent)}
-.dc-order-line{font:600 12px/1.4 var(--mono);color:#fff;background:#0b1118;border:1px solid var(--line);
-  border-radius:4px;padding:6px 8px;margin:4px 0;user-select:all;word-break:break-word}
+.dc-order-line{font:600 12px/1.4 var(--mono);color:var(--ink-dim);background:#0b1118;border:1px dashed var(--line);
+  border-radius:4px;padding:6px 8px;margin:4px 0;user-select:none;word-break:break-word}
+/* copy arms on REVIEW only, once your own risk sized the order (owner, 2026-10-08) */
+.dc-order-line.armed{color:#fff;border-style:solid;border-color:var(--target);user-select:all}
+.dc-copy:disabled{opacity:.45;cursor:not-allowed}
 .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
 .dc-checks{display:flex;flex-direction:column;gap:1px;margin:4px 0}
 .dc-check{display:flex;gap:6px;font-size:10.5px;color:var(--ink-dim)}
@@ -667,3 +670,63 @@ a.cat2-headline:hover{text-decoration:underline}
   background:#131b25;border:1px solid var(--line);color:var(--ink);font-size:12px;box-shadow:0 6px 22px #0008}
 .desk-toast.ok{border-color:#1f4c38;color:#a9efc9} .desk-toast.bad{border-color:#4a1f26;color:#ffb3ba}
 .desk-toast[hidden]{display:none}
+
+/* ── the pro-trader pass (2026-10-08) ────────────────────────────────────
+   FIND left · SEE centre · DECIDE right. The header carries the quote in two
+   lines; the decision card holds the verdict, the catalyst and the order; the
+   Time & Sales sits under it. Colour on the tape is the aggressor side, read
+   against the quote that stood — and every row also carries a mark, so the
+   side never rests on colour alone. */
+.sym-header{min-height:40px;padding:4px 10px;align-items:center}
+.sym-main{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.sym-stats{gap:14px;align-items:baseline}
+.sym-facts{display:flex;gap:12px;flex-wrap:wrap;font:9.5px var(--mono);color:var(--ink-dim);
+  font-variant-numeric:tabular-nums}
+.sym-facts .stat .lab{font-size:8px}
+.stat-last span{font:700 15px/1 var(--mono);letter-spacing:.2px}
+.stat .chg{font:600 12px/1 var(--mono)}
+.stat .up{color:var(--up)} .stat .down{color:var(--down)} .stat .flat{color:var(--ink)}
+
+/* the decision card's new rows */
+.dc-tape{display:flex;gap:6px;align-items:baseline;font-size:10.5px;line-height:1.35;color:var(--ink-dim)}
+.dc-tape-v{color:var(--ink);font-family:var(--mono);font-size:10px}
+.dc-tape-v.warn{color:var(--unk-ink)}
+.dc-cat{margin:2px 0}
+.dc-cat .divider{margin:3px 0 2px}
+
+/* Time & Sales */
+.tape-card .card-body{display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:5px 8px 6px}
+.tag.ts-state{font:700 8.5px/1.3 var(--mono);letter-spacing:.5px}
+.tag.ts-state.ok{color:var(--ok-ink);border-color:var(--ok-line);background:var(--ok-bg)}
+.tag.ts-state.warn{color:var(--unk-ink);border-color:var(--unk-line);background:var(--unk-bg)}
+.tag.ts-state.bad{color:var(--no-ink);border-color:var(--no-line);background:var(--no-bg)}
+.tag.ts-state.info{color:#bcd0ff;border-color:#24365e;background:#121d2e}
+.tag.ts-state.off{color:var(--ink-faint)}
+.ts-status{display:flex;align-items:baseline;gap:8px;font-size:10.5px;flex:none}
+.ts-status b{font:700 12px var(--mono);letter-spacing:.4px}
+.ts-age{font:10px var(--mono);color:var(--ink-dim)} .ts-age.old{color:var(--unk-ink)}
+.ts-src{margin-left:auto;font-size:9px;color:var(--ink-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ts-msg{font-size:10.5px;line-height:1.35;margin:2px 0;color:var(--ink-dim);flex:none}
+.ts-msg.warn{color:var(--unk-ink)} .ts-msg.bad{color:var(--no-ink)} .ts-msg.info{color:#bcd0ff}
+.ts-facts{flex:none;margin:3px 0 4px;padding:4px 6px;background:var(--panel-2);border:1px solid var(--line-soft);border-radius:5px}
+.ts-fact{display:flex;gap:9px;align-items:baseline;font:10.5px var(--mono);font-variant-numeric:tabular-nums;flex-wrap:wrap}
+.ts-fact.sub{font-size:9.5px;color:var(--ink-dim);margin-top:3px}
+.ts-fact .ask{color:var(--up)} .ts-fact .bid{color:var(--down)} .ts-fact .big{color:var(--hi);font-weight:700}
+.ts-win{font:700 8.5px var(--sans);letter-spacing:.5px;text-transform:uppercase;color:var(--ink-faint);min-width:34px}
+.ts-bar{display:flex;height:4px;border-radius:2px;overflow:hidden;margin-top:4px;background:var(--line)}
+.ts-bar.empty{opacity:.4}
+.ts-seg.ask{background:var(--up)} .ts-seg.mid{background:var(--flat)} .ts-seg.bid{background:var(--down)}
+.ts-list{flex:1;min-height:0;overflow-y:auto;font:11px/1.5 var(--mono);font-variant-numeric:tabular-nums}
+.ts-row{display:grid;grid-template-columns:64px 1fr 1fr 14px;gap:6px;padding:0 4px;border-radius:3px}
+.ts-row .ts-p,.ts-row .ts-s{text-align:right}
+.ts-row .ts-t{color:var(--ink-faint)}
+.ts-row.ask{color:var(--up)} .ts-row.bid{color:var(--down)}
+.ts-row.mid{color:var(--ink-dim)} .ts-row.unk{color:var(--ink-faint)}
+.ts-row.big{font-weight:700;background:rgba(255,194,71,.10)}
+.ts-row.big .ts-s{color:var(--hi)}
+.ts-row.hist{opacity:.6;font-style:italic}
+.ts-row.odd .ts-s{opacity:.65}
+.ts-gap{font:9.5px var(--sans);color:var(--unk-ink);border-top:1px dashed var(--unk-line);margin:3px 0;padding-top:2px}
+.ts-gap.hist{color:var(--ink-faint);border-top-color:var(--line)}
+.ts-note,.ts-legend{flex:none;font-size:9px;line-height:1.35;color:var(--ink-faint);margin-top:3px}
+.empty.one-line{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

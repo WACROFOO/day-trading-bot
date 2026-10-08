@@ -41,6 +41,7 @@ from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_ba
                                         session_duration, session_start,
                                         sec_profile, stock_type_of, store_records)
 from ..datasources.ibkr_stream import IbkrStream, read_only_connect
+from ..datasources.ibkr_tape import TapeFeed
 from .session_builder import build_session_from_records
 from .stream import EventHub, UpdatePublisher
 
@@ -194,6 +195,13 @@ class IbkrDesk:
         self._next_competing_note = 0.0
         self._worker_thread: Optional[threading.Thread] = None
         self.fundamentals: Optional[bool] = None      # None = untested, False = account not entitled
+        # Time & Sales for the name the owner selected (2026-10-08): IBKR
+        # tick-by-tick on this same read-only connection, published as the
+        # "tape" event at most twice a second while prints arrive.
+        self.tape: Optional[TapeFeed] = None
+        self.tape_every = 0.5
+        self._next_tape = 0.0
+        self._tape_sent = -1
         self.log: Callable[[str], None] = lambda m: print(m, flush=True)
 
     # -- lifecycle --------------------------------------------------------------
@@ -240,6 +248,9 @@ class IbkrDesk:
         if self.stream is None:
             return
         now = time.monotonic()
+        if self.tape is not None and now >= self._next_tape:
+            self._next_tape = now + self.tape_every
+            self._guard(self._publish_tape)
         if now >= self._next_tick:
             self._next_tick = now + 1.0
             self._guard(self.tick)
@@ -323,6 +334,8 @@ class IbkrDesk:
             self.stream.ib.errorEvent += self._on_tws_error
         except Exception:
             pass
+        if self.tape is None:
+            self.tape = TapeFeed(self.stream, clock=self.clock)
         if not h.connected:
             raise IbkrError(f"TWS not reachable at {self.host}:{self.port} (client {self.client_id}): "
                             f"{h.last_error}. Log the paper GATEWAY in (TWS logged out — one login), "
@@ -367,6 +380,12 @@ class IbkrDesk:
 
     def _on_tws_error(self, reqId, errorCode, errorString, contract=None, *rest) -> None:
         h = self.stream.health if self.stream is not None else None
+        tape = getattr(self, "tape", None)
+        if tape is not None:
+            try:
+                tape.on_error(reqId, errorCode, errorString, contract)
+            except Exception:                          # noqa: BLE001 — the tape never takes the desk down
+                pass
         if errorCode == 10197:
             now = self.clock()
             if self.competing_since is None:
@@ -1228,6 +1247,45 @@ class IbkrDesk:
             "marketDataType": getattr(self.stream.health, "market_data_type", None) if self.stream else None,
         })
 
+    # -- the Time & Sales (2026-10-08) -------------------------------------------------
+
+    def focus(self, symbol: str) -> None:
+        """The owner selected `symbol`: its tape starts on the worker (every
+        IBKR call lives there). Returns at once; the tape event follows."""
+        on_worker = self._worker_thread is None or threading.current_thread() is self._worker_thread
+        if on_worker:
+            self._focus_now(symbol)
+        else:
+            self.submit(self._focus_now, symbol)
+
+    def _focus_now(self, symbol: str) -> dict:
+        if self.tape is None:
+            return {}
+        snap = self.tape.focus(symbol)
+        self._tape_sent = self.tape.version
+        self._tape_sent_at = time.monotonic()
+        self.hub.publish("tape", snap)
+        return snap
+
+    def _publish_tape(self) -> None:
+        """Pacing, reconnects and silence first; then the snapshot, only when
+        it changed (a quiet tape still re-sends every few seconds so its age
+        keeps counting on a page that just connected)."""
+        self.tape.check()
+        v = self.tape.version
+        now = time.monotonic()
+        stale = now - getattr(self, "_tape_sent_at", 0.0) >= 5.0
+        if v != self._tape_sent or (self.tape.symbol and stale):
+            self._tape_sent = v
+            self._tape_sent_at = now
+            self.hub.publish("tape", self.tape.snapshot())
+
+    def tape_snapshot(self) -> dict:
+        if self.tape is None:
+            from ..tape import off_snapshot
+            return off_snapshot("the desk has not connected to IBKR yet")
+        return self.tape.snapshot()
+
     def health(self) -> dict:
         d = self.stream.health.as_dict() if self.stream is not None else {"state": "OFFLINE"}
         d["clientId"] = self.client_id
@@ -1240,6 +1298,8 @@ class IbkrDesk:
         # cleared on 1101/1102, so the page can name it while it lasts.
         cs = getattr(self, "competing_since", None)
         d["competingSince"] = cs.isoformat() if cs is not None else None
+        tape = getattr(self, "tape", None)
+        d["tape"] = tape.status() if tape is not None else None
         return d
 
     def add_symbols(self, symbols) -> list:

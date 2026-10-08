@@ -101,6 +101,9 @@ Practical consequences for typing orders by hand:
 | 18 | the three buttons write `manual_decisions`; the export carries `desk_calls.csv`; the review scores each call beside the bot | `server.py` POST routes (JSON only, owner key), `day_export.py`, `daily_review.py` |
 | — | a real day can be replayed at any minute | `scripts/fixture_from_export.py` |
 | — | the owner's layout call: the decision card takes the simulated Level 2's slot (Level 2 to the tray, still labelled); off REVIEW the order itself says "not now — WAIT: the reason" | `app.js` `DEFAULT_LAYOUT` (layout v9), `renderTicket` |
+| — | the owner's two risk calls: copy arms on REVIEW only, and a hand order is sized on the owner's own risk or not at all (no fallback to the bot's paper risk) | `app.js` `copyArmed`, `src/momentum_platform/dashboard/cards.py` `_risk` |
+| — | the real Time & Sales: IBKR tick-by-tick `Last` + `BidAsk` for the selected name, each print's side read against the quote that stood, 60-s and 10-s facts, big prints, gaps and refusals said on the tape; the decision card carries its one-line summary. Facts, never a gate | `src/momentum_platform/tape.py`, `src/momentum_platform/datasources/ibkr_tape.py`, `ibkr_desk.py`, `/api/v1/tape`, `/api/v1/focus` |
+| — | the owner's "act as a pro trader" pass: find / see / decide — scanners and the Five Pillars check left; the charts under a two-line header that took the quote card's facts; the decision card (now holding the catalyst) over the Time & Sales right; the risk box above the order, the buttons beside it | `app.js` (layout v10), `index.html`, `styles.css` |
 
 Tests: `tests/test_desk_card.py` (46), plus the rewritten card tests in
 `tests/test_dashboard.py` and `tests/test_live_ui.py`, and the desk-calls loop in
@@ -144,7 +147,7 @@ owner's eyes at the trigger, which he places last before the order. In order:
 1. a second IBKR username, so TWS's own book and tape run beside the desk —
    needed for manual orders anyway (see point 4 above);
 2. a real Time & Sales strip on the desk: no new licence, and it covers the
-   "green on the tape" read;
+   "green on the tape" read — **built the same day** on the owner's word;
 3. depth on the desk only after the licence, showing one fact — the largest
    offer between the trigger and the next half dollar, with its size on his
    own scale (*"15,000 and up starts to become more significant. Above 100,000
@@ -159,8 +162,10 @@ recorded cannot be tested.
 
 | risk | how it bites | what limits it now | still open |
 |---|---|---|---|
-| a WATCH / WAIT card shows a copyable buy line | a stop-limit staged while a gate is red can fill while it is still red — an entry the bot would refuse (IPDN 2026-10-06 07:32: trigger 4.16 under the VWAP 4.17) | since 2026-10-08 the order panel itself says "not now — WAIT: below the VWAP 4.17" above the line | arm the copy button on REVIEW only — the owner's call |
-| the order is sized on the bot's paper risk until you type yours | a manual share count from a figure set for the paper exercise | labelled "the bot's risk" under the order | require the owner's own figure before any share count — a risk setting, the owner's call |
+| a WATCH / WAIT card shows a copyable buy line | a stop-limit staged while a gate is red can fill while it is still red — an entry the bot would refuse (IPDN 2026-10-06 07:32: trigger 4.16 under the VWAP 4.17) | the order panel says "not now — WAIT: below the VWAP 4.17" above the line, and **copy arms on REVIEW only** (owner's call, same day) | closed |
+| the order is sized on the bot's paper risk until you type yours | a manual share count from a figure set for the paper exercise | **no share count until the owner types a risk** (owner's call, same day) | closed |
+| a print's side is only as good as the quote it is read against | a stale quote reads a print on the wrong side; with `BidAsk` refused the quote is IBKR's sampled Level 1 | the tape's source line says which quote it reads, and the note calls the Level 1 read an Approximation | — |
+| the tape shares IBKR's tick-by-tick allowance (5 streams on 100 lines, as reported) | TWS windows open on the same login can use it up; the desk's request is then refused | the card reads ERROR with IBKR's reason (10190) — never an empty tape that looks quiet | — |
 | no stop at the broker before 09:30 | a pre-market entry is protected by the owner's eyes only | every pre-market ticket says so (probe 2026-09-18, warning 2109) | — |
 | a stop inside the noise or wider than the halt band | stopped by an ordinary 1-minute range, or halted straight through the stop | red checks on the ticket (rule 5) | — |
 | the position view is what was typed | the desk reads no fills or positions; a mistyped fill or a forgotten "I took it" means wrong trail alerts, or none | — | read positions from IBKR read-only (no order path needed) |

@@ -1193,7 +1193,14 @@ unchanged), and the runner's answer from the ledger. "I took it / I passed /
 I closed it" write `manual_decisions`, which the runner never reads; the day's
 export carries them (`desk_calls.csv`) and the daily review scores them beside
 the bot's plans. Manual positions are the owner's, placed by hand outside this
-code: no order path was added and the guard tests stand.
+code: no order path was added and the guard tests stand. Same day, on the
+owner's word: the order line can be copied only on a REVIEW card, a hand order
+is sized on the owner's own stated risk or not at all, and the desk shows a
+real Time & Sales (IBKR tick-by-tick for the selected name, read-only). The
+runner reads none of it — no tape figure is a gate. Nothing here has measured
+one: Level 2 history does not exist in any source available, and the only
+prints (the F3 trade subset) were turned into 10-second bars
+(`research/edge-hunt/PREREGISTRATION.md`, data table).
 
 ## 6. Stopping rules — the exercise halts and is reviewed if
 

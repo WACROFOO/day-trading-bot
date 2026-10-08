@@ -408,6 +408,8 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
             if path == "/api/v1/scanner-events":
                 events = [a for f in session["frames"] for a in f["alerts"]]
                 return self._json({"count": len(events), "events": events})
+            if path == "/api/v1/tape":
+                return self._json(_tape_snapshot(holder))
 
             asset = (WEB / path.lstrip("/")).resolve()
             if asset.is_file() and WEB.resolve() in asset.parents:
@@ -441,9 +443,37 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                 return self._json(*_manual_post(holder, body))
             if path == "/api/v1/settings":
                 return self._json(*_settings_post(holder, body))
+            if path == "/api/v1/focus":
+                return self._json(*_focus_post(holder, body))
             return self._json({"error": "not found", "path": path}, 404)
 
     return Handler
+
+
+# The Time & Sales (2026-10-08). Only the live IBKR desk has a tape; a replay
+# says so rather than drawing prints it never recorded.
+NO_TAPE = ("no tape in this replay: the day's export carries no prints. "
+           "The live desk reads IBKR tick-by-tick for the selected name.")
+
+
+def _tape_snapshot(holder) -> dict:
+    from ..tape import off_snapshot
+    fn = getattr(holder, "tape_snapshot", None)
+    return fn() if fn is not None else off_snapshot(NO_TAPE)
+
+
+def _focus_post(holder, body: dict) -> tuple:
+    """The owner's selected name becomes the tape's focus. A viewer never
+    gets here (do_POST refuses it), so a second screen cannot move the owner's
+    tape."""
+    sym = str(body.get("symbol") or "").strip().upper()
+    if not sym or len(sym) > 12 or not sym.replace(".", "").replace("-", "").isalnum():
+        return {"error": "a symbol is required"}, 400
+    fn = getattr(holder, "focus", None)
+    if fn is None:
+        return {"focus": sym, "tape": False, "message": NO_TAPE}, 200
+    fn(sym)
+    return {"focus": sym, "tape": True}, 200
 
 
 def _manual_conn(holder):

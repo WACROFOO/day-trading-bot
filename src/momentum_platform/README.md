@@ -12,7 +12,14 @@ verdict. **It does not trade** — no order path exists in this package and
 | `formulas.py` | RVOL and the derived measures, with their denominators named |
 | `models.py` · `state.py` · `store.py` | records, per-symbol state, persistence |
 | `sessions.py` | market phases on the New York clock |
-| `catalyst.py` | catalyst evidence, three channels |
+| `catalyst.py` | catalyst evidence, three channels; `card_read` is the decision card's two-line grade (rules C0–C13 in `knowledge-base/strategies/CATALYST.md`) |
+| `cascade.py` | the reject cascade — the single authority on whether a name is tradeable (FILTERS.md Layer 1 kills, Layer 2 chart gates) |
+| `indicators.py` | the Layer 2 chart gates from minute bars alone: VWAP, EMA 9, MACD |
+| `five_minute.py` | the 5-minute state of a name whose 1-minute chart gives no pullback — display only |
+| `decision_card.py` | the per-symbol card a manual trader acts on: REVIEW / WATCH / WAIT / NO, the reason, the level, the gates as lamps, the bot's own order (2026-10-08) |
+| `order_math.py` | the order arithmetic the bot executes and the desk displays — one copy, re-exported by `execution.intent` |
+| `tape.py` | Time & Sales: one name's prints read against the quote that stood, the 60-s and 10-s facts, gaps said (2026-10-08). Facts, never a gate |
+| `holidays.py` | NYSE full-day and early closes, as data |
 | `desk_profile.py` | the shared rule set and the fingerprint that proves parity |
 | `notify.py` | alerts out |
 | `cli.py` | entry point |

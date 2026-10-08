@@ -891,10 +891,13 @@ function fillListCard(card, id, frame) {
             (parts.length ? parts.join(", ") : "nothing yet — the list is rebuilding") + ".";
       if (b.unknownRvol) msg += " " + b.unknownRvol + " with no RVOL measured yet.";
     }
-    const div = el("div", "empty", msg);
+    // With watched names below, the reason takes ONE line (the rest on hover):
+    // three lines of prose left room for three rows of the desk's main list.
+    if (ordered.length) msg += " Below: names passing 3 or 4 of 5 — watched, not qualified.";
+    const div = el("div", "empty" + (ordered.length ? " one-line" : ""), msg);
+    div.title = msg;
     const stale = tapeStalledNote();
     if (stale) div.appendChild(el("div", "tiny warn", stale));
-    if (ordered.length) div.appendChild(el("div", "tiny", "Below: names passing 3 or 4 of 5 — watched, not qualified."));
     body.appendChild(div);
   }
   const prevKeys = state.prevRowKeys[id] || [];
@@ -1353,16 +1356,52 @@ function renderHeader(frame) {
   const nf = newsFor(sym, nowMs), flameEl = $("#symFlame");
   flameEl.hidden = !(nf && nf.flame);
   if (nf && nf.flame) { flameEl.className = "flame " + nf.flame; flameEl.title = "news " + Math.round(nf.ageMin) + " min old"; }
-  const stats = $("#symStats"); stats.textContent = "";
-  const stat = (lab, val, cls) => { const s = el("div", "stat"); s.appendChild(el("span", "lab", lab)); s.appendChild(el("span", cls || null, val)); stats.appendChild(s); };
-  stat("Last", fx(last)); stat("Change", pct(chg), dirClass(chg)); stat("HOD", fx(hod));
-  stat("RVOL", row ? fx(rowRvol(row)) + "×" : "—");
-  // The screener-comparable number: today ÷ the 10-day average FULL day.
-  // TradingView's "Vol Rel" is this; the time-of-day measure above is not.
-  stat("Day RVOL", row && row.rvolDaily != null ? fx(row.rvolDaily) + "×" : "—");
-  stat("5m RVOL", row ? fx(row.rvol5m) + "×" : "—");
   const halted = frame.halts && frame.halts[sym] === "halted";
-  stat("Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
+  // One home per fact (2026-10-08): the quote card's numbers live here now.
+  // Line 1 is what moves — price, quote, spread, volume, RVOL, halt; line 2
+  // the levels and the supply, each with its source in the tooltip.
+  const stats = $("#symStats"); stats.textContent = "";
+  const stat = (lab, val, cls, title, host) => {
+    const s = el("div", "stat"); if (lab) s.appendChild(el("span", "lab", lab));
+    s.appendChild(el("span", cls || null, val)); if (title) s.title = title;
+    (host || stats).appendChild(s); return s; };
+  stat("", fx(last), "last " + dirClass(chg)).classList.add("stat-last");
+  stat("", pct(chg), "chg " + dirClass(chg));
+  const bid = meta.iexBid, ask = meta.iexAsk;
+  if (bid != null && ask != null) stat("bid × ask", fx(bid) + " × " + fx(ask), null, "IBKR top of book");
+  const spread = row && row.spread != null ? row.spread : (bid != null && ask != null ? ask - bid : null);
+  const sprPct = spread != null && last ? spread / last * 100 : null;
+  stat("spread", spread == null ? "—" : (spread * 100).toFixed(spread < 0.1 ? 1 : 0) + "¢" +
+       (sprPct != null ? " · " + sprPct.toFixed(2) + "%" : ""), sprPct != null && sprPct > 1 ? "down" : null,
+       "the ticket checks the stop against it: stop ≥ 4× the spread (A6)");
+  const volToday = row && row.volume != null ? row.volume : bars.reduce((a, b) => a + (b[5] || 0), 0);
+  stat("vol", vol(volToday));
+  stat("rvol", row && rowRvol(row) != null ? fx(rowRvol(row)) + "×" : "—", null, rowRvolTitle(row));
+  // The screener-comparable number (today ÷ the 10-day average FULL day),
+  // shown only when it differs from the judged one above.
+  if (row && row.rvolDaily != null && row.rvolDaily !== rowRvol(row))
+    stat("day rvol", fx(row.rvolDaily) + "×", null, "today ÷ the 10-day average FULL day — the screener's measure");
+  stat("5m", row && row.rvol5m != null ? fx(row.rvol5m) + "×" : "—", null, "this five-minute bar ÷ recent five-minute bars");
+  stat("halt", halted ? "HALTED" : "trading", halted ? "down" : "muted");
+  const facts = $("#symFacts"); facts.textContent = "";
+  const fact = (lab, val, cls, title) => stat(lab, val, cls, title, facts);
+  const vw = bars.length ? vwap(bars) : [];
+  const vwNow = vw.length ? vw[vw.length - 1] : null;
+  fact("vwap", vwNow == null ? "—" : fx(vwNow) + (last ? " (" + pct((last / vwNow - 1) * 100) + ")" : ""),
+       last && vwNow ? (last >= vwNow ? "up" : "down") : null, "session VWAP from the desk's own bars — the line on the charts");
+  fact("hod", fx(hod));
+  const pm = bars.filter(b => sessionAt(b[0] * 1000) === "premarket");
+  fact("pm high", pm.length ? fx(Math.max(...pm.map(b => b[2]))) : "—", null, "highest pre-market bar, 04:00–09:30 ET");
+  fact("prev", fx(meta.prevClose));
+  fact("52w", fx(meta.high52w), null, "52-week high — daily room overhead");
+  const qf = effectiveFloat(sym, meta);
+  fact("float", (qf.shares ? (qf.shares / 1e6).toFixed(1) + "M" : "UNKNOWN") + " " + floatSourceShort(qf, meta),
+       qf.quality === "unknown" ? "down" : null, "float, and where the number comes from");
+  fact("avg vol", vol(meta.avgDailyVolume));
+  fact("range", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—", null,
+       "where the price sits in the day's range: 100% = at the high (front side), 0% = at the low");
+  if (meta.iexLast != null && meta.iexLastTime)
+    fact((meta.lastSource || "iex").toLowerCase() + " print", meta.iexLastTime, "muted", "the feed's most recent print, ET");
   return { last, chg, hod, row, meta, nf, halted, sym };
 }
 
@@ -1651,8 +1690,9 @@ function renderQuote(frame, ctx) {
       kv(grid, src + " bid/ask", fx(meta.iexBid) + " × " + fx(meta.iexAsk));
   }
   q.appendChild(grid);
-  const card = cardFor(ctx.sym);
-  if (card && card.catalyst) renderServerCatalyst(q, card.catalyst); else renderCatalyst(q, ctx);
+  // The catalyst lives on the decision card since 2026-10-08 — one home per
+  // fact. A session without server cards keeps the browser's own read here.
+  if (!cardFor(ctx.sym)) renderCatalyst(q, ctx);
   if (meta.floatQuality === "shares_outstanding_proxy")
     // Says what the pillar actually does. It used to claim the pillar fails
     // until a verified value exists, while the pill two inches away read PASS:
@@ -1724,19 +1764,10 @@ function renderL2(frame, ctx) {
   // caps the move" — is the one thing this card must never say.
   if (wall) host.appendChild(el("div", "note warn", "SIMULATED book: a large offer would rest at " + fx(wall.price) +
     " (" + wall.size + "). Illustrates the shape to look for on a real Level 2; it is not this stock's book."));
-  host.appendChild(el("div", "divider", "time & sales"));
-  const tape = el("div", "tape");
-  book.prints.forEach(p => {
-    const r = el("div", "print " + (p.atAsk ? "up" : "down"));
-    r.appendChild(el("span", null, fx(p.price)));
-    r.appendChild(el("span", "n", String(p.size)));
-    r.appendChild(el("span", "side", p.atAsk ? "ask" : "bid"));
-    tape.appendChild(r);
-  });
-  host.appendChild(tape);
-  // The ladder AND the tape are generated from the same seed. Saying only
-  // "simulated depth" left the prints below reading as real executions.
-  host.appendChild(el("div", "note", "Simulated book and tape — not licensed market data."));
+  // 2026-10-08: the seeded prints that sat under this ladder are gone. The
+  // desk has a real tape now (the Time & Sales card), and a fake one beside
+  // it is the one thing that must never be read as the market.
+  host.appendChild(el("div", "note", "Simulated book — not licensed market data. The real prints are on the Time & Sales card."));
 }
 
 /* Setup verdict — mirrors the bundled Pine dashboard rows, then applies the
@@ -1956,14 +1987,15 @@ function syncFloatInput() {
   box.value = mine > 0 ? mine : "";
 }
 
-/* The risk box shows the risk the cards are sized on: yours once stated, else
-   the bot's, labelled. Never overwritten while you type. */
+/* The risk box shows the risk the cards are sized on: yours, kept in the
+   ledger. Empty sizes nothing — no fallback to the bot's paper risk (owner,
+   2026-10-08). Never overwritten while you type. */
 function syncRiskInput() {
   const box = document.getElementById("riskInput");
   if (!box || document.activeElement === box || !S.cards) return;
   const c = cardFor(state.selected), r = c && c.risk;
-  if (r && r.source === "yours" && r.dollars != null) box.value = String(r.dollars);
-  box.placeholder = r && r.dollars ? "$" + fx(r.dollars, 0) + " (" + r.source + ")" : "e.g. 25";
+  if (r && r.dollars != null) box.value = String(r.dollars);
+  box.placeholder = "your $ risk";
 }
 
 function renderSizing(plan, row) {
@@ -1983,6 +2015,174 @@ function renderSizing(plan, row) {
   } else {
     out.appendChild(el("div", "note", "No armed setup to size yet."));
   }
+}
+
+/* ── Time & Sales (owner, 2026-10-08) ─────────────────────────────────
+   The prints of the selected name from IBKR tick-by-tick, read on the server
+   (src/momentum_platform/tape.py) and pushed as the "tape" event. The page
+   recomputes nothing: a print's side is the server's read against the quote
+   that stood when it printed, and "?" is a print with no such quote (the
+   history loaded behind a new focus). Facts only — none of it is a gate and
+   none of it moves the verdict. A replay has no tape and says so. */
+let TAPE = null, TAPE_AT = 0, FOCUS_SENT = null, FOCUS_TIMER = null;
+const TAPE_STATE_CLASS = { LIVE: "ok", QUIET: "warn", STARTING: "info", PAUSED: "warn", ERROR: "bad", OFF: "off" };
+const TAPE_MARK = { ask: "▲", bid: "▼", mid: "·", "?": "?" };
+const TAPE_WORDS = { ask: "at or above the ask — a buyer lifted the offer", bid: "at or below the bid — a seller hit the bid",
+                     mid: "between the bid and the ask", "?": "side not known — no quote of that moment was read" };
+const shares = n => n == null ? "—" : Number(n).toLocaleString("en-US");
+
+function applyTape(snap) {
+  if (!snap) return;
+  TAPE = snap; TAPE_AT = Date.now();
+  renderTape();
+  refreshTapeLine();
+}
+const agoText = sec => sec < 5 ? "just now" : fmtAge(sec * 1000) + " ago";
+function tapeAge() {
+  if (!TAPE || TAPE.lastPrintAge == null) return null;
+  return TAPE.lastPrintAge + (Date.now() - TAPE_AT) / 1000;
+}
+function loadTape() {
+  // A page saved to disk, or a desk that does not answer, has no tape: said,
+  // like the replay says it — the card never sits on "loading" forever.
+  const none = () => applyTape({ state: "OFF", symbol: null, prints: [], gaps: [], notes: [], facts: null,
+    message: S.streaming ? "the desk did not answer for the tape — it retries with the next event"
+                         : "no tape in this replay: a saved or recorded page carries no prints" });
+  fetch("/api/v1/tape", { cache: "no-store" }).then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(applyTape).catch(none);
+}
+/* The selected name becomes the tape's focus. Debounced: J/K through a list
+   must not spend IBKR's one-request-per-name-per-15-seconds pacing on every
+   row it passes. A viewer's request is refused (403): it reads the owner's. */
+function postFocus(sym) {
+  if (!S.streaming || !sym || sym === FOCUS_SENT) return;
+  clearTimeout(FOCUS_TIMER);
+  FOCUS_TIMER = setTimeout(() => {
+    FOCUS_SENT = sym;
+    fetch("/api/v1/focus", { method: "POST", headers: { "Content-Type": "application/json" },
+                             body: JSON.stringify({ symbol: sym }) })
+      .catch(() => { FOCUS_SENT = null; });
+  }, 350);
+}
+
+function renderTape() {
+  const host = $("#tapeCard"); if (!host) return;
+  const t = TAPE;
+  const list0 = host.querySelector(".ts-list"), top = list0 ? list0.scrollTop : 0;
+  host.textContent = "";
+  const tag = $("#tapeTag"), st = t ? t.state || "OFF" : "OFF";
+  if (tag) { tag.textContent = st; tag.className = "tag ts-state " + (TAPE_STATE_CLASS[st] || "off"); }
+  if (!t) { host.appendChild(el("div", "placeholder", "loading the tape…")); return; }
+  const head = el("div", "ts-status");
+  if (st === "OFF" && !t.symbol) {
+    host.appendChild(el("div", "ts-msg", t.message || "no tape"));
+    return;
+  }
+  head.appendChild(el("b", null, t.symbol || "—"));
+  const age = tapeAge();
+  const ageEl = el("span", "ts-age" + (age != null && age >= 30 ? " old" : ""),
+                   age == null ? "no print yet" : "last print " + agoText(age));
+  head.appendChild(ageEl);
+  if (t.source) head.appendChild(el("span", "ts-src", t.source));
+  host.appendChild(head);
+  if (t.message) host.appendChild(el("div", "ts-msg " + (TAPE_STATE_CLASS[st] || ""), t.message));
+  if (t.symbol && state.selected && t.symbol !== state.selected && st !== "OFF")
+    host.appendChild(el("div", "ts-msg warn", "the tape is on " + t.symbol + "; it follows the name you select " +
+                                              "(a viewer reads the owner's)"));
+  if (t.facts) host.appendChild(tapeFacts(t));
+  const list = el("div", "ts-list");
+  // Newest first. Prints of one instant keep the server's arrival order; a gap
+  // sits below the prints of its own instant (they came after it).
+  const items = (t.prints || []).map((p, i) => ({ ms: Date.parse(p.t), p, i }))
+    .concat((t.gaps || []).map((g, j) => ({ ms: Date.parse(g.t), gap: g, i: 1e6 + j })))
+    .sort((a, b) => b.ms - a.ms || (a.gap ? 1 : 0) - (b.gap ? 1 : 0) || a.i - b.i);
+  let shownHist = false;
+  items.forEach(it => {
+    if (it.gap) {
+      list.appendChild(el("div", "ts-gap", "gap " + etClock(it.gap.t) + " — " + it.gap.why));
+      return;
+    }
+    const p = it.p;
+    if (p.src === "hist" && !shownHist) {
+      shownHist = true;
+      list.appendChild(el("div", "ts-gap hist", "above: live · below: IBKR history, side not known"));
+    }
+    const r = el("div", "ts-row " + (p.side === "?" ? "unk" : p.side) + (p.big ? " big" : "") +
+                 (p.src === "hist" ? " hist" : "") + (p.s < 100 ? " odd" : ""));
+    r.appendChild(el("span", "ts-t", etClock(p.t)));
+    r.appendChild(el("span", "ts-p", fx(p.p, p.p < 1 ? 4 : 2)));
+    r.appendChild(el("span", "ts-s", shares(p.s)));
+    r.appendChild(el("span", "ts-m", TAPE_MARK[p.side] || "?"));
+    r.title = TAPE_WORDS[p.side] + (p.big ? " · big print" : "") + (p.s < 100 ? " · odd lot" : "") +
+              (p.x ? " · " + p.x : "") + (p.c ? " · conditions " + p.c : "");
+    list.appendChild(r);
+  });
+  if (!items.length && st !== "OFF") list.appendChild(el("div", "placeholder", "no prints yet"));
+  host.appendChild(list);
+  if (top) list.scrollTop = top;                                 // reading down the tape is not undone
+  (t.notes || []).forEach(n => host.appendChild(el("div", "ts-note", n)));
+  if (st !== "OFF") {
+    const rule = t.rule || {}, line = t.facts ? t.facts.bigLine : null;
+    host.appendChild(el("div", "ts-legend",
+      "▲ at/above the ask · ▼ at/below the bid · · between · ? no quote of that moment · bold: a big print" +
+      (line ? " ≥ " + shares(line) + " sh" : "") + " (" + (rule.bigMult || 10) + "× this tape's median, floor " +
+      shares(rule.bigFloor || 2000) + " — Approximation). Facts, not a gate."));
+  }
+}
+function tapeFacts(t) {
+  const f = t.facts, n = t.now || {};
+  const box = el("div", "ts-facts");
+  const win = f.coverS != null && f.coverS < f.windowS ? "last " + Math.round(f.coverS) + " s" : "60 s";
+  const bar = el("div", "ts-bar");
+  const sided = (f.atAsk || 0) + (f.mid || 0) + (f.atBid || 0);
+  [["ask", f.atAsk], ["mid", f.mid], ["bid", f.atBid]].forEach(([k, v]) => {
+    const seg = el("i", "ts-seg " + k); seg.style.flexGrow = sided ? String(v || 0) : "0"; bar.appendChild(seg); });
+  if (!sided) bar.classList.add("empty");
+  const l1 = el("div", "ts-fact");
+  l1.appendChild(el("span", "ts-win", win));
+  l1.appendChild(el("span", "ask", "▲ " + (f.pctAsk == null ? "—" : f.pctAsk.toFixed(0) + "%") + " ask"));
+  l1.appendChild(el("span", "bid", "▼ " + (f.pctBid == null ? "—" : f.pctBid.toFixed(0) + "%") + " bid"));
+  l1.appendChild(el("span", null, vol(f.shares) + " sh"));
+  l1.appendChild(el("span", null, f.perMin == null ? "— /min" : f.perMin.toFixed(0) + " /min"));
+  l1.appendChild(el("span", f.big ? "big" : "muted", f.big + " big"));
+  const l2 = el("div", "ts-fact sub");
+  l2.appendChild(el("span", "ts-win", "10 s"));
+  l2.appendChild(el("span", "ask", "▲ " + (n.pctAsk == null ? "—" : n.pctAsk.toFixed(0) + "%")));
+  l2.appendChild(el("span", "bid", "▼ " + (n.pctBid == null ? "—" : n.pctBid.toFixed(0) + "%")));
+  l2.appendChild(el("span", null, vol(n.shares) + " sh"));
+  if (f.lo != null && f.hi != null) l2.appendChild(el("span", "muted", "range " + fx(f.lo) + "–" + fx(f.hi)));
+  box.title = "shares by side over the window, live prints after the latest gap only: % of the shares " +
+              "printed at the ask, at the bid; prints per minute; big prints. Facts, not a gate.";
+  box.appendChild(l1); box.appendChild(bar); box.appendChild(l2);
+  return box;
+}
+/* One line on the decision card: the tape's 60-second facts for this name. */
+function tapeLineFor(sym) {
+  const d = el("div", "dc-tape");
+  d.dataset.sym = sym;
+  d.appendChild(el("span", "dc-tag", "tape"));
+  const t = TAPE;
+  if (!t || t.state === "OFF") {
+    d.appendChild(el("span", "muted", S.streaming ? "select a name to start its tape" : "none in this replay"));
+    if (t && t.message) d.title = t.message;
+    return d;
+  }
+  if (t.symbol !== sym) { d.appendChild(el("span", "muted", "the tape is on " + t.symbol + " — select this name")); return d; }
+  const f = t.facts || {}, parts = [];
+  if (t.state !== "LIVE") parts.push(t.state);
+  parts.push("60 s");
+  parts.push(f.pctAsk == null ? "no sided prints" : "▲ " + f.pctAsk.toFixed(0) + "% at the ask");
+  if (f.perMin != null) parts.push(f.perMin.toFixed(0) + " prints/min");
+  if (f.big) parts.push(f.big + " big");
+  const age = tapeAge();
+  parts.push(age == null ? "no print yet" : "last print " + agoText(age));
+  d.appendChild(el("span", "dc-tape-v" + (t.state === "LIVE" ? "" : " warn"), parts.join(" · ")));
+  d.title = (t.source || "IBKR tick-by-tick") + " · facts, not a gate";
+  return d;
+}
+function refreshTapeLine() {
+  const old = document.querySelector(".dc-tape");
+  if (old) old.replaceWith(tapeLineFor(old.dataset.sym));
 }
 
 /* ── decision card (owner, 2026-10-08) ─────────────────────────────────
@@ -2028,6 +2228,10 @@ function renderDecisionCard(frame, ctx, card) {
   box.appendChild(lv);
   if (card.setup && card.setup.text && card.setup.text !== v.reason)
     box.appendChild(el("div", "dc-setup", card.setup.text));
+  box.appendChild(tapeLineFor(card.symbol));
+  // The catalyst in two lines, moved here from the quote card (2026-10-08):
+  // the verdict, the news and the order are read in one place.
+  if (card.catalyst) { const cat = el("div", "dc-cat"); renderServerCatalyst(cat, card.catalyst); box.appendChild(cat); }
   const bot = card.bot || {};
   const b = el("div", "dc-bot " + (bot.tone || "info"));
   b.appendChild(el("span", "dc-tag", "bot"));
@@ -2093,18 +2297,26 @@ function renderTicket(card) {
   head.appendChild(el("b", null, "ORDER"));
   head.appendChild(el("span", "muted", t.session === "premarket" ? "pre-market" : t.session === "regular"
     ? "regular hours" : "no new entries now"));
-  const copy = el("button", "btn dc-copy", "copy");
-  copy.title = "Copy the order line";
-  copy.onclick = () => copyText(t.order_line, copy);
+  // The ticket shows before the break so the order is ready; it is not a go.
+  // Copy arms on REVIEW only, and only once your own risk sized it (owner,
+  // 2026-10-08): a stop-limit staged while the VWAP is red fills where the bot
+  // would refuse. Off REVIEW the order says why, not only the top of the card.
+  const word = card.verdict && card.verdict.word;
+  const armed = copyArmed(card);
+  const copy = el("button", "btn dc-copy" + (armed ? " armed" : ""), "copy");
+  copy.disabled = !armed;
+  copy.title = armed ? "Copy the order line"
+    : t.shares == null ? "Type your risk per trade first — nothing is sized without it"
+    : "Copy arms on REVIEW only (owner, 2026-10-08)";
+  copy.onclick = () => { const now = cardFor(card.symbol);              // re-read: the card may have moved on
+    if (now && copyArmed(now) && now.ticket.order_line === t.order_line) copyText(t.order_line, copy);
+    else toast("not copied — the card is no longer REVIEW", "bad"); };
   head.appendChild(copy);
   out.appendChild(head);
-  // The ticket shows before the break so the order is ready; it is not a go.
-  // On WATCH / WAIT the order itself says so, not only the top of the card: a
-  // stop-limit staged while the VWAP is red fills where the bot would refuse.
-  const word = card.verdict && card.verdict.word;
   if (word && word !== "REVIEW") out.appendChild(el("div", "dc-order-gate " + word.toLowerCase(),
     "not now — " + word + ": " + (card.verdict.reason || "")));
-  out.appendChild(el("div", "dc-order-line", t.order_line));
+  out.appendChild(el("div", "dc-order-line" + (armed ? " armed" : ""), t.order_line));
+  out.appendChild(manualButtons(card, ["took", "passed"]));     // your call, next to the order it is about
   const grid = el("div", "dc-grid");
   kv(grid, "trigger", fx(t.trigger));
   kv(grid, "limit (A10)", fx(t.limit));
@@ -2129,9 +2341,12 @@ function renderTicket(card) {
   });
   out.appendChild(checks);
   out.appendChild(el("div", "dc-exit", t.exit_text));
-  out.appendChild(manualButtons(card, ["took", "passed"]));
-  if (card.risk && card.risk.dollars) out.appendChild(el("div", "note", "sized on $" + fx(card.risk.dollars, 0) +
-    " a trade — " + (card.risk.source === "yours" ? "your" : card.risk.source) + " risk"));
+  if (card.risk && card.risk.dollars) out.appendChild(el("div", "note", "sized on your $" + fx(card.risk.dollars, 0) +
+    " a trade"));
+}
+/* Copy is armed on a REVIEW card whose order your own risk sized. */
+function copyArmed(card) {
+  return !!(card && card.verdict && card.verdict.word === "REVIEW" && card.ticket && card.ticket.shares != null);
 }
 
 function manualButtons(card, actions) {
@@ -2366,6 +2581,7 @@ function renderCharts(frame) {
 function select(symbol, source, rowIndex) {
   if (!symbol || !SYMS[symbol]) return;
   state.selected = symbol;
+  postFocus(symbol);                      // the tape follows the selection
   if (source) state.focusTile = source;
   if (rowIndex != null) state.focusRow = rowIndex;
   const url = new URL(location.href); url.searchParams.set("symbol", symbol);
@@ -2503,7 +2719,12 @@ function beep(severity) {
    swap them, ⛶ expands one card over the workspace. The arrangement is saved
    per browser so the desk comes back the way it was left. */
 const DEFAULT_LAYOUT = {
-  L1: "scan-pillars", L2: "scan-running", L3: "scan-hod", L4: "quote",
+  // The desk reads left to right the way a trade is made (owner: "act as a
+  // pro trader", 2026-10-08): FIND on the left — the scanners and the Five
+  // Pillars check for every name; SEE in the centre — the charts under one
+  // header that carries the quote; DECIDE on the right — the decision card
+  // (verdict, catalyst, gates, the order) over the real Time & Sales.
+  L1: "scan-pillars", L2: "scan-running", L3: "scan-hod", L4: "pillars-board",
   // THE DESK'S OWN CHARTS ARE THE BIG PANES (owner, 2026-09-18). They are
   // drawn from the IBKR stream the runner trades on — market data type 1,
   // real-time, no delay — with TradingView's own Lightweight Charts, vendored
@@ -2521,19 +2742,19 @@ const DEFAULT_LAYOUT = {
   // CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/references/dashboard-scanner-chart-knowledge.md
   // §4 recommends. C3 keeps the 10-second pane: no retail platform has one.
   C1: "chart-1m", C2: "chart-5m", C3: "chart-10s",
-  // Right column, top to bottom: the Five Pillars check for every desk
-  // name, then the decision card with the rest of the column. It took the
-  // simulated Level 2's slot (owner, 2026-10-08): the order panel needs the
-  // height, and a seeded book is nothing to decide on. Level 2 waits in the
-  // tray, still labelled simulated, with the screener.
-  R1: "pillars-board", R2: "verdict",
+  // Right column: the decision card, then the tape under it — beside the
+  // 10-second chart, where the eye is at the trigger. The decision card took
+  // the simulated Level 2's slot (owner, 2026-10-08) and now holds the
+  // catalyst too; the quote card's facts moved into the header. Level 2
+  // (simulated, labelled) and the quote card wait in the tray.
+  R1: "verdict", R2: "tape",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
-const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["level2", "screener", "tv-widget", "tv-widget-5m", "chart-daily", "timeline"]);
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["quote", "level2", "screener", "tv-widget", "tv-widget-5m", "chart-daily", "timeline"]);
 const DEFAULT_SIZES = {
-  wLeft: 330, wRight: 372,
-  slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.75, PAIR: 1.1, C2: 1, C3: 1,
-           R1: 1.35, R2: 2.05 },
+  wLeft: 330, wRight: 384,
+  slots: { L1: 1.2, L2: 0.8, L3: 0.8, L4: 1.25, C1: 1.75, PAIR: 1.1, C2: 1, C3: 1,
+           R1: 2.35, R2: 1 },
 };
 // v8: the desk's real-time charts replace TradingView's delayed widget in C1
 // and C2. The version is bumped rather than migrated because a saved v7
@@ -2543,7 +2764,9 @@ const DEFAULT_SIZES = {
 // v9: the right column has two slots, not three — the decision card took
 // Level 2's. A v8 layout names a slot this page no longer has and would fail
 // the check in loadLayout anyway; the bump says so instead of relying on it.
-const LAYOUT_KEY = "momentum-workstation.layout.v9";
+// v10: find / see / decide — the board to the left, the tape under the card.
+// A v9 layout is structurally valid and would quietly keep the old desk.
+const LAYOUT_KEY = "momentum-workstation.layout.v10";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
@@ -3170,6 +3393,7 @@ function streamFollow() {
     .on("screener", renderScreener)
     .on("symbol-added", () => refreshSession())
     .on("session", applySessionTick)           // the server just rebuilt the scanners
+    .on("tape", applyTape)                     // the focus name's Time & Sales
     .on("resync", () => refreshSession())
     .on("status", st => { if (st.state === "reconnecting" || st.state === "closed") {
       $("#feedText").textContent = "RECONNECTING"; $("#feedDot").className = "dot stale"; } })
@@ -3394,6 +3618,7 @@ function render() {
   ingestAlerts(state.frame);            // the timeline keeps what the rebuild drops
   noteArrivals(frame);                  // and only an arrival makes a sound
   if (!state.selected) state.selected = openingSymbol();
+  postFocus(state.selected);            // the tape follows the selection, however it was made
   const live = S.streaming;
   $("#clockET").textContent = live ? etParts(Date.now()) : etClock(frame.ts);
   $("#frameCounter").textContent = "frame " + (state.frame + 1) + "/" + FRAMES.length;
@@ -3415,6 +3640,7 @@ function render() {
   const ctx = renderHeader(frame);
   renderCharts(frame); renderQuote(frame, ctx); renderL2(frame, ctx);
   renderVerdict(frame, ctx); renderTimeline(state.frame); renderPillarsBoard(frame);
+  renderTape();
   watchCards(frame);
   syncRiskInput();
   syncFloatInput();     // or the box keeps the previous symbol's float and writes it onto this one
@@ -3449,6 +3675,9 @@ function init() {
   parked.id = "parked"; parked.hidden = true;
   document.body.appendChild(parked);
   loadLayout(); applyLayout(); applySizes(); wireLayout(); wireResizers(); renderTray();
+  loadTape();                         // a replay answers "no tape in this replay"
+  setInterval(() => { if (TAPE && TAPE.lastPrintAt) { renderTape(); refreshTapeLine(); } }, 1000);
+  window.__applyTape = applyTape;     // tests feed a snapshot without a socket
   renderDeskAlerts(S.provider);       // a competing login or dropped names, named from the first paint
 
   // The line under the name is the date, nothing else (owner, 2026-09-08).

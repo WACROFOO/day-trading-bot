@@ -439,3 +439,15 @@ def test_the_live_tick_carries_only_the_cards_that_changed():
     assert desk._changed_cards({"ABCD": {"verdict": {"word": "WAIT"}, "asOf": "t2"}}) == {}
     b = {"ABCD": {"verdict": {"word": "REVIEW"}, "asOf": "t3"}}
     assert desk._changed_cards(b) == b
+
+
+def test_a_hand_order_is_sized_on_the_owners_risk_or_not_at_all(tmp_path):
+    """Owner, 2026-10-08: no fallback to the bot's paper risk. With only the
+    exercise's dollar risk in the ledger, the card sizes nothing; once the
+    owner states a figure, that figure sizes it."""
+    from momentum_platform.dashboard import cards as C
+    conn = L.connect(tmp_path / "j.sqlite")
+    L.set_state(conn, dollar_risk=40.0, account_size=2000.0)
+    assert C._risk(conn) == (None, None, 2000.0), "the bot's risk never sizes a hand order"
+    L.set_setting(conn, C.RISK_KEY, 25)
+    assert C._risk(conn) == (25.0, "yours", 2000.0)

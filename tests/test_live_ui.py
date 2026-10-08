@@ -493,3 +493,41 @@ def test_the_chart_panes_carry_drawing_tools_and_an_indicator_menu(desk_server):
         for name in ("Volume", "VWAP", "EMA 9", "EMA 200", "MACD 12/26/9"):
             assert any(name in t for t in labels), name
         browser.close()
+
+
+def test_the_selected_name_gets_a_live_tape_end_to_end(desk_server):
+    """The page asks for the selected name's tape (POST /api/v1/focus), the
+    desk opens IBKR tick-by-tick on its worker, prints arrive in the ticker's
+    update event, and the tape event paints the Time & Sales card and the
+    decision card's tape line — read-only all the way (2026-10-08)."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    from fake_ibkr import Obj
+    desk, ib, clock, port = (desk_server[k] for k in ("desk", "ib", "clock", "port"))
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+        pg = browser.new_page(viewport={"width": 1500, "height": 900})
+        errors: list = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(f"http://127.0.0.1:{port}/")
+        pg.wait_for_function("window.DeskLive && window.DeskLive.state === 'open'", timeout=5000)
+        pg.wait_for_timeout(700)                         # the focus request is debounced
+        desk.run_pending()                               # the worker opens the tape
+        assert ("tbt:Last", "AAA") in ib.live_lines and ("tbt:BidAsk", "AAA") in ib.live_lines
+        t = ib.tickers["AAA"]
+        at = clock.now
+        t.tickByTicks = [Obj(time=at, bidPrice=4.34, askPrice=4.36, bidSize=100, askSize=100),
+                         Obj(time=at, price=4.36, size=500, exchange="NASDAQ", specialConditions="",
+                             tickAttribLast=Obj(pastLimit=False, unreported=False)),
+                         Obj(time=at, price=4.34, size=100, exchange="ARCA", specialConditions="",
+                             tickAttribLast=Obj(pastLimit=False, unreported=False))]
+        t.updateEvent.emit(t)
+        t.tickByTicks = []
+        desk._publish_tape()
+        pg.wait_for_function("document.querySelector('#tapeTag').textContent === 'LIVE'", timeout=5000)
+        marks = pg.eval_on_selector_all("#tapeCard .ts-row .ts-m", "els => els.map(e => e.textContent)")
+        assert marks == ["▼", "▲"], marks
+        assert "at the ask" in pg.text_content(".dc-tape")
+        assert desk.health()["tape"]["symbol"] == "AAA"
+        assert not errors, errors
+        browser.close()

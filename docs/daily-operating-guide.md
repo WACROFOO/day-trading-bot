@@ -162,10 +162,11 @@ What the desk does in this mode:
   yesterday's tape, re-reads the previous close, and the page clears its alert
   timeline and arrival memory. Before 04:00 ET the desk shows the last
   completed session and dates itself accordingly.
-- The right column is the Five Pillars check, then the decision card, which
-  since 2026-10-08 also holds the slot Level 2 had: the order panel needs the
-  height, and the book was simulated. Level 2 waits in the tray, still
-  labelled. In a column the board reads symbol, last, gain, five pillar chips
+- Since 2026-10-08 the desk reads find / see / decide: the scanners and the
+  Five Pillars check on the left, the charts under a two-line header (the
+  quote card's facts) in the centre, the decision card over the real Time &
+  Sales on the right (`docs/day-runbook.md`, "Reading the desk"). The quote
+  card and the simulated Level 2 wait in the tray. In a column the board reads symbol, last, gain, five pillar chips
   (P, G, R, F, N — green PASS, red FAIL, amber UNKNOWN) and the score out of
   five, best first; hover a chip for the value behind it, widen the column past
   640 px and the full thirteen-column table comes back. The list card at the
@@ -179,8 +180,9 @@ What the desk does in this mode:
 - Scanner tiles carry the feed's real state — LIVE, STALE, DELAYED or
   OFFLINE — from the provider health, never REPLAY, on a live desk.
 - Level 2 stays labelled SIMULATED. Real depth needs an IBKR NASDAQ TotalView
-  subscription; without it TWS gives top of book only, which the quote card
-  already shows as bid × ask.
+  subscription; without it TWS gives top of book only, which the header
+  shows as bid × ask. The tape is real since 2026-10-08: the Time & Sales
+  card reads IBKR tick-by-tick for the selected name.
 - Two price bands. The Five Pillars analysis keeps the Confirmed $2–20 and
   cannot be widened; the desk ADMITS a wider band of your own ($1–30 by
   default, `DESK_PRICE_MIN` / `DESK_PRICE_MAX` in `.env`) so a runner just

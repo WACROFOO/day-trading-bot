@@ -36,8 +36,10 @@ def _now_of(session: dict) -> datetime:
 
 
 def _risk(conn) -> tuple:
-    """(dollars, source, account) — the owner's stated manual risk first, then
-    the bot's own (exercise_state), else nothing: never an invented figure."""
+    """(dollars, source, account) — the owner's own stated risk per trade, else
+    nothing. Until 2026-10-08 an unset box fell back to the bot's paper risk
+    (exercise_state), labelled; the owner ruled that a hand order is sized on
+    the owner's figure or not at all. The account size still bounds notional."""
     if conn is None:
         return None, None, None
     from journal import ledger as L
@@ -52,8 +54,6 @@ def _risk(conn) -> tuple:
             return float(manual), "yours", account
         except ValueError:
             pass
-    if st.get("dollar_risk"):
-        return float(st["dollar_risk"]), "the bot's", account
     return None, None, account
 
 

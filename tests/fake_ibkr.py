@@ -21,6 +21,10 @@ class FakeEvent:
         self.handlers.append(fn)
         return self
 
+    def __isub__(self, fn):
+        self.handlers = [h for h in self.handlers if h != fn]
+        return self
+
     def emit(self, *args):
         for h in list(self.handlers):
             h(*args)
@@ -57,7 +61,8 @@ class FakeIB:
     `scans` {code: [sym, ...]}, `names` {sym: longName}."""
 
     def __init__(self, daily=None, minutes=None, fives=None, quotes=None, scans=None,
-                 names=None, fail_connects=0, delayed=(), types=None, min5=None):
+                 names=None, fail_connects=0, delayed=(), types=None, min5=None,
+                 ticks=None, refuse_tbt=()):
         self.daily, self.minutes, self.fives = daily or {}, minutes or {}, fives or {}
         self.min5 = min5 or {}
         self.quotes, self.scans, self.names = quotes or {}, scans or {}, names or {}
@@ -76,6 +81,10 @@ class FakeIB:
         self.scan_calls = []
         self.slept = 0.0
         self.client = Obj(serverVersion=lambda: 178)
+        # tick-by-tick (the desk's Time & Sales): `ticks` {sym: [(dt, price, size)]}
+        # answers reqHistoricalTicks; a tick type in `refuse_tbt` raises.
+        self.ticks = ticks or {}
+        self.refuse_tbt = set(refuse_tbt)
 
     # -- connection
     def connect(self, host, port, clientId, readonly=False, timeout=0):
@@ -137,6 +146,26 @@ class FakeIB:
 
     def cancelRealTimeBars(self, lst):
         self.cancelled.append(("rtb", lst.contract.symbol))
+
+    def reqTickByTickData(self, contract, tickType, numberOfTicks=0, ignoreSize=False):
+        if tickType in self.refuse_tbt:
+            raise RuntimeError(f"tick-by-tick {tickType} refused")
+        t = self.tickers.setdefault(contract.symbol, self.quotes.get(contract.symbol) or FakeTicker())
+        if not hasattr(t, "updateEvent"):
+            t.updateEvent = FakeEvent()
+            t.tickByTicks = []
+        self.live_lines.append(("tbt:" + tickType, contract.symbol))
+        return t
+
+    def cancelTickByTickData(self, contract, tickType):
+        self.cancelled.append(("tbt:" + tickType, contract.symbol))
+        return True
+
+    def reqHistoricalTicks(self, contract, start, end, n, what, use_rth, ignoreSize=False, miscOptions=None):
+        assert what == "TRADES" and (start == "" or end == "")
+        self.hist_calls.append((contract.symbol, "ticks", n, use_rth))
+        return [Obj(time=t, price=p, size=sz, exchange="NASDAQ", specialConditions="")
+                for t, p, sz in self.ticks.get(contract.symbol, [])][-n:]
 
     def reqHistoricalData(self, contract, end, duration, size, what, use_rth, formatDate=2, **kw):
         self.hist_calls.append((contract.symbol, duration, size, use_rth))

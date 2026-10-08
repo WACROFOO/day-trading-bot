@@ -78,9 +78,19 @@ Browser desk: `http://127.0.0.1:8787`. The bottom-right verdict is the
 server's cascade word; a killed name reads `suppressed · KILLED` on the
 Entry line, never `ARMED`.
 
-## Reading the desk card (since 2026-10-08)
+## Reading the desk (since 2026-10-08)
 
-The card in the right column is the server's read of the selected name
+The desk reads left to right the way a trade is made. **Find** on the left: the
+scanners and the Five Pillars check for every name. **See** in the centre: the
+charts under a two-line header — line one what moves (last, change, bid × ask,
+spread in ¢ and %, volume, RVOL, 5-minute RVOL, halt), line two the levels and
+the supply (VWAP and the distance to it, HOD, pre-market high, previous close,
+52-week high, float with its source, average volume, position in the range).
+**Decide** on the right: the decision card over the Time & Sales. The quote
+card and the simulated Level 2 wait in the tray (Cards); Layout puts the desk
+back to this.
+
+The decision card is the server's read of the selected name
 (`src/momentum_platform/decision_card.py`); the page recomputes nothing.
 
 | line | what it says |
@@ -88,14 +98,37 @@ The card in the right column is the server's read of the selected name
 | **REVIEW / WATCH / WAIT / NO** + reason | the one reason that decides. REVIEW = a first pullback is in front of you with every gate green: read the chart. Never "buy" |
 | ▸ level | the price that changes the answer: the trigger, the VWAP to reclaim, the line that puts a faded name back inside 25 % |
 | setup | the first-pullback machine: the push, the pullback bars, the last plan and what became of it |
+| **tape** | the Time & Sales in one line: the share of the last 60 s at the ask, prints a minute, big prints, the last print's age |
+| catalyst | the grade and its reason, the headline in two lines, type · age · source, the dilution and split flags (`knowledge-base/strategies/CATALYST.md`) |
 | **bot** | what the runner did with this name's latest plan (refused and why, armed, in, out) |
 | lamps | every gate the bot applies, value beside threshold (⛶ / E for the full table) |
-| **ORDER** | the bot's own order for the plan, from the bot's arithmetic: copy-ready line, limit (A10), shares (A18), the runner's checks (stop ≥ 2 %, stop ≥ 4× spread), the honest stop, the halt band. Pre-market it says IBKR holds no stop (probe 2026-09-18) |
-| I took it / I passed / I closed it | your call, written to the ledger with the card you saw; the daily review scores it beside the bot. After "I took it" the card tracks the position: stop, the 1 R trail (A3), 2 R, sound and notification when one is crossed |
+| your risk | the box above the order: your risk per trade, kept in the ledger (`desk_settings`). **Empty sizes nothing** — no fallback to the bot's paper risk (owner, 2026-10-08) |
+| **ORDER** | the bot's own order for the plan, from the bot's arithmetic: copy-ready line, limit (A10), shares (A18), the runner's checks (stop ≥ 2 %, stop ≥ 4× spread), the honest stop, the halt band. Pre-market it says IBKR holds no stop (probe 2026-09-18). **Copy arms on REVIEW only** (owner, 2026-10-08); on WATCH / WAIT the order says "not now — WAIT: the reason" and stays dim |
+| I took it / I passed / I closed it | your call, under the order line, written to the ledger with the card you saw; the daily review scores it beside the bot. After "I took it" the card tracks the position: stop, the 1 R trail (A3), 2 R, sound and notification when one is crossed |
 
-Your risk per trade: type it in the box under the order; it is kept in the
-ledger (`desk_settings`) and the order is sized on it. Empty = the bot's own
-risk, labelled. The desk never assumes one.
+**The Time & Sales** is the selected name's prints from IBKR tick-by-tick
+(`Last`, read against `BidAsk`), on the desk's own read-only connection
+(`src/momentum_platform/datasources/ibkr_tape.py`). It follows your selection;
+IBKR allows one tape request per name every 15 s, so returning to a name you
+just left can take a few seconds, and the card says so.
+
+| mark | means |
+|---|---|
+| ▲ green | printed at or above the ask: a buyer lifted the offer |
+| ▼ red | printed at or below the bid: a seller hit the bid |
+| · grey | between the bid and the ask |
+| ? dim, italic | IBKR history loaded behind a new focus: no quote of that moment was read, so no side |
+| bold, amber size | a big print: ≥ 10× this tape's median print, never under 2,000 shares — this desk's Approximation, not his number |
+| dashed line | a gap — a reconnect, a competing login, a refusal: prints in between may be missing, and the facts restart after it |
+
+The tag says LIVE, QUIET (no print for 30 s), STARTING, PAUSED (the feed is
+stale or another login holds the data) or ERROR (IBKR refused, with its reason).
+A replay has no tape and says so. **Facts, not a gate**: nothing in this
+repository has measured what a tape figure is worth, and none of it moves the
+verdict (`docs/desk-assessment-2026-10-08.md`, "Level 2"). IBKR's tick-by-tick
+needs only the Level 1 data the desk already uses, as IBKR's documentation was
+reported by a web search on 2026-10-08 — if the tag reads ERROR with an
+entitlement message, that report was wrong for this account.
 
 **A red banner at the top** names what blinds the desk: a competing login
 (10197 — your live TWS, IBKR Mobile or Client Portal on the same username took

@@ -24,11 +24,13 @@ every number labelled by how much it can be trusted.
 **The reading path,** left to right, top to bottom:
 
 ```
-Top gainers (who passed)  ->  Running Up (who is accelerating)  ->  High of Day
-   ->  Quote / catalyst (what is the story)  ->  Charts (what does it look like)
-   ->  Five Pillars check (all names, scored)
-   ->  Decision · order (REVIEW / WATCH / WAIT / NO, the reason, the level, the order)
-       [Screener, Level 2 (simulated): tray — since 2026-10-08]
+FIND    Top gainers (who passed) -> Running Up (who is accelerating)
+        -> High of Day -> Five Pillars check (all names, scored)
+SEE     the header (quote, spread, volume, RVOL / levels, float, room)
+        -> Charts: 1 minute over 5 minute and 10 second
+DECIDE  Decision · order (REVIEW / WATCH / WAIT / NO, the reason, the level,
+        the catalyst, the gates, the order) -> Time & Sales (the real tape)
+        [Quote card, Level 2 (simulated), Screener, timeline: tray — 2026-10-08]
 ```
 
 ---

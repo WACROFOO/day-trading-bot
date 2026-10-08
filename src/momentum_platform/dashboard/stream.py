@@ -16,6 +16,8 @@ the producers publish:
     alert        a scanner alert record
     session      {builtAt, alerts} — the scanners were just rebuilt; refetch
     resync       {reason} — the client fell off the buffer; reload state
+    tape         the focus name's Time & Sales snapshot (tape.py), at most
+                 twice a second while prints arrive
 
 Wiring into server.py (a `/api/v1/stream` GET that calls `serve_sse`) is
 deliberately left to the wiring step so the user's uncommitted IBKR diff to
@@ -38,7 +40,11 @@ from ..state import MarketUpdate
 UTC = timezone.utc
 
 EVENT_TYPES = ("quote", "bar5s", "bar10s", "bar1m", "health", "screener",
-               "symbol-added", "alert", "session", "resync")
+               "symbol-added", "alert", "session", "resync", "tape")
+# Delivered live, never kept for replay: each tape event is a whole snapshot,
+# so a reconnecting page needs only the next one, and twice a second for a
+# morning would push the bars and cards out of the replay buffer.
+TRANSIENT_TYPES = ("tape",)
 
 
 @dataclass(frozen=True)
@@ -84,7 +90,8 @@ class EventHub:
         with self._lock:
             ev = Event(self._next, type, data, time.time())
             self._next += 1
-            self._buf.append(ev)
+            if type not in TRANSIENT_TYPES:
+                self._buf.append(ev)
             self.published += 1
             subs = list(self._subs)
         for q in subs:
