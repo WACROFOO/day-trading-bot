@@ -162,8 +162,10 @@ What the desk does in this mode:
   yesterday's tape, re-reads the previous close, and the page clears its alert
   timeline and arrival memory. Before 04:00 ET the desk shows the last
   completed session and dates itself accordingly.
-- The right column is the Five Pillars check, then Level 2, then the setup
-  verdict. In a column the board reads symbol, last, gain, five pillar chips
+- The right column is the Five Pillars check, then the decision card, which
+  since 2026-10-08 also holds the slot Level 2 had: the order panel needs the
+  height, and the book was simulated. Level 2 waits in the tray, still
+  labelled. In a column the board reads symbol, last, gain, five pillar chips
   (P, G, R, F, N — green PASS, red FAIL, amber UNKNOWN) and the score out of
   five, best first; hover a chip for the value behind it, widen the column past
   640 px and the full thirteen-column table comes back. The list card at the

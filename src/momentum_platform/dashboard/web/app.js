@@ -2098,6 +2098,12 @@ function renderTicket(card) {
   copy.onclick = () => copyText(t.order_line, copy);
   head.appendChild(copy);
   out.appendChild(head);
+  // The ticket shows before the break so the order is ready; it is not a go.
+  // On WATCH / WAIT the order itself says so, not only the top of the card: a
+  // stop-limit staged while the VWAP is red fills where the bot would refuse.
+  const word = card.verdict && card.verdict.word;
+  if (word && word !== "REVIEW") out.appendChild(el("div", "dc-order-gate " + word.toLowerCase(),
+    "not now — " + word + ": " + (card.verdict.reason || "")));
   out.appendChild(el("div", "dc-order-line", t.order_line));
   const grid = el("div", "dc-grid");
   kv(grid, "trigger", fx(t.trigger));
@@ -2516,23 +2522,28 @@ const DEFAULT_LAYOUT = {
   // §4 recommends. C3 keeps the 10-second pane: no retail platform has one.
   C1: "chart-1m", C2: "chart-5m", C3: "chart-10s",
   // Right column, top to bottom: the Five Pillars check for every desk
-  // name, Level 2 (simulated, and labelled so), the setup verdict. The
-  // screener is one drag away in the tray.
-  R1: "pillars-board", R2: "level2", R3: "verdict",
+  // name, then the decision card with the rest of the column. It took the
+  // simulated Level 2's slot (owner, 2026-10-08): the order panel needs the
+  // height, and a seeded book is nothing to decide on. Level 2 waits in the
+  // tray, still labelled simulated, with the screener.
+  R1: "pillars-board", R2: "verdict",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
-const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["screener", "tv-widget", "tv-widget-5m", "chart-daily", "timeline"]);
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["level2", "screener", "tv-widget", "tv-widget-5m", "chart-daily", "timeline"]);
 const DEFAULT_SIZES = {
   wLeft: 330, wRight: 372,
   slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.75, PAIR: 1.1, C2: 1, C3: 1,
-           R1: 1.35, R2: 1, R3: 1.05 },
+           R1: 1.35, R2: 2.05 },
 };
 // v8: the desk's real-time charts replace TradingView's delayed widget in C1
 // and C2. The version is bumped rather than migrated because a saved v7
 // layout is still structurally valid — same slots, same card names — so it
 // would load and quietly restore the delayed charts on the one desk that
 // most needed the fix.
-const LAYOUT_KEY = "momentum-workstation.layout.v8";
+// v9: the right column has two slots, not three — the decision card took
+// Level 2's. A v8 layout names a slot this page no longer has and would fail
+// the check in loadLayout anyway; the bump says so instead of relying on it.
+const LAYOUT_KEY = "momentum-workstation.layout.v9";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 

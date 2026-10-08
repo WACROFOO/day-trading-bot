@@ -26,8 +26,9 @@ every number labelled by how much it can be trusted.
 ```
 Top gainers (who passed)  ->  Running Up (who is accelerating)  ->  High of Day
    ->  Quote / catalyst (what is the story)  ->  Charts (what does it look like)
-   ->  Five Pillars check (all names, scored)  ->  Level 2
-   ->  Setup verdict (GO / WAIT / PASS, and the plan)   [Screener: tray]
+   ->  Five Pillars check (all names, scored)
+   ->  Decision · order (REVIEW / WATCH / WAIT / NO, the reason, the level, the order)
+       [Screener, Level 2 (simulated): tray — since 2026-10-08]
 ```
 
 ---

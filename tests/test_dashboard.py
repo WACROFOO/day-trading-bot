@@ -331,10 +331,12 @@ def test_ui_chart_stack_is_the_desks_own_1m_over_5m_and_10s(page):
     assert five["y"] > big["y"] + big["height"] - 4       # below the 1m
     centre = page.locator("[data-col=center]").bounding_box()
     assert ten["y"] + ten["height"] > centre["y"] + centre["height"] - 12, "nothing under the charts"
-    for parked in ("screener", "tv-widget", "tv-widget-5m", "timeline"):
+    for parked in ("screener", "tv-widget", "tv-widget-5m", "timeline", "level2"):
         assert page.locator(f".slot [data-card={parked}]").count() == 0
-    right = [page.eval_on_selector(f'[data-slot={s}] .card', "e => e.dataset.card") for s in ("R1", "R2", "R3")]
-    assert right == ["pillars-board", "level2", "verdict"]
+    # the decision card took the simulated Level 2's slot (owner, 2026-10-08)
+    right = [page.eval_on_selector(f'[data-slot={s}] .card', "e => e.dataset.card") for s in ("R1", "R2")]
+    assert right == ["pillars-board", "verdict"]
+    assert page.locator('[data-slot="R3"]').count() == 0
     for card in ("chart-1m", "chart-5m", "chart-10s"):
         host = page.locator(f"[data-card={card}] .chart-host").bounding_box()
         inner = page.locator(f"[data-card={card}] .chart-host canvas").first.bounding_box()
@@ -387,10 +389,10 @@ def test_ui_fits_one_viewport(page):
 def test_ui_quote_card_sits_under_the_scanners(page):
     quote = page.locator("[data-card=quote]").bounding_box()
     scan = page.locator("[data-card=scan-pillars]").bounding_box()
-    l2 = page.locator("[data-card=level2]").bounding_box()
+    card = page.locator("[data-card=verdict]").bounding_box()
     assert quote["y"] > scan["y"]
     assert abs(quote["x"] - scan["x"]) < 4
-    assert l2["x"] > quote["x"] + quote["width"]
+    assert card["x"] > quote["x"] + quote["width"]
 
 
 def test_ui_flames_on_every_scanner_row(page):
@@ -419,8 +421,8 @@ def test_ui_gutters_resize_panes_and_persist(page):
     page.wait_for_timeout(300)
     after = page.locator("[data-card=pillars-board]").bounding_box()
     assert after["height"] > before["height"] + 60
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v8'))")
-    assert saved["sizes"]["slots"]["R1"] > saved["sizes"]["slots"]["R2"]
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v9'))")
+    assert saved["sizes"]["slots"]["R1"] / saved["sizes"]["slots"]["R2"] > 1.35 / 2.05, "R1 gained on R2"
     # the page must still fit after a resize
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
     assert metrics["sh"] <= metrics["ih"] + 2
@@ -429,7 +431,7 @@ def test_ui_gutters_resize_panes_and_persist(page):
 
 
 def test_ui_columns_resize(page):
-    """The whole right column can be widened for the book."""
+    """The whole right column can be widened for the decision card."""
     before = page.locator("[data-col=right]").bounding_box()
     gutter = page.locator('.gutter-h[data-cols=right]')
     box = gutter.bounding_box()
@@ -445,15 +447,17 @@ def test_ui_columns_resize(page):
 
 
 def test_ui_the_pillars_check_tops_the_right_column(page):
-    """The Five Pillars check is the top card of the right column and the
-    tallest of the three, per the desk brief."""
+    """The Five Pillars check is the top card of the right column; the decision
+    card has the rest, the taller of the two since it took the simulated
+    Level 2's slot (owner, 2026-10-08): the order panel needs the height."""
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
     column = page.locator("[data-col=right]").bounding_box()
     board = page.locator("[data-card=pillars-board]").bounding_box()
-    l2 = page.locator("[data-card=level2]").bounding_box()
+    card = page.locator("[data-card=verdict]").bounding_box()
     assert board["height"] / column["height"] > 0.3
-    assert board["height"] >= l2["height"] and board["y"] < l2["y"]
+    assert board["y"] < card["y"] and card["height"] > board["height"]
+    assert card["height"] / column["height"] > 0.55
 
 
 def test_ui_bottom_right_card_is_off_the_desk(page):
@@ -468,7 +472,8 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
     items = page.eval_on_selector_all(".tray-item", "els => els.map(e => e.dataset.trayCard)")
     # 2026-09-18: the desk's live 1m/5m panes moved onto the desk and
     # TradingView's delayed widgets took their place here.
-    assert sorted(items) == ["chart-daily", "screener", "timeline",
+    # 2026-10-08: the simulated Level 2 left the desk for the decision card.
+    assert sorted(items) == ["chart-daily", "level2", "screener", "timeline",
                              "tv-widget", "tv-widget-5m"]
     page.locator("#btnTray").click()
     page.wait_for_timeout(150)
@@ -513,19 +518,19 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     """Any card can be dragged onto any other to trade places, and the desk
     comes back the way it was left."""
     before = page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot")
-    target = page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot")
+    target = page.eval_on_selector("[data-card=pillars-board]", "e => e.parentElement.dataset.slot")
     page.evaluate("""() => {
       const dt = new DataTransfer();
       const src = document.querySelector('[data-card=chart-10s] .card-head');
-      const dst = document.querySelector('[data-card=level2]');
+      const dst = document.querySelector('[data-card=pillars-board]');
       src.dispatchEvent(new DragEvent('dragstart', {dataTransfer: dt, bubbles: true}));
       dst.dispatchEvent(new DragEvent('dragover', {dataTransfer: dt, bubbles: true, cancelable: true}));
       dst.dispatchEvent(new DragEvent('drop', {dataTransfer: dt, bubbles: true, cancelable: true}));
     }""")
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
-    assert page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v8'))")
+    assert page.eval_on_selector("[data-card=pillars-board]", "e => e.parentElement.dataset.slot") == before
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v9'))")
     assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
@@ -576,18 +581,34 @@ def test_ui_reasons_drawer_shows_pillar_arithmetic(page):
 
 
 def test_ui_level2_ladder_renders(page):
-    _seek(page, 125)
-    page.locator("[data-card=scan-pillars] .trow").first.click()
-    page.wait_for_timeout(250)
-    assert page.locator(".ladder .lp").count() == 16
-    assert page.locator(".tape .print").count() == 10
-    bids = page.eval_on_selector_all(".ladder .lp.bid", "els => els.map(e => parseFloat(e.textContent))")
-    asks = page.eval_on_selector_all(".ladder .lp.ask", "els => els.map(e => parseFloat(e.textContent))")
-    assert bids == sorted(bids, reverse=True)
-    assert asks == sorted(asks)
-    assert bids[0] < asks[0]
-    body = page.locator("#l2Card").inner_text().lower()
-    assert "simulated" in body and "not licensed market data" in body
+    """Level 2 waits in the tray since 2026-10-08; put back on the desk it
+    renders, and still says it is simulated."""
+    page.locator("[data-card=pillars-board] .card-title").click()   # the tray places onto the last card clicked
+    page.locator("#btnTray").click()
+    page.wait_for_timeout(200)
+    page.locator(".tray-item[data-tray-card=level2]").click()
+    page.wait_for_timeout(300)
+    page.locator("#btnTray").click()
+    page.wait_for_timeout(200)
+    try:
+        assert page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot") == "R1"
+        _seek(page, 125)
+        page.locator("[data-card=scan-pillars] .trow").first.click()
+        page.wait_for_timeout(250)
+        assert page.locator(".ladder .lp").count() == 16
+        assert page.locator(".tape .print").count() == 10
+        bids = page.eval_on_selector_all(".ladder .lp.bid", "els => els.map(e => parseFloat(e.textContent))")
+        asks = page.eval_on_selector_all(".ladder .lp.ask", "els => els.map(e => parseFloat(e.textContent))")
+        assert bids == sorted(bids, reverse=True)
+        assert asks == sorted(asks)
+        assert bids[0] < asks[0]
+        body = page.locator("#l2Card").inner_text().lower()
+        assert "simulated" in body and "not licensed market data" in body
+        assert page.locator("[data-card=level2] .tag.sim").inner_text().lower() == "simulated"
+    finally:
+        page.locator("#btnLayout").click()       # back to the default desk
+        page.wait_for_timeout(300)
+    assert page.locator(".slot [data-card=level2]").count() == 0
 
 
 def test_ui_verdict_mirrors_pine_and_decides(page):
@@ -637,6 +658,14 @@ def test_ui_order_panel_renders_the_servers_ticket(page):
     page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
     page.wait_for_timeout(250)
     assert "— the bot's risk" in page.locator(".sizing").inner_text()
+    # the order says "not now" itself when the card is not REVIEW (2026-10-08)
+    assert page.locator(".dc-order-gate").count() == 0, "REVIEW: no 'not now' on the order"
+    page.evaluate("""([sym]) => { const v = window.__SESSION__.cards[sym].verdict;
+      v.word = "WAIT"; v.reason = "below the VWAP 4.17"; }""", [sym])
+    page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
+    page.wait_for_timeout(250)
+    assert page.locator(".dc-order-gate").inner_text() == "not now — WAIT: below the VWAP 4.17"
+    page.evaluate("""([sym]) => { window.__SESSION__.cards[sym].verdict.word = "REVIEW"; }""", [sym])
     assert page.locator(".dc-check").count() == len(tk["checks"])
     assert page.locator(".dc-btn.took").count() == 1 and page.locator(".dc-btn.passed").count() == 1
     page.locator(".dc-btn.took").click()
@@ -651,15 +680,15 @@ def test_ui_order_panel_renders_the_servers_ticket(page):
 
 
 def test_ui_alert_click_seeks_charts(page):
-    """The alert timeline waits in the tray by default; put it in the bottom
-    strip (a saved layout, as a drag would leave it) and it still seeks."""
+    """The alert timeline waits in the tray by default; put it on the desk
+    (a saved layout, as a drag would leave it) and it still seeks."""
     page.evaluate("""() => {
-      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v8') || '{}');
+      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v9') || '{}');
       saved.layout = Object.assign({}, saved.layout || {
         L1: 'scan-pillars', L2: 'scan-running', L3: 'scan-hod', L4: 'quote',
-        C1: 'tv-widget', C2: 'tv-widget-5m', C3: 'chart-10s', R1: 'pillars-board', R2: 'level2', R3: 'verdict' });
-      saved.layout.R2 = 'timeline';
-      localStorage.setItem('momentum-workstation.layout.v8', JSON.stringify(saved));
+        C1: 'chart-1m', C2: 'chart-5m', C3: 'chart-10s', R1: 'pillars-board', R2: 'verdict' });
+      saved.layout.R1 = 'timeline';
+      localStorage.setItem('momentum-workstation.layout.v9', JSON.stringify(saved));
     }""")
     page.reload()
     page.wait_for_timeout(400)
@@ -1122,7 +1151,12 @@ def test_the_desk_opens_on_its_own_real_time_charts_not_the_delayed_widget():
     assert '"tv-widget"' in spare and '"tv-widget-5m"' in spare
 
     # A structurally valid older layout would restore the delayed charts.
-    assert 'LAYOUT_KEY = "momentum-workstation.layout.v8"' in app
+    assert 'LAYOUT_KEY = "momentum-workstation.layout.v9"' in app
+
+    # The simulated book is not a default pane (owner, 2026-10-08): the
+    # decision card took its slot. It stays one drag away, still labelled.
+    assert '"level2"' not in default and '"verdict"' in default
+    assert '"level2"' in spare
 
 
 def test_a_chart_does_not_swallow_a_card_drag():

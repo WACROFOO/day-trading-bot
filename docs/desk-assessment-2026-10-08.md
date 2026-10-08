@@ -100,6 +100,7 @@ Practical consequences for typing orders by hand:
 | 14–17 | a banner for a competing login (10197) and for names dropped for want of a data permission; halts and resumes sound; a desk that stops answering is said | `ibkr_desk.health`, `app.js` `renderDeskAlerts` |
 | 18 | the three buttons write `manual_decisions`; the export carries `desk_calls.csv`; the review scores each call beside the bot | `server.py` POST routes (JSON only, owner key), `day_export.py`, `daily_review.py` |
 | — | a real day can be replayed at any minute | `scripts/fixture_from_export.py` |
+| — | the owner's layout call: the decision card takes the simulated Level 2's slot (Level 2 to the tray, still labelled); off REVIEW the order itself says "not now — WAIT: the reason" | `app.js` `DEFAULT_LAYOUT` (layout v9), `renderTicket` |
 
 Tests: `tests/test_desk_card.py` (46), plus the rewritten card tests in
 `tests/test_dashboard.py` and `tests/test_live_ui.py`, and the desk-calls loop in
@@ -111,12 +112,65 @@ tests no longer skipped (Playwright installed against the preinstalled Chromium)
 | # | suggestion | basis |
 |---|---|---|
 | 1 | Export each day's references (previous close, 20-day volume, the time-of-day profile), headlines, quotes and halts, so any minute replays faithfully. Without the RVOL baseline every replayed name read NO on "missing rvol" | measured today (the first replay of 2026-10-06/07) |
-| 2 | Give the decision card the slot the **simulated** Level 2 card holds by default; the order panel needs height | opinion — a layout choice, the owner's |
+| 2 | ~~Give the decision card the slot the **simulated** Level 2 card holds by default; the order panel needs height~~ — done the same day on the owner's word | opinion — a layout choice, the owner's |
 | 3 | Compute the card point-in-time when a replay is scrubbed, instead of saying it is the newest read | opinion; the look-ahead itself is measured (the 09:40 screenshots) |
 | 4 | Measure gate 4 from the pre-market high as FILTERS.md states, or amend FILTERS.md: the code uses the session high, so a one-bar spike (BIYA 37.10) or a regular-hours high moves the 25 % line. A preregistered test decides | measured in the code; the effect is not measured |
 | 5 | Decide whether the pillar count should use the 5× scanner dial (A5's choice) or the 1.5× trade floor FILTERS.md calls the gate | opinion; a test decides |
 | 6 | A second IBKR username for manual orders, so they never blind the desk | IBKR documentation via a web search, not verified here |
 | 7 | The company name: IBKR's contract carries none (`longName` lives on the contract details), so the card cannot print it | measured in the code |
+
+## Level 2 — the owner's question, same day
+
+"Do we need a Level 2 analysis layer?" What the repository holds on it, read
+the same day:
+
+| question | what the files say | source |
+|---|---|---|
+| where it sits in his method | the last step before execution, and a veto: *"if I pulled up the level two and all I saw were sellers or I saw a huge sell order on the ask would I've taken the trade absolutely not level two is that final step"* | `4syXgXshgsc` [00:50:13] |
+| can he trade without it | *"could I trade without level two? I could, but my accuracy would be lower because I would miss some of the signals"* | `_9za7jNDPQc` [00:44:38] |
+| how often it is his stated reason | 7 % of his trades | `research/ross-trades/REPORT.md` |
+| near a live entry | 17 % of entry utterances against 7 % of random text (2.5×) | `research/momentum-replication/reports/2026-08-streams-roundup.md` §9 |
+| what of it can be encoded | 63 % of his Level 2 / tape instructions name nothing concrete; of the rest, only seller-wall detection needs the book — *"tick and quote data cover most of it"* | `knowledge-base/strategies/PARAMETERS.md` §10 |
+| can it be tested here | *"Level 2 history — does not exist in any source available here"* | `research/edge-hunt/PREREGISTRATION.md` |
+| is it mastered | the course chapters on it (Basics 9 and 10, Strategies & Scaling 6) are outside the mastered chapters 1–6 | `knowledge-base/warrior-support/trading-questions/19000135531-understanding-level-2.md` |
+| what real depth costs here | Nasdaq TotalView is *"the Nasdaq book, not all US venues"*; IBKR needs TotalView-OpenView plus an API add-on, and allows 3 depth symbols at a time on the default 100 lines | `CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/references/platform-rebuild-audit.md`; IBKR's documentation as reported by a web search on 2026-10-08 — the pages refuse automated reading, so verify in Client Portal |
+| what a real tape costs here | IBKR's tick-by-tick Time & Sales runs on the Level 1 subscription the desk already uses, 5 symbols at a time on 100 lines | IBKR's documentation as reported by the same search — not verified here |
+
+**Answer (opinion, not measured): not a scored layer.** There is nothing to
+calibrate a Level 2 score against, and most of what he reads on it is
+unspecified. What the desk lacks is the raw tape and book in front of the
+owner's eyes at the trigger, which he places last before the order. In order:
+
+1. a second IBKR username, so TWS's own book and tape run beside the desk —
+   needed for manual orders anyway (see point 4 above);
+2. a real Time & Sales strip on the desk: no new licence, and it covers the
+   "green on the tape" read;
+3. depth on the desk only after the licence, showing one fact — the largest
+   offer between the trigger and the next half dollar, with its size on his
+   own scale (*"15,000 and up starts to become more significant. Above 100,000
+   is a huge seller"*, `knowledge-base/warrior-blog/tools-platforms/spotting-breakouts-with-level-2.md`)
+   — and never as a gate: displayed orders can be spoofed, and when they are he
+   stops trusting that stock's book (`q5DRctM5C-Q` [00:22:36]).
+
+The bot can use none of it: a rule on a book this repository has never
+recorded cannot be tested.
+
+## Risks that remain
+
+| risk | how it bites | what limits it now | still open |
+|---|---|---|---|
+| a WATCH / WAIT card shows a copyable buy line | a stop-limit staged while a gate is red can fill while it is still red — an entry the bot would refuse (IPDN 2026-10-06 07:32: trigger 4.16 under the VWAP 4.17) | since 2026-10-08 the order panel itself says "not now — WAIT: below the VWAP 4.17" above the line | arm the copy button on REVIEW only — the owner's call |
+| the order is sized on the bot's paper risk until you type yours | a manual share count from a figure set for the paper exercise | labelled "the bot's risk" under the order | require the owner's own figure before any share count — a risk setting, the owner's call |
+| no stop at the broker before 09:30 | a pre-market entry is protected by the owner's eyes only | every pre-market ticket says so (probe 2026-09-18, warning 2109) | — |
+| a stop inside the noise or wider than the halt band | stopped by an ordinary 1-minute range, or halted straight through the stop | red checks on the ticket (rule 5) | — |
+| the position view is what was typed | the desk reads no fills or positions; a mistyped fill or a forgotten "I took it" means wrong trail alerts, or none | — | read positions from IBKR read-only (no order path needed) |
+| alerts need the page open | a level crossed while the tab sleeps, or with sound and notifications blocked, passes unannounced | — | — |
+| one IBKR username for the desk and hand orders | logging in elsewhere blinds the desk (10197) | a red banner names it | a second username — verify in Client Portal |
+| the catalyst grade reads headlines only | a promotional headline with a hard word grades STRONG | the headline is always on the card | — |
+| the bot's pillar count moved | names whose only catalyst was stale or an unread filing are now killed; the effect on results is not measured | recorded in `docs/preregistration.md` §5 | read it at the next review |
+| replay look-ahead | a scrubbed replay shows the newest card | the card says so | a point-in-time card (row 3 above) |
+| the same author audited and built | the new tests share the builder's assumptions | — | an independent review of the diff |
+| a clearer card read as an edge | legibility feels like reliability; no configuration tested so far has positive expectancy | the verdict below says so | — |
 
 ## What this assessment could not check
 
