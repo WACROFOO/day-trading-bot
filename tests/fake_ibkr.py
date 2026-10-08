@@ -8,6 +8,7 @@ records readonly/clientId on connect so the read-only invariant is testable.
 from __future__ import annotations
 
 import math
+from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
 UTC = timezone.utc
@@ -85,6 +86,10 @@ class FakeIB:
         # answers reqHistoricalTicks; a tick type in `refuse_tbt` raises.
         self.ticks = ticks or {}
         self.refuse_tbt = set(refuse_tbt)
+        # ib_async keeps {tick type: {ticker: request id}} on its wrapper; the
+        # tape matches IBKR's error events to its own streams through it
+        self.wrapper = Obj(ticker2ReqId=defaultdict(dict))
+        self._req_seq = 9000
 
     # -- connection
     def connect(self, host, port, clientId, readonly=False, timeout=0):
@@ -154,10 +159,15 @@ class FakeIB:
         if not hasattr(t, "updateEvent"):
             t.updateEvent = FakeEvent()
             t.tickByTicks = []
+        self._req_seq += 1
+        self.wrapper.ticker2ReqId[tickType][t] = self._req_seq
         self.live_lines.append(("tbt:" + tickType, contract.symbol))
         return t
 
     def cancelTickByTickData(self, contract, tickType):
+        t = self.tickers.get(contract.symbol)
+        if t is not None:
+            self.wrapper.ticker2ReqId[tickType].pop(t, None)
         self.cancelled.append(("tbt:" + tickType, contract.symbol))
         return True
 

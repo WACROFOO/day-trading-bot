@@ -1368,8 +1368,10 @@ function renderHeader(frame) {
   stat("", fx(last), "last " + dirClass(chg)).classList.add("stat-last");
   stat("", pct(chg), "chg " + dirClass(chg));
   const bid = meta.iexBid, ask = meta.iexAsk;
-  if (bid != null && ask != null) stat("bid × ask", fx(bid) + " × " + fx(ask), null, "IBKR top of book");
-  const spread = row && row.spread != null ? row.spread : (bid != null && ask != null ? ask - bid : null);
+  // an empty side arrives as -1 from IBKR: no quote, not a 4-dollar spread
+  const twoSided = bid != null && ask != null && bid > 0 && ask >= bid;
+  if (twoSided) stat("bid × ask", fx(bid) + " × " + fx(ask), null, "IBKR top of book");
+  const spread = row && row.spread != null ? row.spread : (twoSided ? ask - bid : null);
   const sprPct = spread != null && last ? spread / last * 100 : null;
   stat("spread", spread == null ? "—" : (spread * 100).toFixed(spread < 0.1 ? 1 : 0) + "¢" +
        (sprPct != null ? " · " + sprPct.toFixed(2) + "%" : ""), sprPct != null && sprPct > 1 ? "down" : null,
@@ -2024,7 +2026,8 @@ function renderSizing(plan, row) {
    that stood when it printed, and "?" is a print with no such quote (the
    history loaded behind a new focus). Facts only — none of it is a gate and
    none of it moves the verdict. A replay has no tape and says so. */
-let TAPE = null, TAPE_AT = 0, FOCUS_SENT = null, FOCUS_TIMER = null;
+let TAPE = null, TAPE_AT = 0;
+let FOCUS_SENT = null, FOCUS_AT = 0, FOCUS_TIMER = null, FOCUS_PENDING = null, FOCUS_REFUSED = false;
 const TAPE_STATE_CLASS = { LIVE: "ok", QUIET: "warn", STARTING: "info", PAUSED: "warn", ERROR: "bad", OFF: "off" };
 const TAPE_MARK = { ask: "▲", bid: "▼", mid: "·", "?": "?" };
 const TAPE_WORDS = { ask: "at or above the ask — a buyer lifted the offer", bid: "at or below the bid — a seller hit the bid",
@@ -2053,14 +2056,29 @@ function loadTape() {
 }
 /* The selected name becomes the tape's focus. Debounced: J/K through a list
    must not spend IBKR's one-request-per-name-per-15-seconds pacing on every
-   row it passes. A viewer's request is refused (403): it reads the owner's. */
-function postFocus(sym) {
-  if (!S.streaming || !sym || sym === FOCUS_SENT) return;
-  clearTimeout(FOCUS_TIMER);
+   row it passes, and a request for a name you already left is void. Asked
+   again when the tape is not on the selected name (a restarted desk), and on
+   a click when it is in ERROR — never in a loop on a refused name. A viewer's
+   request is refused (403) and it stops asking: it reads the owner's tape.
+   (Review 2026-10-08: the first version posted a name already left, and
+   never re-posted the selected one.) */
+function postFocus(sym, retry) {
+  if (!S.streaming || !sym || FOCUS_REFUSED) return;
+  if (FOCUS_PENDING && FOCUS_PENDING !== sym) {               // the selection moved: that post is void
+    clearTimeout(FOCUS_TIMER); FOCUS_TIMER = null; FOCUS_PENDING = null;
+  }
+  const st = TAPE ? TAPE.state : null;
+  if (TAPE && TAPE.symbol === sym && st !== "OFF" && (st !== "ERROR" || !retry)) { FOCUS_SENT = sym; return; }
+  if (!retry && sym === FOCUS_SENT && Date.now() - FOCUS_AT < 5000) return;   // asked a moment ago
+  if (FOCUS_PENDING === sym) return;                           // already on its way
+  FOCUS_PENDING = sym;
   FOCUS_TIMER = setTimeout(() => {
-    FOCUS_SENT = sym;
+    FOCUS_TIMER = null; FOCUS_PENDING = null;
+    if (sym !== state.selected) return;
+    FOCUS_SENT = sym; FOCUS_AT = Date.now();
     fetch("/api/v1/focus", { method: "POST", headers: { "Content-Type": "application/json" },
                              body: JSON.stringify({ symbol: sym }) })
+      .then(r => { if (r.status === 403) FOCUS_REFUSED = true; })
       .catch(() => { FOCUS_SENT = null; });
   }, 350);
 }
@@ -2170,7 +2188,7 @@ function tapeLineFor(sym) {
   if (t.symbol !== sym) { d.appendChild(el("span", "muted", "the tape is on " + t.symbol + " — select this name")); return d; }
   const f = t.facts || {}, parts = [];
   if (t.state !== "LIVE") parts.push(t.state);
-  parts.push("60 s");
+  parts.push(f.coverS != null && f.windowS && f.coverS < f.windowS ? "last " + Math.round(f.coverS) + " s" : "60 s");
   parts.push(f.pctAsk == null ? "no sided prints" : "▲ " + f.pctAsk.toFixed(0) + "% at the ask");
   if (f.perMin != null) parts.push(f.perMin.toFixed(0) + " prints/min");
   if (f.big) parts.push(f.big + " big");
@@ -2346,7 +2364,7 @@ function renderTicket(card) {
 }
 /* Copy is armed on a REVIEW card whose order your own risk sized. */
 function copyArmed(card) {
-  return !!(card && card.verdict && card.verdict.word === "REVIEW" && card.ticket && card.ticket.shares != null);
+  return !!(card && card.verdict && card.verdict.word === "REVIEW" && card.ticket && card.ticket.shares > 0);
 }
 
 function manualButtons(card, actions) {
@@ -2581,7 +2599,7 @@ function renderCharts(frame) {
 function select(symbol, source, rowIndex) {
   if (!symbol || !SYMS[symbol]) return;
   state.selected = symbol;
-  postFocus(symbol);                      // the tape follows the selection
+  postFocus(symbol, true);                // the tape follows the selection; a click retries a refused one
   if (source) state.focusTile = source;
   if (rowIndex != null) state.focusRow = rowIndex;
   const url = new URL(location.href); url.searchParams.set("symbol", symbol);
@@ -3678,6 +3696,7 @@ function init() {
   loadTape();                         // a replay answers "no tape in this replay"
   setInterval(() => { if (TAPE && TAPE.lastPrintAt) { renderTape(); refreshTapeLine(); } }, 1000);
   window.__applyTape = applyTape;     // tests feed a snapshot without a socket
+  window.__postFocus = postFocus;     // … and drive the focus requests
   renderDeskAlerts(S.provider);       // a competing login or dropped names, named from the first paint
 
   // The line under the name is the date, nothing else (owner, 2026-09-08).

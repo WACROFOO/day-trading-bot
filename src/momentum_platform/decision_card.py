@@ -404,8 +404,11 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
         room = {name: {"price": round(p, 2), "r": round((p - trig) / rps, 1)} for name, p in lv if p}
         parts = [f"{name} {v['price']:.2f} ({v['r']:+.1f}R)" for name, v in room.items()]
         lamps.append(lamp("room", "Room overhead", "INFO", " · ".join(parts), "information, not a gate", kind="info"))
+    # Since 2026-10-08 the desk has a real tape (the Time & Sales card) and
+    # still no book. Reading either stays the owner's: no tape figure is a gate.
     lamps.append(lamp("tape", "Tape · Level 2", "MANUAL_CONFIRMATION_REQUIRED", "your eyes",
-                      "no tape and no book in this tool", kind="manual"))
+                      "the tape on the Time & Sales card — facts, not a gate; no Level 2 book here",
+                      kind="manual"))
 
     # -- Layer 3 and data warnings (they never change the word) -----------------
     vt = _f(m.get("volumeToday"))

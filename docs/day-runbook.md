@@ -122,7 +122,11 @@ just left can take a few seconds, and the card says so.
 | dashed line | a gap — a reconnect, a competing login, a refusal: prints in between may be missing, and the facts restart after it |
 
 The tag says LIVE, QUIET (no print for 30 s), STARTING, PAUSED (the feed is
-stale or another login holds the data) or ERROR (IBKR refused, with its reason).
+stale or another login holds the data — the tape asks again when it clears) or
+ERROR (IBKR refused, with its reason; click the name to retry). If IBKR refuses
+only the quote stream, the prints keep coming and their side is read against
+the desk's Level 1 quote — the source line says so. A locked quote (bid = ask)
+names no side: those prints read "?".
 A replay has no tape and says so. **Facts, not a gate**: nothing in this
 repository has measured what a tape figure is worth, and none of it moves the
 verdict (`docs/desk-assessment-2026-10-08.md`, "Level 2"). IBKR's tick-by-tick

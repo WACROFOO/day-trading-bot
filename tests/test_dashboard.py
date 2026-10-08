@@ -671,7 +671,12 @@ def test_ui_order_panel_renders_the_servers_ticket(page):
     assert page.locator(".dc-order-gate").inner_text() == "not now — WAIT: below the VWAP 4.17"
     assert page.locator(".dc-copy").is_disabled(), "WAIT: the copy button is not armed"
     assert page.locator(".dc-order-line.armed").count() == 0
-    page.evaluate("""([sym]) => { window.__SESSION__.cards[sym].verdict.word = "REVIEW"; }""", [sym])
+    page.evaluate("""([sym]) => { const c = window.__SESSION__.cards[sym];
+      c.verdict.word = "REVIEW"; c.ticket.shares = 0; }""", [sym])
+    page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
+    page.wait_for_timeout(250)
+    assert page.locator(".dc-copy").is_disabled(), "an account-bound 0-share order never copies"
+    page.evaluate("""([sym, n]) => { window.__SESSION__.cards[sym].ticket.shares = n; }""", [sym, tk["shares"]])
     assert page.locator(".dc-check").count() == len(tk["checks"])
     assert page.locator(".dc-btn.took").count() == 1 and page.locator(".dc-btn.passed").count() == 1
     page.locator(".dc-btn.took").click()
@@ -1412,6 +1417,8 @@ def test_ui_the_tape_card_renders_the_servers_prints(page):
     assert "Approximation" in page.locator("#tapeCard .ts-legend").inner_text()
     line = page.locator(".dc-tape").inner_text()
     assert f"{snap['facts']['pctAsk']:.0f}% at the ask" in line and "1 big" in line
+    assert f"last {round(snap['facts']['coverS'])} s" in line and "60 s" not in line, \
+        "nine seconds of tape is not called sixty (review 2026-10-08)"
 
 
 def test_ui_the_tape_says_when_it_is_on_another_name(page):

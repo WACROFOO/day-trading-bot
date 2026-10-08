@@ -53,6 +53,7 @@ def test_a_prints_side_is_read_against_the_quote_that_stood():
     assert T.side_of(7.205, 7.20, 7.21) == "mid"
     assert T.side_of(7.21, None, 7.21) == "?", "no two-sided quote, no side"
     assert T.side_of(7.21, 7.25, 7.21) == "?", "a crossed quote reads nothing"
+    assert T.side_of(3.00, 3.00, 3.00) == "?", "a LOCKED quote names no side (review 2026-10-08)"
 
 
 def test_the_facts_count_shares_by_side_over_the_window():
@@ -104,8 +105,19 @@ def test_history_has_no_side_and_never_counts_in_the_facts():
     assert [p["src"] for p in snap["prints"]] == ["live"] + ["hist"] * 5, "newest first"
     assert all(p["side"] == "?" for p in snap["prints"] if p["src"] == "hist")
     assert snap["facts"]["prints"] == 1 and snap["facts"]["shares"] == 100
-    late = [(T0 + timedelta(seconds=1), 7.30, 999, "", "")]
-    assert b.add_history(late) == 0, "the live stream owns everything from its start"
+    late = [(T0 + timedelta(seconds=1), 7.30, 999, "", ""), (T0 - timedelta(seconds=0.5), 7.31, 999, "", "")]
+    assert b.add_history(late) == 0, "the live stream owns everything from a second before its start"
+
+
+def test_history_keeps_identical_prints_of_one_second():
+    """IBKR stamps history in whole seconds: three 100-share prints at one
+    price in one second are three prints. The same history loaded twice is
+    still not doubled (review 2026-10-08)."""
+    b = T.TapeBook("ABCD", clock=Clock())
+    rows = [(T0 - timedelta(seconds=10), 7.12, 100, "", "")] * 3 + [(T0 - timedelta(seconds=9), 7.13, 200, "", "")]
+    assert b.add_history(rows) == 4
+    assert b.add_history(rows) == 0
+    assert b.add_history(rows + [(T0 - timedelta(seconds=10), 7.12, 100, "", "")]) == 1, "a fourth one is new"
 
 
 def test_a_gap_is_said_and_the_facts_restart_after_it():
@@ -120,8 +132,16 @@ def test_a_gap_is_said_and_the_facts_restart_after_it():
     b.add_print(clock.now, 7.20, 100)
     snap = b.snapshot()
     assert snap["gaps"][0]["why"].startswith("the IBKR connection")
-    assert snap["facts"]["prints"] == 1 and snap["facts"]["pctBid"] == 100.0
+    assert snap["facts"]["prints"] == 1 and snap["facts"]["unknown"] == 100, \
+        "the quote from before the gap is not the quote now: no side until a new one"
     assert snap["facts"]["perMin"] is None, "three seconds of tape is not a rate"
+    b.quote(7.30, 7.31)
+    clock.step(1)
+    b.add_print(clock.now, 7.30, 100)
+    assert b.snapshot()["facts"]["pctBid"] == 100.0
+    for i in range(30):
+        b.gap(f"gap {i}")
+    assert len(b.snapshot()["gaps"]) == T.GAPS_KEPT, "a long morning of flaps does not grow every event"
 
 
 def test_a_silent_tape_says_quiet_then_comes_back():
@@ -130,7 +150,8 @@ def test_a_silent_tape_says_quiet_then_comes_back():
     b.add_print(clock.now, 7.21, 100)
     clock.step(45)
     b.check_quiet()
-    assert b.state == "QUIET" and b.message == "no print for 45 s"
+    assert b.state == "QUIET" and b.message == "no print in the last 30 s", \
+        "no number that freezes while the age counts on"
     b.add_print(clock.now, 7.22, 100)
     assert b.state == "LIVE"
 
@@ -239,18 +260,96 @@ def test_bidask_refused_falls_back_to_level1_and_says_so():
     assert snap["prints"][0]["side"] == "ask"
 
 
-def test_refusals_and_lost_connections_are_said_on_the_tape():
+def _rid(ib, sym, tick_type):
+    return ib.wrapper.ticker2ReqId[tick_type][ib.tickers[sym]]
+
+
+def test_refusals_are_matched_to_the_tapes_own_requests():
+    """IBKR refuses a stream through the error event, on its request id. The
+    Last stream refused stops the tape; another name's refusal — even one
+    whose contract ib_async already dropped — never does (review 2026-10-08)."""
     feed, ib, clock, mono = _feed()
     feed.focus("ABCD")
-    feed.on_error(9, 10190, "Max number of tick-by-tick requests has been reached", Obj(symbol="ABCD"))
-    assert feed.snapshot()["state"] == "ERROR" and "tick-by-tick limit" in feed.snapshot()["message"]
-    feed, ib, clock, mono = _feed()
-    feed.focus("ABCD")
-    feed.on_error(9, 10089, "needs a subscription", Obj(symbol="WXYZ"))
+    feed.on_error(77, 10089, "needs a subscription", Obj(symbol="WXYZ"))
+    feed.on_error(78, 420, "No market data permissions for NYSE STK", None)
     assert feed.snapshot()["state"] != "ERROR", "another name's refusal is not this tape's"
+    feed.on_error(_rid(ib, "ABCD", "Last"), 10190, "Max number of tick-by-tick requests has been reached", None)
+    snap = feed.snapshot()
+    assert snap["state"] == "ERROR" and "tick-by-tick limit" in snap["message"]
+    feed, ib, clock, mono = _feed()
+    feed.focus("ABCD")
+    feed.on_error(79, 10089, "needs a subscription", Obj(symbol="ABCD"))
+    assert feed.snapshot()["state"] == "ERROR", "the focus name has no data permission at all"
+
+
+def test_a_refused_bidask_falls_back_without_stopping_the_tape():
+    """The real refusal path: an error on the BidAsk request id. The prints
+    keep flowing, read against the Level 1 quote, and the tape says so."""
+    feed, ib, clock, mono = _feed()
+    feed.focus("ABCD")
+    feed.on_error(_rid(ib, "ABCD", "BidAsk"), 10190, "Max number of tick-by-tick requests", None)
+    t = ib.tickers["ABCD"]
+    t.bid, t.ask = 7.20, 7.21
+    _batch(t, _last(7.21, 300))
+    snap = feed.snapshot()
+    assert snap["state"] == "LIVE" and snap["prints"][0]["side"] == "ask"
+    assert "Level 1" in snap["source"] and feed.status()["quoteFromL1"] is True
+    assert feed.status()["streams"] == ["Last"]
+
+
+def test_a_competing_login_pauses_the_tape_and_recovery_re_requests_it():
+    feed, ib, clock, mono = _feed()
+    feed.focus("ABCD")
     feed.on_error(-1, 10197, "competing live session", None)
     snap = feed.snapshot()
     assert snap["state"] == "PAUSED" and snap["gaps"] and "10197" in snap["gaps"][0]["why"]
+    feed.on_error(-1, 1102, "Connectivity restored - data maintained", None)
+    mono.t += IT.PACING_S
+    feed.check()
+    assert ib.live_lines.count(("tbt:Last", "ABCD")) == 2, "the dead streams are asked for again"
+    feed.on_error(-1, 10197, "competing live session", None)
+    mono.t += IT.PACING_S
+    feed.check()                                  # cleared without a 1102: the next look asks again
+    feed.check()
+    assert ib.live_lines.count(("tbt:Last", "ABCD")) == 3
+
+
+def test_a_refused_tape_stays_refused_through_reconnects():
+    feed, ib, clock, mono = _feed(symbols=("ABCD",))
+    assert feed.focus("NOPE")["state"] == "ERROR"
+    feed.on_error(-1, 1100, "Connectivity lost", None)
+    feed.on_error(-1, 1101, "restored, data lost", None)
+    mono.t += IT.PACING_S
+    feed.check()
+    snap = feed.snapshot()
+    assert snap["state"] == "ERROR" and "not on the desk" in snap["message"], "the reason is not lost"
+    assert not any(k.startswith("tbt:") for k, _ in ib.live_lines), "1101 does not bypass the refusal"
+
+
+def test_an_unreported_print_never_becomes_the_desks_last_price():
+    """The tape's streams share the desk's Level 1 ticker (ib_async keys
+    tickers by conId). An unreported print is not a tape print, and it must
+    not stay in the last price the desk's quote poll reads (review 2026-10-08)."""
+    feed, ib, clock, mono = _feed()
+    feed.focus("ABCD")
+    t = ib.tickers["ABCD"]
+    _batch(t, _ba(7.20, 7.21), _last(7.21, 300))
+    t.last, t.lastSize = 3.10, 5000                       # what ib_async writes for the next tick …
+    _batch(t, _last(3.10, 5000, unreported=True))         # … an unreported print far off the market
+    assert (t.last, t.lastSize) == (7.21, 300)
+    assert [p["p"] for p in feed.snapshot()["prints"]] == [7.21]
+
+
+def test_the_same_name_again_re_requests_a_tape_in_error():
+    feed, ib, clock, mono = _feed()
+    feed.focus("ABCD")
+    feed.on_error(_rid(ib, "ABCD", "Last"), 10189, "refused", None)
+    assert feed.snapshot()["state"] == "ERROR"
+    snap = feed.focus("ABCD")
+    assert snap["state"] == "STARTING", "a click on the name retries, within IBKR's pacing"
+    mono.t += IT.PACING_S
+    feed.check()
+    assert ib.live_lines.count(("tbt:Last", "ABCD")) == 2
 
 
 def test_a_rebuilt_connection_resubscribes_behind_a_gap():
@@ -322,7 +421,8 @@ def test_a_tws_error_reaches_the_tape():
     desk.no_live_data, desk.symbols, desk.fundamentals = set(), ["ABCD"], None
     desk.competing_since, desk._next_competing_note, desk.clock = None, 0.0, clock
     desk.log = lambda m: None
-    desk._on_tws_error(9, 10190, "Max number of tick-by-tick requests has been reached", Obj(symbol="ABCD"))
+    desk._on_tws_error(_rid(ib, "ABCD", "Last"), 10190, "Max number of tick-by-tick requests has been reached",
+                       Obj(symbol="ABCD"))
     assert feed.snapshot()["state"] == "ERROR"
 
 

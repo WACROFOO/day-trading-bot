@@ -24,7 +24,7 @@ of the tape, never under BIG_FLOOR shares), not a number from the corpus.
 from __future__ import annotations
 
 import threading
-from collections import deque
+from collections import Counter, deque
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from statistics import median
@@ -40,6 +40,7 @@ BIG_FLOOR = 2000         # … and never under this many shares (Approximation)
 BIG_SAMPLE = 300         # prints the median is taken over
 KEEP = 600               # prints kept per tape
 SHOW = 80                # prints shipped in a snapshot, newest first
+GAPS_KEPT = 20           # gap markers kept (and shipped) per tape
 
 STATES = ("OFF", "STARTING", "LIVE", "QUIET", "PAUSED", "ERROR")
 
@@ -61,8 +62,9 @@ class Print:
 
 def side_of(price: float, bid: Optional[float], ask: Optional[float]) -> str:
     """The aggressor side against the quote that stood: a fact only with a
-    real two-sided quote; anything else is "?"."""
-    if bid is None or ask is None or bid <= 0 or ask <= 0 or bid > ask:
+    real two-sided quote; anything else is "?". A LOCKED quote (bid = ask)
+    names no side either: every print would read "ask" (review 2026-10-08)."""
+    if bid is None or ask is None or bid <= 0 or ask <= 0 or bid >= ask:
         return "?"
     if price >= ask:
         return "ask"
@@ -90,8 +92,7 @@ class TapeBook:
         self.source = source
         self.clock = clock
         self._prints: Deque[Print] = deque(maxlen=keep)
-        self._keys: set = set()
-        self._gaps: List[dict] = []
+        self._gaps: Deque[dict] = deque(maxlen=GAPS_KEPT)
         self._notes: List[str] = []
         self._bid: Optional[float] = None
         self._ask: Optional[float] = None
@@ -128,6 +129,7 @@ class TapeBook:
                 self._live_since = ts
             self._facts_since = ts
             self._facts_after = self._seq
+            self._bid = self._ask = self._quote_at = None      # a (re)started stream reads its own quote
             self.version += 1
 
     def quote(self, bid: Optional[float], ask: Optional[float], ts=None) -> None:
@@ -152,7 +154,6 @@ class TapeBook:
             p = Print(_utc(ts), price, size, side_of(price, b, a), "live", str(exch or ""), str(cond or ""),
                       self._seq)
             self._prints.append(p)
-            self._keys.add(p.key())
             if self._live_since is None:
                 self._live_since = p.ts
             if self._facts_since is None:
@@ -164,11 +165,19 @@ class TapeBook:
 
     def add_history(self, rows: Iterable[tuple]) -> int:
         """Prints from before the live stream (ts, price, size, exch, cond).
-        Their side is "?": no quote of that moment was read. A print already
-        on the tape is not added twice."""
+        Their side is "?": no quote of that moment was read.
+
+        IBKR stamps history in whole seconds, so three 100-share prints at one
+        price in one second are three prints, not one: the same history loaded
+        twice is caught by COUNT per (second, price, size), never by presence.
+        The live stream owns everything from one second before it started — a
+        print traded just before the start and received just after it is
+        already on the tape as live (review 2026-10-08)."""
         added = 0
         with self._lock:
             live = [p for p in self._prints if p.src == "live"]
+            have = Counter(p.key() for p in self._prints if p.src == "hist")
+            cutoff = self._live_since.timestamp() - 1.0 if self._live_since is not None else None
             hist = []
             for r in rows:
                 try:
@@ -177,13 +186,13 @@ class TapeBook:
                     continue
                 if price <= 0 or size <= 0:
                     continue
+                if cutoff is not None and ts.timestamp() >= cutoff:
+                    continue
                 p = Print(ts, price, size, "?", "hist", str(r[3] if len(r) > 3 else "") or "",
                           str(r[4] if len(r) > 4 else "") or "")
-                if p.key() in self._keys:
+                if have[p.key()] > 0:
+                    have[p.key()] -= 1            # already on the tape from an earlier load
                     continue
-                if self._live_since is not None and p.ts >= self._live_since:
-                    continue                      # the live stream owns everything from its start
-                self._keys.add(p.key())
                 hist.append(p)
                 added += 1
             if added:
@@ -202,6 +211,9 @@ class TapeBook:
             self._gaps.append({"t": t.isoformat(), "why": why})
             self._facts_since = t
             self._facts_after = self._seq
+            # the quote from before the gap is not the quote now: a print that
+            # lands before the next quote reads "?" rather than a stale side
+            self._bid = self._ask = self._quote_at = None
             self.version += 1
 
     # -- readers ---------------------------------------------------------------
@@ -245,6 +257,13 @@ class TapeBook:
             out["lastBig"] = {"t": b.ts.isoformat(), "p": b.price, "s": b.size, "side": b.side}
         return out
 
+    def last_live(self) -> Optional[Print]:
+        with self._lock:
+            for p in reversed(self._prints):
+                if p.src == "live":
+                    return p
+        return None
+
     def last_live_at(self) -> Optional[datetime]:
         with self._lock:
             for p in reversed(self._prints):
@@ -260,7 +279,9 @@ class TapeBook:
         if self.state == "LIVE" and last is not None:
             age = (now - last).total_seconds()
             if age >= QUIET_S:
-                self.set_state("QUIET", f"no print for {int(age)} s")
+                # no number in the words: it froze while the age kept counting
+                # (review 2026-10-08); the card shows the live age beside it
+                self.set_state("QUIET", f"no print in the last {int(QUIET_S)} s")
 
     def snapshot(self, n: int = SHOW, now: Optional[datetime] = None) -> dict:
         now = _utc(now or self.clock())

@@ -174,7 +174,7 @@ recorded cannot be tested.
 | the catalyst grade reads headlines only | a promotional headline with a hard word grades STRONG | the headline is always on the card | — |
 | the bot's pillar count moved | names whose only catalyst was stale or an unread filing are now killed; the effect on results is not measured | recorded in `docs/preregistration.md` §5 | read it at the next review |
 | replay look-ahead | a scrubbed replay shows the newest card | the card says so | a point-in-time card (row 3 above) |
-| the same author audited and built | the new tests share the builder's assumptions | — | an independent review of the diff |
+| the same author audited and built | the new tests share the builder's assumptions | a separate review agent read the tape and layout diff the same day and confirmed 13 defects — another name's refusal pinned on the focus tape, unreported prints written into the desk's last price, a locked quote read as buying, a refused quote stream that could never fall back, focus requests for a name already left, no re-request after a competing login, among them; each fixed with a test | a human read of the diff |
 | a clearer card read as an edge | legibility feels like reliability; no configuration tested so far has positive expectancy | the verdict below says so | — |
 
 ## What this assessment could not check

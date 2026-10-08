@@ -531,3 +531,42 @@ def test_the_selected_name_gets_a_live_tape_end_to_end(desk_server):
         assert desk.health()["tape"]["symbol"] == "AAA"
         assert not errors, errors
         browser.close()
+
+
+def test_the_page_asks_for_the_tape_only_when_it_needs_to(desk_server):
+    """Review 2026-10-08: the first version posted a name the owner had
+    already left, and never asked again for the selected one. Now a post for a
+    name left is void; a render does not loop on a refused tape; a click
+    retries it; and a tape found on another name is asked for again."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    port = desk_server["port"]
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+        pg = browser.new_page(viewport={"width": 1500, "height": 900})
+        posts: list = []
+        pg.on("request", lambda r: posts.append(json.loads(r.post_data)["symbol"])
+              if r.url.endswith("/api/v1/focus") else None)
+        pg.goto(f"http://127.0.0.1:{port}/")
+        pg.wait_for_function("window.DeskLive && window.DeskLive.state === 'open'", timeout=5000)
+        pg.wait_for_timeout(800)
+        live = {"symbol": "AAA", "state": "LIVE", "prints": [], "gaps": [], "notes": [], "facts": None,
+                "message": "", "source": "test"}
+        pg.evaluate("s => window.__applyTape(s)", live)
+        posts.clear()
+        pg.evaluate("() => { window.__postFocus('BBB', true); window.__postFocus('AAA', true); }")
+        pg.wait_for_timeout(700)
+        assert posts == [], "the post for a name already left is void, and the tape is on AAA"
+        pg.evaluate("s => window.__applyTape(s)", dict(live, state="ERROR", message="IBKR refused"))
+        pg.evaluate("() => window.__postFocus('AAA')")
+        pg.wait_for_timeout(700)
+        assert posts == [], "a render does not loop on a refused tape"
+        pg.evaluate("() => window.__postFocus('AAA', true)")
+        pg.wait_for_timeout(700)
+        assert posts == ["AAA"], "a click retries it"
+        pg.evaluate("s => window.__applyTape(s)", dict(live, symbol="ZZZ"))
+        pg.wait_for_timeout(5200)
+        pg.evaluate("() => window.__postFocus('AAA')")
+        pg.wait_for_timeout(700)
+        assert posts == ["AAA", "AAA"], "a tape found on another name is asked for again"
+        browser.close()
