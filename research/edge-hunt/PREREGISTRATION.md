@@ -852,3 +852,19 @@ net mean > 0. **Reported, deciding nothing:** SPY buy-and-hold over the same per
 market's own drift — a long-only test in a rising decade must beat it, not zero), the
 0.15 % cost sensitivity, holding time, R per year. Pass → a paper-only implementation is
 designed and preregistered separately. Fail → recorded; nothing is built.
+
+**Data note, 2026-10-08, after the download and before any run (no result seen).** (1) The SIP
+daily feed starts 2016-01-04, so with 260 sessions of history the first signal falls in
+January 2017: train is 2017-01 → 2022-12 in practice. (2) Alpaca's asset list omits most
+delisted tickers: only 340 of the 3,337 symbols kept end before 2026-08, and SIVB, FRC, SBNY,
+ATVI have bars on the feed but no asset entry. Supplement, systematic sources only, never a
+hand-picked list: `scripts/daily_momentum.py delisted` adds the acquiree and
+worthless-removal tickers of Alpaca's corporate actions 2016 → 2026 and the listed ticker of
+every OTC "Q" (bankruptcy) asset. Corporate actions are empty for 2016 and thin before 2023
+(2019: 36 stock mergers, no cash mergers; 2023: 370 cash + 568 stock + 34 mixed mergers,
+10 removals), so **survivorship is largely closed on the holdout and only partly on train** —
+train results lean optimistic for a long-only test, and the report says so. (3) Prices are
+split- and dividend-adjusted back from today, so the $10 floor reads an adjusted price: a
+later forward splitter (NVDA reads $0.79 in 2016) is excluded early and a later reverse
+splitter included early — a lookahead that removes winners and adds losers, stated, not
+corrected. Reported, deciding nothing: trades in names whose bars end before 2026-08.

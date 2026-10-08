@@ -5,6 +5,7 @@ New 52-week closing high in an uptrend, bought at the next open, chandelier exit
 3 x ATR(20) under the highest close, at most 10 positions, costs per side.
 
     python3 scripts/daily_momentum.py fetch     # Alpaca daily bars → data/cache/daily (resumable)
+    python3 scripts/daily_momentum.py delisted  # + tickers the asset list dropped (resumable)
     python3 scripts/daily_momentum.py run       # the test and its decision
 """
 from __future__ import annotations
@@ -77,13 +78,9 @@ def _days(ts: str) -> int:
     return (date.fromisoformat(ts[:10]) - date(1970, 1, 1)).days
 
 
-def fetch() -> int:
-    c = _client()
-    CACHE.mkdir(parents=True, exist_ok=True)
-    syms = symbols(c)
-    print(f"{len(syms)} symbols after the name filter", flush=True)
+def _fetch_chunks(c, syms, prefix) -> int:
     for n, i in enumerate(range(0, len(syms), 100)):
-        f = CACHE / f"chunk_{n:04d}.npz"
+        f = CACHE / f"{prefix}_{n:04d}.npz"
         if f.exists():
             continue
         chunk, token, rows = syms[i:i + 100], None, defaultdict(list)
@@ -107,10 +104,57 @@ def fetch() -> int:
                 continue                                   # never in the universe: not kept
             arrays[s] = a
         np.savez_compressed(f, **arrays)
-        print(f"  chunk {n} · {i + len(chunk)}/{len(syms)} · kept {len(arrays)}", flush=True)
+        print(f"  {prefix} {n} · {i + len(chunk)}/{len(syms)} · kept {len(arrays)}", flush=True)
+    return 0
+
+
+def fetch() -> int:
+    c = _client()
+    CACHE.mkdir(parents=True, exist_ok=True)
+    syms = symbols(c)
+    print(f"{len(syms)} symbols after the name filter", flush=True)
+    _fetch_chunks(c, syms, "chunk")
     spy = _get(c, "/v2/stocks/bars", {"symbols": "SPY", "timeframe": "1Day", "start": START, "end": END,
                                       "limit": 10000, "feed": c.feed, "adjustment": "all"})["bars"]["SPY"]
     np.save(CACHE / "SPY.npy", np.array([[_days(b["t"]), b["o"], b["c"]] for b in spy]))
+    return 0
+
+
+def delisted() -> int:
+    """Tickers the asset list no longer carries (addendum 2026-10-08, data note): acquired and
+    removed names from Alpaca's corporate actions, and bankrupt names whose ticker moved to OTC
+    with a Q suffix. Bars come from the SIP feed under the old ticker."""
+    c = _client()
+    assets = []
+    for status in ("active", "inactive"):
+        assets += c._get(c.trading_base, "/v2/assets", {"status": status, "asset_class": "us_equity"})
+    names = {a["symbol"]: (a.get("name") or "").lower() for a in assets}
+    have = set(symbols(c))
+    cand, src = set(), defaultdict(int)
+    for y in range(2016, 2027):
+        token = None
+        while True:
+            p = _get(c, "/v1/corporate-actions", {"types": "cash_merger,stock_merger,stock_and_cash_merger,"
+                                                  "worthless_removal", "start": f"{y}-01-01",
+                                                  "end": min(f"{y}-12-31", END), "limit": 1000, "page_token": token})
+            for kind, rows in (p.get("corporate_actions") or {}).items():
+                for r in rows:
+                    sym = r.get("acquiree_symbol") or r.get("symbol") or ""
+                    if sym:
+                        cand.add(sym); src[f"{y} {kind}"] += 1
+            token = p.get("next_page_token")
+            if not token:
+                break
+    for a in assets:
+        s = a["symbol"]
+        if a.get("exchange") == "OTC" and s.endswith("Q") and 3 <= len(s) <= 6:
+            cand.add(s[:-1]); src["OTC Q ticker"] += 1
+    keep = sorted(s for s in cand if s.isalpha() and s.isupper() and len(s) <= 5 and s not in have
+                  and not EXCLUDE.search(names.get(s, "")))
+    print("sources:", dict(sorted(src.items())), flush=True)
+    print(f"{len(cand)} candidates · {len(keep)} not already fetched, name filter passed "
+          f"({sum(1 for s in keep if not names.get(s))} with no name on file)", flush=True)
+    _fetch_chunks(c, keep, "delisted")
     return 0
 
 
@@ -191,10 +235,11 @@ def run() -> int:
     def pr(x=""):
         print(x, flush=True); lines.append(x)
     data = {}
-    for f in sorted(CACHE.glob("chunk_*.npz")):
+    for f in sorted(CACHE.glob("chunk_*.npz")) + sorted(CACHE.glob("delisted_*.npz")):
         z = np.load(f)
         for s in z.files:
-            data[s] = prep(z[s])
+            if s not in data:
+                data[s] = prep(z[s])
     signals = defaultdict(list)          # signal day -> [(rank, sym, i)]
     universe = defaultdict(list)         # signal day -> [(sym, i)]
     for s, a in data.items():
@@ -265,6 +310,11 @@ def run() -> int:
     for y in ("2024", "2025", "2026"):
         block(f"  {y}", [t for t in ho if t["day"][:4] == y])
     pr(f"  trades still open at the data's end (closed at the last close): {sum(t['open_at_end'] for t in trades)}")
+    last = {s: int(a["d"][-1]) for s, a in data.items()}
+    gone = [t for t in trades if last[t["sym"]] < _days("2026-08-01")]
+    pr(f"  trades in names whose bars end before 2026-08 (delisted or acquired): {len(gone)}"
+       + (f" · net {np.mean([t['net'] for t in gone]):+.3f} R" if gone else "")
+       + f" · symbols ending early {sum(1 for v in last.values() if v < _days('2026-08-01'))} of {len(data)}")
     spy = np.load(CACHE / "SPY.npy")
 
     def spy_ret(a, b):
@@ -287,4 +337,4 @@ def run() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit({"fetch": fetch, "run": run}[sys.argv[1]]())
+    raise SystemExit({"fetch": fetch, "delisted": delisted, "run": run}[sys.argv[1]]())
