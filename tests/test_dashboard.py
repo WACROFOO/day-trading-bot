@@ -624,13 +624,19 @@ def test_ui_order_panel_renders_the_servers_ticket(page):
     sym = page.locator("#symTicker").inner_text()
     tk = OM.ticket(sym, 5.0, 4.8, 25.0, session="regular", bid=4.98, ask=5.0).to_dict()
     page.evaluate("""([sym, tk]) => { const c = window.__SESSION__.cards[sym];
-      c.ticket = tk; c.position = null; c.verdict.word = "REVIEW"; }""", [sym, tk])
+      c.ticket = tk; c.position = null; c.verdict.word = "REVIEW";
+      c.risk = {dollars: 25, source: "yours"}; }""", [sym, tk])
     page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
     page.wait_for_timeout(250)
     line = page.locator(".dc-order-line").inner_text()
     assert line == tk["order_line"] and line.startswith(f"BUY {tk['shares']} {sym} STP LMT")
     body = page.locator(".sizing").inner_text()
     assert "limit (A10)" in body and "worst case (A18)" in body
+    assert "sized on $25 a trade — your risk" in body, "whose risk sized it, in plain words"
+    page.evaluate("""([sym]) => { window.__SESSION__.cards[sym].risk.source = "the bot's"; }""", [sym])
+    page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
+    page.wait_for_timeout(250)
+    assert "— the bot's risk" in page.locator(".sizing").inner_text()
     assert page.locator(".dc-check").count() == len(tk["checks"])
     assert page.locator(".dc-btn.took").count() == 1 and page.locator(".dc-btn.passed").count() == 1
     page.locator(".dc-btn.took").click()

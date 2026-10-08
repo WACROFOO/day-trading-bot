@@ -2125,7 +2125,7 @@ function renderTicket(card) {
   out.appendChild(el("div", "dc-exit", t.exit_text));
   out.appendChild(manualButtons(card, ["took", "passed"]));
   if (card.risk && card.risk.dollars) out.appendChild(el("div", "note", "sized on $" + fx(card.risk.dollars, 0) +
-    " a trade — " + card.risk.source + " risk"));
+    " a trade — " + (card.risk.source === "yours" ? "your" : card.risk.source) + " risk"));
 }
 
 function manualButtons(card, actions) {
