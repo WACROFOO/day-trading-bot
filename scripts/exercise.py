@@ -536,6 +536,40 @@ def cmd_stuck(args) -> int:
     return 0
 
 
+TERMINAL = ("cancelled", "apicancelled", "inactive", "rejected", "expired", "notfilled", "not_filled", "error")
+
+
+def busy_rows(conn, now=None, fresh_min: int = 10) -> tuple[list, list]:
+    """(held positions, working entries): what a stopped runner would leave
+    unwatched. A position is filled and not exited (stuck_orders); a working
+    entry is an order placed in the last `fresh_min` minutes, not filled, not
+    in a terminal state — A10's entry lives three bars, so an older unfilled
+    row is a ledger that never heard the cancel, not a live order."""
+    from datetime import timedelta
+    held = list(L.stuck_orders(conn))
+    now = now or datetime.now(timezone.utc)
+    since = (now - timedelta(minutes=fresh_min)).astimezone(timezone.utc).replace(microsecond=0).isoformat()
+    working = [o for o in conn.execute("SELECT * FROM orders WHERE fill_price IS NULL AND exit_ts IS NULL "
+                                       "AND placed_at >= ?", (since,))
+               if str(o["status"] or "").lower() not in TERMINAL]
+    return held, working
+
+
+def cmd_busy(args) -> int:
+    """Exit 3 when the bot holds a position or an entry order is working —
+    scripts/restart.sh must not stop the day then; 0 when flat."""
+    conn = L.connect(_db(args))
+    held, working = busy_rows(conn)
+    for o in held:
+        print(f"  position: order {o['order_id']} {o['symbol']} x{o['shares']} filled {o['fill_price']} stop {o['stop']}")
+    for o in working:
+        print(f"  working entry: order {o['order_id']} {o['symbol']} x{o['shares']} trigger {o['trigger']} ({o['status']})")
+    if not held and not working:
+        print("flat: no position, no working entry")
+        return 0
+    return 3
+
+
 def held_row(o) -> bool:
     """A filled row the broker may still hold: never exited, or exited by a
     sell that FAILED (ExitFailed keeps the failed sell's exit_ts; the shares
@@ -1274,6 +1308,7 @@ def main(argv=None) -> int:
     r = sub.add_parser("replay"); r.add_argument("fixture"); r.add_argument("--risk", type=float, default=20.0)
     sub.add_parser("check"); sub.add_parser("report"); sub.add_parser("advance"); sub.add_parser("state")
     sub.add_parser("stuck"); sub.add_parser("review")
+    sub.add_parser("busy", help="exit 3 when a position or a working entry is open (scripts/restart.sh reads it)")
     ms = sub.add_parser("missed", help="what the plans not taken went on to do, per row and per reason")
     ms.add_argument("--day", help="ET date, e.g. 2026-09-22 (default: the latest day in the ledger)")
     ms.add_argument("--all", action="store_true", help="also list killed plans whose trigger was never touched")
@@ -1307,7 +1342,7 @@ def main(argv=None) -> int:
     lv.add_argument("--every", type=int, default=5)
     args = ap.parse_args(argv)
     return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
-            "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck, "review": cmd_review,
+            "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck, "review": cmd_review, "busy": cmd_busy,
             "missed": cmd_missed, "whatif": cmd_whatif, "defect": cmd_defect, "reset-unprotected": cmd_reset_unprotected,
             "green-runs": cmd_green_runs,
             "open-phase-c": cmd_open_phase_c,

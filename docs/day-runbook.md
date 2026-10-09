@@ -70,6 +70,27 @@ restarted on the new code when the bot is not trading (it records nothing
 then); during the bot's window you are given the command instead. Without the
 update, the day alone is `IBKR_PORT=4002 python3 scripts/day.py`.
 
+**To restart a day already started, on new code** (owner, 2026-10-09), run
+this in a new terminal tab:
+
+```bash
+cd ~/day-trading-bot && bash scripts/update.sh && bash scripts/restart.sh
+```
+
+`scripts/restart.sh` handles three cases:
+
+- **No day is running:** it starts one.
+- **A day is running and the bot is flat:** it stops the day cleanly
+  (SIGINT, as Ctrl-C), waits for the day and its desk to be gone, then
+  starts the day again in this tab.
+- **The bot holds a position, or placed an entry in the last 10 minutes**
+  (`python3 scripts/exercise.py busy` exits 3): it does **not** stop the
+  day, because a stopped runner leaves the monitored stop unwatched. It
+  restarts the desk alone on the new code; run the command again once the
+  bot is flat.
+
+The day stopped this way is settled at its next start, as after a Ctrl-C.
+
 What it does, in Ross's order (`scripts/day.py`):
 
 | step | what | where the rule lives |

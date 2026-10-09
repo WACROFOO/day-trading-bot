@@ -780,3 +780,125 @@ def test_a_second_launch_restarts_an_idle_desk_on_new_code_and_never_a_recording
         assert "--restart-desk" in capsys.readouterr().out
     finally:
         held.close()
+
+
+# -- one command to restart a day already started (owner, 2026-10-09) --------------
+
+def _restart_sandbox(tmp_path):
+    """restart.sh beside stand-ins: exercise.py answers `busy` with $BUSY_RC;
+    day.py with --hold runs until SIGINT (ignores it with --stubborn), else says
+    what it got."""
+    import shutil
+    scripts = tmp_path / "scripts"
+    scripts.mkdir()
+    shutil.copy(ROOT / "scripts" / "restart.sh", scripts / "restart.sh")
+    (scripts / "exercise.py").write_text(
+        "import os, sys\nprint('busy asked')\nsys.exit(int(os.environ.get('BUSY_RC', '0')))\n")
+    (scripts / "day.py").write_text(
+        "import os, signal, sys, time\n"
+        "if '--hold' in sys.argv:\n"
+        "    signal.signal(signal.SIGINT, signal.SIG_IGN if '--stubborn' in sys.argv else (lambda *_: sys.exit(0)))\n"
+        "    time.sleep(120); sys.exit(0)\n"
+        "print('day.py', sys.argv[1:], 'IBKR_PORT=' + os.environ.get('IBKR_PORT', ''))\n")
+    return scripts
+
+
+def _running_day(scripts, *flags):
+    import subprocess, time
+    p = subprocess.Popen(["python3", str(scripts / "day.py"), "--hold", *flags])
+    time.sleep(0.5)
+    return p
+
+
+def test_restart_starts_the_day_when_none_runs(tmp_path, monkeypatch):
+    import subprocess
+    scripts = _restart_sandbox(tmp_path)
+    monkeypatch.delenv("IBKR_PORT", raising=False)
+    out = subprocess.run(["bash", str(scripts / "restart.sh")], capture_output=True, text=True, timeout=60,
+                         cwd=tmp_path).stdout
+    assert "no trading day running" in out and "day.py [] IBKR_PORT=4002" in out
+    assert "busy asked" not in out
+
+
+def test_restart_stops_a_flat_day_cleanly_then_starts_it_again(tmp_path):
+    import subprocess
+    scripts = _restart_sandbox(tmp_path)
+    day = _running_day(scripts)
+    try:
+        out = subprocess.run(["bash", str(scripts / "restart.sh"), "--symbols", "AAA"], capture_output=True,
+                             text=True, timeout=60, cwd=tmp_path, env={**os.environ, "BUSY_RC": "0"}).stdout
+        assert day.poll() is not None, "the running day was stopped"
+        assert out.index("stopping the running day cleanly") < out.index("day.py ['--symbols', 'AAA']")
+    finally:
+        if day.poll() is None:
+            day.kill()
+
+
+def test_restart_never_stops_a_day_holding_a_position(tmp_path):
+    """A stopped runner leaves a monitored stop unwatched: with a position or
+    a working entry the day keeps running and only the desk restarts."""
+    import subprocess
+    scripts = _restart_sandbox(tmp_path)
+    day = _running_day(scripts)
+    try:
+        out = subprocess.run(["bash", str(scripts / "restart.sh")], capture_output=True, text=True, timeout=60,
+                             cwd=tmp_path, env={**os.environ, "BUSY_RC": "3"}).stdout
+        assert day.poll() is None, "the day holding a position is still running"
+        assert "holds a position or a working entry" in out and "day.py ['--restart-desk']" in out
+    finally:
+        day.kill()
+
+
+def test_restart_starts_nothing_when_the_day_will_not_stop(tmp_path):
+    import subprocess
+    scripts = _restart_sandbox(tmp_path)
+    day = _running_day(scripts, "--stubborn")
+    try:
+        r = subprocess.run(["bash", str(scripts / "restart.sh")], capture_output=True, text=True, timeout=60,
+                           cwd=tmp_path, env={**os.environ, "BUSY_RC": "0", "RESTART_WAIT_S": "2"})
+        assert r.returncode == 1 and "nothing started" in r.stdout and "day.py [" not in r.stdout
+        assert day.poll() is None
+    finally:
+        day.kill()
+
+
+def test_busy_reads_positions_and_fresh_entries_only(tmp_path):
+    """exercise.py busy: a filled, un-exited order or an entry placed in the
+    last ten minutes and not in a terminal state; an old unfilled row is a
+    ledger that never heard the cancel."""
+    import importlib, sys as _sys
+    from datetime import datetime, timedelta, timezone
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    ex = importlib.import_module("exercise")
+    from journal import ledger as L
+    c = L.connect(str(tmp_path / "j.sqlite"))
+    now = datetime(2026, 10, 9, 14, 0, tzinfo=timezone.utc)
+    c.execute("INSERT INTO decisions (decision_id, ts_et, session, symbol, source, session_id, source_name, data_status,"
+              " bar_resolution, verdict, plan_allowed, gates_json, warnings_json, inputs_json, recorded_at, rules_hash,"
+              " code_commit) VALUES ('d1','2026-10-09T09:55:00-04:00','regular','AAA','t','s','t','LIVE','1m','REVIEW',1,"
+              "'[]','[]','{}','x','h','c')")
+
+    def order(oid, status, placed, fill=None, exit_ts=None):
+        c.execute("INSERT INTO orders (order_id, decision_id, symbol, session, trigger, stop, shares, dollar_risk,"
+                  " planned_risk, status, fill_price, exit_ts, placed_at, updated_at) VALUES"
+                  " (?, 'd1', 'AAA', 'regular', 5.0, 4.8, 100, 20, 20, ?, ?, ?, ?, ?)",
+                  (oid, status, fill, exit_ts, placed.isoformat(), placed.isoformat()))
+    order(1, "Cancelled", now - timedelta(minutes=2))
+    order(2, "submitted", now - timedelta(minutes=45))          # stale row, not a live order
+    c.commit()
+    held, working = ex.busy_rows(c, now=now)
+    assert held == [] and working == []
+    order(3, "submitted", now - timedelta(minutes=3))
+    c.commit()
+    assert [o["order_id"] for o in ex.busy_rows(c, now=now)[1]] == [3]
+    order(4, "Filled", now - timedelta(minutes=30), fill=5.01)
+    c.commit()
+    assert [o["order_id"] for o in ex.busy_rows(c, now=now)[0]] == [4]
+
+
+def test_restart_is_read_whole_before_it_runs():
+    """The update before it may rewrite restart.sh; bash reads a script as it
+    goes, so everything sits in a function parsed before it starts."""
+    text = (ROOT / "scripts" / "restart.sh").read_text()
+    body = [ln for ln in text.splitlines() if ln.strip() and not ln.lstrip().startswith("#")]
+    assert body[-1] == 'main ${1+"$@"}' and "main() {" in body
