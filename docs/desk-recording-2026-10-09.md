@@ -278,6 +278,23 @@ alert inside no **MOVE** (≥ 5 % in ≤ 5 minutes, ≥ 10,000 shares).
   halts, because an exported untraded minute is a zero-volume row rather than
   a gap. It now reads 70 halts.
 
+### 4.9 · Follow-up the same day: a smaller card, one stack, cards that move
+
+The owner, after reading the above: *"make the verdict order card smaller with
+non key info (everything below the news) as an expandable section and level
+two down and the time and sales even below and make sure news catalyst is
+clearly displayed in simple words"*, then *"make sure i can drag and drop these
+cards easily and swap them"*.
+
+| | before | after |
+|---|---|---|
+| the card's face | the word, the level, the pillar tiles; on REVIEW the tape line, the hint and the whole order under them | the word, the level, the pillar tiles and **the news in plain words**. Nothing else |
+| everything below the news | partly on the face, partly in "Why, in full" | one fold, **Details**, closed until opened and remembered (a new key, so a desk that kept the old fold open starts small). The order comes first, on REVIEW only, and the closed fold's line says "order". An open position stays on the face |
+| the news | a tile reading `no feed` / `STRONG` / `today`, and the full read in the fold | a line under the tiles: STRONG · SOME · WEAK · NONE · ?, one sentence, the headline and any red flag. The words come from the server (`catalyst.card_read`, `plain`) and the grade is unchanged. `after_card_dvlt_news.png`: *"FDA news, today 09:44 — real company news"* |
+| the right column | the card over Level 2 beside the Time & Sales | one stack: the card, Level 2, the Time & Sales (layout v13) |
+| Level 2 | the ten asks first, so the bids sat below the fold | opens on the inside quote; your own scroll holds for 10 s |
+| dragging cards | **only the three scanner tiles could be picked up with a mouse.** The charts, the board, the card, Level 2 and the tape had no draggable header, and the old test dispatched synthetic drag events, which skip that check | every card's header is a handle. `test_ui_every_card_swaps_with_a_real_mouse_drag` drags with the mouse; it fails on the old page and passes now |
+
 ## 5 · What this could not check
 
 - **A live book.** The account has no depth subscription. LIVE, the ladder
@@ -303,6 +320,9 @@ All eight items are on the desk, and the trading rules are untouched.
 - **Stale plans are gone.** Drawn lines fell from 475 to 63 name-minutes, and
   order blocks from 157 to 18, on the two measured days.
 - **The card answers at a glance**, and its action now matches its level.
+  Since the follow-up, the face ends with the news in plain words and
+  everything else, the order included, is one click away under Details.
+- **Every card can be dragged and swapped**, not just the scanner tiles.
 - **Level 2 is ready and waiting for the subscription.** The work also found
   and fixed a defect that would have taken the Time & Sales down on every name
   selected without one.

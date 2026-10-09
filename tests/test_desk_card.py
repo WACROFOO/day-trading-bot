@@ -189,6 +189,37 @@ def test_the_split_test_is_reported_as_run_or_not():
     assert any("8-for-1" in f["text"] for f in card_read([], now=NOW, split_ratio=8)["flags"])
 
 
+@pytest.mark.parametrize("items,source_ok,label,tone,words", [
+    ([_item("ABCD receives FDA approval for X", "2026-10-07T11:02:00Z")], True, "STRONG", "ok",
+     "FDA news, today 07:02 · pre-market — real company news"),
+    ([_item("ABCD announces partnership with Big Co", "2026-10-07T11:02:00Z")], True, "SOME", "warn",
+     "a partnership, today 07:02 · pre-market — news, but no hard numbers in it"),
+    ([_item("ABCD wins $40M contract", "2026-10-06T14:00:00Z")], True, "SOME", "warn",
+     "a contract from yesterday 10:00 — not today's news"),
+    ([_item("ABCD to present at investor conference", "2026-10-07T11:02:00Z")], True, "WEAK", "bad",
+     "a press release, today 07:02 · pre-market — no real news in it"),
+    ([_item("ABCD agrees to be acquired by DEF for $5.00", "2026-10-07T11:00:00Z")], True, "WEAK", "bad",
+     "a buyout, today 07:00 · pre-market — the price stays stuck near the deal price"),
+    ([_item("ABCD prices $5M registered direct offering", "2026-10-07T12:00:00Z")], True, "WEAK", "bad",
+     "a share offering, today 08:00 · pre-market — more shares for sale, not good news"),
+    ([_item("SEC 6-K · 6-K", "2026-10-07T11:00:00Z", "sec_filing")], True, "WEAK", "bad",
+     "an SEC filing, today 07:00 · pre-market — the desk can't read it: open it yourself"),
+    ([_item("ABCD wins $40M contract", "2026-10-02T14:00:00Z")], True, "NONE", "bad",
+     "no company news since Tuesday's close (the latest is 5 days old)"),
+    ([], True, "NONE", "bad", "no company news since Tuesday's close"),
+    ([], False, "?", "unk", "no news feed on this desk — check the news yourself"),
+])
+def test_the_news_reads_in_plain_words(items, source_ok, label, tone, words):
+    """Owner, 2026-10-09: "make sure news catalyst is clearly displayed in
+    simple words". The card's face reads `plain`: a label, a tone and one
+    sentence — no rule ids, no grading jargon. The grade and the reason the
+    fold shows are unchanged."""
+    r = card_read(items, now=NOW, trading_date="2026-10-07", source_ok=source_ok)
+    assert r["plain"] == {"label": label, "tone": tone, "text": words}, r["plain"]
+    for jargon in ("C0", "C3", "C5", "quantifiable", "catalyst", "pillar", "momentum"):
+        assert jargon not in r["plain"]["text"], jargon
+
+
 def test_no_headline_feed_reads_unknown_never_weak():
     r = card_read([], now=NOW, trading_date="2026-10-07", source_ok=False)
     assert r["grade"] == "UNKNOWN" and r["rule"] == "C0"

@@ -470,6 +470,22 @@ def _clip(text: str, n: int = HEADLINE_MAX) -> str:
     return t if len(t) <= n else t[: n - 1].rstrip() + "…"
 
 
+# The news line on the card's face, in plain words (owner, 2026-10-09: "make
+# sure news catalyst is clearly displayed in simple words"). The grade, the
+# rule and the reason above it are unchanged; this is their wording for a
+# glance. Label and tone by grade; "NONE" when no company news was found.
+PLAIN_WHAT = {"FDA": "FDA news", "earnings": "earnings", "contract": "a contract", "deal": "a deal",
+              "patent": "a patent", "uplist": "an uplisting", "analyst": "an analyst rating",
+              "partnership": "a partnership", "PR": "a press release", "listing notice": "a listing notice",
+              "offering/dilution": "a share offering", "filing": "an SEC filing"}
+PLAIN_LABEL = {"STRONG": ("STRONG", "ok"), "MODERATE": ("SOME", "warn"), "WEAK": ("WEAK", "bad"),
+               "UNKNOWN": ("?", "unk")}
+
+
+def _what(typ: str) -> str:
+    return PLAIN_WHAT.get(typ, typ or "news")
+
+
 def card_read(items, *, now: Optional[datetime] = None, trading_date=None,
               source_ok: bool = True, filings: Optional[Sequence[dict]] = None,
               filings_checked: bool = False, split_checked: bool = False,
@@ -538,10 +554,12 @@ def card_read(items, *, now: Optional[datetime] = None, trading_date=None,
         flag("split", "split test not run (CLAUDE.md rule 6)", "info", "C13")
 
     # -- the grade ------------------------------------------------------------
-    def out(grade, reason, rule, c=None, typ=None):
+    def out(grade, reason, rule, c=None, typ=None, plain=None, label=None):
         it = (c or {}).get("item") or {}
+        lab, tone = PLAIN_LABEL.get(grade, (grade, "unk"))
         return {
             "grade": grade, "reason": reason, "rule": rule,
+            "plain": {"label": label or lab, "tone": tone, "text": plain or reason},
             "type": typ or (c or {}).get("type") or "none found",
             "age": (c or {}).get("age") or "—", "ageBucket": (c or {}).get("bucket"),
             "headline": _clip(it.get("headline") or "") or None,
@@ -554,39 +572,51 @@ def card_read(items, *, now: Optional[datetime] = None, trading_date=None,
         }
 
     if not source_ok:
-        return out("UNKNOWN", "no headline feed on this desk — nothing ruled in or out", "C0", None, "—")
+        return out("UNKNOWN", "no headline feed on this desk — nothing ruled in or out", "C0", None, "—",
+                   plain="no news feed on this desk — check the news yourself")
     catalysts = [c for c in today if c["grade"].grade not in ("dilutive", "filing")]
     hard = [c for c in catalysts if c["grade"].grade == "hard" and not c["buyout"]]
     if hard:
         c = hard[0]
-        return out("STRONG", f"{c['type']} — the company's own news, dated today: quantifiable value", "C3", c)
+        return out("STRONG", f"{c['type']} — the company's own news, dated today: quantifiable value", "C3", c,
+                   plain=f"{_what(c['type'])}, {c['age']} — real company news")
     if any(c["buyout"] for c in catalysts):
         c = next(c for c in catalysts if c["buyout"])
-        return out("WEAK", "buyout target — the price is pinned near the deal; no momentum left", "C7", c, "deal")
+        return out("WEAK", "buyout target — the price is pinned near the deal; no momentum left", "C7", c, "deal",
+                   plain=f"a buyout, {c['age']} — the price stays stuck near the deal price")
     soft = [c for c in catalysts if c["grade"].grade == "soft"
             and c["type"] in ("analyst", "partnership", "patent", "uplist", "contract", "deal", "earnings", "FDA")]
     if soft:
         c = soft[0]
-        return out("MODERATE", f"{c['type']} — attention, no stated value: the chart has to carry it", "C4", c)
+        return out("MODERATE", f"{c['type']} — attention, no stated value: the chart has to carry it", "C4", c,
+                   plain=f"{_what(c['type'])}, {c['age']} — news, but no hard numbers in it")
     older_hard = [c for c in own if not c["today"] and c["grade"].grade == "hard" and not c["buyout"]
                   and c["bucket"] in ("prior",)]
     if older_hard:
         c = older_hard[0]
-        return out("MODERATE", f"yesterday's {c['type']} — day-2 interest, not fresh news", "C8", c)
+        return out("MODERATE", f"yesterday's {c['type']} — day-2 interest, not fresh news", "C8", c,
+                   plain=f"{_what(c['type'])} from {c['age']} — not today's news")
     pr = [c for c in catalysts if c["grade"].grade in ("soft", "listing")]
     if pr:
         c = pr[0]
         why = ("listing notice — administrative, not economic value" if c["grade"].grade == "listing"
                else "PR without substance — attention, no counterparty, no value")
-        return out("WEAK", why, "C5", c, "listing notice" if c["grade"].grade == "listing" else "PR")
+        return out("WEAK", why, "C5", c, "listing notice" if c["grade"].grade == "listing" else "PR",
+                   plain=(f"a listing notice, {c['age']} — paperwork, not news" if c["grade"].grade == "listing"
+                          else f"a press release, {c['age']} — no real news in it"))
     dil = [c for c in today if c["grade"].grade == "dilutive"]
     if dil:
-        return out("WEAK", "offering/dilution — supply, not a catalyst", "C6", dil[0])
+        return out("WEAK", "offering/dilution — supply, not a catalyst", "C6", dil[0],
+                   plain=f"a share offering, {dil[0]['age']} — more shares for sale, not good news")
     unread = [c for c in today if c["grade"].grade == "filing"]
     if unread:
-        return out("WEAK", "unread SEC filing — open it; the desk cannot tell what it says", "C9", unread[0])
+        return out("WEAK", "unread SEC filing — open it; the desk cannot tell what it says", "C9", unread[0],
+                   plain=f"an SEC filing, {unread[0]['age']} — the desk can't read it: open it yourself")
     since = f"the {cutoff:%a} 16:00 close" if cutoff else "the last close"
+    since_plain = f"{cutoff:%A}'s close" if cutoff else "the last close"
     if own:
         return out("WEAK", f"no company news since {since} — the newest own headline is {own[0]['age']}",
-                   "C5", own[0], "none found")
-    return out("WEAK", f"no company news since {since} — the news pillar fails", "C5")
+                   "C5", own[0], "none found", label="NONE",
+                   plain=f"no company news since {since_plain} (the latest is {own[0]['age']})")
+    return out("WEAK", f"no company news since {since} — the news pillar fails", "C5", label="NONE",
+               plain=f"no company news since {since_plain}")

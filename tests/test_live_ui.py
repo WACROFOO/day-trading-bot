@@ -424,7 +424,7 @@ def test_the_verdict_card_renders_the_servers_cascade_not_its_own_score(desk_ser
         assert pg.text_content("#dvWord") == ("NOTHING TO TRADE" if banner == "NO" else banner)
         # every gate the cascade could not pass is a lamp on the card, by state
         red = [l["label"] for l in card["lamps"] if l["state"] in ("FAIL", "UNKNOWN")]
-        shown = pg.eval_on_selector_all("#verdictCard .dc-lamp .l", "els => els.map(e => e.textContent)")
+        shown = pg.eval_on_selector_all("#verdictMore .dc-lamp .l", "els => els.map(e => e.textContent)")
         for label in red:
             assert label in shown, (label, shown)
         browser.close()
@@ -545,7 +545,7 @@ def test_the_selected_name_gets_a_live_tape_end_to_end(desk_server):
         assert marks == ["▼", "▲"], marks
         word = pg.evaluate("window.__SESSION__.cards.AAA.verdict.word")
         if word == "NO":                                 # a NO card carries no tape line (2026-10-09)
-            assert pg.locator("#verdictCard .dc-tape").count() == 0
+            assert pg.locator(".verdict-card .dc-tape").count() == 0
         else:
             assert "at the ask" in pg.text_content(".dc-tape")
         assert desk.health()["tape"]["symbol"] == "AAA"

@@ -273,9 +273,9 @@ def page(tmp_path_factory):
 
 
 def _open_why(page):
-    """Open the decision card's "Why, in full" (closed by default since
-    2026-10-09; the toggle is remembered, so open it only when shut)."""
-    page.evaluate("""() => { const d = document.querySelector('#verdictCard .dc-more');
+    """Open the decision card's fold, "Details" — everything below the news
+    (2026-10-09). Closed by default and remembered, so open it only when shut."""
+    page.evaluate("""() => { const d = document.querySelector('#verdictMore');
                              if (d && !d.open) d.querySelector('summary').click(); }""")
     page.wait_for_timeout(150)
 
@@ -358,13 +358,13 @@ def test_ui_chart_stack_is_the_desks_own_1m_over_5m_and_10s(page):
         assert page.locator(f".slot [data-card={parked}]").count() == 0
     # find / see / decide (2026-10-08): the decision card over the real tape on
     # the right, the Five Pillars check under the scanners on the left
-    # Level 2 beside the tape under the card (owner, 2026-10-09): "they
-    # really should always just be together" (ZfwTJAMLroA @01:45:34)
+    # Level 2 under the card and the tape under Level 2 (owner, 2026-10-09:
+    # "level two down and the time and sales even below")
     right = [page.eval_on_selector(f'[data-slot={s}] .card', "e => e.dataset.card") for s in ("R1", "R2", "R3")]
     assert right == ["verdict", "depth", "tape"]
     book = page.locator("[data-card=depth]").bounding_box()
     tape = page.locator("[data-card=tape]").bounding_box()
-    assert abs(book["y"] - tape["y"]) < 4 and tape["x"] > book["x"] + book["width"] - 4, "side by side"
+    assert tape["y"] >= book["y"] + book["height"] - 4 and abs(book["x"] - tape["x"]) < 4, "the tape under the book"
     assert page.eval_on_selector('[data-slot=L4] .card', "e => e.dataset.card") == "pillars-board"
     for card in ("chart-1m", "chart-5m", "chart-10s"):
         host = page.locator(f"[data-card={card}] .chart-host").bounding_box()
@@ -446,7 +446,7 @@ def test_ui_gutters_resize_panes_and_persist(page):
     """Cards are resizable, not just swappable: a gutter trades space between
     the two panes it sits between, and the sizes are remembered."""
     before = page.locator("[data-card=verdict]").bounding_box()
-    gutter = page.locator('[data-between="R1,RPAIR"]')
+    gutter = page.locator('[data-between="R1,R2"]')
     box = gutter.bounding_box()
     page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
     page.mouse.down()
@@ -455,8 +455,8 @@ def test_ui_gutters_resize_panes_and_persist(page):
     page.wait_for_timeout(300)
     after = page.locator("[data-card=verdict]").bounding_box()
     assert after["height"] > before["height"] + 60
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v12'))")
-    assert saved["sizes"]["slots"]["R1"] / saved["sizes"]["slots"]["RPAIR"] > 2.0 / 1.3, "R1 gained on the pair"
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v13'))")
+    assert saved["sizes"]["slots"]["R1"] / saved["sizes"]["slots"]["R2"] > 1.2 / 1.1, "R1 gained on Level 2"
     # the page must still fit after a resize
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
     assert metrics["sh"] <= metrics["ih"] + 2
@@ -480,20 +480,23 @@ def test_ui_columns_resize(page):
     page.wait_for_timeout(300)
 
 
-def test_ui_the_decision_card_tops_the_right_column_over_the_tape(page):
-    """DECIDE on the right (2026-10-08): the decision card — verdict, catalyst,
-    gates, the order — with most of the column, the Time & Sales under it, by
-    the 10-second chart where the eye is at the trigger."""
+def test_ui_the_right_column_stacks_the_card_the_book_and_the_tape(page):
+    """DECIDE on the right: the decision card on top, Level 2 under it and the
+    Time & Sales under that, each the column's full width (owner, 2026-10-09:
+    "level two down and the time and sales even below")."""
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
     column = page.locator("[data-col=right]").bounding_box()
     card = page.locator("[data-card=verdict]").bounding_box()
     tape = page.locator("[data-card=tape]").bounding_box()
     book = page.locator("[data-card=depth]").bounding_box()
-    assert card["y"] < tape["y"] and card["height"] > tape["height"]
-    assert card["height"] / column["height"] > 0.6
-    assert tape["height"] / column["height"] > 0.22, "room for the facts and a dozen prints"
-    assert abs(book["y"] - tape["y"]) < 4 and abs(book["height"] - tape["height"]) < 4, "the book beside the tape"
+    assert card["y"] < book["y"] < tape["y"], "card, then the book, then the tape"
+    assert card["y"] + card["height"] <= book["y"] + 1 and book["y"] + book["height"] <= tape["y"] + 1
+    for b in (card, book, tape):
+        assert abs(b["width"] - column["width"]) < 4, "each one the column's full width"
+    assert card["height"] / column["height"] > 0.3, "the card's face fits without a scroll"
+    assert book["height"] / column["height"] > 0.28, "room for ten levels a side"
+    assert tape["height"] / column["height"] > 0.25, "room for the facts and a dozen prints"
 
 
 def test_ui_bottom_right_card_is_off_the_desk(page):
@@ -528,7 +531,7 @@ def test_ui_catalyst_card_grades_the_news(page):
             rows.nth(i).click()
             break
     page.wait_for_timeout(300)
-    _open_why(page)                     # the full read sits under "Why, in full" (2026-10-09)
+    _open_why(page)                     # the full read sits in the fold under the news (2026-10-09)
     server = page.evaluate("window.__SESSION__.cards.ABCD.catalyst")
     assert page.locator(".cat2-grade").inner_text() == server["grade"] == "STRONG"
     assert "quantifiable value" in page.locator(".cat2-reason").inner_text()
@@ -538,6 +541,62 @@ def test_ui_catalyst_card_grades_the_news(page):
     assert "CATALYST.md" in (page.locator(".cat2-grade").get_attribute("title") or "")
     clamp = page.eval_on_selector(".cat2-headline", "e => getComputedStyle(e).webkitLineClamp")
     assert clamp == "2", clamp
+
+
+def test_ui_the_card_face_ends_with_the_news_in_plain_words(page):
+    """Owner, 2026-10-09: "make the verdict order card smaller with non key
+    info (everything below the news) as an expandable section ... make sure
+    news catalyst is clearly displayed in simple words". The face: the word,
+    the level, the five pillars and the news line, worded by the server; the
+    fold under it, closed by default, holds everything else."""
+    page.evaluate("() => localStorage.removeItem('momentum-workstation.details.v2')")
+    page.reload()
+    page.wait_for_timeout(600)
+    _seek(page, 124)
+    rows = page.locator("[data-card=scan-pillars] .trow")
+    for i in range(rows.count()):
+        if rows.nth(i).inner_text().startswith("ABCD"):
+            rows.nth(i).click()
+            break
+    page.wait_for_timeout(300)
+    plain = page.evaluate("window.__SESSION__.cards.ABCD.catalyst.plain")
+    assert page.locator("#verdictCard .dc-news .dc-news-l").inner_text() == plain["label"] == "STRONG"
+    assert page.locator("#verdictCard .dc-news .dc-news-t").inner_text() == plain["text"]
+    assert "contract" in page.locator("#verdictCard .dc-news .dc-news-h").inner_text()
+    face = page.eval_on_selector_all("#verdictCard .dc2 > *", "els => els.map(e => e.className)")
+    assert face[-1] == "dc-news", "the news is the face's last line: " + str(face)
+    assert not page.eval_on_selector("#verdictMore", "e => e.open"), "the fold starts closed"
+    assert not page.is_visible("#verdictMore .dc-lamps") and not page.is_visible("#verdictMore .dc-bot")
+    tail = page.locator("#verdictMoreTail").inner_text()
+    _open_why(page)
+    assert page.is_visible("#verdictMore .dc-bot") and page.locator("#verdictMore .dc-lamp").count() > 5
+    assert page.locator("#verdictMore .cat2-grade").inner_text() == "STRONG", "the full read stays in the fold"
+    page.reload()                                   # remembered
+    page.wait_for_timeout(600)
+    assert page.eval_on_selector("#verdictMore", "e => e.open")
+    page.evaluate("() => { const d = document.querySelector('#verdictMore'); d.open = false; }")
+    assert tail is not None
+
+
+def test_ui_an_open_position_stays_on_the_card_face(page):
+    """The fold holds what can wait. An open position's stop and trail cannot:
+    they sit on the face, and the order area is gone while it is open."""
+    _seek(page, 125)
+    page.locator("[data-card=scan-pillars] .trow").first.click()
+    page.wait_for_timeout(250)
+    sym = page.locator("#symTicker").inner_text()
+    page.evaluate("""([sym]) => { const c = window.__SESSION__.cards[sym];
+      c.position = {since: "09:41", shares: 100, entry: 5.0, stop: 4.8, trail: 4.9, target_2r: 5.4,
+                    last: 5.1, r_now: 0.5, pnl: 10, breach: null}; }""", [sym])
+    page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
+    page.wait_for_timeout(250)
+    assert page.is_visible("#positionOut") and "IN POSITION" in page.locator("#positionOut").inner_text()
+    assert page.locator("#positionOut .dc-btn.closed").count() == 1
+    assert page.eval_on_selector(".verdict-card .sizing", "e => e.hidden")
+    page.evaluate("""([sym]) => { window.__SESSION__.cards[sym].position = null; }""", [sym])
+    page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
+    page.wait_for_timeout(250)
+    assert not page.is_visible("#positionOut")
 
 
 def test_ui_catalyst_flags_dilution(page):
@@ -552,6 +611,32 @@ def test_ui_catalyst_flags_dilution(page):
     assert "offering/dilution" in page.locator(".cat2-meta").inner_text()
     flags = page.locator(".cat2-flag.bad").all_inner_texts()
     assert any("offering/dilution in today's news" in f for f in flags), flags
+
+
+def test_ui_every_card_swaps_with_a_real_mouse_drag(page):
+    """Owner, 2026-10-09: "make sure i can drag and drop these cards easily and
+    swap them". With a real mouse — not synthetic events, which skip the
+    browser's draggable check — only the three scanner tiles could be picked
+    up: the charts, the board, the decision card, Level 2 and the tape had no
+    draggable header. Every card's header is its handle now."""
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(300)
+    heads = page.eval_on_selector_all(".slot .card > .card-head",
+                                      "els => els.map(e => [e.parentElement.dataset.card, e.getAttribute('draggable')])")
+    assert heads and all(d == "true" for _, d in heads), heads
+    slot = lambda c: page.eval_on_selector(f"[data-card={c}]", "e => e.parentElement.dataset.slot")  # noqa: E731
+    try:
+        for a, b in (("depth", "tape"), ("verdict", "depth"), ("chart-10s", "chart-5m"), ("pillars-board", "scan-hod")):
+            before = (slot(a), slot(b))
+            page.locator(f"[data-card={a}] > .card-head").drag_to(page.locator(f"[data-card={b}]"))
+            page.wait_for_timeout(300)
+            assert (slot(a), slot(b)) == before[::-1], (a, b, before)
+            assert page.locator(".card.drop-target").count() == 0 and page.locator(".card.dragging").count() == 0
+            page.locator("#btnLayout").click()
+            page.wait_for_timeout(300)
+    finally:
+        page.locator("#btnLayout").click()
+        page.wait_for_timeout(300)
 
 
 def test_ui_cards_swap_by_drag_and_persist(page):
@@ -570,7 +655,7 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
     assert page.eval_on_selector("[data-card=pillars-board]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v12'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v13'))")
     assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
@@ -674,7 +759,7 @@ def test_ui_verdict_mirrors_pine_and_decides(page):
     assert "server card" in (page.get_attribute("#verdictCard .dc-answer", "title") or "")
     # one glance (owner, 2026-10-09 07:41): the five pillars as tiles with the
     # cascade's count on the face; the chart gates, the setup, the bot and
-    # every lamp under "Why, in full"
+    # every lamp in the fold under the news
     tiles = page.eval_on_selector_all("#verdictCard .pl-tile",
                                       "els => els.map(e => [e.dataset.lamp, e.dataset.state])")
     lamps = {l["id"]: l["state"] for l in card["lamps"]}
@@ -682,13 +767,13 @@ def test_ui_verdict_mirrors_pine_and_decides(page):
     assert all(lamps[i] == st for i, st in tiles), (tiles, lamps)
     score = page.locator("#verdictCard .pl-score").inner_text().replace("\n", "")
     assert score == (f"{card['pillars']['passed']}/5" if card["pillars"]["counted"] else "—/5"), score
-    chips = page.eval_on_selector_all("#verdictCard .dc-more .dc-strip .pchip", "els => els.map(e => e.dataset.lamp)")
+    chips = page.eval_on_selector_all("#verdictMore .dc-strip .pchip", "els => els.map(e => e.dataset.lamp)")
     assert chips == ([] if word == "NO" else ["vwap", "ema9", "macd", "pullback"])
-    assert page.locator("#verdictCard .dc-answer ~ .dc-strip").count() == 0, "no chip strip on the face"
-    assert page.locator("#verdictCard .dc-lamp").count() == len(card["lamps"])
+    assert page.locator("#verdictCard .dc-strip").count() == 0, "no chip strip on the face"
+    assert page.locator("#verdictMore .dc-lamp").count() == len(card["lamps"])
     assert {l["id"] for l in card["lamps"]} >= {"price", "gain", "rvol", "float", "catalyst", "pillars",
                                                 "rising", "vwap", "ema9", "macd", "pullback", "tape"}
-    assert page.locator("#verdictCard .dc-bot").count() == 1
+    assert page.locator("#verdictMore .dc-bot").count() == 1
 
 
 def test_ui_order_panel_renders_the_servers_ticket(page):
@@ -708,6 +793,8 @@ def test_ui_order_panel_renders_the_servers_ticket(page):
       c.risk = {dollars: 25, source: "yours"}; }""", [sym, tk])
     page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
     page.wait_for_timeout(250)
+    _open_why(page)                     # the order is the fold's first block on REVIEW (2026-10-09)
+    assert page.locator("#verdictMoreTail").inner_text().startswith("order"), "the closed fold says it holds the order"
     line = page.locator(".dc-order-line").inner_text()
     assert line == tk["order_line"] and line.startswith(f"BUY {tk['shares']} {sym} STP LMT")
     body = page.locator(".sizing").inner_text()
@@ -748,12 +835,12 @@ def test_ui_alert_click_seeks_charts(page):
     """The alert timeline waits in the tray by default; put it on the desk
     (a saved layout, as a drag would leave it) and it still seeks."""
     page.evaluate("""() => {
-      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v12') || '{}');
+      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v13') || '{}');
       saved.layout = Object.assign({}, saved.layout || {
         L1: 'scan-pillars', L2: 'scan-running', L3: 'scan-hod', L4: 'pillars-board',
         C1: 'chart-1m', C2: 'chart-5m', C3: 'chart-10s', R1: 'verdict', R2: 'depth', R3: 'tape' });
       saved.layout.L4 = 'timeline';
-      localStorage.setItem('momentum-workstation.layout.v12', JSON.stringify(saved));
+      localStorage.setItem('momentum-workstation.layout.v13', JSON.stringify(saved));
     }""")
     page.reload()
     page.wait_for_timeout(400)
@@ -1234,8 +1321,9 @@ def test_the_desk_opens_on_its_own_real_time_charts_not_the_delayed_widget():
 
     # A structurally valid older layout would restore the delayed charts — and
     # v10 kept the quote card in the decision card's slot on the owner's desk.
-    # v12 (2026-10-09) adds the Level 2 card beside the tape.
-    assert 'LAYOUT_KEY = "momentum-workstation.layout.v12"' in app
+    # v12 (2026-10-09) adds the Level 2 card; v13 stacks it under the card and
+    # the tape under it.
+    assert 'LAYOUT_KEY = "momentum-workstation.layout.v13"' in app
     assert '"depth"' in default
 
     # The decision card holds R1, the real tape sits under it; the quote card
@@ -1464,7 +1552,7 @@ def test_ui_a_replay_says_it_has_no_tape(page):
     _seek(page, 125)
     page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
-    _open_why(page)                     # off REVIEW the tape line sits under "Why, in full"
+    _open_why(page)                     # off REVIEW the tape line sits in the fold
     assert "none in this replay" in page.locator(".dc-tape").inner_text()
 
 
@@ -1545,7 +1633,7 @@ def test_ui_the_desk_says_whether_anything_is_in_play(page):
 def test_ui_a_no_card_carries_nothing_to_act_on(page):
     """A NO card: the word, the name, the reason, the five pillars — and no
     order, no tape line, no chart gates, no buttons. The bot's line, the
-    catalyst and every lamp wait under "Why, in full"."""
+    catalyst and every lamp wait in the fold under the news."""
     n = page.eval_on_selector("#scrub", "e => +e.max")
     _seek(page, n)
     no = page.evaluate("Object.values(window.__SESSION__.cards).filter(c => c.verdict.word === 'NO').map(c => c.symbol)")
@@ -1556,11 +1644,11 @@ def test_ui_a_no_card_carries_nothing_to_act_on(page):
     assert page.locator("#verdictCard .dc-word").inner_text() == "NO"
     assert page.locator("#verdictCard .dc-act").inner_text().lower() == "skip it"
     assert page.eval_on_selector(".verdict-card .sizing", "e => e.hidden")
-    assert page.locator("#verdictCard .dc-tape").count() == 0
+    assert page.locator(".verdict-card .dc-tape").count() == 0
     assert page.locator("#verdictCard .pl-tile").count() == 5, "the five pillars"
-    assert page.locator("#verdictCard .dc-strip").count() == 0, "no chart strip on a NO"
-    assert page.locator("#verdictCard .dc-more .dc-bot").count() == 1
-    assert page.locator("#verdictCard .dc-more .dc-lamp").count() > 5
+    assert page.locator(".verdict-card .dc-strip").count() == 0, "no chart strip on a NO"
+    assert page.locator("#verdictMore .dc-bot").count() == 1
+    assert page.locator("#verdictMore .dc-lamp").count() > 5
 
 
 def test_ui_the_tape_says_when_it_is_on_another_name(page):
@@ -1799,6 +1887,36 @@ def _depth_snapshot(sym, events=(), state="LIVE", code=None, message=""):
     if state != "LIVE":
         snap.update(state=state, code=code, message=message, bids=[], asks=[])
     return snap
+
+
+def test_ui_the_ladder_opens_on_the_inside(page):
+    """Under the decision card the book is shorter than its twenty rows; the
+    ten asks listed first used to hide the bids. The ladder opens centred on
+    the inside quote, bids and asks both in view."""
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "src"))
+    from momentum_platform.depth import DepthBook
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(300)
+    _seek(page, 125)
+    sym = page.locator("#symTicker").inner_text()
+    b = DepthBook(sym)
+    b.update([(round(6.50 - 0.01 * i, 2), 500 + 100 * (i % 3), "NSDQ") for i in range(10)],
+             [(round(6.51 + 0.01 * i, 2), 400 + 100 * (i % 3), "ARCA") for i in range(10)])
+    page.evaluate("s => window.__applyDepth(s)", b.snapshot())
+    page.wait_for_timeout(200)
+    seen = page.evaluate("""() => {
+      const lad = document.querySelector('#depthCard .l2-ladder'), r = lad.getBoundingClientRect();
+      const inView = e => { const q = e.getBoundingClientRect(); return q.top >= r.top - 1 && q.bottom <= r.bottom + 1; };
+      return { scrolls: lad.scrollHeight > lad.clientHeight + 4,
+               mid: inView(lad.querySelector('.l2-mid')),
+               bids: Array.from(lad.querySelectorAll('.l2-row.bid')).filter(inView).length,
+               asks: Array.from(lad.querySelectorAll('.l2-row.ask')).filter(inView).length };
+    }""")
+    assert seen["mid"], seen
+    if seen["scrolls"]:
+        assert seen["bids"] >= 3 and seen["asks"] >= 3, seen
+        assert abs(seen["bids"] - seen["asks"]) <= 2, "centred: " + str(seen)
 
 
 def test_ui_a_replay_says_it_has_no_book(page):

@@ -1960,6 +1960,7 @@ function renderVerdict(frame, ctx) {
   const sizing = document.querySelector(".verdict-card .sizing");
   if (sizing) sizing.hidden = false;                // a NO card before it hid the order area
   const host = $("#verdictCard"); host.textContent = "";
+  clearCardFold();
   const T = S.pillarThresholds;
   const plan = livePlan(sym, frame);
   // From the persistent log, not the sliding rebuild window: the verdict used
@@ -2476,6 +2477,25 @@ function flowWords(ev) {
   return side + " " + shares(ev.size) + " at " + fx(ev.price) + (ev.venues && ev.venues.length ? " (" + ev.venues.join(", ") + ")" : "") +
     " " + how;
 }
+/* The ladder opens on the inside (2026-10-09): under the decision card the
+   book is shorter than its twenty rows, and listing the ten asks first hid
+   the bids below the fold. A scroll of your own holds for 10 s; the book is
+   rebuilt on every update, so the position is carried across. */
+const LADDER_SCROLL = { user: 0, at: 0, top: 0, sym: null };
+function centreLadder(ladder, mid, sym) {
+  const mine = LADDER_SCROLL.sym === sym && Date.now() - LADDER_SCROLL.at < 10000;
+  if (mine) ladder.scrollTop = LADDER_SCROLL.top;
+  else {
+    const lr = ladder.getBoundingClientRect(), mr = mid.getBoundingClientRect();
+    ladder.scrollTop = Math.max(0, mr.top - lr.top - (ladder.clientHeight - mr.height) / 2);
+  }
+  const touched = () => { LADDER_SCROLL.user = Date.now(); };
+  ["wheel", "touchmove", "pointerdown", "keydown"].forEach(k => ladder.addEventListener(k, touched, { passive: true }));
+  ladder.addEventListener("scroll", () => {
+    if (Date.now() - LADDER_SCROLL.user > 1500) return;          // ours, not yours
+    LADDER_SCROLL.at = Date.now(); LADDER_SCROLL.top = ladder.scrollTop; LADDER_SCROLL.sym = sym;
+  }, { passive: true });
+}
 function renderDepth() {
   const host = $("#depthCard"); if (!host) return;
   const d = DEPTH;
@@ -2519,6 +2539,7 @@ function renderDepth() {
   ladder.appendChild(mid);
   (d.bids || []).forEach(r => ladder.appendChild(depthRow(r, "bid")));
   host.appendChild(ladder);
+  centreLadder(ladder, mid, d.symbol);
   const evs = (d.events || []).filter(e => e.kind !== "gap").slice(-3).reverse();
   if (evs.length) {
     const log = el("div", "l2-events");
@@ -2596,6 +2617,15 @@ function flowAlert(f) {
 }
 let FLOW_ALERTS = 0;
 
+/* A card with nothing to read in its fold (no server card, no bars) leaves
+   no stale read of another name there. */
+function clearCardFold() {
+  const body = $("#verdictMoreBody"), tail = $("#verdictMoreTail"), pos = $("#positionOut");
+  if (body) body.textContent = "";
+  if (tail) tail.textContent = "";
+  if (pos) { pos.textContent = ""; pos.hidden = true; }
+}
+
 /* ── decision card (owner, 2026-10-08) ─────────────────────────────────
    The server builds one card per symbol (src/momentum_platform/decision_card.py):
    the verdict word, the one reason that decides it and the level to watch;
@@ -2619,9 +2649,11 @@ function atLiveEdge(frame) { return !FRAMES.length || frame.t >= FRAMES[FRAMES.l
    SAIQ: a WAIT still carried a news chip, chart chips, a setup line, a tape
    line, a headline, a bot line, a warning and a full priced ORDER): the word,
    what to do, the one reason, the level or "no price level", the five pillars
-   as tiles with the cascade's 0–5 count. The order and the tape hint on
-   REVIEW only. Everything else — chart gates, the setup, the catalyst, the
-   bot, warnings, every lamp — under "Why, in full", closed and remembered.
+   as tiles with the cascade's 0–5 count. Smaller again (owner, 2026-10-09):
+   the face ends with the news in plain words, and everything below it is one
+   fold, "Details", closed and remembered — the order (REVIEW only) first, the
+   tape line, chart gates, the setup, the full catalyst read, the bot,
+   warnings, every lamp. An open position stays on the face.
    Every word, reason, action, level and lamp is the server's; the browser
    picks what to show, never what to conclude. */
 const PILLAR_LAMPS = [["price", "price"], ["gain", "gain"], ["rvol", "RVOL"], ["float", "float"], ["catalyst", "news"]];
@@ -2629,7 +2661,9 @@ const CHART_LAMPS = [["vwap", "VWAP"], ["ema9", "9 EMA"], ["macd", "MACD"], ["pu
 // Only for a payload from before the server worded the action (2026-10-09).
 const WORD_ACTION = { REVIEW: "read the chart and the tape", WAIT: "hands off",
                       WATCH: "keep it on screen", NO: "skip it" };
-const WHY_KEY = "momentum-workstation.why.v1";
+// v2 (owner, 2026-10-09): one fold for everything below the news, the order
+// included. A new key, so a desk that kept "Why, in full" open starts small.
+const WHY_KEY = "momentum-workstation.details.v2";
 function whyOpen() { try { return localStorage.getItem(WHY_KEY) === "1"; } catch (e) { return false; } }
 function setWhyOpen(v) { try { localStorage.setItem(WHY_KEY, v ? "1" : "0"); } catch (e) { /* private mode */ } }
 function lampOf(card, id) { return (card.lamps || []).find(l => l.id === id) || null; }
@@ -2725,7 +2759,7 @@ function pillarTiles(card, ctx) {
   box.appendChild(grid);
   return box;
 }
-/* What "Why, in full" holds, in a few words on its own line, so a closed
+/* What the fold ("Details") holds, in a few words on its own line, so a closed
    fold still says whether opening it would change anything. */
 function whySummary(card) {
   const bits = [];
@@ -2738,11 +2772,52 @@ function whySummary(card) {
   if (nw) bits.push("⚠ " + nw);
   return bits.join(" · ");
 }
+/* The news in plain words (owner, 2026-10-09: "make sure news catalyst is
+   clearly displayed in simple words"): the server's catalyst read worded for a
+   glance — a label, one sentence, the headline, and any red flag. The wording
+   is the server's (catalyst.card_read, "plain"); the page only lays it out. */
+const NEWS_TONE = { ok: "ok", warn: "unk", bad: "no", unk: "unk" };
+function newsLine(card) {
+  const c = card.catalyst, row = el("div", "dc-news");
+  row.appendChild(el("span", "dc-news-k", "news"));
+  const body = el("div", "dc-news-b");
+  if (!c) {                                    // a payload from before the plain wording
+    const l = lampOf(card, "catalyst");
+    body.appendChild(el("span", "dc-news-t", l ? String(l.value) : "—"));
+  } else {
+    const p = c.plain || { label: c.grade, tone: "unk", text: c.reason };
+    const top = el("div", "dc-news-top");
+    const lab = el("b", "dc-news-l " + (NEWS_TONE[p.tone] || "unk"), p.label);
+    lab.title = c.grade + " · rule " + c.rule + " · " + c.reason;
+    top.appendChild(lab);
+    top.appendChild(el("span", "dc-news-t", p.text));
+    body.appendChild(top);
+    if (c.headline) {
+      const h = el(c.url ? "a" : "div", "dc-news-h", "“" + c.headline + "”");
+      if (c.url) { h.href = c.url; h.target = "_blank"; h.rel = "noopener noreferrer"; }
+      h.title = c.headline + [c.age, c.source].filter(x => x && x !== "—").map(x => " · " + x).join("");
+      body.appendChild(h);
+    }
+    // A red flag is news too: an offering, a buyout, a reverse split, a sale filed.
+    (c.flags || []).filter(f => f.level === "bad").forEach(f => {
+      const x = el("div", "dc-news-flag", "⚠ " + f.text); x.title = "rule " + f.rule; body.appendChild(x); });
+  }
+  row.appendChild(body);
+  return row;
+}
+/* The card's fold: one <details> in the page, so the risk box inside it keeps
+   its focus across repaints. Wired once; its state is remembered. */
+function moreFold() {
+  const det = $("#verdictMore");
+  if (det && !det.dataset.wired) {
+    det.dataset.wired = "1";
+    det.open = whyOpen();
+    det.addEventListener("toggle", () => setWhyOpen(det.open));
+  }
+  return det;
+}
 function renderDecisionCard(frame, ctx, card) {
   const host = $("#verdictCard");
-  // The float box lives under "Why, in full"; keep the node (and its focus)
-  // across repaints rather than rebuilding it.
-  const floatBox = document.querySelector(".float-override");
   host.textContent = "";
   const v = card.verdict || {};
   const word = v.word || "—", isNo = word === "NO", isReview = word === "REVIEW";
@@ -2779,7 +2854,7 @@ function renderDecisionCard(frame, ctx, card) {
   box.appendChild(lv);
   // 2b · the shadow strategies (owner, 2026-10-09): the month study's best
   // found (S6) and its robust core (S3), logged forward — never traded. On the
-  // face only when one would take this plan; the misses are under "Why".
+  // face only when one would take this plan; the misses are in the fold.
   const takes = (card.shadow || []).filter(x => x.takes);
   if (takes.length) {
     const sh = el("div", "dc-shadow");
@@ -2790,59 +2865,63 @@ function renderDecisionCard(frame, ctx, card) {
   }
   // 3 · the five pillars: five tiles and the cascade's count
   box.appendChild(pillarTiles(card, ctx));
-  // 4 · REVIEW only: where the eye goes at the trigger (ZfwTJAMLroA @01:08:06)
-  if (isReview) {
-    box.appendChild(tapeLineFor(card.symbol));
-    box.appendChild(el("div", "dc-tapehint", "at the trigger, read the Time & Sales: ▲ green prints at the ask = " +
-      "buyers lifting the offer · ▼ red at the bid = sellers hitting it"));
-  }
-  // 5 · why, in full — closed by default, remembered
-  const det = el("details", "dc-more");
-  det.open = whyOpen();
-  det.addEventListener("toggle", () => setWhyOpen(det.open));
-  const sum = el("summary", null, "Why, in full");
-  const tail = whySummary(card);
-  if (tail) sum.appendChild(el("span", "dc-more-tail", tail));
-  det.appendChild(sum);
-  if (!isNo) det.appendChild(lampStrip(card, CHART_LAMPS, "chart", null, false));
-  if (card.setup && card.setup.text && card.setup.text !== v.reason)
-    det.appendChild(el("div", "dc-setup", card.setup.text));
-  if (!isReview && !isNo) det.appendChild(tapeLineFor(card.symbol));
-  if (card.catalyst) { const cat = el("div", "dc-cat"); renderServerCatalyst(cat, card.catalyst); det.appendChild(cat); }
-  const bot = card.bot || {};
-  const b = el("div", "dc-bot " + (bot.tone || "info"));
-  b.appendChild(el("span", "dc-tag", "bot"));
-  b.appendChild(el("span", null, bot.text || "—"));
-  if (bot.reasons && bot.reasons.length) b.title = bot.reasons.map(r => r.raw).join("\n");
-  det.appendChild(b);
-  (card.warnings || []).forEach(w => det.appendChild(el("div", "dc-warn", "⚠ " + w.text)));
-  (card.shadow || []).filter(x => !x.takes).forEach(x =>
-    det.appendChild(el("div", "dc-setup", "shadow " + x.id + " (" + x.label + ") passes: " + x.failed.join(", "))));
-  const meta = ctx && ctx.meta || {}, last = ctx && ctx.last;
-  // The split flag the header used to carry (audit 2026-10-09): a 52-week
-  // high over 20× the price is split-adjusted history (FILTERS.md).
-  if (meta.high52w && last && meta.high52w > 20 * last)
-    det.appendChild(el("div", "dc-warn", "⚠ 52-week high " + fx(meta.high52w) + " = ×" +
-      Math.round(meta.high52w / last).toLocaleString("en-US") + " the price: split-adjusted history"));
-  const table = el("div", "dc-lamps");
-  (card.lamps || []).forEach(l => {
-    const c = LAMP_CLASS[l.state] || "unk";
-    const r = el("div", "dc-lamp " + c);
-    r.appendChild(el("i", null, ""));
-    r.appendChild(el("span", "l", l.label));
-    r.appendChild(el("span", "v", l.value));
-    r.appendChild(el("span", "r", l.rule));
-    if (l.why) r.title = l.why;
-    table.appendChild(r);
-  });
-  det.appendChild(el("div", "divider", "every gate · the value beside the bot's own threshold"));
-  det.appendChild(table);
-  if (floatBox) det.appendChild(floatBox);
-  box.appendChild(det);
+  // 4 · the news, in plain words — the last line of the face
+  box.appendChild(newsLine(card));
   host.appendChild(box);
-  // The order only on REVIEW (owner, 2026-10-09), or while a position is open.
+
+  // 5 · everything below the news: one fold (owner, 2026-10-09), closed by
+  // default and remembered — the order first on REVIEW, then the read.
+  const det = moreFold();
+  const body = $("#verdictMoreBody");
+  if (body) {
+    body.textContent = "";
+    if (isReview) {
+      // where the eye goes at the trigger (ZfwTJAMLroA @01:08:06)
+      body.appendChild(tapeLineFor(card.symbol));
+      body.appendChild(el("div", "dc-tapehint", "at the trigger, read the Time & Sales: ▲ green prints at the ask = " +
+        "buyers lifting the offer · ▼ red at the bid = sellers hitting it"));
+    }
+    if (!isNo) body.appendChild(lampStrip(card, CHART_LAMPS, "chart", null, false));
+    if (card.setup && card.setup.text && card.setup.text !== v.reason)
+      body.appendChild(el("div", "dc-setup", card.setup.text));
+    if (!isReview && !isNo) body.appendChild(tapeLineFor(card.symbol));
+    if (card.catalyst) { const cat = el("div", "dc-cat"); renderServerCatalyst(cat, card.catalyst); body.appendChild(cat); }
+    const bot = card.bot || {};
+    const b = el("div", "dc-bot " + (bot.tone || "info"));
+    b.appendChild(el("span", "dc-tag", "bot"));
+    b.appendChild(el("span", null, bot.text || "—"));
+    if (bot.reasons && bot.reasons.length) b.title = bot.reasons.map(r => r.raw).join("\n");
+    body.appendChild(b);
+    (card.warnings || []).forEach(w => body.appendChild(el("div", "dc-warn", "⚠ " + w.text)));
+    (card.shadow || []).filter(x => !x.takes).forEach(x =>
+      body.appendChild(el("div", "dc-setup", "shadow " + x.id + " (" + x.label + ") passes: " + x.failed.join(", "))));
+    const meta = ctx && ctx.meta || {}, last = ctx && ctx.last;
+    // The split flag the header used to carry (audit 2026-10-09): a 52-week
+    // high over 20× the price is split-adjusted history (FILTERS.md).
+    if (meta.high52w && last && meta.high52w > 20 * last)
+      body.appendChild(el("div", "dc-warn", "⚠ 52-week high " + fx(meta.high52w) + " = ×" +
+        Math.round(meta.high52w / last).toLocaleString("en-US") + " the price: split-adjusted history"));
+    const table = el("div", "dc-lamps");
+    (card.lamps || []).forEach(l => {
+      const c = LAMP_CLASS[l.state] || "unk";
+      const r = el("div", "dc-lamp " + c);
+      r.appendChild(el("i", null, ""));
+      r.appendChild(el("span", "l", l.label));
+      r.appendChild(el("span", "v", l.value));
+      r.appendChild(el("span", "r", l.rule));
+      if (l.why) r.title = l.why;
+      table.appendChild(r);
+    });
+    body.appendChild(el("div", "divider", "every gate · the value beside the bot's own threshold"));
+    body.appendChild(table);
+  }
+  const tail = $("#verdictMoreTail");
+  if (tail) tail.textContent = [isReview ? "order" : "", whySummary(card)].filter(Boolean).join(" · ");
+  if (det) det.classList.toggle("has-order", isReview);
+  // The order only on REVIEW (owner, 2026-10-09), first in the fold; an open
+  // position on the face (renderTicket).
   const sizing = document.querySelector(".verdict-card .sizing");
-  if (sizing) sizing.hidden = !(isReview || card.position);
+  if (sizing) sizing.hidden = !isReview || !!card.position;
   renderTicket(card);
 }
 
@@ -2907,22 +2986,26 @@ function renderTicket(card) {
   if (a && a.tagName === "INPUT" && out.contains(a)) return;   // never fight the typist
   out.textContent = "";
   const t = card.ticket, pos = card.position;
+  // An open position is not detail: its stop and trail sit on the card's face.
+  const face = $("#positionOut");
+  if (face) { face.textContent = ""; face.hidden = !pos; }
   if (pos) {
+    const host = face || out;
     const p = el("div", "dc-pos" + (pos.breach ? " breach" : ""));
     p.appendChild(el("b", null, "IN POSITION"));
     p.appendChild(el("span", null, " since " + (pos.since || "—") + " · " + pos.shares + " sh @ " + fx(pos.entry)));
-    out.appendChild(p);
+    host.appendChild(p);
     const lv = el("div", "dc-grid");
     kv(lv, "stop", fx(pos.stop));
     kv(lv, "trail (1R, A3)", fx(pos.trail));
     kv(lv, "2R reference", fx(pos.target_2r));
     kv(lv, "now", pos.last == null ? "—" : fx(pos.last) + " · " + (pos.r_now >= 0 ? "+" : "") + fx(pos.r_now) +
        "R · $" + fx(pos.pnl));
-    out.appendChild(lv);
-    if (pos.breach) out.appendChild(el("div", "dc-breach", pos.breach === "2R"
+    host.appendChild(lv);
+    if (pos.breach) host.appendChild(el("div", "dc-breach", pos.breach === "2R"
       ? "2R reached — the bot holds and trails 1R under the high (A3); your call"
       : "price is through your " + pos.breach + " level — the bot would be out"));
-    out.appendChild(manualButtons(card, ["closed"]));
+    host.appendChild(manualButtons(card, ["closed"]));
     return;
   }
   if (!t) {
@@ -3429,10 +3512,10 @@ const DEFAULT_LAYOUT = {
   // catalyst too; the quote card's facts moved into the header and the card
   // waits in the tray. The simulated Level 2 is gone (owner, 2026-10-09): it
   // drew invented depth, and he reads a real book or none.
-  // Level 2 beside the tape under the card (owner, 2026-10-09: "Level 2 as a
-  // default card, ready for the subscription"): he reads the two together —
-  // "you can't really, at least for my strategy, use one without the other"
-  // (ZfwTJAMLroA @01:45:39).
+  // Level 2 under the card and the tape under Level 2 (owner, 2026-10-09:
+  // "level two down and the time and sales even below"): he reads the two
+  // together — "you can't really, at least for my strategy, use one without
+  // the other" (ZfwTJAMLroA @01:45:39).
   R1: "verdict", R2: "depth", R3: "tape",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
@@ -3440,7 +3523,7 @@ const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["quote", "screener", "tv
 const DEFAULT_SIZES = {
   wLeft: 330, wRight: 430,
   slots: { L1: 1.2, L2: 0.8, L3: 0.8, L4: 1.25, C1: 1.75, PAIR: 1.1, C2: 1, C3: 1,
-           R1: 2.0, RPAIR: 1.3, R2: 1, R3: 1 },
+           R1: 1.2, R2: 1.1, R3: 1 },
 };
 // v8: the desk's real-time charts replace TradingView's delayed widget in C1
 // and C2. The version is bumped rather than migrated because a saved v7
@@ -3458,7 +3541,10 @@ const DEFAULT_SIZES = {
 // every saved desk back to the decision card.
 // v12 (2026-10-09): Level 2 beside the Time & Sales under the decision card —
 // a new slot pair (R2, R3); a v11 layout lacks R3 and would fail the check.
-const LAYOUT_KEY = "momentum-workstation.layout.v12";
+// v13 (2026-10-09): one stack — the card, Level 2 under it, the tape under
+// that. A v12 layout has the same slots and would keep the old sizes (and an
+// RPAIR this page no longer has), so the bump resets them.
+const LAYOUT_KEY = "momentum-workstation.layout.v13";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
@@ -3704,8 +3790,23 @@ function endCardDrag() {
   document.querySelectorAll(".dragging,.drop-target")
     .forEach(c => c.classList.remove("dragging", "drop-target"));
 }
+/* Every card's header is its handle (owner, 2026-10-09: "make sure i can drag
+   and drop these cards easily and swap them"). Only the scanner tiles, whose
+   headers cardHead() builds, carried draggable: the charts, the board, the
+   decision card, Level 2 and the tape could not be picked up with a mouse at
+   all. The old test dispatched synthetic drag events, which skip that check,
+   and never noticed; the new one drags with the mouse. */
+const DRAG_HINT = "Drag this card by its header onto another card to swap their places";
+function armDragHandles(root) {
+  (root || document).querySelectorAll(".card > .card-head").forEach(head => {
+    head.setAttribute("draggable", "true");
+    const grip = head.querySelector(".grip");
+    if (grip && !grip.title) grip.title = DRAG_HINT;
+  });
+}
 function wireLayout() {
   const grid = $("#grid");
+  armDragHandles();
   grid.addEventListener("dragstart", e => {
     const head = e.target.closest(".card-head");
     if (!head) return;
@@ -4347,6 +4448,7 @@ function render() {
     for (const id of ["#verdictCard", "#pillarsBoard", "#quoteCard"]) {
       const h = $(id); if (h) { h.textContent = ""; h.appendChild(el("div", "note", why)); }
     }
+    clearCardFold();
     return;
   }
   state.frame = Math.min(Math.max(state.frame, 0), FRAMES.length - 1);

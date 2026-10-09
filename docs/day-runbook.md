@@ -186,7 +186,8 @@ answers in this order:
    the tape), then the reason and the level that changes it, then the five
    pillars as value chips. On a name in play it adds the chart gates, the
    tape, the headline and the bot's line. Everything else — the catalyst
-   read, filings, warnings, every lamp — sits under "Why, in full".
+   read, filings, warnings, every lamp — sits under "Why, in full". (Since
+   the 07:41 recording the face is smaller still: below.)
 5. **The order area appears only where an order can exist.** A NO card has
    none.
 6. **The tape follows the window you look at.** A tab out of view never
@@ -206,7 +207,7 @@ Since 2026-10-09 (`docs/desk-grid-audit-2026-10-09.md`):
   repeat is the signal — and dim names not up 10 % at the alert. The High of
   Day tile carries the **halts** from 09:30. Maximized (E), the pillar board
   is the full table, folding red names and names with no print yet.
-- **Level 2** sits beside the Time & Sales: the selected name's book from IBKR
+- **Level 2** sits under the card, the Time & Sales under it: the selected name's book from IBKR
   SmartDepth. Until the account holds a depth subscription it reads **NO SUB**
   with IBKR's own code and words, and asks again every two minutes (below,
   "Level 2").
@@ -214,9 +215,14 @@ Since 2026-10-09 (`docs/desk-grid-audit-2026-10-09.md`):
 Since 2026-10-09 07:41 (`docs/desk-recording-2026-10-09.md`):
 
 - **The card at a glance:** the word and what to do — never "until the level"
-  when there is no level — the one reason, the level, and the five pillars as
-  tiles (value, threshold, the cascade's count). The ORDER on REVIEW only.
-  Everything else is under "Why, in full".
+  when there is no level — the one reason, the level, the five pillars as
+  tiles (value, threshold, the cascade's count) and **the news in plain words**:
+  STRONG, SOME, WEAK, NONE or ? (no news feed), one sentence, the headline and
+  any red flag (an offering, a buyout, a reverse split). Everything below the
+  news is one fold, **Details**, closed until you open it and remembered: the
+  ORDER first (REVIEW only — the fold's line says "order"), then the tape line,
+  the chart gates, the full catalyst read, the bot and every gate. An open
+  position stays on the face.
 - **Plan lines and the order only for a plan live now:** formed inside the
   bot's 07:00–11:20 window, inside its 3-minute fill window (A10), not stopped,
   not at 2R. Otherwise no lines, and the card says "no live plan — waiting for
@@ -230,6 +236,12 @@ Since 2026-10-09 07:41 (`docs/desk-recording-2026-10-09.md`):
   intraday panes; one session VWAP on every pane; live, the forming 1-minute
   candle moves with each 10-second bar; on by default only what the verdict
   reads.
+- **The right column is one stack:** the card, Level 2 under it (it opens on
+  the inside quote), the Time & Sales under that.
+- **Any card swaps by dragging its header onto another card** — the charts,
+  the board, the card, Level 2 and the tape included (until 2026-10-09 only the
+  scanner tiles could be picked up). The target shows "Drop here to swap";
+  ⟲ Layout puts the desk back.
 - **Running Up** also lists the discovery filters: `5%·low` (5 % off the
   5-minute low), `VOL` (3 % in 2 minutes on 2× volume), `HOD·vol`, `HALT↑` (the
   first print after a halt it ran into) — $2–20, 07:00–11:30, one alert per
