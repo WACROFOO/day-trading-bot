@@ -12,4 +12,5 @@ measures accuracy going forward.
 
 | `REPORT.md` | **the result: no combination made money in both the 15 selection sessions and the held-out week.** The best found (stop ≥ 3 % + price + regular hours + VWAP + pullback volume + still rising, break-even exit) read +0.41 R a trade on 31 trades and −0.73 on its 7 holdout trades. What held in both periods is a direction: wider stops, the price band, regular hours — losing 0.16–0.25 R a trade against the bot's 0.88–1.69 |
 | `output.txt`, `results.json` | the preregistered run's printout and every table |
+| forward record (`../../src/momentum_platform/shadow.py`, `../../scripts/shadow_record.py`) | from 2026-10-09 the best found (S6) and its robust core (S3) are judged on every plan the desk arms and scored like the bot's fill — logged, never traded — into `../daily/shadow.csv`; the test this month could not give |
 | `exploratory.json` (`../../scripts/month_study_explore.py`) | read after the verdict, chose nothing: each greedy step on the holdout, the best found's trades by name |

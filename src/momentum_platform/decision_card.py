@@ -34,6 +34,7 @@ from .cascade import (FADE_MAX_PCT, FLOAT_MAX, PILLARS_MIN, PREMARKET_VOLUME_CEI
                       PRICE_MIN, RVOL_TRADE_FLOOR, SESSION_VOLUME_FLOOR)
 from .indicators import EMA9_MIN, MACD_MIN, ema, macd, vwap
 from .pullback import SetupState
+from .shadow import judge as shadow_judge
 from .scanners.five_pillars import GAIN_MIN_PCT, RVOL_MIN
 
 ET = ZoneInfo("America/New_York")
@@ -253,6 +254,17 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
     else:
         setup.update(text=_search_text(detector, bars))
 
+    # -- the shadow strategies (2026-10-09): what the month study's best found
+    # and its robust core would do with this plan. Logged, never traded.
+    shadow = []
+    if trig and stop:
+        armed_t = now_et.time()
+        if plan is not None and state in (SetupState.ARMED, SetupState.TRIGGERED) and not pend:
+            armed_t = plan.armed_at_bar.astimezone(ET).time()
+        vol_ok = pend["volume_ok"] if pend else (plan.volume_ok if plan is not None else None)
+        shadow = shadow_judge({"trigger": trig, "stop": stop, "armed": armed_t, "last": last, "vwap": vw,
+                               "hod": sh, "volume_ok": vol_ok})
+
     # -- the verdict: first row that applies wins -------------------------------
     word, reason, level, level_label = None, None, None, None
     verdict = (cascade or {}).get("verdict")
@@ -471,6 +483,7 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
         "position": position,
         "catalyst": catalyst,
         "bot": bot,
+        "shadow": shadow,
         "manual": last_manual,
         "risk": {"dollars": risk, "source": risk_source},
     }

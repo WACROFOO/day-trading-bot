@@ -209,6 +209,38 @@ def _index_day(daily: Path, day: str) -> None:
     readme.write_text(text.rstrip() + f"\n| `{day}/` | exported {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC |\n")
 
 
+KEEP = Path.home() / "day-trading-exports"           # where an export that could not be pushed is kept
+
+
+def _git(*args, timeout: int = 60):
+    return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, timeout=timeout)
+
+
+def _keep_outside(days: list[str]) -> Path:
+    """A push that failed (owner, 2026-10-09: no GitHub credentials on the Mac)
+    must not leave the checkout dirty — a local export commit or new files under
+    research/daily/ make the next morning's `git pull` refuse, and the day then
+    runs on old code. Undo the export commit, move the day folders to
+    ~/day-trading-exports/, restore the index. The export itself is kept."""
+    import shutil
+    if (ROOT / ".git" / "rebase-merge").exists() or (ROOT / ".git" / "rebase-apply").exists():
+        _git("rebase", "--abort")
+    head = _git("log", "-1", "--format=%s").stdout.strip()
+    if head.startswith("Daily export "):
+        _git("reset", "-q", "--soft", "HEAD~1")
+    _git("reset", "-q", "--", "research/daily")
+    KEEP.mkdir(parents=True, exist_ok=True)
+    for d in days:
+        src = OUT_ROOT / d
+        if src.exists():
+            dst = KEEP / d
+            if dst.exists():
+                shutil.rmtree(dst)
+            shutil.move(str(src), str(dst))
+    _git("checkout", "--", "research/daily/README.md")
+    return KEEP
+
+
 def push(day, label: str | None = None) -> bool:
     days = [day] if isinstance(day, str) else list(day)
     rels = [f"research/daily/{d}" for d in days] + ["research/daily/README.md"]
@@ -224,9 +256,11 @@ def push(day, label: str | None = None) -> bool:
             r = subprocess.run(c, cwd=ROOT, capture_output=True, text=True, timeout=120)
         except subprocess.TimeoutExpired:
             print(f"  {' '.join(c)} timed out after 120 s")
+            print(f"  export kept at {_keep_outside(days)} — the checkout is left clean for the next pull")
             return False
         if r.returncode != 0 and not (c[1] == "commit" and "nothing to commit" in (r.stdout + r.stderr)):
             print(f"  {' '.join(c)} failed: {(r.stderr or r.stdout).strip()[:300]}")
+            print(f"  export kept at {_keep_outside(days)} — the checkout is left clean for the next pull")
             return False
     return True
 

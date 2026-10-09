@@ -18,6 +18,7 @@ pushed), then read in the cloud by `scripts/daily_review.py`.
 | `<day>/day.log` | the bot's log for the day, secrets redacted |
 | `<day>/review.md` | the review: every plan scored on the day's bars, by the rule that refused it |
 | `cohorts.csv` | the watched cohorts across days (MACD warm-up, run-past entries, before 07:00, 5-minute triggers) toward their 200 prospective trades |
+| `shadow.csv` | the shadow strategies' paper track record from 2026-10-09 (`scripts/shadow_record.py`): every plan S6 (the month study's best found) or S3 (its robust core) would take, scored like the bot's fill, exit break-even then 2 R, net of costs. Logged, never traded; read at 30 and 100 trades a strategy |
 
 The review learns, it does not change rules: a cohort reaching 200 trades is
 flagged for a preregistered decision (`research/edge-hunt/PREREGISTRATION.md`).

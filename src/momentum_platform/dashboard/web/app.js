@@ -2422,6 +2422,17 @@ function renderDecisionCard(frame, ctx, card) {
   }
   lv.appendChild(el("span", "dc-asof", "as of " + card.asOfEt));
   box.appendChild(lv);
+  // 2b · the shadow strategies (owner, 2026-10-09): the month study's best
+  // found (S6) and its robust core (S3), logged forward — never traded. On the
+  // face only when one would take this plan; the misses are under "Why".
+  const takes = (card.shadow || []).filter(x => x.takes);
+  if (takes.length) {
+    const sh = el("div", "dc-shadow");
+    sh.appendChild(el("span", "dc-tag", "shadow"));
+    takes.forEach(x => { const c = el("span", "shchip", x.id + " ✓ " + x.label); c.title = x.id + " would take this plan " +
+      "(exit: break-even after 1 R, then 2 R) — logged for the paper track record, never sent"; sh.appendChild(c); });
+    box.appendChild(sh);
+  }
   // 3 · the five pillars, value beside the verdict on each
   const pl = lampOf(card, "pillars");
   const score = pl ? (String(pl.value).match(/^\d\s*\/\s*5/) || [pl.value])[0] : null;
@@ -2470,6 +2481,8 @@ function renderDecisionCard(frame, ctx, card) {
     det.appendChild(b);
   }
   if (isNo) (card.warnings || []).forEach(w => det.appendChild(el("div", "dc-warn", "⚠ " + w.text)));
+  (card.shadow || []).filter(x => !x.takes).forEach(x =>
+    det.appendChild(el("div", "dc-setup", "shadow " + x.id + " (" + x.label + ") passes: " + x.failed.join(", "))));
   const meta = ctx && ctx.meta || {}, last = ctx && ctx.last;
   // The split flag the header used to carry (audit 2026-10-09): a 52-week
   // high over 20× the price is split-adjusted history (FILTERS.md).

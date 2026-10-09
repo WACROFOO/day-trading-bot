@@ -132,7 +132,7 @@ def test_board_bars_carry_the_spread_when_asked(tmp_path):
     assert rows[0]["symbol"] == "AAA" and rows[0]["bid"] == "3.04" and rows[0]["ask"] == "3.06"
 
 
-def test_a_mac_that_cannot_push_exports_outside_the_repo(tmp_path):
+def test_a_mac_that_cannot_push_exports_outside_the_repo(tmp_path, monkeypatch):
     """Owner, 2026-10-09: no GitHub credentials on the Mac. --out writes the
     day folders elsewhere and leaves research/daily/ (and its index) alone, so
     the next morning's pull is not blocked by local changes."""
@@ -141,12 +141,46 @@ def test_a_mac_that_cannot_push_exports_outside_the_repo(tmp_path):
     c.execute("INSERT INTO candidates (ts_et, source, symbol, verdict, reasons_json, price, gap_pct, float_shares,"
               " pm_volume, recorded_at) VALUES ('2026-09-15T07:05:00','gap_scan','ZZZ','REJECT','[]',2.5,30,1e6,1e5,'x')")
     c.commit(); c.close()
-    before = (DX.OUT_ROOT / "README.md").read_text() if (DX.OUT_ROOT / "README.md").exists() else None
+    repo_daily = tmp_path / "repo_daily"; repo_daily.mkdir()
+    (repo_daily / "README.md").write_text("# Daily\n")
+    monkeypatch.setattr(DX, "OUT_ROOT", repo_daily)
+    before = (DX.OUT_ROOT / "README.md").read_text()
     out = tmp_path / "month_export"
     rc = DX.main(["--db", str(db), "--since", "2026-09-08", "--day", "2026-10-08", "--log", str(tmp_path / "none"),
                   "--out", str(out)])
     assert rc == 0 and (out / "2026-09-15" / "screener.csv").exists()
     assert not (DX.OUT_ROOT / "2026-09-15").exists()
-    after = (DX.OUT_ROOT / "README.md").read_text() if (DX.OUT_ROOT / "README.md").exists() else None
-    assert before == after, "the repo's daily index is untouched"
+    assert (DX.OUT_ROOT / "README.md").read_text() == before, "the repo's daily index is untouched"
     assert DX.main(["--db", str(db), "--since", "2026-09-08", "--day", "2026-10-08", "--out", str(out), "--push"]) == 2
+
+
+def test_a_failed_push_leaves_the_checkout_clean(tmp_path, monkeypatch):
+    """No GitHub credentials (owner, 2026-10-09): a push that fails undoes its
+    export commit, moves the day folder to ~/day-trading-exports and restores
+    the index, so the next morning's pull is not refused."""
+    import subprocess
+    calls = []
+    repo_daily = tmp_path / "daily"; (repo_daily / "2026-10-09").mkdir(parents=True)
+    (repo_daily / "2026-10-09" / "decisions.csv").write_text("x\n")
+    monkeypatch.setattr(DX, "OUT_ROOT", repo_daily)
+    monkeypatch.setattr(DX, "KEEP", tmp_path / "kept")
+
+    class R:
+        def __init__(self, rc, out=""):
+            self.returncode, self.stdout, self.stderr = rc, out, "denied" if rc else ""
+
+    def fake_run(cmd, **kw):
+        calls.append(cmd[1:])
+        if cmd[1] == "push":
+            return R(128)
+        if cmd[1] == "log":
+            return R(0, "Daily export 2026-10-09 (screeners, decisions, orders, bars, log)")
+        if cmd[1] == "rev-parse":
+            return R(0, "claude/x")
+        return R(0)
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    assert DX.push("2026-10-09") is False
+    assert ["reset", "-q", "--soft", "HEAD~1"] in calls, calls
+    assert ["checkout", "--", "research/daily/README.md"] in calls
+    assert (tmp_path / "kept" / "2026-10-09" / "decisions.csv").exists()
+    assert not (repo_daily / "2026-10-09").exists()

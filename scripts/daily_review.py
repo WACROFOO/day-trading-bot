@@ -179,6 +179,27 @@ def cohort_of(d: dict) -> str:
     return (d["outcome"] or "?").lower()
 
 
+def shadow_section(day: str) -> list:
+    """The shadow strategies' plans of the day (2026-10-09, research/month-study/):
+    S6 the best found, S3 its robust core — scored like the bot's fill, exit
+    break-even then 2 R, net of costs at the owner's sizing. Logged, never traded."""
+    import shadow_record as SR
+    rows = SR.record(DAILY, day, day)
+    L = [f"## Shadow strategies — {len(rows)} plans taken today, logged, never traded", "",
+         "Exit: break-even after 1 R, then 2 R; flat 11:30; net of costs at the owner's sizing. "
+         "The record across days: `python3 scripts/shadow_record.py`.", ""]
+    if rows:
+        L += ["| strategy | symbol | armed | trigger / stop | stop % | filled | exit | net R | the bot |",
+              "|---|---|---|---|---|---|---|---|---|"]
+        for r in rows:
+            net = "—" if r["r_net"] is None else f"{r['r_net']:+.2f}"
+            L.append(f"| {r['strategy']} | {r['symbol']} | {r['armed']} | {r['trigger']:.2f} / {r['stop']:.2f} | "
+                     f"{r['stop_pct']:.1f} | {'yes' if r['filled'] else 'no'} | {r['exit'] or '—'} | "
+                     f"{net} | {r['bot_outcome'] or '—'} |")
+    L += [""] + ["- " + x for x in SR.summary(rows)] + [""]
+    return L
+
+
 def review(day: str) -> str:
     dd = DAILY / day
     meta = json.loads((dd / "export.json").read_text())
@@ -279,6 +300,7 @@ def review(day: str) -> str:
                  f"{max(0, PROSPECTIVE_N - len(f))} |")
     L += ["", "Gross R before costs: the ten-year tests put costs near 0.27-0.39 R a trade, so a cohort needs "
           "a gross mean well above that to matter. Nothing on this page changes a rule.", ""]
+    L += shadow_section(day)
     text = "\n".join(L)
     (dd / "review.md").write_text(text)
     return text
