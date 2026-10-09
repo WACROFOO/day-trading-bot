@@ -717,3 +717,66 @@ def test_a_restart_mark_left_behind_is_void_when_a_desk_starts(tmp_path, monkeyp
     mark.write_text("x")
     day.start_desk(["AAA"], False)
     assert not mark.exists(), "a real crash after it must still be counted"
+
+
+# -- one command: update, then the day (owner, 2026-10-09) ---------------------------
+
+def _sandbox(tmp_path, update_rc: int):
+    """go.sh beside stand-ins for update.sh and day.py that say what they got."""
+    import shutil
+    scripts = tmp_path / "scripts"
+    scripts.mkdir()
+    shutil.copy(ROOT / "scripts" / "go.sh", scripts / "go.sh")
+    (scripts / "update.sh").write_text(f'echo "update ran GO_SH=${{GO_SH:-}}"\nexit {update_rc}\n')
+    (scripts / "day.py").write_text("import os, sys\nprint('day.py', sys.argv[1:], 'IBKR_PORT=' + os.environ.get('IBKR_PORT', ''))\n")
+    return scripts / "go.sh"
+
+
+def test_go_updates_then_starts_the_day_with_the_flags(tmp_path, monkeypatch):
+    import subprocess
+    go = _sandbox(tmp_path, 0)
+    monkeypatch.delenv("IBKR_PORT", raising=False)
+    out = subprocess.run(["bash", str(go), "--symbols", "AAA,BBB"], capture_output=True, text=True,
+                         timeout=60, cwd=tmp_path).stdout
+    assert out.index("update ran GO_SH=1") < out.index("day.py ['--symbols', 'AAA,BBB'] IBKR_PORT=4002")
+    out = subprocess.run(["bash", str(go)], capture_output=True, text=True, timeout=60, cwd=tmp_path,
+                         env={**os.environ, "IBKR_PORT": "7497"}).stdout
+    assert "day.py [] IBKR_PORT=7497" in out, "no flags, and a port you set is kept"
+
+
+def test_go_starts_the_day_on_the_code_on_disk_when_the_update_fails(tmp_path):
+    import subprocess
+    out = subprocess.run(["bash", str(_sandbox(tmp_path, 1))], capture_output=True, text=True,
+                         timeout=60, cwd=tmp_path).stdout
+    assert "update failed — starting on the code on disk" in out and "day.py []" in out
+
+
+def test_go_is_read_whole_before_it_runs():
+    """The update rewrites go.sh while bash runs it; bash reads a script as it
+    goes. Everything sits in a function that is parsed before it starts."""
+    text = (ROOT / "scripts" / "go.sh").read_text()
+    body = [ln for ln in text.splitlines() if ln.strip() and not ln.lstrip().startswith("#")]
+    assert body[-1] == 'main ${1+"$@"}' and "main() {" in body
+    upd = (ROOT / "scripts" / "update.sh").read_text()
+    assert 'if [ -z "${GO_SH:-}" ]; then' in upd, "go.sh's own update does not repeat the start hints"
+
+
+def test_a_second_launch_restarts_an_idle_desk_on_new_code_and_never_a_recording_one(tmp_path, monkeypatch,
+                                                                                   capsys):
+    _at(monkeypatch, tmp_path, datetime(2026, 10, 9, 5, 15, tzinfo=ET))
+    held, _ = day.day_lock(tmp_path / "j.sqlite.day.lock")       # the run in another terminal
+    restarted = []
+    monkeypatch.setattr(day, "restart_desk", lambda *a, **k: restarted.append(True) or 0)
+    try:
+        # the desk alone before 06:55: records nothing, older code — restarted
+        monkeypatch.setattr(day, "desk_health", lambda timeout=3.0: {
+            "provider": {"state": "LIVE", "recording": False}})
+        assert day.main(["--no-open"]) == 0 and restarted == [True]
+        assert "restarts on this code now" in capsys.readouterr().out
+        # the bot's day: the desk records — told, never touched
+        monkeypatch.setattr(day, "desk_health", lambda timeout=3.0: {
+            "provider": {"state": "LIVE", "recording": True}})
+        assert day.main(["--no-open"]) == 0 and restarted == [True]
+        assert "--restart-desk" in capsys.readouterr().out
+    finally:
+        held.close()

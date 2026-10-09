@@ -82,7 +82,11 @@ else
   warn "no .env found — run 'bash scripts/setup.sh' to add your keys"
 fi
 
-printf '\n%sThe platform:%s  IBKR_PORT=4002 python3 scripts/day.py   (any hour; Ctrl+C stops it)\n' "$B" "$O"
-printf '%sAlready running?%s  python3 scripts/day.py --restart-desk   (the desk restarts on the new\n' "$B" "$O"
-printf 'code, the bot keeps running). The page loads the new files at once; the desk runs its new\n'
-printf 'code only after a restart, and the page says RESTART THE DESK until then.\n\n'
+# scripts/go.sh runs this, then the day: the hints below would only repeat it.
+if [ -z "${GO_SH:-}" ]; then
+  printf '\n%sUpdate and start in one command next time:%s  bash scripts/go.sh\n' "$B" "$O"
+  printf '%sThe platform alone:%s  IBKR_PORT=4002 python3 scripts/day.py   (any hour; Ctrl+C stops it)\n' "$B" "$O"
+  printf '%sAlready running?%s  python3 scripts/day.py --restart-desk   (the desk restarts on the new\n' "$B" "$O"
+  printf 'code, the bot keeps running). The page loads the new files at once; the desk runs its new\n'
+  printf 'code only after a restart, and the page says RESTART THE DESK until then.\n\n'
+fi

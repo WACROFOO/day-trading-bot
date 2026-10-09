@@ -58,8 +58,17 @@ single-login mode.
 ## 06:55–11:30 ET — one command
 
 ```bash
-IBKR_PORT=4002 python3 scripts/day.py
+cd ~/day-trading-bot && bash scripts/go.sh
 ```
+
+`scripts/go.sh` (owner, 2026-10-09: "update command and day start at one
+command") runs `scripts/update.sh`, then `IBKR_PORT=4002 python3 scripts/day.py`
+with any flags you add (`bash scripts/go.sh --symbols X,Y`). A failed update —
+no network — starts the day on the code on disk, as the scheduled job does. A
+day already running is never replaced: you get its link, and its desk is
+restarted on the new code when the bot is not trading (it records nothing
+then); during the bot's window you are given the command instead. Without the
+update, the day alone is `IBKR_PORT=4002 python3 scripts/day.py`.
 
 What it does, in Ross's order (`scripts/day.py`):
 
@@ -121,8 +130,9 @@ A desk outside the bot's day:
   apply to that launch only, and `data/probe-orders.once` waits for the day
   that runs. Ctrl-C during the hand-over starts no day.
 
-**After an update:** `bash scripts/update.sh`, then
-`python3 scripts/day.py --restart-desk`. It stops the running desk; the day
+**After an update:** `bash scripts/go.sh` does it in one go — it updates, then
+restarts an idle desk by itself. During the bot's window it leaves the desk
+alone and names `python3 scripts/day.py --restart-desk`. It stops the running desk; the day
 that started it starts it again on the new code — the runner is not touched —
 and the command waits until the desk answers on the new commit. It refuses
 while the desk is still coming up (the day would read that as a desk that
@@ -205,7 +215,7 @@ needs only the Level 1 data the desk already uses, as IBKR's documentation was
 reported by a web search on 2026-10-08 — if the tag reads ERROR with an
 entitlement message, that report was wrong for this account.
 
-**Level 2 — what a real book would take (researched 2026-10-09, not bought).**
+**Level 2 — what a real book would take (researched 2026-10-09; owner: not yet).**
 Ross reads the book with the tape ("level two": 264 hits in 134 live streams;
 the course's minimum layout carries both). IBKR's price list, read on
 2026-10-09 by a research agent, puts depth on the **live** user — non-professional

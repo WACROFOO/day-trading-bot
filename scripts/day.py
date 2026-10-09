@@ -828,7 +828,14 @@ def report_running(other: str, args) -> int:
         why = desk_staleness(h)
         if why:
             warn(f"that desk runs older code than this checkout — {why}")
-            note("restart it on this code (the bot keeps running):  python3 scripts/day.py --restart-desk")
+            if (h.get("provider") or {}).get("recording") is False:
+                # Nothing records: the bot's window is closed (desk alone, or
+                # after the day), so a restart costs the exercise nothing.
+                # scripts/go.sh relies on it: update, then this (2026-10-09).
+                note("it records nothing — the bot is not trading — so it restarts on this code now")
+                restart_desk()
+            else:
+                note("restart it on this code (the bot keeps running):  python3 scripts/day.py --restart-desk")
         open_page(url, args)
     note("its output: the terminal that started it — or, for the scheduled 06:55 job and a day this")
     note("command started in the background:  tail -f ~/Library/Logs/day-trading-bot/day.out.log")
