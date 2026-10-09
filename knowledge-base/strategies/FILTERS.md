@@ -35,7 +35,9 @@ exclusion, the V5/V8 reversal split — is `SCANNERS.md`.** That document is
 discovery only; nothing in it overrides a gate here.
 
 **Sort by gap % descending and work top-down.** *"This is the way I have it every
-morning... if I don't see something right away that I like, I move on."*
+morning."* — `ZfwTJAMLroA` [00:12:18]. Later in the same stream: *"if I don't
+see something right away that I like, then I just move on to the next one."*
+— `ZfwTJAMLroA` [00:30:30]
 
 ---
 

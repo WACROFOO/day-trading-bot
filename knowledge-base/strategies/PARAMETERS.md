@@ -11,7 +11,7 @@ does not mean it works.
 
 > **Read §13 and §15 before implementing any of this.** A full implementation attempt produced ~18 defects and not one was a wrong number here — every one was a misreading of a rule that was already stated correctly. §13 lists each trap with the citation that settles it.
 >
-> **A 2026-08 audit against the 2,063-article blog corpus — never previously consulted — found 21 more across every section, and again not one was arithmetic.** Every single one was a *type* error: a scanner dial read as a gate, a sustained state read as an instantaneous test, a caution read as a veto, a conditional rule read as universal, a dated practice read as timeless. §15 is that pattern; `reports/2026-08-parameter-audit.md` is the workings. Twenty-one parameters changed, including `volume_min`, `stop_max_distance`, `size_ladder`, the entry trigger's reference candle, and the entire expectancy basis of §9. One §13 entry marked "unresolved without sub-minute data" was resolved from the blog.
+> **A 2026-08 audit against the 2,063-article blog corpus — never previously consulted — found 21 more across every section, and again not one was arithmetic.** Every single one was a *type* error: a scanner dial read as a gate, a sustained state read as an instantaneous test, a caution read as a veto, a conditional rule read as universal, a dated practice read as timeless. §15 is that pattern; `research/momentum-replication/reports/2026-08-parameter-audit.md` is the workings. Twenty-one parameters changed, including `volume_min`, `stop_max_distance`, `size_ladder`, the entry trigger's reference candle, and the entire expectancy basis of §9. One §13 entry marked "unresolved without sub-minute data" was resolved from the blog.
 
 ---
 
@@ -83,7 +83,7 @@ strength of the catalyst alone (`blog/recaps/starting-off-september-grateful-334
 > market is colder, I tighten that down to under 5 million**."*
 > — `blog/risk-psychology/can-you-trade-in-a-cash-account`
 
-`reports/2026-08-regime-filter.md` tested regime as a filter on **entries** and
+`research/momentum-replication/reports/2026-08-regime-filter.md` tested regime as a filter on **entries** and
 found nothing. It never tested regime as a modifier of the **universe**. Those
 are different experiments and the second is untried.
 
@@ -105,6 +105,13 @@ setup_grade    = 'A' if pillars_passed == 5 else 'B'
 |---|---|---|
 | `min_pillars_to_trade` | 5 | 384 mentions / 91 videos |
 | `trade_b_quality` | false | — |
+
+> **Paper exercise: 4, not 5.** Owner amendment A5 (2026-09-21) kills a name
+> that passes fewer than 4 of price, gain ≥ 10 %, RVOL ≥ 5×, float < 20M, news
+> today. Recorded in `docs/preregistration.md` §5 and as `FILTERS.md` gate 2;
+> in code, `PILLARS_MIN = 4` in `src/momentum_platform/cascade.py`. That is the
+> amendment's choice, not the method's rule — the 5 above is the corpus
+> measurement and stays.
 
 He self-reports 72% accuracy in a month where he *was* trading B-quality, and
 frames that as the mistake — so the grade split is a testable hypothesis, not
@@ -147,7 +154,7 @@ A backtest holding to 11:30 trades 30–60 minutes he is not in.
 
 In the July 2026 challenge, `07:00` is named **78 times against 36 for
 `09:30`**, and `pre-market` **161 times against 9 for "the close"**
-(`reports/2026-07-challenge.md`). "Limit orders only" is a 2017 rule preserved
+(`research/momentum-replication/reports/2026-07-challenge.md`). "Limit orders only" is a 2017 rule preserved
 as present tense.
 
 **Every blog file carries a `<!-- lastmod: -->` header and no pipeline has ever
@@ -537,7 +544,7 @@ Accuracy moved 8 points between those months. The average **winner** moved
 
 Everything §1 gates on is *selection*, and selection moves the win rate. The
 variable that separated −$4,229 from +$70,000 sits on the **exit** side. This
-matches `reports/2026-08-score-basket.md`, which found selection features
+matches `research/momentum-replication/reports/2026-08-score-basket.md`, which found selection features
 predict only risk and never upside — the same result, stated from inside his
 P&L. **`NEXT-STEPS.md` §4 is not one open question among several; it is the
 one that decides the strategy.**
@@ -699,7 +706,7 @@ strategy does not clear that, the rules are noise.
 
 *Derived from `../data/rules_digest.md` — 2,040 rules, 2,903 numeric figures,
 257 videos, **plus a 2026-08 audit against the 2,063-article blog corpus**
-(`reports/2026-08-parameter-audit.md`). Values are stated, not validated.
+(`research/momentum-replication/reports/2026-08-parameter-audit.md`). Values are stated, not validated.
 See `STRATEGY.md` §12.*
 
 ---
@@ -877,7 +884,7 @@ as taught and nothing about the trades actually taken.
 `knowledge-base/recaps/` now holds recap transcripts. They name the tickers
 traded and walk the entries, which makes them the labelled examples any
 calibration needs. A first comparison
-(`research/momentum-replication/RECAP-COMPARISON.md`) found every ticker he
+(`research/momentum-replication/reports/2026-07-27-vs-recaps.md`) found every ticker he
 named was independently on a watchlist the five pillars produced — the first
 external confirmation of any part of the pipeline.
 
