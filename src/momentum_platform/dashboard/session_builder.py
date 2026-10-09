@@ -31,6 +31,7 @@ from ..scanners import (
     FivePillarsList,
     HodMomentumScanner,
     RunningMoveScanner,
+    RunningUpFilters,
     UptrendScanner,
     TopGappersScanner,
     squeeze_5_in_5,
@@ -87,6 +88,8 @@ ALERT_META = {
     "five_pillars_alert": {"title": "Ross's 5 Pillars Alert", "severity": "high"},
     "hod_momentum": {"title": "Small Cap - High of Day Momentum", "severity": "high"},
     "running_up": {"title": "Running Up · 10-minute uptrend · HOD included", "severity": "medium"},
+    "running_up_filters": {"title": "Running Up · filters: 5% off the 5-min low, 3% in 2 min on volume, "
+                                    "new HOD on volume, halt resumed — $2-20, 07:00-11:30", "severity": "medium"},
     "squeeze_5_in_5": {"title": "Squeeze - Up 5% in 5min", "severity": "medium"},
     "squeeze_10_in_10": {"title": "Squeeze - Up 10% in 10min", "severity": "medium"},
     "breakout_52w": {"title": "Squeeze - 52wk Breakout", "severity": "medium"},
@@ -331,6 +334,11 @@ def build_session_from_records(
             FivePillarsList(max_rows=max_rows), TopGappersScanner(max_rows=max_rows),
             top_gainers(max_rows=max_rows), top_relative_volume(max_rows=max_rows),
             top_volume_5m(max_rows=max_rows),
+            # LAST, on purpose (2026-10-09): the router consolidates same-name
+            # alerts of one moment under the first scanner to fire, so the
+            # existing tiles keep every row they showed; these join the
+            # Running Up tile where nothing else spoke.
+            RunningUpFilters(),
         ],
         router=router,
     )

@@ -1,0 +1,130 @@
+# Running Up filters on the recorded days — what each catches, misses and raises falsely
+# 20 days (2026-09-11 … 2026-10-08), 214 name-days: every name with the desk's own
+# 1-minute bars (board_bars.csv.gz), replayed through the desk's session builder
+# RUN  = >= 10% low->high within <= 10 min, low $2-20, high 07:00-11:30 ET, >= 50,000 shares (Approximation)
+# MOVE = >= 5% within <= 5 min, same band/window, >= 10,000 shares, per minute — what a false alarm is judged against
+# 523 RUNs on 104 name-days; 70 halts inferred from runs of >= 4 untraded minutes, 33 of them resuming inside a RUN
+# orphan rule: 13 rows filed under a scanner with no tile (running_down, five_pillars_alert) with a Running Up member; the tile now lists them
+# guard 1: plans, cascade verdicts and card words identical with the filters silenced, 20 days: YES
+# guard 2: every alert row the desk's own scanners showed is identical with the filters silenced, 20 days: YES
+
+scanner                         RUNs caught  name-days  lead min  run left  alerts*  useful  false  false %  out $  out t
+tile before (as shown)           389/523        98/104       5.0       47%     2629    1065    210      16%    533    821
+tile after (as shown)            439/523       101/104       3.0       56%     3258    1589    312      16%    533    824
+desk, both tiles, before         416/523       103/104       5.0       48%     3237    1356    259      16%    627    995
+desk, both tiles, after          456/523       104/104       3.0       56%     3866    1880    361      16%    627    998
+tile after, no orphan rule       437/523       100/104       3.0       56%     3245    1579    312      16%    533    821
+running_up (10-min uptrend)      356/523       100/104       5.0       48%     2020     811    203      20%    411    595
+squeeze_5_in_5                   387/523       100/104       5.0       42%     1180     541     28       5%    243    368
+squeeze_10_in_10                 212/523        89/104       9.0       34%      536     250     13       5%    104    169
+hod_momentum (other tile)        118/523        67/104       8.0       44%      740     350     53      13%    116    221
+filters, all four                413/523        93/104       3.0       54%     1007     856    151      15%      0      0
+filter pct_in_n                  413/523        93/104       3.0       52%      936     832    104      11%      0      0
+filter vol_surge                 246/523        91/104       5.0       47%      496     429     67      14%      0      0
+filter new_hod                   101/523        58/104       9.0       39%      182     139     43      24%      0      0
+filter halt_resume                20/523        18/104      15.0       36%       27      24      3      11%      0      0
+  RUNs caught: alerted between the run's low and its high · name-days: with at least one run caught ·
+  lead: minutes from the run's low to the first alert (median) · run left: share of the run's
+  low->high still above the first alert's price (median; 100% = at the low) · alerts*: every alert,
+  any band or hour · useful / false: in $2-20 and 07:00-11:30, inside a MOVE or not · out $ / out t:
+  alerts outside the band / the window
+
+## false alarms, by the first reason the alert was not a MOVE
+scanner                              under 5%   low under $2   under 10k sh          other
+tile before (as shown)                    165             42              3              0
+tile after (as shown)                     202             69             41              0
+desk, both tiles, before                  195             53             11              0
+desk, both tiles, after                   232             80             49              0
+tile after, no orphan rule                202             69             41              0
+running_up (10-min uptrend)               174             24              5              0
+squeeze_5_in_5                              0             28              0              0
+squeeze_10_in_10                            4              9              0              0
+hod_momentum (other tile)                  34             11              8              0
+filters, all four                          49             59             43              0
+filter pct_in_n                             0             59             45              0
+filter vol_surge                           27             21             19              0
+filter new_hod                             28             11              4              0
+filter halt_resume                          1              2              0              0
+  under 5%: the move from the 5-minute low was smaller (vol_surge fires at 3% in 2 min, new_hod and
+  halt_resume at no size) · low under $2: the alert is in the band, the move started below it ·
+  under 10k sh: fewer than 10,000 shares from the low to the alert · other: a 5% move with the
+  volume whose high printed more than 2 minutes before the alert
+
+## per day — RUNs caught, the tile before -> after (false alarms before -> after)
+  2026-09-11  names  8  RUNs  21  halts  2  caught  18 ->  19  false  16 ->  16
+  2026-09-14  names  8  RUNs   2  halts  2  caught   2 ->   2  false  10 ->  13
+  2026-09-15  names  8  RUNs  15  halts  1  caught  13 ->  14  false   7 ->  20
+  2026-09-16  names  8  RUNs  23  halts  6  caught  18 ->  19  false   9 ->   9
+  2026-09-17  names  8  RUNs  47  halts  5  caught  34 ->  42  false   7 ->  10
+  2026-09-18  names 13  RUNs  38  halts  8  caught  26 ->  29  false  17 ->  23
+  2026-09-21  names 17  RUNs  34  halts  6  caught  30 ->  31  false  14 ->  17
+  2026-09-22  names 12  RUNs  26  halts  5  caught  19 ->  22  false   8 ->  16
+  2026-09-23  names 13  RUNs  44  halts  8  caught  26 ->  35  false  17 ->  23
+  2026-09-24  names 15  RUNs  37  halts  3  caught  27 ->  29  false  25 ->  31
+  2026-09-25  names 14  RUNs  18  halts  4  caught  17 ->  17  false   1 ->   4
+  2026-09-28  names  8  RUNs   5  halts  1  caught   4 ->   5  false  11 ->  13
+  2026-09-29  names  8  RUNs  22  halts  1  caught  17 ->  17  false   3 ->   7
+  2026-09-30  names 14  RUNs  16  halts  1  caught  13 ->  15  false   9 ->  16
+  2026-10-01  names 12  RUNs  14  halts  3  caught  12 ->  13  false   2 ->  16
+  2026-10-02  names  8  RUNs  20  halts  1  caught  18 ->  19  false   5 ->  10
+  2026-10-05  names  7  RUNs  44  halts  7  caught  28 ->  32  false  13 ->  14
+  2026-10-06  names 11  RUNs  30  halts  3  caught  22 ->  24  false   9 ->  11
+  2026-10-07  names 10  RUNs  31  halts  0  caught  20 ->  24  false  13 ->  20
+  2026-10-08  names 12  RUNs  36  halts  3  caught  25 ->  31  false  14 ->  23
+
+## RUNs the tile before missed: 134
+    52  an alert <= 10 min before its low (the leg was already called)
+    21  first alert <= 5 min after its high (late)
+    61  no alert from 10 min before its low to 5 min after its high
+
+## RUNs the tile after missed: 84
+    56  an alert <= 10 min before its low (the leg was already called)
+    12  first alert <= 5 min after its high (late)
+    16  no alert from 10 min before its low to 5 min after its high
+
+## RUNs the filters, all four missed: 110
+    50  an alert <= 10 min before its low (the leg was already called)
+    16  first alert <= 5 min after its high (late)
+    44  no alert from 10 min before its low to 5 min after its high
+
+## RUNs the desk, both tiles, before missed: 107
+    48  an alert <= 10 min before its low (the leg was already called)
+    18  first alert <= 5 min after its high (late)
+    41  no alert from 10 min before its low to 5 min after its high
+
+## RUNs the desk, both tiles, after missed: 67
+    48  an alert <= 10 min before its low (the leg was already called)
+     8  first alert <= 5 min after its high (late)
+    11  no alert from 10 min before its low to 5 min after its high
+
+## tile after (as shown): every RUN with no alert from 10 min before its low to 5 min after its high (16)
+  2026-09-16 RETO  11:25 14.33 -> 11:25 16.38 (+14%, 366,931 sh) · float 35.9M verified · one minute, low and high in the same bar
+  2026-09-18 MEDS  09:53 4.68 -> 09:53 5.17 (+11%, 117,149 sh) · float 1.5M verified · one minute, low and high in the same bar
+  2026-09-18 SSM   10:05 2.34 -> 10:05 2.58 (+10%, 415,047 sh) · float 1.1M verified · one minute, low and high in the same bar
+  2026-09-23 BENF  09:51 2.00 -> 09:51 2.28 (+14%, 1,895,250 sh) · float 2.3M verified · one minute, low and high in the same bar
+  2026-09-23 TNMG  10:50 4.50 -> 10:50 5.85 (+30%, 145,869 sh) · float 2.6M shares_outstanding_proxy · one minute, low and high in the same bar
+  2026-09-24 GLND  09:22 3.15 -> 09:31 3.50 (+11%, 1,814,133 sh) · float 27.5M verified
+  2026-09-24 GLND  10:10 4.45 -> 10:12 5.00 (+12%, 3,509,192 sh) · float 27.5M verified
+  2026-09-24 HCWB  10:20 2.38 -> 10:29 3.12 (+31%, 603,162 sh) · float 1.8M shares_outstanding_proxy
+  2026-09-25 WHLR  07:10 3.99 -> 07:21 6.88 (+72%, 970,205 sh) · float 1.9M shares_outstanding_proxy
+  2026-09-30 LGHL  09:52 5.42 -> 09:52 6.01 (+11%, 73,315 sh) · float 0.1M verified · one minute, low and high in the same bar
+  2026-10-01 NXL   10:16 7.81 -> 10:16 9.42 (+21%, 630,536 sh) · float 22.0M shares_outstanding_proxy · one minute, low and high in the same bar
+  2026-10-05 ALEC  09:30 2.42 -> 09:30 2.73 (+13%, 1,249,122 sh) · float 82.4M verified · one minute, low and high in the same bar
+  2026-10-05 ALEC  09:32 2.14 -> 09:35 2.36 (+10%, 3,222,308 sh) · float 82.4M verified
+  2026-10-05 SDEV  09:30 8.61 -> 09:30 9.82 (+14%, 734,507 sh) · float 1.8M verified · one minute, low and high in the same bar
+  2026-10-06 OFS   09:25 3.86 -> 09:34 4.25 (+10%, 56,767 sh) · float 13.3M verified
+  2026-10-07 BIYA  08:57 2.43 -> 08:58 2.68 (+10%, 502,501 sh) · float 2.7M verified
+
+## desk, both tiles, after: every RUN with no alert from 10 min before its low to 5 min after its high (11)
+  2026-09-16 RETO  11:25 14.33 -> 11:25 16.38 (+14%, 366,931 sh) · float 35.9M verified · one minute, low and high in the same bar
+  2026-09-18 MEDS  09:53 4.68 -> 09:53 5.17 (+11%, 117,149 sh) · float 1.5M verified · one minute, low and high in the same bar
+  2026-09-18 SSM   10:05 2.34 -> 10:05 2.58 (+10%, 415,047 sh) · float 1.1M verified · one minute, low and high in the same bar
+  2026-09-23 BENF  09:51 2.00 -> 09:51 2.28 (+14%, 1,895,250 sh) · float 2.3M verified · one minute, low and high in the same bar
+  2026-09-23 TNMG  10:50 4.50 -> 10:50 5.85 (+30%, 145,869 sh) · float 2.6M shares_outstanding_proxy · one minute, low and high in the same bar
+  2026-09-30 LGHL  09:52 5.42 -> 09:52 6.01 (+11%, 73,315 sh) · float 0.1M verified · one minute, low and high in the same bar
+  2026-10-01 NXL   10:16 7.81 -> 10:16 9.42 (+21%, 630,536 sh) · float 22.0M shares_outstanding_proxy · one minute, low and high in the same bar
+  2026-10-05 ALEC  09:30 2.42 -> 09:30 2.73 (+13%, 1,249,122 sh) · float 82.4M verified · one minute, low and high in the same bar
+  2026-10-05 ALEC  09:32 2.14 -> 09:35 2.36 (+10%, 3,222,308 sh) · float 82.4M verified
+  2026-10-05 SDEV  09:30 8.61 -> 09:30 9.82 (+14%, 734,507 sh) · float 1.8M verified · one minute, low and high in the same bar
+  2026-10-07 BIYA  08:57 2.43 -> 08:58 2.68 (+10%, 502,501 sh) · float 2.7M verified
+

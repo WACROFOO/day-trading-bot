@@ -14,8 +14,10 @@ const PROVIDER = (S.provider && S.provider.provider) ? String(S.provider.provide
 const LIST_IDS = ["five_pillars_list"];
 const ALERT_TILES = {
   running_up: { id: "running_up", title: "Running Up",
-                note: "≥3% in 10 min · fresh 10-min high · above VWAP · liquid. One alert per leg. Approximation.",
-                scanners: ["running_up", "squeeze_5_in_5", "squeeze_10_in_10"] },
+                note: "≥3% in 10 min · fresh 10-min high · above VWAP · liquid; the 5-in-5 and 10-in-10 squeezes; " +
+                      "and the filters (2026-10-09): 5% off the 5-min low · 3% in 2 min on 2× volume · new HOD on " +
+                      "volume · halt resumed — $2–20, 07:00–11:30. One alert per leg. Approximations; discovery only.",
+                scanners: ["running_up", "squeeze_5_in_5", "squeeze_10_in_10", "running_up_filters"] },
   hod_momentum: { id: "hod_momentum", title: "High of Day",
                   note: "New high with momentum. The branch labels the float and RVOL band. Approximation.",
                   scanners: ["hod_momentum", "breakout_52w"] },
@@ -216,8 +218,16 @@ function ingestAlerts(idx) {
   if (ALERT_LOG.length > ALERT_CAP) ALERT_LOG.length = ALERT_CAP;
   return fresh;
 }
+/* The router files same-name alerts of one moment under the FIRST scanner to
+   fire. When that scanner has no tile (running_down), the group was on no
+   tile at all: BENF 2026-09-23 09:40, the halt-resume alert, joined a
+   running_down row and the desk showed nothing (research/running-up-2026-10-09).
+   Such a row is listed in every tile one of its members belongs to. */
+const TILED = new Set([].concat(...Object.keys(ALERT_TILES).map(k => ALERT_TILES[k].scanners)));
 function loggedAlerts(scanners) {
-  return ALERT_LOG.filter(a => scanners.indexOf(a.scannerId) >= 0);
+  return ALERT_LOG.filter(a => scanners.indexOf(a.scannerId) >= 0 ||
+    (a.scannerId !== "halt" && !TILED.has(a.scannerId) && a.group &&
+     (a.group.also_triggered || []).some(s => scanners.indexOf(s) >= 0)));
 }
 
 function alertsUpTo(idx) {
@@ -1084,11 +1094,13 @@ const BRANCH_SHORT = {
   low_float: "LF", medium_float: "MF", high_rvol: "HR", medium_rvol: "MR",
   price_20_plus: "20+", price_under_20: "<20",
   unknown_float: "?F", uptrend_10m: "UP·10m", uptrend_10m_hod: "UP·10m·HOD", qualified: "QUAL",
+  "running_up.pct_in_n": "5%·low", "running_up.vol_surge": "VOL", "running_up.new_hod": "HOD·vol",
+  "running_up.halt_resume": "HALT↑",
 };
 /* The scanner id carries the branch on the squeeze scanners, where the branch
    itself is just "qualified". Two characters of column beat fourteen. */
 const SCANNER_SHORT = { squeeze_5_in_5: "5in5", squeeze_10_in_10: "10in10",
-                        running_up: "UP·10m", running_down: "DN·10m",
+                        running_up: "UP·10m", running_down: "DN·10m", running_up_filters: "RU·filt",
                         breakout_52w: "52wk", hod_momentum: "HOD" };
 function shortBranch(branch, scannerId) {
   // "qualified" is the squeeze scanners' only branch, so it says nothing the
@@ -1099,6 +1111,13 @@ function shortBranch(branch, scannerId) {
                .replace(/high_rvol/, "HR").replace(/medium_rvol/, "MR")
                .replace(/price_20_plus/, "20+").replace(/price_under_20/, "<20")
                .replace(/_/g, "·");
+}
+/* A row listed here because a member belongs to this tile (its primary has
+   no tile, see loggedAlerts) is labelled by that member, not by the primary. */
+function tileLabel(a, scanners) {
+  if (scanners.indexOf(a.scannerId) >= 0) return shortBranch(a.branch, a.scannerId);
+  const m = ((a.group && a.group.also_triggered) || []).find(s => scanners.indexOf(s) >= 0);
+  return m ? shortBranch(null, m) : shortBranch(a.branch, a.scannerId);
 }
 
 /* The alert tiles are timelines, drawn from the desk's own persistent log
@@ -1173,13 +1192,16 @@ function fillAlertCard(card, cfg, idx) {
     if (g.all.length > 1) {
       const xn = el("span", "pill xn", "×" + g.all.length);
       xn.title = g.all.length + " alerts — " + g.all.map(z => etTime(z.sourceTime) + " " +
-        shortBranch(z.branch, z.scannerId) + " " + fx(z.values && z.values.last)).join(" · ");
+        tileLabel(z, cfg.scanners) + " " + fx(z.values && z.values.last)).join(" · ");
       mid.appendChild(xn);
     }
     tr.appendChild(mid);
     tr.appendChild(el("span", null, fx(a.values && a.values.last)));
-    const br = el("span", "branch", shortBranch(a.branch, a.scannerId));
-    br.title = (a.branch || a.scannerId).replace(/_/g, " ") + " (a label, not the filter)";
+    const br = el("span", "branch", tileLabel(a, cfg.scanners));
+    br.title = cfg.scanners.indexOf(a.scannerId) >= 0
+      ? (a.branch || a.scannerId).replace(/_/g, " ") + " (a label, not the filter)"
+      : "filed under " + a.scannerId.replace(/_/g, " ") + ", which has no tile; also fired: " +
+        ((a.group && a.group.also_triggered) || []).join(", ").replace(/_/g, " ");
     tr.appendChild(br);
     tr.onclick = () => select(a.symbol, cfg.id);
     body.appendChild(tr);
@@ -3320,6 +3342,7 @@ if (typeof window !== "undefined") {
   window.__deskSeek = seekTo;
   window.__deskPlanDrawn = () => PLAN_DRAWN;
   window.__deskPanes = () => PANES;
+  window.__deskTiles = { tiles: ALERT_TILES, logged: loggedAlerts, label: tileLabel };
   window.__deskFrame = () => ({ frame: state.frame, frames: FRAMES.length,
                                 ts: FRAMES.length ? FRAMES[Math.min(state.frame, FRAMES.length - 1)].ts : null,
                                 last: FRAMES.length ? FRAMES[FRAMES.length - 1].ts : null });

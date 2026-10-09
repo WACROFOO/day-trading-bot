@@ -118,6 +118,7 @@ class RouterConfig:
         default_factory=lambda: {
             "hod_momentum": 180.0,
             "running_up": 120.0,
+            "running_up_filters": 120.0,
             "running_down": 120.0,
             "squeeze_5_in_5": 120.0,
             "squeeze_10_in_10": 120.0,

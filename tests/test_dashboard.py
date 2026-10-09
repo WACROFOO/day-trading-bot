@@ -911,8 +911,11 @@ def test_single_venue_scale_lets_a_real_runner_alert():
         price = c
     unscaled = build_session_from_records(recs, "a", "a", 10, "iex", volume_floor_scale=1.0)
     scaled = build_session_from_records(recs, "b", "b", 10, "iex", volume_floor_scale=0.1)
-    n_un = sum(len(f["alerts"]) for f in unscaled["frames"])
-    n_sc = sum(len(f["alerts"]) for f in scaled["frames"])
+    # The Running Up filters (2026-10-09) carry no share floor by design —
+    # pre-market volume has a ceiling and no floor (FILTERS.md); their volume
+    # test is relative (rvol5m) — so the floor's scale is not theirs to show.
+    floored = lambda s: sum(1 for f in s["frames"] for a in f["alerts"] if a["scannerId"] != "running_up_filters")
+    n_un, n_sc = floored(unscaled), floored(scaled)
     assert n_un == 0, f"unscaled floor should silence IEX-scale volume, got {n_un}"
     assert n_sc > 0, "the scaled floor must let the runner alert"
 
@@ -1660,6 +1663,28 @@ def test_ui_alert_tiles_list_each_name_once_with_its_count(page):
             chg = row.locator("span").nth(1).inner_text()
             dim = "dim" in (row.get_attribute("class") or "")
             assert dim == (chg in ("—", "") or _pct(chg) < 10), (tile, chg, dim)
+
+
+def test_ui_a_row_filed_under_a_scanner_with_no_tile_is_listed_by_its_member(page):
+    """BENF 2026-09-23 09:40: the halt-resume alert joined a running_down row
+    (the first scanner to fire files the group) and no tile showed it."""
+    out = page.evaluate("""() => {
+      const t = new Date().toISOString();
+      const mk = (k, primary, also) => ({ _key: k, _at: Date.now(), symbol: "ZZZZ", scannerId: primary,
+        branch: null, sourceTime: t, values: { last: 4.2 }, group: { also_triggered: also, count: 1 + also.length } });
+      const orphan = mk("t-orphan", "running_down", ["running_up_filters"]);
+      const filed = mk("t-filed", "hod_momentum", ["running_up_filters"]);
+      const log = window.__deskMemory().log, T = window.__deskTiles;
+      log.push(orphan, filed);
+      try {
+        const ru = T.logged(T.tiles.running_up.scanners).map(a => a._key);
+        const hod = T.logged(T.tiles.hod_momentum.scanners).map(a => a._key);
+        return { ru, hod, label: T.label(orphan, T.tiles.running_up.scanners) };
+      } finally { log.splice(log.indexOf(orphan), 1); log.splice(log.indexOf(filed), 1); }
+    }""")
+    assert "t-orphan" in out["ru"] and "t-orphan" not in out["hod"]
+    assert "t-filed" in out["hod"] and "t-filed" not in out["ru"], "a row a tile shows stays in that tile only"
+    assert out["label"] == "RU·filt"
 
 
 def test_ui_the_context_pane_toggles_to_the_daily(page):

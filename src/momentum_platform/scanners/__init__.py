@@ -8,6 +8,7 @@ from .momentum_events import (
     squeeze_10_in_10,
     squeeze_5_in_5,
 )
+from .running_up_filters import RunningUpFilters
 from .top_lists import (
     TopGappersScanner,
     TopListScanner,
@@ -27,6 +28,7 @@ __all__ = [
     "HodMomentumScanner",
     "RunningMoveScanner",
     "UptrendScanner",
+    "RunningUpFilters",
     "Breakout52wScanner",
     "squeeze_5_in_5",
     "squeeze_10_in_10",
