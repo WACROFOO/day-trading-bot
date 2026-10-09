@@ -6,6 +6,9 @@ pushed), then read in the cloud by `scripts/daily_review.py`.
 
 | file | what it is |
 |---|---|
+| `<day>/screener.csv` | every name the scan returned that day, survivor or reject, with its verdict, reasons, price, gap, float and pre-market volume — the denominator (since 2026-10-09) |
+| `<day>/board.csv` | every name the desk's board carried that day: first and last minute, snapshots, verdicts seen, the gate that killed it |
+| `<day>/board_bars.csv.gz` | only with `--board-bars`: the desk's own 1-minute bars WITH bid and ask, 04:00-12:00 ET, for every screener and board name |
 | `<day>/decisions.csv` | every plan the desk armed, its outcome, refusal reasons, gates, chart values and actuals |
 | `<day>/orders.csv`, `<day>/order_events.csv` | what was sent, filled and exited, with commissions |
 | `<day>/five_minute.csv`, `<day>/green_run.csv` | the display-only states and the green-run shadow log |
@@ -22,6 +25,8 @@ flagged for a preregistered decision (`research/edge-hunt/PREREGISTRATION.md`).
 ## Days exported
 
 `scripts/day_export.py` adds each new day here when it writes the folder.
+`--since DATE --board-bars --push` exports every day with ledger data in one run
+(the month study of 2026-10-09).
 
 | day | notes |
 |---|---|

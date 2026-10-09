@@ -9,9 +9,13 @@ and pushes it on the current branch. `scripts/daily_review.py` reads that folder
     python3 scripts/day_export.py                 # today, written only
     python3 scripts/day_export.py --push          # today, committed and pushed
     python3 scripts/day_export.py --day 2026-10-06 --push
+    python3 scripts/day_export.py --since 2026-09-08 --push   # every day with data, one push
 
-What goes out: decisions with their refusal reasons, gates and chart values,
-their actuals; orders and order events; the 5-minute states, green-run signals and
+What goes out: every name the screeners returned (`screener.csv`, the scan's
+candidates with their verdicts) and every name on the desk's board
+(`board.csv`, one row per name with its first and last minute) — the
+denominator, since 2026-10-09; decisions with their refusal reasons, gates
+and chart values, their actuals; orders and order events; the 5-minute states, green-run signals and
 the owner's trades of the day from research/trade-journal/journal.csv; the 1-minute bars 04:00-12:00 ET of every name with a
 decision; the day's part of ~/Library/Logs/day-trading-bot/day.out.log. Anything
 that looks like a key, secret, token or password is redacted from the log. The
@@ -60,9 +64,14 @@ def _csv(path: Path, rows: list[dict]) -> int:
     return len(rows)
 
 
+DATE_RE = re.compile(r"20\d\d-\d\d-\d\d")
+
+
 def log_excerpt(day: str, log: Path = LOG) -> str:
-    """The day's part of the bot's log: from the first START marker or day.py line
-    stamped with `day`, else the last 4,000 lines. Secrets redacted."""
+    """The day's part of the bot's log: from the first line stamped with `day`
+    to the first line stamped with a later day (an export of past days must not
+    carry the rest of the month in each folder), else the last 4,000 lines.
+    Secrets redacted."""
     if not log.exists():
         return ""
     lines = log.read_text(errors="replace").splitlines()
@@ -71,11 +80,40 @@ def log_excerpt(day: str, log: Path = LOG) -> str:
         if day in ln:
             start = i
             break
-    keep = lines[start:] if start is not None else lines[-4000:]
+    if start is None:
+        keep = lines[-4000:]
+    else:
+        end = len(lines)
+        for j in range(start + 1, len(lines)):
+            if any(d > day for d in DATE_RE.findall(lines[j])):
+                end = j
+                break
+        keep = lines[start:end]
     return "\n".join(SECRET.sub(r"\1[REDACTED]", ln) for ln in keep) + "\n"
 
 
-def export(conn, day: str, out: Path, log: Path = LOG) -> dict:
+def days_with_data(conn, since: str, until: str) -> list[str]:
+    """ET dates in [since, until] on which the ledger recorded a screener
+    candidate, a board snapshot or a decision — weekends and holidays fall out."""
+    days: set[str] = set()
+    for table in ("candidates", "board_snapshots", "decisions"):
+        for (d,) in _rows_raw(conn, f"SELECT DISTINCT substr(ts_et,1,10) FROM {table} "
+                                    f"WHERE substr(ts_et,1,10) BETWEEN ? AND ?", (since, until)):
+            if d:
+                days.add(d)
+    return sorted(days)
+
+
+def _rows_raw(conn, q, args=()):
+    try:
+        return list(conn.execute(q, args))
+    except Exception as exc:                               # noqa: BLE001 — an old ledger lacks a table
+        if "no such table" in str(exc):
+            return []
+        raise
+
+
+def export(conn, day: str, out: Path, log: Path = LOG, board_bars: bool = False) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     n = {}
     dec = _rows(conn, """SELECT d.*, a.ref_price, a.mfe_r_planned, a.mae_r_planned, a.stop_hit, a.target_hit,
@@ -83,6 +121,15 @@ def export(conn, day: str, out: Path, log: Path = LOG) -> dict:
                          FROM decisions d LEFT JOIN actuals a USING(decision_id)
                          WHERE substr(d.ts_et,1,10)=? ORDER BY d.ts_et""", (day,))
     n["decisions"] = _csv(out / "decisions.csv", dec)
+    # The denominator (owner, 2026-10-09: "all ones that popped out in our
+    # screeners"): every name the scan returned, survivor or reject, and every
+    # name the board carried, with the minutes it was there.
+    n["screener"] = _csv(out / "screener.csv", _rows(conn, """SELECT ts_et, source, symbol, verdict, reasons_json,
+        price, gap_pct, float_shares, pm_volume FROM candidates WHERE substr(ts_et,1,10)=? ORDER BY ts_et, id""", (day,)))
+    n["board"] = _csv(out / "board.csv", _rows(conn, """SELECT symbol, MIN(ts_et) AS first_ts, MAX(ts_et) AS last_ts,
+        COUNT(*) AS snapshots, SUM(plan_allowed) AS allowed_snapshots, GROUP_CONCAT(DISTINCT verdict) AS verdicts,
+        GROUP_CONCAT(DISTINCT killed_by) AS killed_by, MIN(last) AS min_last, MAX(last) AS max_last
+        FROM board_snapshots WHERE substr(ts_et,1,10)=? GROUP BY symbol ORDER BY first_ts""", (day,)))
     n["orders"] = _csv(out / "orders.csv", _rows(conn, """SELECT o.* FROM orders o JOIN decisions d USING(decision_id)
                                                            WHERE substr(d.ts_et,1,10)=? ORDER BY o.order_id""", (day,)))
     n["order_events"] = _csv(out / "order_events.csv", _rows(conn, """SELECT e.*, o.symbol FROM order_events e
@@ -114,6 +161,24 @@ def export(conn, day: str, out: Path, log: Path = LOG) -> dict:
                                WHERE symbol=? AND ts>=? AND ts<? ORDER BY ts""",
                       (s, d0.strftime("%Y-%m-%dT%H:%M"), d1.strftime("%Y-%m-%dT%H:%M")))
     n["bars"] = _csv(out / "bars.csv", bars)
+    if board_bars:
+        # Opt-in (--board-bars): the desk's own minute bars WITH bid and ask for
+        # every name the screeners or the board carried — the spreads a cost
+        # model needs, measured rather than assumed. Gzipped: a month is large.
+        import gzip
+        names = sorted({r["symbol"] for r in _rows(conn, "SELECT DISTINCT symbol FROM board_snapshots WHERE substr(ts_et,1,10)=?", (day,))}
+                       | {r["symbol"] for r in _rows(conn, "SELECT DISTINCT symbol FROM candidates WHERE substr(ts_et,1,10)=?", (day,))}
+                       | set(syms))
+        bb = []
+        for s_ in names:
+            bb += _rows(conn, """SELECT symbol, ts, open, high, low, close, volume, bid, ask FROM bars
+                                 WHERE symbol=? AND ts>=? AND ts<? ORDER BY ts""",
+                        (s_, d0.strftime("%Y-%m-%dT%H:%M"), d1.strftime("%Y-%m-%dT%H:%M")))
+        with gzip.open(out / "board_bars.csv.gz", "wt", newline="") as fh:
+            if bb:
+                w = csv.DictWriter(fh, fieldnames=list(bb[0].keys()))
+                w.writeheader(); w.writerows(bb)
+        n["board_bars"] = len(bb)
     text = log_excerpt(day, log)
     (out / "day.log").write_text(text)
     n["log_lines"] = text.count("\n")
@@ -142,11 +207,13 @@ def _index_day(daily: Path, day: str) -> None:
     readme.write_text(text.rstrip() + f"\n| `{day}/` | exported {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC |\n")
 
 
-def push(day: str) -> bool:
-    rel = f"research/daily/{day}"
+def push(day, label: str | None = None) -> bool:
+    days = [day] if isinstance(day, str) else list(day)
+    rels = [f"research/daily/{d}" for d in days] + ["research/daily/README.md"]
     branch = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=ROOT, capture_output=True,
                             text=True).stdout.strip()
-    cmds = [["git", "add", rel], ["git", "commit", "-q", "-m", f"Daily export {day} (decisions, orders, bars, log)"],
+    what = label or (days[0] if len(days) == 1 else f"{days[0]}..{days[-1]} ({len(days)} days)")
+    cmds = [["git", "add", *rels], ["git", "commit", "-q", "-m", f"Daily export {what} (screeners, decisions, orders, bars, log)"],
             ["git", "pull", "-q", "--rebase", "--autostash", "origin", branch], ["git", "push", "-q", "origin", branch]]
     for c in cmds:
         try:
@@ -167,13 +234,21 @@ def main(argv=None) -> int:
     ap.add_argument("--db", default=os.environ.get("JOURNAL_DB") or str(L.DEFAULT_DB))
     ap.add_argument("--day", default=datetime.now(L.ET).date().isoformat())
     ap.add_argument("--log", default=str(LOG))
-    ap.add_argument("--push", action="store_true", help="commit and push research/daily/<day>")
+    ap.add_argument("--since", help="export every day from this ET date to --day that has ledger data")
+    ap.add_argument("--board-bars", action="store_true",
+                    help="also the desk's bars with bid/ask for every screener and board name (gzipped)")
+    ap.add_argument("--push", action="store_true", help="commit and push research/daily/<day> (all of them with --since)")
     args = ap.parse_args(argv)
     conn = L.connect(args.db)
-    meta = export(conn, args.day, OUT_ROOT / args.day, Path(args.log))
-    print(f"exported {args.day} → research/daily/{args.day}: " + " · ".join(f"{k} {v}" for k, v in meta["counts"].items()))
+    days = days_with_data(conn, args.since, args.day) if args.since else [args.day]
+    if not days:
+        print(f"no ledger data between {args.since} and {args.day} in {args.db}")
+        return 1
+    for d in days:
+        meta = export(conn, d, OUT_ROOT / d, Path(args.log), board_bars=args.board_bars)
+        print(f"exported {d} → research/daily/{d}: " + " · ".join(f"{k} {v}" for k, v in meta["counts"].items()))
     if args.push:
-        print("pushed" if push(args.day) else "NOT pushed — run the git commands above by hand")
+        print("pushed" if push(days) else "NOT pushed — run the git commands above by hand")
     return 0
 
 
