@@ -257,6 +257,15 @@ class TapeBook:
             out["lastBig"] = {"t": b.ts.isoformat(), "p": b.price, "s": b.size, "side": b.side}
         return out
 
+    def printed_at(self, price: float, seconds: float, now: Optional[datetime] = None) -> int:
+        """Shares the live tape printed at `price` in the last `seconds` — how
+        the book tells a huge level TAKEN from one PULLED (depth.py)."""
+        now = _utc(now or self.clock())
+        t0 = now.timestamp() - seconds
+        with self._lock:
+            return sum(p.size for p in self._prints
+                       if p.src == "live" and p.ts.timestamp() > t0 and abs(p.price - price) < 1e-4)
+
     def last_live(self) -> Optional[Print]:
         with self._lock:
             for p in reversed(self._prints):

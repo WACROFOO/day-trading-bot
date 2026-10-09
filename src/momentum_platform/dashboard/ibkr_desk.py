@@ -41,6 +41,7 @@ from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_ba
                                         session_duration, session_start,
                                         sec_profile, stock_type_of, store_records)
 from ..datasources.ibkr_stream import IbkrStream, read_only_connect
+from ..datasources.ibkr_depth import DepthFeed
 from ..datasources.ibkr_tape import TapeFeed
 from .session_builder import build_session_from_records
 from .stream import EventHub, UpdatePublisher
@@ -202,6 +203,13 @@ class IbkrDesk:
         self.tape_every = 0.5
         self._next_tape = 0.0
         self._tape_sent = -1
+        # Level 2 for the same selected name (owner, 2026-10-09): IBKR market
+        # depth, SmartDepth, one request at a time on this read-only connection,
+        # published as the "depth" event at most twice a second.
+        self.depth: Optional[DepthFeed] = None
+        self.depth_every = 0.5
+        self._next_depth = 0.0
+        self._depth_sent = -1
         self.log: Callable[[str], None] = lambda m: print(m, flush=True)
         # The exercise's window (owner, 2026-10-08): scripts/day.py keeps the
         # desk up outside the bot's day and says, in DESK_RECORD_UNTIL, when
@@ -265,6 +273,9 @@ class IbkrDesk:
         if self.tape is not None and now >= self._next_tape:
             self._next_tape = now + self.tape_every
             self._guard(self._publish_tape)
+        if getattr(self, "depth", None) is not None and now >= self._next_depth:
+            self._next_depth = now + self.depth_every
+            self._guard(self._publish_depth)
         if now >= self._next_tick:
             self._next_tick = now + 1.0
             self._guard(self.tick)
@@ -350,6 +361,8 @@ class IbkrDesk:
             pass
         if self.tape is None:
             self.tape = TapeFeed(self.stream, clock=self.clock)
+        if getattr(self, "depth", None) is None:
+            self.depth = DepthFeed(self.stream, clock=self.clock, tape=lambda: self.tape)
         if not h.connected:
             raise IbkrError(f"TWS not reachable at {self.host}:{self.port} (client {self.client_id}): "
                             f"{h.last_error}. Log the paper GATEWAY in (TWS logged out — one login), "
@@ -399,6 +412,12 @@ class IbkrDesk:
             try:
                 tape.on_error(reqId, errorCode, errorString, contract)
             except Exception:                          # noqa: BLE001 — the tape never takes the desk down
+                pass
+        depth = getattr(self, "depth", None)
+        if depth is not None:
+            try:
+                depth.on_error(reqId, errorCode, errorString, contract)
+            except Exception:                          # noqa: BLE001 — nor does the book
                 pass
         if errorCode == 10197:
             now = self.clock()
@@ -1280,6 +1299,13 @@ class IbkrDesk:
             self.submit(self._focus_now, symbol)
 
     def _focus_now(self, symbol: str) -> dict:
+        depth = getattr(self, "depth", None)
+        if depth is not None:
+            # the book follows the same selection; the old name's line is released
+            d = depth.focus(symbol)
+            self._depth_sent = depth.version
+            self._depth_sent_at = time.monotonic()
+            self.hub.publish("depth", d)
         if self.tape is None:
             return {}
         snap = self.tape.focus(symbol)
@@ -1307,6 +1333,28 @@ class IbkrDesk:
             return off_snapshot("the desk has not connected to IBKR yet")
         return self.tape.snapshot()
 
+    # -- Level 2 (2026-10-09) ----------------------------------------------------------
+
+    def _publish_depth(self) -> None:
+        """Retries, reconnects and pauses first; then the book, only when it
+        changed (and every few seconds while a name is focused, so a page that
+        just connected sees a refusal's countdown move)."""
+        self.depth.check()
+        v = self.depth.version
+        now = time.monotonic()
+        stale = now - getattr(self, "_depth_sent_at", 0.0) >= 5.0
+        if v != self._depth_sent or (self.depth.symbol and stale):
+            self._depth_sent = v
+            self._depth_sent_at = now
+            self.hub.publish("depth", self.depth.snapshot())
+
+    def depth_snapshot(self) -> dict:
+        depth = getattr(self, "depth", None)
+        if depth is None:
+            from ..depth import off_depth
+            return off_depth("the desk has not connected to IBKR yet")
+        return depth.snapshot()
+
     def health(self) -> dict:
         d = self.stream.health.as_dict() if self.stream is not None else {"state": "OFFLINE"}
         d["clientId"] = self.client_id
@@ -1321,6 +1369,8 @@ class IbkrDesk:
         d["competingSince"] = cs.isoformat() if cs is not None else None
         tape = getattr(self, "tape", None)
         d["tape"] = tape.status() if tape is not None else None
+        depth = getattr(self, "depth", None)
+        d["depth"] = depth.status() if depth is not None else None
         until = getattr(self, "record_until", None)
         d["recordUntil"] = until.isoformat() if until is not None else None
         d["recording"] = self.recording()

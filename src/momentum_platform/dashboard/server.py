@@ -436,6 +436,8 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                 return self._json({"count": len(events), "events": events})
             if path == "/api/v1/tape":
                 return self._json(_tape_snapshot(holder))
+            if path == "/api/v1/depth":
+                return self._json(_depth_snapshot(holder))
 
             asset = (WEB / path.lstrip("/")).resolve()
             if asset.is_file() and WEB.resolve() in asset.parents:
@@ -486,6 +488,17 @@ def _tape_snapshot(holder) -> dict:
     from ..tape import off_snapshot
     fn = getattr(holder, "tape_snapshot", None)
     return fn() if fn is not None else off_snapshot(NO_TAPE)
+
+
+# Level 2 (2026-10-09). Only the live IBKR desk has a book; a replay says so.
+NO_DEPTH = ("no Level 2 in this replay: the day's export carries no book. "
+            "The live desk reads IBKR market depth for the selected name.")
+
+
+def _depth_snapshot(holder) -> dict:
+    from ..depth import off_depth
+    fn = getattr(holder, "depth_snapshot", None)
+    return fn() if fn is not None else off_depth(NO_DEPTH)
 
 
 def _focus_post(holder, body: dict) -> tuple:

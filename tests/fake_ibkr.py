@@ -90,6 +90,7 @@ class FakeIB:
         # tape matches IBKR's error events to its own streams through it
         self.wrapper = Obj(ticker2ReqId=defaultdict(dict))
         self._req_seq = 9000
+        self.depth_calls = []
 
     # -- connection
     def connect(self, host, port, clientId, readonly=False, timeout=0):
@@ -170,6 +171,41 @@ class FakeIB:
             self.wrapper.ticker2ReqId[tickType].pop(t, None)
         self.cancelled.append(("tbt:" + tickType, contract.symbol))
         return True
+
+    # -- market depth (the desk's Level 2, 2026-10-09). As ib_async: the depth
+    # lives on the contract's shared Ticker (domBids / domAsks of DOMLevel),
+    # the request id under wrapper.ticker2ReqId["mktDepth"].
+    def reqMktDepth(self, contract, numRows=5, isSmartDepth=False, mktDepthOptions=None):
+        t = self.tickers.setdefault(contract.symbol, self.quotes.get(contract.symbol) or FakeTicker())
+        if not hasattr(t, "updateEvent"):
+            t.updateEvent = FakeEvent()
+            t.tickByTicks = []
+        for name in ("domBids", "domAsks", "domTicks"):
+            setattr(t, name, [])
+        t.domBidsDict, t.domAsksDict = {}, {}
+        self._req_seq += 1
+        self.wrapper.ticker2ReqId["mktDepth"][t] = self._req_seq
+        self.depth_calls.append((contract.symbol, numRows, isSmartDepth))
+        self.live_lines.append(("depth", contract.symbol))
+        return t
+
+    def cancelMktDepth(self, contract, isSmartDepth=False):
+        t = self.tickers.get(contract.symbol)
+        if t is not None:
+            self.wrapper.ticker2ReqId["mktDepth"].pop(t, None)
+            t.domBids, t.domAsks = [], []
+        self.cancelled.append(("depth", contract.symbol, isSmartDepth))
+
+    def push_depth(self, symbol, bids, asks):
+        """The book as IBKR now holds it: [(price, size, venue)] per side,
+        best first; fires the ticker's update event like a network batch."""
+        t = self.tickers[symbol]
+        t.domBids = [Obj(price=p, size=s, marketMaker=x) for p, s, x in bids]
+        t.domAsks = [Obj(price=p, size=s, marketMaker=x) for p, s, x in asks]
+        t.updateEvent.emit(t)
+
+    def depth_req_id(self, symbol):
+        return self.wrapper.ticker2ReqId["mktDepth"].get(self.tickers.get(symbol))
 
     def reqHistoricalTicks(self, contract, start, end, n, what, use_rth, ignoreSize=False, miscOptions=None):
         assert what == "TRADES" and (start == "" or end == "")

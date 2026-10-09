@@ -18,6 +18,7 @@ the producers publish:
     resync       {reason} — the client fell off the buffer; reload state
     tape         the focus name's Time & Sales snapshot (tape.py), at most
                  twice a second while prints arrive
+    depth        the focus name's Level 2 book (depth.py), the same cadence
 
 Wiring into server.py (a `/api/v1/stream` GET that calls `serve_sse`) is
 deliberately left to the wiring step so the user's uncommitted IBKR diff to
@@ -40,11 +41,11 @@ from ..state import MarketUpdate
 UTC = timezone.utc
 
 EVENT_TYPES = ("quote", "bar5s", "bar10s", "bar1m", "health", "screener",
-               "symbol-added", "alert", "session", "resync", "tape")
+               "symbol-added", "alert", "session", "resync", "tape", "depth")
 # Delivered live, never kept for replay: each tape event is a whole snapshot,
 # so a reconnecting page needs only the next one, and twice a second for a
 # morning would push the bars and cards out of the replay buffer.
-TRANSIENT_TYPES = ("tape",)
+TRANSIENT_TYPES = ("tape", "depth")
 
 
 @dataclass(frozen=True)

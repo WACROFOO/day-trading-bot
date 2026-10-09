@@ -898,3 +898,43 @@ a.dc-headline:hover{text-decoration:underline}
 .btn.ts-howto{padding:0 6px;font-size:9.5px;margin-left:2px}
 .legend-grid .lg-wide{grid-column:1 / -1}
 .legend-grid .lg-wide p{margin:3px 0}
+
+/* Level 2 (2026-10-09): the selected name's book, asks over bids, one shade
+   per price level, the venue on each row; huge levels in amber. */
+.l2-card .card-body{display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:5px 8px 6px}
+.tag.l2-state{font:700 8.5px/1.3 var(--mono);letter-spacing:.5px}
+.tag.l2-state.ok{color:var(--ok-ink);border-color:var(--ok-line);background:var(--ok-bg)}
+.tag.l2-state.warn{color:var(--unk-ink);border-color:var(--unk-line);background:var(--unk-bg)}
+.tag.l2-state.bad{color:var(--no-ink);border-color:var(--no-line);background:var(--no-bg)}
+.tag.l2-state.info{color:#bcd0ff;border-color:#24365e;background:#121d2e}
+.tag.l2-state.off{color:var(--ink-faint)}
+.l2-head{display:flex;align-items:baseline;gap:8px;font-size:10.5px;flex:none;flex-wrap:wrap}
+.l2-head b{font:700 12px var(--mono);letter-spacing:.4px}
+.l2-ladder{flex:1;min-height:0;overflow-y:auto;font:11px/1.45 var(--mono);font-variant-numeric:tabular-nums;margin-top:3px}
+.l2-row{display:grid;grid-template-columns:44px 1fr 1fr;gap:6px;padding:0 4px;border-radius:2px}
+.l2-row .l2-p,.l2-row .l2-s{text-align:right}
+.l2-row .l2-x{color:var(--ink-faint);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.l2-row.ask{color:#ffb3ba;background:rgba(255,95,110,.07)} .l2-row.ask.alt{background:rgba(255,95,110,.14)}
+.l2-row.bid{color:#a9efc9;background:rgba(42,209,127,.07)} .l2-row.bid.alt{background:rgba(42,209,127,.14)}
+.l2-row.huge{font-weight:700;box-shadow:inset 3px 0 0 var(--hi)} .l2-row.huge .l2-s{color:var(--hi)}
+.l2-mid{text-align:center;font:600 10px var(--mono);color:var(--ink);border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);margin:2px 0;padding:1px 0}
+.l2-events{flex:none;margin-top:4px;border-top:1px solid var(--line-soft);padding-top:3px}
+.l2-ev{font:9.5px/1.4 var(--mono);color:var(--ink-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.l2-ev.bid{color:#a9efc9} .l2-ev.ask{color:#ffb3ba}
+.l2-nosub{display:flex;flex-direction:column;gap:5px;padding:6px 7px;border:1px dashed var(--unk-line);
+  border-radius:5px;background:#211b0b;color:var(--unk-ink)}
+.l2-nosub b{font:700 12px var(--sans)}
+.l2-code{font:600 10.5px/1.35 var(--mono);color:#ffe2a8}
+.l2-why{font-size:10px;line-height:1.4;color:var(--ink-dim)}
+
+/* a huge order or a big print on the selected name: sound and this banner */
+.flow-alert{position:fixed;top:40px;left:50%;transform:translateX(-50%);z-index:60;display:flex;gap:10px;
+  align-items:baseline;max-width:min(860px,90vw);padding:6px 12px;border-radius:6px;cursor:pointer;
+  font-size:12px;background:var(--panel-2);border:1px solid var(--line);box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.flow-alert[hidden]{display:none}
+.flow-alert b{font:700 11px var(--cond);letter-spacing:1px}
+.flow-alert.bid{border-left:4px solid var(--up);color:#a9efc9}
+.flow-alert.ask{border-left:4px solid var(--down);color:#ffb3ba}
+.flow-alert.mid{border-left:4px solid var(--hi);color:#ffdf9e}
+.flow-alert .muted{font-size:10px}

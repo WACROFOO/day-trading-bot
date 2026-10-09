@@ -358,10 +358,14 @@ def test_ui_chart_stack_is_the_desks_own_1m_over_5m_and_10s(page):
         assert page.locator(f".slot [data-card={parked}]").count() == 0
     # find / see / decide (2026-10-08): the decision card over the real tape on
     # the right, the Five Pillars check under the scanners on the left
-    right = [page.eval_on_selector(f'[data-slot={s}] .card', "e => e.dataset.card") for s in ("R1", "R2")]
-    assert right == ["verdict", "tape"]
+    # Level 2 beside the tape under the card (owner, 2026-10-09): "they
+    # really should always just be together" (ZfwTJAMLroA @01:45:34)
+    right = [page.eval_on_selector(f'[data-slot={s}] .card', "e => e.dataset.card") for s in ("R1", "R2", "R3")]
+    assert right == ["verdict", "depth", "tape"]
+    book = page.locator("[data-card=depth]").bounding_box()
+    tape = page.locator("[data-card=tape]").bounding_box()
+    assert abs(book["y"] - tape["y"]) < 4 and tape["x"] > book["x"] + book["width"] - 4, "side by side"
     assert page.eval_on_selector('[data-slot=L4] .card', "e => e.dataset.card") == "pillars-board"
-    assert page.locator('[data-slot="R3"]').count() == 0
     for card in ("chart-1m", "chart-5m", "chart-10s"):
         host = page.locator(f"[data-card={card}] .chart-host").bounding_box()
         inner = page.locator(f"[data-card={card}] .chart-host canvas").first.bounding_box()
@@ -440,7 +444,7 @@ def test_ui_gutters_resize_panes_and_persist(page):
     """Cards are resizable, not just swappable: a gutter trades space between
     the two panes it sits between, and the sizes are remembered."""
     before = page.locator("[data-card=verdict]").bounding_box()
-    gutter = page.locator('[data-between="R1,R2"]')
+    gutter = page.locator('[data-between="R1,RPAIR"]')
     box = gutter.bounding_box()
     page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
     page.mouse.down()
@@ -449,8 +453,8 @@ def test_ui_gutters_resize_panes_and_persist(page):
     page.wait_for_timeout(300)
     after = page.locator("[data-card=verdict]").bounding_box()
     assert after["height"] > before["height"] + 60
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v11'))")
-    assert saved["sizes"]["slots"]["R1"] / saved["sizes"]["slots"]["R2"] > 2.35 / 1, "R1 gained on R2"
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v12'))")
+    assert saved["sizes"]["slots"]["R1"] / saved["sizes"]["slots"]["RPAIR"] > 2.0 / 1.3, "R1 gained on the pair"
     # the page must still fit after a resize
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
     assert metrics["sh"] <= metrics["ih"] + 2
@@ -483,9 +487,11 @@ def test_ui_the_decision_card_tops_the_right_column_over_the_tape(page):
     column = page.locator("[data-col=right]").bounding_box()
     card = page.locator("[data-card=verdict]").bounding_box()
     tape = page.locator("[data-card=tape]").bounding_box()
+    book = page.locator("[data-card=depth]").bounding_box()
     assert card["y"] < tape["y"] and card["height"] > tape["height"]
     assert card["height"] / column["height"] > 0.6
     assert tape["height"] / column["height"] > 0.22, "room for the facts and a dozen prints"
+    assert abs(book["y"] - tape["y"]) < 4 and abs(book["height"] - tape["height"]) < 4, "the book beside the tape"
 
 
 def test_ui_bottom_right_card_is_off_the_desk(page):
@@ -562,7 +568,7 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
     assert page.eval_on_selector("[data-card=pillars-board]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v11'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v12'))")
     assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
@@ -740,12 +746,12 @@ def test_ui_alert_click_seeks_charts(page):
     """The alert timeline waits in the tray by default; put it on the desk
     (a saved layout, as a drag would leave it) and it still seeks."""
     page.evaluate("""() => {
-      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v11') || '{}');
+      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v12') || '{}');
       saved.layout = Object.assign({}, saved.layout || {
         L1: 'scan-pillars', L2: 'scan-running', L3: 'scan-hod', L4: 'pillars-board',
-        C1: 'chart-1m', C2: 'chart-5m', C3: 'chart-10s', R1: 'verdict', R2: 'tape' });
+        C1: 'chart-1m', C2: 'chart-5m', C3: 'chart-10s', R1: 'verdict', R2: 'depth', R3: 'tape' });
       saved.layout.L4 = 'timeline';
-      localStorage.setItem('momentum-workstation.layout.v11', JSON.stringify(saved));
+      localStorage.setItem('momentum-workstation.layout.v12', JSON.stringify(saved));
     }""")
     page.reload()
     page.wait_for_timeout(400)
@@ -1223,7 +1229,9 @@ def test_the_desk_opens_on_its_own_real_time_charts_not_the_delayed_widget():
 
     # A structurally valid older layout would restore the delayed charts — and
     # v10 kept the quote card in the decision card's slot on the owner's desk.
-    assert 'LAYOUT_KEY = "momentum-workstation.layout.v11"' in app
+    # v12 (2026-10-09) adds the Level 2 card beside the tape.
+    assert 'LAYOUT_KEY = "momentum-workstation.layout.v12"' in app
+    assert '"depth"' in default
 
     # The decision card holds R1, the real tape sits under it; the quote card
     # stays one drag away. The simulated book is deleted (owner, 2026-10-09).
@@ -1748,3 +1756,97 @@ def test_ui_the_charts_draw_a_plan_only_while_it_is_live(page):
     page.evaluate("ts => window.__deskSeek(ts)", ts_of[chosen["liveUntil"]])
     page.wait_for_timeout(300)
     assert page.evaluate("window.__deskPlanDrawn()")["plan"] is None, "dead: no lines"
+
+
+def _depth_snapshot(sym, events=(), state="LIVE", code=None, message=""):
+    """A book in the shape src/momentum_platform/depth.py sends (DepthBook.snapshot)."""
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "src"))
+    from momentum_platform.depth import DepthBook
+    b = DepthBook(sym)
+    b.update([(6.50, 800, "NSDQ"), (6.50, 400, "ARCA"), (6.49, 1200, "EDGX"), (6.48, 500, "NSDQ")],
+             [(6.51, 600, "NSDQ"), (6.52, 12000, "NSDQ"), (6.53, 400, "IEX")])
+    snap = b.snapshot()
+    snap["events"] = list(events)
+    if state != "LIVE":
+        snap.update(state=state, code=code, message=message, bids=[], asks=[])
+    return snap
+
+
+def test_ui_a_replay_says_it_has_no_book(page):
+    page.evaluate("() => localStorage.clear()")
+    page.reload()
+    page.wait_for_timeout(800)
+    assert page.locator("#depthTag").inner_text() == "OFF"
+    assert "no Level 2 in this replay" in page.locator("#depthCard").inner_text()
+
+
+def test_ui_the_book_card_draws_the_ladder_and_names_each_venue(page):
+    """Asks over bids, best prices at the inside, one shade per price level, the
+    venue on each row; a huge level in amber with its definition in the
+    tooltip — an Approximation, never a gate."""
+    _seek(page, 125)
+    sym = page.locator("#symTicker").inner_text()
+    page.evaluate("s => window.__applyDepth(s)", _depth_snapshot(sym))
+    page.wait_for_timeout(200)
+    assert page.locator("#depthTag").inner_text() == "LIVE"
+    rows = page.eval_on_selector_all("#depthCard .l2-row", "els => els.map(e => [e.className, e.innerText])")
+    sides = [("ask" if " ask" in c else "bid") for c, _ in rows]
+    assert sides == ["ask"] * 3 + ["bid"] * 4, "asks above the inside, bids below"
+    assert "IEX" in rows[0][1] and "6.53" in rows[0][1], "the highest ask on top"
+    assert "6.51" in rows[2][1] and "6.50" in rows[3][1], "the inside meets in the middle"
+    assert page.locator("#depthCard .l2-mid").inner_text() == "6.50 × 6.51"
+    assert page.locator("#depthCard .l2-row.huge").count() == 1
+    assert "12,000" in page.locator("#depthCard .l2-row.huge").inner_text()
+    assert "Approximation" in page.locator("#depthCard .l2-row.huge").get_attribute("title")
+
+
+def test_ui_no_depth_subscription_is_said_with_ibkrs_code(page):
+    _seek(page, 125)
+    sym = page.locator("#symTicker").inner_text()
+    page.evaluate("s => window.__applyDepth(s)", _depth_snapshot(
+        sym, state="NO_SUBSCRIPTION", code=354, message="IBKR 354: Not subscribed to requested market data."))
+    page.wait_for_timeout(200)
+    assert page.locator("#depthTag").inner_text() == "NO SUB"
+    body = page.locator("#depthCard").inner_text()
+    assert "No depth subscription yet" in body and "IBKR 354: Not subscribed to requested market data." in body
+    assert page.locator("#depthCard .l2-row").count() == 0
+
+
+def test_ui_a_huge_order_or_print_alerts_once_debounced_and_never_the_history(page):
+    """Owner, 2026-10-09: an alert — sound and banner — on a huge buy or sell
+    for the selected name, debounced. The first snapshot of a name is history:
+    it never sounds. A second event of the same kind inside 20 s is quiet."""
+    page.reload()                                   # a fresh page: nothing seen yet
+    page.wait_for_timeout(700)
+    _seek(page, 125)
+    sym = page.locator("#symTicker").inner_text()
+    page.evaluate("() => { window.__SESSION__.live = true; }")
+    ev = lambda i, side: {"id": i, "t": "2026-09-01T14:30:0%dZ" % i, "kind": "appeared", "side": side,
+                          "price": 6.52, "size": 12000, "line": 9500, "venues": ["NSDQ"]}
+    before = page.evaluate("window.__deskFlowAlerts()")
+    page.evaluate("s => window.__applyDepth(s)", _depth_snapshot(sym, events=[ev(1, "ask")]))
+    assert page.evaluate("window.__deskFlowAlerts()") == before, "the first snapshot is history"
+    page.evaluate("s => window.__applyDepth(s)", _depth_snapshot(sym, events=[ev(1, "ask"), ev(2, "ask")]))
+    page.wait_for_timeout(100)
+    assert page.evaluate("window.__deskFlowAlerts()") == before + 1
+    banner = page.locator("#flowAlert")
+    assert banner.is_visible() and "HUGE ORDER" in banner.inner_text() and "ASK 12,000 at 6.52" in banner.inner_text()
+    assert "Approximation" in banner.inner_text()
+    page.evaluate("s => window.__applyDepth(s)", _depth_snapshot(sym, events=[ev(1, "ask"), ev(2, "ask"), ev(3, "ask")]))
+    assert page.evaluate("window.__deskFlowAlerts()") == before + 1, "debounced: same kind inside 20 s"
+    page.evaluate("s => window.__applyDepth(s)", _depth_snapshot(sym, events=[ev(1, "ask"), ev(2, "ask"), ev(3, "ask"),
+                                                                              ev(4, "bid")]))
+    assert page.evaluate("window.__deskFlowAlerts()") == before + 2, "the other side is another kind"
+    # a print over the tape's big-print line: the tape's first snapshot is
+    # history, a new big print after it alerts
+    snap = _tape_snapshot(sym)
+    page.evaluate("s => window.__applyTape(s)", snap)
+    assert page.evaluate("window.__deskFlowAlerts()") == before + 2, "the tape's first snapshot is history"
+    big = dict(snap["prints"][0], t="2026-09-01T13:40:30+00:00", s=15000, p=7.22, side="ask", big=True)
+    snap2 = dict(snap, prints=[big] + snap["prints"])
+    page.evaluate("s => window.__applyTape(s)", snap2)
+    assert page.evaluate("window.__deskFlowAlerts()") == before + 3
+    assert "BIG PRINT" in page.locator("#flowAlert").inner_text() and "15,000 at 7.22 at the ask" in \
+        page.locator("#flowAlert").inner_text()
+    page.evaluate("() => { window.__SESSION__.live = false; }")

@@ -2145,6 +2145,7 @@ function applyTape(snap) {
   TAPE = snap; TAPE_AT = Date.now();
   renderTape();
   refreshTapeLine();
+  watchFlow();
 }
 const agoText = sec => sec < 5 ? "just now" : fmtAge(sec * 1000) + " ago";
 function tapeAge() {
@@ -2363,6 +2364,170 @@ function refreshTapeLine() {
   const old = document.querySelector(".dc-tape");
   if (old) old.replaceWith(tapeLineFor(old.dataset.sym));
 }
+
+/* ── Level 2 (owner, 2026-10-09) ────────────────────────────────────────
+   The selected name's book from IBKR market depth (SmartDepth: every
+   exchange, the venue on each row), pushed as the "depth" event by the desk
+   (src/momentum_platform/depth.py, datasources/ibkr_depth.py). Read-only, one
+   request at a time, released when the selection moves. Until the depth
+   subscription is on the account the card says so with IBKR's exact code.
+   Ross reads it with the tape: "level two, um, shows you the buy and sell
+   orders right here … time and sales, so this shows you where people are
+   buying and where they're selling" (ZfwTJAMLroA @01:44:36). Facts, never a
+   gate: nothing here moves a verdict. */
+let DEPTH = null;
+const DEPTH_STATE_CLASS = { LIVE: "ok", STARTING: "info", PAUSED: "warn", NO_SUBSCRIPTION: "warn",
+                            ERROR: "bad", OFF: "off" };
+function applyDepth(snap) {
+  if (!snap) return;
+  DEPTH = snap;
+  renderDepth();
+  watchFlow();
+}
+function loadDepth() {
+  const none = why => applyDepth({ state: "OFF", symbol: null, bids: [], asks: [], events: [], notes: [],
+    message: why === 404 && (S.streaming || S.live)
+      ? "this desk was started before Level 2 existed — restart it to run the update"
+      : S.streaming ? "the desk did not answer for the book — it retries with the next event"
+      : "no Level 2 in this replay: a saved or recorded page carries no book" });
+  fetch("/api/v1/depth", { cache: "no-store" }).then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(applyDepth).catch(none);
+}
+function depthRow(r, side) {
+  const row = el("div", "l2-row " + side + (r.huge ? " huge" : "") + (r.lvl != null && r.lvl % 2 ? " alt" : ""));
+  row.appendChild(el("span", "l2-x", r.x || "—"));
+  row.appendChild(el("span", "l2-p", fx(r.p, r.p < 1 ? 4 : 2)));
+  row.appendChild(el("span", "l2-s", shares(r.s)));
+  row.title = (side === "bid" ? "bid" : "ask") + " " + shares(r.s) + " at " + fx(r.p) + (r.x ? " on " + r.x : "") +
+    (r.huge ? " · HUGE: at or over this book's line — Approximation, a fact, not a gate" : "");
+  return row;
+}
+function flowWords(ev) {
+  const side = ev.side === "bid" ? "BID" : "ASK";
+  const how = ev.kind === "appeared" ? "appeared" : ev.how === "taken" ? "taken by the tape"
+    : ev.how === "pulled" ? "pulled" : "gone";
+  return side + " " + shares(ev.size) + " at " + fx(ev.price) + (ev.venues && ev.venues.length ? " (" + ev.venues.join(", ") + ")" : "") +
+    " " + how;
+}
+function renderDepth() {
+  const host = $("#depthCard"); if (!host) return;
+  const d = DEPTH;
+  host.textContent = "";
+  const tag = $("#depthTag"), st = d ? d.state || "OFF" : "OFF";
+  if (tag) { tag.textContent = st === "NO_SUBSCRIPTION" ? "NO SUB" : st; tag.className = "tag l2-state " + (DEPTH_STATE_CLASS[st] || "off"); }
+  if (!d) { host.appendChild(el("div", "placeholder", "loading the book…")); return; }
+  const sel = state.selected;
+  if (st === "OFF" && !d.symbol) { host.appendChild(el("div", "ts-msg", d.message || "no book")); return; }
+  if (d.symbol && sel && d.symbol !== sel) {
+    host.appendChild(el("div", "ts-other", "The book is on " + d.symbol + ", not on " + sel + ". It follows the tape: " +
+      "select the name, or use “show” on the Time & Sales."));
+    return;
+  }
+  if (st === "NO_SUBSCRIPTION") {
+    const box = el("div", "l2-nosub");
+    box.appendChild(el("b", null, "No depth subscription yet"));
+    box.appendChild(el("div", "l2-code", d.message || ("IBKR " + (d.code || "?"))));
+    const again = d.askedAgainAt ? " — asked again " + etClock(d.askedAgainAt) : "";
+    box.appendChild(el("div", "l2-why", "The book shows here by itself once the subscription is on the account; the desk " +
+      "asks IBKR again every two minutes" + again + ". What it takes: Level 2 on the live user, shared to paper " +
+      "(docs/day-runbook.md, “Level 2”)."));
+    host.appendChild(box);
+    return;
+  }
+  if (st === "ERROR" || st === "PAUSED" || st === "STARTING") {
+    host.appendChild(el("div", "ts-msg " + (DEPTH_STATE_CLASS[st] || ""), (d.symbol ? d.symbol + " · " : "") + (d.message || st)));
+    if (!(d.bids || []).length && !(d.asks || []).length) return;
+  }
+  const ins = d.inside || {}, tot = d.totals || {};
+  const head = el("div", "l2-head");
+  head.appendChild(el("b", null, d.symbol || "—"));
+  head.appendChild(el("span", null, ins.spread != null ? "spread " + (ins.spread * 100).toFixed(ins.spread < 0.1 ? 1 : 0) + "¢" : "no inside"));
+  head.appendChild(el("span", "muted", shares(tot.bid) + " bid · " + shares(tot.ask) + " ask"));
+  head.title = "rows as IBKR holds them (" + (d.rows || "?") + " a side asked) · " + (d.source || "") +
+    " · totals are the rows shown, not the whole book";
+  host.appendChild(head);
+  const ladder = el("div", "l2-ladder");
+  (d.asks || []).slice().reverse().forEach(r => ladder.appendChild(depthRow(r, "ask")));
+  const mid = el("div", "l2-mid", ins.bid != null && ins.ask != null ? fx(ins.bid) + " × " + fx(ins.ask) : "—");
+  ladder.appendChild(mid);
+  (d.bids || []).forEach(r => ladder.appendChild(depthRow(r, "bid")));
+  host.appendChild(ladder);
+  const evs = (d.events || []).filter(e => e.kind !== "gap").slice(-3).reverse();
+  if (evs.length) {
+    const log = el("div", "l2-events");
+    evs.forEach(e => log.appendChild(el("div", "l2-ev " + e.side, etClock(e.t) + " " + flowWords(e))));
+    log.title = "a huge level: within the first " + ((d.rule || {}).near || 3) + " price levels of its side, at least " +
+      ((d.rule || {}).hugeMult || 10) + "× this book's median level, never under " + shares((d.rule || {}).hugeMin || 2000) +
+      " shares — or " + shares((d.rule || {}).hugeAbs || 25000) + " outright. This desk's Approximation; never a gate.";
+    host.appendChild(log);
+  }
+}
+
+/* Huge buys and sells (owner, 2026-10-09): a desk alert — sound and banner —
+   for the selected name, debounced. The definitions are the server's and
+   labelled Approximation: a huge resting level on the book appearing or gone
+   (depth.py), a print at or over the tape's big-print line (tape.py). Facts,
+   never gates: nothing here changes a verdict. Seeded on the first snapshot of
+   each name, so history is never news. */
+const FLOW_DEBOUNCE_MS = 20000;
+const FLOW = { sym: null, bookFor: null, tapeFor: null, seenEvents: new Set(), seenPrints: new Set(), last: {} };
+function flowKey(p) { return p.t + "|" + p.p + "|" + p.s; }
+function watchFlow() {
+  const sym = state.selected;
+  if (!sym) return;
+  if (FLOW.sym !== sym) {                     // a new name: nothing of it seen yet
+    FLOW.sym = sym; FLOW.bookFor = null; FLOW.tapeFor = null;
+    FLOW.seenEvents = new Set(); FLOW.seenPrints = new Set();
+  }
+  const fresh = [];
+  if (DEPTH && DEPTH.symbol === sym) {
+    const seed = FLOW.bookFor !== sym;        // this name's first book is history
+    FLOW.bookFor = sym;
+    (DEPTH.events || []).forEach(e => {
+      if (e.kind === "gap" || FLOW.seenEvents.has(e.id)) return;
+      FLOW.seenEvents.add(e.id);
+      if (!seed) fresh.push({ kind: "book:" + e.side, side: e.side, text: sym + " · " + flowWords(e) });
+    });
+  }
+  if (TAPE && TAPE.symbol === sym) {
+    const seed = FLOW.tapeFor !== sym;        // and so is its first tape
+    FLOW.tapeFor = sym;
+    (TAPE.prints || []).forEach(p => {
+      if (!p.big || p.src !== "live") return;
+      const k = flowKey(p);
+      if (FLOW.seenPrints.has(k)) return;
+      FLOW.seenPrints.add(k);
+      if (!seed) fresh.push({ kind: "print:" + p.side, side: p.side === "bid" ? "bid" : p.side === "ask" ? "ask" : "mid",
+        text: sym + " · print " + shares(p.s) + " at " + fx(p.p) + (p.side === "ask" ? " at the ask ▲" : p.side === "bid" ? " at the bid ▼" : "") });
+    });
+  }
+  if (FLOW.seenEvents.size > 500) FLOW.seenEvents = new Set([...FLOW.seenEvents].slice(-200));
+  if (FLOW.seenPrints.size > 2000) FLOW.seenPrints = new Set([...FLOW.seenPrints].slice(-500));
+  if (!(S.streaming || S.live) || !fresh.length) return;
+  const now = Date.now();
+  fresh.forEach(f => {
+    if (now - (FLOW.last[f.kind] || 0) < FLOW_DEBOUNCE_MS) return;      // debounced per kind and side
+    FLOW.last[f.kind] = now;
+    flowAlert(f);
+  });
+}
+let FLOW_TIMER = null;
+function flowAlert(f) {
+  FLOW_ALERTS++;
+  beep("medium");
+  const b = document.getElementById("flowAlert");
+  if (!b) return;
+  b.className = "flow-alert " + f.side;
+  b.textContent = "";
+  b.appendChild(el("b", null, f.kind.startsWith("book") ? "HUGE ORDER" : "BIG PRINT"));
+  b.appendChild(el("span", null, f.text));
+  b.appendChild(el("span", "muted", "Approximation · a fact, not a gate"));
+  b.hidden = false;
+  clearTimeout(FLOW_TIMER);
+  FLOW_TIMER = setTimeout(() => { b.hidden = true; }, 10000);
+  b.onclick = () => { b.hidden = true; };
+}
+let FLOW_ALERTS = 0;
 
 /* ── decision card (owner, 2026-10-08) ─────────────────────────────────
    The server builds one card per symbol (src/momentum_platform/decision_card.py):
@@ -3183,14 +3348,18 @@ const DEFAULT_LAYOUT = {
   // catalyst too; the quote card's facts moved into the header and the card
   // waits in the tray. The simulated Level 2 is gone (owner, 2026-10-09): it
   // drew invented depth, and he reads a real book or none.
-  R1: "verdict", R2: "tape",
+  // Level 2 beside the tape under the card (owner, 2026-10-09: "Level 2 as a
+  // default card, ready for the subscription"): he reads the two together —
+  // "you can't really, at least for my strategy, use one without the other"
+  // (ZfwTJAMLroA @01:45:39).
+  R1: "verdict", R2: "depth", R3: "tape",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
 const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["quote", "screener", "tv-widget", "tv-widget-5m", "chart-daily", "timeline"]);
 const DEFAULT_SIZES = {
-  wLeft: 330, wRight: 384,
+  wLeft: 330, wRight: 430,
   slots: { L1: 1.2, L2: 0.8, L3: 0.8, L4: 1.25, C1: 1.75, PAIR: 1.1, C2: 1, C3: 1,
-           R1: 2.35, R2: 1 },
+           R1: 2.0, RPAIR: 1.3, R2: 1, R3: 1 },
 };
 // v8: the desk's real-time charts replace TradingView's delayed widget in C1
 // and C2. The version is bumped rather than migrated because a saved v7
@@ -3206,7 +3375,9 @@ const DEFAULT_SIZES = {
 // click in the tray had put it in the decision card's slot, and the saved
 // layout kept it there. A tray click can no longer do that; the bump brings
 // every saved desk back to the decision card.
-const LAYOUT_KEY = "momentum-workstation.layout.v11";
+// v12 (2026-10-09): Level 2 beside the Time & Sales under the decision card —
+// a new slot pair (R2, R3); a v11 layout lacks R3 and would fail the check.
+const LAYOUT_KEY = "momentum-workstation.layout.v12";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
@@ -3862,6 +4033,7 @@ function streamFollow() {
     .on("symbol-added", () => refreshSession())
     .on("session", applySessionTick)           // the server just rebuilt the scanners
     .on("tape", applyTape)                     // the focus name's Time & Sales
+    .on("depth", applyDepth)                   // the focus name's Level 2 book
     .on("resync", () => refreshSession())
     .on("status", st => { if (st.state === "reconnecting" || st.state === "closed") {
       $("#feedText").textContent = "RECONNECTING"; $("#feedDot").className = "dot stale"; } })
@@ -4155,8 +4327,11 @@ function init() {
   document.body.appendChild(parked);
   loadLayout(); applyLayout(); applySizes(); wireLayout(); wireResizers(); renderTray();
   loadTape();                         // a replay answers "no tape in this replay"
+  loadDepth();                        // and "no Level 2 in this replay"
   setInterval(() => { if (TAPE && TAPE.lastPrintAt) { renderTape(); refreshTapeLine(); } }, 1000);
   window.__applyTape = applyTape;     // tests feed a snapshot without a socket
+  window.__applyDepth = applyDepth;   // and a book
+  window.__deskFlowAlerts = () => FLOW_ALERTS;
   window.__postFocus = postFocus;     // … and drive the focus requests
   // The window you look at takes the tape; a tab out of view never asks.
   document.addEventListener("visibilitychange", () => {

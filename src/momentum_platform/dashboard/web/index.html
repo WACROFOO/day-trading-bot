@@ -65,6 +65,8 @@
     <button id="btnHelp" class="btn ghost" title="How to read the desk (?)">? Legend</button>
   </header>
   <div id="deskAlerts" class="desk-alerts" role="alert" hidden></div>
+  <!-- a huge order on the book or a big print on the selected name (2026-10-09) -->
+  <div id="flowAlert" class="flow-alert" role="status" hidden></div>
 
   <main class="grid" id="grid">
     <section class="col dock" data-col="left">
@@ -103,9 +105,15 @@
     <div class="gutter gutter-h" data-cols="right" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize right column"></div>
 
     <section class="col context" data-col="right">
-      <div class="slot" data-slot="R1" style="flex-grow:2.35"></div>
-      <div class="gutter gutter-v" data-between="R1,R2" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize the decision card and the tape"></div>
-      <div class="slot" data-slot="R2" style="flex-grow:1"></div>
+      <div class="slot" data-slot="R1" style="flex-grow:2.0"></div>
+      <div class="gutter gutter-v" data-between="R1,RPAIR" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize the decision card and the book with the tape"></div>
+      <!-- Level 2 beside the Time & Sales (2026-10-09): "they really should always
+           just be together" (ZfwTJAMLroA @01:45:34) -->
+      <div class="pair" data-slot="RPAIR" style="flex-grow:1.3">
+        <div class="slot" data-slot="R2" style="flex-grow:1"></div>
+        <div class="gutter gutter-h pair-gutter" data-pair="R2,R3" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize the Level 2 and the Time & Sales"></div>
+        <div class="slot" data-slot="R3" style="flex-grow:1"></div>
+      </div>
     </section>
   </main>
 
@@ -208,6 +216,15 @@
       <div class="tile-rows" id="screenerRows"><div class="empty">Waiting for the first screener pass…</div></div>
     </article>
 
+    <!-- Level 2 (2026-10-09): IBKR market depth for the selected name, read-only. -->
+    <article class="card l2-card" data-card="depth">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Level 2</span>
+        <span class="tag l2-state off" id="depthTag">—</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="card-body l2-body" id="depthCard"></div>
+    </article>
+
     <!-- The real tape (2026-10-08): IBKR tick-by-tick for the selected name. -->
     <article class="card tape-card" data-card="tape">
       <div class="card-head"><span class="grip">⠿</span>
@@ -267,6 +284,9 @@
         <p>Only a plan that is <b>live now</b>: armed inside the bot's 07:00–11:20 window, inside its fill window (A10: 3 min from the break), not stopped, not at 2R, not killed. <b>ENTRY</b> a frozen plan's trigger · <b>TRIGGER</b> the forming pullback's break level, drawn on a REVIEW only · <b>STOP</b> under the pullback low · <b>2R</b> dotted, a reference (the bot trails; no fixed target) · <b>IN / STOP / TRAIL</b> your open position. No live plan, no lines — the card says so.</p></div>
       <div><h4>Five pillars (card)</h4>
         <p>Five tiles: price · gain · RVOL · float · news, each with ✓ / ✗ / ?, the value and the threshold, from the server's lamps. The big number is the cascade's own count (A5): unknown counts as not passed; the tick on the meter is the minimum.</p></div>
+      <div class="lg-wide" id="legendDepth"><h4>Level 2 — the book</h4>
+        <p><b>What it is:</b> the resting orders on the selected name, from IBKR market depth (SmartDepth: every exchange, the venue on each row). Asks above the inside, bids below; one shade per price level. <i>"level two, um, shows you the buy and sell orders right here … time and sales, so this shows you where people are buying and where they're selling"</i> (ZfwTJAMLroA @01:44:36). <b>NO SUB</b>: IBKR refused the book — its exact code is on the card, and the desk asks again every two minutes, so the book appears once the subscription is live.</p>
+        <p><b>Huge orders</b> (amber rows; the banner and a sound for the selected name, at most one per kind every 20 s): a price level within the first 3 of its side holding at least 10× this book's median level (never under 2,000 shares) or 25,000 shares outright, appearing or gone — <i>taken</i> when the tape printed at least half of it there in the last 10 s, else <i>pulled</i>. A print at or over the tape's big-print line alerts too. This desk's Approximation — the corpus counts the need ("large seller / buyer", PARAMETERS.md §10), not a size. Facts, never a gate.</p></div>
       <div class="lg-wide" id="legendTape"><h4>Time &amp; Sales — the tape</h4>
         <p><b>What it is:</b> every executed trade on the selected name, newest first, as IBKR reports it. <b>▲ green</b> printed at or above the ask: a buyer lifted the offer · <b>▼ red</b> at or below the bid: a seller hit the bid · <b>·</b> between · <b>?</b> no quote of that moment (history). <b>Bold</b>: a big print, at least 10× this tape's median and never under 2,000 shares — this desk's Approximation.</p>
         <p><b>Why at the entry:</b> <i>"So, where is my eye? It's mostly on the time and sales right here and on the ask price. And I glance over at the chart"</i> (ZfwTJAMLroA @01:08:06). <i>"What does continued strength look like? Green on the tape. We want to see more buy orders coming through."</i> (KzVbXzkoZkA @00:54:47).</p>

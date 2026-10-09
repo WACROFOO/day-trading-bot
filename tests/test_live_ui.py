@@ -553,6 +553,45 @@ def test_the_selected_name_gets_a_live_tape_end_to_end(desk_server):
         browser.close()
 
 
+def test_the_selected_name_gets_its_book_end_to_end(desk_server):
+    """Level 2 (owner, 2026-10-09): the same focus asks IBKR for SmartDepth on
+    the desk's read-only connection. Until the account holds the subscription
+    IBKR refuses, and the card says so with IBKR's exact code; the request is
+    made again on its own, and the moment depth flows the ladder paints."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    from fake_ibkr import Obj
+    from momentum_platform.datasources import ibkr_depth as ID
+    desk, ib, clock, port = (desk_server[k] for k in ("desk", "ib", "clock", "port"))
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+        pg = browser.new_page(viewport={"width": 1600, "height": 900})
+        errors: list = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(f"http://127.0.0.1:{port}/")
+        pg.wait_for_function("window.DeskLive && window.DeskLive.state === 'open'", timeout=5000)
+        pg.wait_for_timeout(700)                         # the focus request is debounced
+        desk.run_pending()
+        assert ("AAA", ID.DEPTH_ROWS, True) in ib.depth_calls, "SmartDepth for the selected name"
+        desk._on_tws_error(ib.depth_req_id("AAA"), 354, "Not subscribed to requested market data.",
+                           Obj(symbol="AAA"))
+        desk._publish_depth()
+        pg.wait_for_function("document.querySelector('#depthTag').textContent === 'NO SUB'", timeout=5000)
+        assert "IBKR 354: Not subscribed to requested market data." in pg.text_content("#depthCard")
+        assert desk.health()["depth"]["code"] == 354
+        desk.depth._retry_at = 0                         # the two-minute retry comes due
+        desk._publish_depth()
+        assert sum(1 for c in ib.depth_calls if c[0] == "AAA") >= 2
+        ib.push_depth("AAA", [(4.34, 500, "NSDQ"), (4.33, 800, "ARCA")], [(4.36, 300, "NSDQ"), (4.37, 900, "EDGX")])
+        desk._publish_depth()
+        pg.wait_for_function("document.querySelector('#depthTag').textContent === 'LIVE'", timeout=5000)
+        assert pg.locator("#depthCard .l2-row").count() == 4
+        assert pg.text_content("#depthCard .l2-mid") == "4.34 × 4.36"
+        assert desk.health()["depth"]["state"] == "LIVE"
+        assert not errors, errors
+        browser.close()
+
+
 def test_the_page_asks_for_the_tape_only_when_it_needs_to(desk_server):
     """Review 2026-10-08: the first version posted a name the owner had
     already left, and never asked again for the selected one. Now a post for a
