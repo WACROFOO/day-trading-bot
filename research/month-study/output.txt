@@ -1,0 +1,102 @@
+universe: 20 sessions, 358 symbol-days (board 214, decision 177, screener 284)
+plans: bot 1939 armed, 1347 filled · open 4004 armed, 2782 filled
+SIP vs the desk's own bars: 59383 minutes compared, median difference 0.0
+
+1 · FLEXIBLE (L0) — every plan, selection sessions
+  bot   fixed  both        n  1046  net -0.918 R/trade  total   -960.7 R  gross -0.037  win 34%
+  bot   fixed  pre-market  n   503  net -0.927 R/trade  total   -466.4 R  gross +0.018  win 36%
+  bot   fixed  regular     n   543  net -0.910 R/trade  total   -494.3 R  gross -0.088  win 32%
+  bot   trail  both        n  1046  net -1.124 R/trade  total  -1175.2 R  gross -0.062  win 17%
+  bot   trail  pre-market  n   503  net -1.234 R/trade  total   -620.5 R  gross -0.084  win 16%
+  bot   trail  regular     n   543  net -1.022 R/trade  total   -554.7 R  gross -0.042  win 18%
+  bot   be     both        n  1046  net -1.006 R/trade  total  -1052.4 R  gross -0.079  win 25%
+  bot   be     pre-market  n   503  net -1.049 R/trade  total   -527.7 R  gross -0.051  win 27%
+  bot   be     regular     n   543  net -0.966 R/trade  total   -524.7 R  gross -0.105  win 23%
+  open  fixed  both        n  2095  net -1.023 R/trade  total  -2144.0 R  gross -0.060  win 34%
+  open  fixed  pre-market  n   910  net -0.919 R/trade  total   -836.0 R  gross +0.032  win 37%
+  open  fixed  regular     n  1185  net -1.104 R/trade  total  -1308.0 R  gross -0.131  win 31%
+  open  trail  both        n  2095  net -1.226 R/trade  total  -2567.9 R  gross -0.064  win 16%
+  open  trail  pre-market  n   910  net -1.192 R/trade  total  -1084.3 R  gross -0.026  win 17%
+  open  trail  regular     n  1185  net -1.252 R/trade  total  -1483.5 R  gross -0.093  win 15%
+  open  be     both        n  2095  net -1.087 R/trade  total  -2277.3 R  gross -0.083  win 25%
+  open  be     pre-market  n   910  net -1.004 R/trade  total   -913.4 R  gross -0.011  win 28%
+  open  be     regular     n  1185  net -1.151 R/trade  total  -1363.9 R  gross -0.139  win 22%
+
+  the bot's rules today (G1 G4 VW E9 MC PV, trail, bot window)
+    selection n   119  net -0.879 R/trade  total   -104.6 R  gross +0.067  win 23%
+    holdout   n    31  net -1.694 R/trade  total    -52.5 R  gross -1.055  win 6%
+
+2 · ONE LEVER AT A TIME — added alone to L0, selection
+  bot window, exit fixed: L0 n  1046  net -0.918 R/trade  total   -960.7 R  gross -0.037  win 34%
+    G1               n   621  net -0.854 R/trade  total   -530.0 R  gross -0.044  win 34%   Δ +0.064
+    G4               n   762  net -0.854 R/trade  total   -650.8 R  gross +0.013  win 35%   Δ +0.064
+    VW               n   487  net -0.716 R/trade  total   -348.7 R  gross +0.014  win 35%   Δ +0.202
+    E9               n   852  net -0.888 R/trade  total   -756.9 R  gross -0.037  win 34%   Δ +0.030
+    MC               n   700  net -0.958 R/trade  total   -670.5 R  gross -0.063  win 33%   Δ -0.040
+    PV               n   771  net -0.960 R/trade  total   -739.9 R  gross -0.008  win 35%   Δ -0.042
+    GN≥10%           n   866  net -0.908 R/trade  total   -786.4 R  gross -0.091  win 33%   Δ +0.010
+    GN≥20%           n   640  net -0.807 R/trade  total   -516.3 R  gross -0.125  win 32%   Δ +0.111
+    GN≥30%           n   481  net -0.792 R/trade  total   -381.1 R  gross -0.192  win 30%   Δ +0.126
+    GN≥50%           n   290  net -0.574 R/trade  total   -166.4 R  gross -0.099  win 33%   Δ +0.344
+    RV≥0.5           n   876  net -0.874 R/trade  total   -765.4 R  gross -0.073  win 33%   Δ +0.044
+    RV≥1             n   763  net -0.874 R/trade  total   -666.5 R  gross -0.075  win 33%   Δ +0.044
+    RV≥2             n   642  net -0.786 R/trade  total   -504.6 R  gross -0.046  win 34%   Δ +0.132
+    RV≥5             n   418  net -0.770 R/trade  total   -321.7 R  gross -0.067  win 33%   Δ +0.148
+    FL<20M           n   781  net -0.867 R/trade  total   -677.4 R  gross -0.029  win 35%   Δ +0.051
+    FL<10M           n   709  net -0.862 R/trade  total   -611.1 R  gross -0.031  win 35%   Δ +0.056
+    NW               n   803  net -0.880 R/trade  total   -706.7 R  gross -0.028  win 35%   Δ +0.038
+    SW≥1%            n   941  net -0.752 R/trade  total   -707.8 R  gross -0.015  win 35%   Δ +0.166
+    SW≥2%            n   638  net -0.625 R/trade  total   -399.0 R  gross +0.007  win 35%   Δ +0.293
+    SW≥3%            n   391  net -0.542 R/trade  total   -212.0 R  gross +0.003  win 35%   Δ +0.376
+    WN=pre-market    n   503  net -0.927 R/trade  total   -466.4 R  gross +0.018  win 36%   Δ -0.009
+    WN=regular       n   543  net -0.910 R/trade  total   -494.3 R  gross -0.088  win 32%   Δ +0.008
+    FP               n   160  net -1.175 R/trade  total   -188.0 R  gross -0.106  win 32%   Δ -0.257
+  open window, exit fixed: L0 n  2095  net -1.023 R/trade  total  -2144.0 R  gross -0.060  win 34%
+    G1               n  1258  net -0.954 R/trade  total  -1199.5 R  gross -0.062  win 33%   Δ +0.069
+    G4               n  1404  net -0.944 R/trade  total  -1324.7 R  gross -0.006  win 36%   Δ +0.079
+    VW               n   915  net -0.836 R/trade  total   -765.1 R  gross -0.044  win 34%   Δ +0.187
+    E9               n  1716  net -1.014 R/trade  total  -1740.6 R  gross -0.067  win 34%   Δ +0.009
+    MC               n  1370  net -1.068 R/trade  total  -1463.2 R  gross -0.089  win 32%   Δ -0.045
+    PV               n  1560  net -1.078 R/trade  total  -1681.7 R  gross -0.044  win 34%   Δ -0.055
+    GN≥10%           n  1757  net -0.979 R/trade  total  -1720.2 R  gross -0.109  win 33%   Δ +0.044
+    GN≥20%           n  1381  net -0.881 R/trade  total  -1216.6 R  gross -0.134  win 32%   Δ +0.142
+    GN≥30%           n  1084  net -0.875 R/trade  total   -948.8 R  gross -0.190  win 30%   Δ +0.148
+    GN≥50%           n   659  net -0.700 R/trade  total   -461.1 R  gross -0.130  win 32%   Δ +0.323
+    RV≥0.5           n  1724  net -0.989 R/trade  total  -1705.5 R  gross -0.105  win 32%   Δ +0.034
+    RV≥1             n  1539  net -0.980 R/trade  total  -1507.5 R  gross -0.101  win 32%   Δ +0.043
+    RV≥2             n  1312  net -0.941 R/trade  total  -1234.6 R  gross -0.099  win 32%   Δ +0.082
+    RV≥5             n   966  net -0.945 R/trade  total   -912.9 R  gross -0.137  win 31%   Δ +0.078
+    FL<20M           n  1595  net -0.997 R/trade  total  -1589.8 R  gross -0.066  win 33%   Δ +0.026
+    FL<10M           n  1467  net -0.991 R/trade  total  -1453.1 R  gross -0.063  win 34%   Δ +0.032
+    NW               n  1591  net -0.978 R/trade  total  -1556.4 R  gross -0.057  win 34%   Δ +0.045
+    SW≥1%            n  1863  net -0.830 R/trade  total  -1545.7 R  gross -0.041  win 35%   Δ +0.193
+    SW≥2%            n  1214  net -0.701 R/trade  total   -851.0 R  gross -0.024  win 35%   Δ +0.322
+    SW≥3%            n   700  net -0.585 R/trade  total   -409.2 R  gross -0.007  win 35%   Δ +0.438
+    WN=pre-market    n   910  net -0.919 R/trade  total   -836.0 R  gross +0.032  win 37%   Δ +0.104
+    WN=regular       n  1185  net -1.104 R/trade  total  -1308.0 R  gross -0.131  win 31%   Δ -0.081
+    FP               n   169  net -1.017 R/trade  total   -171.9 R  gross +0.186  win 43%   Δ +0.006
+
+3 · GREEDY BUILD — selection only, ≥ 30 trades, stop under +0.02 R a trade
+  step 0: L0 (no lever)                            exit fixed  n  1046  net -0.918 R/trade  total   -960.7 R  gross -0.037  win 34%
+  step 1: SW≥3%                                    exit fixed  n   391  net -0.542 R/trade  total   -212.0 R  gross +0.003  win 35%
+  step 2: SW≥3% + G1                               exit be     n   155  net -0.310 R/trade  total    -48.1 R  gross -0.060  win 26%
+  step 3: SW≥3% + G1 + WN=regular                  exit be     n    85  net -0.164 R/trade  total    -13.9 R  gross +0.076  win 27%
+  step 4: SW≥3% + G1 + WN=regular + VW             exit be     n    57  net +0.034 R/trade  total     +1.9 R  gross +0.234  win 35%
+  step 5: SW≥3% + G1 + WN=regular + VW + PV        exit be     n    33  net +0.333 R/trade  total    +11.0 R  gross +0.523  win 45%
+  step 6: SW≥3% + G1 + WN=regular + VW + PV + G4   exit be     n    31  net +0.406 R/trade  total    +12.6 R  gross +0.591  win 48%
+
+4 · CHECKS OF THE BEST FOUND
+  best found: SW≥3% + G1 + WN=regular + VW + PV + G4 · exit be · bot window
+    selection n    31  net +0.406 R/trade  total    +12.6 R  gross +0.591  win 48%
+    holdout   n     7  net -0.728 R/trade  total     -5.1 R  gross -0.466  win 14%
+    random entries, same names, gross: strategy 0.591 vs random 0.131 (difference 0.46, 620 random entries)
+    one position, net: selection +10.8 R over 30 trades (7/11 days up) · holdout -5.1 R over 7
+    costs old   selection n    31  net +0.432 R/trade  total    +13.4 R  gross +0.591  win 48%
+               holdout   n     7  net -0.652 R/trade  total     -4.6 R  gross -0.466  win 14%
+    costs meas  selection n     0
+               holdout   n     0
+
+  VERDICT: BEST FOUND, NOT A CANDIDATE — failed: holdout mean net > 0 on ≥ 10
+  configurations evaluated: 450
+
+written /home/user/day-trading-bot/research/month-study/results.json

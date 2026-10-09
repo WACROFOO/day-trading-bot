@@ -10,4 +10,6 @@ measures accuracy going forward.
 | `PREREGISTRATION.md` | written before any run: universe (the ledger's screener, board and decision names, 2026-09-08..10-08), data, the two arming regimes, the levers, the greedy ladder, the holdout week, the random-entry check, what counts as a CANDIDATE |
 | `../../scripts/month_study.py` | the run: universe from `research/daily/<day>/` (screener, board, decisions), SIP bars, the engine's plans in both regimes, three cost models, the ladder, the checks; writes `results.json` here |
 
-The results and the report are added here when the study runs.
+| `REPORT.md` | **the result: no combination made money in both the 15 selection sessions and the held-out week.** The best found (stop ≥ 3 % + price + regular hours + VWAP + pullback volume + still rising, break-even exit) read +0.41 R a trade on 31 trades and −0.73 on its 7 holdout trades. What held in both periods is a direction: wider stops, the price band, regular hours — losing 0.16–0.25 R a trade against the bot's 0.88–1.69 |
+| `output.txt`, `results.json` | the preregistered run's printout and every table |
+| `exploratory.json` (`../../scripts/month_study_explore.py`) | read after the verdict, chose nothing: each greedy step on the holdout, the best found's trades by name |

@@ -1,0 +1,727 @@
+{
+ "universe": {
+  "sessions": 20,
+  "symbol_days": 358,
+  "by_source": {
+   "decision": 177,
+   "board": 214,
+   "screener": 284
+  }
+ },
+ "plans": {
+  "bot": {
+   "plans": 1939,
+   "filled": 1347
+  },
+  "open": {
+   "plans": 4004,
+   "filled": 2782
+  }
+ },
+ "fidelity": {
+  "bars_compared": 59383,
+  "median_rel_diff": 0.0
+ },
+ "L0": {
+  "bot/fixed/both": {
+   "n": 1046,
+   "mean": -0.918,
+   "total": -960.69,
+   "gross": -0.037,
+   "win": 0.34
+  },
+  "bot/fixed/pre-market": {
+   "n": 503,
+   "mean": -0.927,
+   "total": -466.43,
+   "gross": 0.018,
+   "win": 0.36
+  },
+  "bot/fixed/regular": {
+   "n": 543,
+   "mean": -0.91,
+   "total": -494.26,
+   "gross": -0.088,
+   "win": 0.32
+  },
+  "bot/trail/both": {
+   "n": 1046,
+   "mean": -1.124,
+   "total": -1175.23,
+   "gross": -0.062,
+   "win": 0.17
+  },
+  "bot/trail/pre-market": {
+   "n": 503,
+   "mean": -1.234,
+   "total": -620.55,
+   "gross": -0.084,
+   "win": 0.16
+  },
+  "bot/trail/regular": {
+   "n": 543,
+   "mean": -1.022,
+   "total": -554.68,
+   "gross": -0.042,
+   "win": 0.18
+  },
+  "bot/be/both": {
+   "n": 1046,
+   "mean": -1.006,
+   "total": -1052.42,
+   "gross": -0.079,
+   "win": 0.25
+  },
+  "bot/be/pre-market": {
+   "n": 503,
+   "mean": -1.049,
+   "total": -527.74,
+   "gross": -0.051,
+   "win": 0.27
+  },
+  "bot/be/regular": {
+   "n": 543,
+   "mean": -0.966,
+   "total": -524.69,
+   "gross": -0.105,
+   "win": 0.23
+  },
+  "open/fixed/both": {
+   "n": 2095,
+   "mean": -1.023,
+   "total": -2144.03,
+   "gross": -0.06,
+   "win": 0.34
+  },
+  "open/fixed/pre-market": {
+   "n": 910,
+   "mean": -0.919,
+   "total": -835.98,
+   "gross": 0.032,
+   "win": 0.37
+  },
+  "open/fixed/regular": {
+   "n": 1185,
+   "mean": -1.104,
+   "total": -1308.05,
+   "gross": -0.131,
+   "win": 0.31
+  },
+  "open/trail/both": {
+   "n": 2095,
+   "mean": -1.226,
+   "total": -2567.87,
+   "gross": -0.064,
+   "win": 0.16
+  },
+  "open/trail/pre-market": {
+   "n": 910,
+   "mean": -1.192,
+   "total": -1084.33,
+   "gross": -0.026,
+   "win": 0.17
+  },
+  "open/trail/regular": {
+   "n": 1185,
+   "mean": -1.252,
+   "total": -1483.54,
+   "gross": -0.093,
+   "win": 0.15
+  },
+  "open/be/both": {
+   "n": 2095,
+   "mean": -1.087,
+   "total": -2277.35,
+   "gross": -0.083,
+   "win": 0.25
+  },
+  "open/be/pre-market": {
+   "n": 910,
+   "mean": -1.004,
+   "total": -913.41,
+   "gross": -0.011,
+   "win": 0.28
+  },
+  "open/be/regular": {
+   "n": 1185,
+   "mean": -1.151,
+   "total": -1363.94,
+   "gross": -0.139,
+   "win": 0.22
+  }
+ },
+ "bot_today": {
+  "selection": {
+   "n": 119,
+   "mean": -0.879,
+   "total": -104.59,
+   "gross": 0.067,
+   "win": 0.23
+  },
+  "holdout": {
+   "n": 31,
+   "mean": -1.694,
+   "total": -52.51,
+   "gross": -1.055,
+   "win": 0.06
+  }
+ },
+ "single": {
+  "bot/G1": {
+   "n": 621,
+   "mean": -0.854,
+   "total": -530.05,
+   "gross": -0.044,
+   "win": 0.34,
+   "delta": 0.064
+  },
+  "bot/G4": {
+   "n": 762,
+   "mean": -0.854,
+   "total": -650.82,
+   "gross": 0.013,
+   "win": 0.35,
+   "delta": 0.064
+  },
+  "bot/VW": {
+   "n": 487,
+   "mean": -0.716,
+   "total": -348.73,
+   "gross": 0.014,
+   "win": 0.35,
+   "delta": 0.202
+  },
+  "bot/E9": {
+   "n": 852,
+   "mean": -0.888,
+   "total": -756.93,
+   "gross": -0.037,
+   "win": 0.34,
+   "delta": 0.03
+  },
+  "bot/MC": {
+   "n": 700,
+   "mean": -0.958,
+   "total": -670.5,
+   "gross": -0.063,
+   "win": 0.33,
+   "delta": -0.04
+  },
+  "bot/PV": {
+   "n": 771,
+   "mean": -0.96,
+   "total": -739.93,
+   "gross": -0.008,
+   "win": 0.35,
+   "delta": -0.042
+  },
+  "bot/GN\u226510%": {
+   "n": 866,
+   "mean": -0.908,
+   "total": -786.39,
+   "gross": -0.091,
+   "win": 0.33,
+   "delta": 0.01
+  },
+  "bot/GN\u226520%": {
+   "n": 640,
+   "mean": -0.807,
+   "total": -516.27,
+   "gross": -0.125,
+   "win": 0.32,
+   "delta": 0.111
+  },
+  "bot/GN\u226530%": {
+   "n": 481,
+   "mean": -0.792,
+   "total": -381.07,
+   "gross": -0.192,
+   "win": 0.3,
+   "delta": 0.126
+  },
+  "bot/GN\u226550%": {
+   "n": 290,
+   "mean": -0.574,
+   "total": -166.45,
+   "gross": -0.099,
+   "win": 0.33,
+   "delta": 0.344
+  },
+  "bot/RV\u22650.5": {
+   "n": 876,
+   "mean": -0.874,
+   "total": -765.44,
+   "gross": -0.073,
+   "win": 0.33,
+   "delta": 0.044
+  },
+  "bot/RV\u22651": {
+   "n": 763,
+   "mean": -0.874,
+   "total": -666.53,
+   "gross": -0.075,
+   "win": 0.33,
+   "delta": 0.044
+  },
+  "bot/RV\u22652": {
+   "n": 642,
+   "mean": -0.786,
+   "total": -504.56,
+   "gross": -0.046,
+   "win": 0.34,
+   "delta": 0.132
+  },
+  "bot/RV\u22655": {
+   "n": 418,
+   "mean": -0.77,
+   "total": -321.68,
+   "gross": -0.067,
+   "win": 0.33,
+   "delta": 0.148
+  },
+  "bot/FL<20M": {
+   "n": 781,
+   "mean": -0.867,
+   "total": -677.43,
+   "gross": -0.029,
+   "win": 0.35,
+   "delta": 0.051
+  },
+  "bot/FL<10M": {
+   "n": 709,
+   "mean": -0.862,
+   "total": -611.15,
+   "gross": -0.031,
+   "win": 0.35,
+   "delta": 0.056
+  },
+  "bot/NW": {
+   "n": 803,
+   "mean": -0.88,
+   "total": -706.72,
+   "gross": -0.028,
+   "win": 0.35,
+   "delta": 0.038
+  },
+  "bot/SW\u22651%": {
+   "n": 941,
+   "mean": -0.752,
+   "total": -707.83,
+   "gross": -0.015,
+   "win": 0.35,
+   "delta": 0.166
+  },
+  "bot/SW\u22652%": {
+   "n": 638,
+   "mean": -0.625,
+   "total": -399.01,
+   "gross": 0.007,
+   "win": 0.35,
+   "delta": 0.293
+  },
+  "bot/SW\u22653%": {
+   "n": 391,
+   "mean": -0.542,
+   "total": -212.01,
+   "gross": 0.003,
+   "win": 0.35,
+   "delta": 0.376
+  },
+  "bot/WN=pre-market": {
+   "n": 503,
+   "mean": -0.927,
+   "total": -466.43,
+   "gross": 0.018,
+   "win": 0.36,
+   "delta": -0.009
+  },
+  "bot/WN=regular": {
+   "n": 543,
+   "mean": -0.91,
+   "total": -494.26,
+   "gross": -0.088,
+   "win": 0.32,
+   "delta": 0.008
+  },
+  "bot/FP": {
+   "n": 160,
+   "mean": -1.175,
+   "total": -188.02,
+   "gross": -0.106,
+   "win": 0.32,
+   "delta": -0.257
+  },
+  "open/G1": {
+   "n": 1258,
+   "mean": -0.954,
+   "total": -1199.52,
+   "gross": -0.062,
+   "win": 0.33,
+   "delta": 0.069
+  },
+  "open/G4": {
+   "n": 1404,
+   "mean": -0.944,
+   "total": -1324.7,
+   "gross": -0.006,
+   "win": 0.36,
+   "delta": 0.079
+  },
+  "open/VW": {
+   "n": 915,
+   "mean": -0.836,
+   "total": -765.13,
+   "gross": -0.044,
+   "win": 0.34,
+   "delta": 0.187
+  },
+  "open/E9": {
+   "n": 1716,
+   "mean": -1.014,
+   "total": -1740.64,
+   "gross": -0.067,
+   "win": 0.34,
+   "delta": 0.009
+  },
+  "open/MC": {
+   "n": 1370,
+   "mean": -1.068,
+   "total": -1463.19,
+   "gross": -0.089,
+   "win": 0.32,
+   "delta": -0.045
+  },
+  "open/PV": {
+   "n": 1560,
+   "mean": -1.078,
+   "total": -1681.68,
+   "gross": -0.044,
+   "win": 0.34,
+   "delta": -0.055
+  },
+  "open/GN\u226510%": {
+   "n": 1757,
+   "mean": -0.979,
+   "total": -1720.24,
+   "gross": -0.109,
+   "win": 0.33,
+   "delta": 0.044
+  },
+  "open/GN\u226520%": {
+   "n": 1381,
+   "mean": -0.881,
+   "total": -1216.6,
+   "gross": -0.134,
+   "win": 0.32,
+   "delta": 0.142
+  },
+  "open/GN\u226530%": {
+   "n": 1084,
+   "mean": -0.875,
+   "total": -948.79,
+   "gross": -0.19,
+   "win": 0.3,
+   "delta": 0.148
+  },
+  "open/GN\u226550%": {
+   "n": 659,
+   "mean": -0.7,
+   "total": -461.09,
+   "gross": -0.13,
+   "win": 0.32,
+   "delta": 0.323
+  },
+  "open/RV\u22650.5": {
+   "n": 1724,
+   "mean": -0.989,
+   "total": -1705.53,
+   "gross": -0.105,
+   "win": 0.32,
+   "delta": 0.034
+  },
+  "open/RV\u22651": {
+   "n": 1539,
+   "mean": -0.98,
+   "total": -1507.53,
+   "gross": -0.101,
+   "win": 0.32,
+   "delta": 0.043
+  },
+  "open/RV\u22652": {
+   "n": 1312,
+   "mean": -0.941,
+   "total": -1234.59,
+   "gross": -0.099,
+   "win": 0.32,
+   "delta": 0.082
+  },
+  "open/RV\u22655": {
+   "n": 966,
+   "mean": -0.945,
+   "total": -912.94,
+   "gross": -0.137,
+   "win": 0.31,
+   "delta": 0.078
+  },
+  "open/FL<20M": {
+   "n": 1595,
+   "mean": -0.997,
+   "total": -1589.81,
+   "gross": -0.066,
+   "win": 0.33,
+   "delta": 0.026
+  },
+  "open/FL<10M": {
+   "n": 1467,
+   "mean": -0.991,
+   "total": -1453.13,
+   "gross": -0.063,
+   "win": 0.34,
+   "delta": 0.032
+  },
+  "open/NW": {
+   "n": 1591,
+   "mean": -0.978,
+   "total": -1556.39,
+   "gross": -0.057,
+   "win": 0.34,
+   "delta": 0.045
+  },
+  "open/SW\u22651%": {
+   "n": 1863,
+   "mean": -0.83,
+   "total": -1545.73,
+   "gross": -0.041,
+   "win": 0.35,
+   "delta": 0.193
+  },
+  "open/SW\u22652%": {
+   "n": 1214,
+   "mean": -0.701,
+   "total": -850.97,
+   "gross": -0.024,
+   "win": 0.35,
+   "delta": 0.322
+  },
+  "open/SW\u22653%": {
+   "n": 700,
+   "mean": -0.585,
+   "total": -409.25,
+   "gross": -0.007,
+   "win": 0.35,
+   "delta": 0.438
+  },
+  "open/WN=pre-market": {
+   "n": 910,
+   "mean": -0.919,
+   "total": -835.98,
+   "gross": 0.032,
+   "win": 0.37,
+   "delta": 0.104
+  },
+  "open/WN=regular": {
+   "n": 1185,
+   "mean": -1.104,
+   "total": -1308.05,
+   "gross": -0.131,
+   "win": 0.31,
+   "delta": -0.081
+  },
+  "open/FP": {
+   "n": 169,
+   "mean": -1.017,
+   "total": -171.86,
+   "gross": 0.186,
+   "win": 0.43,
+   "delta": 0.006
+  }
+ },
+ "greedy": {
+  "regime": "bot",
+  "steps": [
+   {
+    "config": {},
+    "label": "L0 (no lever)",
+    "exit": "fixed",
+    "n": 1046,
+    "mean": -0.918,
+    "total": -960.69,
+    "gross": -0.037,
+    "win": 0.34
+   },
+   {
+    "config": {
+     "SW": 3.0
+    },
+    "label": "SW\u22653%",
+    "exit": "fixed",
+    "n": 391,
+    "mean": -0.542,
+    "total": -212.01,
+    "gross": 0.003,
+    "win": 0.35
+   },
+   {
+    "config": {
+     "SW": 3.0,
+     "G1": true
+    },
+    "label": "SW\u22653% + G1",
+    "exit": "be",
+    "n": 155,
+    "mean": -0.31,
+    "total": -48.07,
+    "gross": -0.06,
+    "win": 0.26
+   },
+   {
+    "config": {
+     "SW": 3.0,
+     "G1": true,
+     "WN": "regular"
+    },
+    "label": "SW\u22653% + G1 + WN=regular",
+    "exit": "be",
+    "n": 85,
+    "mean": -0.164,
+    "total": -13.95,
+    "gross": 0.076,
+    "win": 0.27
+   },
+   {
+    "config": {
+     "SW": 3.0,
+     "G1": true,
+     "WN": "regular",
+     "VW": true
+    },
+    "label": "SW\u22653% + G1 + WN=regular + VW",
+    "exit": "be",
+    "n": 57,
+    "mean": 0.034,
+    "total": 1.91,
+    "gross": 0.234,
+    "win": 0.35
+   },
+   {
+    "config": {
+     "SW": 3.0,
+     "G1": true,
+     "WN": "regular",
+     "VW": true,
+     "PV": true
+    },
+    "label": "SW\u22653% + G1 + WN=regular + VW + PV",
+    "exit": "be",
+    "n": 33,
+    "mean": 0.333,
+    "total": 11.01,
+    "gross": 0.523,
+    "win": 0.45
+   },
+   {
+    "config": {
+     "SW": 3.0,
+     "G1": true,
+     "WN": "regular",
+     "VW": true,
+     "PV": true,
+     "G4": true
+    },
+    "label": "SW\u22653% + G1 + WN=regular + VW + PV + G4",
+    "exit": "be",
+    "n": 31,
+    "mean": 0.406,
+    "total": 12.58,
+    "gross": 0.591,
+    "win": 0.48
+   }
+  ]
+ },
+ "best": {
+  "config": {
+   "SW": 3.0,
+   "G1": true,
+   "WN": "regular",
+   "VW": true,
+   "PV": true,
+   "G4": true
+  },
+  "label": "SW\u22653% + G1 + WN=regular + VW + PV + G4",
+  "exit": "be",
+  "regime": "bot",
+  "selection": {
+   "n": 31,
+   "mean": 0.406,
+   "total": 12.58,
+   "gross": 0.591,
+   "win": 0.48
+  },
+  "holdout": {
+   "n": 7,
+   "mean": -0.728,
+   "total": -5.1,
+   "gross": -0.466,
+   "win": 0.14
+  },
+  "random": {
+   "n_random": 620,
+   "random_gross": 0.131,
+   "strategy_gross": 0.591,
+   "difference": 0.46
+  },
+  "one_position": {
+   "selection": {
+    "trades": 30,
+    "total": 10.79,
+    "days": 11,
+    "days_pos": 7
+   },
+   "holdout": {
+    "trades": 7,
+    "total": -5.1,
+    "days": 3,
+    "days_pos": 0
+   }
+  },
+  "costs": {
+   "old": {
+    "selection": {
+     "n": 31,
+     "mean": 0.432,
+     "total": 13.39,
+     "gross": 0.591,
+     "win": 0.48
+    },
+    "holdout": {
+     "n": 7,
+     "mean": -0.652,
+     "total": -4.56,
+     "gross": -0.466,
+     "win": 0.14
+    }
+   },
+   "meas": {
+    "selection": {
+     "n": 0,
+     "mean": null,
+     "total": 0.0,
+     "gross": null,
+     "win": null
+    },
+    "holdout": {
+     "n": 0,
+     "mean": null,
+     "total": 0.0,
+     "gross": null,
+     "win": null
+    }
+   }
+  },
+  "verdict": "BEST FOUND, NOT A CANDIDATE",
+  "failed": [
+   "holdout mean net > 0 on \u2265 10"
+  ]
+ },
+ "configurations_evaluated": 450
+}
