@@ -10,6 +10,8 @@ and pushes it on the current branch. `scripts/daily_review.py` reads that folder
     python3 scripts/day_export.py --push          # today, committed and pushed
     python3 scripts/day_export.py --day 2026-10-06 --push
     python3 scripts/day_export.py --since 2026-09-08 --push   # every day with data, one push
+    python3 scripts/day_export.py --since 2026-09-08 --board-bars --out ~/Desktop/month_export
+                                                  # no GitHub push from this Mac: write outside the repo
 
 What goes out: every name the screeners returned (`screener.csv`, the scan's
 candidates with their verdicts) and every name on the desk's board
@@ -238,15 +240,21 @@ def main(argv=None) -> int:
     ap.add_argument("--board-bars", action="store_true",
                     help="also the desk's bars with bid/ask for every screener and board name (gzipped)")
     ap.add_argument("--push", action="store_true", help="commit and push research/daily/<day> (all of them with --since)")
+    ap.add_argument("--out", help="write the day folders here instead of research/daily/ — outside the repo, so a Mac "
+                                  "that cannot push leaves its checkout clean for the next pull (2026-10-09)")
     args = ap.parse_args(argv)
     conn = L.connect(args.db)
     days = days_with_data(conn, args.since, args.day) if args.since else [args.day]
     if not days:
         print(f"no ledger data between {args.since} and {args.day} in {args.db}")
         return 1
+    root = Path(args.out).expanduser() if args.out else OUT_ROOT
+    if args.out and args.push:
+        print("--out writes outside the repo; nothing to push — upload the folder instead")
+        return 2
     for d in days:
-        meta = export(conn, d, OUT_ROOT / d, Path(args.log), board_bars=args.board_bars)
-        print(f"exported {d} → research/daily/{d}: " + " · ".join(f"{k} {v}" for k, v in meta["counts"].items()))
+        meta = export(conn, d, root / d, Path(args.log), board_bars=args.board_bars)
+        print(f"exported {d} → {root / d}: " + " · ".join(f"{k} {v}" for k, v in meta["counts"].items()))
     if args.push:
         print("pushed" if push(days) else "NOT pushed — run the git commands above by hand")
     return 0

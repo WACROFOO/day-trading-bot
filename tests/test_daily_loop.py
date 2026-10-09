@@ -130,3 +130,23 @@ def test_board_bars_carry_the_spread_when_asked(tmp_path):
     assert m1["counts"]["board_bars"] == 1
     rows = list(_csv.DictReader(gzip.open(tmp_path / "b" / "board_bars.csv.gz", "rt")))
     assert rows[0]["symbol"] == "AAA" and rows[0]["bid"] == "3.04" and rows[0]["ask"] == "3.06"
+
+
+def test_a_mac_that_cannot_push_exports_outside_the_repo(tmp_path):
+    """Owner, 2026-10-09: no GitHub credentials on the Mac. --out writes the
+    day folders elsewhere and leaves research/daily/ (and its index) alone, so
+    the next morning's pull is not blocked by local changes."""
+    db = tmp_path / "j.sqlite"
+    c = L.connect(str(db))
+    c.execute("INSERT INTO candidates (ts_et, source, symbol, verdict, reasons_json, price, gap_pct, float_shares,"
+              " pm_volume, recorded_at) VALUES ('2026-09-15T07:05:00','gap_scan','ZZZ','REJECT','[]',2.5,30,1e6,1e5,'x')")
+    c.commit(); c.close()
+    before = (DX.OUT_ROOT / "README.md").read_text() if (DX.OUT_ROOT / "README.md").exists() else None
+    out = tmp_path / "month_export"
+    rc = DX.main(["--db", str(db), "--since", "2026-09-08", "--day", "2026-10-08", "--log", str(tmp_path / "none"),
+                  "--out", str(out)])
+    assert rc == 0 and (out / "2026-09-15" / "screener.csv").exists()
+    assert not (DX.OUT_ROOT / "2026-09-15").exists()
+    after = (DX.OUT_ROOT / "README.md").read_text() if (DX.OUT_ROOT / "README.md").exists() else None
+    assert before == after, "the repo's daily index is untouched"
+    assert DX.main(["--db", str(db), "--since", "2026-09-08", "--day", "2026-10-08", "--out", str(out), "--push"]) == 2
