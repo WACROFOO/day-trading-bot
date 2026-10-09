@@ -332,6 +332,38 @@ def test_a_tws_error_reaches_the_book():
     assert s["state"] == "NO_SUBSCRIPTION" and s["code"] == 10186
 
 
+def test_a_refused_book_never_turns_the_tape_to_error():
+    """IBKR's 354 on the DEPTH request names the same contract as the tape,
+    and the tape reads a name-level refusal from any request. Found shooting
+    the Level 2 screenshots (2026-10-09): with no Level 2 subscription, every
+    name selected showed its Time & Sales as ERROR while the prints flowed."""
+    from momentum_platform.dashboard.ibkr_desk import IbkrDesk
+    ib = FakeIB()
+    clock, mono = Clock(), Mono()
+    s = IbkrStream(ib=ib, clock=clock)
+    s.connect()
+    s.subscribe(["ABCD", "WXYZ"], backfill_seconds=0)
+    tape = IT.TapeFeed(s, clock=clock, monotonic=mono, history=False)
+    feed = ID.DepthFeed(s, clock=clock, monotonic=mono, tape=lambda: tape)
+    tape.focus("ABCD")
+    feed.focus("ABCD")
+    desk = IbkrDesk.__new__(IbkrDesk)
+    desk.stream, desk.tape, desk.depth = s, tape, feed
+    desk.no_live_data, desk.symbols, desk.fundamentals = set(), ["ABCD", "WXYZ"], None
+    desk.competing_since, desk._next_competing_note, desk.clock = None, 0.0, clock
+    desk.log = lambda m: None
+    first = ib.depth_req_id("ABCD")
+    desk._on_tws_error(first, 354, "Not subscribed to requested market data.", Obj(symbol="ABCD"))
+    assert feed.snapshot()["state"] == "NO_SUBSCRIPTION"
+    assert tape.book.state != "ERROR", tape.book.state
+    feed.focus("WXYZ")                                     # a released request's late error is still the book's
+    desk._on_tws_error(first, 354, "Not subscribed to requested market data.", Obj(symbol="ABCD"))
+    assert tape.book.state != "ERROR", tape.book.state
+    # the name's own refusal, on a request that is not the book's, still reaches the tape
+    desk._on_tws_error(None, 10089, "Requested market data requires additional subscription.", Obj(symbol="ABCD"))
+    assert tape.book.state == "ERROR"
+
+
 def test_a_replay_says_it_has_no_book(fixture_server):
     from urllib.request import urlopen
     with urlopen(fixture_server + "/api/v1/depth") as r:

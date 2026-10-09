@@ -206,8 +206,34 @@ Since 2026-10-09 (`docs/desk-grid-audit-2026-10-09.md`):
   repeat is the signal — and dim names not up 10 % at the alert. The High of
   Day tile carries the **halts** from 09:30. Maximized (E), the pillar board
   is the full table, folding red names and names with no print yet.
-- The simulated Level 2 is deleted. A real book needs IBKR market-depth data
-  (below, "Level 2").
+- **Level 2** sits beside the Time & Sales: the selected name's book from IBKR
+  SmartDepth. Until the account holds a depth subscription it reads **NO SUB**
+  with IBKR's own code and words, and asks again every two minutes (below,
+  "Level 2").
+
+Since 2026-10-09 07:41 (`docs/desk-recording-2026-10-09.md`):
+
+- **The card at a glance:** the word and what to do — never "until the level"
+  when there is no level — the one reason, the level, and the five pillars as
+  tiles (value, threshold, the cascade's count). The ORDER on REVIEW only.
+  Everything else is under "Why, in full".
+- **Plan lines and the order only for a plan live now:** formed inside the
+  bot's 07:00–11:20 window, inside its 3-minute fill window (A10), not stopped,
+  not at 2R. Otherwise no lines, and the card says "no live plan — waiting for
+  the next pullback".
+- **Huge orders:** a price level within the first 3 of its side holding at
+  least 10× the book's median level (never under 2,000 shares) or 25,000
+  shares, appearing or gone (taken or pulled), and a print at or over the
+  tape's big-print line: a banner and a sound for the selected name, at most
+  one per kind every 20 s. This desk's Approximation; facts, never a gate.
+- **Charts:** the 1-minute follows the selection; one crosshair across the
+  intraday panes; one session VWAP on every pane; live, the forming 1-minute
+  candle moves with each 10-second bar; on by default only what the verdict
+  reads.
+- **Running Up** also lists the discovery filters: `5%·low` (5 % off the
+  5-minute low), `VOL` (3 % in 2 minutes on 2× volume), `HOD·vol`, `HALT↑` (the
+  first print after a halt it ran into) — $2–20, 07:00–11:30, one alert per
+  leg (`research/running-up-2026-10-09/`). Discovery only: it gates nothing.
 
 The decision card is the server's read of the selected name
 (`src/momentum_platform/decision_card.py`); the page recomputes nothing.
@@ -222,7 +248,7 @@ The decision card is the server's read of the selected name
 | **bot** | what the runner did with this name's latest plan (refused and why, armed, in, out) |
 | lamps | every gate the bot applies, value beside threshold (⛶ / E for the full table) |
 | your risk | the box above the order: your risk per trade, kept in the ledger (`desk_settings`). **Empty sizes nothing** — no fallback to the bot's paper risk (owner, 2026-10-08) |
-| **ORDER** | the bot's own order for the plan, from the bot's arithmetic: copy-ready line, limit (A10), shares (A18), the runner's checks (stop ≥ 2 %, stop ≥ 4× spread), the honest stop, the halt band. Pre-market it says IBKR holds no stop (probe 2026-09-18). **Copy arms on REVIEW only** (owner, 2026-10-08); on WATCH / WAIT the order says "not now — WAIT: the reason" and stays dim |
+| **ORDER** | the bot's own order for the plan, from the bot's arithmetic: copy-ready line, limit (A10), shares (A18), the runner's checks (stop ≥ 2 %, stop ≥ 4× spread), the honest stop, the halt band. Pre-market it says IBKR holds no stop (probe 2026-09-18). **Shown on REVIEW only** (owner, 2026-10-09): on WATCH, WAIT and NO there is no order block, and the card says what it waits for |
 | I took it / I passed / I closed it | your call, under the order line, written to the ledger with the card you saw; the daily review scores it beside the bot. After "I took it" the card tracks the position: stop, the 1 R trail (A3), 2 R, sound and notification when one is crossed |
 
 **The Time & Sales** is the selected name's prints from IBKR tick-by-tick
@@ -267,8 +293,9 @@ Not confirmed: depth in the pre-market, depth on the shared paper login (IBKR's
 paper page says fills are simulated "from the top of the book; no deep book
 access"), NYSE American coverage. Sources: interactivebrokers.com
 market-data pricing, the NASDAQ specialty-subscriptions page (EDS), the TWS API
-market-depth page, ibkrguides article 1719 (sharing to paper). The desk builds
-a display-only book once the data is on the account; no gate, no score.
+market-depth page, ibkrguides article 1719 (sharing to paper). The desk's
+Level 2 card is built (2026-10-09) and reads the book the moment the data is on
+the account: display only — no gate, no score.
 
 **After an update, restart the desk.** The page reads its files from disk on
 every load; the desk's Python only at start. A desk left running after

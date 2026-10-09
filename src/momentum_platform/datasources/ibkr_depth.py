@@ -83,6 +83,7 @@ class DepthFeed:
         self._contract = None
         self._ticker = None
         self._req: Optional[int] = None
+        self._reqs: set = set()                            # every depth request id this feed made
         self._active = False                               # a request IBKR has not refused
         self._retry_at: Optional[float] = None
         self._resume = False
@@ -141,6 +142,8 @@ class DepthFeed:
             self._retry_at = self.monotonic() + RETRY_S
             return
         self._contract, self._ticker, self._req, self._active = c, t, _req_id(ib, t), True
+        if self._req is not None:
+            self._reqs.add(self._req)
         try:
             t.updateEvent += self._on_ticker
         except Exception:                                  # noqa: BLE001
@@ -186,6 +189,11 @@ class DepthFeed:
         asks = [(lv.price, lv.size, getattr(lv, "marketMaker", "")) for lv in (getattr(ticker, "domAsks", None) or [])]
         if bids or asks or self.book.state == "LIVE":
             self.book.update(bids, asks)
+
+    def owns(self, req_id) -> bool:
+        """True when `req_id` is one of this feed's depth requests, current or
+        released: its errors are the book's and no one else's."""
+        return req_id is not None and req_id in self._reqs
 
     def on_error(self, req_id, code, message, contract=None) -> None:
         """TWS errors that are this book's, in words; a lost connection empties

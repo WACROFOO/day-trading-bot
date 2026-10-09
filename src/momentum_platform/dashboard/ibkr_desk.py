@@ -408,12 +408,17 @@ class IbkrDesk:
     def _on_tws_error(self, reqId, errorCode, errorString, contract=None, *rest) -> None:
         h = self.stream.health if self.stream is not None else None
         tape = getattr(self, "tape", None)
-        if tape is not None:
+        depth = getattr(self, "depth", None)
+        # A refused BOOK names the same contract as the tape: the tape, which
+        # falls back to the symbol for an id it does not know, read IBKR's 354
+        # on the depth request as its own and went ERROR on every name the
+        # owner selected without a Level 2 subscription (2026-10-09).
+        books = depth is not None and depth.owns(reqId)
+        if tape is not None and not books:
             try:
                 tape.on_error(reqId, errorCode, errorString, contract)
             except Exception:                          # noqa: BLE001 — the tape never takes the desk down
                 pass
-        depth = getattr(self, "depth", None)
         if depth is not None:
             try:
                 depth.on_error(reqId, errorCode, errorString, contract)
