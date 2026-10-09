@@ -522,6 +522,23 @@ def build_session_from_records(
     if writer is not None:
         writer.commit()
 
+    # Each published plan's life, for a page scrubbed to any minute (2026-10-09:
+    # the page drew the last plan armed before the minute, with no expiry —
+    # VEEA's 04:03 plan at 07:41, SAIQ's after it stopped). `liveUntil` is the
+    # first bar time at which the plan is no longer live (the A10 fill window,
+    # or the bar that stopped it or reached 2R); None = never live, armed
+    # outside the bot's 07:00–11:20 entry window.
+    for p in plans:
+        det = detectors.get(p["symbol"])
+        life = det.lives.get(p["planId"]) if det is not None else None
+        if life is None:
+            continue
+        until = life.live_until()
+        p["liveUntil"] = int(until.timestamp()) if until is not None else None
+        p["inWindow"] = life.in_window
+        p["end"] = ({"why": life.end, "t": int(life.ended_bar.timestamp())}
+                    if life.ended_bar is not None else None)
+
     # Every desk name carries its own numbers. The Five Pillars board used to
     # scavenge them out of whatever ranked list a symbol happened to reach, so
     # a name in no list read UNKNOWN on every pillar however much was known

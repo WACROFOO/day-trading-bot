@@ -24,6 +24,7 @@ Pure: no I/O, no clock — the caller passes `now`.
 from __future__ import annotations
 
 import math
+import re
 import statistics
 from datetime import datetime, time
 from typing import Optional, Sequence
@@ -186,25 +187,39 @@ def plan_outcome(plan, bars: Sequence) -> str:
     return f"triggered {entered}, open" if entered else "never triggered"
 
 
-def _search_text(detector, bars: Sequence) -> str:
-    """The first-pullback machine between setups, in words: the current push
-    (green bars, how far it ran) and the last plan with what became of it."""
+def _search_text(detector, bars: Sequence, now: Optional[datetime] = None) -> tuple:
+    """The first-pullback machine between setups, in words: (the one-line
+    reason, the full line). No plan is live here — a live plan or a forming
+    pullback never reaches this — so both say so (owner, 2026-10-09: the desk
+    drew dead plans as if live). A dead plan that still HOLDS the machine is
+    named with the two prices that release it: no new pullback can arm until
+    one prints (the blackout, kept on purpose — addendum 2026-10-06d)."""
     if detector is None:
-        return "no detector"
+        return "no detector", "no detector"
+    held = detector.held_plan() if hasattr(detector, "held_plan") else None
+    if held is not None:
+        why = detector.life_of(held, now)["why"] if now is not None else "the plan is spent"
+        short = (f"no live plan — the {held.armed_at_bar.astimezone(ET):%H:%M} plan holds the detector "
+                 f"until its stop {held.stop:.2f} or 2R {held.target:.2f}")
+        return short, (f"no live plan: {why}. The detector holds it until its stop {held.stop:.2f} or "
+                       f"2R {held.target:.2f} prints, so no new pullback can arm before then "
+                       "(the blackout, addendum 2026-10-06d)")
     pg = detector.progress()
     n, pct = pg["impulse_bars"], pg["impulse_pct"]
     if n == 0:
-        now = "no push under way"
+        push = "no push under way"
     elif not pg["impulse_valid"]:
-        now = (f"{n} green bar{'s' if n > 1 else ''} (+{pct:.1f}%) — a push needs "
-               f"{pg['min_impulse_bars']} in a row making ≥ {pg['min_impulse_pct']:g}%")
+        push = (f"{n} green bar{'s' if n > 1 else ''} (+{pct:.1f}%) — a push needs "
+                f"{pg['min_impulse_bars']} in a row making ≥ {pg['min_impulse_pct']:g}%")
     else:
-        now = f"push under way: {n} green bars, +{pct:.1f}% — the first red bar starts the pullback"
+        push = f"push under way: {n} green bars, +{pct:.1f}% — the first red bar starts the pullback"
+    short = "no live plan — waiting for the next pullback"
+    full = f"{short} · {push}"
     if detector.plans:
         p = detector.plans[-1]
-        return (f"{now} · last plan {p.armed_at_bar.astimezone(ET):%H:%M} "
-                f"{p.entry:.2f}/{p.stop:.2f} → {plan_outcome(p, bars)}")
-    return now
+        full += (f" · last plan {p.armed_at_bar.astimezone(ET):%H:%M} "
+                 f"{p.entry:.2f}/{p.stop:.2f} → {plan_outcome(p, bars)}")
+    return short, full
 
 
 def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detector, now: datetime,
@@ -227,32 +242,42 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
     mc = macd(closes)
     pend = detector.pending() if detector is not None else None
     state = detector.state if detector is not None else None
-    plan = detector.active_plan if detector is not None else None
+    # Only a plan live NOW (owner, 2026-10-09 07:41: VEEA's 04:03 plan, armed
+    # outside the bot's window, still priced at 07:41; SAIQ's drawn four
+    # minutes after it stopped). `live_plan` is the frozen plan inside the
+    # bot's entry window and its A10 fill window, not stopped, not done;
+    # a dead plan that still holds the machine is named, never priced.
+    plan = detector.live_plan(now) if detector is not None and hasattr(detector, "live_plan") else None
+    life = detector.life_of(plan, now) if plan is not None else None
     fm = five_minute or {}
     warnings: list[dict] = []
 
-    # -- the levels a plan would use: pending (pullback forming) or frozen ----
-    setup = {"state": state.value if state is not None else None}
+    # -- the levels a plan would use: pending (pullback forming) or live -------
+    setup = {"state": state.value if state is not None else None, "live": False}
     trig = stop = None
+    short = None
     if pend:
         trig, stop = pend["entry"], pend["stop"]
         bar_t = pend["trigger_bar_ts"].astimezone(ET).strftime("%H:%M")
         setup.update(text=f"pullback {pend['bars']} bar{'s' if pend['bars'] > 1 else ''} "
                           f"(max {pend['max_bars']}) · volume {'lighter' if pend['volume_ok'] else 'HEAVIER'} than the push",
-                     trigger=trig, stop=stop, triggerBar=bar_t, volumeOk=pend["volume_ok"], bars=pend["bars"])
-    elif plan is not None and state in (SetupState.ARMED, SetupState.TRIGGERED):
+                     trigger=trig, stop=stop, triggerBar=bar_t, volumeOk=pend["volume_ok"], bars=pend["bars"],
+                     forming=True)
+    elif plan is not None:
         trig, stop = plan.entry, plan.stop
         armed = plan.armed_at_bar.astimezone(ET).strftime("%H:%M")
+        until = life["until"].astimezone(ET).strftime("%H:%M")
         text = (f"plan {armed} {plan.entry:.2f}/{plan.stop:.2f}: the pullback broke, the entry has not printed yet"
                 if state == SetupState.ARMED else
-                f"plan {armed} {plan.entry:.2f}/{plan.stop:.2f} triggered")
+                f"plan {armed} {plan.entry:.2f}/{plan.stop:.2f} triggered") + f" — live until {until} (A10)"
         setup.update(text=text, trigger=trig, stop=stop, armedAt=armed, volumeOk=plan.volume_ok,
-                     bars=plan.pullback_candles)
+                     bars=plan.pullback_candles, live=True, liveUntil=until)
     elif fm.get("state") == "EXTENDED":
         setup.update(text=f"extended — straight up since {str(fm.get('since') or '')[11:16]}, "
                           "no 1-minute pullback yet")
     else:
-        setup.update(text=_search_text(detector, bars))
+        short, full = _search_text(detector, bars, now)
+        setup.update(text=full)
 
     # -- the shadow strategies (2026-10-09): what the month study's best found
     # and its robust core would do with this plan. Logged, never traded.
@@ -266,64 +291,87 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
                                "hod": sh, "volume_ok": vol_ok})
 
     # -- the verdict: first row that applies wins -------------------------------
-    word, reason, level, level_label = None, None, None, None
+    # `action` is what to do, worded to match the level: "until the level" only
+    # when there is one (owner, 2026-10-09: SAIQ read "WAIT · hands off until
+    # the level" beside "no level yet").
+    word, reason, level, level_label, action = None, None, None, None, None
     verdict = (cascade or {}).get("verdict")
     if verdict == "STALE":
-        word, reason = "WAIT", "data stale — no verdict on a feed that is behind"
+        word, reason, action = "WAIT", "data stale — no verdict on a feed that is behind", \
+            "hands off until the feed is live again"
     elif halted:
-        word, reason = "WAIT", "halted — no stop executes during a halt; the reopen sets the price"
+        word, reason, action = "WAIT", "halted — no stop executes during a halt; the reopen sets the price", \
+            "hands off until it reopens"
     elif (cascade or {}).get("killedBy"):
-        word = "NO"
+        word, action = "NO", "skip it"
         reason, level, level_label = _kill(cascade, last, sh)
     elif t >= OM.HARD_STOP:
-        word, reason = "NO", "after 11:30 — the session is over (no trades 11:30–15:00)"
+        word, reason, action = "NO", "after 11:30 — the session is over (no trades 11:30–15:00)", \
+            "skip it — the day's entries are over"
     elif t >= OM.ENTRY_CUTOFF:
-        word, reason = "WAIT", "inside the last 10 minutes before the 11:30 flatten — the bot opens nothing (A8)"
+        word, reason, action = "WAIT", \
+            "inside the last 10 minutes before the 11:30 flatten — the bot opens nothing (A8)", \
+            "hands off — no new entry this close to the flatten"
     elif t < OM.PREMARKET_START:
-        word, reason = "WATCH", "before 07:00 — thin tape; the bot's entries start at 07:00"
+        word, reason, action = "WATCH", "before 07:00 — thin tape; the bot's entries start at 07:00", \
+            "keep it on screen until 07:00"
         level, level_label = (trig, "trigger") if trig else (sh, "high of day")
     if word is None:
         reds = []
         for gid, name, val in (("vwap", "VWAP", vw), ("ema9", "9 EMA", e9)):
             if _gate(cascade, gid).get("state") == "FAIL":
-                reds.append((f"below the {name} {_px(val)}", val, f"reclaim the {name}"))
+                reds.append((f"below the {name} {_px(val)}", val, f"reclaim the {name}",
+                             f"hands off until it reclaims the {name}"))
         if _gate(cascade, "macd").get("state") == "FAIL":
             h = mc[2][-1] if mc else None
             reds.append((f"MACD under its signal (hist {h:+.3f})" if h is not None else "MACD under its signal",
-                         None, None))
+                         None, None, "hands off until the MACD crosses back over its signal"))
         if reds:
             word = "WAIT"
-            reason, level, level_label = reds[0]
+            reason, level, level_label, action = reds[0]
+            if level is None:
+                level_label = None
             if len(reds) > 1:
                 reason += f" (+{len(reds) - 1} more red)"
         elif _gate(cascade, "macd").get("state") == "UNKNOWN":
             word = "WATCH"
             reason = f"MACD warming up — {len(closes)} of {MACD_MIN} one-minute bars; the bot refuses until then"
+            action = f"keep it on screen — {max(MACD_MIN - len(closes), 1)} more one-minute bars for the MACD"
             level, level_label = (trig, "trigger") if trig else (None, None)
     if word is None:
         if pend:
             if not pend["volume_ok"]:
+                # The break of this pullback would arm a plan the bot refuses, so
+                # its high is not a level that changes the answer.
                 word, reason = "WAIT", "pullback volume heavier than the push — the bot refuses this one"
+                action = "hands off — wait for a pullback on lighter volume"
             else:
                 word = "REVIEW"
                 reason = f"first pullback, {pend['bars']} bar{'s' if pend['bars'] > 1 else ''} on lighter volume"
-            level, level_label = trig, f"break of the {setup['triggerBar']} high"
-        elif plan is not None and state in (SetupState.ARMED, SetupState.TRIGGERED):
+                action = "read the chart, then the tape at the trigger"
+                level, level_label = trig, f"break of the {setup['triggerBar']} high"
+        elif plan is not None:
             cap = OM.entry_limit(plan.entry)
             if last is not None and last <= plan.stop:
-                word, reason = "NO", "the plan's stop is already broken"
+                word, reason, action = "NO", "the plan's stop is already broken", "skip it"
             elif last is not None and last > cap:
                 word, reason = "WAIT", f"ran past the entry band (limit {cap:.2f}) — no chase; wait for the next pullback"
+                action = "hands off — no chase"
             else:
                 word = "REVIEW"
                 reason = f"broke the pullback at {setup.get('armedAt')} — still inside the entry band (≤ {cap:.2f})"
+                action = "read the chart, then the tape at the trigger"
                 level, level_label = plan.entry, "trigger"
         elif fm.get("state") == "EXTENDED":
             word, reason = "WATCH", "extended — no 1-minute pullback yet; wait for the first red candle"
+            action = "keep it on screen — wait for the first red candle"
         else:
             word = "WATCH"
-            reason = setup["text"]
+            reason = short or setup["text"]
+            action = "keep it on screen"
             level, level_label = sh, "high of day"
+    if level is None:
+        level_label = None
 
     # -- lamps: the bot's own gates, value beside threshold ----------------------
     def lamp(lid, label, state_, value, rule, kind="gate", why=None):
@@ -395,8 +443,7 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
     lamps.append(lamp("macd", "MACD 12/26/9", g.get("state", "UNKNOWN") if g else "NOT_APPLICABLE", mv,
                       "hist > 0 (line above signal)", why="MACD under its signal" if g.get("state") == "FAIL" else
                       (f"needs {MACD_MIN} bars" if g.get("state") == "UNKNOWN" else None)))
-    vol_ok = pend["volume_ok"] if pend else (plan.volume_ok if plan is not None and state in
-                                              (SetupState.ARMED, SetupState.TRIGGERED) else None)
+    vol_ok = pend["volume_ok"] if pend else (plan.volume_ok if plan is not None else None)
     nbars = setup.get("bars")
     pb_value = ("no pullback in play" if vol_ok is None else
                 f"{nbars} bar{'s' if nbars != 1 else ''} · volume {'lighter' if vol_ok else 'heavier'} than the push")
@@ -442,8 +489,11 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
                              "every '% off the high' is measured from it"})
 
     # -- the ticket: the bot's own order for these levels ------------------------
+    # The order exists on REVIEW only (owner, 2026-10-09: VEEA's WAIT card
+    # priced a dead plan). `trig`/`stop` come only from a forming pullback or
+    # a live plan, so no other plan can reach it.
     ticket = None
-    if trig and stop and word in ("REVIEW", "WATCH", "WAIT") and (cascade or {}).get("planAllowed"):
+    if trig and stop and word == "REVIEW" and (cascade or {}).get("planAllowed"):
         tk = OM.ticket(symbol, trig, stop, risk or 0.0, session=OM.entry_session(t), bid=bid, ask=ask,
                        max_notional=max_notional, prev_close=_f(meta.get("prevClose")),
                        ranges=[b[2] - b[3] for b in bars if b[5] > 0 and b[2] > b[3]],
@@ -469,14 +519,37 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
             position = p.to_dict()
             position["since"] = str(manual_open.get("ts_et") or "")[11:16]
 
+    # -- the lines a chart may draw: a live plan, or the order on a REVIEW -----
+    # A frozen plan inside its fill window is drawn whatever the word but NO
+    # (a kill withdraws it); a forming pullback's levels are drawn only on the
+    # REVIEW that prices them, so the chart and the order say the same thing.
+    lines = None
+    if word != "NO" and plan is not None:
+        lines = {"kind": "armed", "entry": plan.entry, "stop": plan.stop, "riskShare": plan.risk_share,
+                 "target": round(plan.target, 2), "armedAt": int(plan.armed_at_bar.timestamp()),
+                 "liveUntil": int(life["until"].timestamp()), "liveUntilEt": setup.get("liveUntil")}
+    elif word == "REVIEW" and pend:
+        lines = {"kind": "forming", "entry": trig, "stop": stop, "riskShare": round(trig - stop, 4),
+                 "target": round(trig + 2.0 * (trig - stop), 2), "triggerBar": setup.get("triggerBar")}
+
+    # -- the five pillars as the cascade counted them (A5) -------------------------
+    gpl_value = str(_gate(cascade, "pillars").get("value") or "")
+    mcount = re.match(r"\s*(\d)\s*/\s*5", gpl_value)
+    pillars = {"passed": int(mcount.group(1)) if mcount else None, "of": 5, "needs": PILLARS_MIN,
+               "counted": mcount is not None,
+               "note": None if mcount else ("not counted: the cascade stopped at "
+                                             f"{(cascade or {}).get('killedBy') or 'an earlier gate'}")}
+
     return {
         "symbol": symbol,
         "asOf": now.isoformat(timespec="seconds"),
         "asOfEt": now_et.strftime("%H:%M:%S"),
-        "verdict": {"word": word, "reason": reason,
+        "verdict": {"word": word, "reason": reason, "action": action,
                     "level": round(level, 2) if level is not None else None, "levelLabel": level_label,
                     "cascade": verdict},
         "setup": setup,
+        "plan": lines,
+        "pillars": pillars,
         "lamps": lamps,
         "warnings": warnings,
         "ticket": ticket,

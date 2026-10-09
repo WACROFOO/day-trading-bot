@@ -151,13 +151,31 @@ function activePlan(sym, t) {
    an instruction.
 
    A plan is live only while the server's cascade has not killed the name. When
-   it has, the levels are withdrawn from the charts and the card says so. */
-function livePlan(sym, t) {
-  const plan = activePlan(sym, t);
-  if (!plan) return null;
+   it has, the levels are withdrawn from the charts and the card says so.
+
+   VEEA and SAIQ, 2026-10-09 07:41 (owner: "the entry in charts have no
+   sense"): VEEA drew a 04:03 plan the bot had refused as outside its window,
+   SAIQ a plan that had stopped at 07:37. Being armed is not being live. The
+   server decides the life (`pullback.PlanLife`): inside the bot's 07:00–11:20
+   entry window, inside the A10 fill window, not stopped, not at 2R. At the
+   live edge the card carries the one plan live now (`card.plan`, or null);
+   scrubbed back, each armed plan carries `liveUntil`, the first minute it is
+   no longer live (null: never live). The page reads both; it judges neither. */
+function livePlan(sym, frame) {
+  if (!frame) return null;
   const sv = serverVerdict(sym);
   if (sv && sv.killedBy) return null;         // withdrawn, not merely unhighlighted
-  return plan;
+  const card = cardFor(sym);
+  if (card && "plan" in card && atLiveEdge(frame)) {
+    const p = card.plan;
+    // A card that stopped refreshing cannot keep a plan alive past its window.
+    if (p && p.liveUntil != null && S.streaming && Date.now() / 1000 >= p.liveUntil) return null;
+    return p || null;
+  }
+  const plan = activePlan(sym, frame.t);
+  if (!plan || !("liveUntil" in plan)) return null;   // no life stamped: never drawn as live
+  if (plan.liveUntil == null || frame.t >= plan.liveUntil) return null;
+  return Object.assign({ kind: "armed" }, plan);
 }
 /* A plan the detector armed and the server's cascade refused to publish. It is
    counted and named rather than absent, so the card can say "suppressed"
@@ -541,17 +559,26 @@ function makePane(hostId, daily) {
       }
       priceLines.forEach(l => candles.removePriceLine(l));
       priceLines = [];
-      const mark = (price, color, title) => {
+      const mark = (price, color, title, dotted) => {
         if (price == null) return;
         priceLines.push(candles.createPriceLine({
           price: price, color: color, lineWidth: 1,
-          lineStyle: TV.LineStyle ? TV.LineStyle.Dashed : 2,
+          lineStyle: TV.LineStyle ? (dotted ? TV.LineStyle.Dotted : TV.LineStyle.Dashed) : (dotted ? 1 : 2),
           axisLabelVisible: true, title: title,
         }));
       };
-      if (opts.plan && show.plan) {
-        mark(opts.plan.target, PALETTE.target, "TARGET");
-        mark(opts.plan.entry, PALETTE.entry, "ENTRY");
+      // Only what is live now (2026-10-09): an open position's levels, else the
+      // plan the server calls live — ENTRY for a frozen plan inside its fill
+      // window, TRIGGER for the forming pullback a REVIEW prices. 2R is a
+      // reference, not an order (A3 trails; there is no fixed target).
+      if (opts.position && show.plan) {
+        mark(opts.position.entry, PALETTE.entry, "IN");
+        mark(opts.position.stop, PALETTE.stop, "STOP");
+        if (opts.position.trail != null && opts.position.trail > opts.position.stop)
+          mark(opts.position.trail, PALETTE.stop, "TRAIL", true);
+      } else if (opts.plan && show.plan) {
+        mark(opts.plan.target, PALETTE.target, "2R", true);
+        mark(opts.plan.entry, PALETTE.entry, opts.plan.kind === "forming" ? "TRIGGER" : "ENTRY");
         mark(opts.plan.stop, PALETTE.stop, "STOP");
       }
       // The pre-market high beside the HOD on the execution pane: gate 4's
@@ -615,7 +642,7 @@ function drawChart(canvas, bars, opts) {
   const plotH = h - padT - volH - padB, plotW = w - padL - padR;
   const N = bars.length, bw = Math.max(1, Math.min(8, plotW / N * 0.7)), step = plotW / N;
   const extras = [];
-  if (opts.plan) extras.push(opts.plan.entry, opts.plan.stop, opts.plan.target);
+  if (opts.plan) extras.push(...[opts.plan.entry, opts.plan.stop, opts.plan.target].filter(v => v != null));
   if (opts.hod) extras.push(opts.hod);
   if (opts.h52) extras.push(opts.h52);
   let lo = Math.min(...bars.map(b => b[3]), ...extras);
@@ -636,8 +663,9 @@ function drawChart(canvas, bars, opts) {
     g.fillRect(x(i) - bw / 2, padT + plotH + volH - vh, bw, vh);
   });
   if (opts.plan) {
-    const spec = [["TARGET", opts.plan.target, PALETTE.target], ["ENTRY", opts.plan.entry, PALETTE.entry],
-                  ["STOP", opts.plan.stop, PALETTE.stop]].sort((a, b) => b[1] - a[1]);
+    const spec = [["2R", opts.plan.target, PALETTE.target],
+                  [opts.plan.kind === "forming" ? "TRIGGER" : "ENTRY", opts.plan.entry, PALETTE.entry],
+                  ["STOP", opts.plan.stop, PALETTE.stop]].filter(x => x[1] != null).sort((a, b) => b[1] - a[1]);
     let lastY = -99;
     spec.forEach(([name, price, col]) => {
       g.strokeStyle = col; g.setLineDash([4, 3]); g.beginPath();
@@ -1866,7 +1894,7 @@ function renderVerdict(frame, ctx) {
   if (sizing) sizing.hidden = false;                // a NO card before it hid the order area
   const host = $("#verdictCard"); host.textContent = "";
   const T = S.pillarThresholds;
-  const plan = livePlan(sym, frame.t);
+  const plan = livePlan(sym, frame);
   // From the persistent log, not the sliding rebuild window: the verdict used
   // to flip ACTIVE -> WAIT while the tile still showed the alert on screen.
   const recent = ALERT_LOG.filter(a => a.symbol === sym && frame.t - Math.floor(a._at / 1000) <= 300);
@@ -2170,6 +2198,17 @@ function postFocus(sym, claim) {
   }, 350);
 }
 
+/* One line that says what the tape is, on the card itself (owner, 2026-10-09);
+   the rest — Ross's eye at the entry, the three steps — in the Legend. */
+function tapeHint() {
+  const h = el("div", "ts-hint");
+  h.appendChild(el("span", null, "every trade as it prints · ▲ at the ask = buyers lifting · ▼ at the bid = sellers hitting "));
+  const q = el("button", "btn ts-howto", "how to read it");
+  q.onclick = () => { const o = $("#legend"); if (!o) return; o.hidden = false;
+    const t = document.getElementById("legendTape"); if (t && t.scrollIntoView) t.scrollIntoView({ block: "center" }); };
+  h.appendChild(q);
+  return h;
+}
 function renderTape() {
   const host = $("#tapeCard"); if (!host) return;
   const t = TAPE;
@@ -2201,6 +2240,7 @@ function renderTape() {
     host.appendChild(m);
     return;
   }
+  host.appendChild(tapeHint());                  // this name's own tape: say what it is, once
   const head = el("div", "ts-status");
   head.appendChild(el("b", null, t.symbol || "—"));
   const age = tapeAge();
@@ -2343,18 +2383,20 @@ function cardFor(sym) { return S.cards ? S.cards[sym] : null; }
 function atLiveEdge(frame) { return !FRAMES.length || frame.t >= FRAMES[FRAMES.length - 1].t; }
 
 /* Verdict first (owner, 2026-10-09 05:30: "it misses the verdict part to be
-   clear" — over a NO card of eleven lines). The word, the one reason and the
-   level that changes it lead in large type; the five pillars follow as five
-   value chips; the chart gates only on a name the cascade let through. The
-   rest — the catalyst read, filings, the bot's line, warnings, the full gate
-   table — sits under "Why, in full", closed by default. A NO card has no
-   order, no tape line and no buttons: nothing on it is actionable. Every
-   word, reason, level and lamp is the server's; the browser picks what to
-   show, never what to conclude. */
+   clear" — over a NO card of eleven lines). One glance (owner, 07:41, VEEA then
+   SAIQ: a WAIT still carried a news chip, chart chips, a setup line, a tape
+   line, a headline, a bot line, a warning and a full priced ORDER): the word,
+   what to do, the one reason, the level or "no price level", the five pillars
+   as tiles with the cascade's 0–5 count. The order and the tape hint on
+   REVIEW only. Everything else — chart gates, the setup, the catalyst, the
+   bot, warnings, every lamp — under "Why, in full", closed and remembered.
+   Every word, reason, action, level and lamp is the server's; the browser
+   picks what to show, never what to conclude. */
 const PILLAR_LAMPS = [["price", "price"], ["gain", "gain"], ["rvol", "RVOL"], ["float", "float"], ["catalyst", "news"]];
 const CHART_LAMPS = [["vwap", "VWAP"], ["ema9", "9 EMA"], ["macd", "MACD"], ["pullback", "pullback vol"]];
-const WORD_ACTION = { REVIEW: "read the chart and the tape", WAIT: "hands off until the level",
-                      WATCH: "keep it on screen — no setup yet", NO: "skip it" };
+// Only for a payload from before the server worded the action (2026-10-09).
+const WORD_ACTION = { REVIEW: "read the chart and the tape", WAIT: "hands off",
+                      WATCH: "keep it on screen", NO: "skip it" };
 const WHY_KEY = "momentum-workstation.why.v1";
 function whyOpen() { try { return localStorage.getItem(WHY_KEY) === "1"; } catch (e) { return false; } }
 function setWhyOpen(v) { try { localStorage.setItem(WHY_KEY, v ? "1" : "0"); } catch (e) { /* private mode */ } }
@@ -2390,10 +2432,89 @@ function lampStrip(card, ids, label, sub, withValue) {
   row.appendChild(chips);
   return row;
 }
+/* One pillar tile: the mark, the value, the threshold — the server lamp's own
+   value and rule, shortened to fit; both in full in the tooltip. */
+function tileValue(l) {
+  const v = String(l.value == null ? "—" : l.value);
+  if (l.id === "rvol") return v.replace(/^(\d{3,})\.\d×$/, "$1×");
+  if (l.id === "gain") return v.replace(/^([+-]\d{3,})\.\d%$/, "$1%");
+  if (l.id === "float") return chipValue(l);
+  if (l.id === "catalyst") {
+    if (/no headline feed/.test(v)) return "no feed";
+    const g = v.split(" · ")[0];
+    return g === "news today" ? "today" : g === "—" ? "—" : g;
+  }
+  return v;
+}
+function tileRule(l) {
+  const r = String(l.rule || "");
+  if (l.id === "rvol") return r.split(" · ")[0].replace(/\s*pillar\s*$/, "");
+  if (l.id === "catalyst") return "today";
+  return r.replace(/\s*\([^)]*\)/g, "").trim();
+}
+function pillarTiles(card, ctx) {
+  const box = el("div", "pl-box");
+  const head = el("div", "pl-head");
+  head.appendChild(el("span", "pl-title", "five pillars"));
+  const P = card.pillars || {};
+  const score = el("span", "pl-score");
+  score.appendChild(document.createTextNode(P.counted ? String(P.passed) : "—"));
+  score.appendChild(el("small", null, "/" + (P.of || 5)));
+  const enough = P.counted && P.passed >= P.needs;
+  score.className = "pl-score " + (P.counted ? (enough ? "ok" : "no") : "unk");
+  head.appendChild(score);
+  const meter = el("span", "pl-meter " + (P.counted ? (enough ? "ok" : "no") : "unk"));
+  for (let i = 0; i < (P.of || 5); i++) meter.appendChild(el("i", P.counted && i < P.passed ? "on" : null));
+  if (P.needs) meter.appendChild(el("b", "pl-need-mark")).style.left = (100 * P.needs / (P.of || 5)) + "%";
+  head.appendChild(meter);
+  head.appendChild(el("span", "pl-need", P.counted ? "needs " + P.needs : (P.note || "not counted")));
+  head.title = P.counted ? "the cascade's count (A5): " + P.passed + " of " + (P.of || 5) + " pass, " + P.needs +
+    " needed — unknown counts as not passed" : (P.note || "");
+  box.appendChild(head);
+  const grid = el("div", "pl-tiles");
+  PILLAR_LAMPS.forEach(([id, word]) => {
+    const l = lampOf(card, id); if (!l) return;
+    const cls = LAMP_CLASS[l.state] || "unk";
+    const t = el("div", "pl-tile " + cls);
+    t.dataset.lamp = id; t.dataset.state = l.state;
+    const k = el("div", "pt-k");
+    k.appendChild(el("span", null, word));
+    k.appendChild(el("i", null, l.state === "PASS" ? "✓" : l.state === "FAIL" ? "✗" : "?"));
+    t.appendChild(k);
+    t.appendChild(el("div", "pt-v", tileValue(l)));
+    t.appendChild(el("div", "pt-r", tileRule(l)));
+    t.title = l.label + ": " + l.state + "\nvalue " + l.value + "\nrule " + l.rule + (l.why ? "\n" + l.why : "");
+    grid.appendChild(t);
+  });
+  // Which RVOL produced the number: two measures differ a hundredfold before
+  // the open (the header's tooltip carried it until 2026-10-09).
+  const rv = grid.querySelector('[data-lamp="rvol"]');
+  if (rv && ctx && ctx.row) rv.title += "\n" + rowRvolTitle(ctx.row);
+  box.appendChild(grid);
+  return box;
+}
+/* What "Why, in full" holds, in a few words on its own line, so a closed
+   fold still says whether opening it would change anything. */
+function whySummary(card) {
+  const bits = [];
+  const reds = CHART_LAMPS.filter(([id]) => { const l = lampOf(card, id); return l && l.state === "FAIL"; })
+    .map(([, w]) => w);
+  if (reds.length) bits.push("chart ✗ " + reds.join(", "));
+  const bot = card.bot || {};
+  if (bot.outcome) bits.push("bot " + String(bot.outcome).toLowerCase().replace("_", " "));
+  const nw = (card.warnings || []).length;
+  if (nw) bits.push("⚠ " + nw);
+  return bits.join(" · ");
+}
 function renderDecisionCard(frame, ctx, card) {
-  const host = $("#verdictCard"); host.textContent = "";
+  const host = $("#verdictCard");
+  // The float box lives under "Why, in full"; keep the node (and its focus)
+  // across repaints rather than rebuilding it.
+  const floatBox = document.querySelector(".float-override");
+  host.textContent = "";
   const v = card.verdict || {};
-  const word = v.word || "—", isNo = word === "NO", cls = CARD_WORD_CLASS[word] || "wait";
+  const word = v.word || "—", isNo = word === "NO", isReview = word === "REVIEW";
+  const cls = CARD_WORD_CLASS[word] || "wait";
   const box = el("div", "dc dc2");
   if (!atLiveEdge(frame)) {
     box.appendChild(el("div", "dc-asof-note", "This card is the desk's read at " + card.asOfEt +
@@ -2406,19 +2527,21 @@ function renderDecisionCard(frame, ctx, card) {
   const idl = el("div", "dc-idl");
   const top = el("div", "dc-idl-top");
   top.appendChild(el("span", "dc-sym", card.symbol));
-  top.appendChild(el("span", "dc-act", WORD_ACTION[word] || ""));
+  top.appendChild(el("span", "dc-act", v.action || WORD_ACTION[word] || ""));
   idl.appendChild(top);
   idl.appendChild(el("div", "dc-reason", v.reason || ""));
   ans.appendChild(idl);
   box.appendChild(ans);
-  // 2 · the level that changes it
+  // 2 · the level that changes it — or the plain statement that none does
   const lv = el("div", "dc-level");
   if (v.level != null) {
     lv.appendChild(el("span", "dc-arrow", isNo ? "changes only if " : "level "));
     lv.appendChild(el("span", null, (v.levelLabel || "") + " "));
     lv.appendChild(el("b", null, fx(v.level)));
+    const pl = card.plan;
+    if (pl && pl.kind === "armed" && pl.liveUntilEt) lv.appendChild(el("span", "dc-live", "live until " + pl.liveUntilEt));
   } else {
-    lv.appendChild(el("span", "muted", isNo ? "no price level changes this answer" : "no level yet"));
+    lv.appendChild(el("span", "muted", isNo ? "no price level changes this answer" : "no price level"));
   }
   lv.appendChild(el("span", "dc-asof", "as of " + card.asOfEt));
   box.appendChild(lv);
@@ -2433,54 +2556,34 @@ function renderDecisionCard(frame, ctx, card) {
       "(exit: break-even after 1 R, then 2 R) — logged for the paper track record, never sent"; sh.appendChild(c); });
     box.appendChild(sh);
   }
-  // 3 · the five pillars, value beside the verdict on each
-  const pl = lampOf(card, "pillars");
-  const score = pl ? (String(pl.value).match(/^\d\s*\/\s*5/) || [pl.value])[0] : null;
-  const pillars = lampStrip(card, PILLAR_LAMPS, "five pillars",
-    pl ? score + " · " + String(pl.rule).replace(/^≥\s*/, "needs ") : null, true);
-  // Which RVOL produced the number: two measures differ a hundredfold before
-  // the open (the header's tooltip carried it until 2026-10-09).
-  const rv = pillars.querySelector('[data-lamp="rvol"]');
-  if (rv && ctx && ctx.row) rv.title += "\n" + rowRvolTitle(ctx.row);
-  box.appendChild(pillars);
-  if (!isNo) {
-    // 4 · the chart, only where the cascade let a plan exist
-    box.appendChild(lampStrip(card, CHART_LAMPS, "chart", null, false));
-    if (card.setup && card.setup.text && card.setup.text !== v.reason)
-      box.appendChild(el("div", "dc-setup", card.setup.text));
+  // 3 · the five pillars: five tiles and the cascade's count
+  box.appendChild(pillarTiles(card, ctx));
+  // 4 · REVIEW only: where the eye goes at the trigger (ZfwTJAMLroA @01:08:06)
+  if (isReview) {
     box.appendChild(tapeLineFor(card.symbol));
-    if (card.catalyst && card.catalyst.headline) {
-      const h = el(card.catalyst.url ? "a" : "div", "dc-headline", card.catalyst.headline);
-      if (card.catalyst.url) { h.href = card.catalyst.url; h.target = "_blank"; h.rel = "noopener noreferrer"; }
-      h.title = [card.catalyst.grade, card.catalyst.type, card.catalyst.age, card.catalyst.source].filter(Boolean).join(" · ");
-      box.appendChild(h);
-    }
-    const bot = card.bot || {};
-    if (bot.outcome) {
-      const b = el("div", "dc-bot " + (bot.tone || "info"));
-      b.appendChild(el("span", "dc-tag", "bot"));
-      b.appendChild(el("span", null, bot.text || "—"));
-      if (bot.reasons && bot.reasons.length) b.title = bot.reasons.map(r => r.raw).join("\n");
-      box.appendChild(b);
-    }
-    (card.warnings || []).forEach(w => box.appendChild(el("div", "dc-warn", "⚠ " + w.text)));
+    box.appendChild(el("div", "dc-tapehint", "at the trigger, read the Time & Sales: ▲ green prints at the ask = " +
+      "buyers lifting the offer · ▼ red at the bid = sellers hitting it"));
   }
   // 5 · why, in full — closed by default, remembered
   const det = el("details", "dc-more");
   det.open = whyOpen();
   det.addEventListener("toggle", () => setWhyOpen(det.open));
-  det.appendChild(el("summary", null, "Why, in full"));
-  if (isNo && card.setup && card.setup.text && card.setup.text !== v.reason)
+  const sum = el("summary", null, "Why, in full");
+  const tail = whySummary(card);
+  if (tail) sum.appendChild(el("span", "dc-more-tail", tail));
+  det.appendChild(sum);
+  if (!isNo) det.appendChild(lampStrip(card, CHART_LAMPS, "chart", null, false));
+  if (card.setup && card.setup.text && card.setup.text !== v.reason)
     det.appendChild(el("div", "dc-setup", card.setup.text));
+  if (!isReview && !isNo) det.appendChild(tapeLineFor(card.symbol));
   if (card.catalyst) { const cat = el("div", "dc-cat"); renderServerCatalyst(cat, card.catalyst); det.appendChild(cat); }
   const bot = card.bot || {};
-  if (isNo || !bot.outcome) {
-    const b = el("div", "dc-bot " + (bot.tone || "info"));
-    b.appendChild(el("span", "dc-tag", "bot"));
-    b.appendChild(el("span", null, bot.text || "—"));
-    det.appendChild(b);
-  }
-  if (isNo) (card.warnings || []).forEach(w => det.appendChild(el("div", "dc-warn", "⚠ " + w.text)));
+  const b = el("div", "dc-bot " + (bot.tone || "info"));
+  b.appendChild(el("span", "dc-tag", "bot"));
+  b.appendChild(el("span", null, bot.text || "—"));
+  if (bot.reasons && bot.reasons.length) b.title = bot.reasons.map(r => r.raw).join("\n");
+  det.appendChild(b);
+  (card.warnings || []).forEach(w => det.appendChild(el("div", "dc-warn", "⚠ " + w.text)));
   (card.shadow || []).filter(x => !x.takes).forEach(x =>
     det.appendChild(el("div", "dc-setup", "shadow " + x.id + " (" + x.label + ") passes: " + x.failed.join(", "))));
   const meta = ctx && ctx.meta || {}, last = ctx && ctx.last;
@@ -2502,11 +2605,12 @@ function renderDecisionCard(frame, ctx, card) {
   });
   det.appendChild(el("div", "divider", "every gate · the value beside the bot's own threshold"));
   det.appendChild(table);
+  if (floatBox) det.appendChild(floatBox);
   box.appendChild(det);
   host.appendChild(box);
-  // The order area only where an order can exist, or a position is open.
+  // The order only on REVIEW (owner, 2026-10-09), or while a position is open.
   const sizing = document.querySelector(".verdict-card .sizing");
-  if (sizing) sizing.hidden = isNo && !card.position;
+  if (sizing) sizing.hidden = !(isReview || card.position);
   renderTicket(card);
 }
 
@@ -2590,9 +2694,9 @@ function renderTicket(card) {
     return;
   }
   if (!t) {
-    out.appendChild(el("div", "note", card.verdict && card.verdict.word === "NO"
-      ? "No order: the cascade killed this name."
-      : "No order yet: no pullback has formed, so there is no trigger and no structural stop."));
+    // The order area shows on REVIEW only (2026-10-09); a REVIEW the server
+    // could not price says so rather than showing an empty box.
+    out.appendChild(el("div", "note", "No order: these levels make no valid long order (stop at or above the trigger)."));
     out.appendChild(manualButtons(card, ["passed"]));
     return;
   }
@@ -2601,10 +2705,8 @@ function renderTicket(card) {
   head.appendChild(el("span", "muted", t.session === "premarket" ? "pre-market" : t.session === "regular"
     ? "regular hours" : "no new entries now"));
   // The ticket shows before the break so the order is ready; it is not a go.
-  // Copy arms on REVIEW only, and only once your own risk sized it (owner,
-  // 2026-10-08): a stop-limit staged while the VWAP is red fills where the bot
-  // would refuse. Off REVIEW the order says why, not only the top of the card.
-  const word = card.verdict && card.verdict.word;
+  // It exists on REVIEW only (owner, 2026-10-09: VEEA's WAIT card priced a
+  // dead plan), and copy arms only once your own risk sized it (2026-10-08).
   const armed = copyArmed(card);
   const copy = el("button", "btn dc-copy" + (armed ? " armed" : ""), "copy");
   copy.disabled = !armed;
@@ -2616,8 +2718,6 @@ function renderTicket(card) {
     else toast("not copied — the card is no longer REVIEW", "bad"); };
   head.appendChild(copy);
   out.appendChild(head);
-  if (word && word !== "REVIEW") out.appendChild(el("div", "dc-order-gate " + word.toLowerCase(),
-    "not now — " + word + ": " + (card.verdict.reason || "")));
   out.appendChild(el("div", "dc-order-line" + (armed ? " armed" : ""), t.order_line));
   out.appendChild(manualButtons(card, ["took", "passed"]));     // your call, next to the order it is about
   const grid = el("div", "dc-grid");
@@ -2862,6 +2962,7 @@ function bars10sUpTo(sym, frame) {
 }
 
 let CHART_SYM = null, SNAP_LIVE = false;
+let PLAN_DRAWN = null;                    // what the charts last drew as the plan (a test reads it)
 function renderCharts(frame) {
   if (!frame) return;                     // no bars yet: nothing to draw, nothing to throw
   const sym = state.selected, meta = SYMS[sym] || {};
@@ -2876,8 +2977,12 @@ function renderCharts(frame) {
   const bars1 = barsUpTo(sym, frame.barIndex);
   const hod = bars1.length ? Math.max(...bars1.map(b => b[2])) : null;
   const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
-  const plan = livePlan(sym, frame.t);
-  const common = { hod: hod, plan: plan, openTs: openTs, symbol: sym, snapToLive: snap };
+  const plan = livePlan(sym, frame);
+  // An open manual position's levels, from the server card, at the live edge.
+  const card = cardFor(sym), pos = card && atLiveEdge(frame) ? card.position : null;
+  const position = pos ? { entry: pos.entry, stop: pos.stop, trail: pos.trail } : null;
+  const common = { hod: hod, plan: plan, position: position, openTs: openTs, symbol: sym, snapToLive: snap };
+  PLAN_DRAWN = { symbol: sym, t: frame.t, plan: plan, position: position };
   const pmBars = bars1.filter(b => sessionAt(b[0] * 1000) === "premarket");
   const pmHigh = pmBars.length ? Math.max(...pmBars.map(b => b[2])) : null;
   PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "1m", pmHigh: pmHigh }, common));
@@ -2991,6 +3096,7 @@ if (typeof window !== "undefined") {
   // sitting relative to the live edge.
   window.__deskMemory = () => ({ log: ALERT_LOG, keys: ALERT_KEYS, seen: SEEN_IN_GRID });
   window.__deskSeek = seekTo;
+  window.__deskPlanDrawn = () => PLAN_DRAWN;
   window.__deskFrame = () => ({ frame: state.frame, frames: FRAMES.length,
                                 ts: FRAMES.length ? FRAMES[Math.min(state.frame, FRAMES.length - 1)].ts : null,
                                 last: FRAMES.length ? FRAMES[FRAMES.length - 1].ts : null });
@@ -4144,7 +4250,7 @@ function init() {
     state.riskDollars = e.target.value;
     if (S.cards) { postRisk(e.target.value); return; }     // the server sizes with the bot's own math
     const frame = FRAMES[state.frame];
-    renderSizing(activePlan(state.selected, frame.t), symbolRow(frame, state.selected));
+    renderSizing(livePlan(state.selected, frame), symbolRow(frame, state.selected));
     syncFloatInput();
   };
   $("#btnHelp").onclick = () => { const o = $("#legend"); o.hidden = !o.hidden; };

@@ -10,16 +10,28 @@ on any HOD/Running Up signal bar instead of detecting the true pullback.
 
 Impulse/volume thresholds are independent approximations (configurable).
 A qualified plan is a planning aid, never an order.
+
+A plan's LIFE (2026-10-09) is bookkeeping beside the machine, never part of
+it: `life_of(plan, now)` says whether a frozen plan is live at `now` — inside
+the bot's entry window, inside its A10 fill window, not stopped, not done. The
+transitions are unchanged, so the bot's plans are the same plans; the desk
+reads the life so that it draws and prices only a plan that is live now.
 """
 
 from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass, field
+from datetime import datetime, timedelta
 from enum import Enum
-from typing import List, Optional
+from typing import Dict, List, Optional
+from zoneinfo import ZoneInfo
 
 from .models import Bar
+from .order_math import ENTRY_TTL_MINUTES, entry_session
+
+ET = ZoneInfo("America/New_York")
+_SPAN = {"10s": 10, "30s": 30, "1m": 60, "2m": 120, "5m": 300, "15m": 900}
 
 
 class SetupState(str, Enum):
@@ -49,6 +61,42 @@ class PullbackPlan:
     pullback_candles: int
     armed_at_bar: object   # bar timestamp
     volume_ok: bool
+
+
+@dataclass
+class PlanLife:
+    """What became of one frozen plan, bar by bar. Observed, never decided:
+    the machine's transitions do not read it.
+
+    Why (owner, 2026-10-09 07:41): the desk drew VEEA's 04:03 plan — armed
+    outside the bot's entry window, a 15 % stop — three and a half hours
+    later, and priced it in the order block; it drew SAIQ's plan four minutes
+    after it stopped. A plan is live only while all of these hold:
+
+    - armed inside the bot's entry window (`order_math.entry_session` of the
+      armed bar, the ledger's own session stamp);
+    - inside its fill window: A10 cancels an entry not filled within
+      `ENTRY_TTL_MINUTES` of being placed, and the bot places it when the
+      trigger bar closes;
+    - not stopped, not at 2R, not expired (the bars after the break)."""
+
+    plan_id: str
+    armed_bar: datetime             # the trigger bar's start (plan.armed_at_bar)
+    decided_at: datetime            # that bar's close: the first moment anyone can act on the plan
+    fill_until: datetime            # decided_at + ENTRY_TTL_MINUTES: the bot's entry rests until then
+    in_window: bool                 # armed inside 07:00–11:20 ET, the bot's entry window
+    triggered_bar: Optional[datetime] = None    # start of the bar in which the entry printed
+    ended_bar: Optional[datetime] = None        # start of the bar that ended it
+    end: Optional[str] = None       # "stop broke before the entry" | "stopped" | "reached 2R" | "expired"
+
+    def live_until(self) -> Optional[datetime]:
+        """The first bar time at which the plan is no longer live, or None
+        when it never was (armed outside the window)."""
+        if not self.in_window:
+            return None
+        if self.ended_bar is not None and self.ended_bar < self.fill_until:
+            return self.ended_bar
+        return self.fill_until
 
 
 @dataclass
@@ -106,6 +154,7 @@ class FirstPullbackDetector:
         self._w = _Working()
         self._armed_age = 0
         self.plans: List[PullbackPlan] = []
+        self.lives: Dict[str, PlanLife] = {}
 
     @property
     def state(self) -> SetupState:
@@ -114,6 +163,59 @@ class FirstPullbackDetector:
     @property
     def active_plan(self) -> Optional[PullbackPlan]:
         return self._w.plan
+
+    # -- a plan's life (read-only bookkeeping, 2026-10-09) ---------------------
+
+    def life_of(self, plan: Optional[PullbackPlan], now: datetime) -> dict:
+        """Is `plan` live at `now` (the bar time the caller has read up to)?
+
+        {"live", "why", "until"}: `why` says in words why a plan is not live
+        (or what keeps it live), `until` is the bar time at which it stops
+        being live. A plan is judged on the bars this detector has seen; `now`
+        is the newest of them (a forming minute on the live desk)."""
+        if plan is None:
+            return {"live": False, "why": "no plan", "until": None}
+        life = self.lives.get(plan.plan_id)
+        if life is None:                            # a plan this detector never froze
+            return {"live": False, "why": "not this detector's plan", "until": None}
+        at = life.armed_bar.astimezone(ET).strftime("%H:%M")
+        if not life.in_window:
+            return {"live": False, "until": None,
+                    "why": f"the {at} plan was armed outside the bot's 07:00–11:20 entry window"}
+        if life.ended_bar is not None and life.ended_bar <= now:
+            when = life.ended_bar.astimezone(ET).strftime("%H:%M")
+            return {"live": False, "until": life.ended_bar, "why": f"the {at} plan {life.end} {when}"}
+        if now >= life.fill_until:
+            shut = life.fill_until.astimezone(ET).strftime("%H:%M")
+            done = ("triggered, then its fill window closed" if life.triggered_bar is not None
+                    else "never triggered; its fill window closed")
+            return {"live": False, "until": life.fill_until,
+                    "why": f"the {at} plan {done} {shut} (A10: {ENTRY_TTL_MINUTES} min)"}
+        return {"live": True, "until": life.fill_until,
+                "why": f"live until {life.fill_until.astimezone(ET):%H:%M} (A10: {ENTRY_TTL_MINUTES} min)"}
+
+    def live_plan(self, now: datetime) -> Optional[PullbackPlan]:
+        """The frozen plan that is live at `now`, else None. The machine holds
+        at most one plan, so this is the active plan or nothing."""
+        plan = self._w.plan
+        if plan is None or self._w.state not in (SetupState.ARMED, SetupState.TRIGGERED):
+            return None
+        return plan if self.life_of(plan, now)["live"] else None
+
+    def held_plan(self) -> Optional[PullbackPlan]:
+        """A plan that still HOLDS the machine (ARMED or TRIGGERED): while it
+        does, no new pullback can arm (the blackout — kept on purpose: removing
+        it lost money in both readings, research/edge-hunt/PREREGISTRATION.md
+        addendum 2026-10-06d, research/paper-exercise/reports/detector_variants_output.txt)."""
+        if self._w.state in (SetupState.ARMED, SetupState.TRIGGERED):
+            return self._w.plan
+        return None
+
+    def _note_end(self, bar: Bar, end: str) -> None:
+        plan = self._w.plan
+        life = self.lives.get(plan.plan_id) if plan is not None else None
+        if life is not None and life.end is None:
+            life.end, life.ended_bar = end, bar.ts
 
     def progress(self) -> dict:
         """Where the search stands, for the desk card: how many green bars the
@@ -206,6 +308,11 @@ class FirstPullbackDetector:
                 w.plan = plan
                 self._armed_age = 0
                 self.plans.append(plan)
+                decided = bar.ts + timedelta(seconds=_SPAN.get(bar.timeframe, 60))
+                self.lives[plan.plan_id] = PlanLife(
+                    plan_id=plan.plan_id, armed_bar=bar.ts, decided_at=decided,
+                    fill_until=decided + timedelta(minutes=ENTRY_TTL_MINUTES),
+                    in_window=entry_session(bar.ts.astimezone(ET).time()) is not None)
                 return plan
 
             w.pullback_bars.append(bar)
@@ -226,10 +333,15 @@ class FirstPullbackDetector:
             self._armed_age += 1
             if bar.low <= plan.stop:
                 w.state = SetupState.STOPPED
+                self._note_end(bar, "stop broke before the entry")
             elif bar.high >= plan.entry:
                 w.state = SetupState.TRIGGERED
+                life = self.lives.get(plan.plan_id)
+                if life is not None:
+                    life.triggered_bar = bar.ts
             elif self._armed_age > self.expire_armed_after_bars:
                 w.state = SetupState.EXPIRED
+                self._note_end(bar, "expired")
             return None
 
         if w.state == SetupState.TRIGGERED:
@@ -237,8 +349,10 @@ class FirstPullbackDetector:
             assert plan is not None
             if bar.low <= plan.stop:
                 w.state = SetupState.STOPPED
+                self._note_end(bar, "stopped")
             elif bar.high >= plan.target:
                 w.state = SetupState.TARGET_HIT
+                self._note_end(bar, "reached 2R")
             return None
 
         return None

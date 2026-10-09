@@ -1,0 +1,52 @@
+# stale plans, before (7aebccc) and after — every minute 07:00–11:29 ET
+guard 2026-10-06: the detector's 91 plans on 10 names, 04:00–12:00, IDENTICAL to 7aebccc's (state by state, plan by plan)
+guard 2026-10-07: the detector's 105 plans on 9 names, 04:00–12:00, IDENTICAL to 7aebccc's (state by state, plan by plan)
+
+## 2026-10-06 — 2640 name-minutes (names on the desk × minutes)
+lines drawn   before  307   after   43 (armed, live 37 · forming on a REVIEW 6)
+drawn before, not after: 266
+     127  stopped
+      87  fill window closed (A10, 3 min)
+      28  reached 2R
+      24  stop broke before the entry
+order block   before  104 (by word: REVIEW 13, WAIT 91; priced from a dead plan 18)   after   13 (REVIEW only)
+name-minutes the detector was held by a dead plan (no new plan could arm): 482
+plans drawn after they stopped being live (each plan once):
+    name  armed  entry/stop     first drawn dead  minutes  why
+    JAGX  10:30    6.32/6.19    10:33               57     stopped
+    IPDN  08:01    5.28/4.83    08:05               54     fill window closed (A10, 3 min)
+    AIFA  10:38    8.61/8.41    10:41               49     stopped
+    AIFA  10:13    8.21/7.84    10:14               24     stop broke before the entry
+    IPDN  09:22    6.51/6.32    09:25               21     stopped
+    IPDN  07:32    4.16/3.68    07:36               17     fill window closed (A10, 3 min)
+    JAGX  10:10    6.49/6.34    10:13               17     reached 2R
+    IPDN  09:00    6.26/6.04    09:04               10     fill window closed (A10, 3 min)
+    IPDN  09:52    5.88/5.41    09:56                6     fill window closed (A10, 3 min)
+    IPDN  09:14    6.21/6.10    09:16                5     reached 2R
+    IPDN  07:53    4.46/4.24    07:56                3     reached 2R
+    IPDN  10:02    5.51/5.39    10:04                3     reached 2R
+
+## 2026-10-07 — 2430 name-minutes (names on the desk × minutes)
+lines drawn   before  168   after   20 (armed, live 17 · forming on a REVIEW 3)
+drawn before, not after: 150
+      55  fill window closed (A10, 3 min)
+      37  reached 2R
+      27  stop broke before the entry
+      21  armed outside the bot's 07:00–11:20 window
+      10  stopped
+order block   before   53 (by word: REVIEW 5, WAIT 48; priced from a dead plan 12)   after    5 (REVIEW only)
+name-minutes the detector was held by a dead plan (no new plan could arm): 281
+plans drawn after they stopped being live (each plan once):
+    name  armed  entry/stop     first drawn dead  minutes  why
+    BIYA  07:21    2.38/2.33    07:25               55     fill window closed (A10, 3 min)
+    LPCN  07:54    3.62/3.52    07:55               27     stop broke before the entry
+    LPCN  07:26    3.67/3.55    07:29               25     reached 2R
+    LPCN  06:56    2.98/2.88    07:00               12     armed outside the bot's 07:00–11:20 window
+    BIYA  07:07    2.44/2.38    07:11               10     stopped
+    LPCN  07:12    3.23/3.10    07:15               10     reached 2R
+    BIYA  06:31    2.63/2.58    07:00                7     armed outside the bot's 07:00–11:20 window
+    SXTC  06:31    2.28/2.20    07:16                2     armed outside the bot's 07:00–11:20 window
+    SXTC  08:12    2.02/1.99    08:14                2     reached 2R
+
+## both days
+name-minutes 5070 · lines before 475 → after 63 · order blocks before 157 (from a dead plan 30) → after 18 · held by a dead plan 763

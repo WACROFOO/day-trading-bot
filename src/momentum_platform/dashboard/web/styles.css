@@ -858,3 +858,43 @@ a.dc-headline:hover{text-decoration:underline}
 .dc-shadow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .shchip{font:600 10px/1 var(--mono);padding:3px 6px;border-radius:3px;color:#c9b8ff;background:#1a1530;
   border:1px dashed #3a2f5c}
+
+/* The five pillars as tiles (owner, 2026-10-09: "lack visuals and clarity").
+   The mark, the value and the threshold per pillar, from the server's lamps;
+   the cascade's own 0-5 count over them. Colour encodes the gate state —
+   pass, fail, unknown — never price direction; the mark repeats it in shape. */
+.pl-box{display:flex;flex-direction:column;gap:5px}
+.pl-head{display:flex;align-items:center;gap:8px;min-width:0}
+.pl-title{font:600 9px/1 var(--sans);text-transform:uppercase;letter-spacing:.7px;color:var(--ink-faint);white-space:nowrap}
+.pl-score{font:700 22px/1 var(--cond);letter-spacing:.5px;color:#fff;flex:none}
+.pl-score small{font-size:12px;font-weight:600;color:var(--ink-dim);margin-left:1px}
+.pl-score.ok{color:var(--ok-ink)} .pl-score.no{color:var(--no-ink)} .pl-score.unk{color:var(--unk-ink)}
+.pl-meter{position:relative;display:flex;gap:2px;flex:1;max-width:120px;min-width:60px}
+.pl-meter i{flex:1;height:7px;border-radius:2px;background:var(--line)}
+.pl-meter.ok i.on{background:var(--ok-ink)} .pl-meter.no i.on{background:var(--no-ink)}
+.pl-meter .pl-need-mark{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--ink);border-radius:1px}
+.pl-need{font:10px var(--mono);color:var(--ink-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.pl-tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.pl-tile{display:flex;flex-direction:column;gap:3px;padding:6px 6px 5px;border-radius:5px;border:1px solid var(--line);
+  background:var(--panel-2);min-width:0}
+.pl-tile .pt-k{display:flex;justify-content:space-between;align-items:center;gap:4px;
+  font:600 9px/1 var(--sans);text-transform:uppercase;letter-spacing:.6px;color:var(--ink-dim)}
+.pl-tile .pt-k i{font-style:normal;font-weight:700;font-size:12px;line-height:1}
+.pl-tile .pt-v{font:700 13px/1.15 var(--mono);letter-spacing:-.2px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-variant-numeric:tabular-nums}
+.pl-tile .pt-r{font:9.5px/1.2 var(--mono);color:var(--ink-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-tile.ok{border-color:var(--ok-line);background:#0f2119} .pl-tile.ok .pt-k{color:var(--ok-ink)}
+.pl-tile.no{border-color:var(--no-line);background:#2a1216} .pl-tile.no .pt-k{color:var(--no-ink)}
+.pl-tile.no .pt-v{color:#ffd0d3}
+.pl-tile.unk,.pl-tile.man{border-style:dashed;border-color:var(--unk-line);background:#211b0b}
+.pl-tile.unk .pt-k,.pl-tile.man .pt-k{color:var(--unk-ink)}
+.pl-tile.na{opacity:.5}
+.dc-live{font:10px var(--mono);color:var(--entry);margin-left:6px;padding:1px 5px;border:1px solid #164c5a;border-radius:3px}
+.dc-tapehint{font-size:10px;line-height:1.35;color:var(--ink-faint)}
+.dc-more-tail{margin-left:8px;text-transform:none;letter-spacing:0;font:500 10px var(--mono);color:var(--ink-dim)}
+
+/* the tape's one-line hint and the Legend's wide tape block (2026-10-09) */
+.ts-hint{font-size:10px;line-height:1.4;color:var(--ink-faint);padding:0 0 3px;border-bottom:1px solid var(--line-soft);margin-bottom:3px}
+.btn.ts-howto{padding:0 6px;font-size:9.5px;margin-left:2px}
+.legend-grid .lg-wide{grid-column:1 / -1}
+.legend-grid .lg-wide p{margin:3px 0}

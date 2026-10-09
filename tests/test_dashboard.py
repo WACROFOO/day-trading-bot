@@ -664,15 +664,19 @@ def test_ui_verdict_mirrors_pine_and_decides(page):
     assert word in {"REVIEW", "WATCH", "WAIT", "NO"} and word != "PASS"
     assert page.locator("#verdictCard .dc-answer .dc-reason").inner_text() == card["verdict"]["reason"]
     assert "server card" in (page.get_attribute("#verdictCard .dc-answer", "title") or "")
-    # verdict first (2026-10-09): the five pillars as chips on the face, the
-    # chart gates beside them on a name the cascade let through, and every
-    # lamp in the table under "Why, in full"
-    pillars = page.eval_on_selector_all("#verdictCard .dc-strip .pchip",
-                                        "els => els.map(e => [e.dataset.lamp, e.dataset.state])")
+    # one glance (owner, 2026-10-09 07:41): the five pillars as tiles with the
+    # cascade's count on the face; the chart gates, the setup, the bot and
+    # every lamp under "Why, in full"
+    tiles = page.eval_on_selector_all("#verdictCard .pl-tile",
+                                      "els => els.map(e => [e.dataset.lamp, e.dataset.state])")
     lamps = {l["id"]: l["state"] for l in card["lamps"]}
-    assert [p[0] for p in pillars[:5]] == ["price", "gain", "rvol", "float", "catalyst"]
-    assert all(lamps[i] == st for i, st in pillars), (pillars, lamps)
-    assert len(pillars) == (5 if word == "NO" else 9)
+    assert [t[0] for t in tiles] == ["price", "gain", "rvol", "float", "catalyst"]
+    assert all(lamps[i] == st for i, st in tiles), (tiles, lamps)
+    score = page.locator("#verdictCard .pl-score").inner_text().replace("\n", "")
+    assert score == (f"{card['pillars']['passed']}/5" if card["pillars"]["counted"] else "—/5"), score
+    chips = page.eval_on_selector_all("#verdictCard .dc-more .dc-strip .pchip", "els => els.map(e => e.dataset.lamp)")
+    assert chips == ([] if word == "NO" else ["vwap", "ema9", "macd", "pullback"])
+    assert page.locator("#verdictCard .dc-answer ~ .dc-strip").count() == 0, "no chip strip on the face"
     assert page.locator("#verdictCard .dc-lamp").count() == len(card["lamps"])
     assert {l["id"] for l in card["lamps"]} >= {"price", "gain", "rvol", "float", "catalyst", "pillars",
                                                 "rising", "vwap", "ema9", "macd", "pullback", "tape"}
@@ -704,13 +708,14 @@ def test_ui_order_panel_renders_the_servers_ticket(page):
     # copy arms on REVIEW only, once the owner's risk sized it (owner, 2026-10-08)
     assert page.locator(".dc-copy").is_enabled() and page.locator(".dc-order-line.armed").count() == 1
     assert page.locator(".dc-order-gate").count() == 0, "REVIEW: no 'not now' on the order"
+    # the order exists on REVIEW only (owner, 2026-10-09: a WAIT card priced
+    # VEEA's dead plan): on a WAIT the whole order area is gone
     page.evaluate("""([sym]) => { const v = window.__SESSION__.cards[sym].verdict;
       v.word = "WAIT"; v.reason = "below the VWAP 4.17"; }""", [sym])
     page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
     page.wait_for_timeout(250)
-    assert page.locator(".dc-order-gate").inner_text() == "not now — WAIT: below the VWAP 4.17"
-    assert page.locator(".dc-copy").is_disabled(), "WAIT: the copy button is not armed"
-    assert page.locator(".dc-order-line.armed").count() == 0
+    assert page.eval_on_selector(".verdict-card .sizing", "e => e.hidden"), "WAIT: no order on the card"
+    assert not page.is_visible(".dc-order-line")
     page.evaluate("""([sym]) => { const c = window.__SESSION__.cards[sym];
       c.verdict.word = "REVIEW"; c.ticket.shares = 0; }""", [sym])
     page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
@@ -1160,7 +1165,7 @@ def test_ui_the_rvol_chip_says_which_measure_it_used(page):
     """Two measures exist and they disagree by two orders of magnitude before
     the open. The chip must say which one produced the number."""
     _seek(page, 124)
-    chip = page.get_attribute('#verdictCard .pchip[data-lamp="rvol"]', "title") or ""
+    chip = page.get_attribute('#verdictCard .pl-tile[data-lamp="rvol"]', "title") or ""
     assert "judged: " in chip and ("daily" in chip or "time of day" in chip), chip
     _wide_board(page)
     title = page.eval_on_selector_all(
@@ -1269,9 +1274,12 @@ def test_a_plan_is_withdrawn_once_the_cascade_kills_the_name():
     app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "app.js").read_text()
     body = app.split("function livePlan")[1].split("\nfunction ")[0]
-    assert "activePlan(sym, t)" in body, "it must start from what was armed"
+    assert "activePlan(sym, frame.t)" in body, "it must start from what was armed"
     assert "serverVerdict(sym)" in body, "and ask the server's cascade about it"
     assert "killedBy" in body and "return null" in body
+    # 2026-10-09: and only while the server calls it live — the card's plan at
+    # the live edge, each armed plan's stamped `liveUntil` scrubbed back
+    assert "card.plan" in body and "liveUntil" in body
 
 
 def test_the_charts_and_the_card_read_the_same_plan():
@@ -1282,8 +1290,8 @@ def test_the_charts_and_the_card_read_the_same_plan():
            / "dashboard" / "web" / "app.js").read_text()
     charts = app.split("function renderCharts")[1].split("\nfunction ")[0]
     card = app.split("function renderVerdict")[1].split("\nfunction ")[0]
-    assert "livePlan(sym, frame.t)" in charts and "activePlan(sym, frame.t)" not in charts
-    assert "livePlan(sym, frame.t)" in card
+    assert "livePlan(sym, frame)" in charts and "activePlan(sym, frame.t)" not in charts
+    assert "livePlan(sym, frame)" in card
     # the card may still name what was armed, but only to say it was withdrawn
     assert "plan WITHDRAWN" in card
 
@@ -1443,6 +1451,7 @@ def test_ui_a_replay_says_it_has_no_tape(page):
     _seek(page, 125)
     page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
+    _open_why(page)                     # off REVIEW the tape line sits under "Why, in full"
     assert "none in this replay" in page.locator(".dc-tape").inner_text()
 
 
@@ -1474,6 +1483,9 @@ def test_ui_the_tape_card_renders_the_servers_prints(page):
     big = page.locator("#tapeCard .ts-facts .ts-fact").first.locator("span").last
     assert "Approximation" in big.get_attribute("title")
     assert "Approximation" in page.locator("#legend").inner_text()
+    # the card says what the tape is, in one line, and the Legend says how to read it
+    assert "▲ at the ask = buyers lifting" in page.locator("#tapeCard .ts-hint").inner_text()
+    _open_why(page)
     line = page.locator(".dc-tape").inner_text()
     assert f"{snap['facts']['pctAsk']:.0f}% at the ask" in line and "1 big" in line
     assert f"last {round(snap['facts']['coverS'])} s" in line and "60 s" not in line, \
@@ -1532,7 +1544,8 @@ def test_ui_a_no_card_carries_nothing_to_act_on(page):
     assert page.locator("#verdictCard .dc-act").inner_text().lower() == "skip it"
     assert page.eval_on_selector(".verdict-card .sizing", "e => e.hidden")
     assert page.locator("#verdictCard .dc-tape").count() == 0
-    assert page.locator("#verdictCard .dc-strip").count() == 1, "the pillars only — no chart strip on a NO"
+    assert page.locator("#verdictCard .pl-tile").count() == 5, "the five pillars"
+    assert page.locator("#verdictCard .dc-strip").count() == 0, "no chart strip on a NO"
     assert page.locator("#verdictCard .dc-more .dc-bot").count() == 1
     assert page.locator("#verdictCard .dc-more .dc-lamp").count() > 5
 
@@ -1548,6 +1561,7 @@ def test_ui_the_tape_says_when_it_is_on_another_name(page):
     # FLYE's tape sat under AIXI); a replay has no button to move it
     assert page.locator("#tapeCard").inner_text().strip() == "The tape is on ZZZZ, not on " + sel + "."
     assert page.locator("#tapeCard .ts-row").count() == 0
+    _open_why(page)
     assert "on ZZZZ" in page.locator(".dc-tape").inner_text()
 
 
@@ -1703,3 +1717,34 @@ def test_gate_four_and_the_split_flag_have_one_home_each():
     assert "meta.high52w > 20 * last" in card and "split-adjusted history" in card
     dc = (root / "decision_card.py").read_text()
     assert 'lamp("rising", "Still rising"' in dc and "FADE_MAX_PCT" in dc
+
+
+def test_ui_the_charts_draw_a_plan_only_while_it_is_live(page):
+    """Owner, 2026-10-09 07:41 ("the entry in charts have no sense"): SAIQ drew
+    a plan four minutes after it stopped, VEEA one armed outside the bot's
+    window. Scrubbed through a plan's life, the 1-minute chart draws it from
+    its arming minute until the server's `liveUntil` — its A10 fill window or
+    the bar that ended it — and not one minute after."""
+    plans = page.evaluate("window.__SESSION__.plans")
+    frames = page.evaluate("window.__SESSION__.frames.map(f => [f.t, f.ts])")
+    ts_of = dict(frames)
+    edge = frames[-1][0]
+    chosen = None
+    for p in plans:
+        if p.get("liveUntil") is None or p["liveUntil"] >= edge:
+            continue
+        later = [q for q in plans if q["symbol"] == p["symbol"] and q["armedAt"] > p["armedAt"]]
+        if (not later or later[0]["armedAt"] > p["liveUntil"]) and p["armedAt"] in ts_of and p["liveUntil"] in ts_of:
+            chosen = p
+            break
+    assert chosen, "the replay holds a plan whose life ends before the next one"
+    page.goto(page.url.split("?")[0] + "?symbol=" + chosen["symbol"])
+    page.wait_for_timeout(700)
+    page.evaluate("ts => window.__deskSeek(ts)", ts_of[chosen["armedAt"]])
+    page.wait_for_timeout(300)
+    drawn = page.evaluate("window.__deskPlanDrawn()")
+    assert drawn["symbol"] == chosen["symbol"] and drawn["plan"]["planId"] == chosen["planId"]
+    assert drawn["plan"]["kind"] == "armed"
+    page.evaluate("ts => window.__deskSeek(ts)", ts_of[chosen["liveUntil"]])
+    page.wait_for_timeout(300)
+    assert page.evaluate("window.__deskPlanDrawn()")["plan"] is None, "dead: no lines"
