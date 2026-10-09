@@ -938,3 +938,7 @@ a.dc-headline:hover{text-decoration:underline}
 .flow-alert.ask{border-left:4px solid var(--down);color:#ffb3ba}
 .flow-alert.mid{border-left:4px solid var(--hi);color:#ffdf9e}
 .flow-alert .muted{font-size:10px}
+
+/* the chart library's attribution (Apache-2.0; its README asks for TradingView and a link) */
+.statusbar .attrib{font-size:10px;color:var(--ink-faint);text-decoration:none;white-space:nowrap}
+.statusbar .attrib:hover{color:var(--ink-dim);text-decoration:underline}

@@ -690,3 +690,120 @@ def test_a_desk_running_older_code_than_its_page_says_restart(desk_server):
         assert grid["height"] > 600 and chart["height"] > 250, (grid, chart)
         assert pg.evaluate("document.body.scrollHeight <= window.innerHeight + 2")
         browser.close()
+
+
+# ------------------------------------------------- the charts (2026-10-09)
+# These need the served desk: the static artifact in test_dashboard.py loads no
+# vendored library and always draws the canvas fallback.
+def _chart_page(desk_server, pw):
+    port = desk_server["port"]
+    browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+    pg = browser.new_page(viewport={"width": 1600, "height": 900})
+    errors: list = []
+    pg.on("pageerror", lambda e: errors.append(str(e)))
+    pg.goto(f"http://127.0.0.1:{port}/")
+    pg.evaluate("() => localStorage.clear()")
+    pg.reload()
+    pg.wait_for_function("window.DeskLive && window.DeskLive.state === 'open'", timeout=5000)
+    pg.wait_for_timeout(600)
+    assert pg.evaluate("window.__deskPanes().a.engine") == "tradingview"
+    return browser, pg, errors
+
+
+def test_the_charts_carry_only_what_the_verdict_reads(desk_server):
+    """Owner, 2026-10-09: "the indicators are useless". On by default only what
+    the verdict reads: the session VWAP, the 1-minute 9 EMA and MACD, volume,
+    HOD / PM high and the live plan. The 20 and 200 are one click away in ƒ;
+    the daily keeps its 9 / 20 / 200 for room. The library's attribution is on
+    the page, as its licence asks."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        browser, pg, errors = _chart_page(desk_server, pw)
+        menus = pg.evaluate("""() => Object.fromEntries(['chartA', 'chartB', 'chartD', 'chartC'].map(id => [id,
+            Array.from(document.querySelectorAll('#' + id + ' .ind-menu label')).map(l =>
+              [l.textContent.trim(), l.querySelector('input').checked])]))""")
+        on = {k: {lab for lab, c in v if c} for k, v in menus.items()}
+        assert on["chartA"] == {"Volume", "VWAP", "EMA 9", "MACD 12/26/9", "High of day", "Entry · stop · target"}
+        assert on["chartB"] == {"Volume", "VWAP", "High of day", "Entry · stop · target"}
+        assert on["chartD"] == {"Volume", "VWAP", "High of day", "Entry · stop · target"}
+        assert {"EMA 9", "EMA 20", "EMA 200"} <= on["chartC"], "the daily keeps the averages for room"
+        for card in ("chart-1m", "chart-5m", "chart-10s"):
+            assert "200" not in pg.eval_on_selector(f"[data-card={card}] .legend", "e => e.textContent")
+        assert "TradingView" in pg.locator(".statusbar .attrib").inner_text()
+        assert pg.get_attribute(".statusbar .attrib", "href") == "https://www.tradingview.com/"
+        assert not errors, errors
+        browser.close()
+
+
+def test_every_pane_draws_the_one_session_vwap(desk_server):
+    """The 10-second pane computed VWAP over its own 30 minutes — a different
+    line from the gate's under the same name. Every pane now reads the
+    1-minute session VWAP at its bar times."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        browser, pg, errors = _chart_page(desk_server, pw)
+        got = pg.evaluate("""() => {
+          const P = window.__deskPanes();
+          const a = P.a.rows(), va = P.a.vwapDrawn(), b = P.b.rows(), vb = P.b.vwapDrawn();
+          const at = (t) => { let r = null; a.forEach((x, i) => { if (x.time <= t) r = va[i]; }); return r; };
+          const checks = [];
+          b.forEach((x, i) => { if (vb[i] != null) checks.push([vb[i], at(x.time + 240)]); });
+          return { n: checks.length, worst: Math.max(0, ...checks.map(([u, v]) => Math.abs(u - v))) };
+        }""")
+        assert got["n"] >= 3 and got["worst"] < 1e-9, got
+        assert not errors, errors
+        browser.close()
+
+
+def test_the_crosshair_is_one_across_the_intraday_panes(desk_server):
+    """A bar hovered on the 1-minute chart is the same moment on the 5-minute
+    pane (2026-10-09), and leaving the chart lets go of it."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        browser, pg, errors = _chart_page(desk_server, pw)
+        box = pg.locator("#chartA").bounding_box()
+        x = pg.evaluate("() => { const a = window.__deskPanes().a, r = a.rows(); return a.xOf(r[r.length - 3].time); }")
+        assert x is not None
+        pg.mouse.move(box["x"] + x, box["y"] + box["height"] * 0.4)
+        pg.wait_for_timeout(250)
+        five = pg.evaluate("() => window.__deskPanes().b.lastCross")
+        assert five is not None, "the 5-minute pane follows the 1-minute's crosshair"
+        one = pg.evaluate("() => window.__deskPanes().a.rows().map(r => r.time)")
+        assert five % 300 == 0 and any(five <= t < five + 300 for t in one)
+        pg.mouse.move(box["x"] - 30, box["y"] - 30)
+        pg.wait_for_timeout(200)
+        assert pg.evaluate("() => window.__deskPanes().b.lastCross") is None, "and lets go with it"
+        assert not errors, errors
+        browser.close()
+
+
+def test_the_forming_minute_moves_with_each_ten_second_bar(desk_server):
+    """Live, the 1-minute's forming candle is built from the 10-second bars of
+    its minute ("ideally real time"); a minute the stream closed is never
+    overwritten by a partial sum."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    desk, clock = desk_server["desk"], desk_server["clock"]
+    with sync_playwright() as pw:
+        browser, pg, errors = _chart_page(desk_server, pw)
+        last = pg.evaluate("() => { const r = window.__SESSION__.bars.AAA; return r[r.length - 1][0]; }")
+        minute = last + 600                                  # a new minute ten minutes on
+        for i, (o, h, l, c, v) in enumerate([(4.40, 4.42, 4.39, 4.41, 1000), (4.41, 4.47, 4.41, 4.46, 2500)]):
+            desk.hub.publish("bar10s", {"symbol": "AAA", "t": minute + 10 * i, "open": o, "high": h, "low": l,
+                                        "close": c, "volume": v})
+        pg.wait_for_function(f"() => {{ const r = window.__SESSION__.bars.AAA; return r[r.length - 1][0] === {minute}; }}",
+                             timeout=5000)
+        candle = pg.evaluate("() => { const r = window.__SESSION__.bars.AAA; return r[r.length - 1]; }")
+        assert candle == [minute, 4.40, 4.47, 4.39, 4.46, 3500]
+        desk.hub.publish("bar1m", {"symbol": "AAA", "t": minute, "open": 4.40, "high": 4.50, "low": 4.38,
+                                   "close": 4.49, "volume": 9000})
+        desk.hub.publish("bar10s", {"symbol": "AAA", "t": minute + 20, "open": 4.46, "high": 4.46, "low": 4.30,
+                                    "close": 4.31, "volume": 50})
+        pg.wait_for_timeout(500)
+        candle = pg.evaluate("() => { const r = window.__SESSION__.bars.AAA; return r[r.length - 1]; }")
+        assert candle == [minute, 4.40, 4.50, 4.38, 4.49, 9000], "the closed minute stands"
+        assert not errors, errors
+        browser.close()

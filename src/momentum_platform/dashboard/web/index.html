@@ -139,7 +139,7 @@
       <div class="card-head"><span class="grip" title="Drag to another card to swap places">⠿</span>
         <span class="card-title">1 minute · execution</span>
         <span class="chart-role">entry · structural stop · trigger</span>
-        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k hod"></i>HOD <i class="k pmh"></i>PM high</span>
+        <span class="legend" title="Only what the verdict reads (2026-10-09): the session VWAP, the 9 EMA and MACD are Layer 2 gates, the HOD and pre-market high gate 4's anchor. The 20 and 200 are one click away in ƒ."><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 EMA <i class="k hod"></i>HOD <i class="k pmh"></i>PM high</span>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host" id="chartA"></div>
     </article>
@@ -147,7 +147,7 @@
     <article class="card chart-card" data-card="chart-5m">
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">5 minute · structure</span>
-        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200</span>
+        <span class="legend" title="The session VWAP (the 1-minute's, read at each 5-minute close) and the HOD; the EMAs and MACD are in ƒ — on this pane they are not the gates' own."><i class="k vwap"></i>VWAP <i class="k hod"></i>HOD</span>
         <button class="icon-btn ctx-toggle" title="Show the daily chart here (D)">D</button>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host" id="chartB"></div>
@@ -156,7 +156,7 @@
     <article class="card chart-card" data-card="chart-10s">
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">10 second · micro</span>
-        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200</span>
+        <span class="legend" title="The session VWAP, stepped by the minute — the same line as the 1-minute's, not one computed over this pane's 30 minutes."><i class="k vwap"></i>VWAP <i class="k hod"></i>HOD</span>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host" id="chartD"></div>
     </article>
@@ -257,6 +257,9 @@
 
   <footer class="statusbar">
     <span class="keys"><kbd>J</kbd><kbd>K</kbd> row · <kbd>Enter</kbd> lock · <kbd>Space</kbd> freeze · <kbd>E</kbd> expand · <kbd>A</kbd> audio · <kbd>Esc</kbd> back</span>
+    <!-- Apache-2.0 attribution the library's README asks for: TradingView as its creator, and a link -->
+    <a class="attrib" href="https://www.tradingview.com/" target="_blank" rel="noopener noreferrer"
+       title="TradingView Lightweight Charts™ v4.1.3 · Copyright (c) 2024 TradingView, Inc. · Apache License 2.0">Charts: TradingView Lightweight Charts™</a>
   </footer>
 </div>
 
@@ -282,6 +285,8 @@
         <p>Labels on an alert, not the filter: <b>LF/MF</b> float band, <b>HR/MR</b> RVOL band, <b>&lt;20 / 20+</b> price band, <b>5-in-5 / 10-in-10</b> squeeze.</p></div>
       <div><h4>Plan lines on the charts</h4>
         <p>Only a plan that is <b>live now</b>: armed inside the bot's 07:00–11:20 window, inside its fill window (A10: 3 min from the break), not stopped, not at 2R, not killed. <b>ENTRY</b> a frozen plan's trigger · <b>TRIGGER</b> the forming pullback's break level, drawn on a REVIEW only · <b>STOP</b> under the pullback low · <b>2R</b> dotted, a reference (the bot trails; no fixed target) · <b>IN / STOP / TRAIL</b> your open position. No live plan, no lines — the card says so.</p></div>
+      <div><h4>Charts</h4>
+        <p>The 1-minute is the execution chart and follows the selection; the 5-minute and the 10-second beside it. The <b>crosshair is shared</b>: a bar hovered on one is the same moment on the others. Live, the 1-minute's forming candle moves with each 10-second bar. On by default only what the verdict reads — <b>VWAP</b> (one session line on every pane), <b>9 EMA</b> and <b>MACD</b> on the 1-minute, volume, <b>HOD / PM high</b>, the live plan; the 20 / 200 and the rest in <b>ƒ</b>. Drawing tools on the left of each pane: level, trend, measure (in R), zone.</p></div>
       <div><h4>Five pillars (card)</h4>
         <p>Five tiles: price · gain · RVOL · float · news, each with ✓ / ✗ / ?, the value and the threshold, from the server's lamps. The big number is the cascade's own count (A5): unknown counts as not passed; the tick on the meter is the minimum.</p></div>
       <div class="lg-wide" id="legendDepth"><h4>Level 2 — the book</h4>

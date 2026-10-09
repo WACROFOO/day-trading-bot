@@ -411,6 +411,20 @@ function makePane(hostId, daily) {
     if (parts.length) html += '<br>' + parts.join('<span class="k"> · </span>');
     legend.innerHTML = html;
   };
+  /* The crosshair, synced across the 1-minute, 5-minute and 10-second panes
+     (2026-10-09): a bar hovered on one is the same moment on the others. The
+     panes share the ET wall-clock axis, so a time maps by bucket: the target
+     pane shows its last bar inside the hovered bar. */
+  const crossListeners = [];
+  const SPAN = { "1m": 60, "5m": 300, "10s": 10 };
+  chart.subscribeCrosshairMove(param => {
+    if (CROSS_SYNCING || daily) return;
+    const span = SPAN[lastOpts && lastOpts.tf];
+    if (!span) return;
+    if (!param || !param.time || !param.point) { crossListeners.forEach(fn => fn(null)); return; }
+    const price = candles.coordinateToPrice(param.point.y);
+    crossListeners.forEach(fn => fn(param.time, param.time + span - 1, price));
+  });
   chart.subscribeCrosshairMove(param => {
     const tail = lastRows.length - 1;
     if (!param || !param.time || tail < 0) { showLegend(lastRows[tail], lastVols[tail], tail); return; }
@@ -460,11 +474,17 @@ function makePane(hostId, daily) {
   // v2 (2026-10-09): MACD on the 1-minute only — the course reads it there;
   // the 5-minute one "can lag and conflict", the 10-second one flips (Preview
   // ch. 5). The owner's desk carried it on the 5-minute from a saved v1 choice.
-  const SHOW_KEY = "momentum-workstation.show.v2." + hostId;
+  // v3 (2026-10-09, owner: "the indicators are useless"): on by default is
+  // only what the verdict reads — the session VWAP, the 1-minute 9 EMA and
+  // MACD (Layer 2 gates), volume (pullback volume), the HOD and pre-market
+  // high (gate 4's anchor) and the live plan. The 9 / 20 / 200 stay one click
+  // away in ƒ (support confluence, knowledge-base/strategies/PARAMETERS.md §3);
+  // the daily keeps them for room. v2's saved "everything on" is not carried.
+  const SHOW_KEY = "momentum-workstation.show.v3." + hostId;
   // MACD is ON by default on the execution pane: it is a Layer 2 gate the
   // cascade judges, so the trader must be able to see it without a menu.
-  const SHOW_DEFAULT = { volume: true, vwap: true, ema9: true, ema20: true,
-                         ema200: true, macd: hostId === "chartA", hod: true, plan: true };
+  const SHOW_DEFAULT = { volume: true, vwap: !daily, ema9: hostId === "chartA" || daily, ema20: daily,
+                         ema200: daily, macd: hostId === "chartA", hod: !daily, plan: true };
   let show = Object.assign({}, SHOW_DEFAULT);
   try {
     const saved = JSON.parse(localStorage.getItem(SHOW_KEY) || "null");
@@ -492,6 +512,26 @@ function makePane(hostId, daily) {
     engine: "tradingview",
     note: paneNote(host),
     tools: tools,
+    onCross(fn) { crossListeners.push(fn); },
+    rows() { return lastRows; },                               // tests read what was drawn
+    xOf(t) { try { return chart.timeScale().timeToCoordinate(t); } catch (e) { return null; } },
+    vwapDrawn() { return lastInd.vwap || null; },
+    lastCross: null,
+    crossTo(t0, t1, price) {
+      const span = SPAN[lastOpts && lastOpts.tf];
+      CROSS_SYNCING = true;
+      try {
+        api.lastCross = null;
+        if (t0 == null || !span || price == null || !lastRows.length) { chart.clearCrosshairPosition(); return; }
+        let lo = 0, hi = lastRows.length;                       // the last bar at or before t1 …
+        while (lo < hi) { const mid = (lo + hi) >> 1; if (lastRows[mid].time <= t1) lo = mid + 1; else hi = mid; }
+        const row = lastRows[lo - 1];
+        if (!row || row.time + span <= t0) { chart.clearCrosshairPosition(); return; }   // … inside the hovered bar
+        chart.setCrosshairPosition(price, row.time, candles);
+        api.lastCross = row.time;
+      } catch (e) { /* an older library: the panes simply do not sync */ }
+      finally { CROSS_SYNCING = false; }
+    },
     // Zoom is state the trader set on purpose. A live reload must hand it back.
     getRange() { try { return chart.timeScale().getVisibleLogicalRange(); } catch (e) { return null; } },
     setRange(r) { try { if (r) chart.timeScale().setVisibleLogicalRange(r); } catch (e) {} },
@@ -540,7 +580,11 @@ function makePane(hostId, daily) {
                                    .filter(Boolean));
       };
       // The caller asks for an overlay; the pane's own menu can switch it off.
-      put("vwap", opts.vwap && show.vwap ? vwap(bars) : null);
+      // One VWAP: the session's, from the 1-minute bars (the cascade's own
+      // arithmetic), read at each of this pane's bar times. The 10-second pane
+      // used to compute it over its own 30-minute window — a different line
+      // from the gate's, drawn under the same name (2026-10-09).
+      put("vwap", show.vwap && opts.vwapSeries ? opts.vwapSeries : null);
       put("ema9", opts.ema9 && show.ema9 ? ema(closes, 9) : null);
       put("ema20", opts.ema20 && show.ema20 ? ema(closes, 20) : null);
       put("ema200", opts.ema200 && show.ema200 ? ema(closes, 200) : null);
@@ -700,7 +744,8 @@ function drawChart(canvas, bars, opts) {
     g.stroke();
   };
   const closes = bars.map(b => b[4]);
-  if (opts.vwap) { g.lineWidth = 3; line(vwap(bars), PALETTE.vwap); g.lineWidth = 1.2; }
+  if (opts.vwapSeries || opts.vwap) {
+    g.lineWidth = 3; line(opts.vwapSeries || vwap(bars), PALETTE.vwap); g.lineWidth = 1.2; }
   if (opts.ema9) line(ema(closes, 9), PALETTE.ema9);
   if (opts.ema20) line(ema(closes, 20), PALETTE.ema20);
   if (opts.ema200) line(ema(closes, 200), PALETTE.ema200);
@@ -3127,6 +3172,7 @@ function bars10sUpTo(sym, frame) {
 }
 
 let CHART_SYM = null, SNAP_LIVE = false;
+let CROSS_SYNCING = false;                // a crosshair set by another pane is not news
 let PLAN_DRAWN = null;                    // what the charts last drew as the plan (a test reads it)
 function renderCharts(frame) {
   if (!frame) return;                     // no bars yet: nothing to draw, nothing to throw
@@ -3150,14 +3196,25 @@ function renderCharts(frame) {
   PLAN_DRAWN = { symbol: sym, t: frame.t, plan: plan, position: position };
   const pmBars = bars1.filter(b => sessionAt(b[0] * 1000) === "premarket");
   const pmHigh = pmBars.length ? Math.max(...pmBars.map(b => b[2])) : null;
-  PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "1m", pmHigh: pmHigh }, common));
-  PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "5m" }, common));
+  // The session VWAP once, from the 1-minute bars; every pane reads it at its
+  // own bar times (the last minute at or before each bar).
+  const vw1 = vwap(bars1);
+  const vwapAt = t => {
+    let lo = 0, hi = bars1.length;
+    while (lo < hi) { const mid = (lo + hi) >> 1; if (bars1[mid][0] <= t) lo = mid + 1; else hi = mid; }
+    return lo ? vw1[lo - 1] : null;
+  };
+  const b5 = agg(bars1, 5);
+  PANES.a.render(bars1, Object.assign({ vwapSeries: vw1, ema9: true, ema20: true, ema200: true, tf: "1m", pmHigh: pmHigh }, common));
+  PANES.b.render(b5, Object.assign({ vwapSeries: b5.map(b => vwapAt(b[0] + 240)), ema9: true, ema20: true,
+                                     ema200: true, tf: "5m" }, common));
   const sub = bars10sUpTo(sym, frame);
   if (sub.length) {
     PANES.d.note(null);   // cleared, then re-set below only when the tape is thin
     // Micro-pullbacks live here: several 10-second candles can form a pause
     // inside a single green 1-minute candle.
-    PANES.d.render(sub, Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "10s" }, common));
+    PANES.d.render(sub, Object.assign({ vwapSeries: sub.map(b => vwapAt(b[0])), ema9: true, ema20: true, ema200: true,
+                                        tf: "10s" }, common));
     if (sub.length < 12) PANES.d.note("Only " + sub.length + " ten-second candles from " + PROVIDER + " in the last 30 minutes — thin tape, not a broken chart.");
   } else {
     PANES.d.render([], {});
@@ -3262,6 +3319,7 @@ if (typeof window !== "undefined") {
   window.__deskMemory = () => ({ log: ALERT_LOG, keys: ALERT_KEYS, seen: SEEN_IN_GRID });
   window.__deskSeek = seekTo;
   window.__deskPlanDrawn = () => PLAN_DRAWN;
+  window.__deskPanes = () => PANES;
   window.__deskFrame = () => ({ frame: state.frame, frames: FRAMES.length,
                                 ts: FRAMES.length ? FRAMES[Math.min(state.frame, FRAMES.length - 1)].ts : null,
                                 last: FRAMES.length ? FRAMES[FRAMES.length - 1].ts : null });
@@ -3897,6 +3955,19 @@ function upsertBar(arr, bar) {
   while (i > 0 && arr[i - 1][0] > bar[0]) i--;
   if (i > 0 && arr[i - 1][0] === bar[0]) arr[i - 1] = bar; else arr.splice(i, 0, bar);
 }
+/* The forming 1-minute candle, from the 10-second bars of its minute
+   (2026-10-09: "ideally real time"). A minute the stream already closed is
+   never overwritten by a partial sum; the closed bar1m replaces this one. */
+const CLOSED_MIN = {};
+function formMinute(sym, t) {
+  const minute = Math.floor(t / 60) * 60;
+  if (minute <= (CLOSED_MIN[sym] || 0)) return;
+  const tens = (S.bars10s[sym] || []).filter(b => b[0] >= minute && b[0] < minute + 60);
+  if (!tens.length) return;
+  const candle = [minute, tens[0][1], Math.max(...tens.map(b => b[2])), Math.min(...tens.map(b => b[3])),
+                  tens[tens.length - 1][4], tens.reduce((v, b) => v + b[5], 0)];
+  upsertBar(BARS[sym] = BARS[sym] || [], candle);
+}
 
 /* Symbol metadata is MERGED, never wholesale replaced. The stream writes the
    provider's last print, its time and the book onto these objects between
@@ -4018,10 +4089,12 @@ function streamFollow() {
   DeskLive.on("bar10s", b => {
     const arr = (S.bars10s[b.symbol] = S.bars10s[b.symbol] || []);
     upsertBar(arr, [b.t, b.open, b.high, b.low, b.close, b.volume]);
+    formMinute(b.symbol, b.t);                 // the 1-minute candle moves every 10 s, not every 60
     if (b.symbol === state.selected) schedule();
   }).on("bar1m", b => {
     const arr = (BARS[b.symbol] = BARS[b.symbol] || []);
     upsertBar(arr, [b.t, b.open, b.high, b.low, b.close, b.volume]);
+    CLOSED_MIN[b.symbol] = Math.max(CLOSED_MIN[b.symbol] || 0, b.t);
     if (b.symbol === state.selected) schedule();
   }).on("quote", q => {
     const meta = SYMS[q.symbol]; if (!meta) return;
@@ -4463,6 +4536,10 @@ function init() {
   PANES.d = makePane("chartD", false);
   PANES.b = makePane("chartB", false);
   PANES.c = makePane("chartC", true);
+  // one crosshair across the 1-minute, 5-minute and 10-second panes
+  ["a", "b", "d"].forEach(k => { const p = PANES[k]; if (!p || !p.onCross) return;
+    p.onCross((t0, t1, price) => ["a", "b", "d"].forEach(j => {
+      if (j !== k && PANES[j] && PANES[j].crossTo) PANES[j].crossTo(t0, t1, price); })); });
   const usingTV = PANES.a.engine === "tradingview";
   $("#chartEngine").textContent = usingTV ? "TRADINGVIEW" : "CANVAS";
   // Which app.js this page is running, as a short hash of its own source.

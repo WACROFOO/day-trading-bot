@@ -370,8 +370,10 @@ def test_ui_chart_stack_is_the_desks_own_1m_over_5m_and_10s(page):
         host = page.locator(f"[data-card={card}] .chart-host").bounding_box()
         inner = page.locator(f"[data-card={card}] .chart-host canvas").first.bounding_box()
         assert inner and abs(inner["width"] - host["width"]) < 4, card
+    # only what the verdict reads is drawn by default (owner, 2026-10-09): the
+    # 200 left the intraday legends; it is one click away in ƒ
     for card in ("chart-1m", "chart-5m"):
-        assert "200" in page.eval_on_selector(f"[data-card={card}] .legend", "e => e.textContent")
+        assert "VWAP" in page.eval_on_selector(f"[data-card={card}] .legend", "e => e.textContent")
     # the widgets keep their intervals for when they are dragged back in
     assert page.eval_on_selector("#tvWidget", "e => e.dataset.interval") == "1"
     assert page.eval_on_selector("#tvWidget5", "e => e.dataset.interval") == "5"
@@ -1679,9 +1681,10 @@ def test_ui_the_context_pane_toggles_to_the_daily(page):
 
 def test_ui_macd_reads_on_the_one_minute_only(page):
     """Preview ch. 5: MACD mainly on the 1-minute; the 5-minute one lags and
-    conflicts. The v2 key drops a saved v1 choice that put it on the 5-minute."""
+    conflicts. The v2 key dropped a saved v1 choice that put it on the 5-minute;
+    v3 (2026-10-09) drops v2's "everything on" for what the verdict reads."""
     app = (ROOT / "src" / "momentum_platform" / "dashboard" / "web" / "app.js").read_text()
-    assert 'macd: hostId === "chartA"' in app and '"momentum-workstation.show.v2."' in app
+    assert 'macd: hostId === "chartA"' in app and '"momentum-workstation.show.v3."' in app
     if page.locator("#chartEngine").inner_text() != "TRADINGVIEW":
         pytest.skip("canvas fallback in this artifact: no MACD band tags to read")
     assert page.locator("#chartA .band-tag").is_visible()
@@ -1850,3 +1853,4 @@ def test_ui_a_huge_order_or_print_alerts_once_debounced_and_never_the_history(pa
     assert "BIG PRINT" in page.locator("#flowAlert").inner_text() and "15,000 at 7.22 at the ask" in \
         page.locator("#flowAlert").inner_text()
     page.evaluate("() => { window.__SESSION__.live = false; }")
+
