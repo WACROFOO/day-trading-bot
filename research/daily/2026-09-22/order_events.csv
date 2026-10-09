@@ -1,0 +1,19 @@
+id,order_id,ts,text,symbol
+1,3,2026-09-22T13:36:43+00:00,"trail (A3): high 6.0 since fill, stop 5.5 -> 5.52 (1R/sh = 0.48)",DCOY
+2,3,2026-09-22T13:36:48+00:00,stop leg now 'Cancelled'; protected=0 — position has NO working stop at the broker,DCOY
+3,3,2026-09-22T13:36:48+00:00,position DCOY x41 at the broker with no working exit (stop status 'Cancelled') — a human must place one,DCOY
+4,3,2026-09-22T13:58:41+00:00,new protective stop 16 placed at 5.52 x41,DCOY
+5,3,2026-09-22T13:58:41+00:00,"trail (A3): high 7.61 since fill, stop 5.52 -> 7.13 (1R/sh = 0.48)",DCOY
+6,4,2026-09-22T14:46:15+00:00,"trail (A3): high 14.74 since fill, stop 14.53 -> 14.56 (1R/sh = 0.18)",GRML
+7,4,2026-09-22T14:46:20+00:00,"trail (A3): high 14.75 since fill, stop 14.56 -> 14.57 (1R/sh = 0.18)",GRML
+8,4,2026-09-22T14:46:25+00:00,"trail (A3): high 14.84 since fill, stop 14.57 -> 14.66 (1R/sh = 0.18)",GRML
+9,4,2026-09-22T14:46:30+00:00,"trail (A3): high 14.92 since fill, stop 14.66 -> 14.74 (1R/sh = 0.18)",GRML
+10,4,2026-09-22T14:46:45+00:00,"trail (A3): high 15.0 since fill, stop 14.74 -> 14.82 (1R/sh = 0.18)",GRML
+11,4,2026-09-22T14:46:55+00:00,"trail (A3): high 15.3 since fill, stop 14.82 -> 15.12 (1R/sh = 0.18)",GRML
+12,4,2026-09-22T14:47:00+00:00,"trail (A3): high 15.48 since fill, stop 15.12 -> 15.3 (1R/sh = 0.18)",GRML
+13,5,2026-09-22T15:30:00+00:00,hard stop: SELL MKT x62 sent (order 23); fill not yet confirmed,GRML
+14,5,2026-09-22T15:30:05+00:00,stop leg now 'Cancelled'; protected=0 — position has NO working stop at the broker,GRML
+15,5,2026-09-22T15:30:05+00:00,exit order Cancelled: the position is STILL HELD — a human must exit it (exercise.py stuck / ah-exit); nothing is resent automatically,GRML
+16,5,2026-09-22T16:05:48+00:00,manual_market confirmed by ayman.benharara: SELL MKT x62 (order 28); filled 15.5,GRML
+17,3,2026-09-22T18:06:32+00:00,"exit marked as a DEFECT exit by ayman.benharara: stop cancelled by the OCA modify at 09:36; exit at the restart price 09:58; excluded from the A3 kill-rule comparison, kept in every P&L figure",DCOY
+18,5,2026-09-22T18:06:44+00:00,"exit marked as a DEFECT exit by ayman.benharara: stop cancelled by the 11:30 flatten, market sell refused as direct-routed; sold by hand 12:05; excluded from the A3 kill-rule comparison, kept in every P&L figure",GRML

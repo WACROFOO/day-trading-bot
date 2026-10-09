@@ -1,0 +1,7 @@
+ts_et,source,symbol,verdict,reasons_json,price,gap_pct,float_shares,pm_volume
+2026-09-28T06:44:59-04:00,gap_scan,GYGY,REJECT,"[""$1.44 under $2.00""]",,94.6998377501352,,14483439.0
+2026-09-28T06:44:59-04:00,gap_scan,CLRO,WATCH,"[""float 0.71M"", ""move explained but not flagged a catalyst"", ""14% off the pre-market high"", ""5.9M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""only 2.68M shares out \u2014 check for a reverse split"", ""$16M cap \u2014 check the shelf/ATM in EDGAR""]",,80.8695652173913,710000.0,5948085.0
+2026-09-28T06:44:59-04:00,gap_scan,MIMI,REJECT,"[""$0.99 under $2.00""]",,28.25466804979253,8720000.0,8570657.0
+2026-09-28T06:44:59-04:00,gap_scan,WBUY,REJECT,"[""$1.06 under $2.00""]",,27.34046388655212,2540000.0,19175229.0
+2026-09-28T06:44:59-04:00,gap_scan,MEDS,STAR,"[""float 1.54M"", ""short float 28.0% \u2014 squeeze fuel"", ""move explained but not flagged a catalyst"", ""1.6M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""only 2.84M shares out \u2014 check for a reverse split"", ""$14M cap \u2014 check the shelf/ATM in EDGAR""]",,23.47266881028939,1540000.0,1601689.0
+2026-09-28T06:44:59-04:00,gap_scan,SDEV,REJECT,"[""$1.68 under $2.00""]",,12.751677852348989,1790000.0,3720830.0

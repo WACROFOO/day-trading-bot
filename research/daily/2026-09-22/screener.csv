@@ -1,0 +1,39 @@
+ts_et,source,symbol,verdict,reasons_json,price,gap_pct,float_shares,pm_volume
+2026-09-22T07:03:37-04:00,gap_scan,TOPS,REJECT,"[""$1.44 under $2.00""]",,100.55710306406684,4099999.9999999995,31936316.0
+2026-09-22T07:03:37-04:00,gap_scan,QNME,REJECT,"[""$0.96 under $2.00"", ""float 25.8M over 20M""]",,50.43777360850533,25780000.0,8401109.0
+2026-09-22T07:03:37-04:00,gap_scan,IMCC,REJECT,"[""33% off the pre-market high \u2014 already faded""]",,40.009724473257705,90000.0,5528776.0
+2026-09-22T07:03:37-04:00,gap_scan,GRML,STAR,"[""float 2.87M"", ""short float 22.4% \u2014 squeeze fuel"", ""$12.59 outside his preferred $2.50-$9"", ""move explained but not flagged a catalyst"", ""4.3M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""finviz and Yahoo disagree on prior close by 3.31x \u2014 verify before trusting gap%"", ""only 3.18M shares out \u2014 check for a reverse split"", ""$43M cap \u2014 check the shelf/ATM in EDGAR""]",,33.697452229299365,2870000.0,4256879.0
+2026-09-22T07:03:37-04:00,gap_scan,GDC,REJECT,"[""$1.83 under $2.00""]",,25.342465753424666,4090000.0,3657870.0
+2026-09-22T07:03:37-04:00,gap_scan,STI,STAR,"[""float 3.54M"", ""finviz flags a dated catalyst"", ""18% off the pre-market high"", ""1.9M shares already traded pre-market \u2014 crowded, the move may be over before the bell""]",,23.966942148760335,3540000.0,1865934.0
+2026-09-22T07:03:37-04:00,gap_scan,SLXN,REJECT,"[""$0.62 under $2.00""]",,13.655578018746539,5590000.0,8626301.0
+2026-09-22T08:06:20-04:00,gap_scan,QNME,REJECT,"[""$1.51 under $2.00"", ""float 25.8M over 20M""]",,136.86679174484053,25780000.0,48023687.0
+2026-09-22T08:06:20-04:00,gap_scan,TOPS,REJECT,"[""$1.37 under $2.00""]",,90.80779944289696,4099999.9999999995,39277675.0
+2026-09-22T08:06:20-04:00,gap_scan,DCOY,WATCH,"[""float 0.57M"", ""move explained but not flagged a catalyst"", ""23% off the pre-market high"", ""8.2M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""only 0.66M shares out \u2014 check for a reverse split"", ""$3M cap \u2014 check the shelf/ATM in EDGAR""]",,58.203124999999986,570000.0,8222940.0
+2026-09-22T08:06:20-04:00,gap_scan,GRML,STAR,"[""float 2.87M"", ""finviz flags a dated catalyst"", ""short float 22.4% \u2014 squeeze fuel"", ""$13.71 outside his preferred $2.50-$9"", ""10.8M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""finviz and Yahoo disagree on prior close by 3.31x \u2014 verify before trusting gap%"", ""only 3.18M shares out \u2014 check for a reverse split"", ""$42M cap \u2014 check the shelf/ATM in EDGAR""]",,45.51486199575371,2870000.0,10818376.0
+2026-09-22T08:06:20-04:00,gap_scan,IMCC,REJECT,"[""35% off the pre-market high \u2014 already faded""]",,34.84602917341978,90000.0,6783692.0
+2026-09-22T08:06:20-04:00,gap_scan,VKTX,REJECT,"[""$39.72 over $20"", ""float 112.9M over 20M""]",,31.9173032215211,112930000.0,2931228.0
+2026-09-22T08:06:20-04:00,gap_scan,NCT,REJECT,"[""50% off the pre-market high \u2014 already faded""]",,26.140350877192986,1020000.0,885117.0
+2026-09-22T08:06:20-04:00,gap_scan,GDC,REJECT,"[""$1.82 under $2.00""]",,24.602739726027394,4090000.0,4772344.0
+2026-09-22T08:06:20-04:00,gap_scan,STI,REJECT,"[""27% off the pre-market high \u2014 already faded""]",,11.347107438016533,3540000.0,2214719.0
+2026-09-22T08:28:16-04:00,gap_scan,QNME,REJECT,"[""$1.47 under $2.00"", ""float 25.8M over 20M""]",,129.83114446529083,25780000.0,58480050.0
+2026-09-22T08:28:16-04:00,gap_scan,TOPS,REJECT,"[""$1.33 under $2.00""]",,85.23676880222843,4099999.9999999995,41439797.0
+2026-09-22T08:28:16-04:00,gap_scan,DCOY,WATCH,"[""float 0.57M"", ""move explained but not flagged a catalyst"", ""15% off the pre-market high"", ""17.1M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""only 0.66M shares out \u2014 check for a reverse split"", ""$4M cap \u2014 check the shelf/ATM in EDGAR""]",,74.96484374999999,570000.0,17127929.0
+2026-09-22T08:28:16-04:00,gap_scan,GRML,STAR,"[""float 2.87M"", ""finviz flags a dated catalyst"", ""short float 22.4% \u2014 squeeze fuel"", ""$13.70 outside his preferred $2.50-$9"", ""12.2M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""finviz and Yahoo disagree on prior close by 3.31x \u2014 verify before trusting gap%"", ""only 3.18M shares out \u2014 check for a reverse split"", ""$43M cap \u2014 check the shelf/ATM in EDGAR""]",,45.43524416135881,2870000.0,12161264.0
+2026-09-22T08:28:16-04:00,gap_scan,IMCC,REJECT,"[""36% off the pre-market high \u2014 already faded""]",,32.554294975688805,90000.0,6930329.0
+2026-09-22T08:28:16-04:00,gap_scan,VKTX,REJECT,"[""$38.11 over $20"", ""float 112.9M over 20M""]",,26.580870142809705,112930000.0,3977825.0
+2026-09-22T08:28:16-04:00,gap_scan,NCT,REJECT,"[""52% off the pre-market high \u2014 already faded""]",,21.578947368421044,1020000.0,988632.0
+2026-09-22T08:28:16-04:00,gap_scan,GDC,REJECT,"[""$1.75 under $2.00""]",,19.52054794520549,4090000.0,5025108.0
+2026-09-22T09:58:34-04:00,gap_scan,LHSW,REJECT,"[""$1.27 under $2.00""]",,193.3018630441962,1030000.0,131664475.0
+2026-09-22T09:58:34-04:00,gap_scan,QNME,REJECT,"[""$1.32 under $2.00"", ""float 25.8M over 20M"", ""25% off the pre-market high \u2014 already faded""]",,106.37898686679176,25780000.0,72997504.0
+2026-09-22T09:58:34-04:00,gap_scan,DCOY,WATCH,"[""float 0.57M"", ""move explained but not flagged a catalyst"", ""10% off the pre-market high"", ""31.0M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""only 0.66M shares out \u2014 check for a reverse split"", ""$4M cap \u2014 check the shelf/ATM in EDGAR""]",,101.5625,570000.0,30954113.0
+2026-09-22T09:58:34-04:00,gap_scan,TOPS,REJECT,"[""$1.28 under $2.00""]",,78.28690807799444,4099999.9999999995,48265341.0
+2026-09-22T09:58:34-04:00,gap_scan,IMCC,REJECT,"[""30% off the pre-market high \u2014 already faded""]",,46.19124797406807,90000.0,8833131.0
+2026-09-22T09:58:34-04:00,gap_scan,GRML,STAR,"[""float 2.87M"", ""finviz flags a dated catalyst"", ""short float 22.4% \u2014 squeeze fuel"", ""$13.64 outside his preferred $2.50-$9"", ""14.7M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""only 3.18M shares out \u2014 check for a reverse split"", ""$43M cap \u2014 check the shelf/ATM in EDGAR""]",,44.81210191082802,2870000.0,14688495.0
+2026-09-22T09:58:34-04:00,gap_scan,FLNA,REJECT,"[""$0.98 under $2.00"", ""float 47.3M over 20M""]",,32.860040567951316,47320000.0,16565816.0
+2026-09-22T09:58:34-04:00,gap_scan,GDC,REJECT,"[""$1.82 under $2.00""]",,24.664383561643845,4090000.0,5775599.0
+2026-09-22T09:58:34-04:00,gap_scan,VKTX,REJECT,"[""$37.00 over $20"", ""float 112.9M over 20M""]",,22.88276320159416,112930000.0,6950766.0
+2026-09-22T09:58:34-04:00,gap_scan,NCT,REJECT,"[""51% off the pre-market high \u2014 already faded""]",,21.929824561403507,1020000.0,1133001.0
+2026-09-22T09:58:34-04:00,gap_scan,SPRO,REJECT,"[""$1.32 under $2.00"", ""float 43.0M over 20M""]",,15.789473684210542,42980000.0,576417.0
+2026-09-22T09:58:34-04:00,gap_scan,SOFX,REJECT,"[""instrument type \""fund\"" \u2014 not common stock""]",,11.494069594868073,,762865.0
+2026-09-22T09:58:34-04:00,gap_scan,STI,REJECT,"[""27% off the pre-market high \u2014 already faded""]",,10.468319559228648,3540000.0,2444204.0
+2026-09-22T09:58:34-04:00,gap_scan,ONON,REJECT,"[""$30.15 over $20"", ""float 225.2M over 20M""]",,10.358711566617856,225210000.0,2267681.0

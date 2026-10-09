@@ -1,0 +1,13 @@
+ts_et,source,symbol,verdict,reasons_json,price,gap_pct,float_shares,pm_volume
+2026-09-14T06:55:07-04:00,gap_scan,SCNI,WATCH,"[""float 0.69M"", ""move explained but not flagged a catalyst"", ""19% off the pre-market high"", ""9.6M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""only 0.71M shares out \u2014 check for a reverse split"", ""$2M cap \u2014 check the shelf/ATM in EDGAR"", ""instrument type \""dr\""""]",,63.25903614457833,690000.0,9613256.0
+2026-09-14T06:55:07-04:00,gap_scan,ELMT,REJECT,"[""$21.75 over $20""]",,34.342186534898076,10260000.0,455228.0
+2026-09-14T06:55:07-04:00,gap_scan,RUM,REJECT,"[""float 132.4M over 20M""]",,16.73640167364016,132440000.0,1920901.0
+2026-09-14T06:55:07-04:00,gap_scan,VSME,REJECT,"[""$1.24 under $2.00""]",,15.898682119824272,2570000.0,3429286.0
+2026-09-14T06:55:07-04:00,gap_scan,BNC,REJECT,"[""float 36.2M over 20M""]",,14.393750000000002,36240000.0,388001.0
+2026-09-14T06:55:07-04:00,gap_scan,SKDD,REJECT,"[""instrument type \""fund\"" \u2014 not common stock""]",,14.080459770114947,,604840.0
+2026-09-14T06:55:07-04:00,gap_scan,NBIZ,REJECT,"[""instrument type \""fund\"" \u2014 not common stock""]",,13.833333333333334,,255777.0
+2026-09-14T06:55:07-04:00,gap_scan,SOXS,REJECT,"[""$50.15 over $20"", ""instrument type \""fund\"" \u2014 not common stock""]",,13.615768010874485,,3577692.0
+2026-09-14T06:55:07-04:00,gap_scan,CORD,REJECT,"[""instrument type \""fund\"" \u2014 not common stock""]",,12.631399317406139,,284438.0
+2026-09-14T06:55:07-04:00,gap_scan,BEZ,REJECT,"[""instrument type \""fund\"" \u2014 not common stock""]",,10.875656742556925,,270053.0
+2026-09-14T06:55:07-04:00,gap_scan,SNDQ,REJECT,"[""instrument type \""fund\"" \u2014 not common stock""]",,10.266159695817487,,1138825.0
+2026-09-14T06:55:07-04:00,gap_scan,MUZ,REJECT,"[""instrument type \""fund\"" \u2014 not common stock""]",,10.03521126760564,,284922.0

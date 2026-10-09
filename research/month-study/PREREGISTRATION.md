@@ -172,4 +172,21 @@ candidate is the owner's decision, recorded as an amendment in
 
 ## Addenda
 
-*(none yet)*
+**A · 2026-10-09 08:07 ET — how the export arrived, and what it covers.**
+Written before the first run; no result exists yet.
+
+- **Transport.** The Mac has no GitHub credentials, so `--push` was not
+  possible. The owner ran `day_export.py --since 2026-09-08 --day 2026-10-08
+  --board-bars --out ~/Desktop/month_export` (commit `614ccfa`, the `--out`
+  option added for this) and uploaded the zip. It is filed unchanged under
+  `research/daily/<day>/`, without `day.log`.
+- **Coverage.** The ledger holds 20 sessions, 2026-09-11 to 2026-10-08.
+  Nothing exists for 09-08 to 09-10.
+- **Split.** The dates are unchanged:
+  - selection: 15 sessions, 09-11 to 10-01;
+  - holdout: 5 sessions, 10-02 to 10-08.
+- **Per day:**
+  - board: 7–17 names;
+  - screener: 5–161 candidate rows;
+  - decisions: 47–141;
+  - the desk's bars with bid/ask: 2,860–5,919 minutes.

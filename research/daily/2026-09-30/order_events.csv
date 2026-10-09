@@ -1,0 +1,4 @@
+id,order_id,ts,text,symbol
+40,11,2026-09-30T13:50:40+00:00,"enforce_stops: bid 2.71 has been below the resting stop 2.78 for 16s and the broker did not fill it; stop leg 52 cancelled, SELL MKT x181 sent (order 54)",BIYA
+41,11,2026-09-30T13:50:45+00:00,stop leg now 'Cancelled'; protected=0 — position has NO working stop at the broker,BIYA
+42,11,2026-09-30T13:50:45+00:00,exit confirmed filled at 2.72,BIYA

@@ -32,3 +32,21 @@ flagged for a preregistered decision (`research/edge-hunt/PREREGISTRATION.md`).
 |---|---|
 | `2026-10-06/` | IPDN 09:22 taken (−1.00 R), APUS 10:58 taken (−0.76 R); uploaded by hand from the Mac |
 | `2026-10-07/` | LPCN 07:26 taken; uploaded by hand from the Mac |
+| `2026-09-11/` | month export (uploaded from the Mac, 2026-10-09): screener 40 rows, board 8 names, decisions 100, orders 0 |
+| `2026-09-14/` | month export (uploaded from the Mac, 2026-10-09): screener 12 rows, board 8 names, decisions 47, orders 0 |
+| `2026-09-15/` | month export (uploaded from the Mac, 2026-10-09): screener 36 rows, board 8 names, decisions 63, orders 0 |
+| `2026-09-16/` | month export (uploaded from the Mac, 2026-10-09): screener 14 rows, board 8 names, decisions 101, orders 0 |
+| `2026-09-17/` | month export (uploaded from the Mac, 2026-10-09): screener 37 rows, board 8 names, decisions 114, orders 0 |
+| `2026-09-18/` | month export (uploaded from the Mac, 2026-10-09): screener 90 rows, board 13 names, decisions 132, orders 1 |
+| `2026-09-21/` | month export (uploaded from the Mac, 2026-10-09): screener 161 rows, board 17 names, decisions 125, orders 1 |
+| `2026-09-22/` | month export (uploaded from the Mac, 2026-10-09): screener 38 rows, board 12 names, decisions 93, orders 3 |
+| `2026-09-23/` | month export (uploaded from the Mac, 2026-10-09): screener 54 rows, board 13 names, decisions 141, orders 1 |
+| `2026-09-24/` | month export (uploaded from the Mac, 2026-10-09): screener 55 rows, board 15 names, decisions 134, orders 2 |
+| `2026-09-25/` | month export (uploaded from the Mac, 2026-10-09): screener 16 rows, board 14 names, decisions 86, orders 2 |
+| `2026-09-28/` | month export (uploaded from the Mac, 2026-10-09): screener 6 rows, board 8 names, decisions 61, orders 0 |
+| `2026-09-29/` | month export (uploaded from the Mac, 2026-10-09): screener 11 rows, board 8 names, decisions 62, orders 0 |
+| `2026-09-30/` | month export (uploaded from the Mac, 2026-10-09): screener 13 rows, board 14 names, decisions 89, orders 1 |
+| `2026-10-01/` | month export (uploaded from the Mac, 2026-10-09): screener 20 rows, board 12 names, decisions 52, orders 3 |
+| `2026-10-02/` | month export (uploaded from the Mac, 2026-10-09): screener 5 rows, board 8 names, decisions 77, orders 6 |
+| `2026-10-05/` | month export (uploaded from the Mac, 2026-10-09): screener 27 rows, board 7 names, decisions 90, orders 0 |
+| `2026-10-08/` | month export (uploaded from the Mac, 2026-10-09): screener 25 rows, board 12 names, decisions 108, orders 0 |

@@ -1,0 +1,6 @@
+id,order_id,ts,text,symbol
+19,6,2026-09-23T14:15:03+00:00,"trail (A3): high 8.34 since fill, stop 7.34 -> 7.37 (1R/sh = 0.97)",WHLR
+20,6,2026-09-23T14:15:18+00:00,"trail (A3): high 8.56 since fill, stop 7.37 -> 7.59 (1R/sh = 0.97)",WHLR
+21,6,2026-09-23T14:15:33+00:00,"trail (A3): high 8.71 since fill, stop 7.59 -> 7.74 (1R/sh = 0.97)",WHLR
+22,6,2026-09-23T14:46:50+00:00,trail level 7.74 corrected to the initial stop: the broker's stop rests there,WHLR
+23,6,2026-09-23T14:46:50+00:00,"trail (A3): high 8.71 since fill, stop 7.34 -> 7.74 (1R/sh = 0.97)",WHLR

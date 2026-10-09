@@ -1,0 +1,14 @@
+ts_et,source,symbol,verdict,reasons_json,price,gap_pct,float_shares,pm_volume
+2026-09-30T04:18:58-04:00,gap_scan,NCI,WATCH,"[""float 2.36M"", ""$2.38 outside his preferred $2.50-$9"", ""move explained but not flagged a catalyst"", ""1.0M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""finviz and Yahoo disagree on prior close by 0.53x \u2014 verify before trusting gap%"", ""52w high 46x the price \u2014 history has been split-adjusted, this has consolidated before"", ""only 2.36M shares out \u2014 check for a reverse split"", ""$5M cap \u2014 check the shelf/ATM in EDGAR""]",,88.88888888888889,2360000.0,1045001.0
+2026-09-30T04:18:58-04:00,gap_scan,KALA,REJECT,"[""$0.74 under $2.00""]",,46.155374528114464,18590000.0,284447.0
+2026-09-30T09:37:15-04:00,gap_scan,CNTB,REJECT,"[""$1.83 under $2.00""]",,84.55645161290323,16970000.0,88058124.0
+2026-09-30T09:37:15-04:00,gap_scan,LGHL,REJECT,"[""28% off the pre-market high \u2014 already faded""]",,56.31929046563193,50000.0,9331890.0
+2026-09-30T09:37:15-04:00,gap_scan,NCI,REJECT,"[""$1.79 under $2.00"", ""30% off the pre-market high \u2014 already faded""]",,42.06349206349206,2360000.0,7301993.0
+2026-09-30T09:37:15-04:00,gap_scan,VBIO,WATCH,"[""float 0.89M"", ""move explained but not flagged a catalyst"", ""26.1M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""52w high 20x the price \u2014 history has been split-adjusted, this has consolidated before"", ""only 0.89M shares out \u2014 check for a reverse split"", ""$3M cap \u2014 check the shelf/ATM in EDGAR""]",,38.16254416961131,890000.0,26123968.0
+2026-09-30T09:37:15-04:00,gap_scan,FFR,REJECT,"[""$1.35 under $2.00"", ""54% off the pre-market high \u2014 already faded""]",,33.66336633663367,7100000.0,10295906.0
+2026-09-30T09:37:15-04:00,gap_scan,TGE,REJECT,"[""$1.01 under $2.00"", ""float 44.2M over 20M""]",,21.867469879518087,44180000.0,21962189.0
+2026-09-30T09:37:15-04:00,gap_scan,WETO,REJECT,"[""$1.34 under $2.00""]",,21.8,910000.0,4598629.0
+2026-09-30T09:37:15-04:00,gap_scan,BIYA,WATCH,"[""float 2.70M"", ""$2.46 outside his preferred $2.50-$9"", ""move explained but not flagged a catalyst"", ""2.2M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""52w high 68x the price \u2014 history has been split-adjusted, this has consolidated before"", ""$15M cap \u2014 check the shelf/ATM in EDGAR""]",,20.00000000000001,2700000.0,2177361.0
+2026-09-30T09:37:15-04:00,gap_scan,CAPR,REJECT,"[""float 52.6M over 20M""]",,18.83313885647607,52650000.0,4360334.0
+2026-09-30T09:37:15-04:00,gap_scan,NCPL,REJECT,"[""$1.39 under $2.00""]",,13.909836065573769,4380000.0,1533667.0
+2026-09-30T09:37:15-04:00,gap_scan,SGMT,REJECT,"[""float 57.4M over 20M""]",,11.36120042872455,57420000.0,338459.0

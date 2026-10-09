@@ -1,0 +1,13 @@
+id,order_id,ts,text,symbol
+43,12,2026-10-01T11:27:00+00:00,"trail (A3, monitored): high 4.79 since fill, watch level 4.67 -> 4.69",MEDS
+44,12,2026-10-01T11:27:05+00:00,"trail (A3, monitored): high 4.81 since fill, watch level 4.69 -> 4.71",MEDS
+45,12,2026-10-01T11:27:16+00:00,"trail (A3, monitored): high 4.82 since fill, watch level 4.71 -> 4.72",MEDS
+46,12,2026-10-01T11:27:51+00:00,"trail (A3, monitored): high 4.83 since fill, watch level 4.72 -> 4.73",MEDS
+47,12,2026-10-01T11:28:02+00:00,"trail (A3, monitored): high 4.85 since fill, watch level 4.73 -> 4.75",MEDS
+48,12,2026-10-01T11:28:22+00:00,watch_stops: bid 4.74 <= stop 4.75; SELL LMT 4.64 x400 sent (order 53); fill not yet confirmed,MEDS
+49,12,2026-10-01T11:28:27+00:00,exit confirmed filled at 4.74,MEDS
+50,14,2026-10-01T13:35:25+00:00,"trail (A3): high 3.61 since fill, stop 3.29 -> 3.42 (1R/sh = 0.19)",VEEA
+51,14,2026-10-01T13:35:32+00:00,"trail (A3): high 3.7 since fill, stop 3.42 -> 3.51 (1R/sh = 0.19)",VEEA
+52,14,2026-10-01T13:35:45+00:00,"trail (A3): high 3.75 since fill, stop 3.51 -> 3.56 (1R/sh = 0.19)",VEEA
+53,14,2026-10-01T13:36:07+00:00,"trail (A3): high 3.82 since fill, stop 3.56 -> 3.63 (1R/sh = 0.19)",VEEA
+54,14,2026-10-01T13:36:14+00:00,"trail (A3): high 3.93 since fill, stop 3.63 -> 3.74 (1R/sh = 0.19)",VEEA

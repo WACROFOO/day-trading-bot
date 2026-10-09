@@ -1,0 +1,19 @@
+{
+ "day": "2026-09-17",
+ "exported_at": "2026-10-09T12:04:28+00:00",
+ "counts": {
+  "decisions": 114,
+  "screener": 37,
+  "board": 8,
+  "orders": 0,
+  "order_events": 0,
+  "five_minute": 0,
+  "green_run": 0,
+  "manual": 0,
+  "desk_calls": 0,
+  "bars": 3582,
+  "board_bars": 3582,
+  "log_lines": 50
+ },
+ "ledger": "/Users/ayman.benharara/day-trading-bot/data/journal.sqlite"
+}

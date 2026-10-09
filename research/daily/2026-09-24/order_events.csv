@@ -1,0 +1,14 @@
+id,order_id,ts,text,symbol
+24,7,2026-09-24T13:38:54+00:00,"trail (A3): high 3.77 since fill, stop 3.49 -> 3.53 (1R/sh = 0.24)",PFSA
+25,7,2026-09-24T13:39:01+00:00,"trail (A3): high 3.84 since fill, stop 3.53 -> 3.6 (1R/sh = 0.24)",PFSA
+26,7,2026-09-24T13:39:08+00:00,"trail (A3): high 3.88 since fill, stop 3.6 -> 3.64 (1R/sh = 0.24)",PFSA
+27,7,2026-09-24T13:39:15+00:00,"trail (A3): high 3.92 since fill, stop 3.64 -> 3.68 (1R/sh = 0.24)",PFSA
+28,7,2026-09-24T13:39:48+00:00,"trail (A3): high 3.93 since fill, stop 3.68 -> 3.69 (1R/sh = 0.24)",PFSA
+29,7,2026-09-24T13:39:55+00:00,"trail (A3): high 3.97 since fill, stop 3.69 -> 3.73 (1R/sh = 0.24)",PFSA
+30,8,2026-09-24T14:08:14+00:00,"trail (A3): high 14.6 since fill, stop 14.02 -> 14.15 (1R/sh = 0.45)",GRML
+31,8,2026-09-24T14:08:21+00:00,"trail (A3): high 14.71 since fill, stop 14.15 -> 14.26 (1R/sh = 0.45)",GRML
+32,8,2026-09-24T14:08:33+00:00,"trail (A3): high 14.74 since fill, stop 14.26 -> 14.29 (1R/sh = 0.45)",GRML
+33,8,2026-09-24T14:08:40+00:00,"trail (A3): high 14.8 since fill, stop 14.29 -> 14.35 (1R/sh = 0.45)",GRML
+34,8,2026-09-24T14:09:13+00:00,"trail (A3): high 14.81 since fill, stop 14.35 -> 14.36 (1R/sh = 0.45)",GRML
+35,8,2026-09-24T14:10:10+00:00,"trail (A3): high 14.83 since fill, stop 14.36 -> 14.38 (1R/sh = 0.45)",GRML
+36,8,2026-09-24T14:10:33+00:00,"trail (A3): high 14.91 since fill, stop 14.38 -> 14.46 (1R/sh = 0.45)",GRML

@@ -1,0 +1,6 @@
+ts_et,source,symbol,verdict,reasons_json,price,gap_pct,float_shares,pm_volume
+2026-10-02T05:51:51-04:00,gap_scan,AMOD,REJECT,"[""$1.96 under $2.00""]",,67.4957264957265,540000.0,6428758.0
+2026-10-02T05:51:51-04:00,gap_scan,SDEV,STAR,"[""float 1.83M"", ""short float 66.2% \u2014 squeeze fuel"", ""move explained but not flagged a catalyst"", ""9.6M shares already traded pre-market \u2014 crowded, the move may be over before the bell"", ""finviz and Yahoo disagree on prior close by 1.41x \u2014 verify before trusting gap%""]",,44.26229508196721,1830000.0,9620559.0
+2026-10-02T05:51:51-04:00,gap_scan,AIXI,REJECT,"[""$1.67 under $2.00""]",,37.448559670781876,,5679786.0
+2026-10-02T05:51:51-04:00,gap_scan,SGRX,REJECT,"[""$1.65 under $2.00""]",,18.705035971223026,800000.0,3848115.0
+2026-10-02T05:51:51-04:00,gap_scan,QTEX,REJECT,"[""$0.91 under $2.00"", ""float 58.5M over 20M""]",,16.250318633698708,58550000.0,9564047.0
