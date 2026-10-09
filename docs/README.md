@@ -19,7 +19,7 @@ Design notes and operating guides for the momentum workstation.
 | `STATUS-2026-10-08.md` | **start the next session here** — where things stand after 8 October: the F9 result, the desk as a manual decision tool (card, order panel, catalyst, Time & Sales, layout), the owner's decisions, what is not verified live yet, the open list, how to run |
 | `STATUS-2026-09-06.md` | **plain-words status** — what works, what is left, what the owner does |
 | `desk-assessment-2026-10-08.md`, `desk-assessment-2026-10-08/` | **the desk as a manual decision tool** — the gap table, the evidence from 2026-10-06/07, what was built, and before/after screenshots of the card |
-| `desk-grid-audit-2026-10-09.md`, `desk-grid-audit-2026-10-09/` | **the desk, grid by grid** — the owner's 04:34 ET screenshot numbered by zone: what each element serves, what Ross uses (his scanners, charts, Level 2, the tape), keep / trim / cut per element, what is missing |
+| `desk-grid-audit-2026-10-09.md`, `desk-grid-audit-2026-10-09/` | **the desk, grid by grid** — the owner's 04:34 ET screenshot numbered by zone: what each element serves, what Ross uses (his scanners, charts, Level 2, the tape), keep / trim / cut per element, what is missing — and what was applied the same day, with after screenshots and the Level 2 costs |
 | `day-runbook.md` | **run this** — the one command, what happens around it, the human-only commands |
 | `preregistration.md` | the exercise's sample size, stopping rules and failure condition — **PROPOSED until the owner sets the values, before the first order** |
 

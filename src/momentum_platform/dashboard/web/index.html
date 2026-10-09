@@ -124,7 +124,7 @@
       <div class="card-head"><span class="grip" title="Drag to another card to swap places">⠿</span>
         <span class="card-title">1 minute · execution</span>
         <span class="chart-role">entry · structural stop · trigger</span>
-        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k hod"></i>HOD</span>
+        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k hod"></i>HOD <i class="k pmh"></i>PM high</span>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host" id="chartA"></div>
     </article>
@@ -133,6 +133,7 @@
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">5 minute · structure</span>
         <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200</span>
+        <button class="icon-btn ctx-toggle" title="Show the daily chart here (D)">D</button>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host" id="chartB"></div>
     </article>
@@ -149,6 +150,7 @@
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">Daily · room</span>
         <span class="legend"><i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k h52"></i>52w</span>
+        <button class="icon-btn ctx-toggle" title="Back to the 5-minute chart (D)">5m</button>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host" id="chartC"></div>
     </article>
@@ -199,14 +201,6 @@
       <div class="tile-rows" id="screenerRows"><div class="empty">Waiting for the first screener pass…</div></div>
     </article>
 
-    <article class="card" data-card="level2">
-      <div class="card-head"><span class="grip">⠿</span>
-        <span class="card-title">Level 2</span>
-        <span class="tag sim">simulated</span>
-        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
-      <div class="card-body l2" id="l2Card"></div>
-    </article>
-
     <!-- The real tape (2026-10-08): IBKR tick-by-tick for the selected name. -->
     <article class="card tape-card" data-card="tape">
       <div class="card-head"><span class="grip">⠿</span>
@@ -237,7 +231,6 @@
   </template>
 
   <footer class="statusbar">
-    <span id="disclaimer">Scanner events are research candidates, never entry signals or orders.</span>
     <span class="keys"><kbd>J</kbd><kbd>K</kbd> row · <kbd>Enter</kbd> lock · <kbd>Space</kbd> freeze · <kbd>E</kbd> expand · <kbd>A</kbd> audio · <kbd>Esc</kbd> back</span>
   </footer>
 </div>
@@ -262,6 +255,10 @@
         <p>Labels on an alert, not the filter: <b>LF/MF</b> float band, <b>HR/MR</b> RVOL band, <b>&lt;20 / 20+</b> price band, <b>5-in-5 / 10-in-10</b> squeeze.</p></div>
       <div><h4>Plan</h4>
         <p>Entry over the trigger, stop under the pullback low, target at 2R. Sized only from the dollar risk you type.</p></div>
+      <div><h4>Time &amp; Sales</h4>
+        <p><b>▲</b> printed at or above the ask · <b>▼</b> at or below the bid · <b>·</b> between · <b>?</b> no quote of that moment (history). <b>Bold</b>: a big print, at least 10× this tape's median and never under 2,000 shares — this desk's Approximation. Facts, never a gate.</p></div>
+      <div><h4>Header</h4>
+        <p><b>pm high</b> with its distance: more than 25% under it, the name is dead (gate 4). <b>52w ×N</b> only when the 52-week high is over 20× the price — split-adjusted history. The previous close is in the change's tooltip, the average volume in RVOL's. <b>print</b> shows only when the last print is old. <b>D</b> switches the 5-minute pane to the daily.</p></div>
     </div>
     <p class="tiny muted">Clean-room approximations of the course scanners, for simulation and study. Nothing on this desk can place an order.</p>
   </div>

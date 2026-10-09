@@ -742,3 +742,17 @@ a.cat2-headline:hover{text-decoration:underline}
 .pb-fold .lab{font:9px var(--sans);color:var(--ink-faint)}
 .pb-fold-sym{color:var(--down);cursor:pointer;opacity:.8}
 .pb-fold-sym:hover{opacity:1;text-decoration:underline}
+
+/* 2026-10-09 — the audit's changes (docs/desk-grid-audit-2026-10-09.md) */
+.k.pmh{background:#e6edf5}
+.trow.alert-row.dim{opacity:.45}
+.trow.alert-row.dim:hover,.trow.alert-row.dim.sel{opacity:.85}
+.pill.xn{font-family:var(--mono);font-weight:700;color:var(--hi);border-color:#4a3c17;background:#241d0c}
+.halts-strip{display:flex;flex-wrap:wrap;gap:3px 6px;align-items:baseline;padding:3px 8px;
+  border-bottom:1px solid var(--line);font:10px var(--mono)}
+.halts-strip .lab{font:600 9px var(--sans);color:var(--ink-faint);text-transform:uppercase;letter-spacing:.04em}
+.halt-chip{cursor:pointer;padding:0 4px;border-radius:3px;border:1px solid var(--line)}
+.halt-chip.on{color:var(--down);border-color:#4a1f26;background:#301419}
+.halt-chip.off{color:var(--ink-dim)}
+.icon-btn.ctx-toggle{font:600 10px var(--mono);color:var(--ink-dim);border:1px solid var(--line);padding:0 5px}
+.icon-btn.ctx-toggle:hover{color:var(--ink)}

@@ -502,6 +502,9 @@ def test_the_chart_panes_carry_drawing_tools_and_an_indicator_menu(desk_server):
                                          "els => els.map(e => e.textContent)")
         for name in ("Volume", "VWAP", "EMA 9", "EMA 200", "MACD 12/26/9"):
             assert any(name in t for t in labels), name
+        # MACD reads on the 1-minute only (audit 2026-10-09; Preview ch. 5)
+        assert pg.is_visible("#chartA .band-tag")
+        assert not pg.is_visible("#chartB .band-tag") and not pg.is_visible("#chartD .band-tag")
         browser.close()
 
 

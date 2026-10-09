@@ -242,7 +242,7 @@ function deskTime(epochSeconds) {
 const PALETTE = {
   bg: "#0b1119", text: "#93a4b8", grid: "#141d27", border: "#1d2836",
   up: "#2ad17f", down: "#ff5f6e", vwap: "#2962ff", ema9: "#26c6da",
-  ema20: "#ff9ad2", ema200: "#ffb648", hod: "#ffc247", h52: "#c39bff",
+  ema20: "#ff9ad2", ema200: "#ffb648", hod: "#ffc247", pmh: "#e6edf5", h52: "#c39bff",
   entry: "#22c7e8", stop: "#ff5f6e", target: "#2ad17f",
 };
 
@@ -439,7 +439,10 @@ function makePane(hostId, daily) {
   /* Which overlays this pane shows. Stored per pane so the 1-minute chart can
      carry MACD while the 10-second pane stays clean, and remembered across
      reloads like every other thing the trader arranged on purpose. */
-  const SHOW_KEY = "momentum-workstation.show.v1." + hostId;
+  // v2 (2026-10-09): MACD on the 1-minute only — the course reads it there;
+  // the 5-minute one "can lag and conflict", the 10-second one flips (Preview
+  // ch. 5). The owner's desk carried it on the 5-minute from a saved v1 choice.
+  const SHOW_KEY = "momentum-workstation.show.v2." + hostId;
   // MACD is ON by default on the execution pane: it is a Layer 2 gate the
   // cascade judges, so the trader must be able to see it without a menu.
   const SHOW_DEFAULT = { volume: true, vwap: true, ema9: true, ema20: true,
@@ -551,7 +554,12 @@ function makePane(hostId, daily) {
         mark(opts.plan.entry, PALETTE.entry, "ENTRY");
         mark(opts.plan.stop, PALETTE.stop, "STOP");
       }
-      if (show.hod) mark(opts.hod, PALETTE.hod, "HOD");
+      // The pre-market high beside the HOD on the execution pane: gate 4's
+      // anchor and the level he positions under (FILTERS.md). One line when
+      // they are the same price, so the label says both.
+      const pmSame = opts.pmHigh != null && opts.hod != null && Math.abs(opts.pmHigh - opts.hod) < 0.005;
+      if (show.hod) mark(opts.hod, PALETTE.hod, pmSame ? "HOD = PM HIGH" : "HOD");
+      if (show.hod && opts.pmHigh != null && !pmSame) mark(opts.pmHigh, PALETTE.pmh, "PM HIGH");
       mark(opts.h52, PALETTE.h52, "52w");
       // Drawings are anchored to (time, price) and belong to this symbol and
       // timeframe only; the measure tool needs the live plan's risk per share
@@ -825,10 +833,10 @@ function fillListCard(card, id, frame) {
   const rows = (frame.lists[id] || []).map(rowObj);
   const froz = state.frozen[id];
   const nowMs = deskNow();
-  // Names that pass three or more of the five pillars but not the hard
-  // gates join the list with their score on the row (owner, 2026-09-08):
-  // a name one pillar short is a candidate to watch, not an absence. They
-  // are part of the visible order, so a freeze pins them too.
+  // Names one pillar short join the list with their score on the row (owner,
+  // 2026-09-08: three or more; 2026-10-09: four or more, and green on the day —
+  // the course passes 3/5, and BIAF −8.7 % 3/5 sat on a list called gainers).
+  // They are part of the visible order, so a freeze pins them too.
   const scores = {};
   const extra = [];
   if (id === "five_pillars_list") {
@@ -836,7 +844,8 @@ function fillListCard(card, id, frame) {
     Object.keys(SYMS).forEach(sym => {
       const sc = pillarScore(frame, sym, nowMs);
       scores[sym] = sc.passed;
-      if (!have.has(sym) && sc.passed >= 3 && sc.row && sc.row.price != null) extra.push(sc.row);
+      if (!have.has(sym) && sc.passed >= 4 && sc.row && sc.row.price != null &&
+          (sc.row.changePct || 0) > 0) extra.push(sc.row);
     });
   }
   // The tile is called Top GAINERS: one order, by change on the day,
@@ -871,7 +880,7 @@ function fillListCard(card, id, frame) {
   card.appendChild(el("div", "tile-note", meta.note));
   const cols = el("div", "tile-cols list-cols");
   const rvHead = el("span", null, "RVOL"); rvHead.title = RVOL_EXPLAIN;
-  ["Symbol / news", "Price", "Chg"].forEach(c => cols.appendChild(el("span", null, c)));
+  ["Symbol / news", "Price", "Chg %"].forEach(c => cols.appendChild(el("span", null, c)));
   cols.appendChild(rvHead); cols.appendChild(el("span", null, "Float"));
   card.appendChild(cols);
   const body = el("div", "tile-rows");
@@ -913,13 +922,8 @@ function fillListCard(card, id, frame) {
     const s = el("span", "tsym");
     s.appendChild(el("b", null, r.symbol));
     s.appendChild(flameFor(r.symbol, nowMs));
-    const nfr = newsFor(r.symbol, nowMs);
-    if (nfr) {
-      const g = classifyCatalyst(nfr.item.headline, nfr.item.category);
-      const gp = el("span", "pill grade-" + g.grade, g.grade === "hard" ? "H" : g.grade === "dilutive" ? "D" : "S");
-      gp.title = g.label + " — " + nfr.item.headline + " — " + g.note;
-      s.appendChild(gp);
-    }
+    // The catalyst's grade letter (H / D / S) moved to the decision card, with
+    // the headline it grades: on the row an "S" read as a 5 beside the 4/5 chip.
     if (scores[r.symbol] != null && scores[r.symbol] < 5) {
       const sp = el("span", "pill partial", scores[r.symbol] + "/5");
       sp.title = scores[r.symbol] + " of 5 pillars pass — on the list to be watched, not because it qualified";
@@ -1030,33 +1034,55 @@ function shortBranch(branch, scannerId) {
    age column says how far back each one sits. */
 function fillAlertCard(card, cfg, idx) {
   card.textContent = "";
-  const all = loggedAlerts(cfg.scanners).slice(0, 80);
+  const raw = loggedAlerts(cfg.scanners).slice(0, 80);
+  // One row per name, its newest alert, and how many times it fired (owner,
+  // 2026-10-09). "A stock hitting scanners more and more times is definitely a
+  // good indicator that it's got some momentum" (yg5E_mqGFGg @00:17:02); one
+  // alert, "probably not going to trade it" (@00:16:47). The count is the
+  // signal, so it is a number on the row, not a row per repeat.
+  const groups = [], bySym = {};
+  raw.forEach(a => {
+    let g = bySym[a.symbol];
+    if (!g) { g = bySym[a.symbol] = { a: a, all: [] }; groups.push(g); }
+    g.all.push(a);
+  });
+  const all = groups.map(g => g.a);
   const nb = el("span", "note-btn", "?"); nb.title = cfg.note;
   const head = cardHead(card, cfg.title, feedLabel(), [nb]);
-  head.insertBefore(el("span", "tile-count", String(all.length)), head.querySelector(".expand"));
+  const cnt = el("span", "tile-count", String(groups.length));
+  cnt.title = raw.length + " alert" + (raw.length === 1 ? "" : "s") + " on " + groups.length + " name" + (groups.length === 1 ? "" : "s");
+  head.insertBefore(cnt, head.querySelector(".expand"));
   if (state.noteOpen[card.dataset.card]) card.classList.add("show-note");
   const note = el("div", "tile-note", cfg.note);
   note.title = cfg.note;
   card.appendChild(note);
   const cols = el("div", "tile-cols alert-cols");
-  // Time, then the move: "PM %" before the open, "Day %" after it. Both are
-  // the change from the previous close; only the name of the session differs.
-  const pctHead = el("span", null, pctHeader());
-  pctHead.title = "change from the previous close, measured " + (pctHeader() === "PM %" ? "in premarket" : "during the session");
+  // Time, then the move: the change from the previous close, under the same
+  // name as the gainers list (audit 2026-10-09: "PM %" here, "Chg" there).
+  const pctHead = el("span", null, "Chg %");
+  pctHead.title = "change from the previous close at the alert, measured " + (pctHeader() === "PM %" ? "in premarket" : "during the session");
   cols.appendChild(el("span", null, "Time"));
   cols.appendChild(pctHead);
   ["Symbol", "Price", "Strategy"].forEach(c => cols.appendChild(el("span", null, c)));
   card.appendChild(cols);
+  if (cfg.id === "hod_momentum") { const hs = haltsStrip(); if (hs) card.appendChild(hs); }
   const body = el("div", "tile-rows timeline");
+  const gainMin = (S.pillarThresholds || {}).gainMinPct || 10;
   if (!all.length) {
     const div = el("div", "empty", "No events yet.");
     const stale = tapeStalledNote();
     if (stale) div.appendChild(el("div", "tiny warn", stale));
     body.appendChild(div);
   }
-  all.forEach(a => {
+  groups.forEach(g => {
+    const a = g.a;
+    // Up less than pillar 1 at the alert: shown, dimmed — FLYE −8.4 % "UP·10m"
+    // was a 3 % bounce on a red name (audit 2026-10-09).
+    const chg = a.values && a.values.change_pct;
+    const weak = chg == null || chg < gainMin;
     const tr = el("div", "trow alert-row" + (state.selected === a.symbol ? " sel" : "") +
-      (state.arrivals.has(a.symbol) ? " fresh" : ""));
+      (state.arrivals.has(a.symbol) ? " fresh" : "") + (weak ? " dim" : ""));
+    if (weak) tr.title = "up less than " + gainMin + "% on the day at this alert — pillar 1 fails";
     const when = el("span", "tl-time", etTime(a.sourceTime));
     when.title = fmtAge(deskNow() - a._at) + " ago";
     tr.appendChild(when);
@@ -1071,6 +1097,12 @@ function fillAlertCard(card, cfg, idx) {
     const sesEl = el("span", "pill ses " + ses.toLowerCase(), ses);
     sesEl.title = SESSION_HELP[ses];
     mid.appendChild(sesEl);
+    if (g.all.length > 1) {
+      const xn = el("span", "pill xn", "×" + g.all.length);
+      xn.title = g.all.length + " alerts — " + g.all.map(z => etTime(z.sourceTime) + " " +
+        shortBranch(z.branch, z.scannerId) + " " + fx(z.values && z.values.last)).join(" · ");
+      mid.appendChild(xn);
+    }
     tr.appendChild(mid);
     tr.appendChild(el("span", null, fx(a.values && a.values.last)));
     const br = el("span", "branch", shortBranch(a.branch, a.scannerId));
@@ -1080,6 +1112,30 @@ function fillAlertCard(card, cfg, idx) {
     body.appendChild(tr);
   });
   card.appendChild(body);
+}
+
+/* Halts — his fourth window (w97KlUrVDk0 @00:48:44–00:49:03) — as one line in
+   the High of Day tile. Halts exist 09:30–16:00 only (5aWoZdbXJrA @00:47:03),
+   so before the open the line is not drawn unless the log holds one. Newest
+   state per name. */
+function haltsStrip() {
+  const ses = S.streaming ? sessionAt(Date.now()) : (FRAMES[state.frame] ? sessionAt(FRAMES[state.frame].t * 1000) : "closed");
+  const evs = loggedAlerts(["halt"]);
+  if (ses !== "regular" && !evs.length) return null;
+  const strip = el("div", "halts-strip");
+  strip.appendChild(el("span", "lab", "Halts"));
+  const seen = new Set();
+  evs.forEach(a => {
+    if (seen.has(a.symbol) || seen.size >= 5) return;
+    seen.add(a.symbol);
+    const on = String(a.branch || "").indexOf("started") >= 0;
+    const chip = el("span", "halt-chip " + (on ? "on" : "off"),
+                    a.symbol + (on ? " halted " : " resumed ") + etTime(a.sourceTime));
+    chip.onclick = () => select(a.symbol, "halt");
+    strip.appendChild(chip);
+  });
+  if (!seen.size) strip.appendChild(el("span", "muted", "none today"));
+  return strip;
 }
 
 /* ── timeline ───────────────────────────────────────────────────────── */
@@ -1271,18 +1327,27 @@ function renderPillarsBoard(frame) {
   // into one line under the list instead of ranking them as if in play. The
   // selected name always keeps its row.
   const red = rows.filter(r => r.row.changePct != null && r.row.changePct < 0 && r.sym !== state.selected);
-  const shown = rows.filter(r => red.indexOf(r) === -1);
-  const fold = () => {
-    if (!red.length) return;
+  // No print this session: nothing to judge (SHPH "— — 1/5", audit 2026-10-09).
+  const quiet = rows.filter(r => r.row.price == null && r.sym !== state.selected && red.indexOf(r) === -1);
+  const shown = rows.filter(r => red.indexOf(r) === -1 && quiet.indexOf(r) === -1);
+  const foldLine = (list, label, tip, text) => {
+    if (!list.length) return;
     const f = el("div", "pb-fold");
-    f.appendChild(el("span", "lab", "▼ " + red.length + " red on the day — not candidates:"));
-    red.forEach(r => {
-      const b = el("span", "pb-fold-sym", r.sym + " " + pct(r.row.changePct));
-      b.title = "down " + pct(r.row.changePct) + " vs the previous close · " + r.passed + "/5 pillars — click to read it";
+    f.appendChild(el("span", "lab", label));
+    list.forEach(r => {
+      const b = el("span", "pb-fold-sym", text(r));
+      b.title = tip(r);
       b.onclick = () => { select(r.sym, "pillars-board"); render(); };
       f.appendChild(b);
     });
     host.appendChild(f);
+  };
+  const fold = () => {
+    foldLine(red, "▼ " + red.length + " red on the day — not candidates:",
+             r => "down " + pct(r.row.changePct) + " vs the previous close · " + r.passed + "/5 pillars — click to read it",
+             r => r.sym + " " + pct(r.row.changePct));
+    foldLine(quiet, "▼ " + quiet.length + " no print yet:",
+             r => "no print this session yet — nothing to judge; click to read it", r => r.sym);
   };
   if (compact) {
     shown.forEach(r => {
@@ -1387,7 +1452,9 @@ function renderHeader(frame) {
     s.appendChild(el("span", cls || null, val)); if (title) s.title = title;
     (host || stats).appendChild(s); return s; };
   stat("", fx(last), "last " + dirClass(chg)).classList.add("stat-last");
-  stat("", pct(chg), "chg " + dirClass(chg));
+  // The previous close lives in the change's tooltip: it is the change's
+  // denominator, and no decision reads it on its own (audit 2026-10-09).
+  stat("", pct(chg), "chg " + dirClass(chg), "from the previous close " + fx(meta.prevClose));
   const bid = meta.iexBid, ask = meta.iexAsk;
   // an empty side arrives as -1 from IBKR: no quote, not a 4-dollar spread
   const twoSided = bid != null && ask != null && bid > 0 && ask >= bid;
@@ -1399,13 +1466,16 @@ function renderHeader(frame) {
        "the ticket checks the stop against it: stop ≥ 4× the spread (A6)");
   const volToday = row && row.volume != null ? row.volume : bars.reduce((a, b) => a + (b[5] || 0), 0);
   stat("vol", vol(volToday));
-  stat("rvol", row && rowRvol(row) != null ? fx(rowRvol(row)) + "×" : "—", null, rowRvolTitle(row));
+  stat("rvol", row && rowRvol(row) != null ? fx(rowRvol(row)) + "×" : "—", null,
+       rowRvolTitle(row) + (meta.avgDailyVolume ? " · average daily volume " + vol(meta.avgDailyVolume) : ""));
   // The screener-comparable number (today ÷ the 10-day average FULL day),
   // shown only when it differs from the judged one above.
   if (row && row.rvolDaily != null && row.rvolDaily !== rowRvol(row))
     stat("day rvol", fx(row.rvolDaily) + "×", null, "today ÷ the 10-day average FULL day — the screener's measure");
   stat("5m", row && row.rvol5m != null ? fx(row.rvol5m) + "×" : "—", null, "this five-minute bar ÷ recent five-minute bars");
-  stat("halt", halted ? "HALTED" : "trading", halted ? "down" : "muted");
+  // Only when it is true: there are no halts before 09:30 or after 16:00
+  // (5aWoZdbXJrA @00:47:03), and "trading" on every row said nothing.
+  if (halted) stat("halt", "HALTED", "down");
   const facts = $("#symFacts"); facts.textContent = "";
   const fact = (lab, val, cls, title) => stat(lab, val, cls, title, facts);
   const vw = bars.length ? vwap(bars) : [];
@@ -1414,18 +1484,44 @@ function renderHeader(frame) {
        last && vwNow ? (last >= vwNow ? "up" : "down") : null, "session VWAP from the desk's own bars — the line on the charts");
   fact("hod", fx(hod));
   const pm = bars.filter(b => sessionAt(b[0] * 1000) === "premarket");
-  fact("pm high", pm.length ? fx(Math.max(...pm.map(b => b[2]))) : "—", null, "highest pre-market bar, 04:00–09:30 ET");
-  fact("prev", fx(meta.prevClose));
-  fact("52w", fx(meta.high52w), null, "52-week high — daily room overhead");
+  // The pre-market high with the distance gate 4 reads (FILTERS.md: more than
+  // 25 % under it, "stair stepping down… I'm not a buyer"). 2026-10-09 04:34:
+  // BDAI read 3.30 under an 8.18 high and nothing on the screen said 60 % off.
+  const pmh = pm.length ? Math.max(...pm.map(b => b[2])) : null;
+  const offPm = pmh && last ? (last / pmh - 1) * 100 : null;
+  fact("pm high", pmh == null ? "—" : fx(pmh) + (offPm != null && offPm < -0.05 ? " (" + pct(offPm) + ")" : ""),
+       offPm != null && offPm < -25 ? "down" : null,
+       "highest pre-market bar, 04:00–09:30 ET · gate 4: more than 25% under it, the name is dead");
+  // The 52-week high as a number was noise (15,675 over a $3.30 stock); what
+  // FILTERS.md reads from it is a flag — over 20× the price means the history
+  // is split-adjusted: reverse splits, a shrunk float, dilution context.
+  if (meta.high52w && last && meta.high52w > 20 * last)
+    fact("52w", "×" + Math.round(meta.high52w / last).toLocaleString("en-US") + " split history", "warn",
+         "52-week high " + fx(meta.high52w) + " = " + Math.round(meta.high52w / last) + "× the price: " +
+         "split-adjusted history (FILTERS.md, capital structure). The daily chart shows the room.");
   const qf = effectiveFloat(sym, meta);
   fact("float", (qf.shares ? (qf.shares / 1e6).toFixed(1) + "M" : "UNKNOWN") + " " + floatSourceShort(qf, meta),
        qf.quality === "unknown" ? "down" : null, "float, and where the number comes from");
-  fact("avg vol", vol(meta.avgDailyVolume));
   fact("range", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—", null,
        "where the price sits in the day's range: 100% = at the high (front side), 0% = at the low");
-  if (meta.iexLast != null && meta.iexLastTime)
-    fact((meta.lastSource || "iex").toLowerCase() + " print", meta.iexLastTime, "muted", "the feed's most recent print, ET");
+  // The last print's time only when it is old enough to matter: in a thin
+  // pre-market the "last" can be minutes behind the market.
+  const pAge = printAgeS(meta);
+  if (pAge != null && pAge > 10)
+    fact("print", agoText(pAge), pAge > 60 ? "down" : "warn",
+         "the feed's most recent print, " + meta.iexLastTime + " ET — the price above is that old");
   return { last, chg, hod, row, meta, nf, halted, sym };
+}
+
+/* Seconds since the feed's last print, from its ET clock time; null on a
+   replay or with no print. */
+function printAgeS(meta) {
+  const t = meta && meta.iexLastTime;
+  if (!t || !S.streaming) return null;
+  const sec = x => { const p = String(x).split(":").map(Number); return p[0] * 3600 + p[1] * 60 + (p[2] || 0); };
+  let d = sec(etParts(Date.now())) - sec(t);
+  if (d < 0) d += 86400;
+  return Number.isFinite(d) ? d : null;
 }
 
 /* Catalyst classification. The provider's own category is unreliable across
@@ -1725,77 +1821,6 @@ function renderQuote(frame, ctx) {
       : "Shares outstanding, not float. Over the cap it proves nothing — verify before sizing."));
 }
 
-/* Level 2 — SIMULATED depth. No licensed depth feed is connected, so the
-   ladder is generated deterministically from the replay snapshot (seeded by
-   symbol + frame) purely to exercise the widget. Swap _depth() for a licensed
-   feed adapter and the rest of the card is unchanged. */
-function seeded(str) {
-  let h = 2166136261 >>> 0;
-  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
-  return function () { h ^= h << 13; h >>>= 0; h ^= h >>> 17; h ^= h << 5; h >>>= 0; return h / 4294967296; };
-}
-function _depth(sym, frameIdx, price, spreadAbs, vol5m) {
-  const rnd = seeded(sym + "|" + frameIdx);
-  const tick = price >= 1 ? 0.01 : 0.001;
-  const half = Math.max(tick, (spreadAbs || tick * 2) / 2);
-  const base = Math.max(100, Math.round((vol5m || 20000) / 60));
-  const side = dir => Array.from({ length: 8 }, (_, i) => {
-    const lvl = price + dir * (half + i * tick);
-    let size = Math.round(base * (0.35 + rnd() * 1.3));
-    if (rnd() < 0.11) size *= 4 + Math.round(rnd() * 5);      // occasional wall
-    return { price: Number(lvl.toFixed(price >= 1 ? 2 : 4)), size: size, mpid: ["ARCA","NSDQ","BATS","EDGX","MIAX"][Math.floor(rnd() * 5)] };
-  });
-  const bids = side(-1), asks = side(1);
-  const median = a => a.map(x => x.size).sort((p, q) => p - q)[Math.floor(a.length / 2)];
-  const mb = median(bids), ma = median(asks);
-  bids.forEach(l => l.wall = l.size >= mb * 4);
-  asks.forEach(l => l.wall = l.size >= ma * 4);
-  const prints = Array.from({ length: 10 }, () => {
-    const atAsk = rnd() > 0.45;
-    return { price: Number((price + (atAsk ? half : -half)).toFixed(price >= 1 ? 2 : 4)),
-             size: Math.round(base * (0.05 + rnd() * 0.6)), atAsk: atAsk };
-  });
-  return { bids: bids, asks: asks, prints: prints };
-}
-function renderL2(frame, ctx) {
-  const host = $("#l2Card"); host.textContent = "";
-  const { last, row, halted, sym } = ctx;
-  if (last == null) { host.appendChild(el("div", "placeholder", "No quote yet.")); return; }
-  if (halted) {
-    host.appendChild(el("div", "halt-banner", "HALTED — the book is not a reliable picture during a halt, and a stop does not protect through a reopen."));
-  }
-  const book = _depth(sym, state.frame, last, row ? row.spread : null, row ? row.volume5m : null);
-  const maxSize = Math.max(...book.bids.map(b => b.size), ...book.asks.map(a => a.size));
-  const ladder = el("div", "ladder");
-  ladder.appendChild(el("div", "ladder-head", "Bid")); ladder.appendChild(el("div", "ladder-head", "Size"));
-  ladder.appendChild(el("div", "ladder-head", "Size")); ladder.appendChild(el("div", "ladder-head", "Ask"));
-  for (let i = 0; i < 8; i++) {
-    const b = book.bids[i], a = book.asks[i];
-    const bp = el("div", "lp bid" + (i === 0 ? " inside" : ""), fx(b.price)); ladder.appendChild(bp);
-    const bs = el("div", "ls bid" + (b.wall ? " wall" : ""));
-    bs.appendChild(el("span", "bar", "")); bs.lastChild.style.width = (b.size / maxSize * 100) + "%";
-    bs.appendChild(el("span", "n", String(b.size))); ladder.appendChild(bs);
-    const as = el("div", "ls ask" + (a.wall ? " wall" : ""));
-    as.appendChild(el("span", "bar", "")); as.lastChild.style.width = (a.size / maxSize * 100) + "%";
-    as.appendChild(el("span", "n", String(a.size))); ladder.appendChild(as);
-    ladder.appendChild(el("div", "lp ask" + (i === 0 ? " inside" : ""), fx(a.price)));
-  }
-  host.appendChild(ladder);
-  const wall = book.asks.find(a => a.wall);
-  // The book on this desk is SIMULATED (no Level 2 entitlement). A sentence
-  // that reads like a read of the real tape — "a seller above the trigger
-  // caps the move" — is the one thing this card must never say.
-  if (wall) host.appendChild(el("div", "note warn", "SIMULATED book: a large offer would rest at " + fx(wall.price) +
-    " (" + wall.size + "). Illustrates the shape to look for on a real Level 2; it is not this stock's book."));
-  // 2026-10-08: the seeded prints that sat under this ladder are gone. The
-  // desk has a real tape now (the Time & Sales card), and a fake one beside
-  // it is the one thing that must never be read as the market.
-  host.appendChild(el("div", "note", "Simulated book — not licensed market data. The real prints are on the Time & Sales card."));
-}
-
-/* Setup verdict — mirrors the bundled Pine dashboard rows, then applies the
-   playbook GO / WAIT / PASS matrix. Education and planning only. */
-/* Short names for the cascade's gates on a chip. Unknown ids keep their label. */
 const GATE_SHORT = { price: "price", float: "float", catalyst: "news", still_rising: "rising", reverse_split: "split",
                      instrument: "stock", tick_size: "tick", buyout: "buyout", halted: "halt", vwap: "VWAP",
                      ema9: "9EMA", macd: "MACD", pullback_volume: "vol↓", session: "session", feed: "feed" };
@@ -2130,7 +2155,9 @@ function renderTape() {
   if (t.symbol && state.selected && t.symbol !== state.selected && st !== "OFF")
     host.appendChild(el("div", "ts-msg warn", "the tape is on " + t.symbol + "; it follows the name you select " +
                                               "(a viewer reads the owner's)"));
-  if (t.facts) host.appendChild(tapeFacts(t));
+  // Facts only once there is something to count: zeroed lines ("LAST 0 S ▲ —
+  // ask ▼ — bid 0 sh") read like a measurement of nothing (audit 2026-10-09).
+  if (t.facts && (t.facts.shares || 0) > 0) host.appendChild(tapeFacts(t));
   const list = el("div", "ts-list");
   // Newest first. Prints of one instant keep the server's arrival order; a gap
   // sits below the prints of its own instant (they came after it).
@@ -2162,13 +2189,8 @@ function renderTape() {
   host.appendChild(list);
   if (top) list.scrollTop = top;                                 // reading down the tape is not undone
   (t.notes || []).forEach(n => host.appendChild(el("div", "ts-note", n)));
-  if (st !== "OFF") {
-    const rule = t.rule || {}, line = t.facts ? t.facts.bigLine : null;
-    host.appendChild(el("div", "ts-legend",
-      "▲ at/above the ask · ▼ at/below the bid · · between · ? no quote of that moment · bold: a big print" +
-      (line ? " ≥ " + shares(line) + " sh" : "") + " (" + (rule.bigMult || 10) + "× this tape's median, floor " +
-      shares(rule.bigFloor || 2000) + " — Approximation). Facts, not a gate."));
-  }
+  // The marks' legend moved to the Legend overlay (?): three lines under the
+  // tape on every repaint were read once (audit 2026-10-09).
 }
 function tapeFacts(t) {
   const f = t.facts, n = t.now || {};
@@ -2185,7 +2207,11 @@ function tapeFacts(t) {
   l1.appendChild(el("span", "bid", "▼ " + (f.pctBid == null ? "—" : f.pctBid.toFixed(0) + "%") + " bid"));
   l1.appendChild(el("span", null, vol(f.shares) + " sh"));
   l1.appendChild(el("span", null, f.perMin == null ? "— /min" : f.perMin.toFixed(0) + " /min"));
-  l1.appendChild(el("span", f.big ? "big" : "muted", f.big + " big"));
+  const bigEl = el("span", f.big ? "big" : "muted", f.big + " big");
+  const rule = t.rule || {};
+  bigEl.title = "a big print" + (f.bigLine ? " ≥ " + shares(f.bigLine) + " sh" : "") + ": " + (rule.bigMult || 10) +
+                "× this tape's median, floor " + shares(rule.bigFloor || 2000) + " — Approximation. Facts, not a gate.";
+  l1.appendChild(bigEl);
   const l2 = el("div", "ts-fact sub");
   l2.appendChild(el("span", "ts-win", "10 s"));
   l2.appendChild(el("span", "ask", "▲ " + (n.pctAsk == null ? "—" : n.pctAsk.toFixed(0) + "%")));
@@ -2194,7 +2220,10 @@ function tapeFacts(t) {
   if (f.lo != null && f.hi != null) l2.appendChild(el("span", "muted", "range " + fx(f.lo) + "–" + fx(f.hi)));
   box.title = "shares by side over the window, live prints after the latest gap only: % of the shares " +
               "printed at the ask, at the bid; prints per minute; big prints. Facts, not a gate.";
-  box.appendChild(l1); box.appendChild(bar); box.appendChild(l2);
+  box.appendChild(l1); box.appendChild(bar);
+  // The last ten seconds only when they hold prints: an all-dash second line
+  // under the first says nothing the first did not.
+  if ((n.shares || 0) > 0) box.appendChild(l2);
   return box;
 }
 /* One line on the decision card: the tape's 60-second facts for this name. */
@@ -2610,7 +2639,9 @@ function renderCharts(frame) {
   const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
   const plan = livePlan(sym, frame.t);
   const common = { hod: hod, plan: plan, openTs: openTs, symbol: sym, snapToLive: snap };
-  PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "1m" }, common));
+  const pmBars = bars1.filter(b => sessionAt(b[0] * 1000) === "premarket");
+  const pmHigh = pmBars.length ? Math.max(...pmBars.map(b => b[2])) : null;
+  PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "1m", pmHigh: pmHigh }, common));
   PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "5m" }, common));
   const sub = bars10sUpTo(sym, frame);
   if (sub.length) {
@@ -2804,12 +2835,13 @@ const DEFAULT_LAYOUT = {
   // Right column: the decision card, then the tape under it — beside the
   // 10-second chart, where the eye is at the trigger. The decision card took
   // the simulated Level 2's slot (owner, 2026-10-08) and now holds the
-  // catalyst too; the quote card's facts moved into the header. Level 2
-  // (simulated, labelled) and the quote card wait in the tray.
+  // catalyst too; the quote card's facts moved into the header and the card
+  // waits in the tray. The simulated Level 2 is gone (owner, 2026-10-09): it
+  // drew invented depth, and he reads a real book or none.
   R1: "verdict", R2: "tape",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
-const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["quote", "level2", "screener", "tv-widget", "tv-widget-5m", "chart-daily", "timeline"]);
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["quote", "screener", "tv-widget", "tv-widget-5m", "chart-daily", "timeline"]);
 const DEFAULT_SIZES = {
   wLeft: 330, wRight: 384,
   slots: { L1: 1.2, L2: 0.8, L3: 0.8, L4: 1.25, C1: 1.75, PAIR: 1.1, C2: 1, C3: 1,
@@ -2825,7 +2857,11 @@ const DEFAULT_SIZES = {
 // the check in loadLayout anyway; the bump says so instead of relying on it.
 // v10: find / see / decide — the board to the left, the tape under the card.
 // A v9 layout is structurally valid and would quietly keep the old desk.
-const LAYOUT_KEY = "momentum-workstation.layout.v10";
+// v11 (2026-10-09): the owner's desk at 04:34 had the quote card in R1 — one
+// click in the tray had put it in the decision card's slot, and the saved
+// layout kept it there. A tray click can no longer do that; the bump brings
+// every saved desk back to the decision card.
+const LAYOUT_KEY = "momentum-workstation.layout.v11";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
@@ -2967,15 +3003,27 @@ function renderTray() {
       e.dataTransfer.effectAllowed = "move";
       document.body.classList.add("dragging-card");   // charts must stop eating the drag
     });
-    item.title = "Drag onto the desk, or click to put it where " + (LAST_CLICKED_CARD || "the screener slot") + " is";
+    const target = trayTarget();
+    item.title = target ? "Drag onto the desk, or click to put it where " + target + " is"
+                        : "Drag onto the desk, or click a card on the desk first, then this";
     item.addEventListener("click", () => {
-      const target = LAST_CLICKED_CARD && placedCards().indexOf(LAST_CLICKED_CARD) >= 0 ? LAST_CLICKED_CARD : layout.R1;
-      swapCards(id, target);
+      const t = trayTarget();
+      if (t) swapCards(id, t);
+      else toast("Click the card it should replace first, or drag it there — the decision card stays", "warn");
     });
     host.appendChild(item);
   });
 }
 let LAST_CLICKED_CARD = null;
+/* Where a click in the tray puts a card: in place of the card clicked last —
+   never the decision card's. 2026-10-09, 04:34: the owner's desk had the
+   quote card in R1, because a tray click with no card clicked before went
+   there, and the verdict, the catalyst and the order were off the screen. */
+const PINNED_CARD = "verdict";
+function trayTarget() {
+  const t = LAST_CLICKED_CARD;
+  return t && t !== PINNED_CARD && placedCards().indexOf(t) >= 0 ? t : null;
+}
 function cardEl(id) { return document.querySelector('.card[data-card="' + id + '"]'); }
 function applyLayout() {
   const parked = document.getElementById("parked");
@@ -3006,6 +3054,18 @@ function swapCards(aId, bId) {
   applyLayout(); saveLayout(); renderTray();
   Object.values(PANES).forEach(p => p.resize());
   render();
+}
+/* The context pane is the 5-minute or the daily (owner, 2026-10-09). His
+   minimum layout links the 1-minute, the 5-minute AND the daily (Preview ch.
+   6), and the daily is where room to the next resistance is read; the
+   clean-room spec gives the context chart a one-key daily toggle
+   (dashboard-scanner-chart-knowledge.md §14). The two cards trade places. */
+function toggleDaily() {
+  const placed = placedCards();
+  const on5 = placed.indexOf("chart-5m") >= 0, onD = placed.indexOf("chart-daily") >= 0;
+  if (on5 && !onD) swapCards("chart-daily", "chart-5m");
+  else if (onD && !on5) swapCards("chart-5m", "chart-daily");
+  else if (on5 && onD) toast("Both charts are on the desk already", "warn");
 }
 function toggleExpand(card) {
   const backdrop = $("#expandBackdrop");
@@ -3087,6 +3147,7 @@ function wireLayout() {
     if (btn) { e.stopPropagation(); toggleExpand(btn.closest(".card")); }
     const feed = e.target.closest(".tv-feed");
     if (feed) { e.stopPropagation(); toggleTvFeed(); }
+    if (e.target.closest(".ctx-toggle")) { e.stopPropagation(); toggleDaily(); }
     // The "?" on a scanner card opens its one-line explanation; it stays open
     // across rebuilds until clicked again.
     const nb = e.target.closest(".note-btn");
@@ -3305,7 +3366,10 @@ function setFeedBadge(h) {
   const cls = st === "LIVE" ? "live" : st === "STALE" ? "stale" : "offline";
   $("#feedText").textContent = st;
   $("#feedDot").className = "dot " + cls;
-  const bits = [String(h.provider || PROVIDER).toUpperCase(), h.readOnly ? "read-only" : "", "gen " + (h.generation || 0)];
+  // "gen 1" on every healthy morning said nothing (audit 2026-10-09): the
+  // connection count shows once it has moved, i.e. after a rebuild.
+  const bits = [String(h.provider || PROVIDER).toUpperCase(), h.readOnly ? "read-only" : "",
+                (h.generation || 0) > 1 ? "gen " + h.generation : ""];
   if (h.reconnects) bits.push(h.reconnects + " reconnects");
   if (h.marketDataType && h.marketDataType !== 1) bits.push("data type " + h.marketDataType);
   $("#feedAge").textContent = bits.filter(Boolean).join(" · ");
@@ -3667,7 +3731,7 @@ function render() {
     const why = S.dataStatus === "stale" || S.dataStatus === "offline"
       ? "feed " + S.dataStatus.toUpperCase() + " — no bars, no verdict"
       : "no bars yet — nothing to judge";
-    for (const id of ["#verdictCard", "#pillarsBoard", "#quoteCard", "#l2Card"]) {
+    for (const id of ["#verdictCard", "#pillarsBoard", "#quoteCard"]) {
       const h = $(id); if (h) { h.textContent = ""; h.appendChild(el("div", "note", why)); }
     }
     return;
@@ -3697,7 +3761,7 @@ function render() {
     else fillAlertCard(card, ALERT_TILES[card.dataset.scanner], state.frame);
   }));
   const ctx = renderHeader(frame);
-  renderCharts(frame); renderQuote(frame, ctx); renderL2(frame, ctx);
+  renderCharts(frame); renderQuote(frame, ctx);
   renderVerdict(frame, ctx); renderTimeline(state.frame); renderPillarsBoard(frame);
   // A desk that ships no decision cards (started before 2026-10-08) still
   // shows the news on the default desk: the quote card that carried it is
@@ -3760,7 +3824,13 @@ function init() {
     $("#sessionLabel").appendChild(document.createTextNode("  "));
     $("#sessionLabel").appendChild(warn);
   }
-  $("#disclaimer").textContent = S.disclaimer;
+  // The session's disclaimer reads in the Legend (audit 2026-10-09: a line in
+  // the footer every minute of every day is not read; the Legend is).
+  const panel = document.querySelector("#legend .legend-panel");
+  if (panel && S.disclaimer && !document.getElementById("legendDisclaimer")) {
+    const disc = el("p", "tiny muted", S.disclaimer); disc.id = "legendDisclaimer";
+    panel.appendChild(disc);
+  }
   // Which rules this desk is running, live or recorded. Two traders compare
   // one badge instead of two screens.
   fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json())
@@ -3851,7 +3921,8 @@ function init() {
                    cardEl(layout[state.focusTile === "five_pillars_list" ? "L1" : "C1"]);
       if (card) toggleExpand(card);
     }
-    else if (k === "n") { $("#quoteCard").scrollIntoView({ block: "center" }); }
+    else if (k === "n") { const v = $("#verdictCard"); if (v) v.scrollIntoView({ block: "center" }); }
+    else if (k === "d") { toggleDaily(); }
     else if (k === "a") { $("#btnSound").click(); }
     else if (k === "?") { $("#btnHelp").click(); }
     else if (e.key === "Escape") {
@@ -3880,6 +3951,11 @@ function init() {
   $("#chartEngineSub").textContent = usingTV ? "lightweight-charts 4.1.3 · local"
     : "vendor/lightweight-charts…js missing — fallback";
   $("#chartDot").className = "dot " + (usingTV ? "live" : "stale");
+  // The chart library's name and version are engineering, not trading
+  // (audit 2026-10-09): the block shows only when the charts fell back. The
+  // page build stays in it for scripts/app_build.py, and the RESTART banner
+  // says when the desk runs older code.
+  $("#chartEngine").closest(".health").hidden = usingTV;
   const ro = new ResizeObserver(() => {
     Object.values(PANES).forEach(p => p.resize());
     renderCharts(FRAMES[state.frame]);

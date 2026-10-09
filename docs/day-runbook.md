@@ -136,12 +136,30 @@ running it says so: run `python3 scripts/day.py`.
 The desk reads left to right the way a trade is made. **Find** on the left: the
 scanners and the Five Pillars check for every name. **See** in the centre: the
 charts under a two-line header — line one what moves (last, change, bid × ask,
-spread in ¢ and %, volume, RVOL, 5-minute RVOL, halt), line two the levels and
-the supply (VWAP and the distance to it, HOD, pre-market high, previous close,
-52-week high, float with its source, average volume, position in the range).
+spread in ¢ and %, volume, RVOL, 5-minute RVOL, and HALTED only when it is),
+line two the levels and the supply (VWAP and the distance to it, HOD, the
+pre-market high and how far under it the price is — red past 25 %, gate 4 —
+float with its source, position in the range; "52w ×N split history" when the
+52-week high is over 20× the price; "print … ago" when the last print is old).
+The previous close sits in the change's tooltip, the average volume in RVOL's.
 **Decide** on the right: the decision card over the Time & Sales. The quote
-card and the simulated Level 2 wait in the tray (Cards); Layout puts the desk
-back to this.
+card waits in the tray (Cards); Layout puts the desk back to this.
+
+Since 2026-10-09 (`docs/desk-grid-audit-2026-10-09.md`):
+
+- **A click in the tray never replaces the decision card.** Click the card a
+  tray card should replace, then the tray card — or drag it there.
+- **D** switches the 5-minute pane to the daily chart and back (his minimum
+  layout links the 1-minute, the 5-minute and the daily).
+- The 1-minute chart draws the **pre-market high** beside the HOD ("HOD = PM
+  HIGH" when they are one price). MACD is on the 1-minute only.
+- The gainers list shows names **green on the day with 4 or 5 pillars**. The
+  alert tiles show **one row per name with ×N** when it fired again — the
+  repeat is the signal — and dim names not up 10 % at the alert. The High of
+  Day tile carries the **halts** from 09:30. The pillar check folds names with
+  no print yet, like the red ones.
+- The simulated Level 2 is deleted. A real book needs IBKR market-depth data
+  (below, "Level 2").
 
 The decision card is the server's read of the selected name
 (`src/momentum_platform/decision_card.py`); the page recomputes nothing.
@@ -186,6 +204,23 @@ verdict (`docs/desk-assessment-2026-10-08.md`, "Level 2"). IBKR's tick-by-tick
 needs only the Level 1 data the desk already uses, as IBKR's documentation was
 reported by a web search on 2026-10-08 — if the tag reads ERROR with an
 entitlement message, that report was wrong for this account.
+
+**Level 2 — what a real book would take (researched 2026-10-09, not bought).**
+Ross reads the book with the tape ("level two": 264 hits in 134 live streams;
+the course's minimum layout carries both). IBKR's price list, read on
+2026-10-09 by a research agent, puts depth on the **live** user — non-professional
+— shared to the paper user: Networks A, B and C at $1.50 each, **NASDAQ
+TotalView-OpenView $16.50 plus its EDS add-on $1.00, which the API needs** —
+$22.00 a month in all, $17.50 if A, B and C are already held. NYSE OpenBook
+($25), ArcaBook ($11), Cboe BZX ($8) and BX TotalView ($3.50) are optional
+extra books; IEX depth comes free with A, B and C. The API reads it with
+`reqMktDepth(…, isSmartDepth=True)`, three depth symbols at a time by default.
+Not confirmed: depth in the pre-market, depth on the shared paper login (IBKR's
+paper page says fills are simulated "from the top of the book; no deep book
+access"), NYSE American coverage. Sources: interactivebrokers.com
+market-data pricing, the NASDAQ specialty-subscriptions page (EDS), the TWS API
+market-depth page, ibkrguides article 1719 (sharing to paper). The desk builds
+a display-only book once the data is on the account; no gate, no score.
 
 **After an update, restart the desk.** The page reads its files from disk on
 every load; the desk's Python only at start. A desk left running after

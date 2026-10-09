@@ -331,7 +331,7 @@ def test_ui_chart_stack_is_the_desks_own_1m_over_5m_and_10s(page):
     assert five["y"] > big["y"] + big["height"] - 4       # below the 1m
     centre = page.locator("[data-col=center]").bounding_box()
     assert ten["y"] + ten["height"] > centre["y"] + centre["height"] - 12, "nothing under the charts"
-    for parked in ("screener", "tv-widget", "tv-widget-5m", "timeline", "level2", "quote"):
+    for parked in ("screener", "tv-widget", "tv-widget-5m", "timeline", "quote"):
         assert page.locator(f".slot [data-card={parked}]").count() == 0
     # find / see / decide (2026-10-08): the decision card over the real tape on
     # the right, the Five Pillars check under the scanners on the left
@@ -353,11 +353,12 @@ def test_ui_chart_stack_is_the_desks_own_1m_over_5m_and_10s(page):
 
 
 def test_ui_alert_grids_show_time_then_the_move(page):
-    """Time, then the move as PM % before the open or Day % after it, then the
-    symbol, the price and the strategy label. Age moved to the time's tooltip."""
+    """Time, then the move — "Chg %", the gainers list's name for the same number
+    (audit 2026-10-09: "PM %" here, "Chg" there) — then the symbol, the price
+    and the strategy label. Age moved to the time's tooltip."""
     _seek(page, 150)
     heads = [h.upper() for h in page.locator("[data-card=scan-running] .tile-cols.alert-cols span").all_inner_texts()]
-    assert heads[0] == "TIME" and heads[1] in ("PM %", "DAY %")
+    assert heads[0] == "TIME" and heads[1] == "CHG %"
     assert heads[2:] == ["SYMBOL", "PRICE", "STRATEGY"]
     row = page.locator("[data-card=scan-running] .alert-row").first
     assert "ago" in row.locator(".tl-time").get_attribute("title")
@@ -425,7 +426,7 @@ def test_ui_gutters_resize_panes_and_persist(page):
     page.wait_for_timeout(300)
     after = page.locator("[data-card=verdict]").bounding_box()
     assert after["height"] > before["height"] + 60
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v10'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v11'))")
     assert saved["sizes"]["slots"]["R1"] / saved["sizes"]["slots"]["R2"] > 2.35 / 1, "R1 gained on R2"
     # the page must still fit after a resize
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
@@ -478,7 +479,8 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
     # TradingView's delayed widgets took their place here.
     # 2026-10-08: the simulated Level 2 left the desk for the decision card,
     # and the quote card for the header (its facts) and the card (the catalyst).
-    assert sorted(items) == ["chart-daily", "level2", "quote", "screener", "timeline",
+    # 2026-10-09: the simulated Level 2 is deleted — invented depth, nowhere.
+    assert sorted(items) == ["chart-daily", "quote", "screener", "timeline",
                              "tv-widget", "tv-widget-5m"]
     page.locator("#btnTray").click()
     page.wait_for_timeout(150)
@@ -535,7 +537,7 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
     assert page.eval_on_selector("[data-card=pillars-board]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v10'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v11'))")
     assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
@@ -585,37 +587,42 @@ def test_ui_reasons_drawer_shows_pillar_arithmetic(page):
         assert token in text
 
 
-def test_ui_level2_ladder_renders(page):
-    """Level 2 waits in the tray since 2026-10-08; put back on the desk it
-    renders, and still says it is simulated."""
-    page.locator("[data-card=pillars-board] .card-title").click()   # the tray places onto the last card clicked
+def test_ui_a_tray_click_never_takes_the_decision_cards_place(page):
+    """2026-10-09, 04:34: the owner's desk had the quote card in R1 — one click
+    in the tray, with no card clicked before, put it in the decision card's
+    slot, and the verdict, the catalyst and the order were off the screen."""
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(200)
+    page.locator("[data-card=verdict] .card-title").click()          # the decision card, clicked last
     page.locator("#btnTray").click()
     page.wait_for_timeout(200)
-    page.locator(".tray-item[data-tray-card=level2]").click()
-    page.wait_for_timeout(300)
-    page.locator("#btnTray").click()
-    page.wait_for_timeout(200)
+    page.locator(".tray-item[data-tray-card=quote]").click()
+    page.wait_for_timeout(250)
     try:
-        assert page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot") == "L4"
-        _seek(page, 125)
-        page.locator("[data-card=scan-pillars] .trow").first.click()
+        assert page.eval_on_selector("[data-card=verdict]", "e => e.parentElement.dataset.slot") == "R1"
+        assert page.locator(".slot [data-card=quote]").count() == 0, "nowhere to put it: refused, said"
+        # a card clicked first is where a tray click puts it
+        page.locator("[data-card=pillars-board] .card-title").click()
+        page.locator(".tray-item[data-tray-card=quote]").click()
         page.wait_for_timeout(250)
-        assert page.locator(".ladder .lp").count() == 16
-        # the seeded prints are gone: the real tape has its own card (2026-10-08)
-        assert page.locator("#l2Card .print").count() == 0
-        assert "Time & Sales card" in page.locator("#l2Card").inner_text()
-        bids = page.eval_on_selector_all(".ladder .lp.bid", "els => els.map(e => parseFloat(e.textContent))")
-        asks = page.eval_on_selector_all(".ladder .lp.ask", "els => els.map(e => parseFloat(e.textContent))")
-        assert bids == sorted(bids, reverse=True)
-        assert asks == sorted(asks)
-        assert bids[0] < asks[0]
-        body = page.locator("#l2Card").inner_text().lower()
-        assert "simulated" in body and "not licensed market data" in body
-        assert page.locator("[data-card=level2] .tag.sim").inner_text().lower() == "simulated"
+        assert page.eval_on_selector("[data-card=quote]", "e => e.parentElement.dataset.slot") == "L4"
+        assert page.eval_on_selector("[data-card=verdict]", "e => e.parentElement.dataset.slot") == "R1"
     finally:
-        page.locator("#btnLayout").click()       # back to the default desk
+        if page.locator("#tray").is_visible():
+            page.locator("#btnTray").click()
+        page.locator("#btnLayout").click()
         page.wait_for_timeout(300)
-    assert page.locator(".slot [data-card=level2]").count() == 0
+    assert page.locator(".slot [data-card=pillars-board]").count() == 1
+
+
+def test_ui_the_simulated_level2_is_gone(page):
+    """Invented depth drawn as a book (audit 2026-10-09): deleted, not parked."""
+    assert page.locator("[data-card=level2]").count() == 0
+    assert page.locator("#l2Card").count() == 0
+    page.locator("#btnTray").click()
+    page.wait_for_timeout(150)
+    assert page.locator(".tray-item[data-tray-card=level2]").count() == 0
+    page.locator("#btnTray").click()
 
 
 def test_ui_verdict_mirrors_pine_and_decides(page):
@@ -695,12 +702,12 @@ def test_ui_alert_click_seeks_charts(page):
     """The alert timeline waits in the tray by default; put it on the desk
     (a saved layout, as a drag would leave it) and it still seeks."""
     page.evaluate("""() => {
-      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v10') || '{}');
+      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v11') || '{}');
       saved.layout = Object.assign({}, saved.layout || {
         L1: 'scan-pillars', L2: 'scan-running', L3: 'scan-hod', L4: 'pillars-board',
         C1: 'chart-1m', C2: 'chart-5m', C3: 'chart-10s', R1: 'verdict', R2: 'tape' });
       saved.layout.L4 = 'timeline';
-      localStorage.setItem('momentum-workstation.layout.v10', JSON.stringify(saved));
+      localStorage.setItem('momentum-workstation.layout.v11', JSON.stringify(saved));
     }""")
     page.reload()
     page.wait_for_timeout(400)
@@ -1162,14 +1169,14 @@ def test_the_desk_opens_on_its_own_real_time_charts_not_the_delayed_widget():
     spare = app.split("const ALL_CARDS = ")[1].split(";")[0]
     assert '"tv-widget"' in spare and '"tv-widget-5m"' in spare
 
-    # A structurally valid older layout would restore the delayed charts.
-    assert 'LAYOUT_KEY = "momentum-workstation.layout.v10"' in app
+    # A structurally valid older layout would restore the delayed charts — and
+    # v10 kept the quote card in the decision card's slot on the owner's desk.
+    assert 'LAYOUT_KEY = "momentum-workstation.layout.v11"' in app
 
-    # The simulated book is not a default pane (owner, 2026-10-08): the
-    # decision card took its slot, the real tape sits under it. Level 2 and
-    # the quote card stay one drag away, still labelled.
+    # The decision card holds R1, the real tape sits under it; the quote card
+    # stays one drag away. The simulated book is deleted (owner, 2026-10-09).
     assert '"level2"' not in default and '"verdict"' in default and '"tape"' in default
-    assert '"level2"' in spare and '"quote"' in spare
+    assert '"level2"' not in spare and '"quote"' in spare
 
 
 def test_a_chart_does_not_swallow_a_card_drag():
@@ -1321,14 +1328,15 @@ def test_the_macd_band_is_laid_out_from_the_first_paint():
     assert "setBands(show.macd);" in pane[loaded:loaded + 600], "bands must follow the loaded state"
 
 
-def test_the_simulated_book_never_reads_as_the_real_tape():
-    """The Level 2 card is SIMULATED (no entitlement). Its note read "a seller
-    above the trigger caps the move until it is consumed" — a claim about the
-    real book that the desk cannot make."""
-    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
-           / "dashboard" / "web" / "app.js").read_text()
+def test_no_simulated_book_is_left_to_read_as_a_real_one():
+    """The Level 2 card was SIMULATED (no entitlement); its note once read "a
+    seller above the trigger caps the move until it is consumed" — a claim
+    about the real book the desk cannot make. 2026-10-09: deleted outright."""
+    web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
+    app, html = (web / "app.js").read_text(), (web / "index.html").read_text()
     assert "caps the move until it is consumed" not in app
-    assert "SIMULATED book" in app
+    assert "SIMULATED book" not in app and "function _depth" not in app and "renderL2" not in app
+    assert 'id="l2Card"' not in html and 'data-card="level2"' not in html
 
 
 def test_top_gainers_are_ordered_by_change_on_the_day():
@@ -1414,7 +1422,11 @@ def test_ui_the_tape_card_renders_the_servers_prints(page):
     assert any("test gap" in g for g in gaps) and any("history" in g for g in gaps)
     facts = page.locator("#tapeCard .ts-facts").inner_text()
     assert f"{snap['facts']['pctAsk']:.0f}%" in facts
-    assert "Approximation" in page.locator("#tapeCard .ts-legend").inner_text()
+    # the marks' legend lives in the Legend overlay; the big-print rule on its count
+    assert page.locator("#tapeCard .ts-legend").count() == 0
+    big = page.locator("#tapeCard .ts-facts .ts-fact").first.locator("span").last
+    assert "Approximation" in big.get_attribute("title")
+    assert "Approximation" in page.locator("#legend").inner_text()
     line = page.locator(".dc-tape").inner_text()
     assert f"{snap['facts']['pctAsk']:.0f}% at the ask" in line and "1 big" in line
     assert f"last {round(snap['facts']['coverS'])} s" in line and "60 s" not in line, \
@@ -1438,11 +1450,18 @@ def test_ui_the_header_carries_the_quote_in_two_lines(page):
     page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
     top = page.locator("#symStats").inner_text().lower()
-    for word in ("spread", "vol", "rvol", "halt"):
+    for word in ("spread", "vol", "rvol"):
         assert word in top, word
     second = page.locator("#symFacts").inner_text().lower()
-    for word in ("vwap", "hod", "pm high", "prev", "52w", "float", "range"):
+    for word in ("vwap", "hod", "pm high", "float", "range"):
         assert word in second, word
+    # audit 2026-10-09: the denominators went to tooltips; the halt, the
+    # 52-week high and the print time show only when they say something
+    assert "halt" not in top or "halted" in top
+    for gone in ("prev", "avg vol"):
+        assert gone not in second, gone
+    assert "52w" not in second or "split history" in second
+    assert "previous close" in page.locator("#symStats .chg").first.evaluate("e => e.parentElement.title")
     labels = page.eval_on_selector_all("#symStats .lab", "els => els.map(e => e.textContent)")
     assert labels.count("rvol") == 1, "one RVOL; the daily one only when it differs"
 
@@ -1476,3 +1495,99 @@ def test_ui_the_board_folds_names_down_on_the_day(page):
     page.wait_for_timeout(300)
     assert page.locator("#symTicker").inner_text() == "JMXP"
     assert page.locator("[data-card=pillars-board] .pb-row.sel").count() == 1, "the selected name keeps its row"
+
+
+# -- the audit of 2026-10-09 (docs/desk-grid-audit-2026-10-09.md) -----------------
+
+def _pct(text):
+    return float(text.replace("%", "").replace("+", "").replace("−", "-").strip())
+
+
+def test_ui_the_gainers_list_holds_green_names_with_four_pillars(page):
+    """BIAF −8.7 % 3/5 sat on a list called gainers: the course passes 3/5,
+    and a red name is not a gainer (owner, 2026-10-09)."""
+    for frame in (125, 150, 10_000):
+        _seek(page, frame)
+        for row in page.locator("[data-card=scan-pillars] .trow").all():
+            assert _pct(row.locator("span").nth(2).inner_text()) > 0
+            partial = row.locator(".pill.partial")
+            if partial.count():
+                assert partial.inner_text() == "4/5"
+        assert page.locator("[data-card=scan-pillars] .pill.grade-soft, [data-card=scan-pillars] .pill.grade-hard").count() == 0
+
+
+def test_ui_alert_tiles_list_each_name_once_with_its_count(page):
+    """The repeat is his signal (yg5E_mqGFGg @00:17:02): one row per name with
+    ×N, not one row per repeat. Names not up 10 % on the day are dimmed."""
+    _seek(page, 10_000)
+    for tile in ("scan-running", "scan-hod"):
+        syms = page.eval_on_selector_all(f"[data-card={tile}] .alert-row .tsym b", "els => els.map(e => e.textContent)")
+        assert len(syms) == len(set(syms)), (tile, syms)
+        for xn in page.locator(f"[data-card={tile}] .pill.xn").all():
+            assert xn.inner_text().startswith("×") and int(xn.inner_text()[1:]) >= 2
+        for row in page.locator(f"[data-card={tile}] .alert-row").all():
+            chg = row.locator("span").nth(1).inner_text()
+            dim = "dim" in (row.get_attribute("class") or "")
+            assert dim == (chg in ("—", "") or _pct(chg) < 10), (tile, chg, dim)
+
+
+def test_ui_the_context_pane_toggles_to_the_daily(page):
+    """His minimum layout links the 1-minute, the 5-minute and the daily."""
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(200)
+    page.locator("[data-card=chart-5m] .ctx-toggle").click()
+    page.wait_for_timeout(300)
+    try:
+        assert page.eval_on_selector("[data-card=chart-daily]", "e => e.parentElement.dataset.slot") == "C2"
+        assert page.locator(".slot [data-card=chart-5m]").count() == 0
+        page.locator("body").press("d")
+        page.wait_for_timeout(300)
+        assert page.eval_on_selector("[data-card=chart-5m]", "e => e.parentElement.dataset.slot") == "C2"
+    finally:
+        page.locator("#btnLayout").click()
+        page.wait_for_timeout(300)
+
+
+def test_ui_macd_reads_on_the_one_minute_only(page):
+    """Preview ch. 5: MACD mainly on the 1-minute; the 5-minute one lags and
+    conflicts. The v2 key drops a saved v1 choice that put it on the 5-minute."""
+    app = (ROOT / "src" / "momentum_platform" / "dashboard" / "web" / "app.js").read_text()
+    assert 'macd: hostId === "chartA"' in app and '"momentum-workstation.show.v2."' in app
+    if page.locator("#chartEngine").inner_text() != "TRADINGVIEW":
+        pytest.skip("canvas fallback in this artifact: no MACD band tags to read")
+    assert page.locator("#chartA .band-tag").is_visible()
+    assert not page.locator("#chartB .band-tag").is_visible()
+    assert not page.locator("#chartD .band-tag").is_visible()
+
+
+def test_ui_halts_line_sits_in_the_hod_tile_in_regular_hours(page):
+    _seek(page, 10_000)
+    strip = page.locator("[data-card=scan-hod] .halts-strip")
+    assert strip.count() == 1 and "halts" in strip.inner_text().lower()
+
+
+def test_ui_the_top_bar_and_footer_carry_trading_state_not_engineering(page):
+    engine = page.locator("#chartEngine").inner_text()
+    hidden = page.eval_on_selector("#chartEngine", "e => e.closest('.health').hidden")
+    assert hidden == (engine == "TRADINGVIEW"), "the chart library shows only when it failed"
+    assert page.locator("#disclaimer").count() == 0
+    assert "Nothing on this desk can place an order" in page.locator("#legend").inner_text()
+
+
+def test_the_one_minute_chart_marks_the_premarket_high():
+    web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
+    app, html = (web / "app.js").read_text(), (web / "index.html").read_text()
+    body = app.split("function renderCharts(frame)")[1][:2500]
+    assert "pmHigh: pmHigh" in body.split("PANES.a.render")[1][:200]
+    assert '"PM HIGH"' in app and '"HOD = PM HIGH"' in app
+    assert 'class="k pmh"' in html
+
+
+def test_the_header_reads_gate_four_from_the_premarket_high():
+    """BDAI 3.30 under an 8.18 pre-market high, 04:34 on 2026-10-09: the header
+    now says how far, and colours it past gate 4's 25 %."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    header = app.split("function renderHeader(frame)")[1].split("\nfunction ")[0]
+    assert "offPm < -25" in header and "gate 4" in header
+    assert "meta.high52w > 20 * last" in header and 'fact("prev"' not in header and 'fact("avg vol"' not in header
