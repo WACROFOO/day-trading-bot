@@ -756,3 +756,101 @@ a.cat2-headline:hover{text-decoration:underline}
 .halt-chip.off{color:var(--ink-dim)}
 .icon-btn.ctx-toggle{font:600 10px var(--mono);color:var(--ink-dim);border:1px solid var(--line);padding:0 5px}
 .icon-btn.ctx-toggle:hover{color:var(--ink)}
+
+/* ── verdict first (owner, 2026-10-09 05:30) ─────────────────────────────
+   "It misses the verdict part to be clear." The desk's answer in the top bar,
+   the selected name's word in large type, the five pillars as value chips,
+   the rest behind "Why, in full". Colour encodes the word and the gate
+   state, never price direction. */
+.desk-verdict{display:flex;align-items:baseline;gap:8px;min-width:0;max-width:46vw;padding:3px 10px;border-radius:5px;
+  border:1px solid var(--line);border-left-width:3px;background:var(--panel-2);color:var(--ink-dim);cursor:default;
+  white-space:nowrap;overflow:hidden;text-align:left}
+.desk-verdict .dv-word{font:700 13px/1 var(--cond);letter-spacing:1px;flex:none}
+.desk-verdict .dv-text{font:10.5px var(--mono);overflow:hidden;text-overflow:ellipsis}
+.desk-verdict.none{border-left-color:var(--ink-faint)}
+.desk-verdict.go{background:#0f2c1f;border-color:#1f4c38;border-left-color:var(--target);color:#a9efc9;cursor:pointer}
+.desk-verdict.watch{background:#121d2e;border-color:#24365a;border-left-color:var(--accent);color:#bcd0ff;cursor:pointer}
+.desk-verdict.wait{background:#2a2410;border-color:#4a3c17;border-left-color:var(--hi);color:#ffdf9e;cursor:pointer}
+
+.dc2{gap:6px}
+.dc-answer{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;border-left:4px solid var(--ink-faint);
+  background:var(--panel-2)}
+.dc-answer .dc-word{font:700 30px/1 var(--cond);letter-spacing:1.5px;flex:none}
+.dc-answer .dc-idl{display:flex;flex-direction:column;gap:3px;min-width:0}
+.dc-answer .dc-idl-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.dc-answer .dc-sym{font:700 14px/1 var(--cond);letter-spacing:1px;color:#fff}
+.dc-answer .dc-act{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;opacity:.85}
+.dc-answer .dc-reason{font-size:13px;line-height:1.3;font-weight:500}
+.dc-answer.go{background:#0f2c1f;border-left-color:var(--target);color:#a9efc9}
+.dc-answer.watch{background:#121d2e;border-left-color:var(--accent);color:#bcd0ff}
+.dc-answer.wait{background:#2a2410;border-left-color:var(--hi);color:#ffdf9e}
+.dc-answer.pass{background:#301419;border-left-color:var(--down);color:#ffb3ba}
+.dc2 .dc-level{font-size:12.5px;padding:0 2px}
+.dc2 .dc-level b{font-size:15px}
+.dc-strip{display:flex;flex-direction:column;gap:3px}
+.dc-strip-h{display:flex;align-items:baseline;gap:8px}
+.dc-strip-l{white-space:nowrap;font:600 9px/1 var(--sans);text-transform:uppercase;letter-spacing:.7px;color:var(--ink-faint)}
+.dc-strip-s{font:10px var(--mono);color:var(--ink-dim)}
+.dc-strip-c{display:flex;flex-wrap:wrap;gap:4px}
+.pchip{display:inline-flex;align-items:baseline;gap:4px;font:600 10.5px/1 var(--mono);padding:4px 6px;border-radius:4px;
+  border:1px solid var(--line);color:var(--ink-dim)}
+.pchip i{font-style:normal;font-weight:700}
+.pchip .pk{font-family:var(--sans);font-weight:600;font-size:10px}
+.pchip .pv{font-weight:500;color:var(--ink)}
+.pchip.ok{color:var(--ok-ink);border-color:var(--ok-line);background:#0f2119}
+.pchip.no{color:var(--no-ink);border-color:var(--no-line);background:#301419}
+.pchip.unk,.pchip.man{color:var(--unk-ink);border-color:var(--unk-line);background:#241d0c;border-style:dashed}
+.pchip.na{opacity:.55}
+.dc-headline{font-size:11px;line-height:1.35;color:var(--ink);text-decoration:none;border-left:2px solid var(--line);padding-left:6px}
+a.dc-headline:hover{text-decoration:underline}
+.dc-more{border-top:1px solid var(--line-soft);padding-top:4px}
+.dc-more > summary{cursor:pointer;font:600 9.5px/1.6 var(--sans);text-transform:uppercase;letter-spacing:.7px;color:var(--ink-faint);
+  list-style:none}
+.dc-more > summary::before{content:"▸ "}
+.dc-more[open] > summary::before{content:"▾ "}
+.dc-more > summary::-webkit-details-marker{display:none}
+.dc-more[open]{display:flex;flex-direction:column;gap:4px}
+.verdict-card .dc-more .dc-lamps{display:grid}
+.verdict-card .sizing[hidden]{display:none!important}
+.float-override > summary{cursor:pointer;font-size:9.5px;color:var(--ink-faint);list-style:none}
+.float-override > summary::-webkit-details-marker{display:none}
+.float-override > summary::before{content:"▸ "}
+.float-override[open] > summary::before{content:"▾ "}
+
+/* the header: one line — name, price, change, the desk's word */
+.stat-word{gap:6px;min-width:0}
+.stat-word .hword{font:700 11px/1 var(--cond);letter-spacing:1px;padding:2px 6px;border-radius:3px;border:1px solid var(--line)}
+.stat-word .hword.go{color:#a9efc9;background:#0f2c1f;border-color:#1f4c38}
+.stat-word .hword.watch{color:#bcd0ff;background:#121d2e;border-color:#24365a}
+.stat-word .hword.wait{color:#ffdf9e;background:#2a2410;border-color:#4a3c17}
+.stat-word .hword.pass{color:#ffb3ba;background:#301419;border-color:#4a1f26}
+.stat-word .hreason{font:10.5px var(--sans);color:var(--ink-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw}
+.sym-facts[hidden]{display:none!important}
+
+/* the tape on another window's name: one line and the way back */
+.ts-other{font-size:11px;color:var(--ink-dim);line-height:1.5;padding:4px 0}
+.btn.ts-claim{padding:1px 7px;font-size:10px;margin-left:4px}
+.dc-tape .btn.ts-claim{margin-left:2px}
+
+/* the verdict list (Five Pillars board, column view) */
+.pillars-board.vlist{display:flex;flex-direction:column;gap:2px}
+.vl-funnel{font:10px var(--mono);color:var(--ink-faint);padding:2px 2px 4px;border-bottom:1px solid var(--line-soft)}
+.vl-row{display:flex;flex-direction:column;gap:2px;padding:5px 4px;border-radius:4px;cursor:pointer;border-left:2px solid transparent}
+.vl-row:hover{background:var(--panel-2)}
+.vl-row.sel{background:#122033;border-left-color:var(--focus)}
+.vl-l1{display:flex;align-items:baseline;gap:8px;min-width:0}
+.vl-l1 b{font:700 12px/1 var(--cond);letter-spacing:.8px;color:var(--ink);min-width:44px}
+.vl-px,.vl-chg{font:10.5px var(--mono);font-variant-numeric:tabular-nums}
+.vl-word{margin-left:auto;font:700 10px/1 var(--cond);letter-spacing:1px;padding:2px 6px;border-radius:3px;border:1px solid var(--line)}
+.vl-word.go{color:#a9efc9;background:#0f2c1f;border-color:#1f4c38}
+.vl-word.watch{color:#bcd0ff;background:#121d2e;border-color:#24365a}
+.vl-word.wait{color:#ffdf9e;background:#2a2410;border-color:#4a3c17}
+.vl-l2{display:flex;gap:8px;align-items:baseline;font-size:10.5px;color:var(--ink-dim);min-width:0}
+.vl-reason{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.vl-pillars{font:9.5px var(--mono);color:var(--ink-faint);flex:none}
+.vl-row.no .vl-reason{font-size:10px;color:var(--ink-faint)}
+.vl-none{font-size:11px;color:var(--ink-dim);padding:6px 2px}
+.vl-fold{font-size:10.5px;color:var(--ink-faint);padding:4px 2px;cursor:pointer;user-select:none}
+.vl-fold:hover{color:var(--ink-dim)}
+.desk-verdict.asof{opacity:.75;border-style:dashed}
+.vl-funnel.asof{color:var(--hi)}

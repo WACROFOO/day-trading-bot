@@ -272,6 +272,29 @@ def page(tmp_path_factory):
         browser.close()
 
 
+def _open_why(page):
+    """Open the decision card's "Why, in full" (closed by default since
+    2026-10-09; the toggle is remembered, so open it only when shut)."""
+    page.evaluate("""() => { const d = document.querySelector('#verdictCard .dc-more');
+                             if (d && !d.open) d.querySelector('summary').click(); }""")
+    page.wait_for_timeout(150)
+
+
+def _wide_board(page):
+    """Drag the Five Pillars board into the 1-minute chart's slot: the wide
+    table, which keeps every pillar cell (the column shows the verdict list)."""
+    page.evaluate("""() => {
+      const src = document.querySelector('[data-card=pillars-board] .card-head');
+      const dst = document.querySelector('[data-card=chart-1m]');
+      const dt = new DataTransfer();
+      src.dispatchEvent(new DragEvent('dragstart', { bubbles: true, dataTransfer: dt }));
+      dst.dispatchEvent(new DragEvent('dragover', { bubbles: true, dataTransfer: dt }));
+      dst.dispatchEvent(new DragEvent('drop', { bubbles: true, dataTransfer: dt }));
+    }""")
+    page.wait_for_timeout(300)
+    assert not page.eval_on_selector("#pillarsBoard", "e => e.classList.contains('compact')")
+
+
 def _seek(page, frame: int):
     page.eval_on_selector("#scrub", f"e => {{ e.value = {frame}; e.dispatchEvent(new Event('input')) }}")
     page.wait_for_timeout(250)
@@ -497,6 +520,7 @@ def test_ui_catalyst_card_grades_the_news(page):
             rows.nth(i).click()
             break
     page.wait_for_timeout(300)
+    _open_why(page)                     # the full read sits under "Why, in full" (2026-10-09)
     server = page.evaluate("window.__SESSION__.cards.ABCD.catalyst")
     assert page.locator(".cat2-grade").inner_text() == server["grade"] == "STRONG"
     assert "quantifiable value" in page.locator(".cat2-reason").inner_text()
@@ -515,6 +539,7 @@ def test_ui_catalyst_flags_dilution(page):
     page.wait_for_timeout(600)
     _seek(page, 100)
     assert page.locator("#symTicker").inner_text() == "CYQN"
+    _open_why(page)
     assert page.locator(".cat2-grade").inner_text() == "WEAK"
     assert "offering/dilution" in page.locator(".cat2-meta").inner_text()
     flags = page.locator(".cat2-flag.bad").all_inner_texts()
@@ -634,12 +659,20 @@ def test_ui_verdict_mirrors_pine_and_decides(page):
     page.wait_for_timeout(250)
     sym = page.locator("#symTicker").inner_text()
     card = page.evaluate(f"window.__SESSION__.cards[{sym!r}]")
-    word = page.locator("#verdictCard .dc-verdict b").inner_text()
+    word = page.locator("#verdictCard .dc-answer .dc-word").inner_text()
     assert word == card["verdict"]["word"], (word, card["verdict"])
     assert word in {"REVIEW", "WATCH", "WAIT", "NO"} and word != "PASS"
-    assert page.locator("#verdictCard .dc-reason").inner_text() == card["verdict"]["reason"]
-    assert "server card" in (page.get_attribute("#verdictCard .dc-verdict", "title") or "")
-    assert page.locator("#verdictCard .dc-chips .vchip").count() == len(card["lamps"])
+    assert page.locator("#verdictCard .dc-answer .dc-reason").inner_text() == card["verdict"]["reason"]
+    assert "server card" in (page.get_attribute("#verdictCard .dc-answer", "title") or "")
+    # verdict first (2026-10-09): the five pillars as chips on the face, the
+    # chart gates beside them on a name the cascade let through, and every
+    # lamp in the table under "Why, in full"
+    pillars = page.eval_on_selector_all("#verdictCard .dc-strip .pchip",
+                                        "els => els.map(e => [e.dataset.lamp, e.dataset.state])")
+    lamps = {l["id"]: l["state"] for l in card["lamps"]}
+    assert [p[0] for p in pillars[:5]] == ["price", "gain", "rvol", "float", "catalyst"]
+    assert all(lamps[i] == st for i, st in pillars), (pillars, lamps)
+    assert len(pillars) == (5 if word == "NO" else 9)
     assert page.locator("#verdictCard .dc-lamp").count() == len(card["lamps"])
     assert {l["id"] for l in card["lamps"]} >= {"price", "gain", "rvol", "float", "catalyst", "pillars",
                                                 "rising", "vwap", "ema9", "macd", "pullback", "tape"}
@@ -1038,41 +1071,47 @@ def test_ui_five_pillars_board_lists_every_desk_symbol(page):
     wide slot it is the full thirteen-column table."""
     _seek(page, 124)
     assert page.eval_on_selector("#pillarsBoard", "e => e.classList.contains('compact')")
-    rows = page.locator("[data-card=pillars-board] .pb-row:not(.head)")
-    n = rows.count()
-    assert n == len(page.evaluate("Object.keys(window.__SESSION__.symbols)"))
-    scores = page.eval_on_selector_all("[data-card=pillars-board] .pb-score", "els => els.map(e => e.textContent)")
-    assert all(s.endswith("/5") for s in scores)
-    nums = [int(s.split("/")[0]) for s in scores]
-    assert nums == sorted(nums, reverse=True), "best names first"
-    pills = page.eval_on_selector_all("[data-card=pillars-board] .pb-pill", "els => els.map(e => e.dataset.state)")
-    assert set(pills) <= {"PASS", "FAIL", "UNKNOWN"} and len(pills) == 5 * n
-    letters = page.eval_on_selector_all("[data-card=pillars-board] .pb-pill", "els => els.map(e => e.textContent)")
-    assert letters[:5] == ["P", "G", "R", "F", "N"]
+    # In its column the board is the verdict list (owner, 2026-10-09): every
+    # name in play with the server's word, every NO folded into one line that
+    # opens to each name with the reason that killed it. Nothing is silent.
+    assert page.eval_on_selector("#pillarsBoard", "e => e.classList.contains('vlist')")
+    cards = page.evaluate("Object.values(window.__SESSION__.cards).map(c => [c.symbol, c.verdict.word, c.verdict.reason])")
+    live = [c for c in cards if c[1] != "NO"]
+    rows = page.locator("[data-card=pillars-board] .vl-row")
+    assert rows.count() == len(live)
+    words = page.eval_on_selector_all("[data-card=pillars-board] .vl-word", "els => els.map(e => e.textContent)")
+    rank = {"REVIEW": 0, "WAIT": 1, "WATCH": 2}
+    assert [rank[w] for w in words] == sorted(rank[w] for w in words), "best word first"
+    fold = page.locator("[data-card=pillars-board] .vl-fold")
+    n_no = len(cards) - len(live)
+    assert fold.count() == (1 if n_no else 0) and str(n_no) + " NO" in fold.inner_text()
+    funnel = page.locator("[data-card=pillars-board] .vl-funnel").inner_text()
+    assert funnel.startswith(str(len(page.evaluate("Object.keys(window.__SESSION__.symbols)"))) + " names judged")
+    fold.click()
+    page.wait_for_timeout(200)
+    assert rows.count() == len(cards), "opened, every name has a row"
+    reasons = page.eval_on_selector_all("[data-card=pillars-board] .vl-row.no .vl-reason", "els => els.map(e => e.textContent)")
+    assert sorted(reasons) == sorted(c[2] for c in cards if c[1] == "NO"), "each NO with the reason that killed it"
+    page.locator("[data-card=pillars-board] .vl-fold").click()
+    page.wait_for_timeout(150)
     # the wide form comes back when the board has the width for it
-    page.evaluate("""() => {
-      const src = document.querySelector('[data-card=pillars-board] .card-head');
-      const dst = document.querySelector('[data-card=chart-1m]');
-      const dt = new DataTransfer();
-      src.dispatchEvent(new DragEvent('dragstart', { bubbles: true, dataTransfer: dt }));
-      dst.dispatchEvent(new DragEvent('dragover', { bubbles: true, dataTransfer: dt }));
-      dst.dispatchEvent(new DragEvent('drop', { bubbles: true, dataTransfer: dt }));
-    }""")
-    page.wait_for_timeout(300)
-    assert not page.eval_on_selector("#pillarsBoard", "e => e.classList.contains('compact')")
+    _wide_board(page)
     heads = page.eval_on_selector_all("[data-card=pillars-board] .pb-row.head span", "els => els.map(e => e.textContent)")
     assert heads[:4] == ["Symbol", "Last", "Vol today", "Avg vol"]
+    pills = page.eval_on_selector_all("[data-card=pillars-board] .pb-pill", "els => els.map(e => e.dataset.state)")
+    assert set(pills) <= {"PASS", "FAIL", "UNKNOWN"}
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
     rows.first.click()
     page.wait_for_timeout(200)
-    assert page.locator("[data-card=pillars-board] .pb-row.sel").count() == 1
+    assert page.locator("[data-card=pillars-board] .vl-row.sel").count() == 1
 
 
 def test_ui_float_pillar_reads_the_same_on_the_board_as_in_the_verdict(page):
     """Shares outstanding over the cap proves nothing: UNKNOWN on the board,
     never FAIL — the verdict already said so and the board disagreed."""
     _seek(page, 124)
+    _wide_board(page)                   # the pillar cells live in the wide table since 2026-10-09
     cell = page.evaluate("""() => {
       const row = Array.from(document.querySelectorAll('[data-card=pillars-board] .pb-row:not(.head)'))
         .find(r => r.querySelector('b').textContent === 'EPHZ');
@@ -1081,6 +1120,8 @@ def test_ui_float_pillar_reads_the_same_on_the_board_as_in_the_verdict(page):
     }""")
     assert cell["pill"] == "UNKNOWN" and cell["v"].endswith("M SO"), cell
     assert page.evaluate("typeof floatPillar") == "undefined", "module-scoped, not a global"
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(300)
 
 
 def test_artifact_build_declares_its_charset():
@@ -1118,9 +1159,15 @@ def test_ui_an_empty_list_names_the_pillar_that_is_closing_it(page):
 def test_ui_the_rvol_chip_says_which_measure_it_used(page):
     """Two measures exist and they disagree by two orders of magnitude before
     the open. The chip must say which one produced the number."""
+    _seek(page, 124)
+    chip = page.get_attribute('#verdictCard .pchip[data-lamp="rvol"]', "title") or ""
+    assert "judged: " in chip and ("daily" in chip or "time of day" in chip), chip
+    _wide_board(page)
     title = page.eval_on_selector_all(
         "[data-card=pillars-board] .pb-cell",
         "els => els.map(e => e.title).filter(t => t.indexOf('RVOL') === 0)")
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(300)
     assert title, "the board has an RVOL cell"
     assert any("prior FULL days" in t or "same clock time" in t for t in title)
 
@@ -1433,37 +1480,96 @@ def test_ui_the_tape_card_renders_the_servers_prints(page):
         "nine seconds of tape is not called sixty (review 2026-10-08)"
 
 
+def test_ui_the_desk_says_whether_anything_is_in_play(page):
+    """Owner, 2026-10-09 05:30: "it misses the verdict part". The top bar now
+    answers the desk's question — is there anything to do? — from the server
+    cards: the best word, the names carrying it, the funnel. Every name NO
+    reads NOTHING TO TRADE. Scrubbed back, it says which minute it is from."""
+    n = page.eval_on_selector("#scrub", "e => +e.max")
+    _seek(page, n)
+    cards = page.evaluate("Object.values(window.__SESSION__.cards).map(c => [c.symbol, c.verdict.word])")
+    rank = {"REVIEW": 0, "WAIT": 1, "WATCH": 2, "NO": 3}
+    best = min((rank[w] for _, w in cards))
+    word = page.locator("#dvWord").inner_text()
+    text = page.locator("#dvText").inner_text()
+    if best < 3:
+        want = [k for k, v in rank.items() if v == best][0]
+        assert word == want, (word, cards)
+        first = text.split("·")[0].strip()
+        assert dict(cards)[first] == want
+        assert "in play" in text and "as of" not in text
+        page.locator("#deskVerdict").click()
+        page.wait_for_timeout(250)
+        assert page.locator("#symTicker").inner_text() == first, "a click shows the first name"
+    _seek(page, 60)
+    assert "as of" in page.locator("#dvText").inner_text(), "an earlier frame names the cards' minute"
+    assert "as of" in page.locator("#symStats .hreason").inner_text()
+    # every card NO: the desk says so in words, not with an empty list
+    page.evaluate("""() => { window.__saved = JSON.stringify(window.__SESSION__.cards);
+                             Object.values(window.__SESSION__.cards).forEach(c => { c.verdict.word = 'NO'; }); }""")
+    _seek(page, n - 1)
+    _seek(page, n)
+    assert page.locator("#dvWord").inner_text() == "NOTHING TO TRADE"
+    assert "every one is NO" in page.locator("#dvText").inner_text()
+    assert page.locator("[data-card=pillars-board] .vl-none").count() == 1
+    page.evaluate("() => { window.__SESSION__.cards = JSON.parse(window.__saved); }")
+    _seek(page, n - 1)
+    _seek(page, n)
+
+
+def test_ui_a_no_card_carries_nothing_to_act_on(page):
+    """A NO card: the word, the name, the reason, the five pillars — and no
+    order, no tape line, no chart gates, no buttons. The bot's line, the
+    catalyst and every lamp wait under "Why, in full"."""
+    n = page.eval_on_selector("#scrub", "e => +e.max")
+    _seek(page, n)
+    no = page.evaluate("Object.values(window.__SESSION__.cards).filter(c => c.verdict.word === 'NO').map(c => c.symbol)")
+    assert no, "the fixture has a NO name"
+    page.goto(page.url.split("?")[0] + "?symbol=" + no[0])
+    page.wait_for_timeout(700)
+    _seek(page, n)
+    assert page.locator("#verdictCard .dc-word").inner_text() == "NO"
+    assert page.locator("#verdictCard .dc-act").inner_text().lower() == "skip it"
+    assert page.eval_on_selector(".verdict-card .sizing", "e => e.hidden")
+    assert page.locator("#verdictCard .dc-tape").count() == 0
+    assert page.locator("#verdictCard .dc-strip").count() == 1, "the pillars only — no chart strip on a NO"
+    assert page.locator("#verdictCard .dc-more .dc-bot").count() == 1
+    assert page.locator("#verdictCard .dc-more .dc-lamp").count() > 5
+
+
 def test_ui_the_tape_says_when_it_is_on_another_name(page):
     _seek(page, 125)
     page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
     page.evaluate("s => window.__applyTape(s)", _tape_snapshot("ZZZZ"))
     page.wait_for_timeout(300)
-    assert "the tape is on ZZZZ" in page.locator("#tapeCard").inner_text()
-    assert "the tape is on ZZZZ" in page.locator(".dc-tape").inner_text()
+    sel = page.locator("#symTicker").inner_text()
+    # One line, never ZZZZ's prints under another name (owner, 2026-10-09:
+    # FLYE's tape sat under AIXI); a replay has no button to move it
+    assert page.locator("#tapeCard").inner_text().strip() == "The tape is on ZZZZ, not on " + sel + "."
+    assert page.locator("#tapeCard .ts-row").count() == 0
+    assert "on ZZZZ" in page.locator(".dc-tape").inner_text()
 
 
-def test_ui_the_header_carries_the_quote_in_two_lines(page):
-    """The quote card's facts moved into the header (2026-10-08): line one what
-    moves, line two the levels and the supply — the float with its source."""
+def test_ui_the_header_is_one_line_with_the_verdict(page):
+    """Owner, 2026-10-09 05:30: both header lines highlighted as useless. One
+    line now: the name, the price, the change and the desk's word on it with
+    its reason. Each number the two lines carried has one home elsewhere —
+    pillars on the card, levels as chart lines, bid × ask on the order."""
     _seek(page, 125)
     page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
+    sym = page.locator("#symTicker").inner_text()
+    card = page.evaluate(f"window.__SESSION__.cards[{sym!r}]")
+    word = page.locator("#symStats .hword").inner_text()
+    assert word == card["verdict"]["word"]
+    assert card["verdict"]["reason"] in page.locator("#symStats .hreason").inner_text()
     top = page.locator("#symStats").inner_text().lower()
-    for word in ("spread", "vol", "rvol"):
-        assert word in top, word
-    second = page.locator("#symFacts").inner_text().lower()
-    for word in ("vwap", "hod", "pm high", "float", "range"):
-        assert word in second, word
-    # audit 2026-10-09: the denominators went to tooltips; the halt, the
-    # 52-week high and the print time show only when they say something
+    for gone in ("spread", "bid × ask", "rvol", "vwap", "pm high", "float", "range", "52w"):
+        assert gone not in top, gone
+    assert page.eval_on_selector("#symFacts", "e => e.hidden")
     assert "halt" not in top or "halted" in top
-    for gone in ("prev", "avg vol"):
-        assert gone not in second, gone
-    assert "52w" not in second or "split history" in second
     assert "previous close" in page.locator("#symStats .chg").first.evaluate("e => e.parentElement.title")
-    labels = page.eval_on_selector_all("#symStats .lab", "els => els.map(e => e.textContent)")
-    assert labels.count("rvol") == 1, "one RVOL; the daily one only when it differs"
 
 
 def test_ui_the_board_folds_names_down_on_the_day(page):
@@ -1484,6 +1590,7 @@ def test_ui_the_board_folds_names_down_on_the_day(page):
     }""")
     page.evaluate("window.__deskSeek(window.__deskFrame().ts)")
     page.wait_for_timeout(300)
+    _wide_board(page)                   # the column is the verdict list since 2026-10-09
     fold = page.locator("[data-card=pillars-board] .pb-fold")
     assert fold.count() == 1 and "red on the day" in fold.inner_text()
     assert "JMXP -3.2%" in fold.inner_text()
@@ -1583,11 +1690,16 @@ def test_the_one_minute_chart_marks_the_premarket_high():
     assert 'class="k pmh"' in html
 
 
-def test_the_header_reads_gate_four_from_the_premarket_high():
+def test_gate_four_and_the_split_flag_have_one_home_each():
     """BDAI 3.30 under an 8.18 pre-market high, 04:34 on 2026-10-09: the header
-    now says how far, and colours it past gate 4's 25 %."""
-    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
-           / "dashboard" / "web" / "app.js").read_text()
+    said how far. Since 05:30 the header is one line, and gate 4 is read where
+    it is judged — the server's "rising" lamp and its NO reason, under the bot's
+    own 25 % — while the 52-week split flag moved to "Why, in full"."""
+    root = Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+    app = (root / "dashboard" / "web" / "app.js").read_text()
     header = app.split("function renderHeader(frame)")[1].split("\nfunction ")[0]
-    assert "offPm < -25" in header and "gate 4" in header
-    assert "meta.high52w > 20 * last" in header and 'fact("prev"' not in header and 'fact("avg vol"' not in header
+    assert "offPm" not in header and "high52w" not in header, "the header no longer judges a gate"
+    card = app.split("function renderDecisionCard(")[1].split("\nfunction ")[0]
+    assert "meta.high52w > 20 * last" in card and "split-adjusted history" in card
+    dc = (root / "decision_card.py").read_text()
+    assert 'lamp("rising", "Still rising"' in dc and "FADE_MAX_PCT" in dc

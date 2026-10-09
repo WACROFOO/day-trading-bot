@@ -20,6 +20,7 @@ Design notes and operating guides for the momentum workstation.
 | `STATUS-2026-09-06.md` | **plain-words status** — what works, what is left, what the owner does |
 | `desk-assessment-2026-10-08.md`, `desk-assessment-2026-10-08/` | **the desk as a manual decision tool** — the gap table, the evidence from 2026-10-06/07, what was built, and before/after screenshots of the card |
 | `desk-grid-audit-2026-10-09.md`, `desk-grid-audit-2026-10-09/` | **the desk, grid by grid** — the owner's 04:34 ET screenshot numbered by zone: what each element serves, what Ross uses (his scanners, charts, Level 2, the tape), keep / trim / cut per element, what is missing — and what was applied the same day, with after screenshots and the Level 2 costs |
+| `desk-verdict-first-2026-10-09.md`, `desk-verdict-first-2026-10-09/` | **the desk, verdict first** — the owner's 05:30 screenshot: the four zones called useless, Ross's screen and morning from the corpus, the desk verdict in the top bar, the verdict list, the one-line header, the tape that two tabs fought over |
 | `day-runbook.md` | **run this** — the one command, what happens around it, the human-only commands |
 | `preregistration.md` | the exercise's sample size, stopping rules and failure condition — **PROPOSED until the owner sets the values, before the first order** |
 

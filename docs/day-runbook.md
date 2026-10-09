@@ -144,16 +144,33 @@ running it says so: run `python3 scripts/day.py`.
 ## Reading the desk (since 2026-10-08)
 
 The desk reads left to right the way a trade is made. **Find** on the left: the
-scanners and the Five Pillars check for every name. **See** in the centre: the
-charts under a two-line header — line one what moves (last, change, bid × ask,
-spread in ¢ and %, volume, RVOL, 5-minute RVOL, and HALTED only when it is),
-line two the levels and the supply (VWAP and the distance to it, HOD, the
-pre-market high and how far under it the price is — red past 25 %, gate 4 —
-float with its source, position in the range; "52w ×N split history" when the
-52-week high is over 20× the price; "print … ago" when the last print is old).
-The previous close sits in the change's tooltip, the average volume in RVOL's.
-**Decide** on the right: the decision card over the Time & Sales. The quote
-card waits in the tray (Cards); Layout puts the desk back to this.
+scanners and the Five Pillars verdict list. **See** in the centre: the charts
+under a one-line header. **Decide** on the right: the verdict card over the
+Time & Sales. The quote card waits in the tray (Cards); Layout puts the desk
+back to this.
+
+Since 2026-10-09 05:30 (`docs/desk-verdict-first-2026-10-09.md`) the desk
+answers in this order:
+
+1. **The top bar says whether anything is in play.** It shows
+   `NOTHING TO TRADE` when every name is NO, otherwise the best word and the
+   names carrying it. A click shows the first of those names.
+2. **The Five Pillars board lists the names in play.** Each row has the
+   server's word, its one reason and the pillars it misses. Every NO folds
+   into one line that opens to each name's killing reason.
+3. **The header is one line:** name, price, change and the word with its
+   reason. `HALTED` and an old print show only when true.
+4. **The card leads with the answer.** First the word and what to do (skip
+   it / keep it on screen / hands off until the level / read the chart and
+   the tape), then the reason and the level that changes it, then the five
+   pillars as value chips. On a name in play it adds the chart gates, the
+   tape, the headline and the bot's line. Everything else — the catalyst
+   read, filings, warnings, every lamp — sits under "Why, in full".
+5. **The order area appears only where an order can exist.** A NO card has
+   none.
+6. **The tape follows the window you look at.** A tab out of view never
+   moves it. A tape on another name says so in one line, with a "show"
+   button.
 
 Since 2026-10-09 (`docs/desk-grid-audit-2026-10-09.md`):
 
@@ -166,8 +183,8 @@ Since 2026-10-09 (`docs/desk-grid-audit-2026-10-09.md`):
 - The gainers list shows names **green on the day with 4 or 5 pillars**. The
   alert tiles show **one row per name with ×N** when it fired again — the
   repeat is the signal — and dim names not up 10 % at the alert. The High of
-  Day tile carries the **halts** from 09:30. The pillar check folds names with
-  no print yet, like the red ones.
+  Day tile carries the **halts** from 09:30. Maximized (E), the pillar board
+  is the full table, folding red names and names with no print yet.
 - The simulated Level 2 is deleted. A real book needs IBKR market-depth data
   (below, "Level 2").
 

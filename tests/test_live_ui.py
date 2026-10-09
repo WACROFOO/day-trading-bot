@@ -145,7 +145,8 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         assert stamp == 2, "price and time are separate elements, so neither wraps"
         states = pg.eval_on_selector_all(".tile-state", "els => els.map(e => e.textContent)")
         assert states and "REPLAY" not in states and set(states) <= {"LIVE", "STALE"}, states
-        assert pg.locator("[data-card=pillars-board] .pb-row:not(.head)").count() == 1
+        # the board's column is the verdict list (2026-10-09): one name judged
+        assert pg.text_content("[data-card=pillars-board] .vl-funnel").startswith("1 name judged")
         assert pg.locator(".slot [data-card=timeline]").count() == 0
         # audio alerts default on for a live desk; the legend opens and closes
         assert pg.get_attribute("#btnSound", "aria-pressed") == "true"
@@ -156,8 +157,8 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         pg.click("#legendClose")
         assert not pg.is_visible("#legend")
         # the board carries the market-data columns and the desk band note
-        heads = pg.eval_on_selector_all("[data-card=pillars-board] .pb-row.head span", "els => els.map(e => e.textContent)")
-        assert heads == ["Symbol", "Last", "Gain", "P", "G", "R", "F", "N", "Score"], "compact form in the column"
+        assert pg.eval_on_selector("#pillarsBoard", "e => e.classList.contains('vlist')"), "the verdict list in the column"
+        assert pg.locator("[data-card=pillars-board] .pb-row.head").count() == 0
         # the thresholds moved off the card head into the "?" tooltip
         assert pg.text_content("#pillarsBoardNote").strip() == "?"
         note = pg.get_attribute("#pillarsBoardNote", "title")
@@ -413,12 +414,14 @@ def test_the_verdict_card_renders_the_servers_cascade_not_its_own_score(desk_ser
         assert pg.evaluate("!!(window.__SESSION__.cards && window.__SESSION__.cards.AAA)"), \
             "the server must ship a decision card for every symbol"
         card = pg.evaluate("window.__SESSION__.cards.AAA")
-        banner = pg.text_content("#verdictCard .dc-verdict b")
+        banner = pg.text_content("#verdictCard .dc-answer .dc-word")
         assert banner == card["verdict"]["word"], (banner, card["verdict"])
         assert banner in {"REVIEW", "WATCH", "WAIT", "NO"}
         assert banner != "PASS"
-        assert "server card" in pg.get_attribute("#verdictCard .dc-verdict", "title")
-        assert pg.text_content("#verdictCard .dc-reason") == card["verdict"]["reason"]
+        assert "server card" in pg.get_attribute("#verdictCard .dc-answer", "title")
+        assert pg.text_content("#verdictCard .dc-answer .dc-reason") == card["verdict"]["reason"]
+        # the top bar says the same word for the desk (one name here)
+        assert pg.text_content("#dvWord") == ("NOTHING TO TRADE" if banner == "NO" else banner)
         # every gate the cascade could not pass is a lamp on the card, by state
         red = [l["label"] for l in card["lamps"] if l["state"] in ("FAIL", "UNKNOWN")]
         shown = pg.eval_on_selector_all("#verdictCard .dc-lamp .l", "els => els.map(e => e.textContent)")
@@ -540,7 +543,11 @@ def test_the_selected_name_gets_a_live_tape_end_to_end(desk_server):
         pg.wait_for_function("document.querySelector('#tapeTag').textContent === 'LIVE'", timeout=5000)
         marks = pg.eval_on_selector_all("#tapeCard .ts-row .ts-m", "els => els.map(e => e.textContent)")
         assert marks == ["▼", "▲"], marks
-        assert "at the ask" in pg.text_content(".dc-tape")
+        word = pg.evaluate("window.__SESSION__.cards.AAA.verdict.word")
+        if word == "NO":                                 # a NO card carries no tape line (2026-10-09)
+            assert pg.locator("#verdictCard .dc-tape").count() == 0
+        else:
+            assert "at the ask" in pg.text_content(".dc-tape")
         assert desk.health()["tape"]["symbol"] == "AAA"
         assert not errors, errors
         browser.close()
@@ -550,7 +557,8 @@ def test_the_page_asks_for_the_tape_only_when_it_needs_to(desk_server):
     """Review 2026-10-08: the first version posted a name the owner had
     already left, and never asked again for the selected one. Now a post for a
     name left is void; a render does not loop on a refused tape; a click
-    retries it; and a tape found on another name is asked for again."""
+    retries it; a tape on another window's name is left there until a click
+    or this tab coming into view; a restarted desk's empty tape is asked for."""
     pytest.importorskip("playwright.sync_api")
     from playwright.sync_api import sync_playwright
     port = desk_server["port"]
@@ -577,11 +585,32 @@ def test_the_page_asks_for_the_tape_only_when_it_needs_to(desk_server):
         pg.evaluate("() => window.__postFocus('AAA', true)")
         pg.wait_for_timeout(700)
         assert posts == ["AAA"], "a click retries it"
+        # Owner, 2026-10-09 05:30: two open tabs each re-posted their own name
+        # every 5 s and IBKR's 15-s pacing never let either start — FLYE sat on
+        # "starting shortly" under AIXI. A repaint no longer takes the tape back
+        # from another window; a click does, and so does a tab coming into view.
         pg.evaluate("s => window.__applyTape(s)", dict(live, symbol="ZZZ"))
         pg.wait_for_timeout(5200)
         pg.evaluate("() => window.__postFocus('AAA')")
         pg.wait_for_timeout(700)
-        assert posts == ["AAA", "AAA"], "a tape found on another name is asked for again"
+        assert posts == ["AAA"], "a repaint leaves another window's name alone"
+        pg.evaluate("() => window.__postFocus('AAA', true)")
+        pg.wait_for_timeout(700)
+        assert posts == ["AAA", "AAA"], "a click takes it back"
+        pg.evaluate("s => window.__applyTape(s)", dict(live, symbol="ZZZ"))
+        pg.evaluate("() => Object.defineProperty(document, 'visibilityState', {value: 'hidden', configurable: true})")
+        pg.evaluate("() => window.__postFocus('AAA', true)")
+        pg.wait_for_timeout(700)
+        assert posts == ["AAA", "AAA"], "a tab out of view never moves the tape"
+        pg.evaluate("""() => { Object.defineProperty(document, 'visibilityState', {value: 'visible', configurable: true});
+                               document.dispatchEvent(new Event('visibilitychange')); }""")
+        pg.wait_for_timeout(700)
+        assert posts == ["AAA", "AAA", "AAA"], "the tab that comes into view takes the tape"
+        pg.evaluate("s => window.__applyTape(s)", dict(live, symbol=None, state="OFF"))
+        pg.wait_for_timeout(5200)
+        pg.evaluate("() => window.__postFocus('AAA')")
+        pg.wait_for_timeout(700)
+        assert posts == ["AAA", "AAA", "AAA", "AAA"], "a desk with no tape at all (restarted) is asked again"
         browser.close()
 
 

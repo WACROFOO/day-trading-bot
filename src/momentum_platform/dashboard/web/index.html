@@ -27,6 +27,13 @@
       <div class="clock-meta"><span id="sessionBadge" class="badge">—</span><span id="frameCounter" class="muted tiny">—</span></div>
     </div>
 
+    <!-- The desk's answer (owner, 2026-10-09): is there anything to do now?
+         The best server verdict on the desk and the names carrying it. -->
+    <button class="desk-verdict none" id="deskVerdict" type="button">
+      <span class="dv-word" id="dvWord">—</span>
+      <span class="dv-text" id="dvText">reading the desk…</span>
+    </button>
+
     <div class="transport" role="group" aria-label="Replay transport">
       <button id="btnPlay" class="btn primary">▶ Play</button>
       <button class="btn" data-seek="open">09:30</button>
@@ -177,7 +184,7 @@
     </article>
     <article class="card" data-card="pillars-board">
       <div class="card-head"><span class="grip">⠿</span>
-        <span class="card-title">Five Pillars check</span>
+        <span class="card-title">Five Pillars · verdicts</span>
         <span class="note-btn" id="pillarsBoardNote" title="price · gain · RVOL · float · news">?</span>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="card-body pillars-board" id="pillarsBoard"></div>
@@ -212,8 +219,8 @@
 
     <article class="card verdict-card" data-card="verdict">
       <div class="card-head"><span class="grip">⠿</span>
-        <span class="card-title">Decision · order</span>
-        <span class="tag">server card</span>
+        <span class="card-title">Verdict · order</span>
+        <span class="tag" title="every word, reason, level and gate here is the server's: src/momentum_platform/decision_card.py">server card</span>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="card-body" id="verdictCard"></div>
       <div class="card-body sizing">
@@ -223,9 +230,10 @@
           <input id="riskInput" type="number" min="1" step="5" placeholder="e.g. 25"
                  aria-label="Your dollar risk per trade"></label>
         <div id="sizingOut"></div>
-        <label class="risk-input"><span>Float you verified (M)</span>
-          <input id="floatInput" type="number" min="0.1" step="0.5" placeholder="e.g. 4.6"
-                 aria-label="Float in millions, as you verified it"></label>
+        <details class="float-override"><summary>float you verified</summary>
+          <label class="risk-input"><span>Float (M) — the board's chips only; the bot reads its own source</span>
+            <input id="floatInput" type="number" min="0.1" step="0.5" placeholder="e.g. 4.6"
+                   aria-label="Float in millions, as you verified it"></label></details>
       </div>
     </article>
   </template>
@@ -244,7 +252,9 @@
       <div><h4>Sessions</h4>
         <p><b>PM</b> 04:00–09:30 ET. <b>RTH</b> 09:30–16:00 ET. <b>AH</b> 16:00–20:00 ET.</p></div>
       <div><h4>Verdict (server cascade)</h4>
-        <p><b>REJECT</b> a kill rule fired; no plan exists for the name. <b>WAIT</b> Layer 1 passed, a chart gate is red. <b>WATCH</b> a chart gate could not be computed yet. <b>REVIEW</b> every gate green — read the chart, tape and book yourself. <b>STALE</b> the feed is behind; no verdict. <b>LOG</b> outside the session window. Never an instruction to buy.</p></div>
+        <p><b>NO</b> a kill rule fired; no plan exists for the name — skip it. <b>WAIT</b> Layer 1 passed, a chart gate is red — hands off until the level. <b>WATCH</b> no setup yet, or a gate not computable yet — keep it on screen. <b>REVIEW</b> every gate green — read the chart, tape and book yourself. Never an instruction to buy.</p></div>
+      <div><h4>Desk verdict (top bar)</h4>
+        <p>The best word on the desk and the names carrying it, from the server cards; <b>NOTHING TO TRADE</b> when every name is NO. Click it to show the first name. Scrubbed back in time it says which minute the verdicts are from.</p></div>
       <div><h4>PASS · FAIL · UNKNOWN</h4>
         <p>Per gate: meets the threshold · does not · no value to judge, never counted as a pass.</p></div>
       <div><h4>Float</h4>
@@ -258,7 +268,7 @@
       <div><h4>Time &amp; Sales</h4>
         <p><b>▲</b> printed at or above the ask · <b>▼</b> at or below the bid · <b>·</b> between · <b>?</b> no quote of that moment (history). <b>Bold</b>: a big print, at least 10× this tape's median and never under 2,000 shares — this desk's Approximation. Facts, never a gate.</p></div>
       <div><h4>Header</h4>
-        <p><b>pm high</b> with its distance: more than 25% under it, the name is dead (gate 4). <b>52w ×N</b> only when the 52-week high is over 20× the price — split-adjusted history. The previous close is in the change's tooltip, the average volume in RVOL's. <b>print</b> shows only when the last print is old. <b>D</b> switches the 5-minute pane to the daily.</p></div>
+        <p>One line: the name, the price, the change and the desk's word on it. <b>HALTED</b> and <b>print</b> (the last print is old) show only when true. VWAP, HOD and the pre-market high are the chart lines; the pillars, the split flag and every gate are on the card; bid × ask is on the order. <b>D</b> switches the 5-minute pane to the daily.</p></div>
     </div>
     <p class="tiny muted">Clean-room approximations of the course scanners, for simulation and study. Nothing on this desk can place an order.</p>
   </div>
