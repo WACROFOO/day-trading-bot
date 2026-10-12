@@ -456,6 +456,10 @@ def _scripted_lead(monkeypatch, tmp_path, older_net):
     monkeypatch.setattr(P, "LOCAL_LEDGER", tmp_path / "ledger.jsonl")
     monkeypatch.setattr(P, "COMMITTED_LEDGER", tmp_path / "committed_ledger.jsonl")
     monkeypatch.setattr(P, "COMMITTED_REGISTRY", tmp_path / "committed_registry.jsonl")
+    monkeypatch.setattr(P, "FOLDER", tmp_path)
+    (tmp_path / "results").mkdir(exist_ok=True)
+    (tmp_path / "results" / "cost_check.json").write_text(json.dumps({"verdict": "holds", "smoke": False}))
+    monkeypatch.setattr(RUN, "real_quotes", lambda port: {"n": len(port), "resolved": len(port), "mean": 0.25})
     rc = RUN.main(["--lead", "S2W", "--no-fetch", "--draws", "0", "--out", str(tmp_path / "out")])
     return rc, calls
 
@@ -477,6 +481,8 @@ def test_both_gates_open_the_parents_holdout_once(tmp_path, monkeypatch, capsys)
     led = [json.loads(x) for x in (tmp_path / "ledger.jsonl").read_text().splitlines()]
     assert led[0]["family"] == "S2" and led[0]["hash"] == P.config_hash("S2", R.FAMILIES["S2W"].configs[0])
     assert led[-1]["family"] == "S2:result" and "holdout, through its lead S2W" in out
+    assert led[-1]["result"]["checks"]["8 real quotes keep the mean net > 0"] is True
+    assert "real quotes (criterion 8): mean net +0.250" in out
     with pytest.raises(P.HoldoutAlreadyOpened):                              # S2 can never open another config
         P.open_holdout("S2", R.FAMILIES["S2"].configs[0], 9, {}, {})
     assert not (ROOT / "research" / "strategy-candidates" / "results").exists()   # nothing escaped to the real paths
@@ -486,3 +492,157 @@ def test_a_lead_never_runs_in_the_main_run():
     from candidates import run as RUN
     with pytest.raises(SystemExit):
         RUN.main(["--families", "S2W"])
+
+
+# ------------------------------------------------------------------ the real-quote cost check (amendment 2026-10-12c)
+from datetime import datetime as _dt, timezone as _tz  # noqa: E402
+
+from candidates import quotes as Q  # noqa: E402
+
+
+def _iso(ms: int) -> str:
+    return _dt.fromtimestamp(ms / 1000, _tz.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+
+
+class FakeFetcher:
+    """tick_replay.Fetcher's surface: chunk() of valid prints, _get() of quotes, a request count."""
+
+    def __init__(self, prints=None, quotes=None):
+        self.prints = prints or {}          # {(sym, day): [(t_ms, price)]}
+        self.quotes = quotes or {}          # {sym: [(t_ms, bid, ask, bid_size, ask_size)]}
+        self.requests = 0
+
+    def chunk(self, sym, day, k, day0, sizes=False):
+        self.requests += 1
+        lo, hi = (day0 + k * 600) * 1000, (day0 + (k + 1) * 600) * 1000
+        rows = sorted((t, p) for t, p in self.prints.get((sym, day), []) if lo <= t < hi)
+        return np.array([r[0] for r in rows], np.int64), np.array([r[1] for r in rows], float)
+
+    def _get(self, path, params):
+        self.requests += 1
+        sym = path.split("/")[3]
+        start, end = Q._ms(params["start"]), Q._ms(params["end"])
+        q = sorted((x for x in self.quotes.get(sym, []) if start <= x[0] <= end), key=lambda x: -x[0])
+        return {"quotes": [{"t": _iso(x[0]), "bp": x[1], "ap": x[2], "bs": x[3], "as": x[4]} for x in q[:params["limit"]]]}
+
+
+def _q_trade(**kw):
+    day = "2022-03-01"
+    base = {"fam": "S2", "day": day, "sym": "AAA", "sig_min": minute(9, 34), "fill_min": minute(9, 35),
+            "entry": 13.00, "stop": 15.03, "comm": 0.05, "cand": [], "why": "flat", "exit_min": minute(15, 55)}
+    return base | kw
+
+
+def test_q_enters_at_the_bid_after_the_latency_and_covers_a_stop_at_the_ask(tmp_path):
+    tr = _q_trade(cand=[minute(9, 35), minute(9, 40)], why="stop", exit_min=minute(9, 35))
+    day = tr["day"]
+    t_order = Q.at_ms(day, minute(9, 35), 4)                              # the 5-minute bar's end + 4 s
+    assert Q.order_minute("S2", minute(9, 34)) == minute(9, 35) and Q.order_minute("S2", minute(9, 37)) == minute(9, 40)
+    trig_t = Q.at_ms(day, minute(9, 40), 30)
+    fx = FakeFetcher(
+        prints={("AAA", day): [(t_order - 1000, 15.50),                    # through the stop BEFORE the order: ignored
+                               (Q.at_ms(day, minute(9, 40), 10), 15.02),   # under the stop
+                               (trig_t, 15.05)]},                          # the first valid print through it
+        quotes={"AAA": [(t_order - 2000, 12.98, 13.02, 300, 400), (trig_t - 500, 15.00, 15.10, 100, 100)]})
+    q = Q.reprice(Q.Tape(fx, tmp_path), tr)
+    assert q["resolved"] and q["how"] == "stop" and q["t_out"] == trig_t
+    assert q["fill_in"] == pytest.approx(12.97) and q["fill_out"] == pytest.approx(15.11)   # max(print, ask) + 1c
+    assert q["q_gross"] == pytest.approx((12.97 - 15.11) / 2.03)
+    assert q["q_net"] == pytest.approx(q["q_gross"] - 0.05)
+    assert q["q0_net"] == pytest.approx((12.98 - 15.10) / 2.03 - 0.05) and q["age_in"] == 2000
+    n = fx.requests
+    assert Q.reprice(Q.Tape(fx, tmp_path), tr) == q and fx.requests - n == 2       # quotes come from the cache now
+
+
+def test_q_holds_to_1555_without_a_print_through_the_stop_and_never_guesses(tmp_path):
+    tr = _q_trade()
+    day = tr["day"]
+    t_order, t_flat = Q.at_ms(day, minute(9, 35), 4), Q.at_ms(day, minute(15, 55), 4)
+    fx = FakeFetcher(quotes={"AAA": [(t_order - 500, 12.90, 12.95, 100, 100), (t_flat - 1000, 12.50, 12.54, 100, 100)]})
+    q = Q.reprice(Q.Tape(fx, tmp_path / "a"), tr)
+    assert q["how"] == "flat" and q["fill_out"] == pytest.approx(12.55)
+    assert q["q_gross"] == pytest.approx((12.89 - 12.55) / 2.03)
+    stale = FakeFetcher(quotes={"AAA": [(t_order - 61_000, 12.90, 12.95, 100, 100)]})   # older than the 60-s lookback
+    assert Q.reprice(Q.Tape(stale, tmp_path / "b"), tr) == {"resolved": False, "unresolved": "no quote at the entry"}
+    crossed = FakeFetcher(quotes={"AAA": [(t_order - 500, 12.95, 12.90, 100, 100)]})    # a crossed book is no quote
+    assert Q.reprice(Q.Tape(crossed, tmp_path / "c"), tr)["resolved"] is False
+    with pytest.raises(ValueError):
+        Q.order_minute("L1", minute(9, 40))                                # longs are not re-priced here
+
+
+def _decide_rows(delta, n=300, noise=0.0, unresolved=0):
+    rows = []
+    for i in range(n):
+        q = ({"resolved": False, "unresolved": "no quote at the entry"} if i < unresolved else
+             {"resolved": True, "q_net": -0.1 + delta + noise * (1 if i % 2 else -1), "q0_net": 0.0})
+        rows.append({"day": f"2022-{1 + i % 12:02d}-{1 + i % 28:02d}", "net": -0.1, "q": q})
+    return rows
+
+
+def test_the_cost_check_rule_maps_delta_to_the_preregistered_branches():
+    from candidates import requote as RQ
+    assert RQ.decide(_decide_rows(0.0))["verdict"] == "holds"
+    assert RQ.decide(_decide_rows(+0.20))["verdict"] == "too_pessimistic"
+    assert RQ.decide(_decide_rows(-0.20))["verdict"] == "too_optimistic"
+    assert RQ.decide(_decide_rows(+0.04))["verdict"] == "holds"                     # inside the 0.05 band
+    assert RQ.decide(_decide_rows(+0.08, n=12, noise=0.9))["verdict"] == "holds"    # an interval holding 0
+    assert RQ.decide(_decide_rows(0.0, unresolved=40))["verdict"] == "inconclusive"  # 13 % unresolved
+    assert RQ.CHOSEN == ("S2", P.config_hash("S2", R.FAMILIES["S2"].configs[1]))   # G20·hod·close
+    assert [R.label(f, c) for f, c in RQ.configs()] == ["G20·hod·close", "G20·bar5·close", "G40·hod·close",
+                                                         "G40·bar5·close", "G20·hod·close·stop10-20"]
+
+
+def test_s2w_refuses_to_run_without_a_cost_check_verdict_that_allows_it(tmp_path, monkeypatch, capsys):
+    from candidates import run as RUN
+    monkeypatch.setattr(P, "FOLDER", tmp_path)
+    assert RUN.main(["--lead", "S2W", "--no-fetch"]) == 2
+    assert "requote.py first" in capsys.readouterr().out
+    (tmp_path / "results").mkdir()
+    for verdict in ("too_pessimistic", "inconclusive"):
+        (tmp_path / "results" / "cost_check.json").write_text(json.dumps({"verdict": verdict, "smoke": False}))
+        assert RUN.main(["--lead", "S2W", "--no-fetch"]) == 2
+        assert f"verdict is '{verdict}'" in capsys.readouterr().out
+    (tmp_path / "results" / "cost_check.json").write_text(json.dumps({"verdict": "holds", "smoke": True}))
+    assert P.cost_verdict() is None                                         # a plumbing run never counts
+
+
+def test_the_cost_check_runs_end_to_end_on_a_cached_day(tmp_path, monkeypatch, capsys):
+    from candidates import requote as RQ
+    sd = crowded(15.0)
+    day = "2022-03-01"
+    raw = [[f"{day}T{(9 * 60 + mm) // 60:02d}:{(9 * 60 + mm) % 60:02d}:00Z", o, h, l, c, v]
+           for mm, o, h, l, c, v in zip(sd.m, sd.o, sd.h, sd.l, sd.c, sd.v)]
+    cache = tmp_path / "history"
+    cache.mkdir()
+    (cache / f"{day}.json").write_text(json.dumps({"AAA": raw}))
+    row = {"prev_close": "10.0", "open_px": "13.30", "prior_dollar_volume_20d": "2000000"}
+    monkeypatch.setattr(D, "universe", lambda since=D.WINDOW[0], until=D.WINDOW[1], path=None:
+                        {day: {"AAA": row}} if since <= day <= until else {})
+    quotes = [(Q.at_ms(day, mm, 1), 12.88, 12.92, 500, 500) for mm in range(minute(9, 30), minute(16, 0))]
+    fx = FakeFetcher(quotes={"AAA": quotes})
+    monkeypatch.setattr(RQ, "make_tape", lambda: Q.Tape(fx, tmp_path / "quotes"))
+    monkeypatch.setattr(RQ, "VERDICT_FILE", tmp_path / "verdict.json")
+    rc = RQ.main(["--sample", "3", "--no-fetch", "--cache", str(cache), "--out", str(tmp_path / "out")])
+    out = capsys.readouterr().out
+    assert rc == 0 and "THE DECISION — S2 G20·hod·close" in out and "PLUMBING" in out
+    assert "S2W G20·hod·close·stop10-20" in out
+    assert not (tmp_path / "verdict.json").exists()                          # a sample never writes the verdict
+    saved = json.loads((tmp_path / "out" / "cost_check.json").read_text())
+    assert saved["smoke"] is True and saved["n"] == 1
+    # the one S2 trade: shorted at the 12.88 bid, held to 15:55, covered at the 12.92 ask; its plan's risk is
+    # 15.03 - 12.90 = 2.13 (the stop over the bar's open). Q and Q0 differ by exactly the two cents.
+    assert saved["q_net"] - saved["q0_net"] == pytest.approx(-0.02 / 2.13)
+    assert saved["q0_net"] - saved["proxy_net"] == pytest.approx(saved["delta"] + 0.02 / 2.13)
+
+
+def test_q_cancels_an_entry_whose_bid_is_already_through_the_stop(tmp_path):
+    from candidates import requote as RQ
+    tr = _q_trade(stop=13.03)
+    t_order = Q.at_ms(tr["day"], minute(9, 35), 4)
+    fx = FakeFetcher(quotes={"AAA": [(t_order - 500, 13.05, 13.08, 100, 100)]})
+    q = Q.reprice(Q.Tape(fx, tmp_path), tr)
+    assert q["resolved"] is False and q["cancelled"] is True
+    rows = _decide_rows(0.0, n=100)
+    rows[0]["q"] = q                                                       # a cancellation is not missing data
+    dec = RQ.decide(rows)
+    assert dec["cancelled"] == 1 and dec["n"] == 99 and dec["unresolved_share"] == 0 and dec["verdict"] == "holds"

@@ -168,8 +168,9 @@ def with_borrow(trades: list[dict], pct: float) -> list[float]:
     return [t["net"] - pct / 100.0 * t["entry"] / t["risk"] for t in trades]
 
 
-def adoption(port: list[dict], side: int, older: list[dict] | None) -> dict:
-    """Criteria 1-7 of PREREGISTRATION.md §6 on the holdout portfolio."""
+def adoption(port: list[dict], side: int, older: list[dict] | None, real: dict | None = None) -> dict:
+    """Criteria 1-7 of PREREGISTRATION.md §6 on the holdout portfolio; with `real` (the same
+    trades re-priced on quotes, amendment 2026-10-12c) also criterion 8."""
     v = [t["net"] for t in port]
     d = [t["day"] for t in port]
     n = len(v)
@@ -193,7 +194,25 @@ def adoption(port: list[dict], side: int, older: list[dict] | None) -> dict:
         f"6 break-even borrow >= {BORROW_MIN_PCT} % (shorts)": side > 0 or (be is not None and be >= BORROW_MIN_PCT),
         "7 2016-2020 mean net > 0": om is not None and om > 0,
     }
+    if real is not None:
+        checks["8 real quotes keep the mean net > 0"] = bool(real.get("n") and real["resolved"] >= 0.9 * real["n"]
+                                                             and real["mean"] is not None and real["mean"] > 0)
     return {"n": n, "mean": mean, "lb": lb, "alpha": a, "years": yr,
             "vs_random": (sum(x[1] for x in rd) / len(rd)) if rd else None, "vs_random_lb": lb_r,
-            "break_even_borrow": be, "older_mean": om, "older_n": len(older or []),
+            "break_even_borrow": be, "older_mean": om, "older_n": len(older or []), "real": real,
             "checks": checks, "adopted": all(checks.values())}
+
+
+COST_CHECK_FILES = ("results/cost_check.json", "cost_check.json")
+
+
+def cost_verdict() -> dict | None:
+    """The real-quote cost check's verdict (amendment 2026-10-12c): the Mac's local copy first,
+    then the committed one."""
+    for rel in COST_CHECK_FILES:
+        f = FOLDER / rel
+        if f.exists():
+            v = json.loads(f.read_text())
+            if not v.get("smoke"):
+                return v
+    return None

@@ -8,7 +8,8 @@ CODE     · scripts/candidates/ (README there) · tests/test_candidates.py
 DATA     · 2021-01-01 → 2026-08-21: 15,959 gapper symbol-days (candidate_days.csv), Alpaca SIP 1-minute
            bars — on the Mac; this container has no market-data keys and no bar cache
 STATUS   · run 2026-10-12T1350Z (the Mac): S1, S2 and L1 fail the 2023 gate, no holdout opened —
-           RESULTS.md · S2's lead (S2W, amendment 2026-10-12b) waits for one Mac run
+           RESULTS.md · NEXT: the real-quote cost check (amendment 2026-10-12c), then — only if its
+           verdict allows — S2's lead S2W (amendment 2026-10-12b)
 ```
 
 ## 1 · The board — every candidate, every combination counted
@@ -17,7 +18,8 @@ STATUS   · run 2026-10-12T1350Z (the Mac): S1, S2 and L1 fail the 2023 gate, no
 |---|---|---:|---|---|
 | **S1** | afternoon fade: short once the high of day is ≥ 30/60 min old and VWAP is lost | 6 | **closed** — run 2026-10-12T1350Z | ✗ fails the 2023 gate (−0.294 on 237); gross ≈ 0 in both periods, the fade is over by the setup |
 | **S2** | crowded-gapper fade: short the first red 5-minute bar of a ≥ 20/40 % gap on ≥ 2 M pre-market shares | 8 + 1 | gate failed — **its lead S2W is preregistered**, waits for the Mac | ✗ fails the 2023 gate (−0.089 on 106); held to the close the gross is positive in all 8 cells, costs and the year take it |
-| **S2W** | S2's lead: G20·hod·close kept only when the stop is 10-20 % above | (in S2) | amendment 2026-10-12b: 2016-2020 first, then S2's one opening | — |
+| **S2W** | S2's lead: G20·hod·close kept only when the stop is 10-20 % above | (in S2) | amendment 2026-10-12b — **waits for the cost check**: 2016-2020 first, then S2's one opening | — |
+| *cost check* | S2's close-exit trades re-priced on real Alpaca prints and quotes, train and 2023 | — | amendment 2026-10-12c — **next to run** | — |
 | **L1** | real-time new-high dip: the megaday entry without knowing the day is a megaday | 6 | **closed** — run 2026-10-12T1350Z | ✗ fails the 2023 gate (−0.135 on 107); the entry does what a random minute does |
 | **L2** | the #1 gainer's new-high break | 18 + 54 | **done before** — the edge hunt's F7 and F8 | ✗ F7 failed validation (net −0.270 R); F8's holdout −0.188 R over 592, every year negative. Not re-run: its holdout is read |
 | **L3** | reference: the bot's entry + stop ≥ 3 % + new-low exit + done after a loss | 1 | reference only, never opens the holdout | −0.371 train · −0.091 in 2023 |
@@ -31,7 +33,8 @@ hunt's 174 exit/sizing configurations (L3's origin).
 ```bash
 bash scripts/update.sh
 python3 scripts/candidates/run.py              # the five-year run (done 2026-10-12T1350Z)
-python3 scripts/candidates/run.py --lead S2W   # S2's lead: train/2023, then 2016-2020, then S2's holdout
+python3 scripts/candidates/requote.py          # NEXT: the real-quote cost check (amendment 2026-10-12c)
+python3 scripts/candidates/run.py --lead S2W   # only if the check's verdict allows it — the runner refuses otherwise
 ```
 
 The report prints on the screen: paste it back, or upload

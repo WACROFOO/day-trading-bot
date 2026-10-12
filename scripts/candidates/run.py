@@ -35,9 +35,10 @@ from candidates import sim as S  # noqa: E402
 from candidates.rules import FAMILIES, LEADS, OPENABLE, entries, label, random_window, signal_key  # noqa: E402
 
 SAMPLE_SEED = 20261012
+CAND_MAX = 120
 TRADE_COLS = ("fam", "hash", "label", "split", "day", "sym", "window", "sig_min", "fill_min", "exit_min", "entry",
               "fill", "stop", "risk_pct", "gross", "comm", "spread", "net", "why", "exit_px", "mfe", "mae", "rnd",
-              "gap", "dv20")
+              "gap", "dv20", "dv5", "sig_px")
 
 
 # ------------------------------------------------------------------ trades
@@ -49,11 +50,16 @@ def trade(fam: str, cfg: dict, sd: D.SymbolDay, e, window: str, costs: S.Costs, 
     w0, w1 = random_window(fam, window)
     rnd = (S.random_baseline(sd, F.side, w0, w1, risk / e.entry, cfg["exit"], F.flat, costs, draws,
                              S.seed_of(sd.day, sd.sym, e.k0)) if draws else None)
+    # for the real-quote check (quotes.py): the minutes whose bar traded through a short's stop, from the
+    # fill bar to the flat — a valid print through the stop can only be in one of them
+    cand = ([sd.m[k] for k in range(e.k0, len(sd)) if sd.m[k] < F.flat and sd.h[k] >= e.stop][:CAND_MAX]
+            if F.side < 0 else [])
     return {"fam": fam, "hash": P.config_hash(fam, cfg), "label": label(fam, cfg), "split": sd.split,
             "day": sd.day, "sym": sd.sym, "window": window, "sig_min": sd.m[e.sig_k], "fill_min": sd.m[e.k0],
             "exit_min": sd.m[ke], "entry": e.entry, "fill": e.fill, "stop": e.stop, "risk": risk,
             "risk_pct": 100.0 * risk / e.entry, "gross": r, "comm": cm, "spread": sp, "net": r - cm - sp,
-            "why": why, "exit_px": px, "mfe": mfe, "mae": mae, "rnd": rnd, "gap": sd.gap(), "dv20": sd.dv20}
+            "why": why, "exit_px": px, "mfe": mfe, "mae": mae, "rnd": rnd, "gap": sd.gap(), "dv20": sd.dv20,
+            "dv5": sd.dv5_before(e.k0), "sig_px": sd.c[e.sig_k], "cand": cand}
 
 
 def collect(gen, wanted: dict, costs: S.Costs, draws: int, total: int | None = None, tag: str = "") -> dict:
@@ -172,6 +178,10 @@ def holdout_lines(res: dict) -> list[str]:
            f"     {yrs} · trade − random {f3(a['vs_random'])} (lb {f3(a['vs_random_lb'])}) · "
            f"2016-2020 {f3(a['older_mean'])} ({a['older_n']}) · break-even borrow {c3(a['break_even_borrow'])} %",
            "     " + " · ".join(("✓ " if ok else "✗ ") + k for k, ok in a["checks"].items())]
+    if a.get("real") is not None:
+        rq = a["real"]
+        out.append(f"     real quotes (criterion 8): mean net {f3(rq.get('mean'))} on {rq.get('resolved', 0)} of "
+                   f"{rq.get('n', 0)} trades re-priced" + (f" — {rq['why']}" if rq.get("why") else ""))
     failed = [k.split(" ")[0] for k, ok in a["checks"].items() if not ok]
     out.append(" → PASSES every criterion — a shadow line and the owner's decision, never a switch" if a["adopted"]
                else f" → NOT ADOPTED (criteria {', '.join(failed)})")
@@ -201,12 +211,34 @@ def period_line(name: str, s: dict) -> str:
             f"{f3(s.get('vs_rnd')):>7} {pct(s['win']):>6} {s['mfe_med']:>7.2f}")
 
 
+def real_quotes(port: list[dict]) -> dict:
+    """Criterion 8 (amendment 2026-10-12c): the holdout portfolio's trades re-priced under Q."""
+    from candidates import quotes as Q
+    from candidates import requote as RQ
+    tape = RQ.make_tape()
+    if tape is None:
+        return {"n": len(port), "resolved": 0, "mean": None, "why": "no Alpaca keys"}
+    qs = [Q.reprice(tape, t) for t in port]
+    ok = [q["q_net"] for q in qs if q.get("resolved")]
+    return {"n": len(port), "resolved": len(ok), "mean": (sum(ok) / len(ok)) if ok else None}
+
+
 def run_lead(args, fam: str) -> int:
     F = FAMILIES[fam]
     parent, cfg = F.lead_of, F.configs[0]
     h = P.config_hash(parent, cfg)                      # registered and opened under the parent family
     key = (fam, P.config_hash(fam, cfg))
     smoke = args.source == "daily" or bool(args.sample)
+    if not smoke:                                       # amendment 2026-10-12c: the cost check decides first
+        v = P.cost_verdict()
+        if v is None:
+            print("The real-quote cost check has not run: python3 scripts/candidates/requote.py first "
+                  "(PREREGISTRATION.md, amendment 2026-10-12c). S2W waits for its verdict.")
+            return 2
+        if v["verdict"] not in ("holds", "too_optimistic"):
+            print(f"The cost check's verdict is '{v['verdict']}' (run {v.get('run')}): by amendment 2026-10-12c S2W "
+                  "does not run on its own.")
+            return 2
     run_id = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H%MZ") + f"-{fam.lower()}" + ("-smoke" if smoke else "")
     out_dir = Path(args.out) if args.out else P.RESULTS / run_id
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -250,7 +282,7 @@ def run_lead(args, fam: str) -> int:
                 got_h = collect(D.history_days(uni, hist, days["holdout"], cov), want, costs, args.draws,
                                 len(days["holdout"]), "holdout")
                 port = P.portfolio(got_h.get(key, []))
-                adopt = P.adoption(port, F.side, old)
+                adopt = P.adoption(port, F.side, old, real=real_quotes(port))
                 P.record_result(parent, adopt | {"hash": h, "lead": fam})
                 got[key].extend(got_h.get(key, []))
 

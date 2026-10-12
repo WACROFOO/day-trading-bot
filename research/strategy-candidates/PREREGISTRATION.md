@@ -270,3 +270,49 @@ is too close to zero on train to spend an opening on.
 * **What the opening costs.** After it, no S2 idea can be judged on 2024-2026 again — forward
   paper only.
 * **Run:** `python3 scripts/candidates/run.py --lead S2W` (the Mac).
+
+---
+
+## Amendment 2026-10-12c — the real-quote cost check, written before any quote is fetched
+
+**Why.** S2 fails on costs: 0.172 R a trade against +0.125 R gross on train (run
+2026-10-12T1350Z). Those costs come from a spread proxy fitted on *sampled desk fills*
+(`scripts/edge_hunt/calibrate.py`) — the desk's own long entries, never a short at 09:35-10:30
+nor a cover at 15:55. S2's one holdout opening must not be spent under an unmeasured cost.
+**So this check runs first, and S2W waits for its outcome** (the runner refuses `--lead S2W`
+until a verdict exists).
+
+**Sample.** Every trade of S2's four close-exit configurations and of S2W, train and 2023 —
+data already read. The four VWAP-exit configurations are left out: they lose before any cost
+on train (`research/strategy-candidates/RESULTS.md` §3), so no cost can make one the train choice.
+
+**Execution model Q (deciding)**, on Alpaca SIP prints and NBBO quotes:
+
+| | rule |
+|---|---|
+| order time | the decision moment + 4 s — the desk's measured plan→runner median is 3-4 s (`research/edge-hunt/PREREGISTRATION.md`, addendum 2026-10-02d); for S2 the decision moment is the end of the 5-minute bar |
+| entry | the short sale fills at the NBBO bid prevailing at the order time, minus 1 ¢ |
+| stop | triggered by the first valid print at or above the stop after the order (prints that set no last sale excluded, as `scripts/tick_replay.py`); filled at the higher of that print and the ask prevailing at it, plus 1 ¢ |
+| otherwise | covered at the ask prevailing at 15:55:04, plus 1 ¢ |
+| the rest | IBKR fixed commission both ways, the $40 / $2,000 sizing and R on the 1-minute plan's risk — as in the run it checks |
+| no data | a trade with no valid quote in the 60 s before an order is **unresolved**: counted, never filled at a guess |
+| cancelled | the bid at the order time already at or above the stop: not taken, as the rule cancels an open through the stop; counted apart, not as missing data |
+
+The cent mirrors the proxy model's. **Sensitivity Q0:** the same without it.
+
+**The decision, fixed now.** Δ = Q net − proxy net per trade, on the chosen configuration
+(S2 G20·hod·close), train + 2023, trade level, with its 95 % day-clustered interval:
+
+| outcome | rule | next |
+|---|---|---|
+| inconclusive | more than 10 % of those trades unresolved | no branch; the gap is reported |
+| the proxy holds | \|Δ̄\| ≤ 0.05 R, or the interval contains 0 | S2W runs as written, plus **criterion 8**: its holdout portfolio re-priced under Q keeps a positive mean net R |
+| the proxy is too pessimistic | Δ̄ > +0.05 R and the interval's lower end > 0 | Q becomes S2's cost model: S2 is chosen again on train under Q among the four close-exit configurations and S2W, gated on 2023, then 2016-2020, then S2's one opening with criteria 1-6 and 8, all under Q; S2W does not run on its own. The code for this branch is written only if the check lands here — the rule is fixed now |
+| the proxy is too optimistic | Δ̄ < −0.05 R and the interval's upper end < 0 | S2's failure stands, harder; S2W runs as written, plus criterion 8 |
+
+**Reported, deciding nothing:** the real and the proxy spread at entry and at exit; the entry
+fill against the bar's open; stop exits the prints do not confirm; Δ by price tier, entry time
+and recent dollar volume; quotes older than 10 s; our share count against the displayed size;
+every configuration's train and 2023 result under Q.
+
+**Run:** `python3 scripts/candidates/requote.py` (the Mac: bars cached, Alpaca keys).

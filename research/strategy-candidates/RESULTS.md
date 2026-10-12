@@ -137,3 +137,7 @@ and their 2024-2026 data stays unread. S1 and L1 are closed; L3 confirms that th
 long loses. S2 is the only one whose fade exists before costs. Its wide-stop lead is
 preregistered as S2W and waits for one Mac run, gated on 2016-2020 before it may open S2's
 holdout. Paper only.
+
+*Since, the same day:* S2's costs come from a proxy never fitted on its kind of trade, so a
+real-quote cost check now runs before S2W (amendment 2026-10-12c); its verdict decides which S2
+rule, if any, may use S2's one holdout opening.
