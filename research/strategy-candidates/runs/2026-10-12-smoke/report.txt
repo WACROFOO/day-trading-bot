@@ -1,0 +1,116 @@
+STRATEGY CANDIDATES · run 2026-10-12T1308Z-smoke · git 5f7117f · research/strategy-candidates/PREREGISTRATION.md
+SOURCE   daily · the exported desk days of research/daily/, 04:00-12:00 bars, prev close as exported
+! SMOKE — plumbing only, NOT evidence: nothing is opened and nothing enters the registry
+COVERAGE train 136 / 136 symbol-days with bars · valid 41 / 41 symbol-days with bars · the holdout is read only where a family opens it below
+COSTS    live: $40 risk, ≤ $2,000 a position, IBKR fixed both orders, half the proxy spread + 1c a marketable side; shorts before borrow (sweep in BORROW) · random baseline 20 entries a trade, same name-day
+TABLE    signals = trades before the one-position rule (train/valid) · n, net, gross, cost, vs rnd = the one-position portfolio, R a trade
+
+━━ S1 · afternoon fade · short · 6 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ A30·close                    21/7 │    12  -0.117  +0.053  0.170  -0.032 │     6  -0.384  -0.220
+ A30·fixed2                   21/7 │    12  -0.117  +0.053  0.170  -0.033 │     6  -0.384  -0.220
+ A30·vwap_reclaim             21/7 │    16  -0.238  -0.053  0.185  -0.037 │     7  -0.208  -0.049
+ A60·close                    17/6 │    10  -0.191  -0.006  0.185  -0.069 │     5  -0.242  -0.064
+ A60·fixed2                   17/6 │    10  -0.191  -0.006  0.185  -0.070 │     5  -0.242  -0.064
+ A60·vwap_reclaim             17/6 │    15  -0.314  -0.085  0.228  -0.038 │     6  -0.214  -0.045
+ → ✗ too few train trades (best 16 < 100): fails for lack of trades
+ WHY (train, A30·vwap_reclaim)  gross -0.053 − commission 0.051 − spread+1c 0.134 = net -0.238
+     win 12 % · avg win +0.254 · avg loss -0.308 · MFE median 0.07 R · reached +1 R 0 % (gave it all back —)
+     without the best 5 % -0.280 · beyond −1 R: 0 · worst -0.66 · exits: cross 81 % · end 19 %
+     random entries, same names -0.201 → trade − random -0.037 (95 % lower bound -0.110)
+ READING · the signal loses before costs (-0.053 R gross): no cost or exit change fixes it
+           random entries on the same names do as well (-0.037 R against them): the trigger adds nothing, the names carry the result (-0.201 R at random)
+ BORROW  no break-even: negative before any borrow (criterion 6 needs ≥ 0.5 %) · net with borrow at 0.0 / 0.25 / 0.5 / 1.0 / 2.0 % of price: -0.238 / -0.262 / -0.286 / -0.334 / -0.430
+ YEARS   train 2026 -0.238 (16) │ validation 2026 -0.208 (7)
+ WHERE   leads — slices positive on train (≥ 100) AND validation (≥ 30), hypotheses for the next round:
+   none
+
+━━ S2 · crowded-gapper fade · short · 8 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ G20·hod·vwap                 27/5 │    18  +0.015  +0.118  0.103  +0.064 │     4  -0.269  -0.169
+ G20·hod·close                27/5 │    13  -0.168  -0.040  0.128  +0.053 │     4  +0.115  +0.243
+ G20·bar5·vwap                34/6 │    23  -0.353  -0.089  0.264  -0.078 │     5  -0.180  -0.071
+ G20·bar5·close               34/6 │    14  -0.319  -0.085  0.234  +0.113 │     4  +0.390  +0.541
+ G40·hod·vwap                 18/2 │    14  +0.181  +0.287  0.106  +0.157 │     2  +0.632  +0.735
+ G40·hod·close                18/2 │    12  -0.387  -0.250  0.137  +0.014 │     2  +0.873  +0.994
+ G40·bar5·vwap                22/3 │    17  -0.206  +0.008  0.214  -0.020 │     3  +0.485  +0.591
+ G40·bar5·close               22/3 │    16  -0.760  -0.495  0.266  -0.082 │     3  +1.186  +1.324
+ → ✗ too few train trades (best 23 < 100): fails for lack of trades
+ WHY (train, G20·bar5·vwap)  gross -0.089 − commission 0.091 − spread+1c 0.173 = net -0.353
+     win 35 % · avg win +0.791 · avg loss -0.963 · MFE median 0.41 R · reached +1 R 22 % (gave it all back 60 %)
+     without the best 5 % -0.508 · beyond −1 R: 0 · worst -2.35 · exits: level 57 % · stop 43 %
+     random entries, same names -0.275 → trade − random -0.078 (95 % lower bound -0.433)
+ READING · the signal loses before costs (-0.089 R gross): no cost or exit change fixes it
+           random entries on the same names do as well (-0.078 R against them): the trigger adds nothing, the names carry the result (-0.275 R at random)
+ BORROW  no break-even: negative before any borrow (criterion 6 needs ≥ 0.5 %) · net with borrow at 0.0 / 0.25 / 0.5 / 1.0 / 2.0 % of price: -0.353 / -0.393 / -0.432 / -0.512 / -0.670
+ YEARS   train 2026 -0.353 (23) │ validation 2026 -0.180 (5)
+ WHERE   leads — slices positive on train (≥ 100) AND validation (≥ 30), hypotheses for the next round:
+   none
+
+━━ L1 · real-time new-high dip · long · 6 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ G30·trail1                   24/4 │    20  -0.438  -0.323  0.115  -0.380 │     4  +0.035  +0.137
+ G30·fixed2                   24/4 │    17  -0.395  -0.278  0.116  -0.081 │     3  +0.024  +0.131
+ G30·newlow                   24/4 │    23  -0.194  -0.071  0.123  -0.138 │     4  +0.142  +0.244
+ G50·trail1                   18/1 │    17  -0.392  -0.287  0.105  -0.428 │     1  +0.191  +0.300
+ G50·fixed2                   18/1 │    15  -0.385  -0.286  0.100  -0.179 │     1  +0.579  +0.688
+ G50·newlow                   18/1 │    18  -0.126  -0.022  0.104  -0.127 │     1  -0.159  -0.050
+ → ✗ too few train trades (best 23 < 100): fails for lack of trades
+ WHY (train, G30·newlow)  gross -0.071 − commission 0.051 − spread+1c 0.072 = net -0.194
+     win 22 % · avg win +0.295 · avg loss -0.330 · MFE median 0.13 R · reached +1 R 9 % (gave it all back 0 %)
+     without the best 5 % -0.242 · beyond −1 R: 0 · worst -0.84 · exits: newlow 100 %
+     random entries, same names -0.057 → trade − random -0.138 (95 % lower bound -0.251)
+ READING · the signal loses before costs (-0.071 R gross): no cost or exit change fixes it
+           random entries on the same names do as well (-0.138 R against them): the trigger adds nothing, the names carry the result (-0.057 R at random)
+ YEARS   train 2026 -0.194 (23) │ validation 2026 +0.142 (4)
+ WHERE   leads — slices positive on train (≥ 100) AND validation (≥ 30), hypotheses for the next round:
+   none
+
+━━ L3 · reference: live entry + stop >= 3 % + new-low exit + done after a loss · long · 1 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ live·3%·newlow·1loss        24/10 │    12  -0.513  -0.246  0.267  -0.467 │     5  -0.251  +0.042
+   pre-market  train -0.560 (9) · valid -0.251 (5) — FLATTERED: the universe knows the 09:30 open
+   regular     train -0.372 (3) · valid — (0)
+ WHY (train, live·3%·newlow·1loss)  gross -0.246 − commission 0.057 − spread+1c 0.210 = net -0.513
+     win 17 % · avg win +0.527 · avg loss -0.721 · MFE median 0.14 R · reached +1 R 25 % (gave it all back 0 %)
+     without the best 5 % -0.640 · beyond −1 R: 1 · worst -1.40 · exits: newlow 83 % · stop 17 %
+     random entries, same names -0.046 → trade − random -0.467 (95 % lower bound -0.985)
+ READING · the signal loses before costs (-0.246 R gross): no cost or exit change fixes it
+           random entries on the same names do as well (-0.467 R against them): the trigger adds nothing, the names carry the result (-0.046 R at random)
+ YEARS   train 2026 -0.513 (12) │ validation 2026 -0.251 (5)
+
+STATUS
+  S1  ✗ too few train trades (best 16 < 100): fails for lack of trades · holdout shut
+  S2  ✗ too few train trades (best 23 < 100): fails for lack of trades · holdout shut
+  L1  ✗ too few train trades (best 23 < 100): fails for lack of trades · holdout shut
+  L3  reference · train -0.513 (12) · validation -0.251 (5)
+
+REGISTRY (one line a configuration; the committed registry.jsonl is rebuilt from these)
+REG S1 64c3f8968afa A30·close tr 12 -0.117 +0.053 va 6 -0.384 -0.220
+REG S1 b642ae351527 A30·fixed2 tr 12 -0.117 +0.053 va 6 -0.384 -0.220
+REG S1 f75f263cebe1 A30·vwap_reclaim tr 16 -0.238 -0.053 va 7 -0.208 -0.049
+REG S1 7f2f2dd06e51 A60·close tr 10 -0.191 -0.006 va 5 -0.242 -0.064
+REG S1 105bd9b8cbe1 A60·fixed2 tr 10 -0.191 -0.006 va 5 -0.242 -0.064
+REG S1 255c2628b15f A60·vwap_reclaim tr 15 -0.314 -0.085 va 6 -0.214 -0.045
+REG S2 76ae582d3192 G20·hod·vwap tr 18 +0.015 +0.118 va 4 -0.269 -0.169
+REG S2 3ed3fb360dec G20·hod·close tr 13 -0.168 -0.040 va 4 +0.115 +0.243
+REG S2 ee93b4680366 G20·bar5·vwap tr 23 -0.353 -0.089 va 5 -0.180 -0.071
+REG S2 9723ed9d1e59 G20·bar5·close tr 14 -0.319 -0.085 va 4 +0.390 +0.541
+REG S2 5797f56360f2 G40·hod·vwap tr 14 +0.181 +0.287 va 2 +0.632 +0.735
+REG S2 1416bfb68b70 G40·hod·close tr 12 -0.387 -0.250 va 2 +0.873 +0.994
+REG S2 443d7196995c G40·bar5·vwap tr 17 -0.206 +0.008 va 3 +0.485 +0.591
+REG S2 f76e076783ae G40·bar5·close tr 16 -0.760 -0.495 va 3 +1.186 +1.324
+REG L1 70835544f5d3 G30·trail1 tr 20 -0.438 -0.323 va 4 +0.035 +0.137
+REG L1 9a91ca70820d G30·fixed2 tr 17 -0.395 -0.278 va 3 +0.024 +0.131
+REG L1 8beb7dbcb6d1 G30·newlow tr 23 -0.194 -0.071 va 4 +0.142 +0.244
+REG L1 2f35f55a510b G50·trail1 tr 17 -0.392 -0.287 va 1 +0.191 +0.300
+REG L1 b1ebd89d3680 G50·fixed2 tr 15 -0.385 -0.286 va 1 +0.579 +0.688
+REG L1 ff58a790ce64 G50·newlow tr 18 -0.126 -0.022 va 1 -0.159 -0.050
+REG L3 c74bf73d5b70 live·3%·newlow·1loss tr 12 -0.513 -0.246 va 5 -0.251 +0.042
+
+done in 3 s · files: research/strategy-candidates/runs/2026-10-12-smoke
+Paper only. Not testable here: Level 2, borrow availability and fees, locates, halts as such, the previous day's SSR, ten-second structure.

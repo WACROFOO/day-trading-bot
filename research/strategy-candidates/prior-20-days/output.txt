@@ -1,0 +1,43 @@
+SHORTS on the 20 exported days · mean R a trade, net of the live cost model (gross in brackets)
+  borrow, locate, SSR and margin are NOT in these numbers: real shorts only do worse
+
+  A mirror · every plan          fixed  sel -0.866 (-0.022) n= 748   hold -0.622 (+0.050) n=248   win 326/996   worst -4.00 R · 4 lost more than 1 R
+  A mirror · every plan          trail  sel -0.902 (+0.078) n= 748   hold -0.693 (+0.088) n=248   win 203/996   worst -4.00 R · 2 lost more than 1 R
+  A mirror · our live plans      fixed  sel -0.124 (+0.190) n=  58   hold -0.474 (-0.077) n= 26   win 31/84   worst -1.00 R · 0 lost more than 1 R
+  A mirror · our live plans      trail  sel -0.225 (+0.147) n=  58   hold -0.487 (-0.029) n= 26   win 27/84   worst -1.00 R · 0 lost more than 1 R
+  B back side · VWAP lost        fixed  sel -0.447 (+0.153) n= 106   hold -0.864 (-0.201) n= 32   win 51/138   worst -1.15 R · 1 lost more than 1 R
+  B back side · VWAP lost        trail  sel -0.568 (+0.148) n= 106   hold -0.888 (-0.143) n= 32   win 38/138   worst -1.15 R · 1 lost more than 1 R
+  C extension · 20 % over VWAP   fixed  sel -0.296 (+0.066) n=  21   hold -0.235 (+0.000) n=  3   win 9/24   worst -1.00 R · 0 lost more than 1 R
+  C extension · 20 % over VWAP   trail  sel -0.157 (+0.277) n=  21   hold -0.119 (+0.128) n=  3   win 9/24   worst -1.00 R · 0 lost more than 1 R
+
+  T · sell the 09:30 open, buy the 11:30 open, gappers >= 10 %, % of price
+    sel  n= 95  mean -1.70 % gross · -3.49 % after one spread · median +3.78 % · worst -206.86 % · fell 57/95
+    hold n= 26  mean +8.34 % gross · +6.57 % after one spread · median +6.17 % · worst -26.68 % · fell 19/26
+
+  for scale, the long bot on the same days (results.txt §C): ours as live -0.285 / -0.891 R a trade
+
+THE OWNER'S SHORT COMBINATION on the 20 exported days · mean R a trade net (gross)
+  in-sample, before borrow / locate / SSR; Level 2 not testable
+
+  ALL five       fixed  sel -0.710 (-0.296) n=  19   hold +0.523 (+0.803) n=  3   days 14
+  ALL five       trail  sel -0.615 (-0.105) n=  19   hold +0.401 (+0.783) n=  3   days 14
+  all but VW     fixed  sel -0.710 (-0.296) n=  19   hold +0.523 (+0.803) n=  3   days 14
+  all but VW     trail  sel -0.615 (-0.105) n=  19   hold +0.401 (+0.783) n=  3   days 14
+  all but MC     fixed  sel -0.819 (-0.377) n=  59   hold +0.237 (+0.509) n= 14   days 20
+  all but MC     trail  sel -0.713 (-0.220) n=  59   hold +0.009 (+0.395) n= 14   days 20
+  all but HD     fixed  sel -0.559 (-0.149) n=  92   hold -0.176 (+0.118) n= 25   days 20
+  all but HD     trail  sel -0.517 (-0.050) n=  92   hold -0.392 (-0.061) n= 25   days 20
+  all but HV     fixed  sel -0.731 (-0.219) n=  42   hold -0.033 (+0.441) n= 10   days 20
+  all but HV     trail  sel -0.681 (-0.089) n=  42   hold -0.478 (+0.136) n= 10   days 20
+  all but DP     fixed  sel -0.221 (+0.130) n=  34   hold +0.105 (+0.352) n=  4   days 17
+  all but DP     trail  sel -0.425 (+0.050) n=  34   hold +0.013 (+0.337) n=  4   days 17
+  VW alone       fixed  sel -0.948 (-0.214) n= 156   hold -0.812 (-0.186) n= 44   days 20
+  VW alone       trail  sel -1.053 (-0.203) n= 156   hold -0.854 (-0.158) n= 44   days 20
+  MC alone       fixed  sel -1.058 (-0.386) n= 152   hold -0.189 (+0.336) n= 45   days 20
+  MC alone       trail  sel -0.962 (-0.208) n= 152   hold -0.518 (+0.104) n= 45   days 20
+  HD alone       fixed  sel -1.074 (-0.408) n= 104   hold -0.497 (+0.002) n= 27   days 20
+  HD alone       trail  sel -1.165 (-0.394) n= 104   hold -0.628 (-0.072) n= 27   days 20
+  HV alone       fixed  sel -0.762 (-0.190) n= 152   hold -0.918 (-0.315) n= 44   days 20
+  HV alone       trail  sel -0.706 (-0.068) n= 152   hold -0.886 (-0.237) n= 44   days 20
+  DP alone       fixed  sel -0.912 (-0.148) n= 142   hold -0.816 (-0.205) n= 39   days 20
+  DP alone       trail  sel -0.980 (-0.115) n= 142   hold -0.745 (-0.070) n= 39   days 20
