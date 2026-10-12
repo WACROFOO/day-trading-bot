@@ -4,6 +4,7 @@
     python3 scripts/candidates/run.py                  # the preregistered run (the Mac: bars + keys)
     python3 scripts/candidates/run.py --source daily   # smoke test on research/daily: plumbing, not evidence
     python3 scripts/candidates/run.py --sample 30      # plumbing on 30 sessions a split; opens nothing
+    python3 scripts/candidates/run.py --lead S2W       # a lead, by its amendment's gates (2026-10-12b)
 
 The report goes to stdout (paste it back); progress goes to stderr. Files go to
 `research/strategy-candidates/results/<run>/` — git-ignored, so `scripts/update.sh` leaves
@@ -31,7 +32,7 @@ from candidates import data as D  # noqa: E402
 from candidates import diagnose as G  # noqa: E402
 from candidates import protocol as P  # noqa: E402
 from candidates import sim as S  # noqa: E402
-from candidates.rules import FAMILIES, OPENABLE, entries, label, random_window, signal_key  # noqa: E402
+from candidates.rules import FAMILIES, LEADS, OPENABLE, entries, label, random_window, signal_key  # noqa: E402
 
 SAMPLE_SEED = 20261012
 TRADE_COLS = ("fam", "hash", "label", "split", "day", "sym", "window", "sig_min", "fill_min", "exit_min", "entry",
@@ -177,6 +178,148 @@ def holdout_lines(res: dict) -> list[str]:
     return out
 
 
+# ------------------------------------------------------------------ a lead (amendment 2026-10-12b)
+def lead_gates(s_tr: dict, s_va: dict, s_old: dict | None) -> tuple[bool, str, bool | None, str]:
+    """Gate 1: the rule positive on train AND validation, >= MIN_VALID trades each. Gate 2:
+    2016-2020 positive, >= MIN_VALID trades. (None, "") for gate 2 when it was not read."""
+    n_tr, n_va = s_tr.get("n", 0), s_va.get("n", 0)
+    ok1 = n_tr >= P.MIN_VALID and n_va >= P.MIN_VALID and s_tr["net"] > 0 and s_va["net"] > 0
+    why1 = (f"train {f3(s_tr.get('net'))} on {n_tr} · validation {f3(s_va.get('net'))} on {n_va}"
+            + ("" if ok1 else f" — needs both > 0 with ≥ {P.MIN_VALID} trades"))
+    if s_old is None:
+        return ok1, why1, None, ""
+    n_o = s_old.get("n", 0)
+    ok2 = n_o >= P.MIN_VALID and s_old["net"] > 0
+    why2 = f"2016-2020 {f3(s_old.get('net'))} on {n_o}" + ("" if ok2 else f" — needs > 0 with ≥ {P.MIN_VALID} trades")
+    return ok1, why1, ok2, why2
+
+
+def period_line(name: str, s: dict) -> str:
+    if not s.get("n"):
+        return f" {name:<22}{0:>6}  —"
+    return (f" {name:<22}{s['n']:>6} {f3(s['net']):>7} {f3(s['gross']):>7} {c3(s['comm'] + s['spread']):>6} "
+            f"{f3(s.get('vs_rnd')):>7} {pct(s['win']):>6} {s['mfe_med']:>7.2f}")
+
+
+def run_lead(args, fam: str) -> int:
+    F = FAMILIES[fam]
+    parent, cfg = F.lead_of, F.configs[0]
+    h = P.config_hash(parent, cfg)                      # registered and opened under the parent family
+    key = (fam, P.config_hash(fam, cfg))
+    smoke = args.source == "daily" or bool(args.sample)
+    run_id = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H%MZ") + f"-{fam.lower()}" + ("-smoke" if smoke else "")
+    out_dir = Path(args.out) if args.out else P.RESULTS / run_id
+    out_dir.mkdir(parents=True, exist_ok=True)
+    costs, cov, t0 = S.Costs(), {}, time.monotonic()
+    want = {fam: [cfg]}
+    if args.source == "history":
+        uni = D.universe()
+        days = {sp: sorted(d for d in uni if D.split_of(d) == sp) for sp in ("train", "valid", "holdout")}
+        if args.sample:
+            rnd = random.Random(SAMPLE_SEED)
+            days = {sp: sorted(rnd.sample(v, min(args.sample, len(v)))) for sp, v in days.items()}
+        hist = D.History(Path(args.cache), fetch=not args.no_fetch)
+        tv = days["train"] + days["valid"]
+        got = collect(D.history_days(uni, hist, tv, cov), want, costs, args.draws, len(tv), "train+valid")
+        source = f"history · Alpaca SIP 1-minute bars, {args.cache} (fetch {'on' if hist.client else 'off'})"
+    else:
+        got = collect(D.daily_days(cov), want, costs, args.draws, None, "daily")
+        source = "daily · the exported desk days of research/daily/ — smoke"
+    if sum(c[1] for c in cov.values()) == 0:
+        print("no symbol-day had bars: run where data/cache/history exists, or with Alpaca keys in .env")
+        return 2
+    ts = got.get(key, [])
+    tr = P.portfolio([t for t in ts if t["split"] == "train"])
+    va = P.portfolio([t for t in ts if t["split"] == "valid"])
+    s_tr, s_va = G.stats(tr), G.stats(va)
+    ok1, why1, _, _ = lead_gates(s_tr, s_va, None)
+    old, s_old, ok2, why2, adopt, led = [], None, None, "", None, None
+    if ok1 and not smoke:
+        uni_old = D.universe(*D.OLDER)
+        got_o = collect(D.history_days(uni_old, hist, None, cov), want, costs, 0, len(uni_old), "2016-2020")
+        old = P.portfolio(got_o.get(key, []))
+        s_old = G.stats(old)
+        _, _, ok2, why2 = lead_gates(s_tr, s_va, s_old)
+        got.setdefault(key, []).extend(got_o.get(key, []))
+        if ok2:
+            try:
+                led = P.open_holdout(parent, cfg, P.n_configs(parent) + 1, G.compact(s_tr), G.compact(s_va))
+            except P.HoldoutAlreadyOpened as exc:
+                why2 += f" · ✗ {exc}"
+            if led is not None:
+                got_h = collect(D.history_days(uni, hist, days["holdout"], cov), want, costs, args.draws,
+                                len(days["holdout"]), "holdout")
+                port = P.portfolio(got_h.get(key, []))
+                adopt = P.adoption(port, F.side, old)
+                P.record_result(parent, adopt | {"hash": h, "lead": fam})
+                got[key].extend(got_h.get(key, []))
+
+    rep = [f"STRATEGY CANDIDATES · LEAD {fam} · run {run_id} · git {P.head()} · "
+           "research/strategy-candidates/PREREGISTRATION.md, amendment 2026-10-12b",
+           f"SOURCE   {source}"]
+    if smoke:
+        rep.append("! SMOKE — plumbing only, NOT evidence: nothing is opened and nothing enters the registry")
+    rep += ["COVERAGE " + " · ".join(f"{sp} {c[1]:,} / {c[0]:,} symbol-days with bars" for sp, c in sorted(cov.items())),
+            "COSTS    live: $40 risk, ≤ $2,000 a position, IBKR fixed both orders, half the proxy spread + 1c a "
+            f"marketable side; borrow not charged (BORROW below) · random baseline {args.draws} entries a trade",
+            f"RULE     {F.name} — one configuration, registered under {parent}",
+            "",
+            f" {'period':<22}{'n':>6} {'net':>7} {'gross':>7} {'cost':>6} {'vs rnd':>7} {'win':>6} {'MFE med':>7}",
+            period_line("train 2021-2022", s_tr), period_line("validation 2023", s_va)]
+    if s_old is not None:
+        rep.append(period_line("2016-2020 (gate 2)", s_old))
+    rep.append(f" GATE 1  {'✓' if ok1 else '✗'} {why1}")
+    if ok2 is not None:
+        rep.append(f" GATE 2  {'✓' if ok2 else '✗'} {why2}")
+    if adopt is None:
+        rep.append(" HOLDOUT shut — " + ("a gate failed" if ok1 is False or ok2 is False
+                                         else "smoke run" if smoke else "the opening was refused"))
+    row = {"family": parent, "hash": h, "config": cfg, "label": label(fam, cfg), "lead": fam, "tr": tr, "va": va,
+           "train": s_tr, "valid": s_va, "signals": (len([t for t in ts if t["split"] == "train"]),
+                                                     len([t for t in ts if t["split"] == "valid"]))}
+    rep += why_block(fam, row)
+    if adopt is not None:
+        rep += ["", f"━━ {parent} · holdout, through its lead {fam} ━━"] + holdout_lines(
+            {"label": row["label"], "ledger": led, "adoption": adopt})
+    reg = {"family": parent, "hash": h, "config": cfg, "label": row["label"], "lead": fam, "run": run_id,
+           "git": P.head(), "source": args.source, "smoke": smoke, "utc": P.utc_now(),
+           "train": G.compact(s_tr), "valid": G.compact(s_va), "older": G.compact(s_old) if s_old else None,
+           "gate1": ok1, "gate2": ok2, "holdout": adopt}
+    P.register([reg], out_dir / "registry.jsonl")
+    if not smoke:
+        P.register([reg], P.LOCAL_REGISTRY)
+    t, v = reg["train"], reg["valid"]
+    o = reg["older"] or {}
+    rep += ["", "REGISTRY (one line; the committed registry.jsonl is rebuilt from it)",
+            f"REG {parent} {h} {row['label']} lead {fam} tr {t.get('n', 0)} {f3(t.get('net'))} {f3(t.get('gross'))} "
+            f"va {v.get('n', 0)} {f3(v.get('net'))} {f3(v.get('gross'))} old {o.get('n', 0)} {f3(o.get('net'))} "
+            f"{f3(o.get('gross'))}" + (f" holdout {adopt['n']} {f3(adopt['mean'])} "
+                                       f"{'ADOPTED' if adopt['adopted'] else 'not adopted'}" if adopt else ""),
+            "", f"done in {time.monotonic() - t0:.0f} s · files: {_shown(out_dir)}",
+            "Paper only. Not testable here: Level 2, borrow availability and fees, locates, halts as such, "
+            "the previous day's SSR, ten-second structure."]
+    _write(out_dir, rep, {"lead": fam, "registry": reg}, got)
+    return 0
+
+
+def _shown(out_dir: Path):
+    p = out_dir.resolve()
+    return p.relative_to(ROOT) if p.is_relative_to(ROOT) else p
+
+
+def _write(out_dir: Path, rep: list[str], summary: dict, got: dict) -> None:
+    text = "\n".join(rep)
+    print(text)
+    (out_dir / "report.txt").write_text(text + "\n")
+    (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, default=str))
+    with gzip.open(out_dir / "trades.csv.gz", "wt", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=TRADE_COLS, extrasaction="ignore")
+        w.writeheader()
+        for ts in got.values():
+            for t in ts:
+                w.writerow({k: (round(x, 5) if isinstance(x, float) else x) for k, x in t.items()})
+
+
 # ------------------------------------------------------------------ main
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -187,12 +330,15 @@ def main(argv=None) -> int:
     ap.add_argument("--draws", type=int, default=20, help="random entries a trade (preregistered: 20)")
     ap.add_argument("--sample", type=int, help="plumbing: a seeded sample of N sessions a split; opens nothing")
     ap.add_argument("--out", help="results folder (default research/strategy-candidates/results/<run>)")
+    ap.add_argument("--lead", choices=LEADS, help="test a lead by its amendment's gates, alone")
     args = ap.parse_args(argv)
 
+    if args.lead:
+        return run_lead(args, args.lead)
     fams = [f.strip() for f in args.families.split(",") if f.strip()]
     for f in fams:
-        if f not in FAMILIES:
-            ap.error(f"unknown family {f} (S1, S2, L1, L3; L2 is not re-run, see the preregistration)")
+        if f not in FAMILIES or f in LEADS:
+            ap.error(f"unknown family {f} (S1, S2, L1, L3; L2 is not re-run; a lead runs only with --lead)")
     smoke = args.source == "daily" or bool(args.sample)
     run_id = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H%MZ") + ("-smoke" if smoke else "")
     out_dir = Path(args.out) if args.out else P.RESULTS / run_id
@@ -321,22 +467,10 @@ def main(argv=None) -> int:
         rep.append(f"REG {r['family']} {r['hash']} {r['label']} tr {t.get('n', 0)} {f3(t.get('net'))} "
                    f"{f3(t.get('gross'))} va {v.get('n', 0)} {f3(v.get('net'))} {f3(v.get('gross'))}"
                    + (" chosen" if r["chosen"] else ""))
-    shown = out_dir.resolve()
-    shown = shown.relative_to(ROOT) if shown.is_relative_to(ROOT) else shown
-    rep += ["", f"done in {time.monotonic() - t0:.0f} s · files: {shown}",
+    rep += ["", f"done in {time.monotonic() - t0:.0f} s · files: {_shown(out_dir)}",
             "Paper only. Not testable here: Level 2, borrow availability and fees, locates, halts as such, "
             "the previous day's SSR, ten-second structure."]
-
-    text = "\n".join(rep)
-    print(text)
-    (out_dir / "report.txt").write_text(text + "\n")
-    (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, default=str))
-    with gzip.open(out_dir / "trades.csv.gz", "wt", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=TRADE_COLS, extrasaction="ignore")
-        w.writeheader()
-        for ts in got.values():
-            for t in ts:
-                w.writerow({k: (round(x, 5) if isinstance(x, float) else x) for k, x in t.items()})
+    _write(out_dir, rep, summary, got)
     return 0
 
 

@@ -246,3 +246,27 @@ family's holdout only if that family never opened it, otherwise on forward paper
 NOTHING MEASURED YET. No candidate is a trading rule. Not testable here: Level 2, borrow,
 locates, halts, the previous day's SSR, ten-second structure. Paper only.
 ```
+
+---
+
+## Amendment 2026-10-12b — S2's lead as a rule (S2W), written before any run of it
+
+Written after reading run 2026-10-12T1350Z
+(`research/strategy-candidates/runs/2026-10-12T1350Z/report.txt`) and before S2W has run
+anywhere. Its only source is that report's lead line for S2 G20·hod·close: *stop% 10-20 —
+train +0.043 (104) | valid +0.302 (41)*. The other lead (*time 09:30-10 — train +0.002 (210)*)
+is too close to zero on train to spend an opening on.
+
+| | rule |
+|---|---|
+| S2W | S2 G20·hod·close exactly (gap ≥ 20 %, ≥ 2 M pre-market shares, the first red 5-minute bar above VWAP, short at the next open, stop at the high of day + 1 ¢, cover at 15:55), its trade **kept only when the stop is 10-20 % above the 5-minute close**; otherwise that symbol-day is skipped — the slice the lead was read on. One configuration. Borrow not charged |
+| gate 1 | the rule itself, one position at a time, positive net on train **and** on validation, ≥ 30 trades in each. It was read there as a slice, so this checks consistency; it is not evidence |
+| gate 2 | **2016-2020, never read for any S2 rule:** positive net, ≥ 30 trades. It replaces criterion 7 and is read *before* the holdout, so a failure keeps the holdout shut |
+| holdout | only behind gates 1 and 2: **S2's one opening**, criteria 1-6 of §6, α unchanged (0.83 %, three families allowed to open) |
+
+* **Counting.** S2's family becomes 9 configurations. The leads came from many more slices (six
+  dimensions × every bucket × 8 configurations); gate 2 and the corrected bound guard against
+  that, not the count.
+* **What the opening costs.** After it, no S2 idea can be judged on 2024-2026 again — forward
+  paper only.
+* **Run:** `python3 scripts/candidates/run.py --lead S2W` (the Mac).

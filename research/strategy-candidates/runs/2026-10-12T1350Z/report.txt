@@ -1,0 +1,114 @@
+STRATEGY CANDIDATES · run 2026-10-12T1350Z · git 7163c35 · research/strategy-candidates/PREREGISTRATION.md
+SOURCE   history · Alpaca SIP 1-minute bars, /Users/ayman.benharara/day-trading-bot/data/cache/history (fetch on) · universe candidate_days.csv 2021-01-01 → 2026-08-21
+COVERAGE train 4,155 / 4,790 symbol-days with bars · valid 1,609 / 1,811 symbol-days with bars · the holdout is read only where a family opens it below
+COSTS    live: $40 risk, ≤ $2,000 a position, IBKR fixed both orders, half the proxy spread + 1c a marketable side; shorts before borrow (sweep in BORROW) · random baseline 20 entries a trade, same name-day
+TABLE    signals = trades before the one-position rule (train/valid) · n, net, gross, cost, vs rnd = the one-position portfolio, R a trade
+
+━━ S1 · afternoon fade · short · 6 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ A30·close                1774/702 │   525  -0.225  -0.018  0.207  +0.038 │   247  -0.291  -0.057
+ A30·fixed2               1774/702 │   531  -0.225  -0.022  0.203  +0.030 │   249  -0.280  -0.051
+ A30·vwap_reclaim         1774/702 │  1114  -0.217  -0.005  0.211  +0.055 │   486  -0.232  +0.001
+ A60·close                1587/605 │   493  -0.180  +0.035  0.215  +0.077 │   237  -0.294  -0.063
+ A60·fixed2               1587/605 │   501  -0.204  -0.002  0.202  +0.048 │   240  -0.282  -0.056
+ A60·vwap_reclaim         1587/605 │  1062  -0.215  +0.008  0.222  +0.062 │   436  -0.233  +0.004
+ → chosen A60·close (best train net among n ≥ 100) · ✗ validation -0.294 R on 237: gate not met
+ WHY (train, A60·close)  gross +0.035 − commission 0.053 − spread+1c 0.162 = net -0.180
+     win 43 % · avg win +0.582 · avg loss -0.761 · MFE median 0.47 R · reached +1 R 21 % (gave it all back 7 %)
+     without the best 5 % -0.288 · beyond −1 R: 5 · worst -2.05 · exits: flat 73 % · stop 27 % · end 0 %
+     random entries, same names -0.258 → trade − random +0.077 (95 % lower bound +0.005)
+ READING · costs take it: +0.035 R gross against 0.215 R of costs (commission 0.053, spread + 1c 0.162); the levers are cost per R: wider stops, fewer orders, regular hours, higher-priced names
+ BORROW  no break-even: negative before any borrow (criterion 6 needs ≥ 0.5 %) · net with borrow at 0.0 / 0.25 / 0.5 / 1.0 / 2.0 % of price: -0.180 / -0.215 / -0.250 / -0.320 / -0.459
+ YEARS   train 2021 -0.195 (265) · 2022 -0.164 (228) │ validation 2023 -0.294 (237)
+ WHERE   leads — slices positive on train (≥ 100) AND validation (≥ 30), hypotheses for the next round:
+   none
+
+━━ S2 · crowded-gapper fade · short · 8 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ G20·hod·vwap              362/113 │   341  -0.167  -0.038  0.128  -0.023 │   111  -0.165  -0.038
+ G20·hod·close             362/113 │   272  -0.047  +0.125  0.172  +0.101 │   106  -0.089  +0.075
+ G20·bar5·vwap             374/109 │   348  -0.258  -0.075  0.183  -0.063 │   107  -0.123  +0.074
+ G20·bar5·close            374/109 │   293  -0.145  +0.096  0.241  +0.079 │   102  +0.214  +0.457
+ G40·hod·vwap               170/53 │   167  -0.167  -0.049  0.118  -0.036 │    52  -0.029  +0.084
+ G40·hod·close              170/53 │   151  -0.135  +0.022  0.156  +0.053 │    51  +0.360  +0.509
+ G40·bar5·vwap              178/55 │   173  -0.241  -0.089  0.152  -0.063 │    54  +0.066  +0.221
+ G40·bar5·close             178/55 │   157  -0.169  +0.030  0.198  +0.038 │    53  +0.864  +1.063
+ → chosen G20·hod·close (best train net among n ≥ 100) · ✗ validation -0.089 R on 106: gate not met
+ WHY (train, G20·hod·close)  gross +0.125 − commission 0.052 − spread+1c 0.120 = net -0.047
+     win 36 % · avg win +1.688 · avg loss -1.040 · MFE median 0.95 R · reached +1 R 47 % (gave it all back 26 %)
+     without the best 5 % -0.249 · beyond −1 R: 5 · worst -2.90 · exits: stop 53 % · flat 47 %
+     random entries, same names -0.148 → trade − random +0.101 (95 % lower bound -0.035)
+ READING · costs take it: +0.125 R gross against 0.172 R of costs (commission 0.052, spread + 1c 0.120); the levers are cost per R: wider stops, fewer orders, regular hours, higher-priced names
+ BORROW  no break-even: negative before any borrow (criterion 6 needs ≥ 0.5 %) · net with borrow at 0.0 / 0.25 / 0.5 / 1.0 / 2.0 % of price: -0.047 / -0.080 / -0.114 / -0.181 / -0.315
+ YEARS   train 2021 +0.026 (168) · 2022 -0.165 (104) │ validation 2023 -0.089 (106)
+ WHERE   leads — slices positive on train (≥ 100) AND validation (≥ 30), hypotheses for the next round:
+   G20·hod·close          stop% 10-20     train +0.043 (104) | valid +0.302 (41)
+   G20·hod·close          time 09:30-10  train +0.002 (210) | valid +0.060 (76)
+
+━━ L1 · real-time new-high dip · long · 6 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ G30·trail1                491/211 │   372  -0.182  -0.031  0.150  -0.229 │   163  -0.070  +0.099
+ G30·fixed2                491/211 │   337  -0.194  -0.058  0.136  -0.257 │   154  -0.117  +0.039
+ G30·newlow                491/211 │   465  -0.099  +0.056  0.155  +0.014 │   200  -0.158  +0.009
+ G50·trail1                279/107 │   241  -0.170  -0.036  0.135  -0.278 │   101  -0.092  +0.048
+ G50·fixed2                279/107 │   226  -0.177  -0.054  0.123  -0.299 │    96  -0.120  +0.007
+ G50·newlow                279/107 │   277  -0.087  +0.048  0.135  -0.004 │   107  -0.135  +0.003
+ → chosen G50·newlow (best train net among n ≥ 100) · ✗ validation -0.135 R on 107: gate not met
+ WHY (train, G50·newlow)  gross +0.048 − commission 0.052 − spread+1c 0.084 = net -0.087
+     win 22 % · avg win +0.681 · avg loss -0.300 · MFE median 0.21 R · reached +1 R 12 % (gave it all back 3 %)
+     without the best 5 % -0.202 · beyond −1 R: 0 · worst -1.18 · exits: newlow 99 % · stop 1 %
+     random entries, same names -0.083 → trade − random -0.004 (95 % lower bound -0.079)
+ READING · costs take it: +0.048 R gross against 0.135 R of costs (commission 0.052, spread + 1c 0.084); the levers are cost per R: wider stops, fewer orders, regular hours, higher-priced names
+           random entries on the same names do as well (-0.004 R against them): the trigger adds nothing, the names carry the result (-0.083 R at random)
+ YEARS   train 2021 -0.146 (171) · 2022 +0.007 (106) │ validation 2023 -0.135 (107)
+ WHERE   leads — slices positive on train (≥ 100) AND validation (≥ 30), hypotheses for the next round:
+   none
+
+━━ L3 · reference: live entry + stop >= 3 % + new-low exit + done after a loss · long · 1 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ live·3%·newlow·1loss      498/216 │   281  -0.371  -0.036  0.335  -0.088 │   143  -0.091  +0.217
+   pre-market  train -0.444 (131) · valid -0.355 (69) — FLATTERED: the universe knows the 09:30 open
+   regular     train -0.308 (150) · valid +0.155 (74)
+ WHY (train, live·3%·newlow·1loss)  gross -0.036 − commission 0.071 − spread+1c 0.263 = net -0.371
+     win 22 % · avg win +1.087 · avg loss -0.784 · MFE median 0.25 R · reached +1 R 27 % (gave it all back 8 %)
+     without the best 5 % -0.542 · beyond −1 R: 11 · worst -1.66 · exits: newlow 88 % · stop 12 %
+     random entries, same names -0.283 → trade − random -0.088 (95 % lower bound -0.206)
+ READING · the signal loses before costs (-0.036 R gross): no cost or exit change fixes it
+           random entries on the same names do as well (-0.088 R against them): the trigger adds nothing, the names carry the result (-0.283 R at random)
+ YEARS   train 2021 -0.278 (175) · 2022 -0.524 (106) │ validation 2023 -0.091 (143)
+
+STATUS
+  S1  ✗ validation -0.294 R on 237: gate not met · holdout shut
+  S2  ✗ validation -0.089 R on 106: gate not met · holdout shut
+  L1  ✗ validation -0.135 R on 107: gate not met · holdout shut
+  L3  reference · train -0.371 (281) · validation -0.091 (143)
+
+REGISTRY (one line a configuration; the committed registry.jsonl is rebuilt from these)
+REG S1 64c3f8968afa A30·close tr 525 -0.225 -0.018 va 247 -0.291 -0.057
+REG S1 b642ae351527 A30·fixed2 tr 531 -0.225 -0.022 va 249 -0.280 -0.051
+REG S1 f75f263cebe1 A30·vwap_reclaim tr 1114 -0.217 -0.005 va 486 -0.232 +0.001
+REG S1 7f2f2dd06e51 A60·close tr 493 -0.180 +0.035 va 237 -0.294 -0.063 chosen
+REG S1 105bd9b8cbe1 A60·fixed2 tr 501 -0.204 -0.002 va 240 -0.282 -0.056
+REG S1 255c2628b15f A60·vwap_reclaim tr 1062 -0.215 +0.008 va 436 -0.233 +0.004
+REG S2 76ae582d3192 G20·hod·vwap tr 341 -0.167 -0.038 va 111 -0.165 -0.038
+REG S2 3ed3fb360dec G20·hod·close tr 272 -0.047 +0.125 va 106 -0.089 +0.075 chosen
+REG S2 ee93b4680366 G20·bar5·vwap tr 348 -0.258 -0.075 va 107 -0.123 +0.074
+REG S2 9723ed9d1e59 G20·bar5·close tr 293 -0.145 +0.096 va 102 +0.214 +0.457
+REG S2 5797f56360f2 G40·hod·vwap tr 167 -0.167 -0.049 va 52 -0.029 +0.084
+REG S2 1416bfb68b70 G40·hod·close tr 151 -0.135 +0.022 va 51 +0.360 +0.509
+REG S2 443d7196995c G40·bar5·vwap tr 173 -0.241 -0.089 va 54 +0.066 +0.221
+REG S2 f76e076783ae G40·bar5·close tr 157 -0.169 +0.030 va 53 +0.864 +1.063
+REG L1 70835544f5d3 G30·trail1 tr 372 -0.182 -0.031 va 163 -0.070 +0.099
+REG L1 9a91ca70820d G30·fixed2 tr 337 -0.194 -0.058 va 154 -0.117 +0.039
+REG L1 8beb7dbcb6d1 G30·newlow tr 465 -0.099 +0.056 va 200 -0.158 +0.009
+REG L1 2f35f55a510b G50·trail1 tr 241 -0.170 -0.036 va 101 -0.092 +0.048
+REG L1 b1ebd89d3680 G50·fixed2 tr 226 -0.177 -0.054 va 96 -0.120 +0.007
+REG L1 ff58a790ce64 G50·newlow tr 277 -0.087 +0.048 va 107 -0.135 +0.003 chosen
+REG L3 c74bf73d5b70 live·3%·newlow·1loss tr 281 -0.371 -0.036 va 143 -0.091 +0.217
+
+done in 803 s · files: research/strategy-candidates/results/2026-10-12T1350Z
+Paper only. Not testable here: Level 2, borrow availability and fees, locates, halts as such, the previous day's SSR, ten-second structure.

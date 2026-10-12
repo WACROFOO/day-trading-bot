@@ -28,6 +28,7 @@ S2_SLOTS = tuple(range(minute(9, 30), minute(10, 30), 5))
 L1_WIN = (minute(9, 30), minute(11, 20))
 L1_MAX_PB, L1_MAX_DEPTH, L1_STOP_X, L1_MIN_STOP = 5, 0.5, 2.0, 0.02
 L3_MIN_STOP_PCT = 3.0
+S2W_BAND = (0.10, 0.20)             # amendment 2026-10-12b: S2's lead, the stop 10-20 % above
 
 
 @dataclass(frozen=True)
@@ -101,6 +102,17 @@ def s2(sd: SymbolDay, gap_min: float, stop_kind: str) -> Entry | None:
                 continue
             return Entry(b, o[b], o[b], stop, True, b - 1)
     return None
+
+
+def s2w(sd: SymbolDay) -> Entry | None:
+    """S2's lead (amendment 2026-10-12b): S2 G20·hod's trade, kept only when its stop is
+    10-20 % above the 5-minute close; otherwise the symbol-day is skipped — the slice the
+    lead was read on, not a new scan."""
+    e = s2(sd, 0.20, "hod")
+    if e is None:
+        return None
+    px = sd.c[e.sig_k]
+    return e if S2W_BAND[0] * px <= e.stop - px <= S2W_BAND[1] * px else None
 
 
 # ------------------------------------------------------------------ L1 real-time new-high dip (long)
@@ -187,6 +199,7 @@ class Family:
     flat: int
     configs: tuple
     reference: bool = False
+    lead_of: str = ""               # a lead tested on its parent family's holdout (registered under it)
 
 
 FAMILIES = {
@@ -199,14 +212,17 @@ FAMILIES = {
                  tuple({"G": g, "exit": e} for g in (0.30, 0.50) for e in ("trail1", "fixed2", "newlow"))),
     "L3": Family("L3", "reference: live entry + stop >= 3 % + new-low exit + done after a loss", 1, FLAT_LONG,
                  ({"ref": "live+stop3+newlow+done_after_loss", "exit": "newlow"},), reference=True),
+    "S2W": Family("S2W", "S2's lead: G20·hod·close, kept when the stop is 10-20 % above (amendment 2026-10-12b)",
+                  -1, FLAT_SHORT, ({"G": 0.20, "stop": "hod", "exit": "close", "band": [0.10, 0.20]},), lead_of="S2"),
 }
+LEADS = ("S2W",)                    # run only with --lead, never in the main run
 # research/strategy-candidates/PREREGISTRATION.md §6: the families allowed to open a holdout
 OPENABLE = ("S1", "S2", "L1")
 
 
 def signal_key(fam: str, cfg: dict):
     return {"S1": lambda c: c["A"], "S2": lambda c: (c["G"], c["stop"]), "L1": lambda c: c["G"],
-            "L3": lambda c: "L3"}[fam](cfg)
+            "L3": lambda c: "L3", "S2W": lambda c: "S2W"}[fam](cfg)
 
 
 def entries(fam: str, sd: SymbolDay, key) -> list[tuple[Entry, str]]:
@@ -216,6 +232,8 @@ def entries(fam: str, sd: SymbolDay, key) -> list[tuple[Entry, str]]:
         e = s2(sd, *key)
     elif fam == "L1":
         e = l1(sd, key)
+    elif fam == "S2W":
+        e = s2w(sd)
     else:
         return l3(sd)
     return [(e, "regular")] if e is not None else []
@@ -225,7 +243,7 @@ def random_window(fam: str, window: str) -> tuple[int, int]:
     """[w0, w1) of the bars whose open the random baseline may buy or sell."""
     if fam == "S1":
         return minute(10, 1), minute(15, 1)
-    if fam == "S2":
+    if fam in ("S2", "S2W"):
         return minute(9, 35), minute(10, 31)
     if fam == "L1":
         return minute(9, 31), minute(11, 21)
@@ -239,4 +257,6 @@ def label(fam: str, cfg: dict) -> str:
         return f"G{round(cfg['G'] * 100)}·{cfg['stop']}·{cfg['exit']}"
     if fam == "L1":
         return f"G{round(cfg['G'] * 100)}·{cfg['exit']}"
+    if fam == "S2W":
+        return "G20·hod·close·stop10-20"
     return "live·3%·newlow·1loss"

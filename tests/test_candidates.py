@@ -393,3 +393,96 @@ def test_the_history_source_reads_the_cache_format_the_mac_has(tmp_path, monkeyp
     assert got.m == sd.m and got.c == sd.c                                 # UTC stamps back to the same ET minutes
     assert not (tmp_path / "registry.jsonl").exists()                      # --sample is plumbing: nothing registered
     assert "REG S1 " in out and "REG L1 " in out
+
+
+# ------------------------------------------------------------------ the S2W lead (amendment 2026-10-12b)
+def crowded(spike_high: float, pc: float = 10.0):
+    """A crowded gapper: pre-market ~12 on 10k-share bars, a spike to `spike_high` at 09:00,
+    an open at 13.30 and a red first 5-minute bar closing at 13.00, above VWAP."""
+    rows = []
+    for mm in range(0, 330):
+        px = spike_high if 300 <= mm < 303 else (12.0 if mm < 300 else 13.2)
+        rows.append((mm, px, px + 0.02, px - 0.02, px, 10_000))
+    for i, c in enumerate((13.24, 13.18, 13.12, 13.06, 13.00)):
+        o = 13.30 if i == 0 else rows[-1][4]
+        rows.append((330 + i, o, max(o, c) + 0.01, min(o, c) - 0.01, c, 50_000))
+    for mm in range(335, 720):
+        rows.append((mm, 12.9, 12.95, 12.85, 12.9, 20_000))
+    return sday(rows, pc=pc, open_px=13.30)
+
+
+def test_s2w_takes_s2s_trade_only_when_its_stop_is_10_to_20_pct_away():
+    far, near = crowded(15.0), crowded(13.8)
+    e_far, e_near = R.s2(far, 0.20, "hod"), R.s2(near, 0.20, "hod")
+    assert e_far is not None and e_near is not None
+    assert (e_far.stop - far.c[e_far.sig_k]) / far.c[e_far.sig_k] == pytest.approx((15.03 - 13.00) / 13.00)
+    assert R.s2w(far) == e_far                                   # 15.6 % away: kept, the same trade
+    assert R.s2w(near) is None                                   # 6.2 % away: the symbol-day is skipped
+    cfg = R.FAMILIES["S2W"].configs[0]
+    assert R.FAMILIES["S2W"].lead_of == "S2" and cfg["exit"] == "close"
+    assert P.config_hash("S2", cfg) not in {P.config_hash("S2", c) for c in R.FAMILIES["S2"].configs}
+
+
+def test_the_lead_gates_need_train_validation_then_2016_2020():
+    from candidates import run as RUN
+    good, bad, thin = {"n": 40, "net": 0.1}, {"n": 40, "net": -0.1}, {"n": 12, "net": 0.5}
+    assert RUN.lead_gates(good, good, None)[0] is True
+    assert RUN.lead_gates(good, bad, None)[0] is False and RUN.lead_gates(thin, good, None)[0] is False
+    assert RUN.lead_gates(good, good, good)[2] is True
+    assert RUN.lead_gates(good, good, bad)[2] is False and RUN.lead_gates(good, good, thin)[2] is False
+
+
+def _scripted_lead(monkeypatch, tmp_path, older_net):
+    """run_lead with its data passes scripted: train/valid and holdout positive, 2016-2020 `older_net`."""
+    from candidates import run as RUN
+    key = ("S2W", P.config_hash("S2W", R.FAMILIES["S2W"].configs[0]))
+    calls = []
+
+    def fake_days(uni, hist, days, coverage):
+        coverage.setdefault("train", [1, 1])
+        return iter(())
+
+    def fake_collect(gen, wanted, costs, draws, total=None, tag=""):
+        calls.append(tag)
+        if tag == "train+valid":
+            return {key: _fake("train", 0.2, 40, "2021-03-01") + _fake("valid", 0.2, 40, "2023-03-01")}
+        if tag == "2016-2020":
+            return {key: _fake("older", older_net, 40, "2018-03-01")}
+        return {key: _fake("holdout", 0.3, 250, "2024-03-01")}
+
+    monkeypatch.setattr(D, "history_days", fake_days)
+    monkeypatch.setattr(RUN, "collect", fake_collect)
+    monkeypatch.setattr(P, "LOCAL_REGISTRY", tmp_path / "registry.jsonl")
+    monkeypatch.setattr(P, "LOCAL_LEDGER", tmp_path / "ledger.jsonl")
+    monkeypatch.setattr(P, "COMMITTED_LEDGER", tmp_path / "committed_ledger.jsonl")
+    monkeypatch.setattr(P, "COMMITTED_REGISTRY", tmp_path / "committed_registry.jsonl")
+    rc = RUN.main(["--lead", "S2W", "--no-fetch", "--draws", "0", "--out", str(tmp_path / "out")])
+    return rc, calls
+
+
+
+def test_a_failed_2016_2020_gate_keeps_the_holdout_shut(tmp_path, monkeypatch, capsys):
+    rc, calls = _scripted_lead(monkeypatch, tmp_path, older_net=-0.1)
+    out = capsys.readouterr().out
+    assert rc == 0 and calls == ["train+valid", "2016-2020"]                 # the holdout was never read
+    assert not (tmp_path / "ledger.jsonl").exists() and "GATE 2  ✗" in out and "HOLDOUT shut" in out
+    reg = [json.loads(x) for x in (tmp_path / "registry.jsonl").read_text().splitlines()]
+    assert reg[0]["family"] == "S2" and reg[0]["lead"] == "S2W" and reg[0]["gate2"] is False
+
+
+def test_both_gates_open_the_parents_holdout_once(tmp_path, monkeypatch, capsys):
+    rc, calls = _scripted_lead(monkeypatch, tmp_path, older_net=0.1)
+    out = capsys.readouterr().out
+    assert rc == 0 and calls == ["train+valid", "2016-2020", "holdout"]
+    led = [json.loads(x) for x in (tmp_path / "ledger.jsonl").read_text().splitlines()]
+    assert led[0]["family"] == "S2" and led[0]["hash"] == P.config_hash("S2", R.FAMILIES["S2W"].configs[0])
+    assert led[-1]["family"] == "S2:result" and "holdout, through its lead S2W" in out
+    with pytest.raises(P.HoldoutAlreadyOpened):                              # S2 can never open another config
+        P.open_holdout("S2", R.FAMILIES["S2"].configs[0], 9, {}, {})
+    assert not (ROOT / "research" / "strategy-candidates" / "results").exists()   # nothing escaped to the real paths
+
+
+def test_a_lead_never_runs_in_the_main_run():
+    from candidates import run as RUN
+    with pytest.raises(SystemExit):
+        RUN.main(["--families", "S2W"])

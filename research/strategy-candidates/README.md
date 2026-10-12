@@ -7,19 +7,20 @@ RULES    · PREREGISTRATION.md — written and committed BEFORE any five-year ru
 CODE     · scripts/candidates/ (README there) · tests/test_candidates.py
 DATA     · 2021-01-01 → 2026-08-21: 15,959 gapper symbol-days (candidate_days.csv), Alpaca SIP 1-minute
            bars — on the Mac; this container has no market-data keys and no bar cache
-STATUS   · nothing measured on the five years yet. One smoke run on the 20 exported desk days
-           (runs/2026-10-12-smoke/) checked the plumbing; it is not evidence
+STATUS   · run 2026-10-12T1350Z (the Mac): S1, S2 and L1 fail the 2023 gate, no holdout opened —
+           RESULTS.md · S2's lead (S2W, amendment 2026-10-12b) waits for one Mac run
 ```
 
 ## 1 · The board — every candidate, every combination counted
 
 | id | candidate | combinations | where it stands | result |
 |---|---|---:|---|---|
-| **S1** | afternoon fade: short once the high of day is ≥ 30/60 min old and VWAP is lost | 6 | preregistered · waiting for the Mac run | — |
-| **S2** | crowded-gapper fade: short the first red 5-minute bar of a ≥ 20/40 % gap on ≥ 2 M pre-market shares | 8 | preregistered · waiting for the Mac run | — |
-| **L1** | real-time new-high dip: the megaday entry without knowing the day is a megaday | 6 | preregistered · waiting for the Mac run | — |
+| **S1** | afternoon fade: short once the high of day is ≥ 30/60 min old and VWAP is lost | 6 | **closed** — run 2026-10-12T1350Z | ✗ fails the 2023 gate (−0.294 on 237); gross ≈ 0 in both periods, the fade is over by the setup |
+| **S2** | crowded-gapper fade: short the first red 5-minute bar of a ≥ 20/40 % gap on ≥ 2 M pre-market shares | 8 + 1 | gate failed — **its lead S2W is preregistered**, waits for the Mac | ✗ fails the 2023 gate (−0.089 on 106); held to the close the gross is positive in all 8 cells, costs and the year take it |
+| **S2W** | S2's lead: G20·hod·close kept only when the stop is 10-20 % above | (in S2) | amendment 2026-10-12b: 2016-2020 first, then S2's one opening | — |
+| **L1** | real-time new-high dip: the megaday entry without knowing the day is a megaday | 6 | **closed** — run 2026-10-12T1350Z | ✗ fails the 2023 gate (−0.135 on 107); the entry does what a random minute does |
 | **L2** | the #1 gainer's new-high break | 18 + 54 | **done before** — the edge hunt's F7 and F8 | ✗ F7 failed validation (net −0.270 R); F8's holdout −0.188 R over 592, every year negative. Not re-run: its holdout is read |
-| **L3** | reference: the bot's entry + stop ≥ 3 % + new-low exit + done after a loss | 1 | preregistered · reference only, never opens the holdout | — |
+| **L3** | reference: the bot's entry + stop ≥ 3 % + new-low exit + done after a loss | 1 | reference only, never opens the holdout | −0.371 train · −0.091 in 2023 |
 | shorts, 20 days | mirror, back side, extension, time fade, the owner's five-condition combination | 31 | first look, 2026-10-12 | ✗ every variant negative net on the selection days — 20 sessions, not evidence (`prior-20-days/`) |
 
 Also counted in `registry.jsonl`: the megaday study's 4 hypotheses (L1's origin) and the edge
@@ -29,7 +30,8 @@ hunt's 174 exit/sizing configurations (L3's origin).
 
 ```bash
 bash scripts/update.sh
-python3 scripts/candidates/run.py
+python3 scripts/candidates/run.py              # the five-year run (done 2026-10-12T1350Z)
+python3 scripts/candidates/run.py --lead S2W   # S2's lead: train/2023, then 2016-2020, then S2's holdout
 ```
 
 The report prints on the screen: paste it back, or upload
@@ -61,7 +63,8 @@ line and the owner's decision, never a switch.
 
 | path | what |
 |---|---|
-| `PREREGISTRATION.md` | the rules, the split, the gate, the seven criteria, the diagnosis — fixed before any run |
+| `PREREGISTRATION.md` | the rules, the split, the gate, the seven criteria, the diagnosis — fixed before any run; amendments dated at its end |
+| `RESULTS.md` | **the read-out of the five-year run**: what failed, why, how it could work, my calls scored |
 | `registry.jsonl` | every combination ever evaluated here, one line each, prior reads included; the Mac's runs are appended when they come back |
 | `holdout_ledger.jsonl` | one line per holdout opening (empty: none yet). The runner also refuses a second opening found in the Mac's local `results/holdout_ledger.jsonl` |
 | `prior-20-days/` | the short-side reads of 2026-10-12 on the 20 exported days, scripts and output |
@@ -76,5 +79,7 @@ universe knows the 09:30 open). Details in the preregistration §10.
 
 ## 6 · Verdict
 
-None yet: no candidate has been measured on the five years. L2 is already answered — no.
-Paper only.
+**No candidate is profitable after costs on the five years** (run 2026-10-12T1350Z): S1, S2 and
+L1 fail the 2023 gate and their holdouts stay unread; L2 was already answered — no. S1 and L1
+are closed. S2's fade exists before costs; its wide-stop lead S2W is the one test left, gated
+on 2016-2020 before it may open S2's holdout. Paper only.

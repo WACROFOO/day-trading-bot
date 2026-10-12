@@ -68,8 +68,9 @@ def utc_now() -> str:
 
 
 # ------------------------------------------------------------------ the holdout ledger
-def opened(family: str, ledgers=(COMMITTED_LEDGER, LOCAL_LEDGER)) -> dict | None:
-    for p in ledgers:
+def opened(family: str, ledgers=None) -> dict | None:
+    # defaults resolve at call time, so a redirected ledger (a test, another machine) is the one read
+    for p in ledgers or (COMMITTED_LEDGER, LOCAL_LEDGER):
         for e in _lines(Path(p)):
             if e.get("family") == family and "hash" in e:
                 return e
@@ -77,13 +78,14 @@ def opened(family: str, ledgers=(COMMITTED_LEDGER, LOCAL_LEDGER)) -> dict | None
 
 
 def open_holdout(family: str, cfg: dict, n_configs: int, train: dict, valid: dict,
-                 ledger: Path = LOCAL_LEDGER, ledgers=(COMMITTED_LEDGER, LOCAL_LEDGER)) -> dict:
+                 ledger: Path | None = None, ledgers=None) -> dict:
     """Record the opening, then allow it. Refuses another configuration of a family
     already opened in any ledger; returns the old entry, flagged, for the same one."""
     if family not in OPENABLE:
         raise ValueError(f"{family} is not allowed to open a holdout (PREREGISTRATION.md §6)")
     h = config_hash(family, cfg)
-    prior = opened(family, ledgers)
+    ledger = Path(ledger or LOCAL_LEDGER)
+    prior = opened(family, ledgers or (COMMITTED_LEDGER, ledger))
     if prior is not None:
         if prior["hash"] != h:
             raise HoldoutAlreadyOpened(f"{family} opened its holdout at {prior['utc']} for {prior['hash']}; "
@@ -91,34 +93,33 @@ def open_holdout(family: str, cfg: dict, n_configs: int, train: dict, valid: dic
         return {**prior, "reread": True}
     entry = {"family": family, "hash": h, "config": cfg, "n_configs_tried": n_configs, "train": train,
              "valid": valid, "utc": utc_now(), "git": head()}
-    ledger = Path(ledger)
     ledger.parent.mkdir(parents=True, exist_ok=True)
     with ledger.open("a") as f:
         f.write(json.dumps(entry, default=str) + "\n")
     return entry
 
 
-def record_result(family: str, result: dict, ledger: Path = LOCAL_LEDGER) -> None:
-    ledger = Path(ledger)
+def record_result(family: str, result: dict, ledger: Path | None = None) -> None:
+    ledger = Path(ledger or LOCAL_LEDGER)
     ledger.parent.mkdir(parents=True, exist_ok=True)
     with ledger.open("a") as f:
         f.write(json.dumps({"family": family + ":result", "result": result, "utc": utc_now()}, default=str) + "\n")
 
 
 # ------------------------------------------------------------------ the registry
-def register(rows: list[dict], path: Path = LOCAL_REGISTRY) -> None:
-    path = Path(path)
+def register(rows: list[dict], path: Path | None = None) -> None:
+    path = Path(path or LOCAL_REGISTRY)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a") as f:
         for r in rows:
             f.write(json.dumps(r, default=str) + "\n")
 
 
-def n_configs(family: str, registries=(COMMITTED_REGISTRY, LOCAL_REGISTRY)) -> int:
+def n_configs(family: str, registries=None) -> int:
     """Distinct configurations of `family` ever evaluated, plus the prior reads that
     relate to it (rows carrying `n_configs` and `relates_to`)."""
     hashes, prior = set(), 0
-    for p in registries:
+    for p in registries or (COMMITTED_REGISTRY, LOCAL_REGISTRY):
         for r in _lines(Path(p)):
             if r.get("family") == family and "hash" in r:
                 hashes.add(r["hash"])
