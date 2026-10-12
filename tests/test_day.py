@@ -450,3 +450,25 @@ def test_the_owner_may_open_phase_c_before_thirty_trades_and_the_other_gates_sti
     _, blockers = day.gates_for_advance(journal, L.get_state(journal))
     assert not any("30 taken trades" in b for b in blockers)
     assert any("reconciled paper trade lifecycle" in b for b in blockers)   # the safety gates still apply
+
+
+def test_the_morning_desk_starts_on_todays_board_never_an_earlier_days():
+    """2026-10-12 04:17: the desk alone started on Friday's board, held seven
+    of its eight seats with Friday's names, and only one of the sixteen gappers
+    its scanner found that morning got in. A board from an earlier day is
+    history: the desk starts empty and its scanner fills the seats."""
+    from argparse import Namespace
+    from datetime import datetime
+    c = L.connect(":memory:")
+    friday = datetime(2026, 10, 9, 11, 29, tzinfo=day.ET)
+    L.record_board(c, friday, "fri", [dict(symbol=s, verdict="REJECT", plan_allowed=False)
+                                      for s in ("SAIQ", "VEEA", "QETA")])
+    monday_0417 = datetime(2026, 10, 12, 4, 17, tzinfo=day.ET)
+    assert day.desk_only_symbols(c, Namespace(symbols=None), now=monday_0417) == []
+    # the same day's board carries on (the desk after the bot's day)
+    later = datetime(2026, 10, 12, 11, 31, tzinfo=day.ET)
+    L.record_board(c, datetime(2026, 10, 12, 11, 29, tzinfo=day.ET), "mon",
+                   [dict(symbol=s, verdict="WATCH", plan_allowed=False) for s in ("YMAT", "LNKS")])
+    assert day.desk_only_symbols(c, Namespace(symbols=None), now=later) == ["LNKS", "YMAT"]
+    # --symbols always wins
+    assert day.desk_only_symbols(c, Namespace(symbols="ymat, apus"), now=monday_0417) == ["YMAT", "APUS"]

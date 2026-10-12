@@ -135,6 +135,11 @@ A desk outside the bot's day:
 - **saves your calls and your risk at any hour**. Calls logged after the day's
   export (about 11:32 ET) are exported again for that day ten minutes after
   the newest one, and at the end of the desk-only run for any left;
+- **starts on today's names** (2026-10-12): `--symbols` when you pass them,
+  else the last board the day's desk recorded *today*, else none — and its
+  scanner fills the eight seats. Before, a 04:17 start sat on Friday's board:
+  seven of eight seats held Friday's names, and of the sixteen gappers the
+  scanner found that morning only YMAT got in;
 - **does not keep the Mac awake** — the caffeinate hold ends with the bot's
   day. A desk that drops (sleep, the Gateway's restart) is started again once
   the Gateway answers; if it keeps failing, 1, 2, 4 … up to 15 min apart;
@@ -208,7 +213,9 @@ Since 2026-10-09 (`docs/desk-grid-audit-2026-10-09.md`):
   Day tile carries the **halts** from 09:30. Maximized (E), the pillar board
   is the full table, folding red names and names with no print yet.
 - **Level 2** sits under the card, the Time & Sales under it: the selected name's book from IBKR
-  SmartDepth. Until the account holds a depth subscription it reads **NO SUB**
+  SmartDepth, in the standard montage since 2026-10-12 — **bids on the left, asks on the right**,
+  each side's best price on top, the venue on each row, one colour per price level (the inside
+  yellow, then green, cyan, blue, violet — the same band on both sides). Until the account holds a depth subscription it reads **NO SUB**
   with IBKR's own code and words, and asks again every two minutes (below,
   "Level 2").
 
@@ -236,8 +243,8 @@ Since 2026-10-09 07:41 (`docs/desk-recording-2026-10-09.md`):
   intraday panes; one session VWAP on every pane; live, the forming 1-minute
   candle moves with each 10-second bar; on by default only what the verdict
   reads.
-- **The right column is one stack:** the card, Level 2 under it (it opens on
-  the inside quote), the Time & Sales under that.
+- **The right column is one stack:** the card, Level 2 under it (the inside
+  on the top line of both columns), the Time & Sales under that.
 - **Any card swaps by dragging its header onto another card** — the charts,
   the board, the card, Level 2 and the tape included (until 2026-10-09 only the
   scanner tiles could be picked up). The target shows "Drop here to swap";
@@ -269,12 +276,17 @@ The decision card is the server's read of the selected name
 IBKR allows one tape request per name every 15 s, so returning to a name you
 just left can take a few seconds, and the card says so.
 
-| mark | means |
+Since 2026-10-12 it is the standard tape: **Time (ET) · Price · Size · Exch ·
+B/S**, newest on top, the colour key on the card's first line, and the 60-second
+line above the prints counting **buys** and **sells** as a share of the shares
+printed. A midpoint print keeps its sub-penny (6.505, not the ask's 6.51).
+
+| B/S, colour | means |
 |---|---|
-| ▲ green | printed at or above the ask: a buyer lifted the offer |
-| ▼ red | printed at or below the bid: a seller hit the bid |
-| · grey | between the bid and the ask |
-| ? dim, italic | IBKR history loaded behind a new focus: no quote of that moment was read, so no side |
+| B, green | a buy: printed at or above the ask — a buyer lifted the offer |
+| S, red | a sell: printed at or below the bid — a seller hit the bid |
+| ·, white | between the bid and the ask |
+| ?, grey italic | IBKR history loaded behind a new focus: no quote of that moment was read, so no side |
 | bold, amber size | a big print: ≥ 10× this tape's median print, never under 2,000 shares — this desk's Approximation, not his number |
 | dashed line | a gap — a reconnect, a competing login, a refusal: prints in between may be missing, and the facts restart after it |
 
@@ -355,6 +367,8 @@ reconstructed — the fixture's header says so.
 | `python3 scripts/exercise.py missed --day 2026-09-24` (KILLED PLANS BY GATE) | since 2026-09-24 evening: every Layer 1 kill scored per window, price split at $2 and $20, the sub-$2 cohort split by the penny-theme flag read from the ledger's gap-scan rows; a third exit column BE+2R (breakeven after +1 R, fixed target) beside fixed and trail everywhere |
 | `Error 10089` / `Error 420 … No market data permissions for AMEX STK` | the account has no real-time data permission for NYSE American (AMEX) names; the desk drops the name (APUS, 2026-09-25) and, since that evening, never re-subscribes it. Nothing to do unless you want AMEX names on the desk, in which case add the NYSE American real-time subscription in IBKR Account Management → Market Data Subscriptions; NASDAQ names are unaffected |
 | `minute history: 3 refreshes in a row timed out … paused for 5 min` | IBKR's history farm is not answering; the desk stops asking for five minutes so the decisions keep flowing on the live bars. Nothing to do |
+| `SYM: no trades in the last 15 min — IBKR's minute history comes back empty; asked again every 5 min` | since 2026-10-12, said once per quiet spell: the name has not printed in the window the refresh asks for (IBKR's 162 "HMDS query returned no data", which used to print every 2–3 minutes — QETA, 2026-10-12). Its live bars carry it. Nothing to do |
+| `!! COMPETING LIVE SESSION (10197, first seen 04:28:17 ET)` | another login on your IBKR username — TWS, IBKR Mobile, Client Portal — took the market data. **Log it out.** The time is ET since 2026-10-12 (it was the desk's UTC clock: "08:28:17" was 04:28 ET). Still logged in at 06:55 and the day refuses to start (the alignment probe reads `competing`) |
 | Ctrl-C | ends the day (since 2026-09-25 evening the desk is not restarted after it); the day is settled at the next start. After 11:30 it stops the desk alone: nothing is left to settle. Once the day has started, the command waits up to 20 min for the Gateway's API port instead of failing |
 | `python3 scripts/day.py --restart-desk` | after `bash scripts/update.sh` while a day or the desk alone runs: that run's desk restarts on the new code; the runner is not touched (2026-10-08) |
 | `python3 scripts/backtest_history.py --sample 300` then without `--sample` | the desk's own rules over the 25,716 gapper-days 2016–2026 WITH pre-market volume (Alpaca SIP, the headline keys in `.env`), net of costs, per year and per window, a walk-forward optimizer, and `--ledger data/journal.sqlite` for forecast vs actuals on your live trades. Runs on the Mac; the cloud side has no feed with pre-market volume |

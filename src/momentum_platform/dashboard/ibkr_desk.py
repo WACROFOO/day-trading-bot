@@ -48,13 +48,21 @@ from .stream import EventHub, UpdatePublisher
 
 UTC = timezone.utc
 
+
+def _et(ts: datetime) -> str:
+    """A desk clock reading as the trader reads the day: Eastern, labelled.
+    2026-10-12: "first seen 08:28:17" was the desk's UTC clock — 04:28 ET,
+    10:28 in Paris — and read as neither."""
+    return f"{ts.astimezone(ET):%H:%M:%S} ET"
+
 # TWS messages that are acknowledgements, not problems. 162 "API scanner
 # subscription cancelled" is TWS confirming that a one-shot scan was closed
 # after it answered; ib_async logs it at ERROR and it filled the terminal with
 # ten red lines per scan round.
 BENIGN = ("API scanner subscription cancelled", "Market data farm connection is OK",
           "HMDS data farm connection is OK", "Sec-def data farm connection is OK",
-          "Fundamentals data is not allowed")     # the desk says this once, itself
+          "Fundamentals data is not allowed",     # the desk says this once, itself
+          "HMDS query returned no data")          # ... and this, once per quiet name (refresh_history)
 
 
 class _TwsNoise(logging.Filter):
@@ -83,6 +91,7 @@ EXTRA_NEWS_EVERY = 600.0     # SEC filings + finviz "why" per symbol at most eve
 HISTORY_SLOW_S = 15.0        # a refresh this slow with no bars is a timeout, not a quiet name
 HISTORY_SLOW_MAX = 3         # in a row, before the refresh backs off
 HISTORY_BACKOFF_S = 300.0
+HISTORY_QUIET_S = 300.0       # a name IBKR answered 'no data' for rests this long, in refresh turns
 
 
 class IbkrDesk:
@@ -181,6 +190,9 @@ class IbkrDesk:
         # next symbol in turn.
         self._next_history = 0.0
         self._history_cursor = 0
+        self._history_turn = 0                        # refresh turns taken, the quiet rest's clock
+        self._history_quiet: Dict[str, int] = {}      # symbol -> the turn it is asked again
+        self._quiet_said: set = set()                 # quiet names already said once
         self.history_every = float(prof["cadence"]["historyEverySeconds"])
         # A TWS farm flap can kill the five-second bar streams while quotes
         # keep arriving. Nothing reports it, so the desk watches for it.
@@ -431,7 +443,7 @@ class IbkrDesk:
             if now.timestamp() >= self._next_competing_note:
                 self._next_competing_note = now.timestamp() + self.COMPETING_EVERY
                 sym = getattr(contract, "symbol", None) or "?"
-                self.log(f"  !! COMPETING LIVE SESSION (10197, first seen {self.competing_since:%H:%M:%S}): another login "
+                self.log(f"  !! COMPETING LIVE SESSION (10197, first seen {_et(self.competing_since)}): another login "
                          f"on this IBKR username — TWS live, IBKR Mobile or Client Portal — has taken the market data; "
                          f"the desk has NO tape for {sym} and the other names until that login closes. Log it out; "
                          f"the desk re-requests on its own when TWS reports the connection restored. No restart needed.")
@@ -450,7 +462,7 @@ class IbkrDesk:
             h.messages.append(f"TWS connection restored ({errorCode})")
             self._resubscribe_wanted = True
             if self.competing_since is not None:
-                self.log(f"  connection restored after a competing session first seen {self.competing_since:%H:%M:%S}; "
+                self.log(f"  connection restored after a competing session first seen {_et(self.competing_since)}; "
                          f"if no 10197 line follows, the other login is gone and the tape is back")
                 self.competing_since = None
                 self._next_competing_note = 0.0
@@ -882,8 +894,21 @@ class IbkrDesk:
         """
         if not self.symbols:
             return None
-        sym = self.symbols[self._history_cursor % len(self.symbols)]
-        self._history_cursor += 1
+        # A name IBKR just answered "no data" for rests (2026-10-12: QETA's
+        # empty answer was asked for, and printed, every 2-3 minutes all
+        # morning). The turn goes to the next name instead. The rest is counted
+        # in turns, not read off the clock: the refresh's own timing (the
+        # timeout backoff below) keeps its two clock readings.
+        self._history_turn += 1
+        sym = None
+        for _ in range(len(self.symbols)):
+            cand = self.symbols[self._history_cursor % len(self.symbols)]
+            self._history_cursor += 1
+            if self._history_quiet.get(cand, 0) <= self._history_turn:
+                sym = cand
+                break
+        if sym is None:
+            return None
         c = self._contracts_for(sym)
         if c is None:
             return None
@@ -920,7 +945,18 @@ class IbkrDesk:
             return sym
         self._history_slow = 0
         if not fresh:
+            # An immediate empty answer — IBKR's 162 "HMDS query returned no
+            # data" — is a name with no trades in the 15 minutes asked for, not a
+            # failure. Said once per quiet spell, in words; asked again later.
+            rest = max(1, round(HISTORY_QUIET_S / max(self.history_every, 1.0)))
+            self._history_quiet[sym] = self._history_turn + rest
+            if sym not in self._quiet_said:
+                self._quiet_said.add(sym)
+                self.log(f"  {sym}: no trades in the last 15 min — IBKR's minute history comes back empty; "
+                         f"asked again every {HISTORY_QUIET_S / 60:.0f} min, its live bars carry it meanwhile")
             return sym
+        self._history_quiet.pop(sym, None)
+        self._quiet_said.discard(sym)               # printing again: a later quiet spell is said again
         merged = {m["ts"]: m for m in self._minutes.get(sym, [])}
         for m in fresh:
             merged[m["ts"]] = m

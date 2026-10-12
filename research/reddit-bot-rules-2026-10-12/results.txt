@@ -1,0 +1,73 @@
+universe: 20 days, 358 symbol-days (2026-09-11..2026-10-08); selection <= 2026-10-01
+  bot: 213 symbol-days with >= 40 bars, 1224 plans armed, 996 touched
+  wide: 213 symbol-days with >= 40 bars, 1452 plans armed, 1185 touched
+
+A · REPLICATION of the month study (bot window, A10 fills, live costs), mean net R a trade (n)
+    month study: L0 fixed -0.918 (1,046) · trail -1.124 · BE -1.006 ; bot rules trail sel -0.879 (119), hold -1.694 (31)
+  L0 every plan · fixed                          sel -0.820 ( 665)  hold -0.655 (228)  all -0.778 ( 893)  gross +0.015
+  L0 every plan · trail                          sel -1.019 ( 665)  hold -0.899 (228)  all -0.988 ( 893)  gross -0.055
+  L0 every plan · be                             sel -0.895 ( 665)  hold -0.713 (228)  all -0.848 ( 893)  gross -0.022
+  month-study bot rules (no A13) · trail         sel -1.069 (  86)  hold -1.130 ( 32)  all -1.085 ( 118)  gross -0.074
+    month study one-lever deltas on L0 fixed (sel): VWAP +0.202 · SW>=2 +0.293 · SW>=3 +0.376 · first plan -0.257
+    here: VWAP       +0.129
+    here: SW>=2      +0.320
+    here: SW>=3      +0.354
+    here: first plan -0.692
+
+B · THEIR GATES, one at a time on L0 (bot window, A10 fills, fixed 2R) — delta vs L0, sel / hold
+  front side (<=10% off HOD, HOD <=60 min old)   sel +0.070 ( 131)  hold +0.181 ( 37)
+  stop <= $0.30                                  sel -0.101 ( 610)  hold -0.018 (218)
+  fresh signal (trigger on the next bar)         sel -0.011 ( 597)  hold +0.053 (205)
+  above VWAP                                     sel +0.129 ( 328)  hold +0.008 ( 83)
+  OUR stop floor >= 2% (A13)                     sel +0.320 ( 416)  hold +0.114 (168)
+
+B2 · EXITS on every fill (L0, bot window, A10) — mean net R a trade
+  L0 · fixed                                     sel -0.820 ( 665)  hold -0.655 (228)  all -0.778 ( 893)  gross +0.015
+  L0 · trail                                     sel -1.019 ( 665)  hold -0.899 (228)  all -0.988 ( 893)  gross -0.055
+  L0 · be                                        sel -0.895 ( 665)  hold -0.713 (228)  all -0.848 ( 893)  gross -0.022
+  L0 · theirs                                    sel -0.965 ( 665)  hold -0.865 (228)  all -0.939 ( 893)  gross -0.022
+  L0 · lock                                      sel -0.878 ( 665)  hold -0.710 (228)  all -0.835 ( 893)  gross -0.020
+  L0 · spike                                     sel -0.966 ( 665)  hold -0.861 (228)  all -0.939 ( 893)  gross -0.021
+
+C · ON TOP OF OUR LIVE RULES (G1 G4 VW E9 MC PV + A13 2% floor), bot window — mean net R a trade
+  ours as live · trail (A3)                      sel -0.285 (  45)  hold -0.891 ( 22)  all -0.484 (  67)  gross -0.100  90% CI(all, by day) -0.753..-0.183
+  ours · fixed 2R                                sel +0.042 (  45)  hold -0.343 ( 22)  all -0.084 (  67)  gross +0.234
+  ours · BE then 2R                              sel -0.094 (  45)  hold -0.467 ( 22)  all -0.217 (  67)  gross +0.116
+  ours · THEIR exit (2R + lock + spike)          sel -0.304 (  45)  hold -0.540 ( 22)  all -0.381 (  67)  gross +0.002  90% CI(all, by day) -0.638..-0.122
+  ours · lock only (2R + lock)                   sel -0.101 (  45)  hold -0.420 ( 22)  all -0.206 (  67)  gross +0.122
+  ours · spike only (2R + spike)                 sel -0.304 (  45)  hold -0.540 ( 22)  all -0.381 (  67)  gross +0.002
+  ours + front side · trail                      sel -0.450 (  21)  hold -0.862 ( 12)  all -0.600 (  33)  gross -0.216  90% CI(all, by day) -0.898..-0.223
+  ours + stop <= $0.30 · trail                   sel -0.285 (  33)  hold -0.995 ( 19)  all -0.545 (  52)  gross -0.112
+  ours + fresh signal · trail                    sel -0.332 (  44)  hold -0.867 ( 21)  all -0.505 (  65)  gross -0.119
+  ours, their 2% chase fill · trail              sel +0.152 (  39)  hold -0.984 ( 19)  all -0.220 (  58)  gross +0.186
+  ours + done after a loss (plan level) · trail  sel -0.271 (  32)  hold -0.608 ( 12)  all -0.363 (  44)  gross +0.010  90% CI(all, by day) -0.691..-0.036
+
+D · THEIR RULE SET as far as it reads on our plans (G1, VWAP, front side, stop<=$0.30, fresh)
+  theirs · their fill (2% chase) · their exit    sel -1.202 (  55)  hold -0.788 ( 23)  all -1.080 (  78)  gross -0.094  90% CI(all, by day) -1.382..-0.683
+  theirs · their fill · fixed 2R                 sel -0.787 (  55)  hold -0.383 ( 23)  all -0.668 (  78)  gross +0.144
+  theirs, stop<=$0.30 swapped for our 2% floor · their exit sel -0.483 (  44)  hold -0.593 ( 23)  all -0.521 (  67)  gross -0.168
+
+E · PORTFOLIO, one position at a time (both bots), total net R in full-size R
+  ours as live (RiskVeto -3R/3 losses/6 entries) · trail sel  -14.37 R /  38 tr = -0.38 (4/13 days up)   hold  -7.30 R / 11 tr = -0.66 (1/4 up)   total  -21.68
+    same, no risk veto                                 sel  -11.35 R /  44 tr = -0.26 (4/13 days up)   hold -19.60 R / 22 tr = -0.89 (1/4 up)   total  -30.95
+    + done after a loss                                sel   -8.67 R /  32 tr = -0.27 (4/13 days up)   hold  -6.78 R / 11 tr = -0.62 (1/4 up)   total  -15.45
+    + their daily stop -2R                             sel   -9.15 R /  33 tr = -0.28 (4/13 days up)   hold  -7.30 R / 11 tr = -0.66 (1/4 up)   total  -16.46
+    + cushion (25% until green)                        sel   -1.25 R /  38 tr = -0.03 (3/13 days up)   hold  -2.88 R / 12 tr = -0.24 (1/4 up)   total   -4.12
+    constant quarter size (cushion's comparator)       sel   -3.59 R /  38 tr = -0.09 (4/13 days up)   hold  -2.25 R / 12 tr = -0.19 (1/4 up)   total   -5.85
+    exit: their 2R+lock+spike                          sel  -16.10 R /  37 tr = -0.44 (2/13 days up)   hold  -5.00 R / 14 tr = -0.36 (2/4 up)   total  -21.10
+    exit: 2R + lock (no spike)                         sel   -5.90 R /  36 tr = -0.16 (5/13 days up)   hold  -4.28 R / 14 tr = -0.31 (1/4 up)   total  -10.19
+    exit: fixed 2R                                     sel   -1.08 R /  36 tr = -0.03 (5/13 days up)   hold  -4.24 R / 14 tr = -0.30 (1/4 up)   total   -5.32
+    exit: break-even then 2R                           sel   -8.89 R /  33 tr = -0.27 (4/13 days up)   hold  -5.16 R / 12 tr = -0.43 (1/4 up)   total  -14.05
+    exit: fixed 2R + done after a loss                 sel   +0.21 R /  31 tr = +0.01 (6/13 days up)   hold  +0.48 R / 13 tr = +0.04 (3/4 up)   total   +0.69
+  theirs full: gates+chase+exit+after-loss+-2R+cushion sel  -14.27 R /  29 tr = -0.49 (1/10 days up)   hold  -3.55 R / 16 tr = -0.22 (1/5 up)   total  -17.82
+  theirs, flat size (no cushion)                       sel  -34.80 R /  28 tr = -1.24 (2/10 days up)   hold -10.76 R / 12 tr = -0.90 (1/5 up)   total  -45.56
+
+F · THEIR WINDOW (arms from 06:00; our bars end 12:00, so 12:00-13:00 is not read)
+  ours as live, plans armed 06:00-07:00 · trail  sel -0.426 (   7)  hold -0.221 (  4)  all -0.352 (  11)  gross +0.031
+  ours as live, plans armed 11:20-11:50 · trail  sel -0.470 (   2)  hold +nan (  0)  all -0.470 (   2)  gross -0.153
+  L0, plans armed 06:00-07:00 · fixed            sel -1.241 ( 106)  hold -0.560 ( 38)  all -1.061 ( 144)  gross -0.084
+  L0, plans armed 07:00-09:30 · fixed            sel -0.895 ( 355)  hold -0.671 (125)  all -0.836 ( 480)  gross +0.028
+  L0, plans armed 09:30-11:20 · fixed            sel -0.743 ( 310)  hold -0.636 (103)  all -0.716 ( 413)  gross -0.006
+
+G · exit reasons under their exit, ours as live (all periods)
+   {'stop': 33, 'spike': 33, 'target': 1}

@@ -542,7 +542,7 @@ def test_the_selected_name_gets_a_live_tape_end_to_end(desk_server):
         desk._publish_tape()
         pg.wait_for_function("document.querySelector('#tapeTag').textContent === 'LIVE'", timeout=5000)
         marks = pg.eval_on_selector_all("#tapeCard .ts-row .ts-m", "els => els.map(e => e.textContent)")
-        assert marks == ["▼", "▲"], marks
+        assert marks == ["S", "B"], marks
         word = pg.evaluate("window.__SESSION__.cards.AAA.verdict.word")
         if word == "NO":                                 # a NO card carries no tape line (2026-10-09)
             assert pg.locator(".verdict-card .dc-tape").count() == 0
@@ -586,7 +586,7 @@ def test_the_selected_name_gets_its_book_end_to_end(desk_server):
         desk._publish_depth()
         pg.wait_for_function("document.querySelector('#depthTag').textContent === 'LIVE'", timeout=5000)
         assert pg.locator("#depthCard .l2-row").count() == 4
-        assert pg.text_content("#depthCard .l2-mid") == "4.34 × 4.36"
+        assert pg.text_content("#depthCard .l2-inside") == "4.34 × 4.36"
         assert desk.health()["depth"]["state"] == "LIVE"
         assert not errors, errors
         browser.close()

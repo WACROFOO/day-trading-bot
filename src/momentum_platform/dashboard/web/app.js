@@ -2207,6 +2207,21 @@ const TAPE_MARK = { ask: "▲", bid: "▼", mid: "·", "?": "?" };
 const TAPE_WORDS = { ask: "at or above the ask — a buyer lifted the offer", bid: "at or below the bid — a seller hit the bid",
                      mid: "between the bid and the ask", "?": "side not known — no quote of that moment was read" };
 const shares = n => n == null ? "—" : Number(n).toLocaleString("en-US");
+/* The standard Time & Sales (owner, 2026-10-12): Time · Price · Size · Exch ·
+   B/S, newest on top, green for a print at the ask (a buy: the buyer lifted
+   the offer), red at the bid (a sell: the seller hit the bid), white between,
+   grey when no quote of that moment was read. The letter says the side as well
+   as the colour. */
+const TAPE_SIDE = { ask: "B", bid: "S", mid: "·", "?": "?" };
+const TAPE_VENUE = { NASDAQ: "NSDQ" };
+const tapeVenue = x => !x ? "" : (TAPE_VENUE[x] || x);
+/* A sub-penny print keeps its sub-penny (a midpoint fill at 6.505 is not
+   6.51, the ask); a whole-cent print reads in cents, a sub-dollar one in 4. */
+const tapePx = v => {
+  if (v == null) return "—";
+  if (v < 1) return fx(v, 4);
+  return Math.abs(v * 100 - Math.round(v * 100)) > 1e-6 ? String(Number(Number(v).toFixed(4))) : fx(v, 2);
+};
 
 function applyTape(snap) {
   if (!snap) return;
@@ -2268,15 +2283,26 @@ function postFocus(sym, claim) {
 }
 
 /* One line that says what the tape is, on the card itself (owner, 2026-10-09);
-   the rest — Ross's eye at the entry, the three steps — in the Legend. */
+   since 2026-10-12 it is the colour key of the standard tape. The rest — Ross's
+   eye at the entry, the three steps — in the Legend. */
 function tapeHint() {
   const h = el("div", "ts-hint");
-  h.appendChild(el("span", null, "every trade as it prints · ▲ at the ask = buyers lifting · ▼ at the bid = sellers hitting "));
+  [["ask", "B", "buy — at the ask"], ["bid", "S", "sell — at the bid"], ["mid", "·", "between"]].forEach(([k, m, w]) => {
+    const c = el("span", "ts-key " + k);
+    c.appendChild(el("b", null, m));
+    c.appendChild(document.createTextNode(" " + w));
+    h.appendChild(c);
+  });
   const q = el("button", "btn ts-howto", "how to read it");
   q.onclick = () => { const o = $("#legend"); if (!o) return; o.hidden = false;
     const t = document.getElementById("legendTape"); if (t && t.scrollIntoView) t.scrollIntoView({ block: "center" }); };
   h.appendChild(q);
   return h;
+}
+function tapeCols() {
+  const c = el("div", "ts-cols");
+  ["Time", "Price", "Size", "Exch", "B/S"].forEach(w => c.appendChild(el("span", null, w)));
+  return c;
 }
 function renderTape() {
   const host = $("#tapeCard"); if (!host) return;
@@ -2324,6 +2350,7 @@ function renderTape() {
   // Facts only once there is something to count: zeroed lines ("LAST 0 S ▲ —
   // ask ▼ — bid 0 sh") read like a measurement of nothing (audit 2026-10-09).
   if (t.facts && (t.facts.shares || 0) > 0) host.appendChild(tapeFacts(t));
+  host.appendChild(tapeCols());
   const list = el("div", "ts-list");
   // Newest first. Prints of one instant keep the server's arrival order; a gap
   // sits below the prints of its own instant (they came after it).
@@ -2344,9 +2371,10 @@ function renderTape() {
     const r = el("div", "ts-row " + (p.side === "?" ? "unk" : p.side) + (p.big ? " big" : "") +
                  (p.src === "hist" ? " hist" : "") + (p.s < 100 ? " odd" : ""));
     r.appendChild(el("span", "ts-t", etClock(p.t)));
-    r.appendChild(el("span", "ts-p", fx(p.p, p.p < 1 ? 4 : 2)));
+    r.appendChild(el("span", "ts-p", tapePx(p.p)));
     r.appendChild(el("span", "ts-s", shares(p.s)));
-    r.appendChild(el("span", "ts-m", TAPE_MARK[p.side] || "?"));
+    r.appendChild(el("span", "ts-x", tapeVenue(p.x)));
+    r.appendChild(el("span", "ts-m", TAPE_SIDE[p.side] || "?"));
     r.title = TAPE_WORDS[p.side] + (p.big ? " · big print" : "") + (p.s < 100 ? " · odd lot" : "") +
               (p.x ? " · " + p.x : "") + (p.c ? " · conditions " + p.c : "");
     list.appendChild(r);
@@ -2369,8 +2397,8 @@ function tapeFacts(t) {
   if (!sided) bar.classList.add("empty");
   const l1 = el("div", "ts-fact");
   l1.appendChild(el("span", "ts-win", win));
-  l1.appendChild(el("span", "ask", "▲ " + (f.pctAsk == null ? "—" : f.pctAsk.toFixed(0) + "%") + " ask"));
-  l1.appendChild(el("span", "bid", "▼ " + (f.pctBid == null ? "—" : f.pctBid.toFixed(0) + "%") + " bid"));
+  l1.appendChild(el("span", "ask", "buys " + (f.pctAsk == null ? "—" : f.pctAsk.toFixed(0) + "%")));
+  l1.appendChild(el("span", "bid", "sells " + (f.pctBid == null ? "—" : f.pctBid.toFixed(0) + "%")));
   l1.appendChild(el("span", null, vol(f.shares) + " sh"));
   l1.appendChild(el("span", null, f.perMin == null ? "— /min" : f.perMin.toFixed(0) + " /min"));
   const bigEl = el("span", f.big ? "big" : "muted", f.big + " big");
@@ -2380,12 +2408,12 @@ function tapeFacts(t) {
   l1.appendChild(bigEl);
   const l2 = el("div", "ts-fact sub");
   l2.appendChild(el("span", "ts-win", "10 s"));
-  l2.appendChild(el("span", "ask", "▲ " + (n.pctAsk == null ? "—" : n.pctAsk.toFixed(0) + "%")));
-  l2.appendChild(el("span", "bid", "▼ " + (n.pctBid == null ? "—" : n.pctBid.toFixed(0) + "%")));
+  l2.appendChild(el("span", "ask", "buys " + (n.pctAsk == null ? "—" : n.pctAsk.toFixed(0) + "%")));
+  l2.appendChild(el("span", "bid", "sells " + (n.pctBid == null ? "—" : n.pctBid.toFixed(0) + "%")));
   l2.appendChild(el("span", null, vol(n.shares) + " sh"));
   if (f.lo != null && f.hi != null) l2.appendChild(el("span", "muted", "range " + fx(f.lo) + "–" + fx(f.hi)));
-  box.title = "shares by side over the window, live prints after the latest gap only: % of the shares " +
-              "printed at the ask, at the bid; prints per minute; big prints. Facts, not a gate.";
+  box.title = "shares by side over the window, live prints after the latest gap only: buys = % of the shares " +
+              "printed at the ask, sells = % printed at the bid; prints per minute; big prints. Facts, not a gate.";
   box.appendChild(l1); box.appendChild(bar);
   // The last ten seconds only when they hold prints: an all-dash second line
   // under the first says nothing the first did not.
@@ -2461,12 +2489,18 @@ function loadDepth() {
   fetch("/api/v1/depth", { cache: "no-store" }).then(r => r.ok ? r.json() : Promise.reject(r.status))
     .then(applyDepth).catch(none);
 }
+/* A montage row (owner, 2026-10-12: "bid left / ask right", the standard
+   look): venue, price, size. Its colour is its price level on its side — the
+   inside first — the same band on both sides, as every Level 2 window does. */
+const L2_BANDS = 5;                             // the first five price levels get a colour, the rest stay plain
 function depthRow(r, side) {
-  const row = el("div", "l2-row " + side + (r.huge ? " huge" : "") + (r.lvl != null && r.lvl % 2 ? " alt" : ""));
+  const lv = r.lvl == null ? L2_BANDS : Math.min(r.lvl, L2_BANDS);
+  const row = el("div", "l2-row " + side + " lv" + lv + (r.huge ? " huge" : ""));
   row.appendChild(el("span", "l2-x", r.x || "—"));
   row.appendChild(el("span", "l2-p", fx(r.p, r.p < 1 ? 4 : 2)));
   row.appendChild(el("span", "l2-s", shares(r.s)));
   row.title = (side === "bid" ? "bid" : "ask") + " " + shares(r.s) + " at " + fx(r.p) + (r.x ? " on " + r.x : "") +
+    (r.lvl != null ? " · price level " + (r.lvl + 1) + " of its side" : "") +
     (r.huge ? " · HUGE: at or over this book's line — Approximation, a fact, not a gate" : "");
   return row;
 }
@@ -2477,28 +2511,25 @@ function flowWords(ev) {
   return side + " " + shares(ev.size) + " at " + fx(ev.price) + (ev.venues && ev.venues.length ? " (" + ev.venues.join(", ") + ")" : "") +
     " " + how;
 }
-/* The ladder opens on the inside (2026-10-09): under the decision card the
-   book is shorter than its twenty rows, and listing the ten asks first hid
-   the bids below the fold. A scroll of your own holds for 10 s; the book is
-   rebuilt on every update, so the position is carried across. */
-const LADDER_SCROLL = { user: 0, at: 0, top: 0, sym: null };
-function centreLadder(ladder, mid, sym) {
-  const mine = LADDER_SCROLL.sym === sym && Date.now() - LADDER_SCROLL.at < 10000;
-  if (mine) ladder.scrollTop = LADDER_SCROLL.top;
-  else {
-    const lr = ladder.getBoundingClientRect(), mr = mid.getBoundingClientRect();
-    ladder.scrollTop = Math.max(0, mr.top - lr.top - (ladder.clientHeight - mr.height) / 2);
-  }
-  const touched = () => { LADDER_SCROLL.user = Date.now(); };
-  ["wheel", "touchmove", "pointerdown", "keydown"].forEach(k => ladder.addEventListener(k, touched, { passive: true }));
-  ladder.addEventListener("scroll", () => {
-    if (Date.now() - LADDER_SCROLL.user > 1500) return;          // ours, not yours
-    LADDER_SCROLL.at = Date.now(); LADDER_SCROLL.top = ladder.scrollTop; LADDER_SCROLL.sym = sym;
-  }, { passive: true });
+/* The montage (owner, 2026-10-12): bids on the left, asks on the right, the
+   best price of each side on top — the inside is the top line of both columns,
+   so nothing needs centring (the vertical ladder before it hid the bids below
+   the fold under the decision card, 2026-10-09). */
+function depthSide(rows, side) {
+  const col = el("div", "l2-side " + side);
+  const head = el("div", "l2-cols " + side);
+  head.appendChild(el("span", null, "MMID"));
+  head.appendChild(el("span", "l2-side-name", side === "bid" ? "Bid" : "Ask"));
+  head.appendChild(el("span", null, "Size"));
+  col.appendChild(head);
+  rows.forEach(r => col.appendChild(depthRow(r, side)));
+  if (!rows.length) col.appendChild(el("div", "l2-none", side === "bid" ? "no bids" : "no asks"));
+  return col;
 }
 function renderDepth() {
   const host = $("#depthCard"); if (!host) return;
   const d = DEPTH;
+  const old = host.querySelector(".l2-montage"), top = old ? old.scrollTop : 0;
   host.textContent = "";
   const tag = $("#depthTag"), st = d ? d.state || "OFF" : "OFF";
   if (tag) { tag.textContent = st === "NO_SUBSCRIPTION" ? "NO SUB" : st; tag.className = "tag l2-state " + (DEPTH_STATE_CLASS[st] || "off"); }
@@ -2528,18 +2559,17 @@ function renderDepth() {
   const ins = d.inside || {}, tot = d.totals || {};
   const head = el("div", "l2-head");
   head.appendChild(el("b", null, d.symbol || "—"));
-  head.appendChild(el("span", null, ins.spread != null ? "spread " + (ins.spread * 100).toFixed(ins.spread < 0.1 ? 1 : 0) + "¢" : "no inside"));
-  head.appendChild(el("span", "muted", shares(tot.bid) + " bid · " + shares(tot.ask) + " ask"));
+  head.appendChild(el("span", "l2-inside", ins.bid != null && ins.ask != null ? fx(ins.bid) + " × " + fx(ins.ask) : "no inside"));
+  if (ins.spread != null) head.appendChild(el("span", null, "spread " + Number((ins.spread * 100).toFixed(1)) + "¢"));
+  head.appendChild(el("span", "muted l2-tot", shares(tot.bid) + " bid · " + shares(tot.ask) + " ask"));
   head.title = "rows as IBKR holds them (" + (d.rows || "?") + " a side asked) · " + (d.source || "") +
     " · totals are the rows shown, not the whole book";
   host.appendChild(head);
-  const ladder = el("div", "l2-ladder");
-  (d.asks || []).slice().reverse().forEach(r => ladder.appendChild(depthRow(r, "ask")));
-  const mid = el("div", "l2-mid", ins.bid != null && ins.ask != null ? fx(ins.bid) + " × " + fx(ins.ask) : "—");
-  ladder.appendChild(mid);
-  (d.bids || []).forEach(r => ladder.appendChild(depthRow(r, "bid")));
-  host.appendChild(ladder);
-  centreLadder(ladder, mid, d.symbol);
+  const montage = el("div", "l2-montage");
+  montage.appendChild(depthSide(d.bids || [], "bid"));
+  montage.appendChild(depthSide(d.asks || [], "ask"));
+  host.appendChild(montage);
+  if (top) montage.scrollTop = top;                       // reading down the book is not undone by an update
   const evs = (d.events || []).filter(e => e.kind !== "gap").slice(-3).reverse();
   if (evs.length) {
     const log = el("div", "l2-events");
@@ -2878,8 +2908,8 @@ function renderDecisionCard(frame, ctx, card) {
     if (isReview) {
       // where the eye goes at the trigger (ZfwTJAMLroA @01:08:06)
       body.appendChild(tapeLineFor(card.symbol));
-      body.appendChild(el("div", "dc-tapehint", "at the trigger, read the Time & Sales: ▲ green prints at the ask = " +
-        "buyers lifting the offer · ▼ red at the bid = sellers hitting it"));
+      body.appendChild(el("div", "dc-tapehint", "at the trigger, read the Time & Sales: green B prints at the ask = " +
+        "buyers lifting the offer · red S at the bid = sellers hitting it"));
     }
     if (!isNo) body.appendChild(lampStrip(card, CHART_LAMPS, "chart", null, false));
     if (card.setup && card.setup.text && card.setup.text !== v.reason)

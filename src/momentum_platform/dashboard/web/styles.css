@@ -723,12 +723,22 @@ a.cat2-headline:hover{text-decoration:underline}
 .ts-bar{display:flex;height:4px;border-radius:2px;overflow:hidden;margin-top:4px;background:var(--line)}
 .ts-bar.empty{opacity:.4}
 .ts-seg.ask{background:var(--up)} .ts-seg.mid{background:var(--flat)} .ts-seg.bid{background:var(--down)}
+/* the standard tape (2026-10-12): Time · Price · Size · Exch · B/S, newest on
+   top; green a buy at the ask, red a sell at the bid, white between, grey no side */
+.ts-cols{flex:none;display:grid;grid-template-columns:62px 1fr 1fr 40px 22px;gap:6px;padding:1px 4px;
+  border-bottom:1px solid var(--line);font:700 8.5px/1.6 var(--sans);letter-spacing:.5px;text-transform:uppercase;
+  color:var(--ink-faint)}
+.ts-cols span:nth-child(2),.ts-cols span:nth-child(3){text-align:right}
+.ts-cols span:nth-child(5){text-align:center}
 .ts-list{flex:1;min-height:0;overflow-y:auto;font:11px/1.5 var(--mono);font-variant-numeric:tabular-nums}
-.ts-row{display:grid;grid-template-columns:64px 1fr 1fr 14px;gap:6px;padding:0 4px;border-radius:3px}
+.ts-row{display:grid;grid-template-columns:62px 1fr 1fr 40px 22px;gap:6px;padding:0 4px;
+  border-bottom:1px solid rgba(255,255,255,.025)}
 .ts-row .ts-p,.ts-row .ts-s{text-align:right}
-.ts-row .ts-t{color:var(--ink-faint)}
-.ts-row.ask{color:var(--up)} .ts-row.bid{color:var(--down)}
-.ts-row.mid{color:var(--ink-dim)} .ts-row.unk{color:var(--ink-faint)}
+.ts-row .ts-t{opacity:.72}
+.ts-row .ts-x{font-size:9.5px;opacity:.7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ts-row .ts-m{text-align:center;font-weight:700}
+.ts-row.ask{color:var(--up);background:rgba(42,209,127,.06)} .ts-row.bid{color:var(--down);background:rgba(255,95,110,.06)}
+.ts-row.mid{color:var(--ink)} .ts-row.unk{color:var(--ink-faint)}
 .ts-row.big{font-weight:700;background:rgba(255,194,71,.10)}
 .ts-row.big .ts-s{color:var(--hi)}
 .ts-row.hist{opacity:.6;font-style:italic}
@@ -894,13 +904,18 @@ a.dc-headline:hover{text-decoration:underline}
 .dc-more-tail{margin-left:8px;text-transform:none;letter-spacing:0;font:500 10px var(--mono);color:var(--ink-dim)}
 
 /* the tape's one-line hint and the Legend's wide tape block (2026-10-09) */
-.ts-hint{font-size:10px;line-height:1.4;color:var(--ink-faint);padding:0 0 3px;border-bottom:1px solid var(--line-soft);margin-bottom:3px}
+.ts-hint{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font-size:10px;line-height:1.4;color:var(--ink-faint);
+  padding:0 0 3px;border-bottom:1px solid var(--line-soft);margin-bottom:3px}
+.ts-key b{font:700 10px var(--mono)} .ts-key.ask{color:var(--up)} .ts-key.bid{color:var(--down)} .ts-key.mid{color:var(--ink)}
 .btn.ts-howto{padding:0 6px;font-size:9.5px;margin-left:2px}
 .legend-grid .lg-wide{grid-column:1 / -1}
 .legend-grid .lg-wide p{margin:3px 0}
 
-/* Level 2 (2026-10-09): the selected name's book, asks over bids, one shade
-   per price level, the venue on each row; huge levels in amber. */
+/* Level 2 (2026-10-09; montage 2026-10-12): the selected name's book in the
+   standard two-column montage — bids on the left, asks on the right, the best
+   price of each side on top — the venue on each row, one colour per price
+   level (the same band on both sides: the inside yellow, then green, cyan,
+   blue, violet), huge levels with an amber edge. */
 .l2-card .card-body{display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:5px 8px 6px}
 .tag.l2-state{font:700 8.5px/1.3 var(--mono);letter-spacing:.5px}
 .tag.l2-state.ok{color:var(--ok-ink);border-color:var(--ok-line);background:var(--ok-bg)}
@@ -910,15 +925,27 @@ a.dc-headline:hover{text-decoration:underline}
 .tag.l2-state.off{color:var(--ink-faint)}
 .l2-head{display:flex;align-items:baseline;gap:8px;font-size:10.5px;flex:none;flex-wrap:wrap}
 .l2-head b{font:700 12px var(--mono);letter-spacing:.4px}
-.l2-ladder{flex:1;min-height:0;overflow-y:auto;font:11px/1.45 var(--mono);font-variant-numeric:tabular-nums;margin-top:3px}
-.l2-row{display:grid;grid-template-columns:44px 1fr 1fr;gap:6px;padding:0 4px;border-radius:2px}
+.l2-head .l2-inside{font:700 11px var(--mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+.l2-head .l2-tot{margin-left:auto;font-family:var(--mono);font-size:9.5px}
+.l2-montage{flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;gap:0 4px;
+  align-items:start;margin-top:3px;font:11px/1.5 var(--mono);font-variant-numeric:tabular-nums}
+.l2-side{min-width:0}
+.l2-cols{display:grid;grid-template-columns:minmax(30px,.9fr) 1fr 1fr;gap:4px;padding:1px 4px;position:sticky;top:0;
+  z-index:1;background:var(--panel);border-bottom:1px solid var(--line);
+  font:700 8.5px/1.6 var(--sans);letter-spacing:.5px;text-transform:uppercase;color:var(--ink-faint)}
+.l2-cols span:nth-child(2),.l2-cols span:nth-child(3){text-align:right}
+.l2-cols.bid .l2-side-name{color:var(--up)} .l2-cols.ask .l2-side-name{color:var(--down)}
+.l2-row{display:grid;grid-template-columns:minmax(30px,.9fr) 1fr 1fr;gap:4px;padding:0 4px;color:var(--ink-dim);
+  background:rgba(255,255,255,.03);border-bottom:1px solid rgba(0,0,0,.25)}
 .l2-row .l2-p,.l2-row .l2-s{text-align:right}
-.l2-row .l2-x{color:var(--ink-faint);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.l2-row.ask{color:#ffb3ba;background:rgba(255,95,110,.07)} .l2-row.ask.alt{background:rgba(255,95,110,.14)}
-.l2-row.bid{color:#a9efc9;background:rgba(42,209,127,.07)} .l2-row.bid.alt{background:rgba(42,209,127,.14)}
+.l2-row .l2-x{font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+.l2-row.lv0{background:rgba(250,204,21,.30);color:#fff3b0}
+.l2-row.lv1{background:rgba(34,197,94,.24);color:#c6f6d5}
+.l2-row.lv2{background:rgba(6,182,212,.22);color:#c4f1f9}
+.l2-row.lv3{background:rgba(59,130,246,.22);color:#cfe0ff}
+.l2-row.lv4{background:rgba(192,80,230,.20);color:#f0d2fb}
 .l2-row.huge{font-weight:700;box-shadow:inset 3px 0 0 var(--hi)} .l2-row.huge .l2-s{color:var(--hi)}
-.l2-mid{text-align:center;font:600 10px var(--mono);color:var(--ink);border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);margin:2px 0;padding:1px 0}
+.l2-none{font:10px var(--sans);color:var(--ink-faint);padding:3px 4px}
 .l2-events{flex:none;margin-top:4px;border-top:1px solid var(--line-soft);padding-top:3px}
 .l2-ev{font:9.5px/1.4 var(--mono);color:var(--ink-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .l2-ev.bid{color:#a9efc9} .l2-ev.ask{color:#ffb3ba}

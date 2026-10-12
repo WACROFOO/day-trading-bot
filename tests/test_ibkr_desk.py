@@ -332,6 +332,43 @@ def test_history_refresh_asks_for_a_short_window(monkeypatch):
     assert mins and mins[0][1] == "900 S", "a rolling refresh, not the whole day again"
 
 
+def test_a_name_with_no_recent_trades_is_said_once_and_rests_instead_of_being_asked_every_turn():
+    """2026-10-12: QETA had no trades, IBKR answered 162 "HMDS query returned
+    no data" to every 15-minute refresh, and the terminal printed it every 2-3
+    minutes all morning. The desk now says it once, in words, lets the name
+    rest five minutes, and asks again; a name that prints again is said again
+    the next time it goes quiet."""
+    from momentum_platform.dashboard import ibkr_desk as D
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    lines = []
+    desk.log = lines.append
+    for _ in range(len(desk.symbols)):              # spend each name's volume-profile turn first
+        desk.refresh_history()
+    ib.minutes["BBB"] = []                          # BBB has stopped printing
+    ib.hist_calls.clear()
+    turns = [desk.refresh_history() for _ in range(6)]
+    asked_bbb = [c for c in ib.hist_calls if c[0] == "BBB" and c[2] == "1 min"]
+    assert len(asked_bbb) == 1, "asked once, then it rests"
+    assert turns.count("AAA") >= 4, "its turns go to the names that trade"
+    said = [x for x in lines if x.strip().startswith("BBB: no trades in the last 15 min")]
+    assert len(said) == 1 and "asked again every 5 min" in said[0]
+    assert "HMDS query returned no data" in D.BENIGN, "the raw IBKR line is the desk's to say"
+    # five minutes of turns on, it is asked again — and still not repeated in the terminal
+    assert desk._history_quiet["BBB"] - desk._history_turn >= 5, "rests about 5 min of 20-s turns"
+    desk._history_quiet["BBB"] = 0
+    for _ in range(3):
+        desk.refresh_history()
+    assert len([c for c in ib.hist_calls if c[0] == "BBB" and c[2] == "1 min"]) == 2
+    assert len([x for x in lines if "BBB: no trades" in x]) == 1
+    # it prints again: rests no more, and a later quiet spell is said again
+    ib.minutes["BBB"] = minute_bars(T0 - timedelta(minutes=30), 40, 8.0)
+    desk._history_quiet["BBB"] = 0
+    for _ in range(3):
+        desk.refresh_history()
+    assert "BBB" not in desk._history_quiet and "BBB" not in desk._quiet_said
+
+
 # -- today's session only ---------------------------------------------------------
 
 def test_session_window_reaches_back_to_four_am_et():
@@ -477,6 +514,21 @@ def test_a_competing_live_session_is_named_once_in_plain_words_not_once_per_symb
     desk._on_tws_error(7, 10197, "No market data during competing live session",
                        type("C", (), {"symbol": "AAA"})())
     assert sum(1 for x in lines if "COMPETING LIVE SESSION" in x) == 2   # a new episode is named again
+
+
+def test_the_competing_session_time_is_said_in_eastern_time_not_the_desks_utc_clock():
+    """2026-10-12: "first seen 08:28:17" was the desk's UTC clock — 04:28 ET,
+    10:28 in Paris — and read as neither. The line says ET, labelled."""
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    lines = []
+    desk.log = lines.append
+    clock.now = datetime(2026, 10, 12, 8, 28, 17, tzinfo=UTC)
+    desk._on_tws_error(7, 10197, "No market data during competing live session", type("C", (), {"symbol": "AAA"})())
+    desk._on_tws_error(-1, 1102, "Connectivity between IB and TWS has been restored")
+    said = [x for x in lines if "first seen" in x]
+    assert len(said) == 2 and all("first seen 04:28:17 ET" in x for x in said)
+    assert not any("08:28:17" in x for x in said)
 
 
 def test_lost_connectivity_is_recorded_without_touching_the_socket():

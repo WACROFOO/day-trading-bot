@@ -35,6 +35,16 @@ Levers (each against the baseline = the desk's current rules, trail-1R exit):
 Costs as `backtest_recent.cost_r` plus $1 per extra partial exit. Fills
 realistic (stop-limit: open inside the cap, cap only on a return, else none).
 
+SECTION 5, PREREGISTERED 2026-10-12 before any run of it
+(research/reddit-bot-rules-2026-10-12/README.md §7). Two leads from a published
+bot's rules, replayed on one month: a fixed 2R target in place of the 1R trail,
+and "done after a loss" — no further plan on a name the day an earlier plan on
+it lost. Both read on the LIVE rules (the current rules + A13's 2 % stop floor).
+A lead HOLDS only if it raises the mean net R per trade over the live rules
+with the 1R trail by at least 0.05 in BOTH the train and the test years, with
+at least 300 test trades. Holding is a direction for the owner's amendment
+(docs/preregistration.md §5), not the adoption rule above.
+
     python3 scripts/ablation_history.py          # from the history cache
 """
 from __future__ import annotations
@@ -188,6 +198,54 @@ FILTER_LEVERS = {
 }
 
 
+def live_ok(p):
+    """The rules the bot runs: the current rules and A13's 2 % stop floor (the
+    $5 floor came off 2026-09-30; $2 is the price band's own floor)."""
+    return base_ok(p) and p["stop_pct"] >= 2.0
+
+
+def after_loss(ps, allowed, exit_name):
+    """"Done after a loss": the allowed plans, minus every plan on a name after
+    an earlier allowed plan on it the same day lost (net R < 0) under the same
+    exit. By arming order — the exit time is not kept here; a plan arming while
+    that trade is still open could not be taken under one position anyway."""
+    keep, lost = [], set()
+    for p in sorted(ps, key=lambda q: (q["day"], q["sym"], q["t"])):
+        if not allowed(p):
+            continue
+        key = (p["day"], p["sym"])
+        if key in lost:
+            continue
+        keep.append(p)
+        if p["x"][exit_name][1] < 0:
+            lost.add(key)
+    return keep
+
+
+LEADS_MIN_GAIN, LEADS_MIN_TEST = 0.05, 300
+
+
+def leads(tr, te):
+    """Section 5's rows: [(name, train n, train R, test n, test R)] and the verdicts."""
+    base_ex = "trail 1R (now)"
+    cfg = [("live rules · trail 1R (now)", lambda ps: [p for p in ps if live_ok(p)], base_ex),
+           ("live rules · fixed 2R", lambda ps: [p for p in ps if live_ok(p)], "fixed 2R"),
+           ("live rules · BE at 1R, target 2R", lambda ps: [p for p in ps if live_ok(p)], "BE at 1R, target 2R"),
+           ("live + done after a loss · trail 1R", lambda ps: after_loss(ps, live_ok, base_ex), base_ex),
+           ("live + done after a loss · fixed 2R", lambda ps: after_loss(ps, live_ok, "fixed 2R"), "fixed 2R")]
+    rows = []
+    for name, pick, ex in cfg:
+        a, b = pick(tr), pick(te)
+        ma, na = score(a, ex); mb, nb = score(b, ex)
+        rows.append((name, na, ma, nb, mb))
+    _, _, b_tr, _, b_te = rows[0]
+    verdicts = {}
+    for name, na, ma, nb, mb in rows[1:]:
+        holds = (ma - b_tr >= LEADS_MIN_GAIN and mb - b_te >= LEADS_MIN_GAIN and nb >= LEADS_MIN_TEST)
+        verdicts[name] = "HOLDS" if holds else "DOES NOT HOLD"
+    return rows, verdicts
+
+
 def score(ps, exit_name, which=1):
     vals = [p["x"][exit_name][which] for p in ps]
     return (mean(vals) if vals else float("nan")), len(vals)
@@ -296,8 +354,16 @@ def main(argv=None) -> int:
           f"test years {', '.join(f'{y} {mean(v):+.3f} ({len(v)})' for y, v in sorted(yrs.items()))}")
     ok = mt > 0 and lb > 0 and nt >= 200 and sum(1 for v in yrs.values() if mean(v) > 0) >= 2
     print(f"  ADOPTION RULE: {'MET' if ok else 'NOT MET'}")
+
+    print("\n5. PREREGISTERED 2026-10-12 · the two leads of research/reddit-bot-rules-2026-10-12/ · plan level")
+    print(f"  holds = +{LEADS_MIN_GAIN} R a trade or more over the first row in BOTH periods, >= {LEADS_MIN_TEST} test trades")
+    lrows, verdicts = leads(tr, te)
+    print(f"  {'configuration':<38}{'train n':>9}{'train R':>9}{'test n':>8}{'test R':>9}")
+    for name, na, ma, nb, mb in lrows:
+        print(f"  {name:<38}{na:>9}{ma:>+9.3f}{nb:>8}{mb:>+9.3f}  {verdicts.get(name, '(the reference)')}")
     if args.json:
-        Path(args.json).write_text(json.dumps({"rows": rows, "best": [cur, ex, chosen, mt, nt, lb]}, default=str))
+        Path(args.json).write_text(json.dumps({"rows": rows, "best": [cur, ex, chosen, mt, nt, lb],
+                                               "leads": lrows, "lead_verdicts": verdicts}, default=str))
     return 0
 
 

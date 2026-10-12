@@ -744,14 +744,21 @@ def _left(until: datetime) -> float:
     return max(0.0, (until - datetime.now(ET)).total_seconds())
 
 
-def desk_only_symbols(conn, args) -> list[str]:
+def desk_only_symbols(conn, args, now: Optional[datetime] = None) -> list[str]:
     """Names for the desk outside the bot's day: --symbols, else the last board
-    the day's desk recorded, else none (the desk's own scanner picks)."""
+    the day's desk recorded TODAY (ET), else none (the desk's own scanner picks).
+
+    2026-10-12 04:17: the morning desk started on Friday's board (MI QETA SAIQ
+    SMJF VEEA VIVK XRTX). The desk holds eight names and never drops one, so of
+    the sixteen gappers its scanner found that morning only YMAT got a seat. An
+    earlier day's board is history, not a watchlist."""
     if args.symbols:
         return [s.strip().upper() for s in args.symbols.split(",") if s.strip()]
+    today = (now or datetime.now(ET)).astimezone(ET).date().isoformat()
     try:
         rows = conn.execute("SELECT DISTINCT symbol FROM board_snapshots WHERE ts_et = "
-                            "(SELECT MAX(ts_et) FROM board_snapshots) ORDER BY symbol").fetchall()
+                            "(SELECT MAX(ts_et) FROM board_snapshots WHERE substr(ts_et, 1, 10) = ?) "
+                            "ORDER BY symbol", (today,)).fetchall()
     except Exception:                                 # noqa: BLE001 — a ledger from before the table
         rows = []
     return [r[0] for r in rows]

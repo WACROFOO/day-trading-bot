@@ -1557,7 +1557,9 @@ def test_ui_a_replay_says_it_has_no_tape(page):
 
 
 def test_ui_the_tape_card_renders_the_servers_prints(page):
-    """Each print carries its side as a mark as well as a colour; a big print
+    """The standard tape (owner, 2026-10-12): Time · Price · Size · Exch · B/S,
+    newest on top; each print carries its side as a letter as well as a
+    colour — B green at the ask, S red at the bid, white between; a big print
     is bold; the gap and the history boundary are said on the tape; the facts
     are the server's, and the decision card repeats the 60-second line."""
     _seek(page, 125)
@@ -1571,7 +1573,13 @@ def test_ui_the_tape_card_renders_the_servers_prints(page):
     rows = page.locator("#tapeCard .ts-row")
     assert rows.count() == len(snap["prints"]) == 7
     marks = page.eval_on_selector_all("#tapeCard .ts-row .ts-m", "els => els.map(e => e.textContent)")
-    assert marks[:4] == ["▲", "·", "▼", "▲"], "newest first: the big lift, mid, the bid, the first lift"
+    assert marks[:4] == ["B", "·", "S", "B"], "newest first: the big lift, mid, the bid, the first lift"
+    assert page.locator("#tapeCard .ts-cols").inner_text().split() == ["TIME", "PRICE", "SIZE", "EXCH", "B/S"]
+    colours = page.eval_on_selector_all("#tapeCard .ts-row", "els => els.slice(0, 3).map(e => getComputedStyle(e).color)")
+    assert colours[0] == "rgb(42, 209, 127)" and colours[2] == "rgb(255, 95, 110)", "a buy green, a sell red"
+    assert colours[1] not in (colours[0], colours[2]), "between is neither"
+    assert all("NSDQ" in t for t in page.locator("#tapeCard .ts-row.hist").all_inner_texts()), "the venue, short"
+    assert "7.205" in rows.nth(1).inner_text(), "a midpoint print keeps its sub-penny, not the ask's 7.21"
     assert page.locator("#tapeCard .ts-row.big").count() == 1
     assert "9,000" in page.locator("#tapeCard .ts-row.big").inner_text()
     assert page.locator("#tapeCard .ts-row.hist").count() == 3
@@ -1585,7 +1593,8 @@ def test_ui_the_tape_card_renders_the_servers_prints(page):
     assert "Approximation" in big.get_attribute("title")
     assert "Approximation" in page.locator("#legend").inner_text()
     # the card says what the tape is, in one line, and the Legend says how to read it
-    assert "▲ at the ask = buyers lifting" in page.locator("#tapeCard .ts-hint").inner_text()
+    key = page.locator("#tapeCard .ts-hint").inner_text()
+    assert "B buy — at the ask" in key and "S sell — at the bid" in key and "between" in key
     _open_why(page)
     line = page.locator(".dc-tape").inner_text()
     assert f"{snap['facts']['pctAsk']:.0f}% at the ask" in line and "1 big" in line
@@ -1889,10 +1898,10 @@ def _depth_snapshot(sym, events=(), state="LIVE", code=None, message=""):
     return snap
 
 
-def test_ui_the_ladder_opens_on_the_inside(page):
-    """Under the decision card the book is shorter than its twenty rows; the
-    ten asks listed first used to hide the bids. The ladder opens centred on
-    the inside quote, bids and asks both in view."""
+def test_ui_the_book_opens_with_both_insides_on_top(page):
+    """The montage (owner, 2026-10-12): bids left, asks right, each side's best
+    price on top — under the decision card, with ten levels a side, both
+    insides are in view without scrolling and side by side."""
     import sys as _sys
     _sys.path.insert(0, str(ROOT / "src"))
     from momentum_platform.depth import DepthBook
@@ -1906,17 +1915,16 @@ def test_ui_the_ladder_opens_on_the_inside(page):
     page.evaluate("s => window.__applyDepth(s)", b.snapshot())
     page.wait_for_timeout(200)
     seen = page.evaluate("""() => {
-      const lad = document.querySelector('#depthCard .l2-ladder'), r = lad.getBoundingClientRect();
+      const m = document.querySelector('#depthCard .l2-montage'), r = m.getBoundingClientRect();
       const inView = e => { const q = e.getBoundingClientRect(); return q.top >= r.top - 1 && q.bottom <= r.bottom + 1; };
-      return { scrolls: lad.scrollHeight > lad.clientHeight + 4,
-               mid: inView(lad.querySelector('.l2-mid')),
-               bids: Array.from(lad.querySelectorAll('.l2-row.bid')).filter(inView).length,
-               asks: Array.from(lad.querySelectorAll('.l2-row.ask')).filter(inView).length };
+      const bid = m.querySelector('.l2-side.bid .l2-row'), ask = m.querySelector('.l2-side.ask .l2-row');
+      return { bidIn: inView(bid), askIn: inView(ask), bidText: bid.innerText, askText: ask.innerText,
+               leftOf: bid.getBoundingClientRect().right <= ask.getBoundingClientRect().left + 1,
+               sameLine: Math.abs(bid.getBoundingClientRect().top - ask.getBoundingClientRect().top) < 2 };
     }""")
-    assert seen["mid"], seen
-    if seen["scrolls"]:
-        assert seen["bids"] >= 3 and seen["asks"] >= 3, seen
-        assert abs(seen["bids"] - seen["asks"]) <= 2, "centred: " + str(seen)
+    assert seen["bidIn"] and seen["askIn"], seen
+    assert seen["leftOf"] and seen["sameLine"], "bid on the left, ask on the right, one line: " + str(seen)
+    assert "6.50" in seen["bidText"] and "6.51" in seen["askText"]
 
 
 def test_ui_a_replay_says_it_has_no_book(page):
@@ -1927,21 +1935,34 @@ def test_ui_a_replay_says_it_has_no_book(page):
     assert "no Level 2 in this replay" in page.locator("#depthCard").inner_text()
 
 
-def test_ui_the_book_card_draws_the_ladder_and_names_each_venue(page):
-    """Asks over bids, best prices at the inside, one shade per price level, the
-    venue on each row; a huge level in amber with its definition in the
-    tooltip — an Approximation, never a gate."""
+def test_ui_the_book_card_is_the_standard_montage_and_names_each_venue(page):
+    """Bids on the left, asks on the right, the best price of each side on top;
+    the venue on each row; one colour per price level, the same band on both
+    sides; a huge level with an amber edge and its definition in the tooltip —
+    an Approximation, never a gate."""
     _seek(page, 125)
     sym = page.locator("#symTicker").inner_text()
     page.evaluate("s => window.__applyDepth(s)", _depth_snapshot(sym))
     page.wait_for_timeout(200)
     assert page.locator("#depthTag").inner_text() == "LIVE"
-    rows = page.eval_on_selector_all("#depthCard .l2-row", "els => els.map(e => [e.className, e.innerText])")
-    sides = [("ask" if " ask" in c else "bid") for c, _ in rows]
-    assert sides == ["ask"] * 3 + ["bid"] * 4, "asks above the inside, bids below"
-    assert "IEX" in rows[0][1] and "6.53" in rows[0][1], "the highest ask on top"
-    assert "6.51" in rows[2][1] and "6.50" in rows[3][1], "the inside meets in the middle"
-    assert page.locator("#depthCard .l2-mid").inner_text() == "6.50 × 6.51"
+    assert page.locator("#depthCard .l2-cols.bid").inner_text().split() == ["MMID", "BID", "SIZE"]
+    assert page.locator("#depthCard .l2-cols.ask").inner_text().split() == ["MMID", "ASK", "SIZE"]
+    bids = page.eval_on_selector_all("#depthCard .l2-side.bid .l2-row", "els => els.map(e => [e.className, e.innerText])")
+    asks = page.eval_on_selector_all("#depthCard .l2-side.ask .l2-row", "els => els.map(e => [e.className, e.innerText])")
+    assert [t.split()[:2] for _, t in bids] == [["NSDQ", "6.50"], ["ARCA", "6.50"], ["EDGX", "6.49"], ["NSDQ", "6.48"]], \
+        "the best bid on top, falling"
+    assert [t.split()[:2] for _, t in asks] == [["NSDQ", "6.51"], ["NSDQ", "6.52"], ["IEX", "6.53"]], \
+        "the best ask on top, rising"
+    lv = lambda c: [x for x in c.split() if x.startswith("lv")][0]
+    assert [lv(c) for c, _ in bids] == ["lv0", "lv0", "lv1", "lv2"], "one band per price level"
+    assert [lv(c) for c, _ in asks] == ["lv0", "lv1", "lv2"]
+    band = page.evaluate("() => [document.querySelector('#depthCard .l2-side.bid .l2-row.lv0'), "
+                         "document.querySelector('#depthCard .l2-side.ask .l2-row.lv0')].map(e => getComputedStyle(e).backgroundColor)")
+    assert band[0] == band[1], "the inside is the same colour on both sides"
+    left = page.evaluate("() => document.querySelector('#depthCard .l2-side.bid').getBoundingClientRect().left < "
+                         "document.querySelector('#depthCard .l2-side.ask').getBoundingClientRect().left")
+    assert left, "bids on the left"
+    assert page.locator("#depthCard .l2-inside").inner_text() == "6.50 × 6.51"
     assert page.locator("#depthCard .l2-row.huge").count() == 1
     assert "12,000" in page.locator("#depthCard .l2-row.huge").inner_text()
     assert "Approximation" in page.locator("#depthCard .l2-row.huge").get_attribute("title")
