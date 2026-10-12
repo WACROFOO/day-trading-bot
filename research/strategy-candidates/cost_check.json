@@ -1,0 +1,18 @@
+{
+ "verdict": "holds",
+ "delta": 0.026,
+ "lo": 0.002,
+ "hi": 0.043,
+ "n": 475,
+ "resolved": 454,
+ "unresolved_share": 0.0442,
+ "cancelled": 0,
+ "proxy_net": -0.145,
+ "q_net": -0.119,
+ "q0_net": -0.064,
+ "run": "2026-10-12T1512Z-quotes",
+ "git": "8512a1e",
+ "smoke": false,
+ "record": "research/strategy-candidates/runs/2026-10-12T1512Z-quotes/report.txt",
+ "note": "values as printed (3 decimals) in the filed report; the Mac holds the unrounded file"
+}

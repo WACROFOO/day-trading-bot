@@ -1,0 +1,32 @@
+REAL-QUOTE COST CHECK · run 2026-10-12T1512Z-quotes · git 8512a1e · research/strategy-candidates/PREREGISTRATION.md, amendment 2026-10-12c
+SOURCE   Alpaca SIP prints and NBBO quotes · bars /Users/ayman.benharara/day-trading-bot/data/cache/history · train 4,155/4,790 symbol-days with bars · valid 1,609/1,811 symbol-days with bars
+MODEL Q  short at the NBBO bid at the order time (+4 s) − 1c · stop: the first valid print ≥ the stop, filled at max(print, ask) + 1c · otherwise the ask at 15:55:04 + 1c · commission as the proxy run · Q0: no cents
+SAMPLE   1610 trades over 5 configurations · 803 distinct to re-price · unresolved: no quote at the entry 26
+
+THE DECISION — S2 G20·hod·close, train + 2023, trade level
+  proxy net -0.145 · Q net -0.119 · Q0 net -0.064 · Δ = Q − proxy +0.026 R (95 % interval +0.002 … +0.043) on 454 of 475 trades (4 % unresolved; 0 more cancelled: the bid already at or above the stop)
+  VERDICT  holds — the rule: |Δ| ≤ 0.05 R or an interval holding 0 → holds; over +0.05 with the interval above 0 → too pessimistic; under −0.05 with it below 0 → too optimistic; more than 10 % unresolved → inconclusive
+  NEXT     S2W runs as written, plus criterion 8: python3 scripts/candidates/run.py --lead S2W
+
+WHAT THE QUOTES SAY (G20·hod·close; the proxy charges half its spread + 1c a side)
+  spread at entry   real median 1.0¢ (0.32 % of price), mean 3.8¢ · proxy median 2.2¢, mean 3.3¢
+  spread at exit    real median 1.0¢ at the stops · 1.0¢ at 15:55
+  entry fill        Q's bid − 1c against the bar's open: median -1.5¢, mean -2.9¢
+  stops             the bars stop 250 trades · the prints confirm 250 (0 later than the bar) · 0 held to 15:55 instead: no valid print through the stop after the order
+  Δ by price           $10+ +0.077 (84) · $2-5 +0.016 (231) · $5-10 +0.010 (139)
+  Δ by order time      09:35-09:59 +0.021 (313) · 10:00-10:30 +0.037 (141)
+  Δ by recent $ volume hi +0.025 (453) · mid +0.150 (1)
+  data              quotes older than 10 s: 3 at entry, 1 at exit · our shares above the displayed bid size (as the feed reports it): 425
+
+EVERY CONFIGURATION UNDER Q — reported; it decides only in the 'too pessimistic' branch
+  n, proxy, Q, Q0: every trade · 1 pos: one position at a time (proxy and Q exits)
+                             │ train 2021-2022, R a trade                            ║ 2023
+ config                      │     n   proxy       Q      Q0 │ 1 pos   proxy       Q ║     n   proxy       Q      Q0 │ 1 pos   proxy       Q
+ G20·hod·close               │   362  -0.172  -0.134  -0.078 │   272  -0.047  -0.012 ║   113  -0.087  -0.070  -0.015 │   106  -0.089  -0.072
+ G20·bar5·close              │   374  -0.253  -0.195  -0.106 │   293  -0.145  -0.098 ║   109  +0.170  +0.101  +0.199 │   102  +0.214  +0.135
+ G40·hod·close               │   170  -0.168  -0.137  -0.088 │   151  -0.135  -0.086 ║    53  +0.302  +0.334  +0.381 │    51  +0.360  +0.399
+ G40·bar5·close              │   178  -0.255  -0.211  -0.142 │   157  -0.169  -0.115 ║    55  +0.781  +0.647  +0.720 │    53  +0.864  +0.725
+ S2W G20·hod·close·stop10-20 │   149  -0.033  -0.022  +0.013 │   127  -0.040  -0.019 ║    47  +0.266  +0.267  +0.307 │    46  +0.221  +0.214
+
+done in 2211 s · files: research/strategy-candidates/results/2026-10-12T1512Z-quotes
+Paper only. Not in this check: borrow, locates, the previous day's SSR, depth beyond the displayed touch.

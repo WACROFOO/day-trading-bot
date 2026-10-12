@@ -646,3 +646,9 @@ def test_q_cancels_an_entry_whose_bid_is_already_through_the_stop(tmp_path):
     rows[0]["q"] = q                                                       # a cancellation is not missing data
     dec = RQ.decide(rows)
     assert dec["cancelled"] == 1 and dec["n"] == 99 and dec["unresolved_share"] == 0 and dec["verdict"] == "holds"
+
+
+def test_quote_sizes_before_november_2025_are_round_lots():
+    from candidates import requote as RQ
+    assert RQ.displayed_shares("2022-03-01", 3) == 300                     # 3 round lots
+    assert RQ.displayed_shares("2025-11-03", 300) == 300                   # shares from the change on

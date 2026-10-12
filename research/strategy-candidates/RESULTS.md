@@ -138,6 +138,6 @@ long loses. S2 is the only one whose fade exists before costs. Its wide-stop lea
 preregistered as S2W and waits for one Mac run, gated on 2016-2020 before it may open S2's
 holdout. Paper only.
 
-*Since, the same day:* S2's costs come from a proxy never fitted on its kind of trade, so a
-real-quote cost check now runs before S2W (amendment 2026-10-12c); its verdict decides which S2
-rule, if any, may use S2's one holdout opening.
+*Since, the same day:* S2's costs came from a proxy never fitted on its kind of trade, so a
+real-quote cost check ran before S2W (amendment 2026-10-12c). The proxy holds, and S2W fails its
+first gate — `research/strategy-candidates/COST-CHECK.md`.

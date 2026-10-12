@@ -34,6 +34,14 @@ from candidates import sim as S  # noqa: E402
 from candidates.rules import FAMILIES, label  # noqa: E402
 
 DELTA_BAND, MAX_UNRESOLVED = 0.05, 0.10                                 # fixed by the amendment
+# Alpaca showed CTA/UTP quote sizes as "the number of round lots available at the quoted price"
+# until 2025-11-03, in shares after (docs.alpaca.markets/us/changelog/marketdata-bid-and-ask-size-display-change).
+# The 2026-10-12 check compared shares with lots; a lot is 100 shares for these $2-20 names.
+SHARES_FROM, LOT = "2025-11-03", 100
+
+
+def displayed_shares(day: str, size: float) -> float:
+    return size if day >= SHARES_FROM else size * LOT
 VERDICT_FILE = P.RESULTS / "cost_check.json"
 NEXT = {
     "holds": "S2W runs as written, plus criterion 8: python3 scripts/candidates/run.py --lead S2W",
@@ -178,9 +186,9 @@ def report(run_id: str, src: str, rows: dict, names: dict, dec: dict, unresolved
         stale_in = sum(1 for r in res if r["q"]["age_in"] > Q.STALE_MS)
         stale_out = sum(1 for r in res if (r["q"]["age_out"] or 0) > Q.STALE_MS)
         big = sum(1 for r in res if r["q"]["bid_size_in"]
-                  and S.live_shares(r["entry"], r["stop"] - r["entry"]) > r["q"]["bid_size_in"])
+                  and S.live_shares(r["entry"], r["stop"] - r["entry"]) > displayed_shares(r["day"], r["q"]["bid_size_in"]))
         rep.append(f"  data              quotes older than 10 s: {stale_in} at entry, {stale_out} at exit · our shares "
-                   f"above the displayed bid size (as the feed reports it): {big}")
+                   f"above the displayed bid (round lots × {LOT} before {SHARES_FROM}): {big}")
     rep += ["", "EVERY CONFIGURATION UNDER Q — reported; it decides only in the 'too pessimistic' branch",
             "  n, proxy, Q, Q0: every trade · 1 pos: one position at a time (proxy and Q exits)"] + config_head()
     for k, ts in rows.items():
