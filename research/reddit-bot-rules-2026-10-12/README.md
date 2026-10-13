@@ -112,13 +112,17 @@ costliest parts: the $0.30 cap with no minimum (our 2 % floor instead:
 - **The $0.30 cap — confirmed over ten years.** Same file, §1: "+ stop ≤ $0.30"
   reads −1.291 / −1.590 against the current rules' −1.218 / −1.476 — worse in
   both periods, as here.
-- **No second try on a name that stopped you out today — still a lead.** Plan
+- **No second try on a name that stopped you out today — still a lead on
+  2026-10-12; ✗ failed over ten years on 2026-10-13 (below).** Plan
   level −0.363 R a trade over 44 against −0.484 over 67; portfolio −15.45 R
   against −21.68, better in both periods; old costs −0.228 against −0.349. The
   month study's stricter "first plan only" made things worse (−0.257 there,
   −0.692 here) — a different rule: it also drops the second try after a win.
   **No ten-year read exists yet**: the ablation never had this lever. It has it
   now (§7).
+  **✗ FAILED its ten-year test (2026-10-13, §7):** −0.437 against −0.430 in
+  train, −0.488 against −0.502 in test — under the +0.05 it needed in both.
+  The month's +0.12 was the month.
 
 ## 5 · What this could not check
 
@@ -138,7 +142,8 @@ costliest parts: the $0.30 cap with no minimum (our 2 % floor instead:
 
 **One of their ideas is still a lead: no second try on a name that stopped you
 out** — better on this month in both periods and under both cost models, never
-measured over ten years. The other, **a plain 2R target in place of the 1 R
+measured over ten years. **✗ Superseded 2026-10-13: the ten-year test (§7)
+fails it — no lead is left.** The other, **a plain 2R target in place of the 1 R
 trail, is withdrawn**: better on this month, worse over ten years on the
 current rules (§4). Their $0.30 stop cap hurts here and over ten years; their
 spike sell cut 33 of 34 winners at +1 R; their full rule set loses about twice
@@ -166,3 +171,36 @@ amendment (`docs/preregistration.md` §5), like A13 — harm reduction, not the
 ablation's own adoption rule, which no configuration has met. The forward
 shadow suggested that morning is not set up: one ten-year run settles more than
 months of forward sessions, and its 2R half already fails.
+
+### Result — run 2026-10-13, in the cloud on the full history cache
+
+The cache was complete here (2,608 sessions, 24,831 symbol-days, none
+missing), so the run did not wait for the Mac. `python3
+scripts/ablation_history.py --costs live`, output in
+`research/paper-exercise/reports/ablation_live_costs_v3.txt`. Its §1–§4 are
+line for line those of `ablation_live_costs_v2.txt`, for example trail −1.218 /
+−1.476 and fixed 2R −1.331 / −1.574 on the current rules. Its §5, net R a
+trade:
+
+| configuration | train n | train R | test n | test R | verdict |
+|---|---:|---:|---:|---:|---|
+| live rules · trail 1R (now) | 3,200 | −0.430 | 2,266 | −0.502 | the reference |
+| live rules · fixed 2R | 3,200 | −0.515 | 2,266 | −0.515 | ✗ does not hold |
+| live rules · BE at 1R, target 2R | 3,200 | −0.474 | 2,266 | −0.510 | ✗ does not hold |
+| live + done after a loss · trail 1R | 2,492 | −0.437 | 1,745 | −0.488 | ✗ does not hold |
+| live + done after a loss · fixed 2R | 2,591 | −0.524 | 1,812 | −0.465 | ✗ does not hold |
+
+**Neither lead holds.**
+- **"Done after a loss"** moves the mean by −0.007 in train and +0.014 in test,
+  against the +0.05 it needed in both.
+- **The 2R target** is worse than the trail in both periods on the live rules,
+  as §4 found on the current ones.
+
+The bot is unchanged.
+
+The live case that made this a question, MNDR 2026-10-12, was the bot's own
+five tries on one name (`research/daily/2026-10-12/review.md`):
+- the first lost −0.81 R;
+- the next four made −0.60, +0.00, +0.08 and −0.35 R on the fills.
+
+Ten years say that day was an anecdote.
