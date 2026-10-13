@@ -1,0 +1,168 @@
+  MNDR: reference rolled to session 2026-10-13
+  rebuild took 20.9s (collect 20.8 · build 0.0 · journal 0.0 · publish 0.0)
+  YMAT: finviz float 1.58M (looked up on join)
+  YMAT: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  YMAT: reference rolled to session 2026-10-13
+  rebuild took 20.8s (collect 20.8 · build 0.0 · journal 0.0 · publish 0.0)
+  GIXI: finviz float 2.49M (looked up on join)
+  GIXI: type COMMON · tick 0.01 · split none
+  GIXI: reference rolled to session 2026-10-13
+  rebuild took 20.9s (collect 20.9 · build 0.0 · journal 0.0 · publish 0.0)
+  CLWT: finviz float 3.08M (looked up on join)
+  CLWT: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  CLWT: reference rolled to session 2026-10-13
+  rebuild took 20.9s (collect 20.9 · build 0.0 · journal 0.0 · publish 0.0)
+  DAIC: finviz float 1.60M (looked up on join)
+  DAIC: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  DAIC: reference rolled to session 2026-10-13
+  rebuild took 20.7s (collect 20.7 · build 0.0 · journal 0.0 · publish 0.0)
+  LNKS: finviz float 1.50M (looked up on join)
+  LNKS: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  LNKS: reference rolled to session 2026-10-13
+  rebuild took 20.9s (collect 20.9 · build 0.0 · journal 0.0 · publish 0.0)
+  NCPL: finviz float 4.38M (looked up on join)
+  NCPL: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  NCPL: reference rolled to session 2026-10-13
+  rebuild took 20.9s (collect 20.8 · build 0.0 · journal 0.0 · publish 0.0)
+  SKYA: finviz float 25.40M (looked up on join)
+  SKYA: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  SKYA: reference rolled to session 2026-10-13
+  rebuild took 20.8s (collect 20.8 · build 0.0 · journal 0.0 · publish 0.0)
+  NCPL: no intraday history for a volume profile; RVOL stays on the daily measure
+  SKYA: no intraday history for a volume profile; RVOL stays on the daily measure
+  MNDR: no intraday history for a volume profile; RVOL stays on the daily measure
+  YMAT: no intraday history for a volume profile; RVOL stays on the daily measure
+  GIXI: no intraday history for a volume profile; RVOL stays on the daily measure
+  CLWT: no intraday history for a volume profile; RVOL stays on the daily measure
+  DAIC: no intraday history for a volume profile; RVOL stays on the daily measure
+  LNKS: no intraday history for a volume profile; RVOL stays on the daily measure
+  minute history: 3 refreshes in a row timed out (20s each) — paused for 5.0 min; live bars carry the session meanwhile
+  minute history: 3 refreshes in a row timed out (20s each) — paused for 5.0 min; live bars carry the session meanwhile
+  minute history: 3 refreshes in a row timed out (20s each) — paused for 5.0 min; live bars carry the session meanwhile
+  TWS reported the data connection restored — re-requesting quotes and five-second bars
+  !! COMPETING LIVE SESSION (10197, first seen 03:41:23 ET): another login on this IBKR username — TWS live, IBKR Mobile or Client Portal — has taken the market data; the desk has NO tape for MNDR and the other names until that login closes. Log it out; the desk re-requests on its own when TWS reports the connection restored. No restart needed.
+  minute history: 3 refreshes in a row timed out (20s each) — paused for 5.0 min; live bars carry the session meanwhile
+  feed OFFLINE (gen 1, 16 lines)
+  feed OFFLINE (gen 1, 0 lines)
+  TWS reported the data connection restored — re-requesting quotes and five-second bars
+  GIXI: minute refresh failed: Not connected
+  feed LIVE (gen 2, 0 lines)
+
+desk stopping — disconnecting from IBKR
+stopped by Ctrl-C — the platform is down; the same command brings it back
+  [93m!![0m   a trading day is already running on this ledger (day.py pid 48050) — nothing started, nothing touched
+  [92mok[0m   the platform is up: http://127.0.0.1:8787/  (feed STALE)
+       [2mits output: the terminal that started it — or, for the scheduled 06:55 job and a day this[0m
+       [2mcommand started in the background:  tail -f ~/Library/Logs/day-trading-bot/day.out.log[0m
+       [2mto stop it deliberately:  kill -INT 48050[0m
+
+[1mTrading day 2026-10-13 · 07:30 ET[0m  phase C · TRADE · $40 risk · account $2,000 · /Users/ayman.benharara/day-trading-bot/data/journal.sqlite
+
+[1m1. Watchlist[0m  (gap scan — STAR then WATCH; rejects named)
+       [2m✗ BKYI   38% off the pre-market high — already faded[0m
+       [2m✗ TCRT   $1.60 under $2.00[0m
+       [2m✗ FCHL   $1.50 under $2.00[0m
+       [2m✗ DCX    36% off the pre-market high — already faded[0m
+       [2m✗ WBUY   $0.94 under $2.00[0m
+       [2m✗ SKDD   instrument type "fund" — not common stock[0m
+       [2m✗ RYDE   $0.68 under $2.00[0m
+       [2m9 finviz float(s) handed to the desk (data/float_overrides.json)[0m
+  [92mok[0m   4 names: SCNI AIXI SUGP YJ
+
+[1m2. Probes[0m  (once per day)
+
+Data alignment probe   AAPL   live 4002 vs paper 4002
+       [2mboth connections read-only; nothing order-shaped is sent[0m
+  [92mok[0m   PAPER: connected 127.0.0.1:4002 client 34 read-only · accounts ['D****9781']
+       [2msingle-login mode: desk and executor share the paper session (IBKR_PORT=4002).[0m
+       [2mDecision tape and fill tape are the same tape by construction; the only[0m
+       [2mquestion left is whether that tape is real-time.[0m
+
+Sampling 20s
+    t   LIVE last      bid      ask        ts   PAPER last      bid      ask        ts
+    2           —        —        —         —       343.47   343.27   343.50  07:53:19
+    4           —        —        —         —       343.47   343.27   343.50  07:53:19
+    6           —        —        —         —       343.47   343.27   343.50  07:53:19
+    8           —        —        —         —       343.47   343.27   343.50  07:53:19
+   10           —        —        —         —       343.47   343.27   343.50  07:53:26
+   12           —        —        —         —       343.47   343.27   343.50  07:53:26
+   14           —        —        —         —       343.47   343.27   343.50  07:53:31
+   16           —        —        —         —       343.47   343.27   343.50  07:53:31
+   18           —        —        —         —       343.47   343.27   343.50  07:53:31
+   20           —        —        —         —       343.50   343.27   343.50  07:53:37
+
+VERDICT
+  [92mok[0m   PAPER session is on real-time data (type 1) — the only session, so nothing to lag against
+       [2mDecision tape and fill tape are the same tape. Slippage is measurable.[0m
+VERDICT: realtime
+       [2mrecorded in exercise_state[0m
+  [92mok[0m   paper session is on real-time data — decision tape and fill tape agree
+       [2mstop probe: OFF — it places an order; pass --probe-orders to run it once, deliberately[0m
+  [92mok[0m   pre-market entries: ON — probe: stop queued to 09:30 — monitored exit, positions UNPROTECTED (A1 accepted by ayman.benharara 2026-09-11)
+
+[1m3. Desk + runner[0m
+       [2mIBKR data port 4002 (IBKR_PORT) · ledger /Users/ayman.benharara/day-trading-bot/data/journal.sqlite[0m
+       [2mdesk: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -m momentum_platform.dashboard.server --host 127.0.0.1 --port 8787 --ibkr SCNI,AIXI,SUGP,YJ --ibkr-required[0m
+       [2mdesk: writes to the exercise ledger until 11:31:30 ET[0m
+Starting the IBKR desk. Scan, quotes and history take 30-90 s the first time; the line 'desk ready' means the page is up.
+  IBKR desk connected read-only, client 27, server version 178
+  SCNI: subscribed (quote + 5-second bars); loading daily and minute history
+  SCNI: type ADR · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  IBKR fundamentals are not entitled on this account: float falls back to SEC shares outstanding (an upper bound) or reads UNKNOWN
+  SCNI: float verified 0.7M (finviz via premarket_stars.py)
+  AIXI: subscribed (quote + 5-second bars); loading daily and minute history
+  AIXI: type ADR · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  AIXI: float shares_outstanding_proxy 55.2M (SEC shares outstanding (upper bound))
+  SUGP: subscribed (quote + 5-second bars); loading daily and minute history
+  SUGP: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  SUGP: float verified 1.5M (finviz via premarket_stars.py)
+  YJ: subscribed (quote + 5-second bars); loading daily and minute history
+  YJ: type ADR · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  YJ: float verified 2.5M (finviz via premarket_stars.py)
+  desk ready: SCNI, AIXI, SUGP, YJ — 234 minutes of history, 76 alerts so far
+session: 234 frames, 4 symbols, 76 alerts
+workstation: http://127.0.0.1:8787/
+IBKR — TWS read-only, client 27 (desk) / 28 (scanner), market data type 1, feed LIVE.
+STREAMING — candles, quotes and health reach the page as they happen; the session rebuilds every 3s and the scanner union runs every 120s.
+  feed LIVE (gen 1, 8 lines)
+  [92mok[0m   desk is up on IBKR — feed LIVE
+       [2mit writes to the exercise ledger until 11:31:30 ET[0m
+       [2mrunner: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -u scripts/exercise.py --db /Users/ayman.benharara/day-trading-bot/data/journal.sqlite live --risk 40.0 --account 2000.0 --trade[0m
+       [2mkeeping the Mac awake until the day ends (caffeinate)[0m
+[2mthe bot runs until 11:30 ET, the desk after it too; Ctrl-C stops both[0m
+  [92mok[0m   the platform: http://127.0.0.1:8787/
+  IBKR scanner connected read-only, client 28
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  TWS reported the data connection restored — re-requesting quotes and five-second bars
+[92mok[0m DUR339781 — paper · client 31 · TRADE mode · risk gate Limits(max_daily_loss_r=3.0, consecutive_losses=3, max_entries_per_day=6)
+[2mreading /Users/ayman.benharara/day-trading-bot/data/journal.sqlite every 5s · hard stop 11:30 ET · Ctrl-C to stop[0m
+  [2m7 plan(s) armed on history loaded at start (04:13–07:29 ET, YJ) → refused, tagged backfill, not counted; each row is in the ledger[0m
+  scan union: 347 names from 15 queries
+  14 non-stock instruments dropped before quoting
+  quoting 1-75 of 136 scan hits
+  quoting 76-136 of 136 scan hits
+  scanner: 13 names up ≥10% in the band: BKYI TCRT SCNI FCHL AIXI WBUY YJ DLHC IZEA FVN  (44s)
+  BKYI: subscribed (quote + 5-second bars); loading daily and minute history
+  BKYI: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  BKYI: float verified 1.3M (finviz via premarket_stars.py)
+  TCRT: subscribed (quote + 5-second bars); loading daily and minute history
+  TCRT: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  TCRT: float verified 2.4M (finviz via premarket_stars.py)
+  FCHL: subscribed (quote + 5-second bars); loading daily and minute history
+  FCHL: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  FCHL: float verified 1.3M (finviz via premarket_stars.py)
+  WBUY: subscribed (quote + 5-second bars); loading daily and minute history
+  WBUY: type COMMON · tick 0.01 at $1+ (IBKR minTick 0.0001) · split none
+  WBUY: float verified 2.5M (finviz via premarket_stars.py)
+  BKYI, TCRT, FCHL, WBUY joined the desk
+  feed LIVE (gen 1, 16 lines)
+  [2m11 plan(s) armed on history loaded at start (04:30–07:48 ET, BKYI, TCRT) → refused, tagged backfill, not counted; each row is in the ledger[0m
+  scanning NASDAQ + AMEX: 15 queries, $1-30
+  headlines: 2 new
+  08:00  YJ     [93mREFUSED [0m 2.29/2.22  ✗ Layer 2 not green: pullback volume was not lighter than the impulse; Layer 2 not green: below VWAP (verdict WAIT)
+  TWS reported the data connection restored — re-requesting quotes and five-second bars
+  headlines: 3 new
+  08:10  TCRT   [93mREFUSED [0m 2.22/2.13  ✗ Layer 2 not green: MACD not positive and above its signal (verdict WAIT)
+  headlines: 4 new
+  08:39  SUGP   [93mREFUSED [0m 2.01/1.97  ✗ Layer 2 not green: below VWAP (verdict WAIT); selective (A13): stop 2.0% of price, under 2%
+  08:40  YJ     [93mREFUSED [0m 2.44/2.34  ✗ Layer 2 not green: MACD not positive and above its signal (verdict WAIT)

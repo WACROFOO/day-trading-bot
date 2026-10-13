@@ -51,3 +51,5 @@ flagged for a preregistered decision (`research/edge-hunt/PREREGISTRATION.md`).
 | `2026-10-02/` | month export (uploaded from the Mac, 2026-10-09): screener 5 rows, board 8 names, decisions 77, orders 6 |
 | `2026-10-05/` | month export (uploaded from the Mac, 2026-10-09): screener 27 rows, board 7 names, decisions 90, orders 0 |
 | `2026-10-08/` | month export (uploaded from the Mac, 2026-10-09): screener 25 rows, board 12 names, decisions 108, orders 0 |
+| `2026-10-12/` | uploaded from the Mac 2026-10-13 (no push credentials): decisions 105, board 12, orders 5 |
+| `2026-10-13/` | uploaded from the Mac 2026-10-13 (no push credentials): decisions 77, board 8, orders 0 — exported 09:15 ET, the day not finished |
