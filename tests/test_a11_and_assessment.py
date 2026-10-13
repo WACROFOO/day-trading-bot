@@ -71,9 +71,12 @@ def test_a11_does_not_touch_pre_market():
 
 
 def test_a_symbol_change_restores_price_autoscale():
+    # 2026-10-13: the price zoom applies the same call from the wheel, so the
+    # check reads the symbol-change block itself rather than the first call.
     js = (ROOT / "src/momentum_platform/dashboard/web/app.js").read_text()
-    i = js.index('priceScale("right").applyOptions({ autoScale: true })')
-    assert "opts.snapToLive" in js[i - 400:i]
+    i = js.index("if (opts.snapToLive) {")
+    assert 'priceScale("right").applyOptions({ autoScale: true })' in js[i:i + 700]
+    assert "if (opts.snapToLive) priceZoom = null;" in js, "and a wheel zoom does not follow to the next name"
 
 
 def test_keep_awake_is_macos_only_and_never_raises(monkeypatch):

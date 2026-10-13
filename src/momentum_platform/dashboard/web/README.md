@@ -9,7 +9,7 @@ The browser desk: panes, tiles, cards and the verdict.
 | `live.js` | the live transport: draws stream events in place, swaps the session without a reload |
 | `styles.css` | the desk's styling |
 | `chartTools.js` | drawing tools and the indicator menu — Lightweight Charts ships neither |
-| `levels.js` | support/resistance zones, the volume profile, the prior day's levels and the whole / half dollars — pure arithmetic on bars, checked in node (`tests/test_chart_levels.py`) |
+| `levels.js` | support/resistance and trend lines ported from this project's `knowledge-base/tradingview/ross-fp-v4.pine`, the volume profile, the prior day's levels and the whole / half dollars — pure arithmetic on bars, checked in node (`tests/test_chart_levels.py`) |
 | `vendor/` | third-party chart library, served locally |
 
 ## Tools on the desk's own panes
@@ -41,11 +41,16 @@ the high of day and the plan levels, stored per pane.
   IBKR through `../chart_history.py`, on its own client. The daily pane loads older years the
   same way. Every indicator is computed per session from 04:00 ET, as the gates compute today's,
   so today's lines are the gates' own and no gate ever sees an older bar.
-- **Levels** (ƒ → *Support / resistance · prior day · $ levels*, on by default on the 1- and
-  5-minute): zones where swing highs and lows cluster, labelled `S`, `R` or `S/R flip` with their
-  touches and `vol N×` — the volume traded inside the band against the average; the prior day's
-  high, low and close; the whole and half dollars either side of the price. Approximations, and
-  **places to watch, never signals**: whether price turns at them is not measured.
+- **Levels** (ƒ → *Support / resistance (ross-fp-v4) · prior day · $ levels*, on by default on
+  the 1- and 5-minute): the S/R fan of our own TradingView strategy, ported line for line —
+  R1 R2 above, S1 S2 below the live price from each pane's own swings, the nearest each side a
+  band — each labelled with its swings and `vol N×`, the volume traded there against the
+  average; the prior day's high, low and close; the whole and half dollars either side.
+  **Places to watch, never signals**: whether price turns at them is not measured.
+- **Trend lines** (ƒ → *Trend lines · breakouts (ross-fp-v4)*, on by default on the 1- and
+  5-minute): the Pine's V9.10 tangents under today's higher lows and over its lower highs. They
+  never cut a confirmed bar, so only live price crosses them, and the label says so at once:
+  `downtrend BROKEN ▲`, `uptrend LOST ▼`.
 - **Volume profile** (ƒ → *Volume profile · visible range*, on by default on the 5-minute):
   volume by price over the bars in view, with the settings of the corpus's volume-profile class
   (24 rows, value area 70 %, up versus down, point of control in red), built from one-minute
@@ -54,9 +59,15 @@ the high of day and the plan levels, stored per pane.
   its own scale, one time axis under both; the date on the axis where a session starts; the
   extended hours tinted for every session. The values legend stays off (owner, 2026-10-02) —
   ƒ → *Values* brings it back.
+- **Handling.** The wheel over the price axis (or ⌥ / Alt + wheel on the chart) zooms the
+  price; a double-click on the axis restores it. The bare wheel zooms time around the newest
+  bar. **»** returns a pane to its newest bar, and a pane is never left showing mostly empty
+  future. Only the pane under the pointer drives the shared time axis of the price and MACD
+  panes; a live tick redraws one point a series, and nothing redraws when no bar changed.
 
-A public Pine script cannot run here: Pine runs inside TradingView's own charts, and this desk
-draws with Lightweight Charts. The levels above are the same kind of thing, computed here.
+A Pine script cannot run here: Pine runs inside TradingView's own charts, and this desk draws
+with Lightweight Charts. The levels and lines above are a port of ours; a test reads the Pine
+file's own numbers and fails if the two drift apart.
 
 ## Which chart is which
 

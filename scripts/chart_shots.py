@@ -180,6 +180,18 @@ def main(argv=None) -> int:
                     pg.mouse.move(box["x"] + x, box["y"] + box["height"] * 0.3)
                     pg.wait_for_timeout(400)
                     pg.locator("[data-card=chart-1m]").screenshot(path=str(out / f"{tag}_chart-1m_values_SYNTHETIC.png"))
+                # a live ten-second bar through the downtrend line: the breakout flag
+                if pg.evaluate("() => { const t = window.__deskPanes().a.trendDrawn && window.__deskPanes().a.trendDrawn(); return !!(t && t.down); }"):
+                    pg.mouse.move(5, 5)
+                    pg.evaluate("() => { const a = window.__deskPanes().a; const n = a.rows().length; a.setRange({from: n - 150, to: n + 3}); }")
+                    line = pg.evaluate("() => window.__deskPanes().a.trendDrawn().down.now")
+                    last = pg.evaluate("() => { const r = window.__SESSION__.bars[%r]; return r[r.length - 1]; }" % SYM)
+                    t0 = last[0] + 60
+                    for i, px in enumerate((last[4], round(line + 0.03, 2), round(line + 0.06, 2))):
+                        desk.hub.publish("bar10s", {"symbol": SYM, "t": t0 + 10 * i, "open": px, "high": px + 0.01,
+                                                    "low": px - 0.01, "close": px, "volume": 4000})
+                        pg.wait_for_timeout(400)
+                    pg.locator("[data-card=chart-1m]").screenshot(path=str(out / f"{tag}_chart-1m_breakout_SYNTHETIC.png"))
                 if errors:
                     print("page errors:", errors)
                 browser.close()

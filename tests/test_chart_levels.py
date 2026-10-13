@@ -86,31 +86,75 @@ def test_swings_never_look_ahead():
     assert all(i <= 4 for i, _ in got), "the newest two bars cannot be swings yet"
 
 
-def test_zones_cluster_swings_and_name_a_flip():
-    """Two highs near 3.40 (resistance), a break to 3.73, and a pullback that
-    holds 3.40 from above: one zone, three touches, a flipped level. Two lows
-    near 2.79: support, not a flip. The median bar range here is 6 cents, so
-    swings within 3 cents join (half the range beats 0.3 % of price)."""
-    got = node("""(() => {
-      const ys = [3.0, 3.2, 3.37, 3.2, 3.0, 2.83, 2.95, 3.1, 3.40, 3.2, 2.9, 2.81, 3.0, 3.25, 3.6, 3.7, 3.55, 3.43, 3.55, 3.7, 3.8];
-      const bars = ys.map((y, i) => [i * 300, y, y + 0.03, y - 0.03, y, 100]);
-      return L.zones(bars, { left: 2, right: 2 }).map(z => ({ p: +z.price.toFixed(2), t: z.touches, h: z.highs, l: z.lows, flip: z.flip }));
-    })()""")
-    assert got == [{"p": 2.79, "t": 2, "h": 0, "l": 2, "flip": False},
-                   {"p": 3.41, "t": 3, "h": 2, "l": 1, "flip": True}]
+PINE = ROOT / "knowledge-base" / "tradingview" / "ross-fp-v4.pine"
 
 
-def test_overlapping_neighbours_are_one_zone():
-    """Highs at 2.98, 3.00 and 3.013 drift the first cluster's mean; 3.025 is
-    too far from it to join but its band overlaps — one zone of four touches,
-    not two labels on top of each other."""
+def test_the_ports_constants_are_the_pine_scripts_own():
+    """Support/resistance and trend lines port ross-fp-v4.pine (owner,
+    2026-10-13: "you can use the pine we've developed at its latest version").
+    Its numbers are read here from the script itself, so a change to the Pine
+    fails this until the port follows."""
+    import re
+    pine = PINE.read_text()
+    want = {
+        "PIVOT": int(re.search(r"srPivotLen\s*=\s*input\.int\((\d+)", pine).group(1)),
+        "SR_EACH": int(re.search(r"maxSRlines\s*=\s*input\.int\((\d+)", pine).group(1)),
+        "SR_DEDUP_ATR": float(re.search(r"tolSR\s*=\s*atr\s*\*\s*([\d.]+)", pine).group(1)),
+        "BAND_ATR": float(re.search(r"bandATRfrac\s*=\s*input\.float\(([\d.]+)", pine).group(1)),
+        "TL_TOL_ATR": float(re.search(r"tolTL\s*=\s*math\.max\(atr\s*\*\s*([\d.]+)", pine).group(1)),
+        "TL_MIN_BARS": int(re.search(r"if nB >= (\d+)", pine).group(1)),
+        "PIVOTS_KEPT": int(re.search(r"array\.size\(pivHighs\) > (\d+)", pine).group(1)),
+    }
+    assert re.search(r'REV = "V9\.12"', pine), "the port follows REV V9.12"
+    got = node("({ PIVOT: L.PIVOT, SR_EACH: L.SR_EACH, SR_DEDUP_ATR: L.SR_DEDUP_ATR, BAND_ATR: L.BAND_ATR, "
+               "TL_TOL_ATR: L.TL_TOL_ATR, TL_MIN_BARS: L.TL_MIN_BARS, PIVOTS_KEPT: L.PIVOTS_KEPT })")
+    assert got == want
+
+
+def test_atr_is_wilders_true_range_average():
     got = node("""(() => {
-      const ys = [2.5, 2.7, 2.95, 2.7, 2.5, 2.7, 2.97, 2.7, 2.5, 2.7, 2.983, 2.7, 2.5, 2.7, 2.995, 2.7, 2.5];
-      const bars = ys.map((y, i) => [i * 300, y, y + 0.03, y - 0.03, y, 100]);
-      return L.zones(bars, { left: 2, right: 2, rangeShare: 0, tol: 0.008 }).filter(z => z.highs)
-        .map(z => [+z.price.toFixed(3), z.touches]);
+      const flat = Array.from({length: 30}, (_, i) => [i * 60, 5, 5.05, 4.95, 5, 100]);
+      const gap = [[0, 5, 5.1, 4.9, 5.0, 1], [60, 5.5, 5.6, 5.4, 5.5, 1], [120, 5.5, 5.6, 5.5, 5.55, 1]];
+      return [L.atr(flat, 14), L.atr(flat.slice(0, 10), 14), L.atr(gap, 2)];
     })()""")
-    assert got == [[3.005, 4]], got
+    assert got[0] == pytest.approx(0.10) and got[1] is None
+    # TRs 0.2, 0.6 (5.6 - prior close 5.0), 0.1: seed (0.2 + 0.6) / 2 = 0.4, then (0.4 + 0.1) / 2 = 0.25
+    assert got[2] == pytest.approx(0.25)
+
+
+def test_the_fan_is_two_a_side_polarised_and_deduplicated():
+    """ross-fp-v4 V9.5: a resistance shelf price has cleared is support now.
+    Highs at 5.41 (twice) under a 5.60 price print once, as support with 2
+    swings; lows at 4.99 the same; the shelf at the price is the resistance."""
+    got = node("""(() => {
+      const ys = [5.1,5.2,5.3,5.4,5.3,5.2,5.1,5.0,5.1,5.2,5.3,5.4,5.3,5.2,5.1,5.0,5.1,5.2,5.3,5.4,5.5,5.6,5.6,5.6,5.6,5.6];
+      const bars = ys.map((y, i) => [i * 60, y, y + 0.01, y - 0.01, y, 100]);
+      const a = L.atr(bars, 14), fan = L.srFan(bars, 5.6, a, { pivot: 3 });
+      return { sup: fan.sup.map(s => [+s.price.toFixed(2), s.touches, s.highs, s.lows]),
+               res: fan.res.map(s => +s.price.toFixed(2)), band: fan.band, a };
+    })()""")
+    assert got["sup"] == [[5.41, 2, 2, 0], [4.99, 2, 0, 2]], "nearest first, the broken highs now support"
+    assert got["res"] == [5.61] and len(got["sup"]) <= 2
+    assert got["band"] == pytest.approx(max(got["a"] * 0.12, 0.01))
+
+
+def test_trend_lines_are_tangents_that_only_live_price_can_cross():
+    """V9.8: the line touches structure and never cuts it; V9.10: it needs 2
+    touches; the label flips the moment live price is through it."""
+    got = node("""(() => {
+      const bars = []; let p = 3.0;
+      for (let i = 0; i < 60; i++) { const w = Math.sin(i / 4) * 0.05; p += 0.01;
+        bars.push([i * 60, p + w, p + w + 0.02, p + w - 0.02, p + w, 100]); }
+      const a = L.atr(bars, 14), last = bars[bars.length - 1][4];
+      const ok = L.trendLines(bars, last, a), lost = L.trendLines(bars, ok.up.now - 0.05, a);
+      const cut = bars.slice(ok.up.anchor + 2).some((b, k) => b[3] < ok.up.at(ok.up.anchor + 2 + k) - 1e-9);
+      return { touches: ok.up.touches, slope: ok.up.slope, through: ok.up.through, lost: lost.up.through,
+               cut, down: ok.down, short: L.trendLines(bars.slice(0, 19), last, a) };
+    })()""")
+    assert got["touches"] >= 2 and got["slope"] >= 0 and got["cut"] is False
+    assert got["through"] is False and got["lost"] is True, "uptrend LOST when live price is under the line"
+    assert got["down"] is None, "a rising day has no line over lower highs"
+    assert got["short"] == {"up": None, "down": None}, "fewer than 20 confirmed bars: no line"
 
 
 def test_round_levels_prior_day_and_sessions():
@@ -222,21 +266,111 @@ def test_scrolling_past_the_oldest_bar_brings_the_session_before(desk_page):
     assert not desk_page["errors"], desk_page["errors"]
 
 
-def test_the_levels_drawn_are_the_prior_day_the_dollars_and_the_zones(desk_page):
+def test_the_levels_drawn_are_the_pine_fan_the_prior_day_and_the_dollars(desk_page):
     pg = desk_page["pg"]
     lv = pg.evaluate("() => window.__deskPanes().a.levelsDrawn()")
     assert lv["pd"] == {"d": "2026-10-12", "h": 3.43, "l": 2.17, "c": 3.06}
     last = lv["last"]
     assert lv["round"]["below"] < last < lv["round"]["above"]
     assert lv["round"]["above"] - lv["round"]["below"] <= 0.5 + 1e-9
-    # yesterday's two highs, a cent apart, are today's support (the price is above them)
-    assert len(lv["zones"]) == 1 and 3.41 <= lv["zones"][0]["price"] <= 3.44 < last
-    assert lv["zones"][0]["touches"] == 2 and lv["zones"][0]["highs"] == 2
-    for z in lv["zones"]:
-        assert z["touches"] >= 2 and z["lo"] <= z["price"] <= z["hi"]
-        assert z["dens"] is None or z["dens"] >= 0
-        assert abs(z["price"] - last) <= last * 0.3
+    assert 1 <= len(lv["res"]) <= 2 and 1 <= len(lv["sup"]) <= 2, "two a side at most (ross-fp-v4 V9.4)"
+    assert all(r["price"] > last for r in lv["res"]) and all(x["price"] < last for x in lv["sup"])
+    assert [x["price"] for x in lv["sup"]] == sorted((x["price"] for x in lv["sup"]), reverse=True), "nearest first"
+    # V9.5 polarity: yesterday's two highs, a cent apart, are today's nearest support
+    first = lv["sup"][0]
+    assert 3.41 <= first["price"] <= 3.44 and first["touches"] == 2 and first["highs"] == 2
+    assert lv["band"] >= 0.01 and all(x["dens"] is None or x["dens"] >= 0 for x in lv["res"] + lv["sup"])
     assert pg.evaluate("() => window.__deskPanes().d.levelsDrawn()") is None, "off on the 10-second pane"
+
+
+def test_the_trend_lines_never_cut_the_bars_they_were_drawn_on(desk_page):
+    """ross-fp-v4 V9.8 / V9.10 on the page: today's tangents from their scored
+    anchors; no confirmed bar of the day crosses either line."""
+    pg = desk_page["pg"]
+    got = pg.evaluate("""() => {
+      const a = window.__deskPanes().a, t = a.trendDrawn(), r = a.rows();
+      const check = (ln, up) => { if (!ln) return null; let cut = 0;
+        for (let i = ln.anchor + 2; i < ln.live; i++) { const line = ln.price + ln.slope * (i - ln.anchor);
+          if (up ? r[i].low < line - 1e-9 : r[i].high > line + 1e-9) cut += 1; }
+        return { cut, touches: ln.touches, through: ln.through }; };
+      return { up: check(t.up, true), down: check(t.down, false) };
+    }""")
+    assert got["up"] and got["up"]["cut"] == 0 and got["up"]["touches"] >= 2
+    assert got["down"] and got["down"]["cut"] == 0 and got["down"]["touches"] >= 2
+    assert got["up"]["through"] is False, "the price is still above today's rising lows"
+
+
+def test_one_history_request_on_load_and_the_other_pane_stays_live(desk_page):
+    """The regression found building this (2026-10-13): a guard judged the
+    5-minute pane's range against its OLD bar count while the previous session
+    was being laid in, threw the view back to the oldest bars, and that empty
+    left edge asked IBKR for yet another session."""
+    pg, desk = desk_page["pg"], desk_page["desk"]
+    assert desk.chart_history.requests >= 1
+    b = pg.evaluate("() => { const b = window.__deskPanes().b, r = b.getRange(); return {to: r.to, n: b.rows().length, live: b.liveButton()}; }")
+    assert b["to"] >= b["n"] - 1 and b["live"] is False, "the 5-minute pane sits on its newest bar"
+
+
+def test_the_wheel_over_the_price_axis_zooms_the_price(desk_page):
+    pg = desk_page["pg"]
+    pg.evaluate("() => window.__deskPanes().a.snapToLive()")
+    box = pg.locator("#chartA .pane-main").bounding_box()
+    x, y = box["x"] + box["width"] - 20, box["y"] + box["height"] * 0.3        # over the price axis
+    pg.mouse.move(x, y)
+    pg.mouse.wheel(0, -400)                                                    # up: zoom in
+    pg.wait_for_timeout(150)
+    z = pg.evaluate("() => window.__deskPanes().a.priceZoomed()")
+    assert z is not None and z["max"] > z["min"]
+    pg.mouse.wheel(0, 400)                                                     # down: back out
+    pg.wait_for_timeout(150)
+    z2 = pg.evaluate("() => window.__deskPanes().a.priceZoomed()")
+    assert z2["max"] - z2["min"] > z["max"] - z["min"]
+    pg.mouse.dblclick(x, y)                                                    # double-click: the data's own scale
+    pg.wait_for_timeout(150)
+    assert pg.evaluate("() => window.__deskPanes().a.priceZoomed()") is None
+    pg.mouse.move(box["x"] + box["width"] * 0.5, y)                            # the bare wheel on the chart: time
+    pg.mouse.wheel(0, -200)
+    pg.wait_for_timeout(150)
+    assert pg.evaluate("() => window.__deskPanes().a.priceZoomed()") is None
+    assert not desk_page["errors"], desk_page["errors"]
+
+
+def test_back_in_time_the_pane_offers_the_live_edge_and_never_strands_in_empty_future(desk_page):
+    """Owner's recording, 2026-10-13 17:53: the 1-minute view ran off into
+    empty space and stayed there."""
+    pg = desk_page["pg"]
+    n = pg.evaluate("() => window.__deskPanes().a.rows().length")
+    pg.evaluate("() => window.__deskPanes().a.setRange({from: 40, to: 200})")
+    pg.wait_for_timeout(150)
+    assert pg.evaluate("() => window.__deskPanes().a.liveButton()") is True
+    pg.click("#chartA .live-btn")
+    pg.wait_for_function(f"() => window.__deskPanes().a.getRange().to >= {n} - 1", timeout=5000)
+    assert pg.evaluate("() => window.__deskPanes().a.liveButton()") is False
+    pg.evaluate(f"() => window.__deskPanes().a.setRange({{from: {n} + 40, to: {n} + 200}})")   # all empty future
+    pg.wait_for_function(f"() => {{ const r = window.__deskPanes().a.getRange(); return r.to - ({n} - 1) <= 12; }}",
+                         timeout=5000)
+
+
+def test_the_live_tape_redraws_one_bar_not_the_whole_pane(desk_page):
+    """Ten-second bars inside the forming minute update the last candle with
+    one point per series; a quote that changes no bar redraws nothing."""
+    pg, desk = desk_page["pg"], desk_page["desk"]
+    pg.evaluate("() => window.__deskPanes().a.snapToLive()")
+    pg.wait_for_timeout(300)
+    last = pg.evaluate("() => { const r = window.__SESSION__.bars.AAA; return r[r.length - 1]; }")
+    minute, before = last[0] + 60, pg.evaluate("() => window.__deskPanes().a.drawStats()")
+    for i, (o, h, l, c, v) in enumerate([(4.40, 4.42, 4.39, 4.41, 900), (4.41, 4.44, 4.40, 4.43, 1200),
+                                         (4.43, 4.45, 4.42, 4.44, 800)]):
+        desk.hub.publish("bar10s", {"symbol": "AAA", "t": minute + 10 * i, "open": o, "high": h, "low": l,
+                                    "close": c, "volume": v})
+        pg.wait_for_timeout(400)
+    after = pg.evaluate("() => window.__deskPanes().a.drawStats()")
+    assert after["incremental"] - before["incremental"] >= 2, (before, after)
+    assert after["full"] - before["full"] <= 1, "one full draw at most, when the new minute's first bar arrives"
+    quiet = pg.evaluate("() => window.__deskPanes().a.drawStats()")
+    desk.hub.publish("quote", {"symbol": "AAA", "price": 4.44, "ts": "2026-10-13T14:16:05Z", "bid": 4.43, "ask": 4.45})
+    pg.wait_for_timeout(500)
+    assert pg.evaluate("() => window.__deskPanes().a.drawStats()") == quiet, "no bar changed: no redraw"
 
 
 def test_the_volume_profile_reads_the_bars_in_view_on_the_five_minute(desk_page):

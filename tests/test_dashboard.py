@@ -1841,7 +1841,7 @@ def test_ui_the_top_bar_and_footer_carry_trading_state_not_engineering(page):
 def test_the_one_minute_chart_marks_the_premarket_high():
     web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
     app, html = (web / "app.js").read_text(), (web / "index.html").read_text()
-    body = app.split("function renderCharts(frame)")[1][:4500]
+    body = app.split("function renderCharts(frame")[1][:4500]
     assert "pmHigh: pmHigh" in body.split("PANES.a.render")[1][:200]
     assert '"PM HIGH"' in app and '"HOD = PM HIGH"' in app
     assert 'class="k pmh"' in html

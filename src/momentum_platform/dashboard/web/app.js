@@ -293,7 +293,8 @@ const INDICATORS = [
   ["volume", "Volume"], ["vwap", "VWAP"], ["ema9", "EMA 9"], ["ema20", "EMA 20"],
   ["ema200", "EMA 200"], ["macd", "MACD 12/26/9"], ["hod", "High of day"],
   ["plan", "Entry · stop · target"],
-  ["levels", "Support / resistance · prior day · $ levels"], ["profile", "Volume profile · visible range"],
+  ["levels", "Support / resistance (ross-fp-v4) · prior day · $ levels"],
+  ["trend", "Trend lines · breakouts (ross-fp-v4)"], ["profile", "Volume profile · visible range"],
   ["values", "Values (OHLC legend)"],
 ];
 function indicatorMenu(host, show, onChange) {
@@ -359,6 +360,9 @@ function makePane(hostId, daily) {
     rightPriceScale: { borderColor: TVC.border, minimumWidth: scaleW },
     timeScale: { borderColor: TVC.border, timeVisible: !daily, secondsVisible: false,
                  rightOffset: 3, barSpacing: daily ? 3 : 6,
+                 // the wheel zooms around the newest bar, as TradingView does —
+                 // zooming at the pointer slid the live edge out of view
+                 rightBarStaysOnScroll: true,
                  // Bars carry ET wall-clock stamps: label them as such and never
                  // let the browser locale inject "01 sept. '26" mid-axis.
                  tickMarkFormatter: daily ? undefined : tickMark },
@@ -375,10 +379,18 @@ function makePane(hostId, daily) {
                  horzAlign: "center", vertAlign: "center" },
   }));
   const sub = TV.createChart(subEl, common(subEl));
+  /* The price zoom (owner, 2026-10-13: "price is not zoom in and out using
+     mouse scroll"). TradingView zooms the price with the wheel over its price
+     axis; this library's wheel only zooms time. While zoomed, the candles
+     report the zoomed range to the autoscale and every other series on the
+     price scale reports none; a double-click on the axis, or a new symbol,
+     hands the scale back to the data. */
+  let priceZoom = null;
   const candles = chart.addCandlestickSeries({
     upColor: TVC.up, downColor: TVC.down, borderVisible: false,
     wickUpColor: TVC.up, wickDownColor: TVC.down,
     priceLineVisible: true, lastValueVisible: true, priceLineColor: "#9598a1", priceLineStyle: 1,
+    autoscaleInfoProvider: orig => priceZoom ? { priceRange: { minValue: priceZoom.min, maxValue: priceZoom.max } } : orig(),
   });
   // Volume on the bottom fifth of the price pane, coloured by the candle.
   const volume = chart.addHistogramSeries({
@@ -408,8 +420,16 @@ function makePane(hostId, daily) {
   const macdTag = document.createElement("div");
   macdTag.className = "band-tag";
   subEl.appendChild(macdTag);
+  /* TradingView's "scroll to the newest bar" button: shown whenever the
+     newest bar is out of view, one click back to the live edge. */
+  const liveBtn = document.createElement("button");
+  liveBtn.className = "live-btn"; liveBtn.textContent = "»"; liveBtn.hidden = true;
+  liveBtn.title = "Back to the newest bar";
+  mainEl.appendChild(liveBtn);
   let lastRows = [], lastVols = [], lastInd = {}, lastBars = [], lastOpts = null, lastLevels = null;
-  let lastProfile = null, runs = [], starts = new Set(), rowPart = [];
+  let lastProfile = null, runs = [], starts = new Set(), rowPart = [], paneLevels = null, forceFull = true;
+  const drawn = { full: 0, incremental: 0 };       // how each render drew (a test reads it)
+  const paneSize = { w: 0, h: 0 };
   const fmtP = v => v == null ? "—" : Math.abs(v) >= 1 ? v.toFixed(2) : v.toFixed(4);
   const at = (arr, idx) => (arr && idx != null && idx < arr.length) ? arr[idx] : (arr && arr.length ? arr[arr.length - 1] : null);
   const showLegend = (row, vol, idx) => {
@@ -443,13 +463,17 @@ function makePane(hostId, daily) {
   const layer = (zOrder, paint) => {
     let request = null;
     const renderer = { draw(target) {
-      target.useMediaCoordinateSpace(s => { try { paint(s.context, s.mediaSize); } catch (e) { /* skip a frame */ } });
+      target.useMediaCoordinateSpace(s => {
+        paneSize.w = s.mediaSize.width; paneSize.h = s.mediaSize.height;
+        try { paint(s.context, s.mediaSize); } catch (e) { /* skip a frame */ }
+      });
     } };
     const view = { zOrder: () => zOrder, renderer: () => renderer };
     return { paneViews: () => [view], updateAllViews() {}, attached(p) { request = p.requestUpdate; },
              detached() { request = null; }, refresh() { if (request) request(); } };
   };
   const xAt = i => chart.timeScale().logicalToCoordinate(i);
+  const y = p => candles.priceToCoordinate(p);
   /* Extended hours tinted and each session's start dashed, the way TradingView's
      ext-hours mode draws them, for every session on the pane — last week's
      too, now that the pane keeps them. */
@@ -508,7 +532,7 @@ function makePane(hostId, daily) {
     const maxV = Math.max(...p.rows.map(r => r.total)) || 1;
     const W = size.width * 0.24, right = size.width;
     p.rows.forEach((r, k) => {
-      const yTop = candles.priceToCoordinate(r.hi), yBot = candles.priceToCoordinate(r.lo);
+      const yTop = y(r.hi), yBot = y(r.lo);
       if (yTop == null || yBot == null || yBot < 0 || yTop > size.height) return;
       const h = Math.max(1, yBot - yTop - 1), inside = k >= p.vaFrom && k <= p.vaTo;
       const wu = W * r.up / maxV, wd = W * r.down / maxV;
@@ -518,7 +542,7 @@ function makePane(hostId, daily) {
       g.fillRect(right - wd, yTop + 0.5, wd, h);
     });
     g.font = "9px " + MONO; g.textAlign = "right";
-    const yPoc = candles.priceToCoordinate(p.poc);
+    const yPoc = y(p.poc);
     if (yPoc != null) {                       // "my point of control by default in red" (wC2Bbf6OMFQ [00:06:14])
       g.fillStyle = "#ff5252"; g.fillRect(0, Math.round(yPoc), size.width, 1);
       g.fillText("POC " + fmtP(p.poc), right - W - 4, Math.round(yPoc) - 3);
@@ -526,39 +550,84 @@ function makePane(hostId, daily) {
     // the value area's edges, dotted over the histogram only
     g.fillStyle = "rgba(255,255,255,0.40)";
     [p.vah, p.val].forEach(v => {
-      const y = candles.priceToCoordinate(v);
-      if (y == null) return;
-      for (let x = right - W; x < right; x += 6) g.fillRect(x, Math.round(y), 3, 1);
+      const yy = y(v);
+      if (yy == null) return;
+      for (let x = right - W; x < right; x += 6) g.fillRect(x, Math.round(yy), 3, 1);
     });
     g.textAlign = "left";
   });
-  /* Support and resistance zones: where swing highs and lows cluster on the
-     5-minute structure of every loaded session, each with its touches and how
-     much traded inside it against the average (levels.js). Below the last
-     price a zone is support (teal), above it resistance (red); one with highs
-     and lows in it is a flipped level (violet). Places to watch, never
-     signals — whether price turns there is not measured on this desk. */
-  const levelBands = layer("bottom", (g, size) => {
-    if (!show.levels || daily || !lastLevels || !lastLevels.zones) return;
+  /* Support and resistance as ross-fp-v4.pine draws them (levels.js srFan):
+     the two nearest levels each side of the live price from this pane's own
+     swing highs and lows, resistance blue and support purple as on the Pine
+     chart, the nearest of each a band. Each label adds what the Pine does
+     not: how many swings the level absorbed, and the volume traded at it
+     against the average. Places to watch, never signals. */
+  const srBands = layer("bottom", (g, size) => {
+    if (!show.levels || daily || !paneLevels || !paneLevels.res) return;
+    const lv = paneLevels;
     g.font = "9.5px " + MONO; g.textAlign = "left";
-    let labelY = -99;                                   // labels never sit on top of each other
-    lastLevels.zones.slice().sort((a, b) => b.price - a.price).forEach(z => {
-      const yTop = candles.priceToCoordinate(z.hi), yBot = candles.priceToCoordinate(z.lo);
-      if (yTop == null || yBot == null || yBot < -2 || yTop > size.height + 2) return;
-      const role = z.flip ? "flip" : z.price > lastLevels.last ? "R" : "S";
-      const rgb = role === "flip" ? "179,157,219" : role === "R" ? "239,83,80" : "38,166,154";
-      g.fillStyle = "rgba(" + rgb + ",0.12)"; g.fillRect(0, yTop, size.width, Math.max(2, yBot - yTop));
-      const ym = Math.round((yTop + yBot) / 2);
-      g.fillStyle = "rgba(" + rgb + ",0.60)"; g.fillRect(0, ym, size.width, 1);
-      g.fillStyle = "rgba(" + rgb + ",0.95)";
-      labelY = Math.max(ym - 3, labelY + 11);
-      g.fillText((role === "flip" ? "S/R flip " : role + " ") + fmtP(z.price) + " · " + z.touches + " touches" +
-                 (z.dens != null ? " · vol " + z.dens.toFixed(1) + "×" : ""), 32, labelY);
+    const marks = [];
+    const draw = (lvl, i, res) => {
+      const yy = y(lvl.price);
+      if (yy == null || yy < -4 || yy > size.height + 4) return;
+      const rgb = res ? "41,98,255" : "171,71,188";
+      if (i === 0 && lv.band) {
+        const yt = y(lvl.price + lv.band), yb = y(lvl.price - lv.band);
+        if (yt != null && yb != null) {
+          g.fillStyle = "rgba(" + rgb + ",0.16)";
+          g.fillRect(0, Math.min(yt, yb), size.width, Math.max(2, Math.abs(yb - yt)));
+        }
+      }
+      g.fillStyle = "rgba(" + rgb + "," + (i === 0 ? 0.80 : 0.45) + ")";
+      g.fillRect(0, Math.round(yy) - (i === 0 ? 1 : 0), size.width, i === 0 ? 2 : 1);
+      marks.push({ yy, rgb, text: (res ? "R" : "S") + (i + 1) + " " + fmtP(lvl.price) +
+        (lvl.touches > 1 ? " · " + lvl.touches + " swings" : "") +
+        (lvl.dens != null ? " · vol " + lvl.dens.toFixed(1) + "×" : "") });
+    };
+    lv.res.forEach((l, i) => draw(l, i, true));
+    lv.sup.forEach((l, i) => draw(l, i, false));
+    let lastY = -99;                                    // labels never sit on top of each other
+    marks.sort((a, b) => a.yy - b.yy).forEach(m => {
+      const ly = Math.max(m.yy - 3, lastY + 11);
+      lastY = ly;
+      g.fillStyle = "rgba(" + m.rgb + ",1)"; g.fillText(m.text, 32, ly);
+    });
+  });
+  /* The trend lines as ross-fp-v4.pine V9.10 draws them (levels.js
+     trendLines): today's tangent under the higher lows (teal) and over the
+     lower highs (red), from their best-scored anchor, extended right. A
+     tangent never cuts the confirmed bars, so only live price can cross it,
+     and the label says so the moment it does: "downtrend BROKEN ▲" — the
+     breakout — and "uptrend LOST ▼". A crossed line turns dashed and dim. */
+  const trendLayer = layer("top", (g, size) => {
+    if (!show.trend || daily || !paneLevels || !paneLevels.trend) return;
+    const t = paneLevels.trend;
+    const ts = chart.timeScale();
+    const edge = ts.coordinateToLogical(size.width);
+    if (edge == null) return;
+    g.font = "10px " + MONO; g.textAlign = "left";
+    [[t.up, true], [t.down, false]].forEach(([ln, up]) => {
+      if (!ln) return;
+      const i0 = t.offset + ln.anchor, iR = Math.max(edge, t.live + 1);
+      const x0 = xAt(i0), xR = xAt(iR), y0 = y(ln.at(ln.anchor)), yR = y(ln.at(iR - t.offset));
+      if (x0 == null || xR == null || y0 == null || yR == null) return;
+      g.strokeStyle = up ? (ln.through ? "rgba(38,166,154,0.35)" : "rgba(38,166,154,0.85)")
+                         : (ln.through ? "rgba(239,83,80,0.35)" : "rgba(239,83,80,0.85)");
+      g.lineWidth = 2; g.setLineDash(ln.through ? [6, 4] : []);
+      g.beginPath(); g.moveTo(x0, y0); g.lineTo(xR, yR); g.stroke(); g.setLineDash([]);
+      const xl = xAt(t.live), yl = y(ln.now);
+      if (xl == null || yl == null) return;
+      const text = up ? (ln.through ? "uptrend LOST ▼" : "uptrend") : (ln.through ? "downtrend BROKEN ▲" : "downtrend");
+      // beside the live bar, or just left of it when the bar sits at the edge
+      const xt = Math.min(xl + 8, size.width - g.measureText(text).width - 4);
+      g.fillStyle = up ? (ln.through ? "#ff9800" : "#26a69a") : (ln.through ? "#76ff03" : "#ef5350");
+      g.fillText(text, xt, yl + (up ? 13 : -6));
     });
   });
   candles.attachPrimitive(sessionBands);
-  candles.attachPrimitive(levelBands);
+  candles.attachPrimitive(srBands);
   candles.attachPrimitive(volumeProfile);
+  candles.attachPrimitive(trendLayer);
 
   /* The crosshair, synced across the 1-minute, 5-minute and 10-second panes
      (2026-10-09): a bar hovered on one is the same moment on the others. The
@@ -604,23 +673,91 @@ function makePane(hostId, daily) {
     const i = lastRows.findIndex(r => r.time === param.time);
     showLegend(i >= 0 ? lastRows[i] : lastRows[tail], i >= 0 ? lastVols[i] : lastVols[tail], i >= 0 ? i : tail);
   });
-  /* One time axis for both panes: whatever the trader does to one range, the
-     other follows. Scrolling past the oldest bar asks for the session before
-     it (TradingView's endless history; app.js loadOlder). */
-  let rangeSync = false, prevFrom = null;
+  /* One time axis for both panes, driven by the pane under the pointer.
+     Owner's recording, 2026-10-13 17:53 (JBDI): the 1-minute view ran off into
+     empty future space and stayed there. Each pane used to copy every range
+     change to the other, so a range one of them adjusted came straight back
+     as a new change. Now only the pane the trader is working in drives — with
+     the pointer elsewhere the price pane drives — and an equal range is never
+     re-applied. Scrolling past the oldest bar asks for the session before it
+     (TradingView's endless history; app.js loadOlder). */
+  let driver = null, prevFrom = null, clampFrame = 0;
+  mainEl.addEventListener("pointerenter", () => { driver = "main"; });
+  mainEl.addEventListener("pointerleave", () => { if (driver === "main") driver = null; });
+  subEl.addEventListener("pointerenter", () => { driver = "sub"; });
+  subEl.addEventListener("pointerleave", () => { if (driver === "sub") driver = null; });
+  const sameRange = (a, b) => !!a && !!b && Math.abs(a.from - b.from) < 0.01 && Math.abs(a.to - b.to) < 0.01;
+  const copyRange = (to, r) => {
+    try { if (r && !sameRange(r, to.timeScale().getVisibleLogicalRange())) to.timeScale().setVisibleLogicalRange(r); }
+    catch (e) { /* a pane with no data yet */ }
+  };
   chart.timeScale().subscribeVisibleLogicalRangeChange(r => {
-    if (r && !rangeSync && !subEl.hidden) {
-      rangeSync = true;
-      try { sub.timeScale().setVisibleLogicalRange(r); } catch (e) {} finally { rangeSync = false; }
-    }
+    if (r && driver !== "sub" && !subEl.hidden) copyRange(sub, r);
     if (r && lastRows.length && prevFrom != null && r.from < prevFrom && r.from < 8) olderListeners.forEach(fn => fn());
     if (r) prevFrom = r.from;
+    if (!r || !lastRows.length) { liveBtn.hidden = true; return; }
+    liveBtn.hidden = r.to >= lastRows.length - 0.5;
+    // Never parked in empty future: past 60 % of the pane, back to the newest
+    // bar. Judged again a frame later on the pane's state THEN — the library
+    // reports a range while new data is still being laid in.
+    const parked = rr => rr && lastRows.length && rr.to - (lastRows.length - 1) > Math.max(10, (rr.to - rr.from) * 0.6);
+    if (parked(r) && !clampFrame) {
+      clampFrame = requestAnimationFrame(() => {
+        clampFrame = 0;
+        try {
+          const now = chart.timeScale().getVisibleLogicalRange();
+          if (!parked(now)) return;
+          const last = lastRows.length - 1, width = now.to - now.from;
+          chart.timeScale().setVisibleLogicalRange({ from: last + 3 - width, to: last + 3 });
+        } catch (e) { /* no data */ }
+      });
+    }
   });
-  sub.timeScale().subscribeVisibleLogicalRangeChange(r => {
-    if (!r || rangeSync) return;
-    rangeSync = true;
-    try { chart.timeScale().setVisibleLogicalRange(r); } catch (e) {} finally { rangeSync = false; }
-  });
+  sub.timeScale().subscribeVisibleLogicalRangeChange(r => { if (driver === "sub") copyRange(chart, r); });
+  liveBtn.addEventListener("click", e => { e.stopPropagation(); api.snapToLive(); });
+  /* The newest bar at the right edge, keeping the zoom: set outright. The
+     library's animated scroll-to-real-time stopped a few bars short after a
+     wheel zoom (2026-10-13). */
+  const toLive = () => {
+    try {
+      const r = chart.timeScale().getVisibleLogicalRange(), last = lastRows.length - 1;
+      if (!r || last < 0) { chart.timeScale().scrollToRealTime(); return; }
+      const w = Math.max(10, r.to - r.from);
+      chart.timeScale().setVisibleLogicalRange({ from: last + 3 - w, to: last + 3 });
+    } catch (e) { /* no data yet */ }
+  };
+
+  /* The wheel over the price axis — or ⌥ / Alt + wheel anywhere on the
+     price pane — zooms the price around the pointer; the bare wheel over the
+     chart still zooms time, as on TradingView. */
+  const axisWidth = () => { try { return chart.priceScale("right").width() || scaleW; } catch (e) { return scaleW; } };
+  const overAxis = e => { const r = mainEl.getBoundingClientRect(); return e.clientX >= r.right - axisWidth(); };
+  mainEl.addEventListener("wheel", e => {
+    if (daily && !overAxis(e)) return;
+    if (!overAxis(e) && !e.altKey) return;
+    e.preventDefault(); e.stopPropagation();
+    if (!lastRows.length || !e.deltaY) return;
+    const h = paneSize.h || mainEl.clientHeight;
+    if (!priceZoom) {
+      // the range the autoscale shows, inside the price scale's margins (8 % top, 22 % bottom)
+      const top = candles.coordinateToPrice(h * 0.08), bottom = candles.coordinateToPrice(h * 0.78);
+      if (top == null || bottom == null || !(top > bottom)) return;
+      priceZoom = { min: bottom, max: top };
+    }
+    const r = mainEl.getBoundingClientRect();
+    const p = candles.coordinateToPrice(Math.min(Math.max(e.clientY - r.top, 0), h));
+    if (p == null) return;
+    const f = Math.exp(Math.max(-0.5, Math.min(0.5, e.deltaY * 0.002)));    // down = out, up = in
+    const min = p - (p - priceZoom.min) * f, max = p + (priceZoom.max - p) * f;
+    if (!(max - min > 1e-6)) return;
+    priceZoom = { min, max };
+    try { chart.priceScale("right").applyOptions({ autoScale: true }); } catch (e2) {}
+  }, { capture: true, passive: false });
+  mainEl.addEventListener("dblclick", e => {
+    if (!overAxis(e)) return;
+    priceZoom = null;                                  // the library's own double-click restores autoscale
+    try { chart.priceScale("right").applyOptions({ autoScale: true }); } catch (e2) {}
+  }, true);
 
   /* Which overlays this pane shows. Stored per pane so the 1-minute chart can
      carry MACD while the 10-second pane stays clean, and remembered across
@@ -635,16 +772,19 @@ function makePane(hostId, daily) {
   // away in ƒ (support confluence, knowledge-base/strategies/PARAMETERS.md §3);
   // the daily keeps them for room. v2's saved "everything on" is not carried.
   // 2026-10-13 (owner: "spot the resistance and support key levels and their
-  // density of volume"): the support/resistance zones and the prior day's
-  // levels on the 1- and 5-minute panes, the volume profile on the 5-minute —
-  // the pane the corpus's class runs it on (wC2Bbf6OMFQ [00:07:36]); one click
-  // puts it on the 1-minute. A key saved before simply lacks them: defaults.
+  // density of volume"): support/resistance and the prior day's levels on the
+  // 1- and 5-minute panes, the volume profile on the 5-minute — the pane the
+  // corpus's class runs it on (wC2Bbf6OMFQ [00:07:36]); then ("do you think
+  // we can handle uptrends and downtrends lines? so i spot breakouts") the
+  // Pine's trend lines on the same two panes. A key saved before simply lacks
+  // the new ones: defaults.
   const SHOW_KEY = "momentum-workstation.show.v3." + hostId;
   // MACD is ON by default on the execution pane: it is a Layer 2 gate the
   // cascade judges, so the trader must be able to see it without a menu.
   const SHOW_DEFAULT = { volume: true, vwap: !daily, ema9: hostId === "chartA" || daily, ema20: daily,
                          ema200: daily, macd: hostId === "chartA", hod: !daily, plan: true,
-                         levels: hostId === "chartA" || hostId === "chartB", profile: hostId === "chartB",
+                         levels: hostId === "chartA" || hostId === "chartB",
+                         trend: hostId === "chartA" || hostId === "chartB", profile: hostId === "chartB",
                          values: false };
   let show = Object.assign({}, SHOW_DEFAULT);
   try {
@@ -659,9 +799,10 @@ function makePane(hostId, daily) {
     chart.applyOptions({ width: W, height: Math.max(40, H - subH), timeScale: { visible: !subH } });
     if (subH) {
       sub.applyOptions({ width: W, height: subH });
-      try { const r = chart.timeScale().getVisibleLogicalRange(); if (r) sub.timeScale().setVisibleLogicalRange(r); } catch (e) {}
+      try { const r = chart.timeScale().getVisibleLogicalRange(); if (r) copyRange(sub, r); } catch (e) {}
     }
     macdTag.hidden = !subH;
+    liveBtn.style.bottom = subH ? "8px" : "34px";       // above the time axis when the price pane carries it
   };
   layoutPanes();
   const tools = window.ChartTools ? window.ChartTools.attach(chart, candles, host, hostId) : null;
@@ -669,14 +810,17 @@ function makePane(hostId, daily) {
     show = next;
     try { localStorage.setItem(SHOW_KEY, JSON.stringify(show)); } catch (e) {}
     layoutPanes();
+    forceFull = true;
     if (lastOpts) api.render(lastBars, lastOpts);
   });
-  const lines = {};
+  const lines = {}, lineFull = {};
   // VWAP is the reference line and reads as one: three pixels against one
-  // for the EMAs (owner, 2026-09-08).
+  // for the EMAs (owner, 2026-09-08). Under a price zoom a line has no say in
+  // the scale.
   const lineFor = key => (lines[key] = lines[key] ||
     chart.addLineSeries({ color: PALETTE[key], lineWidth: key === "vwap" ? 3 : 1, priceLineVisible: false,
-                          lastValueVisible: false, crosshairMarkerVisible: false }));
+                          lastValueVisible: false, crosshairMarkerVisible: false,
+                          autoscaleInfoProvider: orig => priceZoom ? null : orig() }));
   let priceLines = [];
   /* An indicator per session, from 04:00 ET, the way the gates compute today's:
      the lines break where a session starts rather than joining yesterday's
@@ -687,8 +831,36 @@ function makePane(hostId, daily) {
     runs.forEach(r => { const part = fn(closes.slice(r.from, r.to + 1)); part.forEach((v, k) => { out[r.from + k] = v; }); });
     return out;
   };
-  const lineData = (series, rows) => rows.map((r, i) =>
-    (series[i] == null || starts.has(i)) ? { time: r.time } : { time: r.time, value: series[i] });
+  const point = (series, rows, i) =>
+    (series[i] == null || starts.has(i)) ? { time: rows[i].time } : { time: rows[i].time, value: series[i] };
+  const lineData = (series, rows) => rows.map((r, i) => point(series, rows, i));
+  const sameRow = (a, b) => !!a && !!b && a.time === b.time && a.open === b.open && a.high === b.high &&
+    a.low === b.low && a.close === b.close;
+  /* The pane's own levels (levels.js): the Pine's S/R fan over every loaded
+     bar, its trend lines over today's confirmed bars (the forming bar is the
+     live price that can break them), each level's volume density from the
+     caller's one-minute profile. */
+  const computeLevels = (bars, opts) => {
+    const L = window.DeskLevels;
+    if (daily || !L || !bars.length || (!show.levels && !show.trend)) return null;
+    const close = bars[bars.length - 1][4];
+    const a = L.atr(bars, 14);
+    const out = { last: close, atr: a, res: [], sup: [], band: null, trend: null };
+    if (show.levels && a) {
+      const fan = L.srFan(bars, close, a);
+      const fine = opts.levels && opts.levels.fine;
+      const dens = l => fine ? L.density(fine, l.price - fan.band, l.price + fan.band) : null;
+      out.res = fan.res.map(l => Object.assign(l, { dens: dens(l) }));
+      out.sup = fan.sup.map(l => Object.assign(l, { dens: dens(l) }));
+      out.band = fan.band;
+    }
+    if (show.trend && a && runs.length) {
+      const today = runs[runs.length - 1];
+      const tl = L.trendLines(bars.slice(today.from, bars.length - 1), close, a);
+      if (tl.up || tl.down) out.trend = Object.assign(tl, { offset: today.from, live: bars.length - 1 });
+    }
+    return out;
+  };
 
   const api = {
     engine: "tradingview",
@@ -699,8 +871,24 @@ function makePane(hostId, daily) {
     rows() { return lastRows; },                               // tests read what was drawn
     xOf(t) { try { return chart.timeScale().timeToCoordinate(t); } catch (e) { return null; } },
     vwapDrawn() { return lastInd.vwap || null; },
-    levelsDrawn() { return show.levels ? lastLevels : null; },
+    levelsDrawn() {
+      if (!show.levels || !lastLevels) return null;
+      const out = { pd: lastLevels.pd, round: lastLevels.round, last: lastLevels.last };
+      return Object.assign(out, paneLevels ? { res: paneLevels.res, sup: paneLevels.sup, band: paneLevels.band,
+                                               atr: paneLevels.atr, last: paneLevels.last } : {});
+    },
+    trendDrawn() {
+      const t = show.trend && paneLevels && paneLevels.trend;
+      if (!t) return null;
+      const one = ln => ln ? { anchor: t.offset + ln.anchor, touch: t.offset + ln.touch, slope: ln.slope,
+                               price: ln.price, touches: ln.touches, now: ln.now, through: ln.through,
+                               live: t.live } : null;
+      return { up: one(t.up), down: one(t.down) };
+    },
     profileDrawn() { return show.profile ? lastProfile : null; },
+    priceZoomed() { return priceZoom ? Object.assign({}, priceZoom) : null; },
+    drawStats() { return Object.assign({}, drawn); },
+    liveButton() { return !liveBtn.hidden; },
     macdPane() { return { visible: !subEl.hidden, height: subEl.hidden ? 0 : subEl.clientHeight,
                           timeAxisOnPrice: !!chart.options().timeScale.visible }; },
     sessionStarts() { return Array.from(starts).sort((a, b) => a - b); },
@@ -725,51 +913,75 @@ function makePane(hostId, daily) {
     // Zoom is state the trader set on purpose. A live reload must hand it back.
     getRange() { try { return chart.timeScale().getVisibleLogicalRange(); } catch (e) { return null; } },
     setRange(r) { try { if (r) chart.timeScale().setVisibleLogicalRange(r); } catch (e) {} },
-    snapToLive() { try { chart.timeScale().scrollToRealTime(); } catch (e) {} },
+    snapToLive() { toLive(); },
     resize() {
       layoutPanes();
       if (tools) tools.repaint();        // the canvas is sized in CSS pixels
     },
     render(bars, opts) {
       let atEdge = false, before = null;
-      const prevFirst = lastRows.length ? lastRows[0].time : null;
+      const prevRows = lastRows, prevVols = lastVols;
       try {
         before = chart.timeScale().getVisibleLogicalRange();
-        atEdge = !before || !lastRows.length || before.to >= lastRows.length - 2;
+        atEdge = !before || !prevRows.length || before.to >= prevRows.length - 2;
       } catch (e) { atEdge = true; }
       lastBars = bars; lastOpts = opts;
       chart.applyOptions({ watermark: { text: (opts.symbol || "") + (opts.tf ? "  ·  " + opts.tf : "") } });
+      if (opts.snapToLive) priceZoom = null;            // a new symbol starts on its own scale
       if (!bars.length) {
         candles.setData([]); volume.setData([]); macd.setData([]); macdLine.setData([]); macdSignal.setData([]);
-        lastRows = []; lastVols = []; lastLevels = null; runs = []; starts = new Set(); rowPart = [];
-        showLegend(null); return;
+        lastRows = []; lastVols = []; lastLevels = null; paneLevels = null; runs = []; starts = new Set(); rowPart = [];
+        forceFull = true; showLegend(null); return;
       }
       const rows = bars.map((b, i) => daily
         ? { time: b.d, open: b.o, high: b.h, low: b.l, close: b.c }
         : { time: deskTime(b[0]), open: b[1], high: b[2], low: b[3], close: b[4] });
+      const vols = bars.map(b => daily ? b.v : b[5]);
+      const prevStarts = starts;
       runs = (!daily && window.DeskLevels) ? window.DeskLevels.bySession(bars) : [{ from: 0, to: bars.length - 1 }];
       starts = new Set(runs.slice(1).map(r => r.from));
       rowPart = daily ? [] : rows.map(r => { const m = Math.floor((r.time % 86400) / 60);
         return m < 570 ? "pre" : m >= 960 ? "post" : "regular"; });
-      candles.setData(rows);
-      const vols = bars.map(b => daily ? b.v : b[5]);
-      volume.setData(show.volume ? bars.map((b, i) => ({
-        time: rows[i].time, value: vols[i],
-        color: rows[i].close >= rows[i].open ? TVC.volUp : TVC.volDown,
-      })) : []);
+      /* Only the newest bar moved, or one bar was added after an unchanged
+         one — the live tape's every tick. Then each series takes one point
+         (`update`) instead of being rebuilt: the crosshair stays smooth while
+         the tape streams (owner's recording, 2026-10-13). */
+      const n = rows.length, m = prevRows.length;
+      const incremental = !forceFull && !opts.snapToLive && m >= 2 && rows[0].time === prevRows[0].time &&
+        starts.size === prevStarts.size &&
+        (n === m ? rows[n - 1].time === prevRows[m - 1].time && sameRow(rows[n - 2], prevRows[m - 2])
+         : n === m + 1 && sameRow(rows[m - 1], prevRows[m - 1]) && vols[m - 1] === prevVols[m - 1]);
+      forceFull = false;
+      drawn[incremental ? "incremental" : "full"] += 1;
+      const volPoint = i => ({ time: rows[i].time, value: vols[i],
+                               color: rows[i].close >= rows[i].open ? TVC.volUp : TVC.volDown });
+      // The pane's state first: the library reports range changes from inside
+      // setData, and its listeners must judge them against the new bars, not
+      // the old ones (a guard reading the old count threw the 5-minute view
+      // back to the oldest bars as history arrived, 2026-10-13).
       lastRows = rows; lastVols = vols;
-      // Older sessions arrived on the left while the trader was reading: keep
-      // the same bars in view rather than jumping to the ones just loaded.
-      if (!opts.snapToLive && !atEdge && before && prevFirst != null && rows[0].time < prevFirst) {
-        const shift = rows.findIndex(r => r.time >= prevFirst);
-        if (shift > 0) {
+      if (incremental) {
+        candles.update(rows[n - 1]);
+        if (show.volume) volume.update(volPoint(n - 1));
+      } else {
+        candles.setData(rows);
+        volume.setData(show.volume ? rows.map((r, i) => volPoint(i)) : []);
+      }
+      // Older sessions arrived on the left while the trader was reading: the
+      // same bar stays at the same place on screen, found by its time.
+      if (!incremental && !opts.snapToLive && !atEdge && before && m && rows[0].time !== prevRows[0].time) {
+        const k = Math.max(0, Math.min(m - 1, Math.floor(before.from)));
+        const anchor = prevRows[k].time, off = before.from - k;
+        let lo = 0, hi = n;
+        while (lo < hi) { const mid = (lo + hi) >> 1; if (rows[mid].time < anchor) lo = mid + 1; else hi = mid; }
+        if (lo < n && rows[lo].time === anchor) {
           prevFrom = null;
-          try { chart.timeScale().setVisibleLogicalRange({ from: before.from + shift, to: before.to + shift }); } catch (e) {}
+          try { chart.timeScale().setVisibleLogicalRange({ from: lo + off, to: lo + off + (before.to - before.from) }); } catch (e) {}
         }
       }
       const sessionBounds = (!daily && opts.openTs)
         ? { open: deskTime(opts.openTs), close: deskTime(opts.openTs + 6.5 * 3600) } : null;
-      if (candles.setMarkers) {          // today's 09:30 / 16:00 marked on the bars
+      if (candles.setMarkers && (!incremental || n !== m)) {   // today's 09:30 / 16:00 marked on the bars
         const marks = [];
         if (sessionBounds) {
           const firstAt = t => rows.find(r => r.time >= t);
@@ -782,8 +994,9 @@ function makePane(hostId, daily) {
       const closes = rows.map(r => r.close);
       const put = (key, series) => {
         lastInd[key] = series || null;
-        if (!series) { if (lines[key]) lines[key].setData([]); return; }
-        lineFor(key).setData(lineData(series, rows));
+        if (!series) { if (lines[key]) lines[key].setData([]); lineFull[key] = false; return; }
+        if (incremental && lineFull[key]) lines[key].update(point(series, rows, n - 1));
+        else { lineFor(key).setData(lineData(series, rows)); lineFull[key] = true; }
       };
       // The caller asks for an overlay; the pane's own menu can switch it off.
       // One VWAP: the session's, from the 1-minute bars (the cascade's own
@@ -795,15 +1008,21 @@ function makePane(hostId, daily) {
       put("ema20", opts.ema20 && show.ema20 ? perSession(closes, c => ema(c, 20)) : null);
       put("ema200", opts.ema200 && show.ema200 ? perSession(closes, c => ema(c, 200)) : null);
       if (show.macd && !daily) {
-        const pick = k => perSession(closes, c => { const m = macdLines(c); return m[k].length ? m[k] : c.map(() => null); });
+        const pick = k => perSession(closes, c => { const mm = macdLines(c); return mm[k].length ? mm[k] : c.map(() => null); });
         const mh = pick("hist"), ml = pick("macd"), ms = pick("signal");
         lastInd.macd = mh; lastInd.macdLine = ml; lastInd.macdSignal = ms;
         // Every bar gets a point, a blank where MACD has none yet, so the two
         // panes share one time axis bar for bar.
-        macd.setData(rows.map((r, i) => mh[i] == null ? { time: r.time } : {
-          time: r.time, value: mh[i], color: mh[i] >= 0 ? "#26a69a90" : "#ef535090" }));
-        macdLine.setData(lineData(ml, rows));
-        macdSignal.setData(lineData(ms, rows));
+        const histPoint = i => mh[i] == null ? { time: rows[i].time } : {
+          time: rows[i].time, value: mh[i], color: mh[i] >= 0 ? "#26a69a90" : "#ef535090" };
+        if (incremental) {
+          macd.update(histPoint(n - 1));
+          macdLine.update(point(ml, rows, n - 1)); macdSignal.update(point(ms, rows, n - 1));
+        } else {
+          macd.setData(rows.map((r, i) => histPoint(i)));
+          macdLine.setData(lineData(ml, rows));
+          macdSignal.setData(lineData(ms, rows));
+        }
       } else {
         macd.setData([]); macdLine.setData([]); macdSignal.setData([]);
         lastInd.macd = null; lastInd.macdLine = null; lastInd.macdSignal = null;
@@ -843,23 +1062,30 @@ function makePane(hostId, daily) {
       // The prior day's high, low and close (a "daily level", FILTERS.md
       // at_support) and the whole / half dollars either side of the price —
       // the levels he positions under (FILTERS.md: "10-25¢ below a whole
-      // dollar or the pre-market high").
+      // dollar or the pre-market high"). Equal prices share one label: JBDI's
+      // prior day read 1.00 / 1.00 / 1.00 as three stacked tags (2026-10-13).
       lastLevels = opts.levels || null;
       if (show.levels && lastLevels && !daily) {
         const pd = lastLevels.pd;
         if (pd) {
-          mark(pd.h, PALETTE.pd, "PD HIGH", "dotted"); mark(pd.l, PALETTE.pd, "PD LOW", "dotted");
-          mark(pd.c, PALETTE.pd, "PD CLOSE", "sparse");
+          const eq = (a, b) => a != null && b != null && Math.abs(a - b) < 0.005;
+          if (eq(pd.h, pd.l) && eq(pd.l, pd.c)) mark(pd.c, PALETTE.pd, "PD H/L/C", "dotted");
+          else {
+            mark(pd.h, PALETTE.pd, eq(pd.h, pd.c) ? "PD HIGH = CLOSE" : "PD HIGH", "dotted");
+            mark(pd.l, PALETTE.pd, eq(pd.l, pd.c) ? "PD LOW = CLOSE" : "PD LOW", "dotted");
+            if (!eq(pd.h, pd.c) && !eq(pd.l, pd.c)) mark(pd.c, PALETTE.pd, "PD CLOSE", "sparse");
+          }
         }
         const rd = lastLevels.round || {};
         mark(rd.above, PALETTE.round, "", "sparse"); mark(rd.below, PALETTE.round, "", "sparse");
       }
+      paneLevels = computeLevels(bars, opts);
       // Drawings are anchored to (time, price) and belong to this symbol and
       // timeframe only; the measure tool needs the live plan's risk per share
       // to report a move in R.
       if (tools) tools.sync(opts.symbol || null, opts.tf || (daily ? "D" : null), opts.plan || null);
       showLegend(rows[rows.length - 1], vols[vols.length - 1], rows.length - 1);
-      [sessionBands, levelBands, volumeProfile].forEach(p => p.refresh());
+      [sessionBands, srBands, volumeProfile, trendLayer].forEach(p => p.refresh());
       // Follow the tape only when the view is already parked at the newest
       // bar; a trader who scrolled back to read a pullback keeps their view.
       if (opts.snapToLive) {
@@ -870,7 +1096,7 @@ function makePane(hostId, daily) {
         try { chart.priceScale("right").applyOptions({ autoScale: true }); } catch (e) {}
         prevFrom = null;
       }
-      if (opts.snapToLive || atEdge) chart.timeScale().scrollToRealTime();
+      if (opts.snapToLive || (atEdge && !incremental)) toLive();
     },
   };
   void menu;
@@ -3577,24 +3803,26 @@ function vwapBySession(bars) {
   window.DeskLevels.bySession(bars).forEach(r => vwap(bars.slice(r.from, r.to + 1)).forEach(v => out.push(v)));
   return out;
 }
-/* The levels the 1- and 5-minute panes draw (levels.js): support/resistance
-   zones from the 5-minute swings of every loaded session — the three nearest
-   on each side of the last price, within 30 % of it — each with the volume
-   traded inside it against the average (a 120-row profile of the one-minute
-   bars); the prior day's high, low and close; the whole / half dollars either
-   side. A replay cuts all of it at the frame: nothing from later in the day. */
-function chartLevels(sym, all1, b5, daily) {
+/* What every intraday pane shares (levels.js): the prior day's high, low and
+   close, the whole / half dollars either side of the last price, and a
+   120-row volume profile of every loaded one-minute bar — the "vol N×" each
+   pane writes beside its support and resistance (each pane finds those from
+   its own bars, as ross-fp-v4.pine does on each chart). A replay cuts all of
+   it at the frame: nothing from later in the day. */
+function chartLevels(sym, all1, daily) {
   const L = window.DeskLevels;
   if (!L || !all1.length) return null;
   const last = all1[all1.length - 1][4];
-  const fine = L.profile(all1, { rows: 120 });
-  const near = L.zones(b5).filter(z => Math.abs(z.price - last) <= last * 0.3);
-  const above = near.filter(z => z.price > last).sort((a, b) => a.price - b.price).slice(0, 3);
-  const below = near.filter(z => z.price <= last).sort((a, b) => b.price - a.price).slice(0, 3);
-  const zones = below.concat(above).map(z => Object.assign({}, z, { dens: L.density(fine, z.lo, z.hi) }));
-  return { last, zones, pd: L.priorDay(daily, S.tradingDate || ""), round: L.roundLevels(last) };
+  return { last, fine: L.profile(all1, { rows: 120 }), pd: L.priorDay(daily, S.tradingDate || ""),
+           round: L.roundLevels(last) };
 }
-function renderCharts(frame) {
+/* The charts redraw only when what they show changed. Quotes reach the page
+   many times a second; each used to rebuild every series of four panes —
+   thousands of points once older sessions are loaded — and the crosshair
+   stuttered behind the mouse (owner's recording, 2026-10-13). */
+let CHART_SIG = null;
+const tailSig = (arr, k) => (arr || []).slice(-k).map(b => b.join(",")).join(";");
+function renderCharts(frame, force) {
   if (!frame) return;                     // no bars yet: nothing to draw, nothing to throw
   const sym = state.selected, meta = SYMS[sym] || {};
   // A new symbol, or a refreshed session on a streaming desk, must show the
@@ -3631,14 +3859,20 @@ function renderCharts(frame) {
     while (lo < hi) { const mid = (lo + hi) >> 1; if (all1[mid][0] <= t) lo = mid + 1; else hi = mid; }
     return lo ? vw1[lo - 1] : null;
   };
+  const sub = bars10sUpTo(sym, frame);
+  const sig = [sym, frame.t, S.tradingDate, bars1.length, tailSig(bars1, 3), h.m1.length, h.daily.length,
+               sub.length, tailSig(sub, 2), JSON.stringify(plan), JSON.stringify(position), pmHigh,
+               (meta.dailyBars || []).length, meta.high52w,
+               ((S.provider && S.provider.barsStalled) || []).indexOf(sym)].join("|");
+  if (!force && !snap && sig === CHART_SIG) return;
+  CHART_SIG = sig;
   const b5 = agg(all1, 5);
   const dailyAll = h.daily.length ? h.daily.concat(meta.dailyBars || []) : (meta.dailyBars || []);
-  const levels = chartLevels(sym, all1, b5, dailyAll);
+  const levels = chartLevels(sym, all1, dailyAll);
   PANES.a.render(all1, Object.assign({ vwapSeries: vw1, ema9: true, ema20: true, ema200: true, tf: "1m", pmHigh: pmHigh,
                                        levels: levels, profileBars: all1 }, common));
   PANES.b.render(b5, Object.assign({ vwapSeries: b5.map(b => vwapAt(b[0] + 240)), ema9: true, ema20: true,
                                      ema200: true, tf: "5m", levels: levels, profileBars: all1 }, common));
-  const sub = bars10sUpTo(sym, frame);
   if (sub.length) {
     PANES.d.note(null);   // cleared, then re-set below only when the tape is thin
     // Micro-pullbacks live here: several 10-second candles can form a pause
@@ -3986,7 +4220,7 @@ function beginResize(e, g) {
 }
 function afterResize() {
   Object.values(PANES).forEach(p => p.resize());
-  renderCharts(FRAMES[state.frame]);
+  renderCharts(FRAMES[state.frame], true);
 }
 
 /* Cards not on the desk live in the tray. */
@@ -4083,7 +4317,7 @@ function toggleExpand(card) {
   if (!already) card.classList.add("expanded");
   requestAnimationFrame(() => {
     Object.values(PANES).forEach(p => p.resize());
-    renderCharts(FRAMES[state.frame]);
+    renderCharts(FRAMES[state.frame], true);
   });
 }
 /* Card drag and drop, and the four things that were wrong with it.
@@ -5018,12 +5252,12 @@ function init() {
   $("#chartEngine").closest(".health").hidden = usingTV;
   const ro = new ResizeObserver(() => {
     Object.values(PANES).forEach(p => p.resize());
-    renderCharts(FRAMES[state.frame]);
+    renderCharts(FRAMES[state.frame], true);
   });
   ["chartA", "chartB", "chartC", "chartD"].forEach(id => ro.observe(document.getElementById(id)));
   window.addEventListener("resize", () => {
     Object.values(PANES).forEach(p => p.resize());
-    renderCharts(FRAMES[state.frame]);
+    renderCharts(FRAMES[state.frame], true);
   });
   // A RECORDING opens eight minutes before the bell, where the interesting
   // part starts. A LIVE desk opens on the live edge. This line ran on both,
