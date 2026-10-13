@@ -69,7 +69,16 @@ score-basket died (`research/momentum-replication/reports/2026-08-score-basket.m
 
 ## Current state
 
-Journal: 3 trades, all 2026-08-24, all classified **OFF-PATTERN** by
+**2026-10-13 — `2026-10-13-review.md`:** the owner's 16 paper trades of
+10-12/10-13 are logged. In short:
+- +$469 closed; 14 OFF-PATTERN, 2 MNDR shorts the long-only audit cannot
+  judge.
+- The bot's own rules on those names, replayed: −4.3 R taken. Its refusals
+  avoided about 36 R of losers and skipped 5.5 R of winners.
+- The profit came from shorts, scalps and the 04:00–06:00 first leg.
+- MNDR #12's short sat through −$1,449 before closing +$182.
+
+Earlier — journal: 3 trades, all 2026-08-24, all classified **OFF-PATTERN** by
 the audit — net −24.46$. XPON 08:52 (+0.54), BTCT 10:27 scratch, BTCT
 10:36 (−25.00). The audit's verdict is the same each time: no push/dip
 structure at the entry minute. Two of the three bought a lower high

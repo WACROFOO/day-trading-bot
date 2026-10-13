@@ -2,3 +2,19 @@ date,sym,side,entry_hhmm,entry,exit_hhmm,exit,shares,pnl,note
 2026-08-24,XPON,long,08:52,7.87,08:53,8.41,1,0.54,"1-share test, pre-market micro pullback"
 2026-08-24,BTCT,long,10:27,2.72,10:27,2.72,1,0.0,"1-share test, scratch"
 2026-08-24,BTCT,long,10:36,2.67,10:37,2.42,100,-25.0,entry minute inferred from tape (2.67 in 10:34/35/36/37 bars); exit 2.42 in the 10:37 bar
+2026-10-12,YMAT,long,04:21,3.41,04:39,3.48,1,0.07,"1-share long; TradingView paper, France time -6h"
+2026-10-12,YMAT,short,04:39,3.48,04:59,3.2,290,81.2,short after the 04:3x push; 289.69 sh in TV
+2026-10-12,YMAT,long,04:59,3.2,05:24,3.29,1,0.09,1-share long
+2026-10-12,YMAT,short,05:49,3.72,05:54,3.49,51,11.73,CSV says 05:25 (order time); the tape traded 3.72 only at 05:49
+2026-10-12,MNDR,long,07:57,2.35,07:59,2.28,100,-7.0,"pre-market long, stopped out"
+2026-10-12,MNDR,long,09:45,3.56,09:46,3.63,100,7.0,open scalp
+2026-10-12,MNDR,short,09:47,3.31,09:49,3.14,100,17.0,scalp
+2026-10-12,MNDR,short,09:51,3.14,10:01,3.31,100,-17.0,"scalp, stopped"
+2026-10-12,MNDR,long,10:02,3.29,10:05,3.53,100,24.0,dip buy
+2026-10-12,MNDR,long,10:07,3.51,10:08,3.55,100,4.0,scalp
+2026-10-12,MNDR,short,10:09,3.6,10:10,3.42,200,36.0,scalp
+2026-10-12,MNDR,short,10:10,3.6,13:29,3.34,700,182.0,"held through the run to 5.67 at 11:16 (MAE -1,449 USD); CSV 10:11"
+2026-10-13,BKYI,long,04:43,5.33,04:45,5.77,100,44.0,"first leg, pre-market"
+2026-10-13,BKYI,long,05:32,5.4,05:34,5.57,100,17.0,"pre-market, under the 6.44 high"
+2026-10-13,TCRT,long,08:18,1.884,08:53,1.97,500,43.0,CSV says 08:06 (order time); the tape traded 1.884 only at 08:18
+2026-10-13,YJ,long,08:28,2.49,08:58,2.62,200,26.0,pre-market
