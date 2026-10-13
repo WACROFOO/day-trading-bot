@@ -13,6 +13,7 @@ market data or the trading engine.
 | `run_scanner.py` | CLI wrapper for the paper-trading platform's scanner |
 | `edge_hunt/` | The holdout-guarded edge hunt (`research/edge-hunt/`): compact bar store, the desk's plans, point-in-time features, exit engine, costs, the holdout ledger |
 | `candidates/` | The strategy candidates' runner (`research/strategy-candidates/`): entries S1 / S2 / L1 / L3, long and short exits, live costs with borrow, the random baseline, the registry of every combination, the holdout ledger — `python3 scripts/candidates/run.py` |
+| `chart_shots.py` | Screenshots of the desk's charts on SYNTHETIC data (the test suite's fake TWS) for `docs/desk-2026-10-13/` — `python3 scripts/chart_shots.py [OUT_DIR] [PREFIX]` |
 | `pipeline/` | The numbered corpus pipeline — see its README |
 | `corpus.py` | **Search every register at once, with citations.** Entry point for the `warrior-corpus` skill |
 | `fetch_warrior_blog.py` / `fetch_warrior_fast.py` | Fetch the written corpus from warriortrading.com |

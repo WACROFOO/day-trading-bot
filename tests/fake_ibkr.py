@@ -219,7 +219,11 @@ class FakeIB:
         if size == "1 day":
             return [Obj(date=d, open=o, high=h, low=l, close=c, volume=v) for d, o, h, l, c, v in self.daily.get(sym, [])]
         if size == "1 min":
-            return [Obj(date=d, open=o, high=h, low=l, close=c, volume=v) for d, o, h, l, c, v in self.minutes.get(sym, [])]
+            rows = self.minutes.get(sym, [])
+            if isinstance(end, datetime):
+                # An end-dated "1 D" request (the chart history's): the day before `end` only.
+                rows = [r for r in rows if end - timedelta(days=1) <= r[0] < end]
+            return [Obj(date=d, open=o, high=h, low=l, close=c, volume=v) for d, o, h, l, c, v in rows]
         if size == "5 mins":
             return [Obj(date=d, open=o, high=h, low=l, close=c, volume=v) for d, o, h, l, c, v in self.min5.get(sym, [])]
         if size == "5 secs":

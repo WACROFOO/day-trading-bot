@@ -258,8 +258,15 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
    thick one on the chart and here. */
 .k.vwap{background:#2962ff;height:4px} .k.ema9{background:#26c6da} .k.ema20{background:#ff9ad2}
 .k.hod{background:var(--hi)} .k.ema200{background:#ffb648} .k.h52{background:#c39bff}
-.chart-host{flex:1 1 auto;min-height:0;position:relative}
+.chart-host{flex:1 1 auto;min-height:0;position:relative;background:#131722}
 .chart-host canvas{display:block;width:100%}
+/* Two stacked charts in one pane, as TradingView lays out an indicator: the
+   price on top, MACD in its own pane with its own scale beneath, one time axis
+   at the bottom (2026-10-13). */
+.pane-main,.pane-sub{position:absolute;left:0;right:0}
+.pane-main{top:0}
+.pane-sub{bottom:0;border-top:1px solid #2a2e39}
+.pane-sub[hidden]{display:none}
 
 /* ── drawing tools and the indicator menu ───────────────────────────────
    The toolbar and the ƒ button sit above the chart canvases and only appear
@@ -286,9 +293,13 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
   border:1px solid #223046;border-radius:5px;padding:6px 8px;display:flex;flex-direction:column;gap:3px;
   box-shadow:0 6px 18px #0009}
 .ind-menu[hidden]{display:none}
-.band-tag{position:absolute;left:8px;bottom:6px;z-index:4;pointer-events:none;
-  font:9px var(--mono);color:#26a69a;letter-spacing:.3px;opacity:.8}
+/* The indicator pane's name, top left as TradingView writes it; its values
+   follow when "Values" is on. */
+.band-tag{position:absolute;left:8px;top:3px;z-index:4;pointer-events:none;
+  font:9.5px var(--mono);color:#b2b5be;letter-spacing:.2px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .band-tag[hidden]{display:none}
+.band-tag .lk{color:#787b86;margin-right:4px} .band-tag .m{color:#2962ff} .band-tag .s{color:#ff6d00}
+.band-tag .u{color:#26a69a} .band-tag .d{color:#ef5350}
 .ind-menu label{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-dim,#9fb0c3);
   cursor:pointer;white-space:nowrap}
 .ind-menu label:hover{color:var(--ink,#dbe6f3)}
@@ -508,16 +519,16 @@ body.resizing .gutter{pointer-events:auto}
 .tl-detail .seek-back{margin-top:6px;width:auto;padding:2px 8px;font-size:10px}
 .lag{min-width:96px;display:inline-flex;align-items:center;justify-content:center;
   font-variant-numeric:tabular-nums;white-space:nowrap}
-.tv-legend{position:absolute;top:4px;left:8px;z-index:4;pointer-events:none;
-  font:9.5px var(--mono);color:#b2b5be;line-height:1.5;
+.tv-legend{position:absolute;top:4px;left:30px;z-index:4;pointer-events:none;
+  font:10px var(--mono);color:#b2b5be;line-height:1.5;
   font-variant-numeric:tabular-nums;white-space:nowrap}
+.tv-legend[hidden]{display:none}
 .tv-legend>span{margin-right:5px}
-.tv-legend .k{color:#787b86;margin-left:4px}
+/* Labels in their own class: the colour-swatch class .k sized them to a 10 px
+   bar, and the legend read as noise (2026-10-02). */
+.tv-legend .lk{color:#787b86;margin-right:2px}
+.tv-legend .sym{color:#d1d4dc;font-weight:600}
 .tv-legend .u{color:#26a69a} .tv-legend .d{color:#ef5350}
-/* Extended-hours tint, drawn under the series and above the grid.
-   Sits below the empty-pane note (z-index 5) so an explanation still reads. */
-.session-shade{position:absolute;top:0;bottom:0;z-index:1;pointer-events:none;
-  background:rgba(120,130,150,0.06);border-left:1px dashed rgba(255,194,71,0.25);width:0}
 /* Header warning when the desk stepped back to an earlier session. */
 .session-note{color:var(--hi);border:1px solid #4a3c17;background:#241d0c;
   border-radius:3px;padding:0 5px;margin-left:6px;font-size:9.5px}

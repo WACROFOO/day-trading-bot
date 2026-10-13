@@ -715,7 +715,10 @@ def test_the_charts_carry_only_what_the_verdict_reads(desk_server):
     the verdict reads: the session VWAP, the 1-minute 9 EMA and MACD, volume,
     HOD / PM high and the live plan. The 20 and 200 are one click away in ƒ;
     the daily keeps its 9 / 20 / 200 for room. The library's attribution is on
-    the page, as its licence asks."""
+    the page, as its licence asks. Owner, 2026-10-13: "spot the resistance and
+    support key levels and their density of volume" — the levels on the 1- and
+    5-minute panes, the volume profile on the 5-minute; the values legend
+    stays off (2026-10-02)."""
     pytest.importorskip("playwright.sync_api")
     from playwright.sync_api import sync_playwright
     with sync_playwright() as pw:
@@ -724,8 +727,10 @@ def test_the_charts_carry_only_what_the_verdict_reads(desk_server):
             Array.from(document.querySelectorAll('#' + id + ' .ind-menu label')).map(l =>
               [l.textContent.trim(), l.querySelector('input').checked])]))""")
         on = {k: {lab for lab, c in v if c} for k, v in menus.items()}
-        assert on["chartA"] == {"Volume", "VWAP", "EMA 9", "MACD 12/26/9", "High of day", "Entry · stop · target"}
-        assert on["chartB"] == {"Volume", "VWAP", "High of day", "Entry · stop · target"}
+        levels, profile = "Support / resistance · prior day · $ levels", "Volume profile · visible range"
+        assert on["chartA"] == {"Volume", "VWAP", "EMA 9", "MACD 12/26/9", "High of day", "Entry · stop · target",
+                                levels}
+        assert on["chartB"] == {"Volume", "VWAP", "High of day", "Entry · stop · target", levels, profile}
         assert on["chartD"] == {"Volume", "VWAP", "High of day", "Entry · stop · target"}
         assert {"EMA 9", "EMA 20", "EMA 200"} <= on["chartC"], "the daily keeps the averages for room"
         for card in ("chart-1m", "chart-5m", "chart-10s"):

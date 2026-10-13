@@ -1010,14 +1010,18 @@ def test_single_venue_scale_lets_a_real_runner_alert():
 def test_chart_panes_carry_the_tradingview_dressing():
     """Engine alone was not enough: people recognise the OHLC legend, the
     symbol watermark, the open marker and session tint, and axis labels on
-    the New York clock rather than the browser locale."""
+    the New York clock rather than the browser locale. Since 2026-10-13 the
+    session tint is drawn on the chart's own canvas for every session on the
+    pane (a series primitive), and MACD sits in its own pane under the price,
+    both price scales one width so their bars line up."""
     web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
     app = (web / "app.js").read_text()
     css = (web / "styles.css").read_text()
     for needle in ("tv-legend", "subscribeCrosshairMove", "watermark:", "tickMarkFormatter",
-                   "session-shade", 'text: "09:30"', 'text: "16:00"', '"#26a69a"', '"#ef5350"'):
+                   "sessionBands", "attachPrimitive", "minimumWidth", 'text: "09:30"', 'text: "16:00"',
+                   '"#26a69a"', '"#ef5350"'):
         assert needle in app, needle
-    assert ".tv-legend{" in css and ".session-shade{" in css
+    assert ".tv-legend{" in css and ".pane-sub{" in css
 
 
 def test_ten_second_pane_is_cut_by_time_not_by_index():
@@ -1476,12 +1480,18 @@ def test_the_desk_speaks_one_pillar_denominator():
 def test_the_macd_band_is_laid_out_from_the_first_paint():
     """GRML, 2026-09-21 07:52: MACD computed, its value in the legend, nothing
     on the chart. The volume band kept its MACD-off height and painted over
-    the MACD band; setBands(show.macd) was only reached from the menu."""
+    the MACD band; setBands(show.macd) was only reached from the menu. Since
+    2026-10-13 MACD has its own pane: layoutPanes() sizes it from the loaded
+    state before anything is drawn, and again from the menu."""
     app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "app.js").read_text()
     pane = app.split("function makePane")[1].split("\nfunction ")[0]
     loaded = pane.index("blocked storage: the defaults are fine")
-    assert "setBands(show.macd);" in pane[loaded:loaded + 600], "bands must follow the loaded state"
+    after = pane[loaded:]
+    assert "\n  layoutPanes();\n" in after[:1500], "the panes must follow the loaded state"
+    assert after.index("\n  layoutPanes();\n") < after.index("render(bars, opts)")
+    menu = after.split("indicatorMenu(host, show, next => {")[1][:300]
+    assert "layoutPanes();" in menu, "and every change made in ƒ"
 
 
 def test_no_simulated_book_is_left_to_read_as_a_real_one():
@@ -1831,7 +1841,7 @@ def test_ui_the_top_bar_and_footer_carry_trading_state_not_engineering(page):
 def test_the_one_minute_chart_marks_the_premarket_high():
     web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
     app, html = (web / "app.js").read_text(), (web / "index.html").read_text()
-    body = app.split("function renderCharts(frame)")[1][:2500]
+    body = app.split("function renderCharts(frame)")[1][:4500]
     assert "pmHigh: pmHigh" in body.split("PANES.a.render")[1][:200]
     assert '"PM HIGH"' in app and '"HOD = PM HIGH"' in app
     assert 'class="k pmh"' in html

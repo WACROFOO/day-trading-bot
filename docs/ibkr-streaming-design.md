@@ -35,6 +35,7 @@ Invariants enforced by tests, mapped to the audit's rules:
 | Freshness / stale-but-green | `stale_threshold_seconds()` 20 s RTH, 60 s extended; `check()` -> LIVE/STALE/OFFLINE from an injected clock. |
 | Reconnect must resubscribe once, no duplicates | `reconnect()` unsubscribes, backs off (1,2,4…30 s), reconnects, resubscribes, 120 s gap backfill; `test_reconnect_resubscribes_each_symbol_once`. |
 | Client ids 27 (desk) / 28 (scanner) | `IbkrStream(client_id=27)` default; the scanner process uses 28 (wiring step). |
+| Client id 30 (chart history, 2026-10-13) | `src/momentum_platform/dashboard/chart_history.py`: older one-minute sessions and daily bars for the charts, on their own read-only client and thread; `IBKR_HISTORY_CLIENT_ID` overrides it. |
 | Line limits | `max_lines=50`, two lines per symbol, refusal is logged in `Health.messages`, never silent. |
 
 ## Wired (second round, same day)

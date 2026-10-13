@@ -205,9 +205,9 @@ def test_add_symbols_from_another_thread_is_queued_to_the_worker():
 
 def test_no_order_surface_anywhere_in_the_ibkr_path():
     import inspect
-    from momentum_platform.dashboard import ibkr_desk
+    from momentum_platform.dashboard import chart_history, ibkr_desk
     from momentum_platform.datasources import ibkr_depth, ibkr_tape
-    for mod in (ibkr_desk, sc, ibkr_tape, ibkr_depth):
+    for mod in (ibkr_desk, sc, ibkr_tape, ibkr_depth, chart_history):
         src = inspect.getsource(mod)
         for word in ("placeOrder", "cancelOrder", "reqOpenOrders", "whatIfOrder"):
             assert word not in src, f"{mod.__name__} mentions {word}"

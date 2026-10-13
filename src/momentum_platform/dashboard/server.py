@@ -438,6 +438,8 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                 return self._json(_tape_snapshot(holder))
             if path == "/api/v1/depth":
                 return self._json(_depth_snapshot(holder))
+            if path == "/api/v1/chart/history":
+                return self._json(*_chart_history(holder, urlparse(self.path).query))
 
             asset = (WEB / path.lstrip("/")).resolve()
             if asset.is_file() and WEB.resolve() in asset.parents:
@@ -499,6 +501,47 @@ def _depth_snapshot(holder) -> dict:
     from ..depth import off_depth
     fn = getattr(holder, "depth_snapshot", None)
     return fn() if fn is not None else off_depth(NO_DEPTH)
+
+
+# Older candles for the charts (2026-10-13). Only the live IBKR desk has them;
+# a replay carries its one recorded day and says so.
+NO_HISTORY = ("no older candles in this session: they come from the live IBKR desk; "
+              "a replay carries its one recorded day")
+
+
+def _chart_history(holder, query: str) -> tuple:
+    """GET /api/v1/chart/history?symbol=SYM&tf=1m|D&before=YYYY-MM-DD&sessions=N.
+
+    Only a name on the desk: the history client's IBKR budget is not spent on
+    whatever a viewer types."""
+    from urllib.parse import parse_qs
+    q = parse_qs(query or "")
+    sym = (q.get("symbol", [""])[0] or "").strip().upper()
+    if not sym or len(sym) > 12 or not sym.replace(".", "").replace("-", "").isalnum():
+        return {"error": "a symbol is required"}, 400
+    tf = q.get("tf", ["1m"])[0]
+    if tf not in ("1m", "D"):
+        return {"error": "tf is 1m or D"}, 400
+    before = q.get("before", [None])[0]
+    if before is not None:
+        try:
+            from datetime import date as _date
+            _date.fromisoformat(before)
+        except ValueError:
+            return {"error": "before is a date, YYYY-MM-DD"}, 400
+    hist = getattr(holder, "chart_history", None)
+    if hist is None:
+        return {"symbol": sym, "tf": tf, "sessions": [], "bars": [], "more": False, "note": NO_HISTORY}, 200
+    if sym not in (getattr(holder, "symbols", None) or []):
+        return {"symbol": sym, "tf": tf, "sessions": [], "bars": [], "more": False,
+                "note": f"{sym} is not on the desk"}, 404
+    if tf == "D":
+        return hist.daily(sym, before=before), 200
+    try:
+        n = int(q.get("sessions", ["1"])[0])
+    except ValueError:
+        n = 1
+    return hist.minutes(sym, before=before, sessions=n), 200
 
 
 def _focus_post(holder, body: dict) -> tuple:

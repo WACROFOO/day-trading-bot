@@ -9,6 +9,7 @@ The browser desk: panes, tiles, cards and the verdict.
 | `live.js` | the live transport: draws stream events in place, swaps the session without a reload |
 | `styles.css` | the desk's styling |
 | `chartTools.js` | drawing tools and the indicator menu — Lightweight Charts ships neither |
+| `levels.js` | support/resistance zones, the volume profile, the prior day's levels and the whole / half dollars — pure arithmetic on bars, checked in node (`tests/test_chart_levels.py`) |
 | `vendor/` | third-party chart library, served locally |
 
 ## Tools on the desk's own panes
@@ -32,6 +33,30 @@ it needs the plan's risk per share, which only this desk knows.
 
 The `ƒ` button on each pane toggles volume, VWAP, the 9/20/200 EMAs, MACD,
 the high of day and the plan levels, stored per pane.
+
+## Older candles, levels and the TradingView look (2026-10-13)
+
+- **Older candles.** The intraday panes hold the sessions before today: the previous one as
+  soon as a name is shown, one more each time the chart is dragged past its oldest bar — from
+  IBKR through `../chart_history.py`, on its own client. The daily pane loads older years the
+  same way. Every indicator is computed per session from 04:00 ET, as the gates compute today's,
+  so today's lines are the gates' own and no gate ever sees an older bar.
+- **Levels** (ƒ → *Support / resistance · prior day · $ levels*, on by default on the 1- and
+  5-minute): zones where swing highs and lows cluster, labelled `S`, `R` or `S/R flip` with their
+  touches and `vol N×` — the volume traded inside the band against the average; the prior day's
+  high, low and close; the whole and half dollars either side of the price. Approximations, and
+  **places to watch, never signals**: whether price turns at them is not measured.
+- **Volume profile** (ƒ → *Volume profile · visible range*, on by default on the 5-minute):
+  volume by price over the bars in view, with the settings of the corpus's volume-profile class
+  (24 rows, value area 70 %, up versus down, point of control in red), built from one-minute
+  bars.
+- **The look.** TradingView's dark background with a visible grid; MACD in its own pane with
+  its own scale, one time axis under both; the date on the axis where a session starts; the
+  extended hours tinted for every session. The values legend stays off (owner, 2026-10-02) —
+  ƒ → *Values* brings it back.
+
+A public Pine script cannot run here: Pine runs inside TradingView's own charts, and this desk
+draws with Lightweight Charts. The levels above are the same kind of thing, computed here.
 
 ## Which chart is which
 

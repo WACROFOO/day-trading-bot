@@ -272,6 +272,7 @@ const PALETTE = {
   up: "#2ad17f", down: "#ff5f6e", vwap: "#2962ff", ema9: "#26c6da",
   ema20: "#ff9ad2", ema200: "#ffb648", hod: "#ffc247", pmh: "#e6edf5", h52: "#c39bff",
   entry: "#22c7e8", stop: "#ff5f6e", target: "#2ad17f",
+  pd: "#a7b1c2", round: "#4c5363",
 };
 
 function paneNote(host) {
@@ -292,6 +293,8 @@ const INDICATORS = [
   ["volume", "Volume"], ["vwap", "VWAP"], ["ema9", "EMA 9"], ["ema20", "EMA 20"],
   ["ema200", "EMA 200"], ["macd", "MACD 12/26/9"], ["hod", "High of day"],
   ["plan", "Entry · stop · target"],
+  ["levels", "Support / resistance · prior day · $ levels"], ["profile", "Volume profile · visible range"],
+  ["values", "Values (OHLC legend)"],
 ];
 function indicatorMenu(host, show, onChange) {
   const btn = document.createElement("button");
@@ -324,110 +327,259 @@ function indicatorMenu(host, show, onChange) {
 function makePane(hostId, daily) {
   const host = document.getElementById(hostId);
   if (!TV) return canvasPane(host);
-  /* Styled to read like a TradingView chart: their default candle and volume
-     colours, a symbol/interval watermark, a dashed crosshair with axis labels,
-     a last-price line, and an OHLC legend that follows the cursor. The engine
-     is TradingView's own; what was missing was the dressing people recognise. */
-  const TVC = { up: "#26a69a", down: "#ef5350", volUp: "#26a69ab3", volDown: "#ef5350b3",
-                cross: "#758696", label: "#2a2e39" };
+  /* Styled to read like a TradingView chart (owner, 2026-10-13: "trading view
+     look which is completely missed — grids, indicators, charts"): their dark
+     background and visible grid, their default candle and volume colours, a
+     symbol/interval watermark, a dashed crosshair with axis labels, a
+     last-price line, dates on the time axis where a session starts, and MACD
+     in its own pane under the price with its own scale — one time axis at the
+     bottom, as TradingView stacks an indicator. The engine is TradingView's
+     own; this is the dressing people recognise. */
+  const TVC = { up: "#26a69a", down: "#ef5350", volUp: "#26a69a80", volDown: "#ef535080",
+                cross: "#758696", label: "#363a45", bg: "#131722", grid: "rgba(54,60,78,0.55)",
+                text: "#b2b5be", border: "#2a2e39" };
+  const MONO = '"IBM Plex Mono", ui-monospace, monospace';
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const hhmm = t => {
     const d = new Date(t * 1000);   // stamps are already shifted to the ET wall clock
     return String(d.getUTCHours()).padStart(2, "0") + ":" + String(d.getUTCMinutes()).padStart(2, "0");
   };
-  const chart = TV.createChart(host, {
-    width: host.clientWidth || 400, height: host.clientHeight || 200,
-    layout: { background: { type: "solid", color: PALETTE.bg }, textColor: "#b2b5be",
-              fontFamily: '"IBM Plex Mono", ui-monospace, monospace', fontSize: 10 },
-    grid: { vertLines: { color: "#1c2230" }, horzLines: { color: "#1c2230" } },
-    rightPriceScale: { borderColor: "#2a2e39", scaleMargins: { top: 0.08, bottom: 0.26 } },
-    timeScale: { borderColor: "#2a2e39", timeVisible: !daily, secondsVisible: false,
+  const mday = t => { const d = new Date(t * 1000); return MONTHS[d.getUTCMonth()] + " " + d.getUTCDate(); };
+  // A new day on the axis reads as a date ("Oct 12"), every other mark as the
+  // ET clock — in en-US whatever the browser's locale ("01 sept. '26" once).
+  const tickMark = (t, type) => (type != null && type <= 2) ? mday(t) : hhmm(t);
+  const mainEl = document.createElement("div"), subEl = document.createElement("div");
+  mainEl.className = "pane-main"; subEl.className = "pane-sub";
+  host.appendChild(mainEl); host.appendChild(subEl);
+  const scaleW = 66;          // both panes' price scales the same width, so their bars line up
+  const common = (el) => ({
+    width: host.clientWidth || 400, height: el === mainEl ? (host.clientHeight || 200) : 60,
+    layout: { background: { type: "solid", color: TVC.bg }, textColor: TVC.text, fontFamily: MONO, fontSize: 10 },
+    grid: { vertLines: { color: TVC.grid }, horzLines: { color: TVC.grid } },
+    rightPriceScale: { borderColor: TVC.border, minimumWidth: scaleW },
+    timeScale: { borderColor: TVC.border, timeVisible: !daily, secondsVisible: false,
                  rightOffset: 3, barSpacing: daily ? 3 : 6,
                  // Bars carry ET wall-clock stamps: label them as such and never
                  // let the browser locale inject "01 sept. '26" mid-axis.
-                 tickMarkFormatter: daily ? undefined : (t => hhmm(t)) },
-    localization: { locale: "en-US", timeFormatter: daily ? undefined : (t => hhmm(t) + " ET") },
+                 tickMarkFormatter: daily ? undefined : tickMark },
+    localization: { locale: "en-US", timeFormatter: daily ? undefined : (t => mday(t) + "  " + hhmm(t) + " ET") },
     crosshair: { mode: TV.CrosshairMode ? TV.CrosshairMode.Normal : 0,
                  vertLine: { color: TVC.cross, width: 1, style: 3, labelBackgroundColor: TVC.label },
                  horzLine: { color: TVC.cross, width: 1, style: 3, labelBackgroundColor: TVC.label } },
-    watermark: { visible: true, color: "rgba(120,130,150,0.07)", fontSize: 22, text: "",
-                 horzAlign: "center", vertAlign: "center" },
     handleScale: { axisPressedMouseMove: { time: true, price: true }, mouseWheel: true, pinch: true },
     handleScroll: { mouseWheel: true, pressedMouseMove: true, horzTouchDrag: true, vertTouchDrag: false },
   });
+  const chart = TV.createChart(mainEl, Object.assign(common(mainEl), {
+    rightPriceScale: { borderColor: TVC.border, minimumWidth: scaleW, scaleMargins: { top: 0.08, bottom: 0.22 } },
+    watermark: { visible: true, color: "rgba(120,130,150,0.07)", fontSize: 22, text: "",
+                 horzAlign: "center", vertAlign: "center" },
+  }));
+  const sub = TV.createChart(subEl, common(subEl));
   const candles = chart.addCandlestickSeries({
     upColor: TVC.up, downColor: TVC.down, borderVisible: false,
     wickUpColor: TVC.up, wickDownColor: TVC.down,
     priceLineVisible: true, lastValueVisible: true, priceLineColor: "#9598a1", priceLineStyle: 1,
   });
+  // Volume on the bottom fifth of the price pane, coloured by the candle.
   const volume = chart.addHistogramSeries({
     priceFormat: { type: "volume" }, priceScaleId: "vol", color: TVC.volUp,
     lastValueVisible: false, priceLineVisible: false,
   });
-  /* MACD 12/26/9 as a histogram on its own scale under the volume band. It was
-     already computed for the cascade's MACD gate (`macdHist`) and shown as a
-     chip on the verdict card, but never drawn — so the one gate the trader
-     could not see for themselves was the one the desk judged silently. */
-  const macd = chart.addHistogramSeries({
-    priceScaleId: "macd", lastValueVisible: false, priceLineVisible: false,
-    priceFormat: { type: "price", precision: 3, minMove: 0.001 },
-  });
-  /* The MACD line and its signal, on the histogram's scale, in TradingView's
-     colours (blue 2962ff, orange ff6d00). 10:42 on GRML: "MACD had no line
-     but only bars" — the histogram alone cannot show the cross. */
-  const macdLineOpts = (color) => ({
-    priceScaleId: "macd", color, lineWidth: 1, lastValueVisible: false, priceLineVisible: false,
-    crosshairMarkerVisible: false, priceFormat: { type: "price", precision: 3, minMove: 0.001 },
-  });
-  const macdLine = chart.addLineSeries(macdLineOpts("#2962ff"));
-  const macdSignal = chart.addLineSeries(macdLineOpts("#ff6d00"));
+  chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.80, bottom: 0 } });
+  /* MACD 12/26/9 — the histogram, the MACD line and its signal in TradingView's
+     colours (blue 2962ff, orange ff6d00) — in its own pane. It is a Layer 2
+     gate the cascade judges; squeezed under the volume on the price pane it
+     could not be read (GRML, 2026-09-21; "MACD had no line but only bars"). */
+  const macdOpts = { lastValueVisible: false, priceLineVisible: false,
+                     priceFormat: { type: "price", precision: 3, minMove: 0.001 } };
+  const macd = sub.addHistogramSeries(Object.assign({}, macdOpts));
+  const lineOpts = color => Object.assign({ color, lineWidth: 1, crosshairMarkerVisible: false }, macdOpts);
+  const macdLine = sub.addLineSeries(lineOpts("#2962ff"));
+  const macdSignal = sub.addLineSeries(lineOpts("#ff6d00"));
 
-  /* OHLC legend, TradingView style: follows the crosshair, rests on the last bar.
-     OFF since 2026-10-02 (owner: "remove from the charts all unnecessary figures and
-     numbers in the top of the charts grids as they serve for nothing"). The price
-     axis, the HOD line and the header already carry the numbers that matter; the
-     series colours are named by the legend chips in each card's title bar. Set
-     CHART_VALUE_LEGEND = true to bring the line back. */
-  const CHART_VALUE_LEGEND = false;
+  /* The values legend, TradingView style: symbol and interval, O H L C, the
+     change and the volume, then every indicator's value at the crosshair in
+     its own colour. OFF by default since 2026-10-02 (owner: "remove from the
+     charts all unnecessary figures and numbers in the top of the charts grids
+     as they serve for nothing"); one click in ƒ ("Values") brings it back. */
   const legend = document.createElement("div");
   legend.className = "tv-legend";
-  if (CHART_VALUE_LEGEND) host.appendChild(legend);
-  let lastRows = [], lastVols = [], lastInd = {};
-  /* Two legend lines, as TradingView draws them: OHLC + change + volume on
-     the first, every indicator's value at the crosshair on the second, in
-     the indicator's own colour. The overlays were drawn but never named
-     with a number; "which line is the 9?" is a question a chart should not
-     make you ask. */
+  host.appendChild(legend);
+  const macdTag = document.createElement("div");
+  macdTag.className = "band-tag";
+  subEl.appendChild(macdTag);
+  let lastRows = [], lastVols = [], lastInd = {}, lastBars = [], lastOpts = null, lastLevels = null;
+  let lastProfile = null, runs = [], starts = new Set(), rowPart = [];
+  const fmtP = v => v == null ? "—" : Math.abs(v) >= 1 ? v.toFixed(2) : v.toFixed(4);
+  const at = (arr, idx) => (arr && idx != null && idx < arr.length) ? arr[idx] : (arr && arr.length ? arr[arr.length - 1] : null);
   const showLegend = (row, vol, idx) => {
-    if (!CHART_VALUE_LEGEND) return;
-    if (!row) { legend.textContent = ""; return; }
+    const sp = (cls, txt) => '<span class="' + cls + '">' + txt + '</span>';
+    const mv = at(lastInd.macdLine, idx), sv = at(lastInd.macdSignal, idx), hv = at(lastInd.macd, idx);
+    macdTag.innerHTML = sp("lk", "MACD 12 26 9") + (show.values && mv != null
+      ? " " + sp("m", mv.toFixed(3)) + " " + sp("s", sv != null ? sv.toFixed(3) : "—") + " " +
+        sp(hv != null && hv >= 0 ? "u" : "d", hv != null ? hv.toFixed(3) : "—") : "");
+    if (!show.values || !row) { legend.innerHTML = ""; legend.hidden = true; return; }
+    legend.hidden = false;
     const chg = row.open ? (row.close - row.open) / row.open * 100 : 0;
     const c = row.close >= row.open ? "u" : "d";
-    const cell = (k, v) => '<span class="k">' + k + '</span><span class="' + c + '">' + v + '</span>';
-    let html = cell("O", row.open.toFixed(2)) + cell("H", row.high.toFixed(2)) +
-      cell("L", row.low.toFixed(2)) + cell("C", row.close.toFixed(2)) +
-      '<span class="' + c + '">' + (chg >= 0 ? "+" : "") + chg.toFixed(2) + '%</span>' +
-      (vol != null ? cell("Vol", Math.round(vol).toLocaleString("en-US")) : "");
+    const cell = (k, v) => sp("lk", k) + sp(c, v);
+    let html = sp("sym", (lastOpts && lastOpts.symbol) || "") + sp("lk", (lastOpts && lastOpts.tf) || (daily ? "D" : "")) +
+      cell("O", fmtP(row.open)) + cell("H", fmtP(row.high)) + cell("L", fmtP(row.low)) + cell("C", fmtP(row.close)) +
+      sp(c, (chg >= 0 ? "+" : "") + chg.toFixed(2) + "%") +
+      (vol != null ? cell("Vol", vol >= 1e6 ? (vol / 1e6).toFixed(2) + "M" : vol >= 1e3 ? (vol / 1e3).toFixed(1) + "K" : String(Math.round(vol))) : "");
     const parts = [];
-    const at = (arr) => (arr && idx != null && idx < arr.length) ? arr[idx] : (arr && arr.length ? arr[arr.length - 1] : null);
-    const ind = (key, label, color, digits) => {
-      const v = at(lastInd[key]);
-      if (v == null) return;
-      parts.push('<span style="color:' + color + '">' + label + ' ' + v.toFixed(digits == null ? 2 : digits) + '</span>');
+    const ind = (key, label, color) => {
+      const v = at(lastInd[key], idx);
+      if (v != null) parts.push('<span style="color:' + color + '">' + label + ' ' + fmtP(v) + '</span>');
     };
-    ind("vwap", "VWAP", PALETTE.vwap); ind("ema9", "EMA9", PALETTE.ema9);
-    ind("ema20", "EMA20", PALETTE.ema20); ind("ema200", "EMA200", PALETTE.ema200);
-    ind("macdLine", "MACD", "#2962ff", 3); ind("macdSignal", "signal", "#ff6d00", 3);
-    ind("macd", "hist", "#26a69a", 3);
-    if (parts.length) html += '<br>' + parts.join('<span class="k"> · </span>');
+    ind("vwap", "VWAP", PALETTE.vwap); ind("ema9", "EMA 9", PALETTE.ema9);
+    ind("ema20", "EMA 20", PALETTE.ema20); ind("ema200", "EMA 200", PALETTE.ema200);
+    if (parts.length) html += '<br>' + parts.join(sp("lk", " · "));
     legend.innerHTML = html;
   };
+
+  /* Drawn on the chart's own canvas, so they pan and zoom with the bars (the
+     library's series primitives, v4.1+). */
+  const layer = (zOrder, paint) => {
+    let request = null;
+    const renderer = { draw(target) {
+      target.useMediaCoordinateSpace(s => { try { paint(s.context, s.mediaSize); } catch (e) { /* skip a frame */ } });
+    } };
+    const view = { zOrder: () => zOrder, renderer: () => renderer };
+    return { paneViews: () => [view], updateAllViews() {}, attached(p) { request = p.requestUpdate; },
+             detached() { request = null; }, refresh() { if (request) request(); } };
+  };
+  const xAt = i => chart.timeScale().logicalToCoordinate(i);
+  /* Extended hours tinted and each session's start dashed, the way TradingView's
+     ext-hours mode draws them, for every session on the pane — last week's
+     too, now that the pane keeps them. */
+  const sessionBands = layer("bottom", (g, size) => {
+    if (daily || !lastRows.length) return;
+    g.fillStyle = "rgba(120,130,150,0.07)";
+    for (let i = 0; i < lastRows.length;) {
+      if (rowPart[i] === "regular") { i++; continue; }
+      let j = i;
+      while (j + 1 < lastRows.length && rowPart[j + 1] === rowPart[i] && !starts.has(j + 1)) j++;
+      const x0 = xAt(i - 0.5), x1 = xAt(j + 0.5);
+      if (x0 != null && x1 != null && x1 > 0 && x0 < size.width) {
+        g.fillRect(Math.max(0, x0), 0, Math.min(size.width, x1) - Math.max(0, x0), size.height);
+      }
+      i = j + 1;
+    }
+    g.strokeStyle = "rgba(255,194,71,0.35)"; g.lineWidth = 1; g.setLineDash([3, 4]);
+    starts.forEach(k => {
+      const x = xAt(k - 0.5);
+      if (x == null || x < 0 || x > size.width) return;
+      g.beginPath(); g.moveTo(Math.round(x) + 0.5, 0); g.lineTo(Math.round(x) + 0.5, size.height); g.stroke();
+    });
+    g.setLineDash([]);
+  });
+  /* Volume by price over the bars in view — TradingView's "visible range"
+     volume profile with the settings the corpus's class uses (24 rows, value
+     area 70 %, up versus down; levels.js). Built from the one-minute bars
+     under the pane, each bar's volume spread over its range: an
+     approximation of what the prints would show. */
+  let profKey = null;
+  const profileOf = (i0, i1) => {
+    const src = lastOpts && lastOpts.profileBars;
+    let bars = lastBars.slice(i0, i1 + 1);
+    if (src && src.length && lastBars.length) {
+      const span = { "1m": 60, "5m": 300, "10s": 10 }[lastOpts.tf] || 60;
+      const t0 = lastBars[i0][0], t1 = lastBars[i1][0] + span;
+      let lo = 0, hi = src.length;
+      while (lo < hi) { const m = (lo + hi) >> 1; if (src[m][0] < t0) lo = m + 1; else hi = m; }
+      let end = lo;
+      while (end < src.length && src[end][0] < t1) end++;
+      bars = src.slice(lo, end);
+    }
+    const last = bars.length ? bars[bars.length - 1] : null;
+    const key = i0 + "|" + i1 + "|" + bars.length + "|" + (last ? last.join(",") : "");
+    if (key !== profKey) { profKey = key; lastProfile = window.DeskLevels ? window.DeskLevels.profile(bars) : null; }
+    return lastProfile;
+  };
+  const volumeProfile = layer("bottom", (g, size) => {
+    if (!show.profile || daily || !lastRows.length) { lastProfile = null; return; }
+    const vr = chart.timeScale().getVisibleLogicalRange();
+    if (!vr) return;
+    const i0 = Math.max(0, Math.ceil(vr.from)), i1 = Math.min(lastRows.length - 1, Math.floor(vr.to));
+    if (i1 < i0) return;
+    const p = profileOf(i0, i1);
+    if (!p) return;
+    const maxV = Math.max(...p.rows.map(r => r.total)) || 1;
+    const W = size.width * 0.24, right = size.width;
+    p.rows.forEach((r, k) => {
+      const yTop = candles.priceToCoordinate(r.hi), yBot = candles.priceToCoordinate(r.lo);
+      if (yTop == null || yBot == null || yBot < 0 || yTop > size.height) return;
+      const h = Math.max(1, yBot - yTop - 1), inside = k >= p.vaFrom && k <= p.vaTo;
+      const wu = W * r.up / maxV, wd = W * r.down / maxV;
+      g.fillStyle = inside ? "rgba(41,98,255,0.40)" : "rgba(41,98,255,0.16)";
+      g.fillRect(right - wu - wd, yTop + 0.5, wu, h);
+      g.fillStyle = inside ? "rgba(251,192,45,0.40)" : "rgba(251,192,45,0.16)";
+      g.fillRect(right - wd, yTop + 0.5, wd, h);
+    });
+    g.font = "9px " + MONO; g.textAlign = "right";
+    const yPoc = candles.priceToCoordinate(p.poc);
+    if (yPoc != null) {                       // "my point of control by default in red" (wC2Bbf6OMFQ [00:06:14])
+      g.fillStyle = "#ff5252"; g.fillRect(0, Math.round(yPoc), size.width, 1);
+      g.fillText("POC " + fmtP(p.poc), right - W - 4, Math.round(yPoc) - 3);
+    }
+    // the value area's edges, dotted over the histogram only
+    g.fillStyle = "rgba(255,255,255,0.40)";
+    [p.vah, p.val].forEach(v => {
+      const y = candles.priceToCoordinate(v);
+      if (y == null) return;
+      for (let x = right - W; x < right; x += 6) g.fillRect(x, Math.round(y), 3, 1);
+    });
+    g.textAlign = "left";
+  });
+  /* Support and resistance zones: where swing highs and lows cluster on the
+     5-minute structure of every loaded session, each with its touches and how
+     much traded inside it against the average (levels.js). Below the last
+     price a zone is support (teal), above it resistance (red); one with highs
+     and lows in it is a flipped level (violet). Places to watch, never
+     signals — whether price turns there is not measured on this desk. */
+  const levelBands = layer("bottom", (g, size) => {
+    if (!show.levels || daily || !lastLevels || !lastLevels.zones) return;
+    g.font = "9.5px " + MONO; g.textAlign = "left";
+    let labelY = -99;                                   // labels never sit on top of each other
+    lastLevels.zones.slice().sort((a, b) => b.price - a.price).forEach(z => {
+      const yTop = candles.priceToCoordinate(z.hi), yBot = candles.priceToCoordinate(z.lo);
+      if (yTop == null || yBot == null || yBot < -2 || yTop > size.height + 2) return;
+      const role = z.flip ? "flip" : z.price > lastLevels.last ? "R" : "S";
+      const rgb = role === "flip" ? "179,157,219" : role === "R" ? "239,83,80" : "38,166,154";
+      g.fillStyle = "rgba(" + rgb + ",0.12)"; g.fillRect(0, yTop, size.width, Math.max(2, yBot - yTop));
+      const ym = Math.round((yTop + yBot) / 2);
+      g.fillStyle = "rgba(" + rgb + ",0.60)"; g.fillRect(0, ym, size.width, 1);
+      g.fillStyle = "rgba(" + rgb + ",0.95)";
+      labelY = Math.max(ym - 3, labelY + 11);
+      g.fillText((role === "flip" ? "S/R flip " : role + " ") + fmtP(z.price) + " · " + z.touches + " touches" +
+                 (z.dens != null ? " · vol " + z.dens.toFixed(1) + "×" : ""), 32, labelY);
+    });
+  });
+  candles.attachPrimitive(sessionBands);
+  candles.attachPrimitive(levelBands);
+  candles.attachPrimitive(volumeProfile);
+
   /* The crosshair, synced across the 1-minute, 5-minute and 10-second panes
      (2026-10-09): a bar hovered on one is the same moment on the others. The
      panes share the ET wall-clock axis, so a time maps by bucket: the target
      pane shows its last bar inside the hovered bar. */
-  const crossListeners = [];
+  const crossListeners = [], olderListeners = [];
   const SPAN = { "1m": 60, "5m": 300, "10s": 10 };
+  let paneSync = false;
+  const subAt = time => {                       // the MACD pane follows the price pane
+    if (subEl.hidden) return;
+    paneSync = true;
+    try {
+      if (time == null) { sub.clearCrosshairPosition(); return; }
+      const i = lastRows.findIndex(r => r.time === time);
+      const v = i >= 0 && lastInd.macd ? lastInd.macd[i] : null;
+      sub.setCrosshairPosition(v == null ? 0 : v, time, macd);
+    } catch (e) { /* no MACD point there */ } finally { paneSync = false; }
+  };
   chart.subscribeCrosshairMove(param => {
+    if (paneSync) return;
+    subAt(param && param.time && param.point ? param.time : null);
     if (CROSS_SYNCING || daily) return;
     const span = SPAN[lastOpts && lastOpts.tf];
     if (!span) return;
@@ -435,48 +587,40 @@ function makePane(hostId, daily) {
     const price = candles.coordinateToPrice(param.point.y);
     crossListeners.forEach(fn => fn(param.time, param.time + span - 1, price));
   });
+  sub.subscribeCrosshairMove(param => {
+    if (paneSync) return;
+    paneSync = true;
+    try {
+      if (!param || !param.time || !param.point) chart.clearCrosshairPosition();
+      else {
+        const row = lastRows.find(r => r.time === param.time);
+        if (row) chart.setCrosshairPosition(row.close, row.time, candles);
+      }
+    } catch (e) { /* an older library: the panes simply do not sync */ } finally { paneSync = false; }
+  });
   chart.subscribeCrosshairMove(param => {
     const tail = lastRows.length - 1;
     if (!param || !param.time || tail < 0) { showLegend(lastRows[tail], lastVols[tail], tail); return; }
     const i = lastRows.findIndex(r => r.time === param.time);
     showLegend(i >= 0 ? lastRows[i] : lastRows[tail], i >= 0 ? lastVols[i] : lastVols[tail], i >= 0 ? i : tail);
   });
-
-  /* Extended-hours shading, the way TradingView's ext-hours mode draws it:
-     premarket and after-hours are tinted so the 09:30 open and 16:00 close
-     read at a glance. Overlays that track the time scale, since the library
-     has no native session bands. */
-  const shadePre = document.createElement("div"), shadePost = document.createElement("div");
-  shadePre.className = "session-shade"; shadePost.className = "session-shade";
-  host.appendChild(shadePre); host.appendChild(shadePost);
-  let sessionBounds = null;   // { open, close } as ET wall-clock epoch seconds
-  const paintShade = () => {
-    if (!sessionBounds || daily) { shadePre.style.width = "0"; shadePost.style.width = "0"; return; }
-    const ts = chart.timeScale();
-    const xo = ts.timeToCoordinate(sessionBounds.open), xc = ts.timeToCoordinate(sessionBounds.close);
-    const w = Math.max(0, host.clientWidth - 58);      // minus the price scale
-    shadePre.style.left = "0";
-    shadePre.style.width = xo != null ? Math.max(0, Math.min(w, xo)) + "px" : "0";
-    if (xc != null) { shadePost.style.left = Math.max(0, xc) + "px"; shadePost.style.width = Math.max(0, w - xc) + "px"; }
-    else shadePost.style.width = "0";
-  };
-  chart.timeScale().subscribeVisibleLogicalRangeChange(paintShade);
-  /* Lower band, split when MACD is on: volume 0.74-0.88, MACD 0.88-1.0. With
-     MACD off the volume band takes the whole quarter back, so nothing on a
-     pane that shows no MACD is squeezed to pay for one. */
-  const setBands = macdOn => {
-    chart.priceScale("vol").applyOptions({
-      scaleMargins: macdOn ? { top: 0.70, bottom: 0.14 } : { top: 0.76, bottom: 0 } });
-    chart.priceScale("macd").applyOptions({ scaleMargins: { top: 0.87, bottom: 0 } });
-  };
-  setBands(false);
-  const lines = {};
-  // VWAP is the reference line and reads as one: three pixels against one
-  // for the EMAs (owner, 2026-09-08).
-  const lineFor = key => (lines[key] = lines[key] ||
-    chart.addLineSeries({ color: PALETTE[key], lineWidth: key === "vwap" ? 3 : 1, priceLineVisible: false,
-                          lastValueVisible: false, crosshairMarkerVisible: false }));
-  let priceLines = [];
+  /* One time axis for both panes: whatever the trader does to one range, the
+     other follows. Scrolling past the oldest bar asks for the session before
+     it (TradingView's endless history; app.js loadOlder). */
+  let rangeSync = false, prevFrom = null;
+  chart.timeScale().subscribeVisibleLogicalRangeChange(r => {
+    if (r && !rangeSync && !subEl.hidden) {
+      rangeSync = true;
+      try { sub.timeScale().setVisibleLogicalRange(r); } catch (e) {} finally { rangeSync = false; }
+    }
+    if (r && lastRows.length && prevFrom != null && r.from < prevFrom && r.from < 8) olderListeners.forEach(fn => fn());
+    if (r) prevFrom = r.from;
+  });
+  sub.timeScale().subscribeVisibleLogicalRangeChange(r => {
+    if (!r || rangeSync) return;
+    rangeSync = true;
+    try { chart.timeScale().setVisibleLogicalRange(r); } catch (e) {} finally { rangeSync = false; }
+  });
 
   /* Which overlays this pane shows. Stored per pane so the 1-minute chart can
      carry MACD while the 10-second pane stays clean, and remembered across
@@ -490,54 +634,90 @@ function makePane(hostId, daily) {
   // high (gate 4's anchor) and the live plan. The 9 / 20 / 200 stay one click
   // away in ƒ (support confluence, knowledge-base/strategies/PARAMETERS.md §3);
   // the daily keeps them for room. v2's saved "everything on" is not carried.
+  // 2026-10-13 (owner: "spot the resistance and support key levels and their
+  // density of volume"): the support/resistance zones and the prior day's
+  // levels on the 1- and 5-minute panes, the volume profile on the 5-minute —
+  // the pane the corpus's class runs it on (wC2Bbf6OMFQ [00:07:36]); one click
+  // puts it on the 1-minute. A key saved before simply lacks them: defaults.
   const SHOW_KEY = "momentum-workstation.show.v3." + hostId;
   // MACD is ON by default on the execution pane: it is a Layer 2 gate the
   // cascade judges, so the trader must be able to see it without a menu.
   const SHOW_DEFAULT = { volume: true, vwap: !daily, ema9: hostId === "chartA" || daily, ema20: daily,
-                         ema200: daily, macd: hostId === "chartA", hod: !daily, plan: true };
+                         ema200: daily, macd: hostId === "chartA", hod: !daily, plan: true,
+                         levels: hostId === "chartA" || hostId === "chartB", profile: hostId === "chartB",
+                         values: false };
   let show = Object.assign({}, SHOW_DEFAULT);
   try {
     const saved = JSON.parse(localStorage.getItem(SHOW_KEY) || "null");
     if (saved) Object.keys(SHOW_DEFAULT).forEach(k => { if (k in saved) show[k] = !!saved[k]; });
   } catch (e) { /* blocked storage: the defaults are fine */ }
-  // The bands must match what is shown from the first paint. With MACD on and
-  // the volume band still at its MACD-off height, volume painted over the
-  // MACD histogram: computed, legended, invisible (GRML, 2026-09-21 07:52).
-  setBands(show.macd);
-  const macdTag = document.createElement("div");
-  macdTag.className = "band-tag"; macdTag.textContent = "MACD 12·26·9";
-  macdTag.hidden = !show.macd;
-  host.appendChild(macdTag);
+  const layoutPanes = () => {
+    const W = host.clientWidth, H = host.clientHeight;
+    const subH = show.macd && !daily && H > 140 ? Math.max(56, Math.round(H * 0.24)) : 0;
+    subEl.hidden = !subH;
+    mainEl.style.height = (H - subH) + "px"; subEl.style.height = subH + "px";
+    chart.applyOptions({ width: W, height: Math.max(40, H - subH), timeScale: { visible: !subH } });
+    if (subH) {
+      sub.applyOptions({ width: W, height: subH });
+      try { const r = chart.timeScale().getVisibleLogicalRange(); if (r) sub.timeScale().setVisibleLogicalRange(r); } catch (e) {}
+    }
+    macdTag.hidden = !subH;
+  };
+  layoutPanes();
   const tools = window.ChartTools ? window.ChartTools.attach(chart, candles, host, hostId) : null;
   const menu = indicatorMenu(host, show, next => {
     show = next;
     try { localStorage.setItem(SHOW_KEY, JSON.stringify(show)); } catch (e) {}
-    setBands(show.macd);
-    macdTag.hidden = !show.macd;
+    layoutPanes();
     if (lastOpts) api.render(lastBars, lastOpts);
   });
-  let lastBars = [], lastOpts = null;
+  const lines = {};
+  // VWAP is the reference line and reads as one: three pixels against one
+  // for the EMAs (owner, 2026-09-08).
+  const lineFor = key => (lines[key] = lines[key] ||
+    chart.addLineSeries({ color: PALETTE[key], lineWidth: key === "vwap" ? 3 : 1, priceLineVisible: false,
+                          lastValueVisible: false, crosshairMarkerVisible: false }));
+  let priceLines = [];
+  /* An indicator per session, from 04:00 ET, the way the gates compute today's:
+     the lines break where a session starts rather than joining yesterday's
+     20:00 to this morning's 04:00. Today's segment is the gates' own line. */
+  const perSession = (closes, fn) => {
+    if (daily || runs.length <= 1) return fn(closes);
+    const out = new Array(closes.length).fill(null);
+    runs.forEach(r => { const part = fn(closes.slice(r.from, r.to + 1)); part.forEach((v, k) => { out[r.from + k] = v; }); });
+    return out;
+  };
+  const lineData = (series, rows) => rows.map((r, i) =>
+    (series[i] == null || starts.has(i)) ? { time: r.time } : { time: r.time, value: series[i] });
 
   const api = {
     engine: "tradingview",
     note: paneNote(host),
     tools: tools,
     onCross(fn) { crossListeners.push(fn); },
+    onNeedOlder(fn) { olderListeners.push(fn); },
     rows() { return lastRows; },                               // tests read what was drawn
     xOf(t) { try { return chart.timeScale().timeToCoordinate(t); } catch (e) { return null; } },
     vwapDrawn() { return lastInd.vwap || null; },
+    levelsDrawn() { return show.levels ? lastLevels : null; },
+    profileDrawn() { return show.profile ? lastProfile : null; },
+    macdPane() { return { visible: !subEl.hidden, height: subEl.hidden ? 0 : subEl.clientHeight,
+                          timeAxisOnPrice: !!chart.options().timeScale.visible }; },
+    sessionStarts() { return Array.from(starts).sort((a, b) => a - b); },
+    legendText() { return legend.hidden ? "" : legend.textContent; },
     lastCross: null,
     crossTo(t0, t1, price) {
       const span = SPAN[lastOpts && lastOpts.tf];
       CROSS_SYNCING = true;
       try {
         api.lastCross = null;
-        if (t0 == null || !span || price == null || !lastRows.length) { chart.clearCrosshairPosition(); return; }
+        if (t0 == null || !span || price == null || !lastRows.length) { chart.clearCrosshairPosition(); subAt(null); return; }
         let lo = 0, hi = lastRows.length;                       // the last bar at or before t1 …
         while (lo < hi) { const mid = (lo + hi) >> 1; if (lastRows[mid].time <= t1) lo = mid + 1; else hi = mid; }
         const row = lastRows[lo - 1];
-        if (!row || row.time + span <= t0) { chart.clearCrosshairPosition(); return; }   // … inside the hovered bar
+        if (!row || row.time + span <= t0) { chart.clearCrosshairPosition(); subAt(null); return; }   // … inside the hovered bar
         chart.setCrosshairPosition(price, row.time, candles);
+        subAt(row.time);
         api.lastCross = row.time;
       } catch (e) { /* an older library: the panes simply do not sync */ }
       finally { CROSS_SYNCING = false; }
@@ -547,21 +727,30 @@ function makePane(hostId, daily) {
     setRange(r) { try { if (r) chart.timeScale().setVisibleLogicalRange(r); } catch (e) {} },
     snapToLive() { try { chart.timeScale().scrollToRealTime(); } catch (e) {} },
     resize() {
-      chart.applyOptions({ width: host.clientWidth, height: host.clientHeight });
+      layoutPanes();
       if (tools) tools.repaint();        // the canvas is sized in CSS pixels
     },
     render(bars, opts) {
-      lastBars = bars; lastOpts = opts;
-      let atEdge = false;
+      let atEdge = false, before = null;
+      const prevFirst = lastRows.length ? lastRows[0].time : null;
       try {
-        const vr = chart.timeScale().getVisibleLogicalRange();
-        atEdge = !vr || !lastRows.length || vr.to >= lastRows.length - 2;
+        before = chart.timeScale().getVisibleLogicalRange();
+        atEdge = !before || !lastRows.length || before.to >= lastRows.length - 2;
       } catch (e) { atEdge = true; }
+      lastBars = bars; lastOpts = opts;
       chart.applyOptions({ watermark: { text: (opts.symbol || "") + (opts.tf ? "  ·  " + opts.tf : "") } });
-      if (!bars.length) { candles.setData([]); volume.setData([]); lastRows = []; lastVols = []; showLegend(null); paintShade(); return; }
+      if (!bars.length) {
+        candles.setData([]); volume.setData([]); macd.setData([]); macdLine.setData([]); macdSignal.setData([]);
+        lastRows = []; lastVols = []; lastLevels = null; runs = []; starts = new Set(); rowPart = [];
+        showLegend(null); return;
+      }
       const rows = bars.map((b, i) => daily
         ? { time: b.d, open: b.o, high: b.h, low: b.l, close: b.c }
         : { time: deskTime(b[0]), open: b[1], high: b[2], low: b[3], close: b[4] });
+      runs = (!daily && window.DeskLevels) ? window.DeskLevels.bySession(bars) : [{ from: 0, to: bars.length - 1 }];
+      starts = new Set(runs.slice(1).map(r => r.from));
+      rowPart = daily ? [] : rows.map(r => { const m = Math.floor((r.time % 86400) / 60);
+        return m < 570 ? "pre" : m >= 960 ? "post" : "regular"; });
       candles.setData(rows);
       const vols = bars.map(b => daily ? b.v : b[5]);
       volume.setData(show.volume ? bars.map((b, i) => ({
@@ -569,25 +758,32 @@ function makePane(hostId, daily) {
         color: rows[i].close >= rows[i].open ? TVC.volUp : TVC.volDown,
       })) : []);
       lastRows = rows; lastVols = vols;
-      sessionBounds = (!daily && opts.openTs)
+      // Older sessions arrived on the left while the trader was reading: keep
+      // the same bars in view rather than jumping to the ones just loaded.
+      if (!opts.snapToLive && !atEdge && before && prevFirst != null && rows[0].time < prevFirst) {
+        const shift = rows.findIndex(r => r.time >= prevFirst);
+        if (shift > 0) {
+          prevFrom = null;
+          try { chart.timeScale().setVisibleLogicalRange({ from: before.from + shift, to: before.to + shift }); } catch (e) {}
+        }
+      }
+      const sessionBounds = (!daily && opts.openTs)
         ? { open: deskTime(opts.openTs), close: deskTime(opts.openTs + 6.5 * 3600) } : null;
-      if (candles.setMarkers) {          // 09:30 / 16:00 marked on the bars, as TradingView does
+      if (candles.setMarkers) {          // today's 09:30 / 16:00 marked on the bars
         const marks = [];
         if (sessionBounds) {
-          const at = t => rows.find(r => r.time >= t);
-          const o = at(sessionBounds.open), c = at(sessionBounds.close);
+          const firstAt = t => rows.find(r => r.time >= t);
+          const o = firstAt(sessionBounds.open), c = firstAt(sessionBounds.close);
           if (o) marks.push({ time: o.time, position: "belowBar", color: "#ffc247", shape: "arrowUp", text: "09:30" });
           if (c) marks.push({ time: c.time, position: "aboveBar", color: "#758696", shape: "arrowDown", text: "16:00" });
         }
         candles.setMarkers(marks);
       }
-      paintShade();
       const closes = rows.map(r => r.close);
       const put = (key, series) => {
         lastInd[key] = series || null;
         if (!series) { if (lines[key]) lines[key].setData([]); return; }
-        lineFor(key).setData(series.map((v, i) => v == null ? null : { time: rows[i].time, value: v })
-                                   .filter(Boolean));
+        lineFor(key).setData(lineData(series, rows));
       };
       // The caller asks for an overlay; the pane's own menu can switch it off.
       // One VWAP: the session's, from the 1-minute bars (the cascade's own
@@ -595,30 +791,32 @@ function makePane(hostId, daily) {
       // used to compute it over its own 30-minute window — a different line
       // from the gate's, drawn under the same name (2026-10-09).
       put("vwap", show.vwap && opts.vwapSeries ? opts.vwapSeries : null);
-      put("ema9", opts.ema9 && show.ema9 ? ema(closes, 9) : null);
-      put("ema20", opts.ema20 && show.ema20 ? ema(closes, 20) : null);
-      put("ema200", opts.ema200 && show.ema200 ? ema(closes, 200) : null);
-      if (show.macd) {
-        const ml = macdLines(closes), mh = ml.hist;
-        lastInd.macd = mh; lastInd.macdLine = ml.macd; lastInd.macdSignal = ml.signal;
-        macd.setData(rows.map((r, i) => mh[i] == null ? null : {
-          time: r.time, value: mh[i],
-          color: mh[i] >= 0 ? "#26a69a90" : "#ef535090",
-        }).filter(Boolean));
-        macdLine.setData(rows.map((r, i) => ml.macd[i] == null ? null : { time: r.time, value: ml.macd[i] }).filter(Boolean));
-        macdSignal.setData(rows.map((r, i) => ml.signal[i] == null ? null : { time: r.time, value: ml.signal[i] }).filter(Boolean));
+      put("ema9", opts.ema9 && show.ema9 ? perSession(closes, c => ema(c, 9)) : null);
+      put("ema20", opts.ema20 && show.ema20 ? perSession(closes, c => ema(c, 20)) : null);
+      put("ema200", opts.ema200 && show.ema200 ? perSession(closes, c => ema(c, 200)) : null);
+      if (show.macd && !daily) {
+        const pick = k => perSession(closes, c => { const m = macdLines(c); return m[k].length ? m[k] : c.map(() => null); });
+        const mh = pick("hist"), ml = pick("macd"), ms = pick("signal");
+        lastInd.macd = mh; lastInd.macdLine = ml; lastInd.macdSignal = ms;
+        // Every bar gets a point, a blank where MACD has none yet, so the two
+        // panes share one time axis bar for bar.
+        macd.setData(rows.map((r, i) => mh[i] == null ? { time: r.time } : {
+          time: r.time, value: mh[i], color: mh[i] >= 0 ? "#26a69a90" : "#ef535090" }));
+        macdLine.setData(lineData(ml, rows));
+        macdSignal.setData(lineData(ms, rows));
       } else {
         macd.setData([]); macdLine.setData([]); macdSignal.setData([]);
         lastInd.macd = null; lastInd.macdLine = null; lastInd.macdSignal = null;
       }
       priceLines.forEach(l => candles.removePriceLine(l));
       priceLines = [];
-      const mark = (price, color, title, dotted) => {
+      const mark = (price, color, title, style, label) => {
         if (price == null) return;
         priceLines.push(candles.createPriceLine({
           price: price, color: color, lineWidth: 1,
-          lineStyle: TV.LineStyle ? (dotted ? TV.LineStyle.Dotted : TV.LineStyle.Dashed) : (dotted ? 1 : 2),
-          axisLabelVisible: true, title: title,
+          lineStyle: TV.LineStyle ? (style === "dotted" ? TV.LineStyle.Dotted : style === "sparse"
+            ? TV.LineStyle.SparseDotted : TV.LineStyle.Dashed) : (style === "dotted" ? 1 : style === "sparse" ? 4 : 2),
+          axisLabelVisible: label !== false, title: title,
         }));
       };
       // Only what is live now (2026-10-09): an open position's levels, else the
@@ -629,9 +827,9 @@ function makePane(hostId, daily) {
         mark(opts.position.entry, PALETTE.entry, "IN");
         mark(opts.position.stop, PALETTE.stop, "STOP");
         if (opts.position.trail != null && opts.position.trail > opts.position.stop)
-          mark(opts.position.trail, PALETTE.stop, "TRAIL", true);
+          mark(opts.position.trail, PALETTE.stop, "TRAIL", "dotted");
       } else if (opts.plan && show.plan) {
-        mark(opts.plan.target, PALETTE.target, "2R", true);
+        mark(opts.plan.target, PALETTE.target, "2R", "dotted");
         mark(opts.plan.entry, PALETTE.entry, opts.plan.kind === "forming" ? "TRIGGER" : "ENTRY");
         mark(opts.plan.stop, PALETTE.stop, "STOP");
       }
@@ -642,11 +840,26 @@ function makePane(hostId, daily) {
       if (show.hod) mark(opts.hod, PALETTE.hod, pmSame ? "HOD = PM HIGH" : "HOD");
       if (show.hod && opts.pmHigh != null && !pmSame) mark(opts.pmHigh, PALETTE.pmh, "PM HIGH");
       mark(opts.h52, PALETTE.h52, "52w");
+      // The prior day's high, low and close (a "daily level", FILTERS.md
+      // at_support) and the whole / half dollars either side of the price —
+      // the levels he positions under (FILTERS.md: "10-25¢ below a whole
+      // dollar or the pre-market high").
+      lastLevels = opts.levels || null;
+      if (show.levels && lastLevels && !daily) {
+        const pd = lastLevels.pd;
+        if (pd) {
+          mark(pd.h, PALETTE.pd, "PD HIGH", "dotted"); mark(pd.l, PALETTE.pd, "PD LOW", "dotted");
+          mark(pd.c, PALETTE.pd, "PD CLOSE", "sparse");
+        }
+        const rd = lastLevels.round || {};
+        mark(rd.above, PALETTE.round, "", "sparse"); mark(rd.below, PALETTE.round, "", "sparse");
+      }
       // Drawings are anchored to (time, price) and belong to this symbol and
       // timeframe only; the measure tool needs the live plan's risk per share
       // to report a move in R.
       if (tools) tools.sync(opts.symbol || null, opts.tf || (daily ? "D" : null), opts.plan || null);
       showLegend(rows[rows.length - 1], vols[vols.length - 1], rows.length - 1);
+      [sessionBands, levelBands, volumeProfile].forEach(p => p.refresh());
       // Follow the tape only when the view is already parked at the newest
       // bar; a trader who scrolled back to read a pullback keeps their view.
       if (opts.snapToLive) {
@@ -655,6 +868,7 @@ function makePane(hostId, daily) {
         // 0.5-5.5 axis, volume and MACD visible, candles off-screen
         // (2026-09-24). A new symbol always starts autoscaled.
         try { chart.priceScale("right").applyOptions({ autoScale: true }); } catch (e) {}
+        prevFrom = null;
       }
       if (opts.snapToLive || atEdge) chart.timeScale().scrollToRealTime();
     },
@@ -3309,6 +3523,77 @@ function bars10sUpTo(sym, frame) {
 let CHART_SYM = null, SNAP_LIVE = false;
 let CROSS_SYNCING = false;                // a crosshair set by another pane is not news
 let PLAN_DRAWN = null;                    // what the charts last drew as the plan (a test reads it)
+
+/* Older candles (owner, 2026-10-13: "the graphs dont keep ols candles"): the
+   sessions before today's, from the desk's own IBKR history client — one when
+   a name is first shown, one more each time the trader scrolls past the
+   oldest bar — and older daily bars the same way. Chart data only: the gates
+   and the plans are built on the server from today's bars and never see
+   these (dashboard/chart_history.py). */
+const HIST = {};
+function histOf(sym) {
+  return HIST[sym] || (HIST[sym] = { m1: [], before: null, more: true, busy: false, asked: false,
+                                     daily: [], dMore: true, dBusy: false });
+}
+function loadOlder(sym, tf) {
+  if (!sym || !S.streaming || !SYMS[sym]) return;
+  const h = histOf(sym);
+  const done = () => { if (sym === state.selected) renderCharts(FRAMES[state.frame]); };
+  // Said once when IBKR could not answer now (budget, timeout); a name with
+  // nothing older simply stops asking.
+  const say = res => { if (res && res.note && res.more && !res.pending) toast(res.note, "warn"); };
+  const url = "/api/v1/chart/history?symbol=" + encodeURIComponent(sym);
+  if (tf === "D") {
+    const own = SYMS[sym].dailyBars || [];
+    const first = h.daily.length ? h.daily[0].d : (own.length ? own[0].d : null);
+    if (h.dBusy || !h.dMore || !first) return;
+    h.dBusy = true;
+    fetch(url + "&tf=D&before=" + first, { cache: "no-store" }).then(r => r.json()).then(res => {
+      const add = (res.bars || []).filter(b => b.d < first);
+      h.daily = add.concat(h.daily);
+      h.dMore = !!res.more && add.length > 0;
+      say(res);
+    }).catch(() => {}).then(() => { h.dBusy = false; done(); });
+    return;
+  }
+  if (h.busy || !h.more) return;
+  h.busy = true; h.asked = true;
+  fetch(url + "&tf=1m&sessions=1" + (h.before ? "&before=" + h.before : ""), { cache: "no-store" })
+    .then(r => r.json()).then(res => {
+      const first = h.m1.length ? h.m1[0][0] : Infinity;
+      const add = [];
+      (res.sessions || []).forEach(s => (s.bars || []).forEach(b => { if (b[0] < first) add.push(b); }));
+      add.sort((a, b) => a[0] - b[0]);
+      h.m1 = add.concat(h.m1);
+      if (res.next_before) h.before = res.next_before;
+      h.more = !!res.more;
+      say(res);
+    }).catch(() => {}).then(() => { h.busy = false; done(); });
+}
+/* VWAP per session, each from its own 04:00 ET like the gate's for today. */
+function vwapBySession(bars) {
+  if (!window.DeskLevels) return vwap(bars);
+  const out = [];
+  window.DeskLevels.bySession(bars).forEach(r => vwap(bars.slice(r.from, r.to + 1)).forEach(v => out.push(v)));
+  return out;
+}
+/* The levels the 1- and 5-minute panes draw (levels.js): support/resistance
+   zones from the 5-minute swings of every loaded session — the three nearest
+   on each side of the last price, within 30 % of it — each with the volume
+   traded inside it against the average (a 120-row profile of the one-minute
+   bars); the prior day's high, low and close; the whole / half dollars either
+   side. A replay cuts all of it at the frame: nothing from later in the day. */
+function chartLevels(sym, all1, b5, daily) {
+  const L = window.DeskLevels;
+  if (!L || !all1.length) return null;
+  const last = all1[all1.length - 1][4];
+  const fine = L.profile(all1, { rows: 120 });
+  const near = L.zones(b5).filter(z => Math.abs(z.price - last) <= last * 0.3);
+  const above = near.filter(z => z.price > last).sort((a, b) => a.price - b.price).slice(0, 3);
+  const below = near.filter(z => z.price <= last).sort((a, b) => b.price - a.price).slice(0, 3);
+  const zones = below.concat(above).map(z => Object.assign({}, z, { dens: L.density(fine, z.lo, z.hi) }));
+  return { last, zones, pd: L.priorDay(daily, S.tradingDate || ""), round: L.roundLevels(last) };
+}
 function renderCharts(frame) {
   if (!frame) return;                     // no bars yet: nothing to draw, nothing to throw
   const sym = state.selected, meta = SYMS[sym] || {};
@@ -3321,6 +3606,11 @@ function renderCharts(frame) {
   const snap = sym !== CHART_SYM;
   CHART_SYM = sym; SNAP_LIVE = false;
   const bars1 = barsUpTo(sym, frame.barIndex);
+  const h = histOf(sym);
+  if (snap && S.streaming && !h.asked) loadOlder(sym, "1m");   // the previous session, prefetched by the desk
+  const t0 = bars1.length ? bars1[0][0] : Infinity;
+  const older = h.m1.length ? h.m1.filter(b => b[0] < t0) : [];
+  const all1 = older.length ? older.concat(bars1) : bars1;
   const hod = bars1.length ? Math.max(...bars1.map(b => b[2])) : null;
   const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
   const plan = livePlan(sym, frame);
@@ -3333,23 +3623,28 @@ function renderCharts(frame) {
   const pmHigh = pmBars.length ? Math.max(...pmBars.map(b => b[2])) : null;
   // The session VWAP once, from the 1-minute bars; every pane reads it at its
   // own bar times (the last minute at or before each bar).
-  const vw1 = vwap(bars1);
+  // Each older session carries its own (it resets at 04:00 ET); today's is
+  // the gate's, identical to vwap(bars1).
+  const vw1 = older.length ? vwapBySession(all1) : vwap(bars1);
   const vwapAt = t => {
-    let lo = 0, hi = bars1.length;
-    while (lo < hi) { const mid = (lo + hi) >> 1; if (bars1[mid][0] <= t) lo = mid + 1; else hi = mid; }
+    let lo = 0, hi = all1.length;
+    while (lo < hi) { const mid = (lo + hi) >> 1; if (all1[mid][0] <= t) lo = mid + 1; else hi = mid; }
     return lo ? vw1[lo - 1] : null;
   };
-  const b5 = agg(bars1, 5);
-  PANES.a.render(bars1, Object.assign({ vwapSeries: vw1, ema9: true, ema20: true, ema200: true, tf: "1m", pmHigh: pmHigh }, common));
+  const b5 = agg(all1, 5);
+  const dailyAll = h.daily.length ? h.daily.concat(meta.dailyBars || []) : (meta.dailyBars || []);
+  const levels = chartLevels(sym, all1, b5, dailyAll);
+  PANES.a.render(all1, Object.assign({ vwapSeries: vw1, ema9: true, ema20: true, ema200: true, tf: "1m", pmHigh: pmHigh,
+                                       levels: levels, profileBars: all1 }, common));
   PANES.b.render(b5, Object.assign({ vwapSeries: b5.map(b => vwapAt(b[0] + 240)), ema9: true, ema20: true,
-                                     ema200: true, tf: "5m" }, common));
+                                     ema200: true, tf: "5m", levels: levels, profileBars: all1 }, common));
   const sub = bars10sUpTo(sym, frame);
   if (sub.length) {
     PANES.d.note(null);   // cleared, then re-set below only when the tape is thin
     // Micro-pullbacks live here: several 10-second candles can form a pause
     // inside a single green 1-minute candle.
     PANES.d.render(sub, Object.assign({ vwapSeries: sub.map(b => vwapAt(b[0])), ema9: true, ema20: true, ema200: true,
-                                        tf: "10s" }, common));
+                                        tf: "10s", levels: levels }, common));
     if (sub.length < 12) PANES.d.note("Only " + sub.length + " ten-second candles from " + PROVIDER + " in the last 30 minutes — thin tape, not a broken chart.");
   } else {
     PANES.d.render([], {});
@@ -3360,7 +3655,7 @@ function renderCharts(frame) {
       ? "IBKR is sending quotes for " + sym + " but no five-second bars — the desk is re-requesting the stream. Empty rather than invented."
       : "No sub-minute data for " + sym + " in this session. Empty rather than invented.");
   }
-  PANES.c.render(meta.dailyBars || [], { ema9: true, ema20: true, ema200: true, h52: meta.high52w, symbol: sym, tf: "D" });
+  PANES.c.render(dailyAll, { ema9: true, ema20: true, ema200: true, h52: meta.high52w, symbol: sym, tf: "D" });
   if (PENDING_RANGES && !S.streaming) {   // first paint after a live reload: give the zoom back
     const r = PENDING_RANGES; PENDING_RANGES = null;
     ["a", "b", "d", "c"].forEach(k => { if (r[k] && PANES[k] && PANES[k].setRange) PANES[k].setRange(r[k]); });
@@ -4134,6 +4429,8 @@ const STREAM_FIELDS = ["iexLast", "iexLastTime", "iexBid", "iexAsk"];
    this morning is an arrival, with its sound. */
 function newTradingDay(date) {
   S.tradingDate = date;
+  Object.keys(HIST).forEach(k => delete HIST[k]);    // yesterday's "today" is history now: asked for afresh,
+  CHART_SYM = null;                                  // on the next paint, before the new day's first print
   ALERT_LOG.length = 0;
   ALERT_KEYS.clear();
   SEEN_IN_GRID.clear();
@@ -4691,6 +4988,9 @@ function init() {
   PANES.d = makePane("chartD", false);
   PANES.b = makePane("chartB", false);
   PANES.c = makePane("chartC", true);
+  // scrolling past the oldest bar asks for the session before it
+  ["a", "b"].forEach(k => { if (PANES[k].onNeedOlder) PANES[k].onNeedOlder(() => loadOlder(state.selected, "1m")); });
+  if (PANES.c.onNeedOlder) PANES.c.onNeedOlder(() => loadOlder(state.selected, "D"));
   // one crosshair across the 1-minute, 5-minute and 10-second panes
   ["a", "b", "d"].forEach(k => { const p = PANES[k]; if (!p || !p.onCross) return;
     p.onCross((t0, t1, price) => ["a", "b", "d"].forEach(j => {

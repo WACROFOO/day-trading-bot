@@ -5,7 +5,8 @@ The desk's server, event stream and browser page.
 | Module | What |
 |---|---|
 | `ibkr_desk.py` | ONE worker thread owning both IBKR connections; rebuilds the session in memory every 3 s. On each closed 10-second candle it also evaluates setup S (`../green_run.py`) and logs it to the ledger's `green_run_signals` — a shadow log, no decision, no order. `DESK_RECORD_UNTIL` (set by `scripts/day.py`) ends every exercise write: an ISO instant for the bot's day, `0` for the desk alone; unset, a desk by hand writes as before |
-| `server.py` | HTTP: the page, `/api/v1/stream`, `/health` (with the app build and the commit the desk started on), `/screener`, `/desk/add`, `/tape`; the owner's POSTs `/manual`, `/settings`, `/focus` (JSON only; a viewer key is refused) |
+| `chart_history.py` | older candles for the charts (2026-10-13): the sessions before today in one-minute bars and daily bars older than the desk's year, from IBKR on their own read-only client (30) and thread — one session a request, paced, every completed session cached on disk. Charts only: nothing it loads reaches a gate |
+| `server.py` | HTTP: the page, `/api/v1/stream`, `/health` (with the app build and the commit the desk started on), `/screener`, `/desk/add`, `/tape`, `/chart/history`; the owner's POSTs `/manual`, `/settings`, `/focus` (JSON only; a viewer key is refused) |
 | `stream.py` | server-sent events: quote, bar10s, bar1m, health, screener, session, resync, and `tape` — live only, never kept for replay |
 | `cards.py` | the decision cards for a built session: the detector re-run, the catalyst read, the bot's answer and the owner's calls from the ledger; sizes only on the owner's own stated risk |
 | `session_builder.py` | turns reference data, history and live candles into the session the page renders |

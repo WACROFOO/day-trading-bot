@@ -43,6 +43,7 @@ from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_ba
 from ..datasources.ibkr_stream import IbkrStream, read_only_connect
 from ..datasources.ibkr_depth import DepthFeed
 from ..datasources.ibkr_tape import TapeFeed
+from .chart_history import ChartHistory
 from .session_builder import build_session_from_records
 from .stream import EventHub, UpdatePublisher
 
@@ -105,7 +106,8 @@ class IbkrDesk:
                  min_gain: Optional[float] = None, top: Optional[int] = None,
                  ib_factory: Optional[Callable[[], object]] = None,
                  clock: Callable[[], datetime] = lambda: datetime.now(UTC),
-                 headlines: bool = True, sec: bool = True) -> None:
+                 headlines: bool = True, sec: bool = True,
+                 history_client_id: Optional[int] = None) -> None:
         self.host, self.port = host, port
         self.client_id, self.scanner_client_id = client_id, scanner_client_id
         # Unset arguments come from the shared profile, so two traders running
@@ -223,6 +225,15 @@ class IbkrDesk:
         self._next_depth = 0.0
         self._depth_sent = -1
         self.log: Callable[[str], None] = lambda m: print(m, flush=True)
+        # Older candles for the charts (owner, 2026-10-13): previous sessions in
+        # one-minute bars and older daily bars, on their own read-only client
+        # and thread, never this worker. Nothing they load reaches a gate.
+        self.chart_history = ChartHistory(
+            host=host, port=port, ib_factory=ib_factory,
+            **({"client_id": history_client_id} if history_client_id is not None else {}),
+            contract_for=self._cached_contract, daily_closes=self._daily_closes,
+            today=lambda: datetime.fromisoformat(self.session_day()).date(),
+            log=lambda m: self.log(m))
         # The exercise's window (owner, 2026-10-08): scripts/day.py keeps the
         # desk up outside the bot's day and says, in DESK_RECORD_UNTIL, when
         # this desk stops writing to the ledger. Your calls and your risk are
@@ -243,6 +254,7 @@ class IbkrDesk:
     def start(self, timeout: float = 600.0) -> dict:
         """Start the worker and block until the first session exists."""
         quiet_tws_logs()
+        self.chart_history.start()
         t = threading.Thread(target=self._worker, daemon=True, name="ibkr-desk")
         self._worker_thread = t
         t.start()
@@ -251,6 +263,7 @@ class IbkrDesk:
     def stop(self) -> None:
         self._flush_10s()          # the tail of the buffer, or it dies with the desk
         self._stop.set()
+        self.chart_history.stop()
 
     def submit(self, fn: Callable, *args) -> Future:
         fut: Future = Future()
@@ -550,6 +563,9 @@ class IbkrDesk:
             r = self._reference[sym]
             self.log(f"  {sym}: float {r['float_quality']}"
                      + (f" {r['float_shares'] / 1e6:.1f}M ({r['float_source']})" if r["float_shares"] else ""))
+            # Its previous session, fetched on the history client while the
+            # desk runs on, so the chart has it when the name is first clicked.
+            self.chart_history.prefetch(sym)
         if added and self.headlines:
             recs, note = news_records(self.symbols)
             if recs:
@@ -1017,6 +1033,19 @@ class IbkrDesk:
             return self.stream._contract(sym)
         except Exception:
             return None
+
+    def _cached_contract(self, sym: str):
+        """The qualified contract the stream already holds — a dict read, safe
+        from the chart-history thread; None asks that thread to qualify its own."""
+        stream = self.stream
+        return getattr(stream, "_contracts", {}).get(sym) if stream is not None else None
+
+    def _daily_closes(self, sym: str) -> Dict[str, float]:
+        """The days this name traded, with their closes, from the daily bars the
+        desk loaded at subscribe (one year): the chart history skips the days it
+        did not trade and re-asks a cached day a split has rescaled."""
+        ref = self._reference.get(sym) or {}
+        return {b["d"]: b["c"] for b in ref.get("daily_bars") or [] if b.get("d") and b.get("c")}
 
     def data_through(self, session: dict) -> Optional[str]:
         """The newest minute the session actually carries."""
