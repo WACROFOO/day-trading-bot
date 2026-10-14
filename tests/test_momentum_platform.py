@@ -305,6 +305,64 @@ class TestHodMomentum:
         scanner.on_snapshot(self.snap(6.0, rvol=1.0), None, state, hot)
         assert scanner.on_snapshot(self.snap(6.1, rvol=1.0), None, state, hot) == []
 
+    def test_a_new_high_that_does_not_alert_is_recorded_with_what_failed(self):
+        """2026-10-14: "why did AEHL never print on High of Day" had no answer.
+        A new high the scanner turns down is kept, with the condition that
+        failed, for the session builder to store."""
+        scanner = HodMomentumScanner(min_recent_rvol=3.0)
+        hot = HotState()
+        state = hot.get("ABCD")
+        scanner.on_snapshot(self.snap(6.0, rvol=1.0), None, state, hot)
+        scanner.on_snapshot(self.snap(6.1, rvol=1.0), None, state, hot)
+        assert len(scanner.misses) == 1
+        assert [f for f, _, _ in scanner.misses[0]["failed"]] == ["recent_rvol"]
+        assert scanner.misses[0]["failed"][0][2] == 3.0
+        scanner.on_snapshot(self.snap(6.2), None, state, hot)          # this one alerts: no miss
+        assert len(scanner.misses) == 1
+
+
+class TestFormerMomo:
+    """SCANNERS.md §B1: "a stock that in the past went up over 100% in one
+    day" (w97KlUrVDk0 [00:58:29]), watched "a little sooner" (yg5E_mqGFGg
+    [00:16:03]). The looser trigger's numbers are the desk's Approximation."""
+    NOW = utc(2026, 9, 1, 14, 0)
+
+    def snap(self, high, former=None, gain=7.0, rvol=2.5):
+        s = snapshot(last=high, session_high=high, change_from_close_pct=gain, rvol_daily=rvol,
+                     volume_5m=50_000, float_shares=10_000_000, event_ts=self.NOW, session=Session.REGULAR)
+        s.former_runner = former
+        return s
+
+    def test_the_newest_completed_day_up_100_percent(self):
+        from momentum_platform.scanners import former_runner_day
+        bars = [{"d": "2026-03-02", "c": 1.0, "h": 1.0}, {"d": "2026-03-03", "c": 1.6, "h": 2.2},
+                {"d": "2026-06-10", "c": 2.0, "h": 2.0}, {"d": "2026-06-11", "c": 3.0, "h": 4.1},
+                {"d": "2026-09-01", "c": 9.0, "h": 9.5}]
+        assert former_runner_day(bars, "2026-09-01") == "2026-06-11"
+        assert former_runner_day(bars[:2], "2026-09-01") == "2026-03-03"
+        today = bars[:1] + [{"d": "2026-09-01", "c": 3.0, "h": 3.0}]
+        assert former_runner_day(today, "2026-09-01") is None, "today's bar is not the past"
+        assert former_runner_day([{"d": "2026-03-02", "c": 1.0, "h": 1.0},
+                                  {"d": "2026-03-03", "c": 1.5, "h": 1.99}], "2026-09-01") is None
+        assert former_runner_day([], "2026-09-01") is None
+
+    def test_a_former_runner_alerts_sooner_and_nothing_else_does(self):
+        from momentum_platform.scanners import FormerMomoScanner
+        hot = HotState()
+        fm, hod = FormerMomoScanner(), HodMomentumScanner()
+        st = hot.get("ABCD")
+        for sc in (fm, hod):
+            sc.on_snapshot(self.snap(6.0, "2026-06-11"), None, st, hot)
+        ev = fm.on_snapshot(self.snap(6.1, "2026-06-11"), None, st, hot)
+        assert len(ev) == 1 and ev[0].scanner == "former_momo" and ev[0].values["former_runner"] == "2026-06-11"
+        assert hod.on_snapshot(self.snap(6.1, "2026-06-11"), None, st, hot) == [], \
+            "+7 % on 2.5x is under High of Day's +10 % and 3x"
+        other = FormerMomoScanner()
+        st2 = hot.get("WXYZ")
+        other.on_snapshot(self.snap(6.0), None, st2, hot)
+        assert other.on_snapshot(self.snap(6.1), None, st2, hot) == [], "not a former runner: no alert"
+        assert fm.misses == [], "High of Day's misses are the measured ones"
+
 
 class TestRunningUp:
     def test_five_percent_in_five_minutes(self):

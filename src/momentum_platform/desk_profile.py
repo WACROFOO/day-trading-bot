@@ -28,7 +28,7 @@ PROFILE_PATH = ROOT / "config" / "desk-profile.json"
 # committed file; the file is what actually ships between two traders.
 DEFAULTS: Dict[str, Dict[str, Any]] = {
     "desk": {"priceMin": 1.0, "priceMax": 30.0, "minGainPct": 10.0,
-             "maxSymbols": 8, "scanTop": 30},
+             "maxSymbols": 12, "scanTop": 30},              # 8 until 2026-10-14 (preregistration §5)
     "cadence": {"rebuildSeconds": 3, "rescanSeconds": 120, "historyEverySeconds": 20,
                 "volumeProfileDays": 10, "barStallSeconds": 300},
     "liquidity": {"minVolume5m": 25000, "minPillars": 3},
@@ -137,9 +137,9 @@ def scanner_versions() -> Dict[str, str]:
     """Each scanner's definition version: the logic behind the alerts."""
     try:
         from .scanners.five_pillars import FivePillarsAlert, FivePillarsList
-        from .scanners.momentum_events import (Breakout52wScanner, HodMomentumScanner,
+        from .scanners.momentum_events import (Breakout52wScanner, FormerMomoScanner, HodMomentumScanner,
                                                RunningMoveScanner, UptrendScanner)
-        made = [FivePillarsAlert(), FivePillarsList(), HodMomentumScanner(), UptrendScanner(),
+        made = [FivePillarsAlert(), FivePillarsList(), HodMomentumScanner(), FormerMomoScanner(), UptrendScanner(),
                 RunningMoveScanner(direction="down"), Breakout52wScanner()]
         return {s.scanner_id: s.definition_version for s in made}
     except Exception:

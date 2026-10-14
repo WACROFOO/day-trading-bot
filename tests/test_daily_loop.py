@@ -195,12 +195,32 @@ def test_every_scanner_event_is_stored_once_and_exported(tmp_path, monkeypatch):
     build_session(FIXTURE, journal=c)
     first = L.scanner_alerts(c, "2026-09-01")
     assert first, "the fixture raises scanner events"
-    assert {r["outcome"] for r in first} <= {"delivered", "suppressed"}
+    assert {r["outcome"] for r in first} <= {"delivered", "suppressed", "rejected"}
     assert any(r["outcome"] == "delivered" for r in first)
-    assert all(r["detail"] for r in first if r["outcome"] == "suppressed"), "a suppression carries its reason"
+    assert all(r["detail"] for r in first if r["outcome"] != "delivered"), "a suppression carries its reason"
+    # High of Day's new highs that did not alert, each with what failed
+    rej = [r for r in first if r["outcome"] == "rejected"]
+    assert rej and all(r["scanner"] == "hod_momentum" for r in rej)
+    assert all("/" in part for r in rej for part in r["detail"].split("; ")), "value/threshold per failed condition"
     build_session(FIXTURE, journal=c)                      # the live desk rebuilds every 3 s
     assert len(L.scanner_alerts(c, "2026-09-01")) == len(first), "each event once"
     meta = DX.export(c, "2026-09-01", tmp_path / "2026-09-01", tmp_path / "none.log")
     assert meta["counts"]["alerts"] == len(first)
     head = (tmp_path / "2026-09-01" / "alerts.csv").read_text().splitlines()[0]
     assert head.startswith("ts_et,symbol,scanner,branch,severity,outcome,detail")
+
+
+def test_the_review_scores_the_scanner_alerts(tmp_path, monkeypatch):
+    """The daily review reads alerts.csv: what each scanner raised, what the
+    router held back, and High of Day's new highs that did not alert by the
+    condition that failed — the evidence for the High of Day rule."""
+    c = L.connect(":memory:")
+    build_session(FIXTURE, journal=c)
+    monkeypatch.setattr(DR, "DAILY", tmp_path)
+    DX.export(c, "2026-09-01", tmp_path / "2026-09-01", tmp_path / "none.log")
+    out = DR.review("2026-09-01")
+    assert "## Scanner alerts" in out and "| hod_momentum |" in out
+    assert "### High of Day — new highs that did not alert, by the condition that failed" in out
+    assert "| recent_rvol |" in out
+    sec = DR.alerts_section(tmp_path / "nothing")
+    assert sec[2].startswith("No scanner log for this day")

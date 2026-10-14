@@ -16,7 +16,7 @@
     "priceMin": 1.0,
     "priceMax": 30.0,
     "minGainPct": 10.0,
-    "maxSymbols": 8,
+    "maxSymbols": 12,
     "scanTop": 30
   },
   "cadence": {

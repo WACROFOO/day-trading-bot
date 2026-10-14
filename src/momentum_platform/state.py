@@ -42,6 +42,7 @@ class ReferenceData:
     avg_daily_volume: Optional[float] = None
     volume_profile: Optional[list] = None      # time-of-day RVOL baseline
     high_52w: Optional[float] = None
+    former_runner: Optional[str] = None      # see former_runner_day()
     float_shares: Optional[float] = None
     float_quality: FloatQuality = FloatQuality.UNKNOWN
 
@@ -119,6 +120,7 @@ class HotState:
             if ref.volume_profile:
                 snap.volume_profile = list(ref.volume_profile)
             snap.high_52w = ref.high_52w
+            snap.former_runner = ref.former_runner
             snap.float_shares = ref.float_shares
             snap.float_quality = ref.float_quality
 

@@ -2,7 +2,9 @@ from .base import Scanner, EdgeTracker
 from .five_pillars import FivePillarsAlert, FivePillarsList, score_pillars
 from .momentum_events import (
     Breakout52wScanner,
+    FormerMomoScanner,
     HodMomentumScanner,
+    former_runner_day,
     RunningMoveScanner,
     UptrendScanner,
     squeeze_10_in_10,
@@ -26,6 +28,8 @@ __all__ = [
     "FivePillarsList",
     "score_pillars",
     "HodMomentumScanner",
+    "FormerMomoScanner",
+    "former_runner_day",
     "RunningMoveScanner",
     "UptrendScanner",
     "RunningUpFilters",

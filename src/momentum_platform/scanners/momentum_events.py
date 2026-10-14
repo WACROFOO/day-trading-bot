@@ -87,6 +87,12 @@ class HodMomentumScanner(Scanner):
         # application's independent approximation of that behaviour.
         self.min_hod_advance_pct = min_hod_advance_pct
         self._prior_hod: dict = {}
+        # New highs that did NOT alert, with the condition that failed
+        # (2026-10-14): without them "why did AEHL never print on High of
+        # Day" had no answer. The session builder stores them beside the
+        # alerts; nothing reads them to decide.
+        self.misses: list = []
+        self.record_misses = True
 
     def _branch(self, snap: SymbolSnapshot) -> Optional[str]:
         """Label the event with the closest captured branch name."""
@@ -150,9 +156,11 @@ class HodMomentumScanner(Scanner):
             Reason("pillars_passed", pillars, liquid, self.min_pillars),
         ]
         if not all(r.passed for r in reasons):
+            self._miss(current, now, [r for r in reasons if not r.passed])
             return []
         branch = self._branch(current)
         if branch is None:
+            self._miss(current, now, [Reason("float_band", current.float_shares, False, self.medium_float_max)])
             return []
         return [
             self._event(
@@ -161,6 +169,54 @@ class HodMomentumScanner(Scanner):
                 extra_values={"hod": _round(current_high, 4), "prior_hod": _round(prior_hod, 4)},
             )
         ]
+
+    def _miss(self, snap: SymbolSnapshot, now, failed: List[Reason]) -> None:
+        if not self.record_misses:
+            return
+        self.misses.append({"symbol": snap.symbol, "scanner": self.scanner_id, "ts": snap.event_ts or now,
+                            "failed": [(r.filter, r.value, r.threshold) for r in failed],
+                            "values": {"last": snap.last, "change_pct": _round(snap.change_from_close_pct)}})
+
+
+def former_runner_day(daily_bars, today: Optional[str] = None) -> Optional[str]:
+    """The newest COMPLETED day whose high reached twice the prior close, in the
+    daily bars given ({d, h, c, ...}, oldest first), or None. Today's partial
+    bar is not "the past". The desk's page labels the same day (app.js
+    formerRunner)."""
+    best = None
+    rows = [b for b in (daily_bars or []) if b.get("d") and (today is None or b["d"] < today)]
+    for prev, cur in zip(rows, rows[1:]):
+        p, h = prev.get("c"), cur.get("h")
+        if p and h and p > 0 and h / p >= 2.0:
+            best = cur["d"]
+    return best
+
+
+class FormerMomoScanner(HodMomentumScanner):
+    """Former Momo: a new high of day on a name that ran 100 %+ in one day in
+    the daily bars the desk holds (a year), on a looser trigger than High of
+    Day's. Corpus (knowledge-base/strategies/SCANNERS.md §B1): "a stock that
+    in the past went up over 100% in one day, and that's in the recent past"
+    (w97KlUrVDk0 [00:58:29]); "I want to see them a little sooner… some of
+    the filters are adjusted a little bit so I could see it quicker"
+    (yg5E_mqGFGg [00:16:03]). How much looser is not stated: a +5 % gain
+    instead of +10 % and 2× recent RVOL instead of 3× are this desk's
+    Approximation. Discovery only, like every scanner here."""
+
+    scanner_id = "former_momo"
+    definition_version = "former_momo@1.0.0"
+
+    def __init__(self, min_change_pct: float = 5.0, min_recent_rvol: float = 2.0, **kw) -> None:
+        super().__init__(min_change_pct=min_change_pct, min_recent_rvol=min_recent_rvol, **kw)
+        self.record_misses = False           # High of Day's misses are the ones measured
+
+    def on_snapshot(self, current, previous, state, hot) -> List[ScannerEvent]:
+        if not current.former_runner:
+            return []
+        events = super().on_snapshot(current, previous, state, hot)
+        for e in events:
+            e.values["former_runner"] = current.former_runner
+        return events
 
 
 class RunningMoveScanner(Scanner):

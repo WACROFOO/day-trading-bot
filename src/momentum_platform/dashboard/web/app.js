@@ -19,8 +19,9 @@ const ALERT_TILES = {
                       "volume · halt resumed — $2–20, 07:00–11:30. One alert per leg. Approximations; discovery only.",
                 scanners: ["running_up", "squeeze_5_in_5", "squeeze_10_in_10", "running_up_filters"] },
   hod_momentum: { id: "hod_momentum", title: "High of Day",
-                  note: "New high with momentum. The branch labels the float and RVOL band. Approximation.",
-                  scanners: ["hod_momentum", "breakout_52w"] },
+                  note: "New high with momentum. The branch labels the float and RVOL band. FM·: a former runner " +
+                        "(a day up 100 %+ in the past year) on a looser trigger — +5 % and 2× RVOL. Approximations.",
+                  scanners: ["hod_momentum", "breakout_52w", "former_momo"] },
 };
 // Three cards, in funnel order: candidates -> acceleration -> breakout.
 const DOCK_ORDER = ["five_pillars_list", "running_up", "hod_momentum"];
@@ -1627,8 +1628,10 @@ const BRANCH_SHORT = {
    itself is just "qualified". Two characters of column beat fourteen. */
 const SCANNER_SHORT = { squeeze_5_in_5: "5in5", squeeze_10_in_10: "10in10",
                         running_up: "UP·10m", running_down: "DN·10m", running_up_filters: "RU·filt",
-                        breakout_52w: "52wk", hod_momentum: "HOD" };
+                        breakout_52w: "52wk", hod_momentum: "HOD", former_momo: "FM" };
 function shortBranch(branch, scannerId) {
+  // Former Momo labels the same bands as High of Day, marked as its own
+  if (scannerId === "former_momo") return "FM·" + shortBranch(branch, "hod_momentum");
   // "qualified" is the squeeze scanners' only branch, so it says nothing the
   // scanner name does not; fall back to the scanner's own short label there.
   if (!branch || branch === "qualified") return SCANNER_SHORT[scannerId] || scannerId.replace(/_/g, "·");
@@ -4120,10 +4123,24 @@ function membership(frame) {
   // Running Up leg on the same name inside ten minutes made no sound at all.
   Object.keys(ALERT_TILES).forEach(tile => {
     loggedAlerts(ALERT_TILES[tile].scanners).forEach(a =>
-      out.push({ k: tile + ":" + a._key, sym: a.symbol, at: a._at }));
+      out.push({ k: tile + ":" + a._key, sym: a.symbol, at: a._at, a }));
   });
   return out;
 }
+/* Which alerts make a sound (owner, 2026-10-14, "all of them": the corpus's
+   own choice). "I only have the audio alerts enabled for low float and
+   squeezing up 10 in 10 minutes. The others I don't use audio alerts for"
+   (yg5E_mqGFGg @00:19:36; knowledge-base/strategies/SCANNERS.md §B1): a
+   low-float High of Day alert and the 10-in-10 squeeze sound; every other
+   alert flashes its card in silence. A name entering the pillars list still
+   sounds — the desk's own first signal, not one of his widget's strategies. */
+function audible(a) {
+  if (!a) return false;
+  const fired = [a.scannerId].concat((a.group && a.group.also_triggered) || []);
+  if (fired.indexOf("squeeze_10_in_10") >= 0) return true;
+  return (a.scannerId === "hod_momentum" || a.scannerId === "former_momo") && /^low_float/.test(a.branch || "");
+}
+window.__audible = audible;
 function noteArrivals(frame) {
   const now = Date.now();
   state.arrivals.forEach((until, sym) => { if (until <= now) state.arrivals.delete(sym); });
@@ -4146,7 +4163,8 @@ function noteArrivals(frame) {
   const deskMs = deskNow();
   const news = fresh.filter(e => e.at == null || deskMs - e.at <= ALERT_NEWS_MS);
   if (news.length) {
-    beep(news.some(e => e.k.startsWith("gainers:")) ? "high" : "medium");
+    const gainers = news.some(e => e.k.startsWith("gainers:"));
+    if (gainers || news.some(e => audible(e.a))) beep(gainers ? "high" : "medium");
     const which = news.some(e => e.k.startsWith("gainers:")) ? "scan-pillars"
                 : news[0].k.startsWith("hod_momentum:") ? "scan-hod" : "scan-running";
     const card = document.querySelector('[data-card="' + which + '"]');
@@ -4190,8 +4208,8 @@ function paintSoundButton() {
   b.textContent = (!state.sound ? "🔇" : AUDIO_BLOCKED ? "🔕" : "🔔") + " Alerts";
   b.title = !state.sound ? "Alert sounds are off (A)"
           : AUDIO_BLOCKED ? "The browser is holding sound until you click the page once (A)"
-          : "A sound on every new alert: high for a name entering the pillars list, "
-            + "medium for a Running Up or High of Day leg (A)";
+          : "Sounds: a name entering the pillars list, and the two alerts he hears — a low-float High of Day " +
+            "and the 10-in-10 squeeze (yg5E_mqGFGg @00:19:36). Every other alert flashes its card, silently (A)";
   b.classList.toggle("blocked", !!state.sound && AUDIO_BLOCKED);
 }
 function beep(severity) {
@@ -5242,8 +5260,8 @@ let timer = null;
 function tick() {
   if (state.frame >= FRAMES.length - 1) { pause(); return; }
   state.frame++;
-  const fresh = FRAMES[state.frame].alerts;
-  if (fresh.length) beep(fresh[0].severity);
+  const loud = FRAMES[state.frame].alerts.filter(audible);
+  if (loud.length) beep(loud[0].severity);
   syncTransport(); render();
 }
 function play() {

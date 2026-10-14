@@ -200,6 +200,49 @@ def shadow_section(day: str) -> list:
     return L
 
 
+def alerts_section(dd: Path) -> list:
+    """The day's scanner events (`alerts.csv`, stored since 2026-10-14): what
+    each scanner raised, what reached a card, what the router held back and
+    why, and High of Day's new highs that did not alert, by the condition that
+    failed — the evidence for or against the High of Day rule
+    (docs/desk-2026-10-14.md §6). Discovery only: nothing here moves a rule."""
+    rows = read(dd, "alerts.csv")
+    if not rows:
+        return ["## Scanner alerts", "", "No scanner log for this day: the desk stores one since 2026-10-14.", ""]
+    cols = ["delivered", "cooldown", "consolidated", "duplicate", "rejected"]
+    by = defaultdict(Counter)
+    for r in rows:
+        d = r.get("detail") or ""
+        kind = (r["outcome"] if r["outcome"] != "suppressed" else
+                "consolidated" if d.startswith("consolidated") else "duplicate" if "duplicate" in d
+                else "cooldown" if d == "cooldown" else "other")
+        by[r["scanner"]][kind] += 1
+    L = [f"## Scanner alerts — {len(rows)} events", "",
+         "`delivered` reached a card; `consolidated` was filed under another scanner of the same moment (shown "
+         "only in that row's group); `rejected` is a new high of day the High of Day scanner turned down.", "",
+         "| scanner | " + " | ".join(cols) + " |", "|---" * (len(cols) + 1) + "|"]
+    for sc in sorted(by):
+        L.append(f"| {sc} | " + " | ".join(str(by[sc].get(c, 0)) for c in cols) + " |")
+    rej = [r for r in rows if r["outcome"] == "rejected"]
+    if rej:
+        cond, names = Counter(), defaultdict(Counter)
+        for r in rej:
+            for part in (r.get("detail") or "").split("; "):
+                c = part.split(" ")[0] if part else "?"
+                cond[c] += 1
+                names[r["symbol"]][c] += 1
+        alerted = {r["symbol"] for r in rows if r["scanner"] in ("hod_momentum", "former_momo")
+                   and r["outcome"] != "rejected"}
+        L += ["", "### High of Day — new highs that did not alert, by the condition that failed", "",
+              "| condition | new highs it blocked |", "|---|---|"] + [f"| {c} | {n} |" for c, n in cond.most_common()]
+        L += ["", "| name | new highs turned down | most often by | High of Day ever alerted |", "|---|---|---|---|"]
+        for sym in sorted(names, key=lambda x: -sum(names[x].values())):
+            n = sum(1 for r in rej if r["symbol"] == sym)
+            top = ", ".join(f"{c} ×{k}" for c, k in names[sym].most_common(2))
+            L.append(f"| {sym} | {n} | {top} | {'yes' if sym in alerted else '**no**'} |")
+    return L + [""]
+
+
 def review(day: str) -> str:
     dd = DAILY / day
     meta = json.loads((dd / "export.json").read_text())
@@ -300,6 +343,7 @@ def review(day: str) -> str:
                  f"{max(0, PROSPECTIVE_N - len(f))} |")
     L += ["", "Gross R before costs: the ten-year tests put costs near 0.27-0.39 R a trade, so a cohort needs "
           "a gross mean well above that to matter. Nothing on this page changes a rule.", ""]
+    L += alerts_section(dd)
     L += shadow_section(day)
     text = "\n".join(L)
     (dd / "review.md").write_text(text)

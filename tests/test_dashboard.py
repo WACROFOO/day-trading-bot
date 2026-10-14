@@ -2105,3 +2105,19 @@ def test_ui_a_former_runner_is_a_label_with_its_date():
     newest, short, empty = js.loads(out.stdout)
     assert newest["d"] == "2026-06-11" and round(newest["pct"]) == 105, "the newest +100 % day"
     assert short is None and empty is None
+
+
+def test_ui_only_the_two_alerts_he_hears_make_a_sound(page):
+    """Owner, 2026-10-14 ("all of them"): sound as the corpus does — "I only
+    have the audio alerts enabled for low float and squeezing up 10 in 10
+    minutes" (yg5E_mqGFGg [00:19:36]). Every other alert flashes its card."""
+    got = page.evaluate("""() => [
+      { scannerId: 'squeeze_10_in_10' },
+      { scannerId: 'running_up', group: { also_triggered: ['squeeze_10_in_10'] } },
+      { scannerId: 'hod_momentum', branch: 'low_float_high_rvol_price_under_20' },
+      { scannerId: 'former_momo', branch: 'low_float_medium_rvol_price_under_20' },
+      { scannerId: 'hod_momentum', branch: 'unknown_float_high_rvol_price_under_20' },
+      { scannerId: 'hod_momentum', branch: 'medium_float_high_rvol_price_under_20' },
+      { scannerId: 'running_up' }, { scannerId: 'squeeze_5_in_5' }, { scannerId: 'running_up_filters' },
+    ].map(a => window.__audible(a))""")
+    assert got == [True, True, True, True, False, False, False, False, False]

@@ -1217,6 +1217,28 @@ seconds, and the day is settled a minute later on a ledger nothing writes to.
 The owner's calls and stated risk are saved at any hour; the runner reads
 neither.
 
+**The desk's net, 8 names → 12 (2026-10-14) — the owner's decision; no gate,
+window or sizing moves; the bot's candidates widen.** Proposed in
+`docs/desk-2026-10-14.md` §7 as the owner's call, because the bot takes one
+position at a time (§2) from the plans the desk arms: more names on the desk
+change which plan it may take first. The owner's answer, verbatim: "All of them
+even the runners up and all other items". `maxSymbols` in
+`config/desk-profile.json` is 12. The cascade, the detector, the window and the
+sizing are unchanged, so no stored decision changes its answer: R11 reproduces
+every one and the cohort does not reset (the 2026-09-18 rule above resets on a
+changed answer). The profile fingerprint moves (`desk_profile.fingerprint()`
+hashes the profile), so decisions after the next desk start carry the new hash
+and the two nets can be told apart. Unchanged on purpose: the rescan stays
+every 120 s — one scan pass takes most of that period
+(`ibkr_desk._scan_in_background`). Limits: the stream refuses a name past 50
+market-data lines, two a name; a rebuild slower than 5 s is logged as "rebuild
+took Ns", and `DESK_MAX_SYMBOLS` in `.env` sets the net back without a commit.
+The same day, display and record only, nothing the bot reads: a Former Momo
+scanner on the High of Day card, sounds for the corpus's two audible alerts
+only, and every scanner event — with High of Day's new highs that did not
+alert and the condition that failed — stored in the ledger (`scanner_alerts`)
+and exported as `alerts.csv`.
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**
@@ -1242,6 +1264,7 @@ the cause is written into `docs/paper-exercise-brief.md` §⑦ or fixed.
 | the NBBO source | the failure condition (§4) |
 | the report layout | n (§3) |
 | **gate 3 (catalyst): kill → flag** — Amendment A2, owner, 2026-09-17, before the first order; rules hash moved; phase-A decisions keep theirs | every other cascade gate and every threshold |
+| **the desk's net** (`maxSymbols`, how many names the cascade sees at once — not a gate, not a threshold): 8 → 12, owner, 2026-10-14 (§5); profile fingerprint moved | |
 
 Tuning the cascade or the detector mid-exercise on the ledger's own fills
 is specifically forbidden: paper fills are optimistic, and tuning on them

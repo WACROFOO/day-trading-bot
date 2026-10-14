@@ -12,7 +12,7 @@ pushed), then read in the cloud by `scripts/daily_review.py`.
 | `<day>/decisions.csv` | every plan the desk armed, its outcome, refusal reasons, gates, chart values and actuals |
 | `<day>/orders.csv`, `<day>/order_events.csv` | what was sent, filled and exited, with commissions |
 | `<day>/five_minute.csv`, `<day>/green_run.csv` | the display-only states and the green-run shadow log |
-| `<day>/alerts.csv` | every scanner event of the day — High of Day, Running Up, the squeezes, the five-pillars alert — `delivered` to a card or `suppressed` with the router's reason (cooldown, consolidated under another scanner of the same moment, duplicate); since 2026-10-14, when the desk began storing them (`scanner_alerts` in the ledger) |
+| `<day>/alerts.csv` | every scanner event of the day — High of Day, Running Up, the squeezes, the five-pillars alert — `delivered` to a card or `suppressed` with the router's reason (cooldown, consolidated under another scanner of the same moment, duplicate), and High of Day's new highs it turned down, `rejected` with the condition that failed (`recent_rvol 2.54/3.0`); since 2026-10-14, when the desk began storing them (`scanner_alerts` in the ledger). `review.md` counts them in its *Scanner alerts* section |
 | `<day>/manual_trades.csv` | the owner's trades of the day, copied from `research/trade-journal/journal.csv` (`scripts/trade_log.py add`) |
 | `<day>/desk_calls.csv` | the owner's calls from the desk's buttons (took / passed / closed), each with the card the desk showed; the review scores them beside the bot (since 2026-10-08) |
 | `<day>/bars.csv` | the desk's 1-minute bars 04:00-12:00 ET for every name with a decision |

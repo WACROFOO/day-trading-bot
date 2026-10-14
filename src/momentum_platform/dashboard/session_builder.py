@@ -30,7 +30,9 @@ from ..pullback import FirstPullbackDetector
 from ..scanners import (
     FivePillarsAlert,
     FivePillarsList,
+    FormerMomoScanner,
     HodMomentumScanner,
+    former_runner_day,
     RunningMoveScanner,
     RunningUpFilters,
     UptrendScanner,
@@ -314,6 +316,7 @@ def build_session_from_records(
         ReferenceData(
             symbol=s["symbol"], prev_close=s["prevClose"],
             avg_daily_volume=s["avgDailyVolume"], high_52w=s["high52w"],
+            former_runner=former_runner_day(s.get("dailyBars"), _td),
             volume_profile=profiles.get(s["symbol"]),
             float_shares=s["floatShares"],
             float_quality=FloatQuality(s["floatQuality"]),
@@ -321,13 +324,17 @@ def build_session_from_records(
         for s in symbols.values()
     ])
 
+    hod_scanner = HodMomentumScanner(min_volume_5m=MIN_VOLUME_5M * volume_floor_scale)
     captured: list = []          # [(event, consolidation_group)]
     router = NotificationRouter(RouterConfig(), [_Collector(captured)])
     engine = ScannerEngine(
         hot=hot,
         scanners=[
             FivePillarsAlert(),
-            HodMomentumScanner(min_volume_5m=MIN_VOLUME_5M * volume_floor_scale),
+            hod_scanner,
+            # after High of Day: when both fire on one moment the router files
+            # the Former Momo alert under High of Day's (also_triggered)
+            FormerMomoScanner(min_volume_5m=MIN_VOLUME_5M * volume_floor_scale),
             UptrendScanner(min_volume_5m=MIN_VOLUME_5M * volume_floor_scale),
             RunningMoveScanner(direction="down", min_volume_5m=MIN_VOLUME_5M * volume_floor_scale),
             squeeze_5_in_5(), squeeze_10_in_10(),
@@ -642,7 +649,7 @@ def build_session_from_records(
         _journal_tape(writer, bar_records, symbols)
         # Every scanner event, delivered or suppressed with the router's
         # reason — what the alert cards could be scored on afterwards.
-        _journal_alerts(writer, router.deliveries)
+        _journal_alerts(writer, router.deliveries, hod_scanner.misses)
     if writer is not None:
         # COMMIT. The runner is a separate process reading this file; without
         # this, every write above stayed inside the desk's own connection and
@@ -959,12 +966,23 @@ def _journal_tape(journal, bar_records, symbols) -> None:
 _ALERTS_SEEN: dict = {}
 
 
-def _journal_alerts(journal, deliveries) -> None:
+def _journal_alerts(journal, deliveries, misses=()) -> None:
     from journal import ledger as _L
     seen = _ALERTS_SEEN.get(id(journal))
     if seen is None or seen["conn"] is not journal:
         seen = _ALERTS_SEEN[id(journal)] = {"conn": journal, "keys": set()}
     rows = []
+    # High of Day's new highs that did not alert, each with the condition
+    # that failed ("recent_rvol 1.6/3.0") — what the High of Day rule is
+    # measured on (docs/desk-2026-10-14.md §6).
+    for m in misses:
+        key = f"{m['symbol']}|{m['scanner']}|rejected|{m['ts'].strftime('%Y%m%dT%H%M%S')}"
+        if key in seen["keys"]:
+            continue
+        seen["keys"].add(key)
+        rows.append({"key": key, "ts": m["ts"], "symbol": m["symbol"], "scanner": m["scanner"], "branch": None,
+                     "severity": None, "outcome": "rejected",
+                     "detail": "; ".join(f"{f} {v}/{t}" for f, v, t in m["failed"]), "values": m["values"]})
     for d in deliveries:
         e = d.event
         if e.idempotency_key in seen["keys"] or d.status == "failed":

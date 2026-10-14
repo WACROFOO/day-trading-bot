@@ -72,6 +72,7 @@ class SymbolSnapshot:
     # bucket after 04:00 ET. The baseline for time-of-day relative volume.
     volume_profile: Optional[list] = None
     high_52w: Optional[float] = None           # prior 252 sessions, excludes today
+    former_runner: Optional[str] = None        # newest day up 100 %+ (high vs prior close), before today
     float_shares: Optional[float] = None
     float_quality: FloatQuality = FloatQuality.UNKNOWN
     latest_news_ts: Optional[datetime] = None
