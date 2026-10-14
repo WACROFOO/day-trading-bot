@@ -41,7 +41,7 @@ from ..state import MarketUpdate
 UTC = timezone.utc
 
 EVENT_TYPES = ("quote", "bar5s", "bar10s", "bar1m", "health", "screener",
-               "symbol-added", "alert", "session", "resync", "tape", "depth")
+               "symbol-added", "symbol-removed", "alert", "session", "resync", "tape", "depth")
 # Delivered live, never kept for replay: each tape event is a whole snapshot,
 # so a reconnecting page needs only the next one, and twice a second for a
 # morning would push the bars and cards out of the replay buffer.

@@ -17,7 +17,8 @@
     "priceMax": 30.0,
     "minGainPct": 10.0,
     "maxSymbols": 12,
-    "scanTop": 30
+    "scanTop": 30,
+    "seatDeadMinutes": 15
   },
   "cadence": {
     "rebuildSeconds": 3,

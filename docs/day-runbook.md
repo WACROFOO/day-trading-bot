@@ -137,9 +137,14 @@ A desk outside the bot's day:
   the newest one, and at the end of the desk-only run for any left;
 - **starts on today's names** (2026-10-12): `--symbols` when you pass them,
   else the last board the day's desk recorded *today*, else none — and its
-  scanner fills the eight seats. Before, a 04:17 start sat on Friday's board:
-  seven of eight seats held Friday's names, and of the sixteen gappers the
-  scanner found that morning only YMAT got in;
+  scanner fills the seats (twelve since 2026-10-14). Before, a 04:17 start sat
+  on Friday's board: seven of eight seats held Friday's names, and of the
+  sixteen gappers the scanner found that morning only YMAT got in. Since
+  2026-10-14 a full desk also **rotates**: a name the cascade has rejected on
+  every rebuild for 15 minutes gives its seat to the scanner's next new name —
+  never a name with an order, a position, a live plan or the tape
+  (`docs/preregistration.md` §5; `DESK_SEAT_DEAD_MINUTES=0` in `.env` turns it
+  off);
 - **does not keep the Mac awake** — the caffeinate hold ends with the bot's
   day. A desk that drops (sleep, the Gateway's restart) is started again once
   the Gateway answers; if it keeps failing, 1, 2, 4 … up to 15 min apart;
@@ -207,9 +212,13 @@ Since 2026-10-09 (`docs/desk-grid-audit-2026-10-09.md`):
   layout links the 1-minute, the 5-minute and the daily).
 - The 1-minute chart draws the **pre-market high** beside the HOD ("HOD = PM
   HIGH" when they are one price). MACD is on the 1-minute only.
-- The gainers list shows names **green on the day with 4 or 5 pillars**. The
+- The gainers list shows **every name green on the day** (2026-10-14; it
+  showed names with 4 or 5 pillars), each with five marks — **P G R F N**,
+  green pass, red fail, grey unknown: known, never a filter. Every scanner row
+  is one line; its **▸** opens the detail. The
   alert tiles show **one row per name with ×N** when it fired again — the
-  repeat is the signal — and dim names not up 10 % at the alert. The High of
+  repeat is the signal — and dim names not up 10 % at the alert; **NOW** says
+  HIGH at the session high, else how far under it. The High of
   Day tile carries the **halts** from 09:30. Maximized (E), the pillar board
   is the full table, folding red names and names with no print yet.
 - **Level 2** sits under the card, the Time & Sales under it: the selected name's book from IBKR

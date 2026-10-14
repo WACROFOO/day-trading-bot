@@ -71,10 +71,14 @@ ROW_COLUMNS = [
 ]
 
 LIST_META = {
-    "five_pillars_list": {"title": "Top gainers · 5 pillars", "metric": "Change %",
-                          "note": "Price, gain and RVOL pass; ranked by change from the previous "
-                                  "close, premarket and regular alike. Float and news are columns, "
-                                  "never gates."},
+    # The card shows every name on the desk up on the day with its pillars marked
+    # (owner, 2026-10-14: "it just should be known but not killing filter"); the
+    # list itself, price + gain + RVOL passing, is what the desk's sound reads.
+    "five_pillars_list": {"title": "Top gainers", "metric": "Change %",
+                          "note": "Every name on the desk up on the day, by change from the previous close, "
+                                  "premarket and regular alike. The five pillars are marks on each row — "
+                                  "P price $2–20 · G gain ≥ 10% · R RVOL ≥ 5× · F float < 20M · N news — "
+                                  "green pass, red fail, grey unknown: shown, never a filter. ▸ opens the checks."},
     "top_gappers": {"title": "Top Gappers", "metric": "Gap %",
                     "note": "Freezes at 09:30 ET, matching the captured platform."},
     "top_gainers": {"title": "Top Gainers", "metric": "Change from close %",

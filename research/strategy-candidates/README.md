@@ -26,10 +26,10 @@ STATUS   · Round 1 CLOSED, none profitable. The five-year run (RESULTS.md): S1,
 | **L2** | the #1 gainer's new-high break | 18 + 54 | **done before** — the edge hunt's F7 and F8 | ✗ F7 failed validation (net −0.270 R); F8's holdout −0.188 R over 592, every year negative. Not re-run: its holdout is read |
 | **L3** | reference: the bot's entry + stop ≥ 3 % + new-low exit + done after a loss | 1 | reference only, never opens the holdout | −0.371 train · −0.091 in 2023 |
 | shorts, 20 days | mirror, back side, extension, time fade, the owner's five-condition combination | 31 | first look, 2026-10-12 | ✗ every variant negative net on the selection days — 20 sessions, not evidence (`prior-20-days/`) |
-| **L4** | trend-line break: a close above the desk's down-line, stop under the last 5 bars or under the line, target 2 R / trail / next resistance / high of day | 8 | **preregistered** 2026-10-14 (amendment), not run on the five years | — |
-| **L5** | support hold: the fan's nearest support touched and held (Pine's retest test) | 8 | **preregistered** 2026-10-14, not run | — |
-| **L6** | resistance break: a close above the fan's nearest resistance + band | 8 | **preregistered** 2026-10-14, not run | — |
-| *level read-out* | do the desk's levels hold more often than the same levels moved ±0.5-1.5 ATR? Descriptive, 2021-2023 only | — | **preregistered** 2026-10-14, not run | — |
+| **L4** | trend-line break: a close above the desk's down-line, stop under the last 5 bars or under the line, target 2 R / trail / next resistance / high of day | 8 | **preregistered** 2026-10-14 (amendment), waiting for the five-year run · WAIT | first look on the 22 desk days: every cell negative net (`levels-first-look/`) — not evidence |
+| **L5** | support hold: the fan's nearest support touched and held (Pine's retest test) | 8 | **preregistered** 2026-10-14, waiting · WAIT | first look: every cell negative net — not evidence |
+| **L6** | resistance break: a close above the fan's nearest resistance + band | 8 | **preregistered** 2026-10-14, waiting · WAIT | first look: two cells positive on the early days, both negative on the later ones — not evidence |
+| *level read-out* | do the desk's levels hold more often than the same levels moved ±0.5-1.5 ATR? Descriptive, 2021-2023 only | — | **preregistered** 2026-10-14, waiting | first look: none better than its placebo; the fan's support worse (−3.0 pts) — not evidence |
 
 Also counted in `registry.jsonl`: the megaday study's 4 hypotheses (L1's origin) and the edge
 hunt's 174 exit/sizing configurations (L3's origin).
@@ -81,6 +81,7 @@ line and the owner's decision, never a switch.
 | `registry.jsonl` | every combination ever evaluated here, one line each, prior reads included; the Mac's runs are appended when they come back |
 | `holdout_ledger.jsonl` | one line per holdout opening (empty: none yet). The runner also refuses a second opening found in the Mac's local `results/holdout_ledger.jsonl` |
 | `prior-20-days/` | the short-side reads of 2026-10-12 on the 20 exported days, scripts and output |
+| `levels-first-look/` | the levels round (L4-L6, the level read-out) on the 22 exported desk days, run after its amendment was pushed: plumbing and a first look, not evidence |
 | `runs/` | the reports brought back, one folder a run |
 | `results/` | git-ignored: what a run writes on the machine that ran it |
 

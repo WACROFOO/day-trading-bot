@@ -1,0 +1,39 @@
+LEVEL READ-OUT · run 2026-10-14T1254Z-levels-smoke · git f3e6063 · research/strategy-candidates/PREREGISTRATION.md, amendment 2026-10-14 · descriptive: decides nothing
+SOURCE   daily · the exported desk days of research/daily/, 04:00-12:00 bars — FIRST LOOK, not evidence
+! FIRST LOOK / PLUMBING — not evidence
+COVERAGE train 136 / 136 symbol-days with bars · valid 59 / 59 symbol-days with bars
+TEST     support: previous close above level + band, the bar's low at level + band or under (09:30-11:29); held = a high 1 ATR above first, broke = a close under level − band first, within 30 bars; resistance mirrored
+PLACEBO  the same level moved ±0.5-1.5 ATR (seeded by the symbol-day and the level), tested the same way · held % = held / (held + broke) · interval: trading days resampled
+
+ level  side       │  tests   held   open │ placebo   held │ Δ held, pts    95 % interval │  train Δ  valid Δ
+ fan    support    │   3151   44 %    1 % │    1160   47 % │        -3.0     [-5.8, -0.2] │     -3.2     -2.4
+ fan    resistance │   3102   46 %    1 % │    1047   47 % │        -0.6     [-3.4, +2.3] │     +0.2     -2.6
+ trend  support    │    737   44 %    1 % │     560   45 % │        -1.1     [-4.9, +2.9] │     -0.8     -2.9
+ trend  resistance │    674   52 %    0 % │     474   51 % │        +0.9     [-4.0, +6.1] │     +0.0     +3.7
+ vwap   support    │    525   43 %    1 % │     457   47 % │        -4.2    [-10.5, +1.8] │     -1.4    -12.1
+ vwap   resistance │    480   41 %    0 % │     494   44 % │        -2.9     [-8.3, +2.4] │     -5.1     +2.9
+ round  support    │   1453   45 %    0 % │     747   42 % │        +3.3     [-1.2, +7.9] │     +2.4     +5.8
+ round  resistance │   1412   44 %    0 % │     816   42 % │        +1.5     [-3.2, +5.6] │     +1.4     +1.6
+ pmh    support    │    156   43 %    0 % │     180   49 % │        -6.2    [-15.7, +3.4] │     -1.7    -18.1
+ pmh    resistance │    191   46 %    1 % │     203   45 % │        +0.7   [-11.3, +13.3] │     +5.6    -12.5
+ hod    resistance │    308   49 %    0 % │     259   43 % │        +5.9    [-2.4, +13.9] │     +6.0     +5.9
+ fan+   support    │    406   44 %    0 % │     162   45 % │        -0.8     [-9.2, +9.2] │     +4.3    -13.9
+ fan+   resistance │    370   45 %    1 % │     125   50 % │        -4.5    [-15.0, +8.0] │     +5.4    -27.4
+
+ READING
+   fan support: holds LESS often than the same level moved at random
+   fan resistance: no different from the same level moved at random
+   trend support: no different from the same level moved at random
+   trend resistance: no different from the same level moved at random
+   vwap support: no different from the same level moved at random
+   vwap resistance: no different from the same level moved at random
+   round support: no different from the same level moved at random
+   round resistance: no different from the same level moved at random
+   pmh support: no different from the same level moved at random
+   pmh resistance: no different from the same level moved at random
+   hod resistance: no different from the same level moved at random
+   fan+ support: no different from the same level moved at random
+   fan+ resistance: no different from the same level moved at random
+
+done in 4 s · 19,649 tests · files: research/strategy-candidates/results/2026-10-14T1254Z-levels-smoke
+Levels from the symbol-day's own bars (no prior session). Paper only.

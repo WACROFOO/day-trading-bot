@@ -750,8 +750,8 @@ def desk_only_symbols(conn, args, now: Optional[datetime] = None) -> list[str]:
 
     2026-10-12 04:17: the morning desk started on Friday's board (MI QETA SAIQ
     SMJF VEEA VIVK XRTX). The desk held eight names (twelve since 2026-10-14) and
-    never drops one, so of the sixteen gappers its scanner found that morning only
-    YMAT got a seat. An
+    never dropped one (a dead name's seat rotates since 2026-10-14), so of the
+    sixteen gappers its scanner found that morning only YMAT got a seat. An
     earlier day's board is history, not a watchlist."""
     if args.symbols:
         return [s.strip().upper() for s in args.symbols.split(",") if s.strip()]

@@ -278,7 +278,9 @@ def main(argv=None) -> int:
             "PLACEBO  the same level moved ±0.5-1.5 ATR (seeded by the symbol-day and the level), tested the same way ·"
             " held % = held / (held + broke) · interval: trading days resampled",
             ""] + report_lines(rows) + ["", " READING"] + reading(rows)
-    rep += ["", f"done in {time.monotonic() - t0:.0f} s · {len(events):,} tests · files: {out_dir}",
+    shown = out_dir.resolve()
+    shown = shown.relative_to(ROOT) if shown.is_relative_to(ROOT) else shown
+    rep += ["", f"done in {time.monotonic() - t0:.0f} s · {len(events):,} tests · files: {shown}",
             "Levels from the symbol-day's own bars (no prior session). Paper only."]
     text = "\n".join(rep)
     print(text)

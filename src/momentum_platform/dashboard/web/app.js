@@ -1314,7 +1314,8 @@ function rvolPillar(row, meta, min) {
     ? "RVOL ≥ " + min + "× — volume so far vs the same clock time in prior sessions"
     : thin ? "RVOL ≥ " + min + "× — today vs prior FULL days (same-time baseline too thin to trust)"
     : "RVOL ≥ " + min + "× — today vs prior FULL days (understates a part-day)";
-  const chip = { k: "R", name: name, v: fx(v) + "×", ok: (v || 0) >= min, unknown: v == null };
+  const chip = { k: "R", name: name, v: fx(v) + "×", ok: (v || 0) >= min, unknown: v == null,
+                 measure: tod ? "same time of day" : thin ? "full days, thin baseline" : "full days" };
   if (tod && m.rvolBaseline) {
     chip.name += " · " + vol(m.volumeToday) + " vs " + vol(m.rvolBaseline) + " expected by now"
                + (meta.volumeProfileDays ? " (" + meta.volumeProfileDays + " sessions)" : "");
@@ -1437,37 +1438,50 @@ function sessionAt(ms) {
        : hhmm < "16:00" ? "regular" : hhmm < "20:00" ? "after_hours" : "closed";
 }
 
+/* Top gainers (owner, 2026-10-14: "why filter the top gainer on 5 pillars, it
+   just should be known but not killing filter from that card"). Every name on
+   the desk that is up on the day, by change from the previous close; the five
+   pillars are marks on the row — P price, G gain, R RVOL, F float, N news —
+   green pass, red fail, grey unknown: known, never a filter. Until then only
+   names passing price, gain and RVOL were listed (plus the desk's 4/5 names),
+   so before the open, when no name has 5x RVOL yet, the card read "blocked by
+   RVOL on 10" over an empty list. A red name is still not a gainer (owner,
+   2026-10-09: BIAF −8.7 %). The checks and the rest open from the row's ▸;
+   the row's "?" that did it read as an unknown on every row. */
+function gainerRows(frame, nowMs) {
+  return Object.keys(SYMS).map(sym => {
+    const sc = pillarScore(frame, sym, nowMs);
+    return Object.assign({}, sc.row, { symbol: sym, _sc: sc });
+  }).filter(r => r.price != null && r.changePct != null && r.changePct > 0)
+    .sort((a, b) => (b.changePct - a.changePct) || (b._sc.passed - a._sc.passed) || (a.symbol < b.symbol ? -1 : 1));
+}
+function pillarMarks(checks) {
+  const box = el("span", "pmarks");
+  checks.forEach(c => {
+    const word = c.ok ? "pass" : c.unknown ? "unknown" : "fail";
+    const m = el("i", "pm " + (c.ok ? "ok" : c.unknown ? "unk" : "no"), c.k);
+    m.title = c.name + ": " + c.v + " — " + word;
+    box.appendChild(m);
+  });
+  box.title = checks.filter(c => c.ok).length + " of 5 pillars pass — shown, never a filter";
+  return box;
+}
+/* The row's ▸: its detail opens under it, one row at a time across the cards. */
+function rowOpener(cardId, symbol) {
+  const open = state.openRow === cardId + "|" + symbol;
+  const b = el("button", "row-open" + (open ? " open" : ""), open ? "▾" : "▸");
+  b.title = open ? "Hide the detail" : "Show the detail";
+  b.tabIndex = -1;
+  b.onclick = e => { e.stopPropagation(); toggleReasons(cardId, symbol); render(); };
+  return { b, open };
+}
+
 function fillListCard(card, id, frame) {
   card.textContent = "";
   const meta = S.listMeta[id] || { title: id, metric: "", note: "" };
-  const rows = (frame.lists[id] || []).map(rowObj);
-  const froz = state.frozen[id];
   const nowMs = deskNow();
-  // Names one pillar short join the list with their score on the row (owner,
-  // 2026-09-08: three or more; 2026-10-09: four or more, and green on the day —
-  // the course passes 3/5, and BIAF −8.7 % 3/5 sat on a list called gainers).
-  // They are part of the visible order, so a freeze pins them too.
-  const scores = {};
-  const extra = [];
-  if (id === "five_pillars_list") {
-    const have = new Set(rows.map(r => r.symbol));
-    Object.keys(SYMS).forEach(sym => {
-      const sc = pillarScore(frame, sym, nowMs);
-      scores[sym] = sc.passed;
-      if (!have.has(sym) && sc.passed >= 4 && sc.row && sc.row.price != null &&
-          (sc.row.changePct || 0) > 0) extra.push(sc.row);
-    });
-  }
-  // The tile is called Top GAINERS: one order, by change on the day,
-  // descending, across the server's rows and the desk's additions alike.
-  // Until 2026-09-21 the server rows came first (sorted) and the additions
-  // after (sorted by score), so GRML +141% · VEEE +109% · CPOP +25% · LOBO
-  // +128% read as no order at all. Pillar score breaks ties only.
-  const all = rows.concat(extra);
-  if (id === "five_pillars_list") {
-    all.sort((a, b) => ((b.changePct == null ? -1e9 : b.changePct) - (a.changePct == null ? -1e9 : a.changePct))
-                       || ((scores[b.symbol] || 0) - (scores[a.symbol] || 0)));
-  }
+  const all = gainerRows(frame, nowMs);
+  const froz = state.frozen[id];
   let ordered = all, pending = 0;
   if (froz) {
     const byS = {}; all.forEach(r => byS[r.symbol] = r);
@@ -1490,31 +1504,14 @@ function fillListCard(card, id, frame) {
   card.appendChild(el("div", "tile-note", meta.note));
   const cols = el("div", "tile-cols list-cols");
   const rvHead = el("span", null, "RVOL"); rvHead.title = RVOL_EXPLAIN;
-  ["Symbol / news", "Price", "Chg %"].forEach(c => cols.appendChild(el("span", null, c)));
-  cols.appendChild(rvHead); cols.appendChild(el("span", null, "Float"));
+  const pmHead = el("span", null, "Pillars");
+  pmHead.title = "P price $2–20 · G gain ≥ 10% · R RVOL ≥ 5× · F float < 20M · N news — green pass, red fail, grey unknown";
+  [el("span", null, ""), el("span", null, "Symbol"), el("span", null, "Price"), el("span", null, "Chg %"), rvHead,
+   pmHead].forEach(c => cols.appendChild(c));
   card.appendChild(cols);
   const body = el("div", "tile-rows");
-  // Nothing passes price, gain AND RVOL: say which pillar is closing the
-  // list, whether or not partial rows follow it.
-  if (!rows.length) {
-    const b = deskBlockers(FRAMES[state.frame]);
-    const T2 = S.pillarThresholds || {};
-    let msg = "Nothing passes price, gain and RVOL. An empty list is a real answer.";
-    if (b) {
-      const parts = [];
-      if (b.counts.R) parts.push("RVOL on " + b.counts.R +
-        (b.bestRvol != null ? " (best " + fx(b.bestRvol) + "× of " + T2.rvolMin + "× needed)" : ""));
-      if (b.counts.P) parts.push("price on " + b.counts.P);
-      if (b.counts.G) parts.push("gain on " + b.counts.G);
-      msg = b.n + (b.n === 1 ? " name" : " names") + " on the desk · blocked by " +
-            (parts.length ? parts.join(", ") : "nothing yet — the list is rebuilding") + ".";
-      if (b.unknownRvol) msg += " " + b.unknownRvol + " with no RVOL measured yet.";
-    }
-    // With watched names below, the reason takes ONE line (the rest on hover):
-    // three lines of prose left room for three rows of the desk's main list.
-    if (ordered.length) msg += " Below: names passing 3 or 4 of 5 — watched, not qualified.";
-    const div = el("div", "empty" + (ordered.length ? " one-line" : ""), msg);
-    div.title = msg;
+  if (!all.length) {
+    const div = el("div", "empty", Object.keys(SYMS).length ? "No name on the desk is up on the day." : "No names on the desk yet.");
     const stale = tapeStalledNote();
     if (stale) div.appendChild(el("div", "tiny warn", stale));
     body.appendChild(div);
@@ -1525,82 +1522,56 @@ function fillListCard(card, id, frame) {
     const tr = el("div", "trow list-row" + (state.selected === r.symbol ? " sel" : "") +
       (prevKeys.indexOf(r.symbol) === -1 && state.frame > 0 ? " fresh" : ""));
     tr.dataset.symbol = r.symbol; tr.setAttribute("role", "button"); tr.tabIndex = 0;
-    // Where it trades and where the registrant lives — a Chinese ADR on NASDAQ
-    // or a Canadian cross-list is a different animal from a Delaware microcap,
-    // and the screener should say so on the row, not in a tooltip.
     if (sym.exchange || sym.country) tr.title = [sym.name, sym.exchange, sym.country].filter(Boolean).join(" · ");
+    const op = rowOpener(id, r.symbol);
+    tr.appendChild(op.b);
     const s = el("span", "tsym");
     s.appendChild(el("b", null, r.symbol));
     s.appendChild(flameFor(r.symbol, nowMs));
-    // The catalyst's grade letter (H / D / S) moved to the decision card, with
-    // the headline it grades: on the row an "S" read as a 5 beside the 4/5 chip.
-    if (scores[r.symbol] != null && scores[r.symbol] < 5) {
-      const sp = el("span", "pill partial", scores[r.symbol] + "/5");
-      sp.title = scores[r.symbol] + " of 5 pillars pass — on the list to be watched, not because it qualified";
-      s.appendChild(sp);
-    }
-    if (sym.floatQuality && sym.floatQuality !== "verified")
-      s.appendChild(el("span", "pill unknown", sym.floatQuality === "unknown" ? "?" : "proxy"));
-    if (r.spread != null && r.price && r.spread / r.price > 0.01)
-      s.appendChild(el("span", "pill warn", "sprd"));
     tr.appendChild(s);
-    tr.appendChild(el("span", null, fx(r.price)));
-    tr.appendChild(el("span", dirClass(r.changePct), pct(r.changePct)));
+    // A spread over 1 % of the price tints the price; the figure is in the detail.
+    const wide = r.spread != null && r.price && r.spread / r.price > 0.01;
+    const px = el("span", "px" + (wide ? " warn" : ""), fx(r.price));
+    if (wide) px.title = "spread $" + fx(r.spread, 3) + " — " + (r.spread / r.price * 100).toFixed(1) + "% of the price";
+    tr.appendChild(px);
+    tr.appendChild(el("span", "chg " + dirClass(r.changePct), pct(r.changePct)));
     const rv = el("span", null, fx(rowRvol(r)) + "×");
     rv.title = rowRvolTitle(r);
     tr.appendChild(rv);
-    const fl = el("span", "muted", sym.floatShares ? (sym.floatShares / 1e6).toFixed(1) + "M" : "—");
-    // "Why this row is here" opens from its own button, never from the row
-    // click: a click on a name is a selection, and the drawer it used to open
-    // pushed the other names out of a five-row tile (owner, 2026-09-23).
-    const why = el("button", "row-why" + (state.openRow === id + "|" + r.symbol ? " open" : ""), "?");
-    why.title = "Why this row is here (pillar checks)"; why.tabIndex = -1;
-    why.onclick = e => { e.stopPropagation(); toggleReasons(id, r.symbol); render(); };
-    fl.appendChild(why);
-    tr.appendChild(fl);
+    tr.appendChild(pillarMarks(r._sc.checks));
     tr.onclick = () => { select(r.symbol, id, i); };
     tr.onkeydown = e => { if (e.key === "Enter") { select(r.symbol, id, i); e.preventDefault(); } };
     body.appendChild(tr);
-    if (state.openRow === id + "|" + r.symbol) body.appendChild(reasonsDrawer(r, sym, id));
+    if (op.open) body.appendChild(reasonsDrawer(r, sym, id));
   });
   state.prevRowKeys[id] = ordered.map(r => r.symbol);
   card.appendChild(body);
   if (pending) card.appendChild(el("div", "pending",
-    pending + " new candidate" + (pending > 1 ? "s" : "") + " waiting — unfreeze to apply"));
+    pending + " new name" + (pending > 1 ? "s" : "") + " waiting — unfreeze to apply"));
 }
 
 function reasonsDrawer(r, sym, listId) {
   const d = el("div", "reasons");
-  const head = el("div", "reason");
-  head.appendChild(el("span", "reason-name", "Why this row is here — " + (S.definitionVersions[listId] || listId)));
-  d.appendChild(head);
-  if (listId === "five_pillars_list") {
-    pillarChecks(r, sym).forEach(c => {
-      const row = el("div", "reason");
-      row.appendChild(el("span", c.ok ? "ok" : "no", c.ok ? "PASS" : "FAIL"));
-      row.appendChild(el("span", "reason-name", c.name));
-      row.appendChild(el("span", null, String(c.v)));
-      row.appendChild(el("span", "ev confirmed", "confirmed course"));
-      d.appendChild(row);
-    });
-    const n = el("div", "reason");
-    n.appendChild(el("span", "reason-name", "news / catalyst — displayed, never a gate (Confirmed platform)"));
-    d.appendChild(n);
-    [["gap %", pct(r.gapPct)], ["5m RVOL", fx(r.rvol5m) + "×"], ["5m volume", vol(r.volume5m)],
-     ["volume", vol(r.volume)], ["position in range", r.rangePos != null ? (r.rangePos * 100).toFixed(0) + "%" : "—"],
-     ["spread", "$" + fx(r.spread, 3)]].forEach(([lab, val]) => {
-      const row = el("div", "reason");
-      row.appendChild(el("span", "reason-name", lab));
-      row.appendChild(el("span", null, String(val)));
-      d.appendChild(row);
-    });
-  } else {
+  const T = S.pillarThresholds || {};
+  const SHORT = { P: "price $" + T.priceMin + "–" + T.priceMax, G: "gain ≥ " + T.gainMinPct + "%",
+                  R: "RVOL ≥ " + T.rvolMin + "×", F: "float < " + (T.floatMaxShares / 1e6) + "M", N: "news" };
+  ((r._sc && r._sc.checks) || pillarChecks(r, sym)).forEach(c => {
     const row = el("div", "reason");
-    row.appendChild(el("span", "ok", "RANK"));
-    row.appendChild(el("span", "reason-name", (S.listMeta[listId] || {}).metric + " — " + (S.listMeta[listId] || {}).note));
-    row.appendChild(el("span", "ev approximation", "approximation"));
+    row.appendChild(el("span", c.ok ? "ok" : c.unknown ? "unk" : "no", c.ok ? "PASS" : c.unknown ? "UNKNOWN" : "FAIL"));
+    const nm = el("span", "reason-name", SHORT[c.k] || c.name);
+    nm.title = c.name;
+    row.appendChild(nm);
+    row.appendChild(el("span", null, (typeof c.v === "number" ? fx(c.v) : String(c.v)) + (c.measure ? " · " + c.measure : "")));
     d.appendChild(row);
-  }
+  });
+  const facts = [["gap", pct(r.gapPct)], ["5m RVOL", r.rvol5m != null ? fx(r.rvol5m) + "×" : null],
+                 ["5m vol", r.volume5m ? vol(r.volume5m) : null], ["vol", r.volume ? vol(r.volume) : null],
+                 ["range", r.rangePos != null ? (r.rangePos * 100).toFixed(0) + "%" : null],
+                 ["spread", r.spread != null ? "$" + fx(r.spread, 3) : null],
+                 [null, [sym.exchange, sym.country].filter(Boolean).join(" ") || null]]
+    .filter(([, v]) => v != null && v !== "—").map(([k, v]) => (k ? k + " " : "") + v);
+  if (facts.length) d.appendChild(el("div", "tiny muted", facts.join(" · ")));
+  d.appendChild(el("div", "tiny muted", "confirmed course pillars — shown, never a filter"));
   return d;
 }
 
@@ -1697,19 +1668,23 @@ function formerOf(sym) {
 }
 window.__formerRunner = formerRunner;
 window.__loggedAlerts = scanners => loggedAlerts(scanners);       // tests read what a card lists
+window.__gainerRows = () => FRAMES.length ? gainerRows(FRAMES[Math.min(state.frame, FRAMES.length - 1)], deskNow())
+  .map(r => [r.symbol, r.changePct]) : [];
+/* The name now, on the row in one cell (owner, 2026-10-14: "less text in each
+   row of the scanners and detail with an arrow if needed expandable"): "HIGH"
+   at its session high, else how far under it; price, the high and when it
+   printed in the cell's title and in the row's ▸ detail. */
 function alertLive(sym, nowMs) {
   const n = nameNow(sym);
   if (!n) return null;
-  const d = el("div", "alert-live");
-  d.dataset.now = String(n.last); d.dataset.high = String(n.high); d.dataset.highAt = String(n.highAt);
-  d.appendChild(el("span", null, "now " + fx(n.last)));
   const near = n.off != null && n.off > -0.5;
-  d.appendChild(el("span", near ? "at-high" : n.off < -10 ? "far" : null,
-                   near ? "at the high " + fx(n.high) : n.off.toFixed(1) + "% vs high " + fx(n.high)));
   const ago = Math.max(0, nowMs - n.highAt);
-  d.appendChild(el("span", null, "high " + (ago < 60000 ? "now" : fmtAge(ago) + " ago")));
-  d.title = "now, at the viewed minute — the row above is the alert";
-  return { el: d, fresh: ago <= NEW_HIGH_MS };
+  const said = "now " + fx(n.last) + " · " + (near ? "at the high " + fx(n.high) : n.off.toFixed(1) + "% vs high " + fx(n.high)) +
+               " · high " + (ago < 60000 ? "now" : fmtAge(ago) + " ago");
+  const d = el("span", "alert-live" + (near ? " at-high" : n.off < -10 ? " far" : ""), near ? "HIGH" : n.off.toFixed(1) + "%");
+  d.dataset.now = String(n.last); d.dataset.high = String(n.high); d.dataset.highAt = String(n.highAt);
+  d.title = said + " — at the viewed minute; the rest of the row is the alert";
+  return { el: d, fresh: ago <= NEW_HIGH_MS, said };
 }
 
 function fillAlertCard(card, cfg, idx) {
@@ -1741,9 +1716,13 @@ function fillAlertCard(card, cfg, idx) {
   // name as the gainers list (audit 2026-10-09: "PM %" here, "Chg" there).
   const pctHead = el("span", null, "Chg %");
   pctHead.title = "change from the previous close at the alert, measured " + (pctHeader() === "PM %" ? "in premarket" : "during the session");
+  const nowHead = el("span", null, "Now");
+  nowHead.title = "the name at the viewed minute: HIGH at its session high, else how far under it";
+  cols.appendChild(el("span", null, ""));
   cols.appendChild(el("span", null, "Time"));
   cols.appendChild(pctHead);
   ["Symbol", "Price", "Strategy"].forEach(c => cols.appendChild(el("span", null, c)));
+  cols.appendChild(nowHead);
   card.appendChild(cols);
   if (cfg.id === "hod_momentum") { const hs = haltsStrip(); if (hs) card.appendChild(hs); }
   const body = el("div", "tile-rows timeline");
@@ -1772,40 +1751,31 @@ function fillAlertCard(card, cfg, idx) {
     tr.dataset.sym = a.symbol; tr.dataset.at = String(a._at);
     if (weak) tr.title = "up less than " + gainMin + "% on the day at this alert — pillar 1 fails";
     else if (age > ALERT_AGED_MS) tr.title = "the newest alert here is " + fmtAge(age) + " old";
-    const when = el("span", "tl-time", etTime(a.sourceTime));
-    when.title = fmtAge(deskNow() - a._at) + " ago";
+    else if (live && live.fresh) tr.title = "a new session high in the last two minutes";
+    const op = rowOpener(cfg.id, a.symbol);
+    tr.appendChild(op.b);
+    // The session tints the time (pre-market amber, after hours blue) — it was
+    // a PM/RTH pill on every row before the rows went to one line.
+    const ses = sessionOf(a.sourceTime);
+    const when = el("span", "tl-time ses-" + ses.toLowerCase(), etTime(a.sourceTime));
+    when.dataset.session = ses;
+    when.title = SESSION_HELP[ses] + " · " + fmtAge(deskNow() - a._at) + " ago";
     tr.appendChild(when);
-    tr.appendChild(el("span", dirClass(a.values && a.values.change_pct), pct(a.values && a.values.change_pct)));
+    tr.appendChild(el("span", "chg " + dirClass(a.values && a.values.change_pct), pct(a.values && a.values.change_pct)));
     const mid = el("span", "tsym");
     mid.appendChild(el("b", null, a.symbol));
     // The alert carries the flame observed AT the alert, which is the honest
     // record even when the news feed caught up minutes later.
     mid.appendChild(flameIcon(a.news && a.news.flame ? a.news.flame : "none",
       a.news ? "news " + a.news.age_minutes + " min old at alert" : "no headline at alert"));
-    const ses = sessionOf(a.sourceTime);
-    const sesEl = el("span", "pill ses " + ses.toLowerCase(), ses);
-    sesEl.title = SESSION_HELP[ses];
-    mid.appendChild(sesEl);
+    // The repeat count is his signal, so it stays on the row: hot at two or
+    // more in ten minutes ("a stock hitting scanners more and more times",
+    // yg5E_mqGFGg @00:17:02).
+    const recent = g.all.filter(z => nowMs - z._at <= ALERT_HEAT_MS).length;
     if (g.all.length > 1) {
-      // Hot when it keeps firing: two or more in the last ten minutes
-      // ("a stock hitting scanners more and more times", yg5E_mqGFGg @00:17:02).
-      const recent = g.all.filter(z => nowMs - z._at <= ALERT_HEAT_MS).length;
       const xn = el("span", "pill xn" + (recent >= 2 ? " hot" : ""), "×" + g.all.length);
-      xn.title = (recent >= 2 ? recent + " in the last 10 minutes — " : "") + g.all.length + " alerts — " +
-        g.all.map(z => etTime(z.sourceTime) + " " + tileLabel(z, cfg.scanners) + " " + fx(z.values && z.values.last)).join(" · ");
+      xn.title = (recent >= 2 ? recent + " in the last 10 minutes — " : "") + g.all.length + " alerts — ▸ lists them";
       mid.appendChild(xn);
-    }
-    if (live && live.fresh) {
-      const nh = el("span", "pill nh", "new high");
-      nh.title = "a new session high in the last two minutes";
-      mid.appendChild(nh);
-    }
-    const fm = formerOf(a.symbol);
-    if (fm) {
-      const b = el("span", "pill fm", "FM");
-      b.title = "former runner: up " + Math.round(fm.pct) + "% on " + fm.d + " (high vs the prior close) — " +
-        "\"went up over 100% in one day … in the recent past\" (w97KlUrVDk0 @00:58:29); a label, not a filter";
-      mid.appendChild(b);
     }
     tr.appendChild(mid);
     tr.appendChild(el("span", null, fx(a.values && a.values.last)));
@@ -1815,22 +1785,56 @@ function fillAlertCard(card, cfg, idx) {
       : "filed under " + a.scannerId.replace(/_/g, " ") + ", which has no tile; also fired: " +
         ((a.group && a.group.also_triggered) || []).join(", ").replace(/_/g, " ");
     tr.appendChild(br);
-    if (live) tr.appendChild(live.el);
+    tr.appendChild(live ? live.el : el("span", "alert-live", "—"));
     tr.onclick = () => select(a.symbol, cfg.id);
-    return { tr, age };
+    const rows = [tr];
+    if (op.open) rows.push(alertRowDetail(g, cfg, live));
+    return { rows, age };
   };
   groups.forEach(g => {
     const r = rowOf(g);
-    if (r.age > ALERT_FOLD_MS) folded.push(r.tr); else body.appendChild(r.tr);
+    if (r.age > ALERT_FOLD_MS) folded.push(...r.rows); else r.rows.forEach(n => body.appendChild(n));
   });
   if (folded.length) {
     const open = !!(state.alertFoldOpen && state.alertFoldOpen[cfg.id]);
-    const f = el("div", "alert-fold", (open ? "▾ " : "▸ ") + folded.length + " older than an hour" + (open ? "" : " — show"));
+    const n = folded.filter(x => x.classList.contains("alert-row")).length;
+    const f = el("div", "alert-fold", (open ? "▾ " : "▸ ") + n + " older than an hour" + (open ? "" : " — show"));
     f.onclick = () => { state.alertFoldOpen = state.alertFoldOpen || {}; state.alertFoldOpen[cfg.id] = !open; render(); };
     body.appendChild(f);
     if (open) folded.forEach(tr => body.appendChild(tr));
   }
   card.appendChild(body);
+}
+
+/* An alert row's ▸ detail: the name now in words, every alert of the name in
+   this card (time, label, price), the session, a former runner, and the label
+   in full — what used to sit on the row, a line per alert. */
+function alertRowDetail(g, cfg, live) {
+  const a = g.a;
+  const d = el("div", "reasons alert-detail");
+  const line = (lab, val, cls) => {
+    const r = el("div", "reason");
+    r.appendChild(el("span", "reason-name", lab));
+    const v = el("span", cls || null);
+    if (val instanceof Node) v.appendChild(val); else v.textContent = val;
+    r.appendChild(v);
+    d.appendChild(r);
+  };
+  if (live) line("now", live.said, live.el.classList.contains("at-high") ? "ok" : live.el.classList.contains("far") ? "no" : null);
+  const ses = sessionOf(a.sourceTime);
+  line("session", SESSION_HELP[ses]);
+  line(g.all.length > 1 ? g.all.length + " alerts" : "alert",
+       g.all.map(z => etTime(z.sourceTime) + " " + tileLabel(z, cfg.scanners) + " " + fx(z.values && z.values.last)).join(" · "));
+  const lab = cfg.scanners.indexOf(a.scannerId) >= 0 ? (a.branch || a.scannerId).replace(/_/g, " ")
+            : "filed under " + a.scannerId.replace(/_/g, " ");
+  line("label", lab + " — a label, not the filter");
+  const why = (a.reasons || []).filter(r => r.passed).map(r => (r.filter || r.field || "").replace(/_/g, " ") +
+    (r.value != null ? " " + (typeof r.value === "number" ? fx(r.value) : r.value) : "")).filter(Boolean);
+  if (why.length) line("fired on", why.join(" · "));
+  const fm = formerOf(a.symbol);
+  if (fm) line("former runner", "up " + Math.round(fm.pct) + "% on " + fm.d + " (high vs the prior close) — " +
+                                "\"went up over 100% in one day … in the recent past\" (w97KlUrVDk0 @00:58:29); a label, not a filter");
+  return d;
 }
 
 /* Halts — his fourth window (w97KlUrVDk0 @00:48:44–00:49:03) — as one line in
@@ -1929,26 +1933,9 @@ function alertDetail(a) {
   return d;
 }
 
-/* ── why a list is empty ─────────────────────────────────────────────
-   An empty scanner is a real answer, but it is not a useful one on its own.
-   These count what the desk knows and name the pillar that is closing the
-   list, and say when the tape itself has stopped — the event scanners read
-   bars, so a frozen tape silences them however well the names score. */
-function deskBlockers(frame) {
-  const syms = Object.keys(SYMS);
-  if (!syms.length || !frame) return null;
-  const counts = { P: 0, G: 0, R: 0, F: 0 }, keys = ["P", "G", "R", "F"];
-  let bestRvol = null, unknownRvol = 0;
-  syms.forEach(sym => {
-    const { row, meta } = boardRow(frame, sym);
-    const checks = pillarChecks(row, meta);
-    checks.forEach((c, i) => { if (!c.ok && keys[i]) counts[keys[i]]++; });
-    const rv = rowRvol(row);
-    if (rv == null) unknownRvol++;
-    else if (bestRvol == null || rv > bestRvol) bestRvol = rv;
-  });
-  return { n: syms.length, counts, bestRvol, unknownRvol };
-}
+/* ── a frozen tape ─────────────────────────────────────────────────────
+   The event scanners read bars, so a frozen tape silences them however well
+   the names score: an empty card says so. */
 function tapeStalledNote() {
   if (!S.streaming) return null;
   const f = FRAMES[FRAMES.length - 1];
@@ -1961,9 +1948,8 @@ function tapeStalledNote() {
 
 /* ── Five Pillars board ─────────────────────────────────────────────── */
 /* Every symbol on the desk against the five pillars, sorted by how many it
-   passes and then by gain. The list card above shows only names that pass
-   the hard gates; this board shows why the others do not, so a name a few
-   RVOL points short is a candidate to watch, not an absence. */
+   passes and then by gain: the pillars in full, where the Top gainers card
+   marks them on its rows (2026-10-14: marks, never a filter). */
 function boardRow(frame, sym) {
   const meta = SYMS[sym] || {};
   // The session publishes every symbol's own numbers. Before that the board read
@@ -4132,8 +4118,10 @@ function membership(frame) {
    squeezing up 10 in 10 minutes. The others I don't use audio alerts for"
    (yg5E_mqGFGg @00:19:36; knowledge-base/strategies/SCANNERS.md §B1): a
    low-float High of Day alert and the 10-in-10 squeeze sound; every other
-   alert flashes its card in silence. A name entering the pillars list still
-   sounds — the desk's own first signal, not one of his widget's strategies. */
+   alert flashes its card in silence. A gainer newly passing price, gain and
+   RVOL still sounds (the server's five_pillars_list, which the Top gainers card
+   no longer filters on, 2026-10-14) — the desk's own first signal, not one of
+   his widget's strategies. */
 function audible(a) {
   if (!a) return false;
   const fired = [a.scannerId].concat((a.group && a.group.also_triggered) || []);
@@ -4208,7 +4196,7 @@ function paintSoundButton() {
   b.textContent = (!state.sound ? "🔇" : AUDIO_BLOCKED ? "🔕" : "🔔") + " Alerts";
   b.title = !state.sound ? "Alert sounds are off (A)"
           : AUDIO_BLOCKED ? "The browser is holding sound until you click the page once (A)"
-          : "Sounds: a name entering the pillars list, and the two alerts he hears — a low-float High of Day " +
+          : "Sounds: a gainer passing price, gain and RVOL, and the two alerts he hears — a low-float High of Day " +
             "and the 10-in-10 squeeze (yg5E_mqGFGg @00:19:36). Every other alert flashes its card, silently (A)";
   b.classList.toggle("blocked", !!state.sound && AUDIO_BLOCKED);
 }
@@ -4987,6 +4975,7 @@ function streamFollow() {
   }).on("health", setFeedBadge)
     .on("screener", renderScreener)
     .on("symbol-added", () => refreshSession())
+    .on("symbol-removed", () => refreshSession())   // a dead name gave its seat to a new runner (2026-10-14)
     .on("session", applySessionTick)           // the server just rebuilt the scanners
     .on("tape", applyTape)                     // the focus name's Time & Sales
     .on("depth", applyDepth)                   // the focus name's Level 2 book
@@ -5395,7 +5384,9 @@ function init() {
   document.addEventListener("keydown", e => {
     if (e.target.matches("input,select,textarea")) return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
-    const rows = (FRAMES[state.frame].lists[state.focusTile] || []).map(rowObj);
+    // the gainers card's own order (every green name, 2026-10-14), not the server's pillar list
+    const rows = state.focusTile === LIST_IDS[0] ? (state.prevRowKeys[LIST_IDS[0]] || []).map(symbol => ({ symbol }))
+               : (FRAMES[state.frame].lists[state.focusTile] || []).map(rowObj);
     const k = e.key.toLowerCase();
     if (k === "j" || e.key === "ArrowDown") { state.focusRow = Math.min(rows.length - 1, state.focusRow + 1); if (rows[state.focusRow] && !state.locked) select(rows[state.focusRow].symbol, state.focusTile, state.focusRow); e.preventDefault(); }
     else if (k === "k" || e.key === "ArrowUp") { state.focusRow = Math.max(0, state.focusRow - 1); if (rows[state.focusRow] && !state.locked) select(rows[state.focusRow].symbol, state.focusTile, state.focusRow); e.preventDefault(); }

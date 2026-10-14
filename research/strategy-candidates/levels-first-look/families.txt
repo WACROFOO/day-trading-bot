@@ -1,0 +1,120 @@
+STRATEGY CANDIDATES · run 2026-10-14T1254Z-smoke · git f3e6063 · research/strategy-candidates/PREREGISTRATION.md, amendment 2026-10-14
+SOURCE   daily · the exported desk days of research/daily/, 04:00-12:00 bars, prev close as exported
+! SMOKE — plumbing only, NOT evidence: nothing is opened and nothing enters the registry
+COVERAGE train 136 / 136 symbol-days with bars · valid 59 / 59 symbol-days with bars · the holdout is read only where a family opens it below
+COSTS    live: $40 risk, ≤ $2,000 a position, IBKR fixed both orders, half the proxy spread + 1c a marketable side; shorts before borrow (sweep in BORROW) · random baseline 20 entries a trade, same name-day
+TABLE    signals = trades before the one-position rule (train/valid) · n, net, gross, cost, vs rnd = the one-position portfolio, R a trade
+
+━━ L4 · trend-line break: a close above the desk's down-line · long · 8 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ bars5·fixed2                95/33 │    43  -0.372  -0.026  0.345  -0.003 │    20  -0.679  -0.367
+ bars5·trail1                95/33 │    62  -0.162  +0.258  0.419  +0.174 │    26  -0.335  -0.011
+ bars5·res                   95/33 │    65  -0.353  -0.047  0.306  -0.032 │    28  -0.354  -0.102
+ bars5·hod                   95/33 │    44  -0.653  -0.230  0.423  -0.170 │    20  -0.858  -0.541
+ level·fixed2                81/32 │    56  -0.399  +0.095  0.493  +0.142 │    26  -0.706  -0.192
+ level·trail1                81/32 │    65  -0.163  +0.429  0.592  +0.174 │    27  -0.326  +0.221
+ level·res                   81/32 │    69  -0.505  -0.048  0.457  -0.010 │    29  -0.596  -0.162
+ level·hod                   81/32 │    52  -0.697  -0.143  0.554  -0.084 │    24  -1.065  -0.525
+ → ✗ too few train trades (best 69 < 100): fails for lack of trades
+ WHY (train, level·res)  gross -0.048 − commission 0.132 − spread+1c 0.325 = net -0.505
+     win 29 % · avg win +0.607 · avg loss -0.959 · MFE median 0.27 R · reached +1 R 17 % (gave it all back 25 %)
+     without the best 5 % -0.604 · beyond −1 R: 0 · worst -2.20 · exits: target 61 % · stop 38 % · flat 1 %
+     random entries, same names -0.495 → trade − random -0.010 (95 % lower bound -0.187)
+ READING · the signal loses before costs (-0.048 R gross): no cost or exit change fixes it
+           random entries on the same names do as well (-0.010 R against them): the trigger adds nothing, the names carry the result (-0.495 R at random)
+ YEARS   train 2026 -0.505 (69) │ validation 2026 -0.596 (29)
+ TARGETS level exits on train — how far, how often missing, how often reached:
+   bars5·res              target at the level: median 0.22 R away · none found → 2 R: 3 % · target reached: 72 %
+   bars5·hod              target at the level: median 4.62 R away · none found → 2 R: 2 % · target reached: 18 %
+   level·res              target at the level: median 0.37 R away · none found → 2 R: 4 % · target reached: 61 %
+   level·hod              target at the level: median 5.20 R away · none found → 2 R: 2 % · target reached: 12 %
+ WHERE   leads — slices positive on train (≥ 100) AND validation (≥ 30), hypotheses for the next round:
+   none
+
+━━ L5 · support hold: the fan's nearest support touched and held · long · 8 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ bars5·fixed2               107/38 │    43  -0.281  +0.085  0.366  +0.198 │    20  -0.306  -0.031
+ bars5·trail1               107/38 │    55  -0.327  +0.065  0.392  +0.104 │    23  -0.629  -0.292
+ bars5·res                  107/38 │    57  -0.381  -0.085  0.296  +0.012 │    24  -0.093  +0.166
+ bars5·hod                  107/38 │    35  -0.291  +0.087  0.378  +0.162 │    22  -0.416  -0.088
+ level·fixed2               109/38 │    47  -0.282  +0.130  0.412  +0.241 │    18  -0.225  +0.104
+ level·trail1               109/38 │    64  -0.288  +0.227  0.516  +0.165 │    23  -0.671  -0.311
+ level·res                  109/38 │    66  -0.502  -0.114  0.388  -0.055 │    25  -0.286  +0.003
+ level·hod                  109/38 │    35  -0.438  +0.055  0.493  +0.047 │    20  -0.452  -0.162
+ → ✗ too few train trades (best 66 < 100): fails for lack of trades
+ WHY (train, level·res)  gross -0.114 − commission 0.098 − spread+1c 0.290 = net -0.502
+     win 33 % · avg win +0.720 · avg loss -1.113 · MFE median 0.25 R · reached +1 R 14 % (gave it all back 11 %)
+     without the best 5 % -0.625 · beyond −1 R: 0 · worst -2.41 · exits: target 50 % · stop 47 % · end 2 % · flat 2 %
+     random entries, same names -0.446 → trade − random -0.055 (95 % lower bound -0.275)
+ READING · the signal loses before costs (-0.114 R gross): no cost or exit change fixes it
+           random entries on the same names do as well (-0.055 R against them): the trigger adds nothing, the names carry the result (-0.446 R at random)
+ YEARS   train 2026 -0.502 (66) │ validation 2026 -0.286 (25)
+ TARGETS level exits on train — how far, how often missing, how often reached:
+   bars5·res              target at the level: median 0.31 R away · none found → 2 R: 11 % · target reached: 58 %
+   bars5·hod              target at the level: median 4.40 R away · none found → 2 R: 3 % · target reached: 20 %
+   level·res              target at the level: median 0.50 R away · none found → 2 R: 12 % · target reached: 50 %
+   level·hod              target at the level: median 6.70 R away · none found → 2 R: 3 % · target reached: 14 %
+ WHERE   leads — slices positive on train (≥ 100) AND validation (≥ 30), hypotheses for the next round:
+   none
+
+━━ L6 · resistance break: a close above the fan's nearest resistance · long · 8 configuration(s) ━━
+ config                    signals │     n     net   gross   cost  vs rnd │     n     net   gross
+                                   │ train                               │ validation
+ bars5·fixed2               113/41 │    35  -0.178  +0.116  0.294  -0.016 │    16  -0.455  -0.223
+ bars5·trail1               113/41 │    43  -0.213  +0.133  0.347  +0.041 │    19  -0.397  -0.134
+ bars5·res                  113/41 │    53  -0.296  -0.042  0.254  +0.018 │    25  -0.163  +0.073
+ bars5·hod                  113/41 │    38  -0.260  +0.047  0.307  -0.107 │    16  -0.839  -0.584
+ level·fixed2               112/40 │    45  -0.280  +0.124  0.403  +0.032 │    18  -0.375  -0.000
+ level·trail1               112/40 │    44  +0.243  +0.723  0.480  +0.486 │    21  -0.495  -0.064
+ level·res                  112/40 │    52  -0.467  -0.095  0.372  -0.048 │    24  -0.146  +0.198
+ level·hod                  112/40 │    43  +0.132  +0.560  0.428  +0.226 │    18  -0.914  -0.569
+ → ✗ too few train trades (best 53 < 100): fails for lack of trades
+ WHY (train, bars5·res)  gross -0.042 − commission 0.079 − spread+1c 0.175 = net -0.296
+     win 47 % · avg win +0.429 · avg loss -0.944 · MFE median 0.24 R · reached +1 R 8 % (gave it all back 25 %)
+     without the best 5 % -0.383 · beyond −1 R: 1 · worst -2.35 · exits: target 64 % · stop 34 % · end 2 %
+     random entries, same names -0.315 → trade − random +0.018 (95 % lower bound -0.304)
+ READING · the signal loses before costs (-0.042 R gross): no cost or exit change fixes it
+ YEARS   train 2026 -0.296 (53) │ validation 2026 -0.163 (25)
+ TARGETS level exits on train — how far, how often missing, how often reached:
+   bars5·res              target at the level: median 0.39 R away · none found → 2 R: 11 % · target reached: 64 %
+   bars5·hod              target at the level: median 4.11 R away · none found → 2 R: 3 % · target reached: 24 %
+   level·res              target at the level: median 0.51 R away · none found → 2 R: 15 % · target reached: 52 %
+   level·hod              target at the level: median 4.59 R away · none found → 2 R: 5 % · target reached: 26 %
+ WHERE   leads — slices positive on train (≥ 100) AND validation (≥ 30), hypotheses for the next round:
+   none
+
+STATUS
+  L4  ✗ too few train trades (best 69 < 100): fails for lack of trades · holdout shut
+  L5  ✗ too few train trades (best 66 < 100): fails for lack of trades · holdout shut
+  L6  ✗ too few train trades (best 53 < 100): fails for lack of trades · holdout shut
+
+REGISTRY (one line a configuration; the committed registry.jsonl is rebuilt from these)
+REG L4 e05fd998feb4 bars5·fixed2 tr 43 -0.372 -0.026 va 20 -0.679 -0.367
+REG L4 798ddb24c074 bars5·trail1 tr 62 -0.162 +0.258 va 26 -0.335 -0.011
+REG L4 2113a0cec565 bars5·res tr 65 -0.353 -0.047 va 28 -0.354 -0.102
+REG L4 bc30f3a2aa42 bars5·hod tr 44 -0.653 -0.230 va 20 -0.858 -0.541
+REG L4 ce2a4267bbc2 level·fixed2 tr 56 -0.399 +0.095 va 26 -0.706 -0.192
+REG L4 337c7cec32fc level·trail1 tr 65 -0.163 +0.429 va 27 -0.326 +0.221
+REG L4 87f4c84581bb level·res tr 69 -0.505 -0.048 va 29 -0.596 -0.162
+REG L4 bacf61f3116c level·hod tr 52 -0.697 -0.143 va 24 -1.065 -0.525
+REG L5 7a152fcdfc35 bars5·fixed2 tr 43 -0.281 +0.085 va 20 -0.306 -0.031
+REG L5 908c556cd4b5 bars5·trail1 tr 55 -0.327 +0.065 va 23 -0.629 -0.292
+REG L5 3a483e7ea585 bars5·res tr 57 -0.381 -0.085 va 24 -0.093 +0.166
+REG L5 0b8be99584c7 bars5·hod tr 35 -0.291 +0.087 va 22 -0.416 -0.088
+REG L5 c6c781d82adb level·fixed2 tr 47 -0.282 +0.130 va 18 -0.225 +0.104
+REG L5 f68337f525b1 level·trail1 tr 64 -0.288 +0.227 va 23 -0.671 -0.311
+REG L5 ec1d1e3d8397 level·res tr 66 -0.502 -0.114 va 25 -0.286 +0.003
+REG L5 0193b6b7397d level·hod tr 35 -0.438 +0.055 va 20 -0.452 -0.162
+REG L6 9051ed889fc6 bars5·fixed2 tr 35 -0.178 +0.116 va 16 -0.455 -0.223
+REG L6 e85e29fd891c bars5·trail1 tr 43 -0.213 +0.133 va 19 -0.397 -0.134
+REG L6 0c679724f9a8 bars5·res tr 53 -0.296 -0.042 va 25 -0.163 +0.073
+REG L6 031fa7ae041d bars5·hod tr 38 -0.260 +0.047 va 16 -0.839 -0.584
+REG L6 f301cea8e741 level·fixed2 tr 45 -0.280 +0.124 va 18 -0.375 -0.000
+REG L6 b6e16a7e828f level·trail1 tr 44 +0.243 +0.723 va 21 -0.495 -0.064
+REG L6 ca04189675b9 level·res tr 52 -0.467 -0.095 va 24 -0.146 +0.198
+REG L6 17c60edfee85 level·hod tr 43 +0.132 +0.560 va 18 -0.914 -0.569
+
+done in 3 s · files: research/strategy-candidates/results/2026-10-14T1254Z-smoke
+Paper only. Not testable here: Level 2, borrow availability and fees, locates, halts as such, the previous day's SSR, ten-second structure.

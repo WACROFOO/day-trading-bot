@@ -1239,6 +1239,24 @@ only, and every scanner event — with High of Day's new highs that did not
 alert and the condition that failed — stored in the ledger (`scanner_alerts`)
 and exported as `alerts.csv`.
 
+**Seat rotation (2026-10-14) — the owner's decision; no gate, window or sizing
+moves; which names the desk holds changes.** Proposed the same day: the desk
+never dropped a name, so once its seats were full a later runner could not get
+in (2026-10-12 04:17: of sixteen gappers its scanner found, one got a seat). The
+owner's answer, verbatim: "go ahead with the seat rotation too". The rule
+(`src/momentum_platform/dashboard/seats.py`): when the scanner finds new names
+and the desk is full, a name the cascade has answered REJECT on every rebuild
+for `seatDeadMinutes` (15, `config/desk-profile.json`) gives its seat to the
+next new name, the longest dead first. Never a name the bot may hold an order in
+(the ledger's alive orders, as `positions_alive` counts them), a manual
+position, a live plan or a forming pullback, or the name on the tape and the
+book; a ledger that cannot answer gives up no seat. A name that gave up its seat
+does not take one back by rotation the same day. Fifteen minutes is this desk's
+Approximation, not a corpus number. A REJECT name arms no plan (the cascade
+withdraws it), so no stored decision changes its answer: R11 reproduces every
+one and the cohort does not reset. The profile fingerprint moves;
+`DESK_SEAT_DEAD_MINUTES=0` in `.env` turns rotation off without a commit.
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**
@@ -1265,6 +1283,7 @@ the cause is written into `docs/paper-exercise-brief.md` §⑦ or fixed.
 | the report layout | n (§3) |
 | **gate 3 (catalyst): kill → flag** — Amendment A2, owner, 2026-09-17, before the first order; rules hash moved; phase-A decisions keep theirs | every other cascade gate and every threshold |
 | **the desk's net** (`maxSymbols`, how many names the cascade sees at once — not a gate, not a threshold): 8 → 12, owner, 2026-10-14 (§5); profile fingerprint moved | |
+| **seat rotation** (`seatDeadMinutes`: a name rejected on every rebuild for 15 min gives its seat to a new runner when the desk is full — not a gate, not a threshold), owner, 2026-10-14 (§5); profile fingerprint moved | |
 
 Tuning the cascade or the detector mid-exercise on the ledger's own fills
 is specifically forbidden: paper fills are optimistic, and tuning on them

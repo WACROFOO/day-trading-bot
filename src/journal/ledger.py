@@ -1326,6 +1326,16 @@ def positions_alive(conn: sqlite3.Connection) -> int:
                            AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive', 'Closed', 'NotFilled')""").fetchone()[0]
 
 
+def alive_symbols(conn: sqlite3.Connection) -> list[str]:
+    """The names `positions_alive` counts, by name: an order that may still be or become a
+    position. The desk never gives such a name's seat away (seat rotation, 2026-10-14)."""
+    return [r[0] for r in conn.execute("""SELECT DISTINCT symbol FROM orders
+                                          WHERE (exit_ts IS NULL OR status IN ('ExitPending', 'ExitFailed'))
+                                          AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive', 'Closed',
+                                                             'NotFilled')
+                                          ORDER BY symbol""").fetchall()]
+
+
 DEAD_ENTRY_STATUSES = ("Inactive", "Cancelled", "ApiCancelled", "Rejected")
 
 

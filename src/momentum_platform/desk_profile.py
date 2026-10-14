@@ -28,7 +28,8 @@ PROFILE_PATH = ROOT / "config" / "desk-profile.json"
 # committed file; the file is what actually ships between two traders.
 DEFAULTS: Dict[str, Dict[str, Any]] = {
     "desk": {"priceMin": 1.0, "priceMax": 30.0, "minGainPct": 10.0,
-             "maxSymbols": 12, "scanTop": 30},              # 8 until 2026-10-14 (preregistration §5)
+             "maxSymbols": 12, "scanTop": 30,               # 8 until 2026-10-14 (preregistration §5)
+             "seatDeadMinutes": 15},                        # seat rotation, 2026-10-14 (preregistration §5); 0 = off
     "cadence": {"rebuildSeconds": 3, "rescanSeconds": 120, "historyEverySeconds": 20,
                 "volumeProfileDays": 10, "barStallSeconds": 300},
     "liquidity": {"minVolume5m": 25000, "minPillars": 3},
@@ -41,6 +42,7 @@ ENV_OVERRIDES = {
     ("desk", "priceMax"): "DESK_PRICE_MAX",
     ("desk", "minGainPct"): "DESK_MIN_GAIN_PCT",
     ("desk", "maxSymbols"): "DESK_MAX_SYMBOLS",
+    ("desk", "seatDeadMinutes"): "DESK_SEAT_DEAD_MINUTES",
     ("cadence", "rescanSeconds"): "DESK_RESCAN_SECONDS",
     ("cadence", "volumeProfileDays"): "DESK_VOLUME_PROFILE_DAYS",
     ("cadence", "barStallSeconds"): "DESK_BAR_STALL_SECONDS",

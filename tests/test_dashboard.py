@@ -314,10 +314,14 @@ def test_ui_tiles_report_state(page):
 
 
 def test_ui_alert_rows_show_session(page):
+    """The session tints the alert's time since the rows went to one line
+    (2026-10-14); its name is in the time's title and in the row's ▸ detail."""
     _seek(page, 150)
-    tags = page.eval_on_selector_all("[data-card=scan-hod] .pill.ses",
-                                     "els => els.map(e => e.textContent)")
+    tags = page.eval_on_selector_all("[data-card=scan-hod] .alert-row .tl-time",
+                                     "els => els.map(e => e.dataset.session)")
     assert tags and set(tags) <= {"PM", "RTH", "AH"}
+    titles = page.eval_on_selector_all("[data-card=scan-hod] .alert-row .tl-time", "els => els.map(e => e.title)")
+    assert all(t.split(" — ")[0] in ("PM", "RTH", "AH") and "ago" in t for t in titles), titles
 
 
 def test_ui_row_click_links_everything(page):
@@ -387,8 +391,8 @@ def test_ui_alert_grids_show_time_then_the_move(page):
     and the strategy label. Age moved to the time's tooltip."""
     _seek(page, 150)
     heads = [h.upper() for h in page.locator("[data-card=scan-running] .tile-cols.alert-cols span").all_inner_texts()]
-    assert heads[0] == "TIME" and heads[1] == "CHG %"
-    assert heads[2:] == ["SYMBOL", "PRICE", "STRATEGY"]
+    assert heads[0] == "" and heads[1] == "TIME" and heads[2] == "CHG %"          # the ▸ column first (2026-10-14)
+    assert heads[3:] == ["SYMBOL", "PRICE", "STRATEGY", "NOW"]
     row = page.locator("[data-card=scan-running] .alert-row").first
     assert "ago" in row.locator(".tl-time").get_attribute("title")
     assert row.locator("span").nth(1).inner_text().endswith("%")
@@ -696,17 +700,21 @@ def test_ui_reasons_drawer_shows_pillar_arithmetic(page):
     _seek(page, 125)
     page.keyboard.press("Escape")
     page.wait_for_timeout(150)
-    # a row click selects only (owner, 2026-09-23); the drawer has its own button
+    # a row click selects only (owner, 2026-09-23); the detail opens from the row's ▸ (2026-10-14)
     page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
     assert page.locator(".reasons").count() == 0
-    page.locator("[data-card=scan-pillars] .trow .row-why").first.click()
+    page.locator("[data-card=scan-pillars] .trow .row-open").first.click()
     page.wait_for_timeout(250)
     drawer = page.locator(".reasons")
     assert drawer.count() == 1
     text = drawer.inner_text()
-    for token in ("price $2", "gain", "RVOL", "float", "confirmed course"):
+    for token in ("price $2", "gain", "RVOL", "float", "news", "confirmed course", "never a filter"):
         assert token in text
+    assert page.locator("[data-card=scan-pillars] .trow .row-open").first.inner_text() == "▾"
+    page.locator("[data-card=scan-pillars] .trow .row-open").first.click()
+    page.wait_for_timeout(250)
+    assert page.locator(".reasons").count() == 0
 
 
 def test_ui_a_tray_click_never_takes_the_decision_cards_place(page):
@@ -1259,18 +1267,27 @@ def test_ui_non_ascii_survives_the_artifact_build(page):
     assert "â" not in note, "mojibake: the page is being decoded as windows-1252"
 
 
-def test_ui_an_empty_list_names_the_pillar_that_is_closing_it(page):
-    """"An empty list is a real answer" is true and useless on its own. The
-    card counts the desk and names the blocking pillar, so an operator can see
-    that RVOL, not the market, is what emptied it."""
+def test_ui_top_gainers_lists_green_names_whatever_their_pillars(page):
+    """Owner, 2026-10-14: "why filter the top gainer on 5 pillars, it just should
+    be known but not killing filter from that card". On this fixture's opening
+    minutes no name has 5x RVOL, and the card used to read "blocked by RVOL on
+    10" over an empty list. Every green name is listed now, the pillars marked
+    on its row — here with the RVOL mark red on every one."""
     # Earlier tests in this module drag cards and persist the arrangement; the
     # desk this one needs is the default one.
     page.evaluate("() => localStorage.clear()")
     page.reload()
-    page.wait_for_selector("[data-card=scan-pillars] .empty", timeout=15000)
-    text = page.text_content("[data-card=scan-pillars] .empty")
-    assert "names on the desk" in text
-    assert "blocked by RVOL on" in text and "of 5× needed" in text
+    page.wait_for_selector("[data-card=scan-pillars] .trow", timeout=15000)
+    _seek(page, 0)
+    rows = page.locator("[data-card=scan-pillars] .trow")
+    assert rows.count() >= 3 and page.locator("[data-card=scan-pillars] .empty").count() == 0
+    for row in rows.all():
+        marks = row.locator(".pm")
+        assert [m.inner_text() for m in marks.all()] == ["P", "G", "R", "F", "N"]
+        r = row.locator(".pm").nth(2)
+        assert "no" in (r.get_attribute("class") or ""), "RVOL fails on every name before the open — and each is listed"
+    assert page.locator("[data-card=scan-pillars] .pill.partial, [data-card=scan-pillars] .row-why, "
+                        "[data-card=scan-pillars] .pill.unknown").count() == 0, "no ? and no 4/5 on the rows"
 
 
 def test_ui_the_rvol_chip_says_which_measure_it_used(page):
@@ -1520,25 +1537,32 @@ def test_no_simulated_book_is_left_to_read_as_a_real_one():
 def test_top_gainers_are_ordered_by_change_on_the_day():
     """GRML +141% · VEEE +109% · CPOP +25% · LOBO +128% · GLND +127% was the
     tile at 09:58 on 2026-09-21: server rows first, desk additions after,
-    each sorted on its own. One order for the whole tile."""
+    each sorted on its own. One order for the whole tile — and since
+    2026-10-14 one source: every green desk name (the page test checks the
+    rendered order)."""
     app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "app.js").read_text()
-    body = app.split("const all = rows.concat(extra);")[1][:600]
-    assert "all.sort(" in body and "changePct" in body
+    body = app.split("function gainerRows(")[1].split("\nfunction ")[0]
+    assert ".sort(" in body and "b.changePct - a.changePct" in body
+    assert "rows.concat(extra)" not in app
 
 
-def test_a_list_row_click_selects_and_the_why_drawer_has_its_own_button():
+def test_a_list_row_click_selects_and_the_detail_has_its_own_arrow():
     """Owner, 2026-09-23: clicking a name in Top gainers opened the pillar
     drawer under it and hid the other names in a five-row tile. The click now
-    selects only; the drawer opens from a ? button on the row."""
+    selects only. The drawer opened from a "?" on every row, which read as an
+    unknown on every row (owner, 2026-10-14: "why ? in each row of that card");
+    a ▸ at the row's start opens it now, on every scanner card alike."""
     app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "app.js").read_text()
     assert 'tr.onclick = () => { toggleReasons(id, r.symbol); select(r.symbol, id, i); };' not in app
     assert 'tr.onclick = () => { select(r.symbol, id, i); };' in app
-    assert 'el("button", "row-why"' in app and 'toggleReasons(id, r.symbol); render();' in app
+    assert 'el("button", "row-why"' not in app
+    assert 'el("button", "row-open"' in app and 'toggleReasons(cardId, symbol); render();' in app
+    assert app.count("rowOpener(") >= 3, "the gainers rows and both alert cards"
     css = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "styles.css").read_text()
-    assert ".row-why{" in css
+    assert ".row-open{" in css and ".row-why{" not in css
 
 
 # ---------------------------------------------- Time & Sales (2026-10-08)
@@ -1755,16 +1779,17 @@ def _pct(text):
     return float(text.replace("%", "").replace("+", "").replace("−", "-").strip())
 
 
-def test_ui_the_gainers_list_holds_green_names_with_four_pillars(page):
-    """BIAF −8.7 % 3/5 sat on a list called gainers: the course passes 3/5,
-    and a red name is not a gainer (owner, 2026-10-09)."""
-    for frame in (125, 150, 10_000):
+def test_ui_the_gainers_list_holds_every_green_name_and_no_red_one(page):
+    """A red name is not a gainer (owner, 2026-10-09: BIAF −8.7 %); every green
+    name is one, whatever its pillars (owner, 2026-10-14), by change on the day."""
+    for frame in (0, 125, 150, 10_000):
         _seek(page, frame)
-        for row in page.locator("[data-card=scan-pillars] .trow").all():
-            assert _pct(row.locator("span").nth(2).inner_text()) > 0
-            partial = row.locator(".pill.partial")
-            if partial.count():
-                assert partial.inner_text() == "4/5"
+        shown = page.eval_on_selector_all("[data-card=scan-pillars] .trow", "els => els.map(e => e.dataset.symbol)")
+        chg = [_pct(t) for t in page.eval_on_selector_all("[data-card=scan-pillars] .trow .chg",
+                                                          "els => els.map(e => e.textContent)")]
+        assert all(c > 0 for c in chg) and chg == sorted(chg, reverse=True), (frame, chg)
+        want = page.evaluate("() => window.__gainerRows().map(r => r[0])")
+        assert shown == want, (frame, shown, want)
         assert page.locator("[data-card=scan-pillars] .pill.grade-soft, [data-card=scan-pillars] .pill.grade-hard").count() == 0
 
 
@@ -2082,6 +2107,31 @@ def test_ui_alert_rows_say_what_the_name_is_doing_now(page):
         assert r["fresh"] == (r["highAge"] is not None and r["highAge"] <= 2 * 60000), r
         assert r["hot"] == (r["n"] > 1 and r["recent"] >= 2), r
     assert all("older than an hour" in f for f in got["folds"])
+
+
+def test_ui_scanner_rows_are_one_line_and_the_arrow_opens_the_detail(page):
+    """Owner, 2026-10-14: "less text in each row of the scanners and detail with
+    an arrow if needed expandable". A row is one line; its ▸ opens what used to
+    sit on it — the name now in words, every alert of the name, the session,
+    the label, why it fired — and a second click closes it."""
+    n = page.eval_on_selector("#scrub", "e => +e.max")
+    _seek(page, n)
+    for card in ("scan-pillars", "scan-running", "scan-hod"):
+        rows = page.locator(f"[data-card={card}] .trow")
+        assert rows.count() >= 1, card
+        for row in rows.all()[:6]:
+            assert row.bounding_box()["height"] < 24, card
+    page.locator("[data-card=scan-running] .alert-row .row-open").first.click()
+    page.wait_for_timeout(250)
+    det = page.locator("[data-card=scan-running] .alert-detail")
+    assert det.count() == 1
+    text = det.inner_text()
+    for token in ("now", "session", "alert", "label"):
+        assert token in text, (token, text)
+    assert "undefined" not in text
+    page.locator("[data-card=scan-running] .alert-row .row-open").first.click()
+    page.wait_for_timeout(250)
+    assert page.locator("[data-card=scan-running] .alert-detail").count() == 0
 
 
 def test_ui_a_former_runner_is_a_label_with_its_date():

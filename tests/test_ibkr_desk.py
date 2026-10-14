@@ -757,3 +757,105 @@ def test_a_partly_streamed_minute_does_not_replace_the_complete_ibkr_minute():
     assert by["2026-09-30T13:41:00Z"] == ["10s"] * 6
     assert by["2026-09-30T13:42:00Z"] == ["1m"]                     # partial and not the newest
     assert by["2026-09-30T13:43:00Z"] == ["10s"]                    # the forming minute streams
+
+
+# -- seat rotation (owner, 2026-10-14) ----------------------------------------------
+
+def _full_desk(tmp_path, monkeypatch, **kw):
+    """AAA and BBB fill a two-seat desk, both rejected by the cascade (under three
+    pillars on the fake tape); the scanner finds CCC."""
+    from momentum_platform.dashboard import ibkr_desk as desk_mod
+    from journal import ledger as L
+    db = tmp_path / "j.sqlite"
+    monkeypatch.setenv("JOURNAL_DB", str(db))
+    monkeypatch.setattr(desk_mod, "_JOURNAL", None)
+    desk, ib, clock = make_desk(max_symbols=2, rescan=60, **kw)
+    said = []
+    desk.log = said.append
+    s = desk._bootstrap()
+    assert {k: v["verdict"] for k, v in s["cascade"].items()} == {"AAA": "REJECT", "BBB": "REJECT"}
+    return desk, ib, clock, said, L.connect(db)
+
+
+def test_a_dead_name_gives_its_seat_to_a_new_runner_when_the_desk_is_full(tmp_path, monkeypatch):
+    """2026-10-12: the desk never dropped a name, and of sixteen gappers one got a seat."""
+    desk, ib, clock, said, _ = _full_desk(tmp_path, monkeypatch)
+    clock.now = T0 + timedelta(minutes=14)
+    desk.refresh_session()
+    desk.scan()
+    assert desk.symbols == ["AAA", "BBB"], "fourteen minutes rejected is not dead yet"
+    clock.now = T0 + timedelta(minutes=15)
+    desk.refresh_session()
+    desk.scan()
+    assert desk.symbols == ["BBB", "CCC"] and desk.stream.symbols == ["BBB", "CCC"]
+    ev = [(e.type, e.data) for e in desk.hub.since(0) if e.type in ("symbol-removed", "symbol-added")]
+    assert ev[-2:] == [("symbol-removed", {"symbol": "AAA", "for": "CCC", "killedBy": "pillars",
+                                           "deadSince": "2026-09-03T14:00:00+00:00"}),
+                       ("symbol-added", {"symbol": "CCC"})]
+    assert any("AAA gave its seat to CCC: rejected (pillars) on every rebuild since 10:00:00 ET" in m for m in said)
+    assert "CCC" in desk.current()["symbols"] and "AAA" not in desk.current()["symbols"]
+
+
+def test_an_order_a_plan_a_position_or_the_tape_keeps_a_seat(tmp_path, monkeypatch):
+    from journal import ledger as L
+    desk, ib, clock, said, conn = _full_desk(tmp_path, monkeypatch)
+    L.record_intent(conn, "d-aaa", symbol="AAA", session="s", trigger=4.4, stop=4.2, target=None, shares=10,
+                    dollar_risk=2.0)
+    conn.commit()
+    assert L.alive_symbols(conn) == ["AAA"]
+    desk.focus("BBB")                                                 # the tape and the book follow BBB
+    clock.now = T0 + timedelta(minutes=20)
+    desk.refresh_session()
+    desk.scan()
+    assert desk.symbols == ["AAA", "BBB"], "AAA holds an order, BBB is on the tape"
+    desk.tape.symbol = desk.depth.symbol = None
+    desk.session["cards"]["BBB"]["setup"]["live"] = True               # a live plan keeps it too
+    desk.scan()
+    assert desk.symbols == ["AAA", "BBB"]
+    desk.session["cards"]["BBB"]["setup"]["live"] = False
+    desk.scan()
+    assert desk.symbols == ["AAA", "CCC"], "BBB, free of all four, gives its seat"
+
+
+def test_a_name_that_gave_up_its_seat_does_not_take_one_back_by_rotation(tmp_path, monkeypatch):
+    desk, ib, clock, said, _ = _full_desk(tmp_path, monkeypatch)
+    clock.now = T0 + timedelta(minutes=16)
+    desk.refresh_session()
+    desk.scan()
+    assert desk.symbols == ["BBB", "CCC"]
+    assert desk.seats.gave_up_today("AAA", desk.session_day())
+    ib.scans["TOP_PERC_GAIN"] = ["AAA", "CCC"]                         # AAA is listed again
+    clock.now = T0 + timedelta(minutes=40)
+    desk.refresh_session()
+    desk.scan()
+    assert "AAA" not in desk.symbols
+
+
+def test_any_other_answer_restarts_the_dead_clock_and_zero_turns_it_off(monkeypatch):
+    from momentum_platform import desk_profile
+    from momentum_platform.dashboard.seats import SeatClock
+    sc = SeatClock(15)
+    sc.observe(T0, {"AAA": ("REJECT", "rising"), "BBB": ("REJECT", "price")})
+    sc.observe(T0 + timedelta(minutes=5), {"AAA": ("STALE", None), "BBB": ("REJECT", "price")})
+    sc.observe(T0 + timedelta(minutes=6), {"AAA": ("REJECT", "rising"), "BBB": ("REJECT", "price")})
+    assert sc.dead(T0 + timedelta(minutes=16)) == [("BBB", T0)]
+    assert sc.dead(T0 + timedelta(minutes=21)) == [("BBB", T0), ("AAA", T0 + timedelta(minutes=6))]
+    assert sc.dead(T0 + timedelta(minutes=21), keep={"BBB"}) == [("AAA", T0 + timedelta(minutes=6))]
+    sc.observe(T0 + timedelta(minutes=22), {"AAA": ("REJECT", "rising")})          # BBB left the desk
+    assert [s for s, _ in sc.dead(T0 + timedelta(minutes=30))] == ["AAA"]
+    assert SeatClock(0).dead(T0 + timedelta(hours=5)) == [] and not SeatClock(0).on
+    monkeypatch.setenv("DESK_SEAT_DEAD_MINUTES", "0")
+    prof = desk_profile.load()
+    assert prof["rules"]["desk"]["seatDeadMinutes"] == 0 and prof["envOverrides"] == {"DESK_SEAT_DEAD_MINUTES": 0}
+    desk, ib, clock = make_desk(max_symbols=2, rescan=60)
+    assert desk.seats.on is False
+
+
+def test_the_seat_rule_is_in_the_shared_profile_and_its_fingerprint(monkeypatch):
+    from momentum_platform import desk_profile
+    monkeypatch.delenv("DESK_SEAT_DEAD_MINUTES", raising=False)
+    shipped = json.loads((ROOT / "config" / "desk-profile.json").read_text())
+    assert shipped["desk"]["seatDeadMinutes"] == desk_profile.DEFAULTS["desk"]["seatDeadMinutes"] == 15
+    a = desk_profile.fingerprint()["hash"]
+    monkeypatch.setenv("DESK_SEAT_DEAD_MINUTES", "30")
+    assert desk_profile.fingerprint()["hash"] != a, "two desks rotating differently must not hash the same"

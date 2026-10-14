@@ -122,16 +122,29 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .tile-rows{flex:1 1 auto;min-height:0;overflow-y:auto}
 .trow{display:grid;gap:5px;padding:3px 8px;align-items:center;cursor:pointer;
   border-bottom:1px solid #0e141c;font:11px var(--mono);font-variant-numeric:tabular-nums}
-.list-row{grid-template-columns:1.45fr .62fr .62fr .5fr .5fr}
+.list-row{grid-template-columns:var(--list-cols)}
 .alert-row{grid-template-columns:var(--alert-cols);position:relative}
-.tile-cols.list-cols{grid-template-columns:1.45fr .62fr .62fr .5fr .5fr}
+.tile-cols.list-cols{grid-template-columns:var(--list-cols)}
 .tile-cols.alert-cols{grid-template-columns:var(--alert-cols)}
 /* One definition for the header and the rows. They were two independent grids
-   whose last track was `auto`, so the columns drifted apart every rebuild. */
-:root{--alert-cols:34px minmax(0,.66fr) minmax(0,1.6fr) minmax(0,.66fr) 50px}
+   whose last track was `auto`, so the columns drifted apart every rebuild.
+   2026-10-14: one line a row, the ▸ that opens its detail first. */
+:root{--list-cols:12px minmax(0,1.25fr) minmax(0,.62fr) minmax(0,.7fr) minmax(0,.55fr) 64px;
+      --alert-cols:12px 32px minmax(0,.6fr) minmax(0,1.45fr) minmax(0,.55fr) 50px 38px}
 .tile-cols span:not(:first-child),.trow > span:not(:first-child),.trow > b{text-align:right}
-.tile-cols.alert-cols span:nth-child(1),.tile-cols.alert-cols span:nth-child(3),
-.alert-row > .tl-time,.alert-row > .tsym{text-align:left}
+.tile-cols.alert-cols span:nth-child(2),.tile-cols.alert-cols span:nth-child(4),.tile-cols.list-cols span:nth-child(2),
+.alert-row > .tl-time,.alert-row > .tsym,.list-row > .tsym{text-align:left}
+.alert-row > .tsym{padding-left:4px}
+.tl-time.ses-pm{color:var(--hi)} .tl-time.ses-ah{color:#bcd0ff}
+.row-open{background:none;border:0;padding:0;width:12px;cursor:pointer;color:var(--ink-faint);font:10px/1 var(--mono)}
+.row-open:hover,.row-open.open{color:var(--focus)}
+.pmarks{display:flex;gap:2px;justify-content:flex-end}
+.pm{font:700 8.5px/11px var(--mono);font-style:normal;width:11px;text-align:center;border-radius:2px;
+  border:1px solid transparent}
+.pm.ok{color:#0b1a12;background:var(--up)}
+.pm.no{color:#fff;background:#8f2f3a}
+.pm.unk{color:var(--ink-faint);border:1px dashed var(--line);background:none}
+.px.warn{color:var(--hi)}
 .tl-age{font:9.5px var(--mono);color:var(--ink-faint);text-align:right}
 
 /* The alert tiles are timelines: a rail down the gutter, a node per event,
@@ -153,8 +166,8 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 @keyframes flash{0%{background:#4a3a15}70%{background:#33281299}100%{background:transparent}}
 .tsym{display:flex;align-items:center;gap:4px;font-family:var(--sans);font-weight:600;
   min-width:0;overflow:hidden}
-.alert-row .tsym{gap:5px}
-.alert-row .tsym .pill.ses{flex:none}
+.alert-row .tsym{gap:3px}
+.alert-row .tsym .pill.xn{padding:0 3px;flex:none}
 .alert-row .tsym b{flex:none}
 .tsym b{font-size:11.5px}
 .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
@@ -174,7 +187,6 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .pill.grade-hard{color:#9fe3c0;border-color:#1f4c38;background:#0f2119}
 .pill.grade-dilutive{color:#ffb3ba;border-color:#4a1f26;background:#301419}
 .pill.grade-soft{color:var(--ink-dim)}
-.pill.partial{color:var(--hi);border-color:#4a3c17;background:#241d0c;font-family:var(--mono)}
 /* The verdict card: banner, pillar and chart-gate chips, the plan. The full
    gate table and the sentences open when the card is maximized. */
 .vchips{display:flex;flex-wrap:wrap;gap:3px;margin:2px 0 5px}
@@ -202,21 +214,18 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .pill{font-size:8.5px;padding:0 3px;border-radius:3px;border:1px solid var(--line);
   color:var(--ink-faint);white-space:nowrap}
 .pill.warn{color:var(--hi);border-color:#4a3c17;background:#241d0c}
-.pill.unknown{color:var(--ink-dim);border-style:dashed}
-.pill.ses{font-family:var(--mono);font-weight:600}
-.pill.ses.pm{color:var(--hi);border-color:#4a3c17;background:#241d0c}
-.pill.ses.rth{color:#9fe3c0;border-color:#1f4c38;background:#0f2119}
-.pill.ses.ah{color:#bcd0ff;border-color:#2a3a63;background:#141c30}
 .branch{font-size:9px;color:var(--ink-dim);font-family:var(--mono);white-space:nowrap;
   max-width:58px;overflow:hidden;text-overflow:ellipsis}
 
-.row-why{margin-left:6px;font:600 9px/1 var(--mono);color:var(--ink-dim);background:none;border:1px solid var(--line);
-  border-radius:3px;padding:1px 4px;cursor:pointer;vertical-align:middle}
-.row-why:hover,.row-why.open{color:var(--ink);border-color:var(--focus)}
 .reasons{grid-column:1/-1;padding:6px 8px 8px;background:#0b1119;border-bottom:1px solid var(--line-soft)}
 .reason{display:flex;gap:6px;align-items:baseline;font:10.5px var(--mono);padding:1px 0}
-.reason .ok{color:var(--up)} .reason .no{color:var(--down)}
+.reason .ok{color:var(--up)} .reason .no{color:var(--down)} .reason .unk{color:var(--ink-faint)}
 .reason-name{flex:1;color:var(--ink-dim)}
+/* an alert row's ▸ detail: a label column, the value left and wrapping (2026-10-14) */
+.alert-detail .reason{display:grid;grid-template-columns:58px minmax(0,1fr);gap:6px;font-size:10px}
+.alert-detail .reason-name{color:var(--ink-faint)}
+.alert-detail .reason > span:last-child{text-align:left;color:var(--ink-dim);overflow-wrap:anywhere}
+.alert-detail .reason > span.ok{color:var(--up)} .alert-detail .reason > span.no{color:var(--down)}
 .ev{font-size:8.5px;padding:0 3px;border-radius:3px;border:1px solid var(--line);color:var(--ink-faint)}
 .ev.confirmed{color:var(--ok-ink);border-color:var(--ok-line)}
 .ev.approximation{color:var(--unk-ink);border-color:var(--unk-line)}
@@ -770,10 +779,9 @@ body.resizing .gutter{pointer-events:auto}
 .pill.xn{font-family:var(--mono);font-weight:700;color:var(--hi);border-color:#4a3c17;background:#241d0c}
 /* live alert rows (2026-10-14): heat, a fresh high, a former runner, the name now, age */
 .pill.xn.hot{color:#ffb74d;border-color:#ff9800;background:#3a2408}
-.pill.nh{font-family:var(--mono);font-weight:700;color:#76ff03;border-color:#2e5c12;background:#13240a}
-.pill.fm{font-family:var(--mono);font-weight:700;color:#c9b8ff;border-color:#3a2f5c;background:#1a1530}
-.alert-row .alert-live{grid-column:1/-1;display:flex;gap:9px;font:9.5px/1.2 var(--mono);color:var(--ink-faint);text-align:left;margin-top:-1px}
-.alert-live .at-high{color:var(--up)} .alert-live .far{color:var(--down)}
+.alert-row .alert-live{font:10px var(--mono);color:var(--ink-dim);text-align:right}
+.alert-row .alert-live.at-high{color:var(--up);font-weight:700}
+.alert-row .alert-live.far{color:var(--down)}
 .trow.aged{opacity:.5}
 .trow.new-high .tsym b{color:#76ff03}
 .alert-fold{font-size:10px;color:var(--ink-faint);padding:4px 8px 4px 18px;cursor:pointer;user-select:none}

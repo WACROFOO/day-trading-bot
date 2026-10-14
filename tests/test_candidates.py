@@ -476,7 +476,13 @@ def test_a_failed_2016_2020_gate_keeps_the_holdout_shut(tmp_path, monkeypatch, c
     assert reg[0]["family"] == "S2" and reg[0]["lead"] == "S2W" and reg[0]["gate2"] is False
 
 
+def _files(folder: Path) -> list:
+    return sorted(str(x.relative_to(folder)) for x in folder.rglob("*")) if folder.exists() else []
+
+
 def test_both_gates_open_the_parents_holdout_once(tmp_path, monkeypatch, capsys):
+    real = ROOT / "research" / "strategy-candidates" / "results"
+    before = _files(real)                       # a machine that has run the candidates keeps its results
     rc, calls = _scripted_lead(monkeypatch, tmp_path, older_net=0.1)
     out = capsys.readouterr().out
     assert rc == 0 and calls == ["train+valid", "2016-2020", "holdout"]
@@ -487,7 +493,7 @@ def test_both_gates_open_the_parents_holdout_once(tmp_path, monkeypatch, capsys)
     assert "real quotes (criterion 8): mean net +0.250" in out
     with pytest.raises(P.HoldoutAlreadyOpened):                              # S2 can never open another config
         P.open_holdout("S2", R.FAMILIES["S2"].configs[0], 9, {}, {})
-    assert not (ROOT / "research" / "strategy-candidates" / "results").exists()   # nothing escaped to the real paths
+    assert _files(real) == before                                            # nothing escaped to the real paths
 
 
 def test_a_lead_never_runs_in_the_main_run():

@@ -15,7 +15,9 @@ What the worker does, on a schedule:
   every N s     rebuild the desk session in memory from reference + minute
                 history + the live store, run the scanners, swap the session
   every M s     run the scanner union on client 28, publish the screener,
-                and put new runners on the desk when there is room
+                and put new runners on the desk when there is room — or, when
+                the desk is full, in the seat of a name dead for 15 minutes
+                (seats.py, 2026-10-14)
 
 Read-only, never delayed, never invented: the invariants live in
 ibkr_stream.py; this file only schedules them.
@@ -44,6 +46,7 @@ from ..datasources.ibkr_stream import IbkrStream, read_only_connect
 from ..datasources.ibkr_depth import DepthFeed
 from ..datasources.ibkr_tape import TapeFeed
 from .chart_history import ChartHistory
+from .seats import SeatClock, pairs
 from .session_builder import build_session_from_records
 from .stream import EventHub, UpdatePublisher
 
@@ -121,6 +124,10 @@ class IbkrDesk:
         self.max_price = pick(max_price, "desk", "priceMax")
         self.min_gain = pick(min_gain, "desk", "minGainPct")
         self.top = pick(top, "desk", "scanTop")
+        # Seat rotation (owner, 2026-10-14; docs/preregistration.md §5): a name the
+        # cascade has rejected on every rebuild for this long gives its seat to a
+        # new runner when the desk is full. 0 turns it off (DESK_SEAT_DEAD_MINUTES).
+        self.seats = SeatClock(prof["desk"].get("seatDeadMinutes", 0))
         self.symbols: List[str] = [s.strip().upper() for s in symbols if s and s.strip()]
         self.ib_factory = ib_factory
         self.clock = clock
@@ -1265,6 +1272,10 @@ class IbkrDesk:
         with self.lock:
             self.session = session
             self.built_at = session["builtAt"]
+        # Seat rotation: every name's cascade answer at this rebuild.
+        casc = session.get("cascade") or {}
+        self.seats.observe(now, {sym: ((casc.get(sym) or {}).get("verdict"), (casc.get(sym) or {}).get("killedBy"))
+                                 for sym in self.symbols})
         # Tell every open page now: the scanners moved. A poll would find out
         # in up to five seconds; a trader watching Running Up should not wait.
         n_alerts = sum(len(f["alerts"]) for f in session["frames"])
@@ -1330,7 +1341,82 @@ class IbkrDesk:
             room = max(0, self.max_symbols - len(self.symbols))
             if fresh and room:
                 self.add_symbols(fresh[:room])
+            if fresh[room:] and self.seats.on:
+                self.rotate_seats(fresh[room:])
         return out
+
+    # -- seat rotation (owner, 2026-10-14) -------------------------------------------
+
+    def rotate_seats(self, fresh) -> list:
+        """The scanner's new names for a full desk: each takes the seat of a dead name
+        (seats.py). From the scanner thread the swap is queued onto the worker, where
+        every IBKR call lives."""
+        on_worker = self._worker_thread is None or threading.current_thread() is self._worker_thread
+        if on_worker:
+            return self._rotate_now(list(fresh))
+        self.submit(self._rotate_now, list(fresh))
+        return []
+
+    def _seat_keepers(self) -> Optional[set]:
+        """Names that never give up their seat: an order the bot may hold, a manual
+        position, a live plan or a forming pullback, the name on the tape and the book.
+        None when the ledger cannot answer: then no seat is given up."""
+        keep = set()
+        for feed in (getattr(self, "tape", None), getattr(self, "depth", None)):
+            sym = getattr(feed, "symbol", None)
+            if sym:
+                keep.add(sym)
+        for sym, card in ((self.session or {}).get("cards") or {}).items():
+            setup = card.get("setup") or {}
+            if setup.get("live") or setup.get("forming") or card.get("position"):
+                keep.add(sym)
+        j = _journal()
+        if j is not None:
+            try:
+                from journal import ledger
+                keep |= set(ledger.alive_symbols(j))
+            except Exception as exc:                          # noqa: BLE001 — fail closed
+                self.log(f"  seat rotation: the ledger could not say which names hold an order ({exc!r}); "
+                         "no seat given up")
+                return None
+        return keep
+
+    def _rotate_now(self, fresh: List[str]) -> List[str]:
+        if not self.seats.on:
+            return []
+        day, now = self.session_day(), self.clock()
+        keep = self._seat_keepers()
+        if keep is None:
+            return []
+        dead = self.seats.dead(now, keep)
+        if not dead:
+            return []
+        cand = [s for s in dict.fromkeys(str(x).strip().upper() for x in fresh)
+                if s and s not in self.symbols and s not in self.no_live_data
+                and not self.seats.gave_up_today(s, day)]
+        # the float screen first: a dead name never leaves for a name that cannot join
+        swaps = pairs(dead, self._float_screen(cand))
+        if not swaps:
+            return []
+        for sym, since, new in swaps:
+            why = self.seats.why.get(sym) or "?"
+            self._drop(sym)
+            self.seats.gave_up(sym, day)
+            self.log(f"  {sym} gave its seat to {new}: rejected ({why}) on every rebuild since {_et(since)}")
+            self.hub.publish("symbol-removed", {"symbol": sym, "for": new, "killedBy": why,
+                                                "deadSince": since.isoformat(timespec="seconds")})
+        return self._add_now([new for _, _, new in swaps])
+
+    def _drop(self, sym: str) -> None:
+        """Off the desk: quotes and bars cancelled, out of the symbol list. Its bars and
+        reference stay in memory; the ledger keeps what it decided."""
+        try:
+            if self.stream is not None:
+                self.stream.unsubscribe([sym])
+        except Exception:                                     # noqa: BLE001
+            pass
+        if sym in self.symbols:
+            self.symbols.remove(sym)
 
     # -- surface used by the HTTP handler ------------------------------------------
 
@@ -1462,15 +1548,16 @@ class IbkrDesk:
         self.submit(self._add_now, wanted)
         return wanted
 
-    def _add_now(self, wanted: List[str]) -> List[str]:
-        wanted = [s for s in wanted if s not in self.no_live_data]
-        # 2026-09-29: SMMT (152M) and NVTS (226M) joined from the scanner after
-        # the gap scan had rejected them on float; eleven names made rebuilds
-        # 13-33 s. A VERIFIED float over the gate can never trade, so it does
-        # not take a slot. An SEC upper bound over 20M proves nothing: kept.
+    def _float_screen(self, wanted: List[str]) -> List[str]:
+        """`wanted` without the names whose VERIFIED float is over the gate.
+
+        2026-09-29: SMMT (152M) and NVTS (226M) joined from the scanner after
+        the gap scan had rejected them on float; eleven names made rebuilds
+        13-33 s. A VERIFIED float over the gate can never trade, so it does
+        not take a slot. An SEC upper bound over 20M proves nothing: kept."""
         from momentum_platform.scanners.five_pillars import FLOAT_MAX_SHARES
-        day, over = self.session_day(), []
-        for s in list(wanted):
+        day, over, ok = self.session_day(), [], []
+        for s in wanted:
             # 2026-10-05: QTEX (59M, known from the gap scan) was kept out while
             # ALEC (82M) and SABS (82M) came in, because their float was only
             # looked up after joining. Look it up first (one finviz request per
@@ -1479,10 +1566,15 @@ class IbkrDesk:
                 self._finviz_float(s)
             ov = _float_override(s, day)
             if ov and ov["float"] >= FLOAT_MAX_SHARES:
-                wanted.remove(s)
                 over.append(f"{s} {ov['float'] / 1e6:.0f}M")
+            else:
+                ok.append(s)
         if over:
             self.log(f"  not added, verified float over {FLOAT_MAX_SHARES / 1e6:.0f}M: {', '.join(over)}")
+        return ok
+
+    def _add_now(self, wanted: List[str]) -> List[str]:
+        wanted = self._float_screen([s for s in wanted if s not in self.no_live_data])
         self.symbols += [s for s in wanted if s not in self.symbols]
         added = self._subscribe(wanted)
         for sym in added:

@@ -69,6 +69,7 @@ def test_a_name_whose_float_is_over_the_cap_is_kept_off_before_joining(tmp_path,
 
     class _Stub:
         _add_now = D.IbkrDesk._add_now
+        _float_screen = D.IbkrDesk._float_screen         # the screen seat rotation also runs first (2026-10-14)
         session_day = lambda self: "2026-10-05"
         no_live_data, sec, symbols = set(), True, []
         hub = types.SimpleNamespace(publish=lambda *a: None)

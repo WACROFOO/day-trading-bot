@@ -14,3 +14,18 @@ pictures is a market fact.
 | `after_chart-5m_SYNTHETIC.png` | now: the morning's down-line dashed to the candle that closed through it, `downtrend BROKEN ▲` |
 | `after_desk_SYNTHETIC.png` | the whole desk, 1920 × 952, at the desk's own minute (10:16): the S/R · trend · profile switches on each chart card's header (lit = on), the pillar tiles, the trimmed card, the live alert rows |
 | `after_scan-running_SYNTHETIC.png`, `after_scan-hod_SYNTHETIC.png` | the two alert cards: each row's alert, and under it the name now — "now 4.39 · −2.2% vs high 4.49 · high 42m ago"; the 09:33 High of Day row dimmed, its newest alert 43 minutes old |
+
+**Round four (§12), the scanner cards** — on the replay fixture's ten made-up names
+(`fixtures/market_replay/workstation_open_2026-09-01.jsonl`, made by `scripts/make_replay_fixture.py`), the
+static page the dashboard tests use (`scripts/build_dashboard_artifact.py`); "before" is the cards as of
+`b367b70`. Also synthetic: nothing here is a market fact.
+
+| file | what |
+|---|---|
+| `before_scan-pillars_0800_fixture_SYNTHETIC.png` | 08:00: "10 names on the desk · blocked by RVOL on 10" over an empty Top gainers card |
+| `after_scan-pillars_0800_fixture_SYNTHETIC.png` | 08:00 now: the ten names up on the day by change, P G R F N on each row, R red on every one |
+| `before_scan-pillars_1005_fixture_SYNTHETIC.png` | 10:05: four rows, "4/5" pills, a "?" button under each float |
+| `after_scan-pillars_1005_fixture_SYNTHETIC.png`, `after_scan-pillars_open_fixture_SYNTHETIC.png` | 10:05 now, one line a row; the first row's ▸ open: the five checks, the name's facts |
+| `before_scan-running_fixture_SYNTHETIC.png`, `before_scan-hod_fixture_SYNTHETIC.png` | two lines an alert: the row with PM/RTH, ×N, "new high", then "now … vs high … high … ago" |
+| `after_scan-running_fixture_SYNTHETIC.png`, `after_scan-hod_fixture_SYNTHETIC.png` | one line an alert: ▸, time, change, name, ×N, price, label, NOW |
+| `after_scan-running_open_fixture_SYNTHETIC.png` | an alert's ▸ open: the name now, the session, its four alerts, the label, what it fired on |
