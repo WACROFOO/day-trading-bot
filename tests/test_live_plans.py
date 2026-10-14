@@ -235,7 +235,7 @@ def test_a_heavier_pullback_has_no_level_because_its_break_changes_nothing():
 def test_the_card_carries_the_cascades_pillar_count():
     rows = _rows(PUSH_PULL, "2026-10-07T09:30:00-04:00")
     c = _card(rows, len(rows) - 1)
-    assert c["pillars"] == {"passed": 5, "of": 5, "needs": 4, "counted": True, "note": None}
+    assert c["pillars"] == {"passed": 5, "of": 5, "needs": 4, "counted": True, "stale": False, "note": None}
     killed = _cascade(verdict="REJECT", killed="price", price="FAIL", pillars="NOT_APPLICABLE")
     for g in killed["gates"]:
         if g["id"] == "pillars":

@@ -422,11 +422,17 @@ def test_the_verdict_card_renders_the_servers_cascade_not_its_own_score(desk_ser
         assert pg.text_content("#verdictCard .dc-answer .dc-reason") == card["verdict"]["reason"]
         # the top bar says the same word for the desk (one name here)
         assert pg.text_content("#dvWord") == ("NOTHING TO TRADE" if banner == "NO" else banner)
-        # every gate the cascade could not pass is a lamp on the card, by state
-        red = [l["label"] for l in card["lamps"] if l["state"] in ("FAIL", "UNKNOWN")]
-        shown = pg.eval_on_selector_all("#verdictMore .dc-lamp .l", "els => els.map(e => e.textContent)")
-        for label in red:
-            assert label in shown, (label, shown)
+        # every gate the cascade could not pass is on the card, by state: a pillar
+        # as a tile on the face, any other gate as a chip in the fold (a NO card
+        # carries no gate strip: its reason is the kill)
+        red = [l for l in card["lamps"] if l["state"] in ("FAIL", "UNKNOWN")]
+        tiles = dict(pg.eval_on_selector_all("#verdictCard .pl-tile", "els => els.map(e => [e.dataset.lamp, e.dataset.state])"))
+        chips = dict(pg.eval_on_selector_all("#verdictMore .dc-gates .pchip", "els => els.map(e => [e.dataset.lamp, e.dataset.state])"))
+        for l in red:
+            if l["id"] in ("price", "gain", "rvol", "float", "catalyst"):
+                assert tiles.get(l["id"]) == l["state"], (l, tiles)
+            elif l["id"] != "pillars" and banner != "NO":
+                assert chips.get(l["id"]) == l["state"], (l, chips)
         browser.close()
 
 
@@ -730,7 +736,7 @@ def test_the_charts_carry_only_what_the_verdict_reads(desk_server):
               [l.textContent.trim(), l.querySelector('input').checked])]))""")
         on = {k: {lab for lab, c in v if c} for k, v in menus.items()}
         levels = "Support / resistance (ross-fp-v4) · prior day · $ levels"
-        trend, profile = "Trend lines · breakouts (ross-fp-v4)", "Volume profile · visible range"
+        trend, profile = "Trend lines · breakouts (two swings)", "Volume profile · visible range"
         assert on["chartA"] == {"Volume", "VWAP", "EMA 9", "MACD 12/26/9", "High of day", "Entry · stop · target",
                                 levels, trend}
         assert on["chartB"] == {"Volume", "VWAP", "High of day", "Entry · stop · target", levels, trend, profile}

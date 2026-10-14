@@ -379,8 +379,13 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
                 "kind": kind, "why": why if state_ in ("FAIL", "UNKNOWN", "MANUAL_CONFIRMATION_REQUIRED",
                                                        "STALE") else None}
 
+    # On a stale feed the lamps are the cascade's gates on the LAST data the
+    # desk holds (session_builder "lastData"), and the card says so; the
+    # verdict above stays the stale WAIT and no plan is drawn.
+    stale = verdict == "STALE"
+    lg = ((cascade or {}).get("lastData") or cascade) if stale else cascade
     lamps = []
-    gp = _gate(cascade, "price")
+    gp = _gate(lg, "price")
     lamps.append(lamp("price", "Price", gp.get("state", "UNKNOWN"), f"${_px(last)}",
                       f"${PRICE_MIN:.0f}–{PRICE_MAX:.0f}", why=gp.get("reason")))
     chg = _f(m.get("changePct"))
@@ -393,10 +398,10 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
                       "—" if rv is None else f"{rv:.1f}×",
                       f"≥ {RVOL_MIN:g}× pillar · ≥ {RVOL_TRADE_FLOOR:g}× trade floor",
                       why=None if rv is None else f"{rv:.1f}× is under the {RVOL_MIN:g}× pillar"))
-    gf = _gate(cascade, "float")
+    gf = _gate(lg, "float")
     lamps.append(lamp("float", "Float", gf.get("state", "UNKNOWN"), gf.get("value", "—"),
                       f"< {FLOAT_MAX / 1e6:.0f}M (flag only, A5)", why=gf.get("reason")))
-    gc = _gate(cascade, "catalyst")
+    gc = _gate(lg, "catalyst")
     if catalyst and catalyst.get("grade") == "UNKNOWN":
         cat_value = "no headline feed on this desk"
     elif catalyst:
@@ -405,15 +410,15 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
         cat_value = gc.get("value", "—")
     lamps.append(lamp("catalyst", "Catalyst", gc.get("state", "UNKNOWN"), cat_value,
                       "own news dated today (flag only, A2)", why=gc.get("reason")))
-    gpl = _gate(cascade, "pillars")
+    gpl = _gate(lg, "pillars")
     lamps.append(lamp("pillars", "Pillars", gpl.get("state", "UNKNOWN"), gpl.get("value", "—"),
                       f"≥ {PILLARS_MIN} of 5", why=gpl.get("reason")))
-    gr = _gate(cascade, "rising")
+    gr = _gate(lg, "rising")
     reopen = round(sh * (1 - FADE_MAX_PCT / 100.0), 2) if sh else None
     lamps.append(lamp("rising", "Still rising", gr.get("state", "UNKNOWN"), gr.get("value", "—"),
                       f"≤ {FADE_MAX_PCT:g}% off the high" + (f" (line {reopen:.2f})" if reopen else ""),
                       why=gr.get("reason")))
-    struct = [g for g in (_gate(cascade, x) for x in ("split", "instrument", "tick", "buyout")) if g]
+    struct = [g for g in (_gate(lg, x) for x in ("split", "instrument", "tick", "buyout")) if g]
     states = [g.get("state") for g in struct]
     worst = next((g for g in struct if g.get("state") == "FAIL"), None) or \
         next((g for g in struct if g.get("state") == "UNKNOWN"), None)
@@ -428,13 +433,13 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
                       "gates 5–8", why=(worst.get("reason") or f"{worst.get('label')}: {worst.get('value')}")
                       if worst is not None else None))
     for gid, label, val in (("vwap", "VWAP", vw), ("ema9", "9 EMA", e9)):
-        g = _gate(cascade, gid)
+        g = _gate(lg, gid)
         st = g.get("state", "UNKNOWN") if g else "NOT_APPLICABLE"
         d = (f"{(last - val) / val * 100:+.1f}%" if (last is not None and val) else "")
         lamps.append(lamp(gid, label, st, f"{_px(last)} vs {_px(val)} {d}".strip(), "price above",
                           why=f"price is below the {label}" if st == "FAIL" else
                           ("not computed (cascade stopped earlier)" if st == "NOT_APPLICABLE" else None)))
-    g = _gate(cascade, "macd")
+    g = _gate(lg, "macd")
     if mc:
         line, sig, hist = mc[0][-1], mc[1][-1], mc[2][-1]
         mv = f"line {line:+.3f} · signal {sig:+.3f} · hist {hist:+.3f}"
@@ -534,12 +539,12 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
                  "target": round(trig + 2.0 * (trig - stop), 2), "triggerBar": setup.get("triggerBar")}
 
     # -- the five pillars as the cascade counted them (A5) -------------------------
-    gpl_value = str(_gate(cascade, "pillars").get("value") or "")
+    gpl_value = str(_gate(lg, "pillars").get("value") or "")
     mcount = re.match(r"\s*(\d)\s*/\s*5", gpl_value)
     pillars = {"passed": int(mcount.group(1)) if mcount else None, "of": 5, "needs": PILLARS_MIN,
-               "counted": mcount is not None,
+               "counted": mcount is not None, "stale": stale,
                "note": None if mcount else ("not counted: the cascade stopped at "
-                                             f"{(cascade or {}).get('killedBy') or 'an earlier gate'}")}
+                                             f"{(lg or {}).get('killedBy') or 'an earlier gate'}")}
 
     return {
         "symbol": symbol,

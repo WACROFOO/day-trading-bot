@@ -327,6 +327,29 @@ def test_stale_and_halted_are_waits_and_stale_draws_no_order():
     assert halted["verdict"]["word"] == "WAIT" and "halted" in halted["verdict"]["reason"]
 
 
+def test_a_stale_card_tiles_the_last_datas_gates_and_stays_a_wait():
+    """Owner's recording 2026-10-14 06:12 ET: on a stale feed GRML's price
+    tile read "?" at $6.88, inside $2-20, beside a judged gain and RVOL. The
+    stale cascade carries only its feed gate; the tiles now read the gates on
+    the last data, marked stale, and the word stays the stale WAIT."""
+    stale = {"verdict": "STALE", "killedBy": None, "planAllowed": False,
+             "gates": [{"id": "feed", "label": "Feed", "state": "STALE", "value": "behind", "reason": "stale"}],
+             "lastData": _cascade(verdict="REVIEW", float="UNKNOWN", pillars="PASS")}
+    for g in stale["lastData"]["gates"]:
+        if g["id"] == "pillars":
+            g["value"] = "4/5 — missing float"
+    c = _card(stale)
+    lamps = {l["id"]: l for l in c["lamps"]}
+    assert c["verdict"]["word"] == "WAIT" and "stale" in c["verdict"]["reason"] and c["ticket"] is None
+    assert lamps["price"]["state"] == "PASS" and lamps["float"]["state"] == "UNKNOWN"
+    assert c["pillars"]["stale"] is True and c["pillars"]["counted"] and c["pillars"]["passed"] == 4
+    assert c["plan"] is None, "a stale card draws no plan lines"
+    # without the last data (an older payload) the tiles stay unknown, never invented
+    bare = _card({k: v for k, v in stale.items() if k != "lastData"})
+    assert {l["id"]: l for l in bare["lamps"]}["price"]["state"] == "UNKNOWN"
+    assert bare["pillars"]["counted"] is False and bare["pillars"]["stale"] is True
+
+
 def test_lamps_show_the_bots_thresholds_and_a_reason_only_when_red():
     c = _card(_cascade(verdict="WAIT", vwap="FAIL"))
     lamps = {l["id"]: l for l in c["lamps"]}

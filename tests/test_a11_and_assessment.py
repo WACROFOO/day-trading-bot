@@ -76,7 +76,8 @@ def test_a_symbol_change_restores_price_autoscale():
     js = (ROOT / "src/momentum_platform/dashboard/web/app.js").read_text()
     i = js.index("if (opts.snapToLive) {")
     assert 'priceScale("right").applyOptions({ autoScale: true })' in js[i:i + 700]
-    assert "if (opts.snapToLive) priceZoom = null;" in js, "and a wheel zoom does not follow to the next name"
+    assert "if (opts.snapToLive && priceZoom) setZoom(null);" in js, \
+        "and a wheel zoom or a dragged price does not follow to the next name"
 
 
 def test_keep_awake_is_macos_only_and_never_raises(monkeypatch):

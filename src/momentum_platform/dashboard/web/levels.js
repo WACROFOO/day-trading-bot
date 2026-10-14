@@ -4,11 +4,10 @@
    chart library, so tests/test_chart_levels.py checks them in node and in the
    page. app.js draws what they return.
 
-   Support/resistance and the trend lines are PORTS of this project's own
-   TradingView strategy, knowledge-base/tradingview/ross-fp-v4.pine (REV V9.12),
-   so the desk draws the lines the owner already reads on TradingView
-   (owner, 2026-10-13: "you can use the pine we've developed at its latest
-   version"):
+   Support/resistance is a PORT of this project's own TradingView strategy,
+   knowledge-base/tradingview/ross-fp-v4.pine (REV V9.12), so the desk draws
+   the levels the owner already reads on TradingView (owner, 2026-10-13: "you
+   can use the pine we've developed at its latest version"):
 
    - srFan — V4.1 bands, V7.1 fan, V9.4 "2 clean levels each side", V9.5
      polarity: the last 40 swing highs and the last 40 swing lows (5 bars each
@@ -17,12 +16,15 @@
      the two nearest each side are kept, and the nearest one each side is the
      highlighted band, ± 0.12 ATR (`bandATRfrac`). `touches` — how many swings
      the kept level absorbed — is the desk's addition; the Pine drops them.
-   - trendLines — V9.8 tangent, V9.9 day-scoped, V9.10 scored anchors: the
-     up-line is the tangent under today's confirmed lows from the best-scored
-     swing-low anchor (touches within 0.2 ATR count 2 each, minus the line's
-     distance from price in ATR); the down-line mirrors it over the highs. A
-     tangent touches structure and never cuts it, so only LIVE price can cross
-     it — that is the signal: "downtrend BROKEN ▲", "uptrend LOST ▼".
+
+   The trend lines are NOT the Pine's any more (2026-10-14). Its V9.8–V9.10
+   tangent was ported on 2026-10-13 and the owner's next recording showed why
+   the Pine needed four revisions for them: re-anchored on every bar, so the
+   lines jumped; anchored on the session's first print, under a gap (GRML
+   5-minute, 04:00 pre-gap low); tangent to two neighbouring bars from the
+   high of the day. trendLines below is the two-swing method of the public
+   TradingView script "Trend Lines v2" (LonesomeTheBlue, open source), written
+   here from its published description, no code copied — see trendLines.
 
    The volume profile's settings are the ones the corpus's volume-profile
    class sets up: "visible range", "value area volume is 70 row size 24 volume
@@ -47,8 +49,9 @@
   const SR_EACH = 2;          // ross-fp-v4.pine maxSRlines: "2 = clean"
   const SR_DEDUP_ATR = 0.5;   // ross-fp-v4.pine tolSR = atr * 0.5
   const BAND_ATR = 0.12;      // ross-fp-v4.pine bandATRfrac
-  const TL_TOL_ATR = 0.20;    // ross-fp-v4.pine tolTL = atr * 0.20
-  const TL_MIN_BARS = 20;     // ross-fp-v4.pine: `if nB >= 20`
+  const TL_TOL_ATR = 0.20;    // ross-fp-v4.pine tolTL = atr * 0.20: a swing this close to a line touches it
+  const TL_SWINGS = 10;       // "Trend Lines v2": the last 10 swings of each kind are searched
+  const TL_KEEP_BROKEN = 20;  // a line broken within the last 20 bars stays drawn, at its break
 
   /* The volume profile of `bars`: `rows` price rows between the lowest low
      and the highest high, each with its up and down volume; the point of
@@ -178,52 +181,77 @@
     return { res: side(true), sup: side(false), band: Math.max(a * BAND_ATR, mintick(close)), atr: a };
   }
 
-  /* ross-fp-v4.pine V9.10's two trend lines over `bars` — today's CONFIRMED
-     bars, oldest first (the forming bar is not one) — judged against the live
-     `close` and the ATR `a`. Each line: its anchor and touch indices into
-     `bars`, the slope per bar, `at(i)` its price at bar index i (i = bars.length
-     is the live bar), `now` that price, its touches, and whether live price is
-     through it. Null when no candidate has 2 touches and the right slope. */
-  function trendLines(bars, close, a) {
-    const nB = bars.length;
-    if (nB < TL_MIN_BARS || close == null || !(a > 0)) return { up: null, down: null };
+  /* Trend lines through two swings. `bars` are the CONFIRMED bars, oldest
+     first — the forming bar is not one; its index, bars.length, is the live
+     bar, and `close` its price. `a` is the ATR at the live bar. Options:
+     `from`, the index where today's session starts (anchors are today's
+     swings only, ross-fp-v4 V9.9: never an overnight print), and `pivot`.
+
+     The method of "Trend Lines v2" (LonesomeTheBlue, TradingView, open
+     source) as its description states it: take the last 10 swing highs and
+     the last 10 swing lows, search from the newest, keep a line only where one
+     is possible and say whether it is broken. Here:
+       - a swing is a confirmed pivot, 5 bars each side — the swings the S/R
+         fan reads, so both tools stand on the same points;
+       - a down-line joins an older swing high to a LOWER newer one, an
+         up-line an older swing low to a HIGHER newer one — two swings at
+         least six bars apart, never two neighbouring bars;
+       - it is possible only if no candle CLOSES through it between its two
+         swings and no swing of its kind pierces it by more than 0.2 ATR there
+         (wicks may poke through; a close may not — the public scripts' rule);
+       - after its second swing, the first candle closing through it BREAKS
+         it: "downtrend BROKEN ▲" (the breakout), "uptrend LOST ▼";
+       - searched newest swing first, each with its newest possible partner
+         first: the first unbroken line is the line; a line broken in the last
+         20 bars is kept too, drawn to its break.
+     A line moves only when a new swing confirms or a candle closes through
+     it — never on a tick. Live price beyond an unbroken line is `through`:
+     breaking, not yet broken.
+
+     Returns { up, down, upBroken, downBroken }; each line or null:
+     { a, b, pa, pb, slope, at(i), touches, brokeAt, breakPrice, now, through }
+     — indices into `bars`, `at(i)` the line's price at bar i, `now` at the
+     live bar, `touches` the swings of its kind within 0.2 ATR of it. */
+  function trendLines(bars, close, a, opts) {
+    opts = opts || {};
+    const none = { up: null, down: null, upBroken: null, downBroken: null };
+    const P = opts.pivot || PIVOT, from = Math.max(0, opts.from || 0);
+    const keep = opts.keep == null ? TL_KEEP_BROKEN : opts.keep;
+    const n = bars.length;
+    if (n < 2 * P + 2 || close == null || !(a > 0)) return none;
     const tol = Math.max(a * TL_TOL_ATR, mintick(close));
-    const pick = (vals, up) => {
-      // candidate anchors: local extremes (2 bars each side) up to 9 bars back, the last 10, + the day's extreme
-      let cand = [];
-      for (let i = 2; i <= nB - 9; i++) {
-        let ext = true;
-        for (let j = Math.max(0, i - 2); j <= Math.min(nB - 1, i + 2); j++)
-          if (up ? vals[j] < vals[i] : vals[j] > vals[i]) ext = false;
-        if (ext) cand.push(i);
-      }
-      cand = cand.slice(-10);
-      let dayI = 0;
-      for (let i = 1; i <= nB - 9; i++) if (up ? vals[i] < vals[dayI] : vals[i] > vals[dayI]) dayI = i;
-      cand.push(dayI);
-      let best = null;
-      for (const anc of cand) {
-        let sl = null, tch = -1;
-        for (let k = anc + 2; k < nB; k++) {
-          const s = (vals[k] - vals[anc]) / (k - anc);
-          if (sl === null || (up ? s < sl : s > sl)) { sl = s; tch = k; }
+    const piv = pivots(bars, P, P).filter(p => p.i >= from);
+    const side = up => {
+      const sw = piv.filter(p => p.kind === (up ? "low" : "high")).slice(-TL_SWINGS);
+      const beyond = (v, line, by) => up ? v < line - by : v > line + by;
+      let intact = null, broken = null;
+      for (let bi = sw.length - 1; bi >= 1 && !intact; bi--) {
+        const B = sw[bi];
+        for (let ai = bi - 1; ai >= 0; ai--) {
+          const A = sw[ai];
+          if (up ? !(A.price < B.price) : !(A.price > B.price)) continue;
+          const slope = (B.price - A.price) / (B.i - A.i);
+          const at = i => A.price + slope * (i - A.i);
+          let ok = true;
+          for (let k = A.i + 1; k < B.i && ok; k++) if (beyond(bars[k][4], at(k), 1e-9)) ok = false;
+          for (let k = ai + 1; k < bi && ok; k++) if (beyond(sw[k].price, at(sw[k].i), tol)) ok = false;
+          if (!ok) continue;
+          let brokeAt = null;
+          for (let k = B.i + 1; k < n; k++) if (beyond(bars[k][4], at(k), 1e-9)) { brokeAt = k; break; }
+          const end = brokeAt == null ? n : brokeAt;
+          const touches = sw.filter(p => p.i >= A.i && p.i <= end && Math.abs(p.price - at(p.i)) <= tol).length;
+          const now = at(n);
+          const line = { a: A.i, b: B.i, pa: A.price, pb: B.price, slope, at, touches, brokeAt,
+                         breakPrice: brokeAt == null ? null : at(brokeAt), now,
+                         through: brokeAt == null && beyond(close, now, 1e-9) };
+          if (brokeAt == null) { intact = line; break; }
+          if (n - brokeAt <= keep && (!broken || brokeAt > broken.brokeAt)) broken = line;
         }
-        if (sl === null || tch <= 0 || (up ? sl < 0 : sl > 0)) continue;
-        let touches = 1;
-        for (let k = anc + 2; k < nB; k++) if (Math.abs(vals[k] - (vals[anc] + sl * (k - anc))) <= tol) touches += 1;
-        const now = vals[anc] + sl * (nB - anc);
-        const dist = (up ? close - now : now - close) / a;
-        const score = touches * 2 - Math.min(Math.max(dist, 0), 20);
-        if (touches >= 2 && (best === null || score > best.score)) best = { anchor: anc, touch: tch, slope: sl, touches, score, now };
       }
-      if (!best) return null;
-      const p0 = vals[best.anchor], anc = best.anchor, sl = best.slope;
-      best.price = p0;
-      best.at = i => p0 + sl * (i - anc);
-      best.through = up ? close < best.now : close > best.now;
-      return best;
+      return { intact, broken };
     };
-    return { up: pick(bars.map(b => b[3]), true), down: pick(bars.map(b => b[2]), false) };
+    const u = side(true), d = side(false);
+    return { up: u.intact, down: d.intact, upBroken: u.broken, downBroken: d.broken };
   }
 
   /* The nearest whole or half dollar strictly below and above `price`. */
@@ -260,7 +288,8 @@
     return out;
   }
 
-  const DeskLevels = { ROWS, VALUE_AREA, PIVOT, PIVOTS_KEPT, SR_EACH, SR_DEDUP_ATR, BAND_ATR, TL_TOL_ATR, TL_MIN_BARS,
+  const DeskLevels = { ROWS, VALUE_AREA, PIVOT, PIVOTS_KEPT, SR_EACH, SR_DEDUP_ATR, BAND_ATR, TL_TOL_ATR, TL_SWINGS,
+                       TL_KEEP_BROKEN,
                        profile, density, pivots, atr, mintick, srFan, trendLines, roundLevels, priorDay,
                        sessionDay, bySession };
   global.DeskLevels = DeskLevels;

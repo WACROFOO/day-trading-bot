@@ -45,6 +45,18 @@ def test_a_stale_feed_yields_stale_verdicts_and_no_plans():
     assert all(c["planAllowed"] is False for c in stale["cascade"].values())
 
 
+def test_a_stale_session_carries_the_last_datas_gates_for_display_only():
+    """The verdict stays STALE and no plan arms; the gates the cascade would
+    compute on the last data ride beside it for the card's tiles (2026-10-14)."""
+    live = build_session_from_records(records(), "t", "fixture", data_status="live")
+    stale = build_session_from_records(records(), "t", "fixture", data_status="stale")
+    for sym, c in stale["cascade"].items():
+        assert c["verdict"] == "STALE" and c["planAllowed"] is False
+        assert [g["id"] for g in c["gates"]] == ["feed"]
+        assert c["lastData"]["gates"] == live["cascade"][sym]["gates"]
+    assert all("lastData" not in c for c in live["cascade"].values())
+
+
 def test_delayed_data_is_stale_too():
     s = build_session_from_records(records(), "t", "fixture", data_status="delayed")
     assert s["plans"] == [] and {c["verdict"] for c in s["cascade"].values()} == {"STALE"}

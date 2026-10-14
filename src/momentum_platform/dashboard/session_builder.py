@@ -13,6 +13,7 @@ server-side reasons verbatim.
 
 from __future__ import annotations
 
+import dataclasses
 import json
 import time as _time
 from datetime import datetime, timedelta, timezone
@@ -593,21 +594,32 @@ def build_session_from_records(
             _build_now = datetime.fromisoformat(frames[-1]["ts"].replace("Z", "+00:00"))
         except (KeyError, ValueError):
             _build_now = None
+    def _gates(res) -> list:
+        return [{"id": g.id, "label": g.label, "state": g.state.value,
+                 "value": g.value, "reason": g.reason} for g in res.gates]
+
     for sym, meta in symbols.items():
         meta.setdefault("symbol", sym)
-        res = evaluate_cascade(cascade_inputs(meta, halt_state.get(sym),
-                                              feed_stale=_feed_is_stale(data_status),
-                                              chart=chart_gates(bars_by_symbol.get(sym, [])),
-                                              now=_build_now))
+        _ci = cascade_inputs(meta, halt_state.get(sym), feed_stale=_feed_is_stale(data_status),
+                             chart=chart_gates(bars_by_symbol.get(sym, [])), now=_build_now)
+        res = evaluate_cascade(_ci)
         cascade_by_symbol[sym] = {
             "verdict": res.verdict.value,
             "killedBy": res.killed_by,
             "planAllowed": res.plan_allowed,
             "reasons": res.reasons,
             "warnings": res.warnings,
-            "gates": [{"id": g.id, "label": g.label, "state": g.state.value,
-                       "value": g.value, "reason": g.reason} for g in res.gates],
+            "gates": _gates(res),
         }
+        # A stale feed decides nothing, and the verdict above stays STALE. The
+        # gates on the last data the desk holds are still facts the card shows,
+        # marked as such: without them the pillar tiles read "?" on a known
+        # price beside a gain and an RVOL that were judged (owner's recording,
+        # 2026-10-14 06:12 ET: GRML $6.88, inside $2–20, tiled "?").
+        if res.verdict.value == "STALE":
+            last = evaluate_cascade(dataclasses.replace(_ci, feed_stale=False))
+            cascade_by_symbol[sym]["lastData"] = {"verdict": last.verdict.value, "killedBy": last.killed_by,
+                                                  "gates": _gates(last)}
 
     # The 5-minute state (owner, 2026-10-06): a straight green 1-minute run arms
     # no plan, and the card said only "no confirmed first pullback". It now says

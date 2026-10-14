@@ -294,7 +294,7 @@ const INDICATORS = [
   ["ema200", "EMA 200"], ["macd", "MACD 12/26/9"], ["hod", "High of day"],
   ["plan", "Entry · stop · target"],
   ["levels", "Support / resistance (ross-fp-v4) · prior day · $ levels"],
-  ["trend", "Trend lines · breakouts (ross-fp-v4)"], ["profile", "Volume profile · visible range"],
+  ["trend", "Trend lines · breakouts (two swings)"], ["profile", "Volume profile · visible range"],
   ["values", "Values (OHLC legend)"],
 ];
 function indicatorMenu(host, show, onChange) {
@@ -322,7 +322,39 @@ function indicatorMenu(host, show, onChange) {
     if (!panel.hidden && !panel.contains(e.target) && e.target !== btn) panel.hidden = true;
   });
   host.appendChild(btn); host.appendChild(panel);
-  return { btn, panel };
+  // a switch flipped elsewhere (the card's header chips) shows here too
+  const sync = () => panel.querySelectorAll("input").forEach((box, k) => { box.checked = !!show[INDICATORS[k][0]]; });
+  return { btn, panel, sync };
+}
+
+/* The overlays switched most, as chips on the chart card's own header (owner,
+   2026-10-14: "the possibility to switch off the default indicators such as
+   trendlines and supp/res"): support/resistance, trend lines, the volume
+   profile. The ƒ menu inside the chart, shown on hover, holds every switch;
+   both flip the same per-pane setting. */
+const OVERLAY_CHIPS = [["levels", "S/R", "Support / resistance, the prior day's levels and the $ levels"],
+                       ["trend", "trend", "Trend lines and their breakouts"],
+                       ["profile", "profile", "Volume profile of the bars in view"]];
+function overlayChips(host, show, flip) {
+  const head = host.closest(".card") && host.closest(".card").querySelector(".card-head");
+  if (!head) return () => {};
+  const wrap = document.createElement("span");
+  wrap.className = "ov-chips";
+  const chips = OVERLAY_CHIPS.map(([key, label, title]) => {
+    const b = document.createElement("button");
+    b.className = "ov-chip"; b.dataset.key = key; b.textContent = label;
+    b.addEventListener("click", e => { e.stopPropagation(); flip(key); });
+    b.title = title + " — click to switch on or off";
+    wrap.appendChild(b);
+    return b;
+  });
+  head.insertBefore(wrap, head.querySelector(".expand"));
+  const paint = () => chips.forEach(b => {
+    const on = !!show()[b.dataset.key];
+    b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+  paint();
+  return paint;
 }
 
 function makePane(hostId, daily) {
@@ -386,6 +418,12 @@ function makePane(hostId, daily) {
      price scale reports none; a double-click on the axis, or a new symbol,
      hands the scale back to the data. */
   let priceZoom = null;
+  let autoBtnRef = null;
+  const setZoom = z => {
+    priceZoom = z;
+    if (autoBtnRef) autoBtnRef.hidden = !z;
+    try { chart.priceScale("right").applyOptions({ autoScale: true }); } catch (e) { /* no data yet */ }
+  };
   const candles = chart.addCandlestickSeries({
     upColor: TVC.up, downColor: TVC.down, borderVisible: false,
     wickUpColor: TVC.up, wickDownColor: TVC.down,
@@ -426,6 +464,14 @@ function makePane(hostId, daily) {
   liveBtn.className = "live-btn"; liveBtn.textContent = "»"; liveBtn.hidden = true;
   liveBtn.title = "Back to the newest bar";
   mainEl.appendChild(liveBtn);
+  /* TradingView's "A" under the price axis: shown while the price is zoomed
+     or dragged by hand, one click hands the scale back to the data. */
+  const autoBtn = document.createElement("button");
+  autoBtn.className = "auto-btn"; autoBtn.textContent = "A"; autoBtn.hidden = true;
+  autoBtn.title = "Auto-scale the price (or double-click the price axis)";
+  mainEl.appendChild(autoBtn);
+  autoBtnRef = autoBtn;
+  autoBtn.addEventListener("click", e => { e.stopPropagation(); setZoom(null); });
   let lastRows = [], lastVols = [], lastInd = {}, lastBars = [], lastOpts = null, lastLevels = null;
   let lastProfile = null, runs = [], starts = new Set(), rowPart = [], paneLevels = null, forceFull = true;
   const drawn = { full: 0, incremental: 0 };       // how each render drew (a test reads it)
@@ -593,36 +639,42 @@ function makePane(hostId, daily) {
       g.fillStyle = "rgba(" + m.rgb + ",1)"; g.fillText(m.text, 32, ly);
     });
   });
-  /* The trend lines as ross-fp-v4.pine V9.10 draws them (levels.js
-     trendLines): today's tangent under the higher lows (teal) and over the
-     lower highs (red), from their best-scored anchor, extended right. A
-     tangent never cuts the confirmed bars, so only live price can cross it,
-     and the label says so the moment it does: "downtrend BROKEN ▲" — the
-     breakout — and "uptrend LOST ▼". A crossed line turns dashed and dim. */
+  /* The trend lines (levels.js trendLines, 2026-10-14): each through two of
+     today's confirmed swings — dotted where it touches — the down-line red over
+     the lower highs, the up-line teal under the higher lows, drawn a few bars
+     past the newest one. Live price through an unbroken line says
+     "BREAKING"; a candle closing through it, "downtrend BROKEN ▲" (the
+     breakout) or "uptrend LOST ▼", and the broken line stays drawn to its
+     break, dashed, for 20 bars. */
+  const TL_PROJECT = 8;                       // bars an unbroken line is drawn past the newest bar
   const trendLayer = layer("top", (g, size) => {
     if (!show.trend || daily || !paneLevels || !paneLevels.trend) return;
     const t = paneLevels.trend;
-    const ts = chart.timeScale();
-    const edge = ts.coordinateToLogical(size.width);
-    if (edge == null) return;
     g.font = "10px " + MONO; g.textAlign = "left";
-    [[t.up, true], [t.down, false]].forEach(([ln, up]) => {
+    const one = (ln, up, broken) => {
       if (!ln) return;
-      const i0 = t.offset + ln.anchor, iR = Math.max(edge, t.live + 1);
-      const x0 = xAt(i0), xR = xAt(iR), y0 = y(ln.at(ln.anchor)), yR = y(ln.at(iR - t.offset));
-      if (x0 == null || xR == null || y0 == null || yR == null) return;
-      g.strokeStyle = up ? (ln.through ? "rgba(38,166,154,0.35)" : "rgba(38,166,154,0.85)")
-                         : (ln.through ? "rgba(239,83,80,0.35)" : "rgba(239,83,80,0.85)");
-      g.lineWidth = 2; g.setLineDash(ln.through ? [6, 4] : []);
-      g.beginPath(); g.moveTo(x0, y0); g.lineTo(xR, yR); g.stroke(); g.setLineDash([]);
-      const xl = xAt(t.live), yl = y(ln.now);
+      const iEnd = broken ? ln.brokeAt : t.live + TL_PROJECT;
+      const x0 = xAt(ln.a), x1 = xAt(iEnd), y0 = y(ln.at(ln.a)), y1 = y(ln.at(iEnd));
+      if (x0 == null || x1 == null || y0 == null || y1 == null) return;
+      const rgb = up ? "38,166,154" : "239,83,80";
+      g.strokeStyle = "rgba(" + rgb + "," + (broken ? 0.5 : 0.9) + ")";
+      g.lineWidth = broken ? 1.5 : 2; g.setLineDash(broken ? [6, 4] : []);
+      g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke(); g.setLineDash([]);
+      g.fillStyle = "rgba(" + rgb + ",0.95)";
+      [ln.a, ln.b].forEach(i => {                // the two swings it stands on
+        const xx = xAt(i), yy = y(ln.at(i));
+        if (xx != null && yy != null) { g.beginPath(); g.arc(xx, yy, 2.5, 0, 2 * Math.PI); g.fill(); }
+      });
+      const text = broken ? (up ? "uptrend LOST ▼" : "downtrend BROKEN ▲")
+        : ln.through ? (up ? "uptrend BREAKING ▼" : "downtrend BREAKING ▲") : (up ? "uptrend" : "downtrend");
+      const iL = broken ? ln.brokeAt : t.live, xl = xAt(iL), yl = y(ln.at(iL));
       if (xl == null || yl == null) return;
-      const text = up ? (ln.through ? "uptrend LOST ▼" : "uptrend") : (ln.through ? "downtrend BROKEN ▲" : "downtrend");
-      // beside the live bar, or just left of it when the bar sits at the edge
       const xt = Math.min(xl + 8, size.width - g.measureText(text).width - 4);
-      g.fillStyle = up ? (ln.through ? "#ff9800" : "#26a69a") : (ln.through ? "#76ff03" : "#ef5350");
+      g.fillStyle = broken || ln.through ? (up ? "#ff9800" : "#76ff03") : (up ? "#26a69a" : "#ef5350");
       g.fillText(text, xt, yl + (up ? 13 : -6));
-    });
+    };
+    one(t.downBroken, false, true); one(t.upBroken, true, true);
+    one(t.down, false, false); one(t.up, true, false);
   });
   candles.attachPrimitive(sessionBands);
   candles.attachPrimitive(srBands);
@@ -731,6 +783,12 @@ function makePane(hostId, daily) {
      price pane — zooms the price around the pointer; the bare wheel over the
      chart still zooms time, as on TradingView. */
   const axisWidth = () => { try { return chart.priceScale("right").width() || scaleW; } catch (e) { return scaleW; } };
+  // the range the autoscale shows, inside the price scale's margins (8 % top, 22 % bottom)
+  const shownRange = () => {
+    const h = paneSize.h || mainEl.clientHeight;
+    const top = candles.coordinateToPrice(h * 0.08), bottom = candles.coordinateToPrice(h * 0.78);
+    return top != null && bottom != null && top > bottom ? { min: bottom, max: top } : null;
+  };
   const overAxis = e => { const r = mainEl.getBoundingClientRect(); return e.clientX >= r.right - axisWidth(); };
   mainEl.addEventListener("wheel", e => {
     if (daily && !overAxis(e)) return;
@@ -738,26 +796,51 @@ function makePane(hostId, daily) {
     e.preventDefault(); e.stopPropagation();
     if (!lastRows.length || !e.deltaY) return;
     const h = paneSize.h || mainEl.clientHeight;
-    if (!priceZoom) {
-      // the range the autoscale shows, inside the price scale's margins (8 % top, 22 % bottom)
-      const top = candles.coordinateToPrice(h * 0.08), bottom = candles.coordinateToPrice(h * 0.78);
-      if (top == null || bottom == null || !(top > bottom)) return;
-      priceZoom = { min: bottom, max: top };
-    }
+    const z = priceZoom || shownRange();
+    if (!z) return;
     const r = mainEl.getBoundingClientRect();
     const p = candles.coordinateToPrice(Math.min(Math.max(e.clientY - r.top, 0), h));
     if (p == null) return;
     const f = Math.exp(Math.max(-0.5, Math.min(0.5, e.deltaY * 0.002)));    // down = out, up = in
-    const min = p - (p - priceZoom.min) * f, max = p + (priceZoom.max - p) * f;
+    const min = p - (p - z.min) * f, max = p + (z.max - p) * f;
     if (!(max - min > 1e-6)) return;
-    priceZoom = { min, max };
-    try { chart.priceScale("right").applyOptions({ autoScale: true }); } catch (e2) {}
+    setZoom({ min, max });
   }, { capture: true, passive: false });
   mainEl.addEventListener("dblclick", e => {
     if (!overAxis(e)) return;
-    priceZoom = null;                                  // the library's own double-click restores autoscale
-    try { chart.priceScale("right").applyOptions({ autoScale: true }); } catch (e2) {}
+    setZoom(null);                                     // the library's own double-click restores autoscale
   }, true);
+  /* Drag the price up and down (owner's recording, 2026-10-14: "i cannot move
+     the chart up and down using the mouse"). The library moves the price on a
+     drag only with its autoscale off, and this pane zooms through the
+     autoscale; so a vertical drag shifts the zoomed range by the pointer's
+     travel, while the library keeps the sideways drag — a diagonal drag moves
+     both, as on TradingView. Four pixels of dead zone keep a sideways drag
+     sideways. "A" or a double-click on the axis hands the scale back. */
+  let vdrag = null;
+  mainEl.addEventListener("pointerdown", e => {
+    vdrag = null;
+    if (e.button !== 0 || overAxis(e) || (e.target.closest && e.target.closest("button, .ind-menu"))) return;
+    vdrag = { y: e.clientY, from: null, perPx: null };
+  }, true);
+  window.addEventListener("pointermove", e => {
+    if (!vdrag) return;
+    if (!(e.buttons & 1)) { vdrag = null; return; }
+    const dy = e.clientY - vdrag.y;
+    if (!vdrag.from) {
+      if (Math.abs(dy) < 4) return;
+      const p0 = candles.coordinateToPrice(0), p1 = candles.coordinateToPrice(100), z = priceZoom || shownRange();
+      if (p0 == null || p1 == null || !z || !(p0 > p1)) { vdrag = null; return; }
+      vdrag.from = z; vdrag.perPx = (p0 - p1) / 100;
+    }
+    setZoom({ min: vdrag.from.min + dy * vdrag.perPx, max: vdrag.from.max + dy * vdrag.perPx });
+  });
+  // The library's own drag on the price axis scales by hand and turns its
+  // autoscale off: "A" shows for that too, and gives the scale back.
+  window.addEventListener("pointerup", () => {
+    vdrag = null;
+    try { if (!chart.priceScale("right").options().autoScale) autoBtn.hidden = false; } catch (e) { /* no data */ }
+  });
 
   /* Which overlays this pane shows. Stored per pane so the 1-minute chart can
      carry MACD while the 10-second pane stays clean, and remembered across
@@ -776,7 +859,7 @@ function makePane(hostId, daily) {
   // 1- and 5-minute panes, the volume profile on the 5-minute — the pane the
   // corpus's class runs it on (wC2Bbf6OMFQ [00:07:36]); then ("do you think
   // we can handle uptrends and downtrends lines? so i spot breakouts") the
-  // Pine's trend lines on the same two panes. A key saved before simply lacks
+  // trend lines on the same two panes (two swings since 2026-10-14). A key saved before simply lacks
   // the new ones: defaults.
   const SHOW_KEY = "momentum-workstation.show.v3." + hostId;
   // MACD is ON by default on the execution pane: it is a Layer 2 gate the
@@ -803,16 +886,20 @@ function makePane(hostId, daily) {
     }
     macdTag.hidden = !subH;
     liveBtn.style.bottom = subH ? "8px" : "34px";       // above the time axis when the price pane carries it
+    autoBtn.style.bottom = subH ? "6px" : "32px";
   };
   layoutPanes();
   const tools = window.ChartTools ? window.ChartTools.attach(chart, candles, host, hostId) : null;
-  const menu = indicatorMenu(host, show, next => {
-    show = next;
+  let paintChips = () => {};
+  const applyShow = () => {
     try { localStorage.setItem(SHOW_KEY, JSON.stringify(show)); } catch (e) {}
     layoutPanes();
     forceFull = true;
     if (lastOpts) api.render(lastBars, lastOpts);
-  });
+    paintChips();
+  };
+  const menu = indicatorMenu(host, show, next => { show = next; applyShow(); });
+  if (!daily) paintChips = overlayChips(host, () => show, key => { show[key] = !show[key]; menu.sync(); applyShow(); });
   const lines = {}, lineFull = {};
   // VWAP is the reference line and reads as one: three pixels against one
   // for the EMAs (owner, 2026-09-08). Under a price zoom a line has no say in
@@ -855,9 +942,9 @@ function makePane(hostId, daily) {
       out.band = fan.band;
     }
     if (show.trend && a && runs.length) {
-      const today = runs[runs.length - 1];
-      const tl = L.trendLines(bars.slice(today.from, bars.length - 1), close, a);
-      if (tl.up || tl.down) out.trend = Object.assign(tl, { offset: today.from, live: bars.length - 1 });
+      // the confirmed bars; the forming one is the live price that can break a line
+      const tl = L.trendLines(bars.slice(0, bars.length - 1), close, a, { from: runs[runs.length - 1].from });
+      if (tl.up || tl.down || tl.upBroken || tl.downBroken) out.trend = Object.assign(tl, { live: bars.length - 1 });
     }
     return out;
   };
@@ -880,10 +967,9 @@ function makePane(hostId, daily) {
     trendDrawn() {
       const t = show.trend && paneLevels && paneLevels.trend;
       if (!t) return null;
-      const one = ln => ln ? { anchor: t.offset + ln.anchor, touch: t.offset + ln.touch, slope: ln.slope,
-                               price: ln.price, touches: ln.touches, now: ln.now, through: ln.through,
-                               live: t.live } : null;
-      return { up: one(t.up), down: one(t.down) };
+      const one = ln => ln ? { anchor: ln.a, touch: ln.b, slope: ln.slope, price: ln.pa, touches: ln.touches,
+                               now: ln.now, through: ln.through, brokeAt: ln.brokeAt, live: t.live } : null;
+      return { up: one(t.up), down: one(t.down), upBroken: one(t.upBroken), downBroken: one(t.downBroken) };
     },
     profileDrawn() { return show.profile ? lastProfile : null; },
     priceZoomed() { return priceZoom ? Object.assign({}, priceZoom) : null; },
@@ -927,7 +1013,7 @@ function makePane(hostId, daily) {
       } catch (e) { atEdge = true; }
       lastBars = bars; lastOpts = opts;
       chart.applyOptions({ watermark: { text: (opts.symbol || "") + (opts.tf ? "  ·  " + opts.tf : "") } });
-      if (opts.snapToLive) priceZoom = null;            // a new symbol starts on its own scale
+      if (opts.snapToLive && priceZoom) setZoom(null);  // a new symbol starts on its own scale
       if (!bars.length) {
         candles.setData([]); volume.setData([]); macd.setData([]); macdLine.setData([]); macdSignal.setData([]);
         lastRows = []; lastVols = []; lastLevels = null; paneLevels = null; runs = []; starts = new Set(); rowPart = [];
@@ -1959,9 +2045,15 @@ function boardVerdictList(host, rows) {
   const cards = rankedCards(), live = cards.filter(c => c.verdict.word !== "NO"), no = cards.filter(c => c.verdict.word === "NO");
   const n = Object.keys(SYMS).length;
   const asOf = cardsAsOfNote();
-  host.appendChild(el("div", "vl-funnel" + (asOf ? " asof" : ""), n + (n === 1 ? " name" : " names") + " judged · " +
+  // A stale feed is one fact about the desk, said once — not the same long
+  // reason cut short on every row (2026-10-14: eight rows of "data stale — no
+  // verdict on a feed…")
+  const stale = c => c.verdict.cascade === "STALE";
+  const allStale = live.length > 0 && live.every(stale);
+  host.appendChild(el("div", "vl-funnel" + (asOf ? " asof" : "") + (allStale ? " stale" : ""),
+    n + (n === 1 ? " name" : " names") + " judged · " +
     (live.length ? live.length + " in play" : "none in play") + (no.length ? " · " + no.length + " NO" : "") +
-    (asOf ? " · " + asOf : "")));
+    (allStale ? " · feed stale: no verdicts, pillars on the last data" : "") + (asOf ? " · " + asOf : "")));
   const priceCells = (tr, sym) => {
     const r = byS[sym] && byS[sym].row || {};
     tr.appendChild(el("span", "vl-px " + dirClass(r.changePct), fx(r.price)));
@@ -1976,11 +2068,15 @@ function boardVerdictList(host, rows) {
     l1.appendChild(el("span", "vl-word " + (CARD_WORD_CLASS[v.word] || "wait"), v.word));
     tr.appendChild(l1);
     const l2 = el("div", "vl-l2");
-    l2.appendChild(el("span", "vl-reason", v.reason || ""));
+    l2.appendChild(el("span", "vl-reason", stale(c) ? (allStale ? "" : "feed stale") : (v.reason || "")));
     const pl = lampOf(c, "pillars");
-    const miss = PILLAR_LAMPS.filter(([id]) => { const l = lampOf(c, id); return l && l.state !== "PASS"; }).map(([, w]) => w);
+    // ✗ is a pillar that fails, ? one the desk cannot judge — "✗ price" on a
+    // $6.88 name was an unknown read as a failure (2026-10-14)
+    const which = st => PILLAR_LAMPS.filter(([id]) => { const l = lampOf(c, id); return l && st(l.state); }).map(([, w]) => w);
+    const fail = which(x => x === "FAIL"), unk = which(x => x !== "PASS" && x !== "FAIL");
     const score = pl ? (String(pl.value).match(/^\d\s*\/\s*5/) || [pl.value])[0] : "";
-    l2.appendChild(el("span", "vl-pillars", score + (miss.length ? " ✗ " + miss.join(", ") : "")));
+    l2.appendChild(el("span", "vl-pillars", [score, fail.length ? "✗ " + fail.join(", ") : "",
+                                              unk.length ? "? " + unk.join(", ") : ""].filter(Boolean).join(" ")));
     tr.appendChild(l2);
     tr.title = v.word + " — " + (v.reason || "") + (v.level != null ? " · level " + (v.levelLabel || "") + " " + fx(v.level) : "");
     tr.onclick = () => select(c.symbol, "pillars-board");
@@ -3150,23 +3246,13 @@ function chipValue(l) {
 function lampChip(l, word, withValue) {
   const cls = LAMP_CLASS[l.state] || "unk";
   const c = el("span", "pchip " + cls);
-  c.appendChild(el("i", null, l.state === "PASS" ? "✓" : l.state === "FAIL" ? "✗" : "?"));
+  c.appendChild(el("i", null, l.state === "PASS" ? "✓" : l.state === "FAIL" ? "✗"
+    : (l.state === "INFO" || l.state === "MANUAL_CONFIRMATION_REQUIRED") ? "·" : "?"));
   c.appendChild(el("span", "pk", word));
   if (withValue) c.appendChild(el("span", "pv", chipValue(l)));
   c.dataset.lamp = l.id; c.dataset.state = l.state;
   c.title = l.label + ": " + l.state + " · " + l.value + " · rule " + l.rule + (l.why ? "\n" + l.why : "");
   return c;
-}
-function lampStrip(card, ids, label, sub, withValue) {
-  const row = el("div", "dc-strip");
-  const h = el("div", "dc-strip-h");
-  h.appendChild(el("span", "dc-strip-l", label));
-  if (sub) h.appendChild(el("span", "dc-strip-s", sub));
-  row.appendChild(h);
-  const chips = el("div", "dc-strip-c");
-  ids.forEach(([id, word]) => { const l = lampOf(card, id); if (l) chips.appendChild(lampChip(l, word, withValue)); });
-  row.appendChild(chips);
-  return row;
 }
 /* One pillar tile: the mark, the value, the threshold — the server lamp's own
    value and rule, shortened to fit; both in full in the tooltip. */
@@ -3189,10 +3275,13 @@ function tileRule(l) {
   return r.replace(/\s*\([^)]*\)/g, "").trim();
 }
 function pillarTiles(card, ctx) {
-  const box = el("div", "pl-box");
+  const P = card.pillars || {};
+  // A stale feed: the tiles are the last data's, dimmed and said so — the word
+  // above is the stale WAIT (owner's recording 2026-10-14: price "?" on a known
+  // $6.88 beside a judged gain and RVOL read as a broken card).
+  const box = el("div", "pl-box" + (P.stale ? " stale" : ""));
   const head = el("div", "pl-head");
   head.appendChild(el("span", "pl-title", "five pillars"));
-  const P = card.pillars || {};
   const score = el("span", "pl-score");
   score.appendChild(document.createTextNode(P.counted ? String(P.passed) : "—"));
   score.appendChild(el("small", null, "/" + (P.of || 5)));
@@ -3203,9 +3292,11 @@ function pillarTiles(card, ctx) {
   for (let i = 0; i < (P.of || 5); i++) meter.appendChild(el("i", P.counted && i < P.passed ? "on" : null));
   if (P.needs) meter.appendChild(el("b", "pl-need-mark")).style.left = (100 * P.needs / (P.of || 5)) + "%";
   head.appendChild(meter);
-  head.appendChild(el("span", "pl-need", P.counted ? "needs " + P.needs : (P.note || "not counted")));
-  head.title = P.counted ? "the cascade's count (A5): " + P.passed + " of " + (P.of || 5) + " pass, " + P.needs +
-    " needed — unknown counts as not passed" : (P.note || "");
+  head.appendChild(el("span", "pl-need", (P.stale ? "feed stale · last data · " : "") +
+    (P.counted ? "needs " + P.needs : (P.note || "not counted"))));
+  head.title = (P.stale ? "The feed is stale: no verdict is computed on it. These are the gates on the last data the desk holds.\n" : "") +
+    (P.counted ? "the cascade's count (A5): " + P.passed + " of " + (P.of || 5) + " pass, " + P.needs +
+    " needed — unknown counts as not passed" : (P.note || ""));
   box.appendChild(head);
   const grid = el("div", "pl-tiles");
   PILLAR_LAMPS.forEach(([id, word]) => {
@@ -3228,6 +3319,26 @@ function pillarTiles(card, ctx) {
   if (rv && ctx && ctx.row) rv.title += "\n" + rowRvolTitle(ctx.row);
   box.appendChild(grid);
   return box;
+}
+/* The fold's gates: every lamp the face's tiles do not show, as one strip of
+   chips — the mark and a word; value, rule and reason in the tooltip. A gate
+   the cascade never reached (NOT_APPLICABLE) is left out. */
+const FACE_LAMPS = new Set(PILLAR_LAMPS.map(([id]) => id).concat(["pillars"]));
+const GATE_WORD = { rising: "rising", structure: "split·tick", vwap: "VWAP", ema9: "9 EMA", macd: "MACD",
+                    pullback: "pullback vol", room: "room", tape: "tape" };
+function gateStrip(card) {
+  const row = el("div", "dc-strip dc-gates");
+  (card.lamps || []).filter(l => !FACE_LAMPS.has(l.id) && l.state !== "NOT_APPLICABLE")
+    .forEach(l => row.appendChild(lampChip(l, GATE_WORD[l.id] || LAMP_SHORT[l.id] || l.label, false)));
+  return row;
+}
+/* The setup in a phrase: the server's first clause, plus what became of the
+   last plan; the whole sentence on hover. Nothing when it repeats the reason. */
+function setupPhrase(text, reason) {
+  if (!text || text === reason) return null;
+  const parts = String(text).split(" · ");
+  const keep = [parts[0]].concat(parts.slice(1).filter(x => /^last plan/.test(x)));
+  return keep.join(" · ");
 }
 /* What the fold ("Details") holds, in a few words on its own line, so a closed
    fold still says whether opening it would change anything. */
@@ -3351,39 +3462,40 @@ function renderDecisionCard(frame, ctx, card) {
       body.appendChild(el("div", "dc-tapehint", "at the trigger, read the Time & Sales: green B prints at the ask = " +
         "buyers lifting the offer · red S at the bid = sellers hitting it"));
     }
-    if (!isNo) body.appendChild(lampStrip(card, CHART_LAMPS, "chart", null, false));
-    if (card.setup && card.setup.text && card.setup.text !== v.reason)
-      body.appendChild(el("div", "dc-setup", card.setup.text));
+    // Only what the face does not say, a line each (owner, 2026-10-14: "reduce
+    // in an optimized way the text under the details toggle"): the setup in a
+    // phrase, the other gates as chips — value, rule and reason on hover — the
+    // checks the news read could not make, the warnings, the bot. The five
+    // pillars and the news are on the face and are not repeated here.
+    const st = setupPhrase(card.setup && card.setup.text, v.reason);
+    if (st) { const d = el("div", "dc-setup", st); d.title = card.setup.text; body.appendChild(d); }
+    if (!isNo) body.appendChild(gateStrip(card));
     if (!isReview && !isNo) body.appendChild(tapeLineFor(card.symbol));
-    if (card.catalyst) { const cat = el("div", "dc-cat"); renderServerCatalyst(cat, card.catalyst); body.appendChild(cat); }
-    const bot = card.bot || {};
-    const b = el("div", "dc-bot " + (bot.tone || "info"));
-    b.appendChild(el("span", "dc-tag", "bot"));
-    b.appendChild(el("span", null, bot.text || "—"));
-    if (bot.reasons && bot.reasons.length) b.title = bot.reasons.map(r => r.raw).join("\n");
-    body.appendChild(b);
-    (card.warnings || []).forEach(w => body.appendChild(el("div", "dc-warn", "⚠ " + w.text)));
-    (card.shadow || []).filter(x => !x.takes).forEach(x =>
-      body.appendChild(el("div", "dc-setup", "shadow " + x.id + " (" + x.label + ") passes: " + x.failed.join(", "))));
+    const checks = ((card.catalyst || {}).flags || []).filter(f => f.level !== "bad");
+    if (checks.length) {
+      const c = el("div", "dc-checks");
+      checks.forEach(f => { const x = el("span", "cat2-flag " + f.level, f.text); x.title = "rule " + f.rule; c.appendChild(x); });
+      body.appendChild(c);
+    }
+    (card.warnings || []).forEach(w => { const d = el("div", "dc-warn", "⚠ " + w.text); d.title = w.text; body.appendChild(d); });
     const meta = ctx && ctx.meta || {}, last = ctx && ctx.last;
     // The split flag the header used to carry (audit 2026-10-09): a 52-week
     // high over 20× the price is split-adjusted history (FILTERS.md).
     if (meta.high52w && last && meta.high52w > 20 * last)
       body.appendChild(el("div", "dc-warn", "⚠ 52-week high " + fx(meta.high52w) + " = ×" +
         Math.round(meta.high52w / last).toLocaleString("en-US") + " the price: split-adjusted history"));
-    const table = el("div", "dc-lamps");
-    (card.lamps || []).forEach(l => {
-      const c = LAMP_CLASS[l.state] || "unk";
-      const r = el("div", "dc-lamp " + c);
-      r.appendChild(el("i", null, ""));
-      r.appendChild(el("span", "l", l.label));
-      r.appendChild(el("span", "v", l.value));
-      r.appendChild(el("span", "r", l.rule));
-      if (l.why) r.title = l.why;
-      table.appendChild(r);
-    });
-    body.appendChild(el("div", "divider", "every gate · the value beside the bot's own threshold"));
-    body.appendChild(table);
+    const bot = card.bot || {};
+    const b = el("div", "dc-bot " + (bot.tone || "info"));
+    b.appendChild(el("span", "dc-tag", "bot"));
+    b.appendChild(el("span", null, bot.text || "—"));
+    if (bot.reasons && bot.reasons.length) b.title = bot.reasons.map(r => r.raw).join("\n");
+    body.appendChild(b);
+    const miss = (card.shadow || []).filter(x => !x.takes);
+    if (miss.length) {
+      const d = el("div", "dc-setup", "shadow " + miss.map(x => x.id + " ✗").join(" · "));
+      d.title = miss.map(x => x.id + " (" + x.label + ") passes: " + x.failed.join(", ")).join("\n");
+      body.appendChild(d);
+    }
   }
   const tail = $("#verdictMoreTail");
   if (tail) tail.textContent = [isReview ? "order" : "", whySummary(card)].filter(Boolean).join(" · ");
@@ -3697,33 +3809,6 @@ function healthFailed() {
   HEALTH_FAILS++;
   if (!HEALTH_FAIL_SINCE) HEALTH_FAIL_SINCE = new Date().toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false });
   renderDeskAlerts(null);
-}
-
-/* The catalyst block, from the server's read (catalyst.card_read): the grade
-   and its reason on one line, the headline in two, then type · age · source
-   and the flags. Rules: knowledge-base/strategies/CATALYST.md. */
-function renderServerCatalyst(host, cat) {
-  host.appendChild(el("div", "divider", "catalyst"));
-  const top = el("div", "cat2-top");
-  const g = el("span", "cat2-grade " + cat.grade, cat.grade);
-  g.title = "rule " + cat.rule + " · knowledge-base/strategies/CATALYST.md";
-  top.appendChild(g);
-  const why = el("span", "cat2-reason", cat.reason);
-  why.title = cat.reason;
-  top.appendChild(why);
-  host.appendChild(top);
-  if (cat.headline) {
-    const h = el(cat.url ? "a" : "p", "cat2-headline", cat.headline);
-    if (cat.url) { h.href = cat.url; h.target = "_blank"; h.rel = "noopener noreferrer"; }
-    h.title = cat.headline;
-    host.appendChild(h);
-  }
-  const meta = [cat.type, cat.age, cat.source].filter(x => x && x !== "—");
-  if (meta.length) host.appendChild(el("div", "cat2-meta", meta.join(" · ")));
-  const flags = el("div", "cat2-flags");
-  (cat.flags || []).forEach(f => {
-    const x = el("span", "cat2-flag " + f.level, f.text); x.title = "rule " + f.rule; flags.appendChild(x); });
-  host.appendChild(flags);
 }
 
 /* ── charts ─────────────────────────────────────────────────────────── */

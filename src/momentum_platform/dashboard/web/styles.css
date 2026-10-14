@@ -274,6 +274,18 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
   cursor:pointer}
 .live-btn:hover{border-color:#2962ff;color:#fff}
 .live-btn[hidden]{display:none}
+.auto-btn{position:absolute;right:6px;bottom:32px;z-index:6;width:20px;height:18px;padding:0;
+  border:1px solid #2962ff;border-radius:3px;background:#1e222dcc;color:#d1d4dc;font:600 10px/1 var(--sans);cursor:pointer}
+.auto-btn:hover{background:#2962ff;color:#fff}
+.auto-btn[hidden]{display:none}
+/* the overlay switches on a chart card's header: lit = drawn */
+.ov-chips{display:inline-flex;gap:3px;margin-left:8px;flex:none}
+/* the line key gives way first when the header is narrow; the switches stay whole */
+.chart-card .card-head .legend{min-width:0;overflow:hidden}
+.ov-chip{font:600 9.5px/1 var(--mono);padding:2px 6px;border-radius:3px;border:1px solid var(--line);
+  background:transparent;color:var(--ink-faint);cursor:pointer;text-decoration:line-through}
+.ov-chip.on{color:#d1d4dc;border-color:#2962ff;background:#2962ff22;text-decoration:none}
+.ov-chip:hover{border-color:#5b7cff;color:#fff}
 
 /* ── drawing tools and the indicator menu ───────────────────────────────
    The toolbar and the ƒ button sit above the chart canvases and only appear
@@ -616,26 +628,18 @@ body.resizing .gutter{pointer-events:auto}
 .dc-arrow{color:var(--hi)}
 .dc-asof{margin-left:auto;font:9px var(--mono);color:var(--ink-faint)}
 .dc-asof-note{font-size:10.5px;color:var(--hi);border:1px dashed #4a3c17;border-radius:4px;padding:4px 6px}
-.dc-setup{font-size:10.5px;color:var(--ink-dim)}
+.dc-setup{font-size:10.5px;color:var(--ink-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dc-gates{margin:2px 0}
+.dc-checks{display:flex;flex-wrap:wrap;gap:4px}
 .dc-bot{display:flex;gap:6px;align-items:baseline;font-size:10.5px;line-height:1.35;color:var(--ink-dim)}
 .dc-bot.ok{color:#a9efc9} .dc-bot.warn{color:#ffdf9e}
 .dc-tag{font:700 8.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.6px;padding:2px 4px;border-radius:3px;
   border:1px solid var(--line);color:var(--ink-faint);flex:none}
-.dc-warn{font-size:10.5px;color:var(--hi);line-height:1.3}
+.dc-warn{font-size:10.5px;color:var(--hi);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dc-chips{display:flex;flex-wrap:wrap;gap:3px}
 .vchip.man{color:#c9b8ff;border-color:#3a2f5c;background:#1a1530;border-style:dashed}
 .vchip.na{color:var(--ink-faint);opacity:.6}
 .vchip.info{color:#bcd0ff;border-color:#24365a;background:#101a2b}
-.dc-lamps{display:grid;grid-template-columns:10px minmax(90px,auto) 1fr auto;gap:2px 8px;align-items:center;
-  font-size:11px}
-.dc-lamp{display:contents}
-.dc-lamp i{width:8px;height:8px;border-radius:50%;background:var(--ink-faint)}
-.dc-lamp.ok i{background:var(--target)} .dc-lamp.no i{background:var(--down)}
-.dc-lamp.unk i{background:transparent;border:1px dashed var(--hi)} .dc-lamp.man i{background:#8f7cff}
-.dc-lamp.info i{background:var(--accent)} .dc-lamp.na i{opacity:.4}
-.dc-lamp .l{color:var(--ink-dim)} .dc-lamp .v{font-family:var(--mono);color:var(--ink)}
-.dc-lamp .r{font-size:9.5px;color:var(--ink-faint);text-align:right}
-.verdict-card:not(.expanded) .dc-lamps{display:none}
 .verdict-card.expanded .dc-chips{display:none}
 /* One scroll for the whole decision card: the verdict, then the order panel
    under it, read top to bottom like a ticket — never two half-height boxes. */
@@ -669,18 +673,6 @@ body.resizing .gutter{pointer-events:auto}
 .dc-pos{font-size:11.5px;color:#a9efc9;background:#0f2c1f;border-radius:4px;padding:5px 8px;margin-bottom:4px}
 .dc-pos.breach{background:#301419;color:#ffb3ba}
 .dc-breach{font-weight:600;color:#ffb3ba;font-size:11px;margin:4px 0}
-.cat2-top{display:flex;align-items:center;gap:7px;margin:2px 0 3px;min-width:0}
-.cat2-grade{font:700 10.5px/1 var(--mono);letter-spacing:.8px;padding:4px 7px;border-radius:4px;flex:none}
-.cat2-grade.STRONG{color:#0b0f14;background:var(--up)}
-.cat2-grade.MODERATE{color:#0b0f14;background:var(--hi)}
-.cat2-grade.WEAK{color:#ffb3ba;background:#301419;border:1px solid #4a1f26}
-.cat2-grade.UNKNOWN{color:var(--ink-faint);background:#12181f;border:1px dashed var(--line)}
-.cat2-reason{font-size:11px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.cat2-headline{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-  font-size:12px;line-height:1.35;color:var(--ink);margin:0 0 2px;text-decoration:none}
-a.cat2-headline:hover{text-decoration:underline}
-.cat2-meta{font:10px var(--mono);color:var(--ink-dim);margin-bottom:3px}
-.cat2-flags{display:flex;flex-wrap:wrap;gap:3px}
 .cat2-flag{font-size:9.5px;padding:1px 5px;border-radius:3px;border:1px solid var(--line);color:var(--ink-dim)}
 .cat2-flag.bad{color:#ffb3ba;border-color:#4a1f26;background:#301419}
 .cat2-flag.warn{color:#ffdf9e;border-color:#4a3c17;background:#241d0c}
@@ -815,11 +807,7 @@ a.cat2-headline:hover{text-decoration:underline}
 .dc-answer.pass{background:#301419;border-left-color:var(--down);color:#ffb3ba}
 .dc2 .dc-level{font-size:12.5px;padding:0 2px}
 .dc2 .dc-level b{font-size:15px}
-.dc-strip{display:flex;flex-direction:column;gap:3px}
-.dc-strip-h{display:flex;align-items:baseline;gap:8px}
-.dc-strip-l{white-space:nowrap;font:600 9px/1 var(--sans);text-transform:uppercase;letter-spacing:.7px;color:var(--ink-faint)}
-.dc-strip-s{font:10px var(--mono);color:var(--ink-dim)}
-.dc-strip-c{display:flex;flex-wrap:wrap;gap:4px}
+.dc-strip{display:flex;flex-wrap:wrap;gap:4px}
 .pchip{display:inline-flex;align-items:baseline;gap:4px;font:600 10.5px/1 var(--mono);padding:4px 6px;border-radius:4px;
   border:1px solid var(--line);color:var(--ink-dim)}
 .pchip i{font-style:normal;font-weight:700}
@@ -828,6 +816,8 @@ a.cat2-headline:hover{text-decoration:underline}
 .pchip.ok{color:var(--ok-ink);border-color:var(--ok-line);background:#0f2119}
 .pchip.no{color:var(--no-ink);border-color:var(--no-line);background:#301419}
 .pchip.unk,.pchip.man{color:var(--unk-ink);border-color:var(--unk-line);background:#241d0c;border-style:dashed}
+.pchip.man{color:#c9b8ff;border-color:#3a2f5c;background:#1a1530}
+.pchip.info{color:#bcd0ff;border-color:#24365a;background:#101a2b}
 .pchip.na{opacity:.55}
 .dc-headline{font-size:11px;line-height:1.35;color:var(--ink);text-decoration:none;border-left:2px solid var(--line);padding-left:6px}
 a.dc-headline:hover{text-decoration:underline}
@@ -838,7 +828,6 @@ a.dc-headline:hover{text-decoration:underline}
 .dc-more[open] > summary::before{content:"▾ "}
 .dc-more > summary::-webkit-details-marker{display:none}
 .dc-more[open]{display:flex;flex-direction:column;gap:4px}
-.verdict-card .dc-more .dc-lamps{display:grid}
 .verdict-card .sizing[hidden]{display:none!important}
 .float-override > summary{cursor:pointer;font-size:9.5px;color:var(--ink-faint);list-style:none}
 .float-override > summary::-webkit-details-marker{display:none}
@@ -882,6 +871,7 @@ a.dc-headline:hover{text-decoration:underline}
 .vl-fold:hover{color:var(--ink-dim)}
 .desk-verdict.asof{opacity:.75;border-style:dashed}
 .vl-funnel.asof{color:var(--hi)}
+.vl-funnel.stale{color:var(--unk-ink)}
 /* the shadow strategies (2026-10-09): logged, never traded */
 .dc-shadow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .shchip{font:600 10px/1 var(--mono);padding:3px 6px;border-radius:3px;color:#c9b8ff;background:#1a1530;
@@ -917,6 +907,8 @@ a.dc-headline:hover{text-decoration:underline}
 .pl-tile.unk,.pl-tile.man{border-style:dashed;border-color:var(--unk-line);background:#211b0b}
 .pl-tile.unk .pt-k,.pl-tile.man .pt-k{color:var(--unk-ink)}
 .pl-tile.na{opacity:.5}
+.pl-box.stale .pl-tiles{opacity:.62}
+.pl-box.stale .pl-need{color:var(--unk-ink)}
 .dc-live{font:10px var(--mono);color:var(--entry);margin-left:6px;padding:1px 5px;border:1px solid #164c5a;border-radius:3px}
 .dc-tapehint{font-size:10px;line-height:1.35;color:var(--ink-faint)}
 .dc-more-tail{margin-left:8px;text-transform:none;letter-spacing:0;font:500 10px var(--mono);color:var(--ink-dim)}

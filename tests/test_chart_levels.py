@@ -37,10 +37,11 @@ TODAY = date(2026, 10, 13)
 
 # -- levels.js, in node ---------------------------------------------------------------
 
-def node(expr: str):
+def node(expr: str, prelude: str = ""):
     if shutil.which("node") is None:
         pytest.skip("no node binary")
-    code = f"const L = require({json.dumps(str(LEVELS))}); process.stdout.write(JSON.stringify(({expr})));"
+    code = (f"const L = require({json.dumps(str(LEVELS))}); {prelude}\n"
+            f"process.stdout.write(JSON.stringify(({expr})));")
     out = subprocess.run(["node", "-e", code], capture_output=True, text=True, timeout=30)
     assert out.returncode == 0, out.stderr
     return json.loads(out.stdout)
@@ -90,10 +91,10 @@ PINE = ROOT / "knowledge-base" / "tradingview" / "ross-fp-v4.pine"
 
 
 def test_the_ports_constants_are_the_pine_scripts_own():
-    """Support/resistance and trend lines port ross-fp-v4.pine (owner,
-    2026-10-13: "you can use the pine we've developed at its latest version").
-    Its numbers are read here from the script itself, so a change to the Pine
-    fails this until the port follows."""
+    """Support/resistance ports ross-fp-v4.pine (owner, 2026-10-13: "you can
+    use the pine we've developed at its latest version"); the trend lines keep
+    its touch tolerance. Its numbers are read here from the script itself, so
+    a change to the Pine fails this until the port follows."""
     import re
     pine = PINE.read_text()
     want = {
@@ -102,12 +103,11 @@ def test_the_ports_constants_are_the_pine_scripts_own():
         "SR_DEDUP_ATR": float(re.search(r"tolSR\s*=\s*atr\s*\*\s*([\d.]+)", pine).group(1)),
         "BAND_ATR": float(re.search(r"bandATRfrac\s*=\s*input\.float\(([\d.]+)", pine).group(1)),
         "TL_TOL_ATR": float(re.search(r"tolTL\s*=\s*math\.max\(atr\s*\*\s*([\d.]+)", pine).group(1)),
-        "TL_MIN_BARS": int(re.search(r"if nB >= (\d+)", pine).group(1)),
         "PIVOTS_KEPT": int(re.search(r"array\.size\(pivHighs\) > (\d+)", pine).group(1)),
     }
     assert re.search(r'REV = "V9\.12"', pine), "the port follows REV V9.12"
     got = node("({ PIVOT: L.PIVOT, SR_EACH: L.SR_EACH, SR_DEDUP_ATR: L.SR_DEDUP_ATR, BAND_ATR: L.BAND_ATR, "
-               "TL_TOL_ATR: L.TL_TOL_ATR, TL_MIN_BARS: L.TL_MIN_BARS, PIVOTS_KEPT: L.PIVOTS_KEPT })")
+               "TL_TOL_ATR: L.TL_TOL_ATR, PIVOTS_KEPT: L.PIVOTS_KEPT })")
     assert got == want
 
 
@@ -138,23 +138,105 @@ def test_the_fan_is_two_a_side_polarised_and_deduplicated():
     assert got["band"] == pytest.approx(max(got["a"] * 0.12, 0.01))
 
 
-def test_trend_lines_are_tangents_that_only_live_price_can_cross():
-    """V9.8: the line touches structure and never cuts it; V9.10: it needs 2
-    touches; the label flips the moment live price is through it."""
+# Closes through linear anchors (index, price); highs and lows two cents out.
+PATH_JS = """const path = anchors => { const out = []; let prev = anchors[0][1];
+  for (let k = 0; k + 1 < anchors.length; k++) { const [i0, p0] = anchors[k], [i1, p1] = anchors[k + 1];
+    for (let i = i0; i < i1; i++) { const c = +(p0 + (p1 - p0) * (i - i0) / (i1 - i0)).toFixed(4);
+      out.push([i * 60, prev, Math.max(prev, c) + 0.02, Math.min(prev, c) - 0.02, c, 1000]); prev = c; } }
+  return out; };
+const lines = (bars, close, opts) => { const t = L.trendLines(bars, close, L.atr(bars, 14), opts);
+  const f = ln => ln && { a: ln.a, b: ln.b, touches: ln.touches, brokeAt: ln.brokeAt, through: ln.through,
+                          now: ln.now, slope: ln.slope };
+  return { up: f(t.up), down: f(t.down), upBroken: f(t.upBroken), downBroken: f(t.downBroken) }; };"""
+
+
+def test_a_down_line_joins_the_high_to_the_lower_high_and_breaks_on_a_close():
+    """The breakout line (owner, 2026-10-13: "so i spot breakouts"): from the
+    high of the day through the lower high; a candle CLOSING above it breaks
+    it, a live price above it is only breaking. Never two neighbouring bars."""
     got = node("""(() => {
-      const bars = []; let p = 3.0;
-      for (let i = 0; i < 60; i++) { const w = Math.sin(i / 4) * 0.05; p += 0.01;
-        bars.push([i * 60, p + w, p + w + 0.02, p + w - 0.02, p + w, 100]); }
-      const a = L.atr(bars, 14), last = bars[bars.length - 1][4];
-      const ok = L.trendLines(bars, last, a), lost = L.trendLines(bars, ok.up.now - 0.05, a);
-      const cut = bars.slice(ok.up.anchor + 2).some((b, k) => b[3] < ok.up.at(ok.up.anchor + 2 + k) - 1e-9);
-      return { touches: ok.up.touches, slope: ok.up.slope, through: ok.up.through, lost: lost.up.through,
-               cut, down: ok.down, short: L.trendLines(bars.slice(0, 19), last, a) };
-    })()""")
-    assert got["touches"] >= 2 and got["slope"] >= 0 and got["cut"] is False
-    assert got["through"] is False and got["lost"] is True, "uptrend LOST when live price is under the line"
-    assert got["down"] is None, "a rising day has no line over lower highs"
-    assert got["short"] == {"up": None, "down": None}, "fewer than 20 confirmed bars: no line"
+      const pull = path([[0, 4.0], [20, 5.0], [26, 4.6], [32, 4.8], [40, 4.4], [50, 4.5], [51, 4.5]]);
+      const out = path([[0, 4.0], [20, 5.0], [26, 4.6], [32, 4.8], [40, 4.4], [50, 4.5], [56, 4.95], [60, 4.9], [61, 4.9]]);
+      const held = lines(pull, 4.5);
+      return { held, live: lines(pull, held.down.now + 0.05), out: lines(out, 4.9),
+               old: lines(out, 4.9, { keep: 5 }) };
+    })()""", PATH_JS)
+    d = got["held"]["down"]
+    assert (d["a"], d["b"]) == (20, 32) and d["touches"] == 2 and d["brokeAt"] is None and d["slope"] < 0
+    assert d["b"] - d["a"] > 5, "two swings, never neighbouring bars"
+    assert got["held"]["up"] is None, "lower lows: no up-line"
+    assert got["live"]["down"]["through"] is True and got["live"]["downBroken"] is None, \
+        "live price over the line is breaking, not broken"
+    assert got["out"]["down"] is None and got["out"]["downBroken"]["brokeAt"] == 51, "the first close above it"
+    assert got["old"]["downBroken"] is None, "a break older than the window drops off"
+
+
+def test_an_up_line_on_a_gapper_stands_on_the_swings_after_the_gap():
+    """GRML 5-minute, 2026-10-14: the tangent anchored on the pre-gap print.
+    Swings are searched newest first, and the flat pre-gap closes sit under any
+    line from the pre-gap dip, so it cannot qualify."""
+    got = node("""(() => {
+      const bars = path([[0, 2.0], [10, 1.95], [20, 2.0], [29, 2.0], [30, 3.0], [38, 3.3], [45, 2.9],
+                         [52, 3.35], [60, 3.05], [68, 3.4], [70, 3.4]]);
+      const one = path([[0, 2.0], [10, 1.95], [20, 2.0], [29, 2.0], [30, 3.0], [38, 3.3], [45, 2.9],
+                        [52, 3.35], [54, 3.35]]);
+      return { two: lines(bars, 3.4), one: lines(one, 3.35), today: lines(bars, 3.4, { from: 40 }) };
+    })()""", PATH_JS)
+    assert (got["two"]["up"]["a"], got["two"]["up"]["b"]) == (45, 60)
+    assert got["one"]["up"] is None, "one swing after the gap: no line, rather than one from under the gap"
+    assert got["today"]["up"]["a"] >= 40, "anchors are today's swings only"
+
+
+def test_trend_lines_never_have_a_close_or_a_swing_through_them_between_their_swings():
+    """The rule that makes a line a line, on random walks: between its two
+    swings no candle closes through it and no swing of its kind pierces it by
+    more than 0.2 ATR; its break is the first close through after them."""
+    got = node("""(() => {
+      let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+      const bad = []; let drawn = 0;
+      for (let run = 0; run < 40; run++) {
+        const bars = []; let p = 5;
+        for (let i = 0; i < 240; i++) { const o = p; p = Math.max(0.5, p * (1 + (rnd() - 0.5) * 0.02));
+          bars.push([i * 60, o, Math.max(o, p) * (1 + rnd() * 0.004), Math.min(o, p) * (1 - rnd() * 0.004), p, 1000]); }
+        const a = L.atr(bars, 14), t = L.trendLines(bars, p, a), sw = L.pivots(bars, 5, 5);
+        [["up", true], ["down", false], ["upBroken", true], ["downBroken", false]].forEach(([k, up]) => {
+          const ln = t[k]; if (!ln) return; drawn += 1;
+          const kind = up ? "low" : "high", tol = Math.max(a * L.TL_TOL_ATR, 0.01);
+          const beyond = (v, i, by) => up ? v < ln.at(i) - by : v > ln.at(i) + by;
+          if (!sw.some(s => s.i === ln.a && s.kind === kind) || !sw.some(s => s.i === ln.b && s.kind === kind)) bad.push([run, k, "anchor"]);
+          if (up ? !(ln.slope > 0) : !(ln.slope < 0)) bad.push([run, k, "slope"]);
+          for (let i = ln.a + 1; i < ln.b; i++) if (beyond(bars[i][4], i, 1e-9)) bad.push([run, k, "close", i]);
+          sw.filter(s => s.kind === kind && s.i > ln.a && s.i < ln.b).forEach(s => { if (beyond(s.price, s.i, tol)) bad.push([run, k, "swing", s.i]); });
+          const first = bars.findIndex((b, i) => i > ln.b && beyond(b[4], i, 1e-9));
+          if ((first < 0 ? null : first) !== ln.brokeAt) bad.push([run, k, "break", first, ln.brokeAt]);
+        });
+      }
+      return { bad, drawn };
+    })()""", PATH_JS)
+    assert got["drawn"] >= 40, "the walks draw lines"
+    assert got["bad"] == []
+
+
+def test_a_line_moves_only_when_a_swing_confirms_or_a_close_breaks_it():
+    """Consistency (owner, 2026-10-14: "the trendlines are not consistent"): the
+    tangent re-anchored on every bar; a two-swing line stays put bar after bar
+    until the market confirms a new swing or closes through it."""
+    got = node("""(() => {
+      const bars = path([[0, 4.0], [20, 5.0], [26, 4.6], [32, 4.8], [40, 4.4], [60, 4.45], [61, 4.45]]);
+      const ids = [], states = [];
+      for (let n = 44; n <= bars.length; n++) {
+        const sl = bars.slice(0, n), t = L.trendLines(sl, sl[n - 1][4], L.atr(sl, 14)), ln = t.down || t.downBroken;
+        ids.push(ln ? ln.a + "-" + ln.b : "none");
+        const st = t.down ? "intact" : t.downBroken ? "broken@" + t.downBroken.brokeAt : "none";
+        if (states[states.length - 1] !== st) states.push(st);
+      }
+      // the first close over the line through the 20 and 32 highs, by hand
+      const slope = (bars[32][2] - bars[20][2]) / 12;
+      const first = bars.findIndex((b, i) => i > 32 && b[4] > bars[20][2] + slope * (i - 20) + 1e-9);
+      return { ids: [...new Set(ids)], states, first };
+    })()""", PATH_JS)
+    assert got["ids"] == ["20-32"], "the same two swings on every bar"
+    assert got["states"] == ["intact", "broken@%d" % got["first"]], "it changes once: the candle that closes through it"
 
 
 def test_round_levels_prior_day_and_sessions():
@@ -194,10 +276,21 @@ def _day(d: date, prices) -> list:
 
 
 @pytest.fixture(scope="module")
-def desk_page(tmp_path_factory):
+def chromium():
+    """One Playwright and one browser for every page in this module."""
     if not Path(CHROME).is_file():
         pytest.skip("no chromium binary")
     pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    pw = sync_playwright().start()
+    browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+    yield browser
+    browser.close()
+    pw.stop()
+
+
+@pytest.fixture(scope="module")
+def desk_page(tmp_path_factory, chromium):
     from momentum_platform.dashboard.ibkr_desk import IbkrDesk
     from momentum_platform.dashboard.server import make_handler
     days = {date(2026, 10, 8): [2.1, 2.3, 2.1, 2.3, 2.1], date(2026, 10, 9): [2.1, 2.3, 2.12, 2.3, 2.2],
@@ -225,17 +318,13 @@ def desk_page(tmp_path_factory):
     sock = socket.socket(); sock.bind(("127.0.0.1", 0)); port = sock.getsockname()[1]; sock.close()
     httpd = ThreadingHTTPServer(("127.0.0.1", port), make_handler("ibkr:AAA", desk, None))
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
-    from playwright.sync_api import sync_playwright
-    pw = sync_playwright().start()
-    browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
-    pg = browser.new_page(viewport={"width": 1600, "height": 950})
+    pg = chromium.new_page(viewport={"width": 1600, "height": 950})
     errors: list = []
     pg.on("pageerror", lambda e: errors.append(str(e)))
     pg.goto(f"http://127.0.0.1:{port}/")
     pg.wait_for_function("() => window.__deskPanes && window.__deskPanes().a.sessionStarts().length >= 1", timeout=8000)
     yield {"pg": pg, "errors": errors, "desk": desk, "ib": ib}
-    browser.close()
-    pw.stop()
+    pg.close()
     httpd.shutdown()
 
 
@@ -283,21 +372,56 @@ def test_the_levels_drawn_are_the_pine_fan_the_prior_day_and_the_dollars(desk_pa
     assert pg.evaluate("() => window.__deskPanes().d.levelsDrawn()") is None, "off on the 10-second pane"
 
 
-def test_the_trend_lines_never_cut_the_bars_they_were_drawn_on(desk_page):
-    """ross-fp-v4 V9.8 / V9.10 on the page: today's tangents from their scored
-    anchors; no confirmed bar of the day crosses either line."""
-    pg = desk_page["pg"]
+@pytest.fixture(scope="module")
+def synth_page(tmp_path_factory, chromium):
+    """The SYNTHETIC desk of scripts/chart_shots.py — four noisy made-up
+    sessions of "SYNTH" — on the real server and page."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import chart_shots
+    desk, httpd, port = chart_shots.serve(tmp_path_factory.mktemp("synth_cache"))
+    pg = chromium.new_page(viewport={"width": 1600, "height": 950})
+    errors: list = []
+    pg.on("pageerror", lambda e: errors.append(str(e)))
+    pg.goto(f"http://127.0.0.1:{port}/")
+    pg.wait_for_function("() => window.__deskPanes && window.__deskPanes().a.rows().length > 100", timeout=8000)
+    yield {"pg": pg, "errors": errors, "desk": desk}
+    pg.close()
+    httpd.shutdown()
+
+
+def test_every_trend_line_drawn_stands_on_two_of_todays_swings(synth_page):
+    """On the page (2026-10-14): each line drawn on the 1- and 5-minute panes
+    joins two of today's confirmed swings, at least six bars apart; no candle
+    closes through it between them; a broken one broke at the first close
+    through it."""
+    pg = synth_page["pg"]
     got = pg.evaluate("""() => {
-      const a = window.__deskPanes().a, t = a.trendDrawn(), r = a.rows();
-      const check = (ln, up) => { if (!ln) return null; let cut = 0;
-        for (let i = ln.anchor + 2; i < ln.live; i++) { const line = ln.price + ln.slope * (i - ln.anchor);
-          if (up ? r[i].low < line - 1e-9 : r[i].high > line + 1e-9) cut += 1; }
-        return { cut, touches: ln.touches, through: ln.through }; };
-      return { up: check(t.up, true), down: check(t.down, false) };
+      const P = window.__deskPanes(), out = {};
+      ['a', 'b'].forEach(k => {
+        const pane = P[k], t = pane.trendDrawn(), rows = pane.rows(), today = pane.sessionStarts().slice(-1)[0] || 0;
+        const bars = rows.map(r => [r.time, r.open, r.high, r.low, r.close, 0]);
+        const sw = window.DeskLevels.pivots(bars.slice(0, -1), 5, 5);
+        out[k] = [];
+        ['up', 'down', 'upBroken', 'downBroken'].forEach(name => {
+          const ln = t && t[name]; if (!ln) return;
+          const up = name.startsWith('up'), kind = up ? 'low' : 'high';
+          const at = i => ln.price + ln.slope * (i - ln.anchor);
+          const through = i => up ? rows[i].close < at(i) - 1e-9 : rows[i].close > at(i) + 1e-9;
+          let crossed = 0; for (let i = ln.anchor + 1; i < ln.touch; i++) if (through(i)) crossed += 1;
+          let first = null; for (let i = ln.touch + 1; i < ln.live; i++) if (through(i)) { first = i; break; }
+          out[k].push({ name, gap: ln.touch - ln.anchor, today: ln.anchor >= today, crossed, first, brokeAt: ln.brokeAt,
+                        swings: sw.some(s => s.i === ln.anchor && s.kind === kind) && sw.some(s => s.i === ln.touch && s.kind === kind) });
+        });
+      });
+      return out;
     }""")
-    assert got["up"] and got["up"]["cut"] == 0 and got["up"]["touches"] >= 2
-    assert got["down"] and got["down"]["cut"] == 0 and got["down"]["touches"] >= 2
-    assert got["up"]["through"] is False, "the price is still above today's rising lows"
+    drawn = got["a"] + got["b"]
+    assert drawn, "the noisy SYNTH day draws trend lines"
+    for ln in drawn:
+        assert ln["swings"] and ln["today"] and ln["gap"] > 5, ln
+        assert ln["crossed"] == 0, ln
+        assert ln["first"] == ln["brokeAt"], ln
+    assert not synth_page["errors"], synth_page["errors"]
 
 
 def test_one_history_request_on_load_and_the_other_pane_stays_live(desk_page):
@@ -332,6 +456,51 @@ def test_the_wheel_over_the_price_axis_zooms_the_price(desk_page):
     pg.mouse.wheel(0, -200)
     pg.wait_for_timeout(150)
     assert pg.evaluate("() => window.__deskPanes().a.priceZoomed()") is None
+    assert not desk_page["errors"], desk_page["errors"]
+
+
+def test_a_vertical_drag_moves_the_price_and_a_sideways_one_does_not(desk_page):
+    """Owner's recording 2026-10-14: "i cannot move the chart up and down using
+    the mouse". Dragging down shows higher prices by the distance dragged, the
+    time axis follows the library's own sideways drag, and "A" hands the scale
+    back to the data."""
+    pg = desk_page["pg"]
+    a = "window.__deskPanes().a"
+    pg.evaluate(f"() => {a}.snapToLive()")
+    pg.wait_for_timeout(200)
+    box = pg.locator("#chartA .pane-main").bounding_box()
+    x, y = box["x"] + box["width"] * 0.45, box["y"] + box["height"] * 0.4
+    # a sideways drag with a pixel of wobble: time only
+    pg.mouse.move(x, y); pg.mouse.down(); pg.mouse.move(x - 120, y + 2, steps=8); pg.mouse.up()
+    pg.wait_for_timeout(150)
+    assert pg.evaluate(f"() => {a}.priceZoomed()") is None
+    assert not pg.evaluate("() => !document.querySelector('#chartA .auto-btn').hidden")
+    pg.mouse.move(x, y); pg.mouse.down(); pg.mouse.move(x, y + 80, steps=10); pg.mouse.up()
+    pg.wait_for_timeout(150)
+    z = pg.evaluate(f"() => {a}.priceZoomed()")
+    assert z is not None and z["max"] > z["min"]
+    assert pg.evaluate("() => !document.querySelector('#chartA .auto-btn').hidden"), "the A button shows"
+    pg.mouse.move(x, y); pg.mouse.down(); pg.mouse.move(x, y + 40, steps=5); pg.mouse.up()
+    pg.wait_for_timeout(150)
+    z2 = pg.evaluate(f"() => {a}.priceZoomed()")
+    span = z["max"] - z["min"]
+    assert z2["max"] - z2["min"] == pytest.approx(span, rel=1e-6), "a drag pans, it does not zoom"
+    assert z2["min"] > z["min"], "dragging down shows higher prices"
+    # 40 px of the pane's 70 % price area: the range moves by 40 / (0.70 h) of its span
+    h = box["height"]
+    assert (z2["min"] - z["min"]) / span == pytest.approx(40 / (0.70 * h), rel=0.25)
+    pg.click("#chartA .auto-btn")
+    pg.wait_for_timeout(150)
+    assert pg.evaluate(f"() => {a}.priceZoomed()") is None
+    assert pg.evaluate("() => document.querySelector('#chartA .auto-btn').hidden")
+    # the library's own drag on the price axis scales by hand: "A" offers the way back too
+    ax = box["x"] + box["width"] - 20
+    pg.mouse.move(ax, y); pg.mouse.down(); pg.mouse.move(ax, y + 60, steps=6); pg.mouse.up()
+    pg.wait_for_timeout(150)
+    assert pg.evaluate("() => !document.querySelector('#chartA .auto-btn').hidden"), "A after an axis drag"
+    pg.click("#chartA .auto-btn")
+    pg.wait_for_timeout(150)
+    assert pg.evaluate("() => document.querySelector('#chartA .auto-btn').hidden")
     assert not desk_page["errors"], desk_page["errors"]
 
 
@@ -400,3 +569,31 @@ def test_macd_has_its_own_pane_and_the_values_legend_is_one_click(desk_page):
     pg.locator("#chartA .ind-menu label", has_text="Values").click()
     assert pg.evaluate("() => window.__deskPanes().a.legendText()") == ""
     assert not desk_page["errors"], desk_page["errors"]
+
+
+def test_the_header_chips_switch_the_overlays_off_and_on(synth_page):
+    """Owner, 2026-10-14: "the possibility to switch off the default indicators
+    such as trendlines and supp/res". A chip on the card's header flips the
+    pane's own setting — the ƒ menu shows the same — and a second click brings
+    the overlay back."""
+    pg = synth_page["pg"]
+    a = "window.__deskPanes().a"
+    chip = "[data-card=chart-1m] .ov-chip[data-key={}]"
+    menu_box = """() => Array.from(document.querySelectorAll('#chartA .ind-menu label'))
+      .find(l => l.textContent.startsWith('{}')).querySelector('input').checked"""
+    assert pg.evaluate(f"() => !!{a}.trendDrawn()") and pg.evaluate(f"() => !!{a}.levelsDrawn()")
+    assert pg.get_attribute(chip.format("trend"), "aria-pressed") == "true"
+    pg.click(chip.format("trend"))
+    pg.click(chip.format("levels"))
+    pg.wait_for_timeout(150)
+    assert pg.evaluate(f"() => {a}.trendDrawn()") is None and pg.evaluate(f"() => {a}.levelsDrawn()") is None
+    assert pg.get_attribute(chip.format("trend"), "aria-pressed") == "false"
+    assert pg.evaluate(menu_box.replace("{}", "Trend lines")) is False, "the ƒ menu says the same"
+    assert pg.evaluate("() => window.__deskPanes().b.trendDrawn()") is not None, "the other pane keeps its own"
+    pg.click(chip.format("trend"))
+    pg.click(chip.format("levels"))
+    pg.wait_for_timeout(150)
+    assert pg.evaluate(f"() => !!{a}.trendDrawn()") and pg.evaluate(f"() => !!{a}.levelsDrawn()")
+    assert pg.evaluate(menu_box.replace("{}", "Trend lines")) is True
+    assert pg.locator("[data-card=chart-daily] .ov-chip").count() == 0, "the daily has none of these overlays"
+    assert not synth_page["errors"], synth_page["errors"]

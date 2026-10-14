@@ -521,9 +521,11 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
 
 
 def test_ui_catalyst_card_grades_the_news(page):
-    """The catalyst reads in two lines (owner, 2026-10-08): the server's grade
-    and its one-line reason, the headline clamped to two lines, then type ·
-    age · source. The grade comes from catalyst.card_read, not the browser."""
+    """The catalyst, graded by the server (catalyst.card_read), not the browser.
+    Since 2026-10-14 it is read on the face's news line only — the fold no
+    longer repeats it: the plain label and sentence, the grade, its rule and
+    reason on the label's hover, the headline (one click to the story) with
+    its type, age and source on hover."""
     _seek(page, 124)
     rows = page.locator("[data-card=scan-pillars] .trow")
     for i in range(rows.count()):
@@ -531,16 +533,16 @@ def test_ui_catalyst_card_grades_the_news(page):
             rows.nth(i).click()
             break
     page.wait_for_timeout(300)
-    _open_why(page)                     # the full read sits in the fold under the news (2026-10-09)
     server = page.evaluate("window.__SESSION__.cards.ABCD.catalyst")
-    assert page.locator(".cat2-grade").inner_text() == server["grade"] == "STRONG"
-    assert "quantifiable value" in page.locator(".cat2-reason").inner_text()
-    assert "contract" in page.locator(".cat2-headline").inner_text()
-    meta = page.locator(".cat2-meta").inner_text()
-    assert meta.startswith("contract") and "today 08:55" in meta, meta
-    assert "CATALYST.md" in (page.locator(".cat2-grade").get_attribute("title") or "")
-    clamp = page.eval_on_selector(".cat2-headline", "e => getComputedStyle(e).webkitLineClamp")
-    assert clamp == "2", clamp
+    assert server["grade"] == "STRONG"
+    label = page.locator("#verdictCard .dc-news .dc-news-l")
+    tip = label.get_attribute("title") or ""
+    assert tip.startswith("STRONG · rule ") and "quantifiable value" in tip, tip
+    head = page.locator("#verdictCard .dc-news .dc-news-h")
+    assert "contract" in head.inner_text()
+    assert "today 08:55" in (head.get_attribute("title") or ""), head.get_attribute("title")
+    _open_why(page)
+    assert page.locator("#verdictMore .cat2-grade").count() == 0, "not repeated in the fold"
 
 
 def test_ui_the_card_face_ends_with_the_news_in_plain_words(page):
@@ -566,11 +568,14 @@ def test_ui_the_card_face_ends_with_the_news_in_plain_words(page):
     face = page.eval_on_selector_all("#verdictCard .dc2 > *", "els => els.map(e => e.className)")
     assert face[-1] == "dc-news", "the news is the face's last line: " + str(face)
     assert not page.eval_on_selector("#verdictMore", "e => e.open"), "the fold starts closed"
-    assert not page.is_visible("#verdictMore .dc-lamps") and not page.is_visible("#verdictMore .dc-bot")
+    assert not page.is_visible("#verdictMore .dc-gates") and not page.is_visible("#verdictMore .dc-bot")
     tail = page.locator("#verdictMoreTail").inner_text()
     _open_why(page)
-    assert page.is_visible("#verdictMore .dc-bot") and page.locator("#verdictMore .dc-lamp").count() > 5
-    assert page.locator("#verdictMore .cat2-grade").inner_text() == "STRONG", "the full read stays in the fold"
+    assert page.is_visible("#verdictMore .dc-bot") and page.locator("#verdictMore .dc-gates .pchip").count() >= 4
+    # 2026-10-14 ("reduce in an optimized way the text under the details toggle"):
+    # the fold holds only what the face does not say — the news is not repeated
+    assert page.locator("#verdictMore .dc-news").count() == 0 and page.locator("#verdictMore .cat2-grade").count() == 0
+    assert len(page.locator("#verdictMoreBody").inner_text()) < 600, "a few lines, not a table"
     page.reload()                                   # remembered
     page.wait_for_timeout(600)
     assert page.eval_on_selector("#verdictMore", "e => e.open")
@@ -606,10 +611,9 @@ def test_ui_catalyst_flags_dilution(page):
     page.wait_for_timeout(600)
     _seek(page, 100)
     assert page.locator("#symTicker").inner_text() == "CYQN"
-    _open_why(page)
-    assert page.locator(".cat2-grade").inner_text() == "WEAK"
-    assert "offering/dilution" in page.locator(".cat2-meta").inner_text()
-    flags = page.locator(".cat2-flag.bad").all_inner_texts()
+    # on the face's news line (2026-10-14: the fold no longer repeats the read)
+    assert (page.locator("#verdictCard .dc-news-l").get_attribute("title") or "").startswith("WEAK")
+    flags = page.locator("#verdictCard .dc-news-flag").all_inner_texts()
     assert any("offering/dilution in today's news" in f for f in flags), flags
 
 
@@ -767,10 +771,16 @@ def test_ui_verdict_mirrors_pine_and_decides(page):
     assert all(lamps[i] == st for i, st in tiles), (tiles, lamps)
     score = page.locator("#verdictCard .pl-score").inner_text().replace("\n", "")
     assert score == (f"{card['pillars']['passed']}/5" if card["pillars"]["counted"] else "—/5"), score
-    chips = page.eval_on_selector_all("#verdictMore .dc-strip .pchip", "els => els.map(e => e.dataset.lamp)")
-    assert chips == ([] if word == "NO" else ["vwap", "ema9", "macd", "pullback"])
+    # every gate the face's tiles do not show is a chip in the fold, value and rule on hover
+    chips = page.eval_on_selector_all("#verdictMore .dc-gates .pchip", "els => els.map(e => e.dataset.lamp)")
+    face = {"price", "gain", "rvol", "float", "catalyst", "pillars"}
+    assert chips == ([] if word == "NO" else [l["id"] for l in card["lamps"]
+                                              if l["id"] not in face and l["state"] != "NOT_APPLICABLE"])
     assert page.locator("#verdictCard .dc-strip").count() == 0, "no chip strip on the face"
-    assert page.locator("#verdictMore .dc-lamp").count() == len(card["lamps"])
+    if chips:
+        tip = page.get_attribute(f"#verdictMore .dc-gates .pchip[data-lamp={chips[0]}]", "title")
+        lamp = next(l for l in card["lamps"] if l["id"] == chips[0])
+        assert lamp["rule"] in tip and str(lamp["value"]) in tip
     assert {l["id"] for l in card["lamps"]} >= {"price", "gain", "rvol", "float", "catalyst", "pillars",
                                                 "rising", "vwap", "ema9", "macd", "pullback", "tape"}
     assert page.locator("#verdictMore .dc-bot").count() == 1
@@ -1490,8 +1500,10 @@ def test_the_macd_band_is_laid_out_from_the_first_paint():
     after = pane[loaded:]
     assert "\n  layoutPanes();\n" in after[:1500], "the panes must follow the loaded state"
     assert after.index("\n  layoutPanes();\n") < after.index("render(bars, opts)")
-    menu = after.split("indicatorMenu(host, show, next => {")[1][:300]
-    assert "layoutPanes();" in menu, "and every change made in ƒ"
+    # every change made in ƒ or on the header chips goes through one applyShow
+    apply = after.split("const applyShow = () => {")[1].split("\n  };")[0]
+    assert "layoutPanes();" in apply, "and every change made in ƒ"
+    assert "indicatorMenu(host, show, next => { show = next; applyShow(); })" in after
 
 
 def test_no_simulated_book_is_left_to_read_as_a_real_one():
@@ -1665,9 +1677,8 @@ def test_ui_a_no_card_carries_nothing_to_act_on(page):
     assert page.eval_on_selector(".verdict-card .sizing", "e => e.hidden")
     assert page.locator(".verdict-card .dc-tape").count() == 0
     assert page.locator("#verdictCard .pl-tile").count() == 5, "the five pillars"
-    assert page.locator(".verdict-card .dc-strip").count() == 0, "no chart strip on a NO"
+    assert page.locator(".verdict-card .dc-strip").count() == 0, "no gate strip on a NO"
     assert page.locator("#verdictMore .dc-bot").count() == 1
-    assert page.locator("#verdictMore .dc-lamp").count() > 5
 
 
 def test_ui_the_tape_says_when_it_is_on_another_name(page):
