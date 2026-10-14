@@ -379,7 +379,7 @@ def synth_page(tmp_path_factory, chromium):
     sys.path.insert(0, str(ROOT / "scripts"))
     import chart_shots
     desk, httpd, port = chart_shots.serve(tmp_path_factory.mktemp("synth_cache"))
-    pg = chromium.new_page(viewport={"width": 1600, "height": 950})
+    pg = chart_shots.open_page(chromium, port, {"width": 1600, "height": 950})
     errors: list = []
     pg.on("pageerror", lambda e: errors.append(str(e)))
     pg.goto(f"http://127.0.0.1:{port}/")

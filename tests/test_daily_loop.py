@@ -184,3 +184,23 @@ def test_a_failed_push_leaves_the_checkout_clean(tmp_path, monkeypatch):
     assert ["checkout", "--", "research/daily/README.md"] in calls
     assert (tmp_path / "kept" / "2026-10-09" / "decisions.csv").exists()
     assert not (repo_daily / "2026-10-09").exists()
+
+
+def test_every_scanner_event_is_stored_once_and_exported(tmp_path, monkeypatch):
+    """2026-10-14: why AEHL and GRML never printed on High of Day was
+    unanswerable — the desk kept no record of its scanner events. Each event
+    is stored once by its stable key, delivered or suppressed with the
+    router's reason, and the day's export carries them as alerts.csv."""
+    c = L.connect(":memory:")
+    build_session(FIXTURE, journal=c)
+    first = L.scanner_alerts(c, "2026-09-01")
+    assert first, "the fixture raises scanner events"
+    assert {r["outcome"] for r in first} <= {"delivered", "suppressed"}
+    assert any(r["outcome"] == "delivered" for r in first)
+    assert all(r["detail"] for r in first if r["outcome"] == "suppressed"), "a suppression carries its reason"
+    build_session(FIXTURE, journal=c)                      # the live desk rebuilds every 3 s
+    assert len(L.scanner_alerts(c, "2026-09-01")) == len(first), "each event once"
+    meta = DX.export(c, "2026-09-01", tmp_path / "2026-09-01", tmp_path / "none.log")
+    assert meta["counts"]["alerts"] == len(first)
+    head = (tmp_path / "2026-09-01" / "alerts.csv").read_text().splitlines()[0]
+    assert head.startswith("ts_et,symbol,scanner,branch,severity,outcome,detail")

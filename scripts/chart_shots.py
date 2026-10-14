@@ -121,6 +121,17 @@ def serve(cache_dir: Path):
     return desk, httpd, port
 
 
+def open_page(browser, port: int, viewport=None):
+    """A page on the SYNTH desk whose clock reads the desk's own minute. The
+    page lives on the browser's wall clock (app.js deskNow), and the made-up
+    day is not today: without this every alert read as a day old. The clock
+    keeps running from NOW."""
+    pg = browser.new_page(viewport=viewport or {"width": 1920, "height": 952})
+    pg.clock.install(time=NOW)
+    pg.clock.resume()
+    return pg
+
+
 LABEL = """() => { const d = document.createElement('div');
   d.textContent = 'SYNTHETIC — made-up test data, not IBKR, not a market fact';
   d.style.cssText = 'position:fixed;left:50%;top:6px;transform:translateX(-50%);z-index:9999;padding:2px 10px;'
@@ -139,7 +150,7 @@ def main(argv=None) -> int:
         try:
             with sync_playwright() as pw:
                 browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
-                pg = browser.new_page(viewport={"width": 1920, "height": 952})
+                pg = open_page(browser, port)
                 errors = []
                 pg.on("pageerror", lambda e: errors.append(str(e)))
                 pg.goto(f"http://127.0.0.1:{port}/")
@@ -164,7 +175,7 @@ def main(argv=None) -> int:
                 pg.mouse.move(5, 5)                      # no synced crosshair in the picture
                 pg.wait_for_timeout(600)
                 pg.screenshot(path=str(out / f"{tag}_desk_SYNTHETIC.png"))
-                for card in ("chart-1m", "chart-5m"):
+                for card in ("chart-1m", "chart-5m", "scan-running", "scan-hod"):
                     pg.locator(f"[data-card={card}]").screenshot(path=str(out / f"{tag}_{card}_SYNTHETIC.png"))
                 # the 1-minute zoomed out over every loaded session
                 pg.evaluate("() => { const a = window.__deskPanes().a; const n = a.rows().length; a.setRange({from: 0, to: n + 3}); }")

@@ -640,6 +640,9 @@ def build_session_from_records(
         # on a real session with no fixture; quotes are the runner's NBBO at
         # fill time. Neither is a decision, so neither touches `decisions`.
         _journal_tape(writer, bar_records, symbols)
+        # Every scanner event, delivered or suppressed with the router's
+        # reason — what the alert cards could be scored on afterwards.
+        _journal_alerts(writer, router.deliveries)
     if writer is not None:
         # COMMIT. The runner is a separate process reading this file; without
         # this, every write above stayed inside the desk's own connection and
@@ -948,6 +951,31 @@ def _journal_tape(journal, bar_records, symbols) -> None:
         _L.record_quotes(journal, changed)
         for sym, q in changed.items():
             seen["quotes"][sym] = tuple(sorted(q.items(), key=lambda kv: kv[0]))
+
+
+#: Scanner events this process already wrote, per ledger connection. Every
+#: rebuild replays the day from 04:00 through a fresh router, so the same
+#: events come back every 3 s; each is written once.
+_ALERTS_SEEN: dict = {}
+
+
+def _journal_alerts(journal, deliveries) -> None:
+    from journal import ledger as _L
+    seen = _ALERTS_SEEN.get(id(journal))
+    if seen is None or seen["conn"] is not journal:
+        seen = _ALERTS_SEEN[id(journal)] = {"conn": journal, "keys": set()}
+    rows = []
+    for d in deliveries:
+        e = d.event
+        if e.idempotency_key in seen["keys"] or d.status == "failed":
+            continue
+        seen["keys"].add(e.idempotency_key)
+        rows.append({"key": e.idempotency_key, "ts": e.source_ts, "symbol": e.symbol, "scanner": e.scanner,
+                     "branch": e.branch, "severity": e.severity,
+                     "outcome": "delivered" if d.status == "delivered" else "suppressed",
+                     "detail": d.detail, "values": dict(e.values)})
+    if rows:
+        _L.record_alerts(journal, rows)
 
 
 def _newest_bar_ts(bar, meta) -> bool:

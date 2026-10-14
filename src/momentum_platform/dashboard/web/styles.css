@@ -768,6 +768,16 @@ body.resizing .gutter{pointer-events:auto}
 .trow.alert-row.dim{opacity:.45}
 .trow.alert-row.dim:hover,.trow.alert-row.dim.sel{opacity:.85}
 .pill.xn{font-family:var(--mono);font-weight:700;color:var(--hi);border-color:#4a3c17;background:#241d0c}
+/* live alert rows (2026-10-14): heat, a fresh high, a former runner, the name now, age */
+.pill.xn.hot{color:#ffb74d;border-color:#ff9800;background:#3a2408}
+.pill.nh{font-family:var(--mono);font-weight:700;color:#76ff03;border-color:#2e5c12;background:#13240a}
+.pill.fm{font-family:var(--mono);font-weight:700;color:#c9b8ff;border-color:#3a2f5c;background:#1a1530}
+.alert-row .alert-live{grid-column:1/-1;display:flex;gap:9px;font:9.5px/1.2 var(--mono);color:var(--ink-faint);text-align:left;margin-top:-1px}
+.alert-live .at-high{color:var(--up)} .alert-live .far{color:var(--down)}
+.trow.aged{opacity:.5}
+.trow.new-high .tsym b{color:#76ff03}
+.alert-fold{font-size:10px;color:var(--ink-faint);padding:4px 8px 4px 18px;cursor:pointer;user-select:none}
+.alert-fold:hover{color:var(--ink-dim)}
 .halts-strip{display:flex;flex-wrap:wrap;gap:3px 6px;align-items:baseline;padding:3px 8px;
   border-bottom:1px solid var(--line);font:10px var(--mono)}
 .halts-strip .lab{font:600 9px var(--sans);color:var(--ink-faint);text-transform:uppercase;letter-spacing:.04em}

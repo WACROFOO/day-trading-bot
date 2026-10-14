@@ -18,7 +18,8 @@ candidates with their verdicts) and every name on the desk's board
 (`board.csv`, one row per name with its first and last minute) — the
 denominator, since 2026-10-09; decisions with their refusal reasons, gates
 and chart values, their actuals; orders and order events; the 5-minute states, green-run signals and
-the owner's trades of the day from research/trade-journal/journal.csv; the 1-minute bars 04:00-12:00 ET of every name with a
+the owner's trades of the day from research/trade-journal/journal.csv; every scanner event, delivered or
+suppressed with its reason (`alerts.csv`, since 2026-10-14); the 1-minute bars 04:00-12:00 ET of every name with a
 decision; the day's part of ~/Library/Logs/day-trading-bot/day.out.log. Anything
 that looks like a key, secret, token or password is redacted from the log. The
 paper account id stays (it is in the repo already).
@@ -140,6 +141,11 @@ def export(conn, day: str, out: Path, log: Path = LOG, board_bars: bool = False)
     n["five_minute"] = _csv(out / "five_minute.csv", _rows(conn, "SELECT * FROM five_minute_states WHERE substr(ts_et,1,10)=?", (day,)))
     n["green_run"] = _csv(out / "green_run.csv", _rows(conn, """SELECT symbol, pause_id, ts_et, session, status, entry, stop,
         stop_pct, spread, refusals_json FROM green_run_signals WHERE substr(ts_et,1,10)=?""", (day,)))
+    # Every scanner event, delivered to a card or suppressed with the router's
+    # reason (since 2026-10-14): what High of Day and Running Up are scored on.
+    n["alerts"] = _csv(out / "alerts.csv", _rows(conn, """SELECT ts_et, symbol, scanner, branch, severity, outcome,
+        detail, last, change_pct, values_json FROM scanner_alerts WHERE substr(ts_et,1,10)=? ORDER BY ts_et, idem_key""",
+                                                 (day,)))
     jf = ROOT / "research" / "trade-journal" / "journal.csv"      # the owner's trades: scripts/trade_log.py
     manual = []
     if jf.exists():

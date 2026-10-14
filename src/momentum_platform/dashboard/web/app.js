@@ -1650,6 +1650,65 @@ function tileLabel(a, scanners) {
    rather than from the current rebuild window, so an event stays on screen
    for the session. Newest first; a left rail ties the rows together and the
    age column says how far back each one sits. */
+/* What a listed name is doing NOW (owner, 2026-10-14: "i need them more
+   dynamic"). An alert row keeps what the scanner saw at its alert; under it,
+   the name at the viewed minute: its price, how far under the session high,
+   and how long ago that high printed — at 06:12 the High of Day card read
+   04:01 and 04:36 rows with nothing saying whether either was still near its
+   high. From the desk's own minute bars cut at the viewed frame (the live
+   quote at the live edge), so a scrubbed replay reads its own minute. */
+const ALERT_AGED_MS = 15 * 60000, ALERT_FOLD_MS = 60 * 60000, ALERT_HEAT_MS = 10 * 60000, NEW_HIGH_MS = 2 * 60000;
+function nameNow(sym) {
+  const frame = FRAMES[Math.min(state.frame, FRAMES.length - 1)];
+  const bars = barsUpTo(sym, frame ? frame.barIndex : 0);
+  if (!bars.length) return null;
+  let high = -Infinity, highT = null;
+  bars.forEach(b => { if (b[2] > high) { high = b[2]; highT = b[0] * 1000; } });   // where the high was SET
+  const quote = S.streaming && frame && atLiveEdge(frame) ? ((SYMS[sym] || {}).metrics || {}).last : null;
+  const last = quote != null ? quote : bars[bars.length - 1][4];
+  if (last > high) { high = last; highT = deskNow(); }
+  return { last, high, highAt: highT, off: high > 0 ? (last - high) / high * 100 : null };
+}
+/* A former runner: a day up 100 % or more in the year of daily bars the desk
+   holds (its high against the prior close, regular session). Corpus, Former
+   Momo: "a stock that in the past went up over 100% in one day, and that's in
+   the recent past" (w97KlUrVDk0 [00:58:29]) — "recent" is not defined there,
+   so the badge carries the date and the reader judges it. A label, never a
+   filter. */
+const FORMER = {};
+function formerRunner(daily) {
+  let best = null;
+  for (let i = 1; i < (daily || []).length; i++) {
+    const p = daily[i - 1].c, h = daily[i].h;
+    if (p > 0 && h > 0 && h / p >= 2 && (!best || daily[i].d > best.d)) best = { d: daily[i].d, pct: (h / p - 1) * 100 };
+  }
+  return best;
+}
+function formerOf(sym) {
+  const daily = (SYMS[sym] || {}).dailyBars || [];
+  const f = FORMER[sym];
+  if (f && f.n === daily.length) return f.v;
+  const v = formerRunner(daily);
+  FORMER[sym] = { n: daily.length, v };
+  return v;
+}
+window.__formerRunner = formerRunner;
+window.__loggedAlerts = scanners => loggedAlerts(scanners);       // tests read what a card lists
+function alertLive(sym, nowMs) {
+  const n = nameNow(sym);
+  if (!n) return null;
+  const d = el("div", "alert-live");
+  d.dataset.now = String(n.last); d.dataset.high = String(n.high); d.dataset.highAt = String(n.highAt);
+  d.appendChild(el("span", null, "now " + fx(n.last)));
+  const near = n.off != null && n.off > -0.5;
+  d.appendChild(el("span", near ? "at-high" : n.off < -10 ? "far" : null,
+                   near ? "at the high " + fx(n.high) : n.off.toFixed(1) + "% vs high " + fx(n.high)));
+  const ago = Math.max(0, nowMs - n.highAt);
+  d.appendChild(el("span", null, "high " + (ago < 60000 ? "now" : fmtAge(ago) + " ago")));
+  d.title = "now, at the viewed minute — the row above is the alert";
+  return { el: d, fresh: ago <= NEW_HIGH_MS };
+}
+
 function fillAlertCard(card, cfg, idx) {
   card.textContent = "";
   const raw = loggedAlerts(cfg.scanners).slice(0, 80);
@@ -1692,15 +1751,24 @@ function fillAlertCard(card, cfg, idx) {
     if (stale) div.appendChild(el("div", "tiny warn", stale));
     body.appendChild(div);
   }
-  groups.forEach(g => {
+  // Ageing (2026-10-14): a row whose newest alert is over 15 minutes old is
+  // dimmed, over an hour it folds away under one line — still one click off.
+  const nowMs = deskNow();
+  const folded = [];
+  const rowOf = g => {
     const a = g.a;
+    const age = nowMs - a._at;
     // Up less than pillar 1 at the alert: shown, dimmed — FLYE −8.4 % "UP·10m"
     // was a 3 % bounce on a red name (audit 2026-10-09).
     const chg = a.values && a.values.change_pct;
     const weak = chg == null || chg < gainMin;
+    const live = alertLive(a.symbol, nowMs);
     const tr = el("div", "trow alert-row" + (state.selected === a.symbol ? " sel" : "") +
-      (state.arrivals.has(a.symbol) ? " fresh" : "") + (weak ? " dim" : ""));
+      (state.arrivals.has(a.symbol) ? " fresh" : "") + (weak ? " dim" : "") + (age > ALERT_AGED_MS ? " aged" : "") +
+      (live && live.fresh ? " new-high" : ""));
+    tr.dataset.sym = a.symbol; tr.dataset.at = String(a._at);
     if (weak) tr.title = "up less than " + gainMin + "% on the day at this alert — pillar 1 fails";
+    else if (age > ALERT_AGED_MS) tr.title = "the newest alert here is " + fmtAge(age) + " old";
     const when = el("span", "tl-time", etTime(a.sourceTime));
     when.title = fmtAge(deskNow() - a._at) + " ago";
     tr.appendChild(when);
@@ -1716,10 +1784,25 @@ function fillAlertCard(card, cfg, idx) {
     sesEl.title = SESSION_HELP[ses];
     mid.appendChild(sesEl);
     if (g.all.length > 1) {
-      const xn = el("span", "pill xn", "×" + g.all.length);
-      xn.title = g.all.length + " alerts — " + g.all.map(z => etTime(z.sourceTime) + " " +
-        tileLabel(z, cfg.scanners) + " " + fx(z.values && z.values.last)).join(" · ");
+      // Hot when it keeps firing: two or more in the last ten minutes
+      // ("a stock hitting scanners more and more times", yg5E_mqGFGg @00:17:02).
+      const recent = g.all.filter(z => nowMs - z._at <= ALERT_HEAT_MS).length;
+      const xn = el("span", "pill xn" + (recent >= 2 ? " hot" : ""), "×" + g.all.length);
+      xn.title = (recent >= 2 ? recent + " in the last 10 minutes — " : "") + g.all.length + " alerts — " +
+        g.all.map(z => etTime(z.sourceTime) + " " + tileLabel(z, cfg.scanners) + " " + fx(z.values && z.values.last)).join(" · ");
       mid.appendChild(xn);
+    }
+    if (live && live.fresh) {
+      const nh = el("span", "pill nh", "new high");
+      nh.title = "a new session high in the last two minutes";
+      mid.appendChild(nh);
+    }
+    const fm = formerOf(a.symbol);
+    if (fm) {
+      const b = el("span", "pill fm", "FM");
+      b.title = "former runner: up " + Math.round(fm.pct) + "% on " + fm.d + " (high vs the prior close) — " +
+        "\"went up over 100% in one day … in the recent past\" (w97KlUrVDk0 @00:58:29); a label, not a filter";
+      mid.appendChild(b);
     }
     tr.appendChild(mid);
     tr.appendChild(el("span", null, fx(a.values && a.values.last)));
@@ -1729,9 +1812,21 @@ function fillAlertCard(card, cfg, idx) {
       : "filed under " + a.scannerId.replace(/_/g, " ") + ", which has no tile; also fired: " +
         ((a.group && a.group.also_triggered) || []).join(", ").replace(/_/g, " ");
     tr.appendChild(br);
+    if (live) tr.appendChild(live.el);
     tr.onclick = () => select(a.symbol, cfg.id);
-    body.appendChild(tr);
+    return { tr, age };
+  };
+  groups.forEach(g => {
+    const r = rowOf(g);
+    if (r.age > ALERT_FOLD_MS) folded.push(r.tr); else body.appendChild(r.tr);
   });
+  if (folded.length) {
+    const open = !!(state.alertFoldOpen && state.alertFoldOpen[cfg.id]);
+    const f = el("div", "alert-fold", (open ? "▾ " : "▸ ") + folded.length + " older than an hour" + (open ? "" : " — show"));
+    f.onclick = () => { state.alertFoldOpen = state.alertFoldOpen || {}; state.alertFoldOpen[cfg.id] = !open; render(); };
+    body.appendChild(f);
+    if (open) folded.forEach(tr => body.appendChild(tr));
+  }
   card.appendChild(body);
 }
 

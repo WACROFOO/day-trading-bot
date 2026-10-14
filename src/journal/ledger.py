@@ -325,6 +325,21 @@ CREATE INDEX IF NOT EXISTS ix_manual_symbol_ts ON manual_decisions(symbol, ts_et
 CREATE TABLE IF NOT EXISTS desk_settings (
     key TEXT PRIMARY KEY, value TEXT, updated_at TEXT NOT NULL
 );
+
+-- Every scanner event the desk raised (2026-10-14), delivered to a card or
+-- suppressed with the router's reason (cooldown, consolidated under another
+-- scanner of the same moment, duplicate). Without it the High of Day and
+-- Running Up cards could not be scored afterwards: why AEHL and GRML never
+-- printed on High of Day on 2026-10-14 was unanswerable. Discovery only —
+-- nothing reads it to decide.
+CREATE TABLE IF NOT EXISTS scanner_alerts (
+    idem_key TEXT PRIMARY KEY,
+    ts_et TEXT NOT NULL, symbol TEXT NOT NULL, scanner TEXT NOT NULL, branch TEXT,
+    severity TEXT, outcome TEXT NOT NULL, detail TEXT,
+    last REAL, change_pct REAL, values_json TEXT,
+    recorded_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ix_scanner_alerts_ts ON scanner_alerts(ts_et);
 """
 
 
@@ -545,6 +560,32 @@ def record_board(conn: sqlite3.Connection, ts, session_id: str,
              int(bool(r["plan_allowed"])), r.get("last"), _now()))
         n += cur.rowcount
     return n
+
+
+def record_alerts(conn: sqlite3.Connection, rows: Iterable[dict]) -> int:
+    """Scanner events, once each by their stable key (symbol|scanner|branch|
+    second). `rows`: dicts with key, ts, symbol, scanner, branch, severity,
+    outcome (delivered | suppressed), detail, values."""
+    n = 0
+    for r in rows:
+        v = r.get("values") or {}
+        cur = conn.execute("""
+            INSERT OR IGNORE INTO scanner_alerts
+              (idem_key, ts_et, symbol, scanner, branch, severity, outcome, detail, last, change_pct,
+               values_json, recorded_at)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
+            (r["key"], _et(r["ts"]), r["symbol"], r["scanner"], r.get("branch"), r.get("severity"),
+             r["outcome"], r.get("detail") or None, v.get("last"), v.get("change_pct"), _json(v), _now()))
+        n += cur.rowcount
+    return n
+
+
+def scanner_alerts(conn: sqlite3.Connection, day: Optional[str] = None) -> list[sqlite3.Row]:
+    """The scanner events of one ET day (all days when None), in time order."""
+    if day is None:
+        return conn.execute("SELECT * FROM scanner_alerts ORDER BY ts_et, idem_key").fetchall()
+    return conn.execute("SELECT * FROM scanner_alerts WHERE substr(ts_et,1,10)=? ORDER BY ts_et, idem_key",
+                        (day,)).fetchall()
 
 
 def record_halt(conn: sqlite3.Connection, ts, symbol: str, status: str,

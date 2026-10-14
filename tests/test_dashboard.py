@@ -2039,3 +2039,69 @@ def test_ui_a_huge_order_or_print_alerts_once_debounced_and_never_the_history(pa
         page.locator("#flowAlert").inner_text()
     page.evaluate("() => { window.__SESSION__.live = false; }")
 
+
+
+def test_ui_alert_rows_say_what_the_name_is_doing_now(page):
+    """Owner, 2026-10-14: "i need them more dynamic" — at 06:12 the High of Day
+    card read 04:01 and 04:36 rows with nothing saying whether either name was
+    still near its high. Each row now carries the name at the viewed minute
+    (price, the session high, when it printed); a row whose newest alert is over
+    15 minutes old is dimmed and over an hour folds away; a name firing twice in
+    ten minutes is hot; a fresh session high is flagged."""
+    n = page.eval_on_selector("#scrub", "e => +e.max")
+    _seek(page, n)
+    got = page.evaluate("""() => {
+      const S = window.__SESSION__, f = S.frames[S.frames.length - 1], now = f.t * 1000, out = [];
+      const cards = { 'scan-hod': ['hod_momentum', 'breakout_52w'],
+                      'scan-running': ['running_up', 'squeeze_5_in_5', 'squeeze_10_in_10', 'running_up_filters'] };
+      for (const [card, scanners] of Object.entries(cards)) {
+        const listed = window.__loggedAlerts(scanners);
+        document.querySelectorAll('[data-card=' + card + '] .alert-row').forEach(r => {
+          const sym = r.dataset.sym, live = r.querySelector('.alert-live'), xn = r.querySelector('.pill.xn');
+          const bars = (S.bars[sym] || []).filter(b => b[0] < f.t + 60);
+          let hi = -Infinity, hiAt = null; bars.forEach(b => { if (b[2] > hi) { hi = b[2]; hiAt = b[0] * 1000; } });
+          const mine = listed.filter(a => a.symbol === sym);
+          out.push({ card, sym, age: now - +r.dataset.at, newest: Math.max(...mine.map(a => a._at)) === +r.dataset.at,
+                     aged: r.classList.contains('aged'), fresh: r.classList.contains('new-high'),
+                     now: live ? +live.dataset.now : null, want: bars.length ? bars[bars.length - 1][4] : null,
+                     high: live ? +live.dataset.high : null, wantHigh: hi, highAge: hiAt == null ? null : now - hiAt,
+                     hot: !!(xn && xn.classList.contains('hot')),
+                     recent: mine.filter(a => now - a._at <= 600000).length, n: mine.length });
+        });
+      }
+      const folds = Array.from(document.querySelectorAll('.alert-fold')).map(e => e.textContent);
+      return { rows: out, folds };
+    }""")
+    rows_ = got["rows"]
+    assert rows_, "the fixture lists alerts"
+    for r in rows_:
+        assert r["newest"], r
+        assert r["now"] == r["want"] and r["high"] == r["wantHigh"], r
+        assert r["aged"] == (r["age"] > 15 * 60000), r
+        assert r["age"] <= 60 * 60000 or r["aged"], r
+        assert r["fresh"] == (r["highAge"] is not None and r["highAge"] <= 2 * 60000), r
+        assert r["hot"] == (r["n"] > 1 and r["recent"] >= 2), r
+    assert all("older than an hour" in f for f in got["folds"])
+
+
+def test_ui_a_former_runner_is_a_label_with_its_date():
+    """Former Momo (SCANNERS.md B1): "a stock that in the past went up over
+    100% in one day" (w97KlUrVDk0 [00:58:29]). The badge names the newest such
+    day in the daily bars the desk holds; under 100 % there is none."""
+    import shutil, subprocess as sp, json as js
+    if shutil.which("node") is None:
+        pytest.skip("no node binary")
+    app = (ROOT / "src" / "momentum_platform" / "dashboard" / "web" / "app.js").read_text()
+    body = "function formerRunner" + app.split("function formerRunner")[1].split("\nfunction ")[0]
+    code = body + """
+      const D = (d, c, h) => ({ d, c, h });
+      process.stdout.write(JSON.stringify([
+        formerRunner([D('2026-03-02', 1.0, 1.0), D('2026-03-03', 1.6, 2.2), D('2026-03-04', 1.5, 1.7),
+                      D('2026-06-10', 2.0, 2.0), D('2026-06-11', 3.0, 4.1)]),
+        formerRunner([D('2026-03-02', 1.0, 1.0), D('2026-03-03', 1.5, 1.9)]),
+        formerRunner([])]));"""
+    out = sp.run(["node", "-e", code], capture_output=True, text=True, timeout=30)
+    assert out.returncode == 0, out.stderr
+    newest, short, empty = js.loads(out.stdout)
+    assert newest["d"] == "2026-06-11" and round(newest["pct"]) == 105, "the newest +100 % day"
+    assert short is None and empty is None
