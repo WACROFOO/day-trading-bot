@@ -100,8 +100,10 @@ def test_a_short_is_exactly_the_mirror_of_a_long():
         entry = sd.o[k0]
         stop = entry * 1.05
         for ex in S.EXITS:
-            a = S.run(sd, -1, k0, entry, entry, stop, ex, minute(15, 55))
-            b = S.run(mirror, 1, k0, K - entry, K - entry, K - stop, ex, minute(15, 55))
+            tp = entry * 0.97 if S.EXITS[ex].get("target_px") else None          # a level target, under a short
+            a = S.run(sd, -1, k0, entry, entry, stop, ex, minute(15, 55), target_px=tp)
+            b = S.run(mirror, 1, k0, K - entry, K - entry, K - stop, ex, minute(15, 55),
+                      target_px=None if tp is None else K - tp)
             assert a[1] == b[1] and a[2] == b[2], (seed, ex)
             assert a[0] == pytest.approx(b[0], abs=1e-9) and a[4] == pytest.approx(b[4], abs=1e-9)
             assert a[3] == pytest.approx(K - b[3], abs=1e-9)
@@ -652,3 +654,216 @@ def test_quote_sizes_before_november_2025_are_round_lots():
     from candidates import requote as RQ
     assert RQ.displayed_shares("2022-03-01", 3) == 300                     # 3 round lots
     assert RQ.displayed_shares("2025-11-03", 300) == 300                   # shares from the change on
+
+
+# ------------------------------------------------------------------ the levels round (amendment 2026-10-14)
+from momentum_platform import levels as LV  # noqa: E402
+
+
+def volatile(seed, pc=4.0):
+    """A gapper on wide one-minute bars (1-3 %), swinging in legs around +40 %: the regime
+    the levels round's 2 % stop floor is written for."""
+    rnd = random.Random(seed)
+    rows, px, drift = [], pc * 1.25, 0.0
+    for mm in range(0, 720):
+        if mm % rnd.randint(6, 16) == 0:
+            drift = rnd.choice((-1, 1)) * rnd.uniform(0.003, 0.012)
+        vol = 0.012 if mm >= 330 else 0.005
+        pull = (pc * 1.4 - px) / px * 0.05
+        o = px * (1 + rnd.gauss(0, vol / 4))
+        c = max(pc * 1.05, o * (1 + drift + pull + rnd.gauss(0, vol)))
+        h = max(o, c) * (1 + abs(rnd.gauss(0, vol / 2)))
+        lo = min(o, c) * (1 - abs(rnd.gauss(0, vol / 2)))
+        rows.append((mm, round(o, 4), round(h, 4), round(lo, 4), round(c, 4), rnd.randint(5_000, 80_000)))
+        px = c
+    return sday(rows, pc=pc, open_px=next(r for r in rows if r[0] >= 330)[1])
+
+
+def _level_days():
+    return [volatile(s) for s in range(40)] + [gapper(s, pm_vol=40_000) for s in range(20)]
+
+
+def _bars(sd):
+    return list(zip(sd.m, sd.o, sd.h, sd.l, sd.c, sd.v))
+
+
+def test_the_levels_entries_decide_from_bars_up_to_their_fill_bar_only():
+    fired = {}
+    for i, sd in enumerate(_level_days()):
+        for fam in R.LEVEL_FAMILIES:
+            for stop in ("bars5", "level"):
+                got = R.entries(fam, sd, stop)
+                if not got:
+                    continue
+                e = got[0][0]
+                fired[(fam, stop)] = fired.get((fam, stop), 0) + 1
+                assert e.k0 == e.sig_k + 1 and e.fill == e.entry == sd.o[e.k0] and e.high_ok
+                px = sd.c[e.sig_k]
+                assert R.LV_BAND[0] * px - 1e-9 <= px - e.stop <= R.LV_BAND[1] * px + 1e-9
+                assert e.fill > e.stop and sd.m[e.k0] < R.FLAT_LONG
+                assert R.LV_WIN[0] <= sd.m[e.sig_k] < R.LV_WIN[1] and px >= 1.10 * sd.pc
+                for alt in (_cut(sd, e.k0), _scramble(sd, e.k0, i)):
+                    again = R.entries(fam, alt, stop)
+                    assert again and again[0][0] == e, (i, fam, stop)
+    assert all(fired.get((f, s), 0) >= 5 for f in R.LEVEL_FAMILIES for s in ("bars5", "level")), fired
+
+
+def test_each_levels_signal_is_the_line_the_desk_draws():
+    """Recomputed with the direct port of levels.js on the bars before the signal bar."""
+    seen = 0
+    for sd in _level_days():
+        b = _bars(sd)
+        for fam in R.LEVEL_FAMILIES:
+            for stop in ("bars5", "level"):
+                got = R.entries(fam, sd, stop)
+                if not got:
+                    continue
+                e = got[0][0]
+                k = e.sig_k
+                a = LV.atr(b[:k])
+                if fam == "L4":
+                    ln = LV.trend_lines(b[:k], sd.c[k], a)["down"]
+                    assert ln is not None and ln.through and sd.c[k] > ln.now
+                    level = ln.now
+                else:
+                    fan = LV.sr_fan(b[:k], sd.c[k - 1], a)
+                    band = fan["band"]
+                    if fam == "L5":
+                        level = fan["sup"][0]["price"]
+                        assert level - band <= sd.l[k] <= level + band and sd.c[k] > level and sd.c[k] >= sd.o[k]
+                    else:
+                        level = fan["res"][0]["price"]
+                        assert sd.c[k] > level + band
+                want = (min(sd.l[k - 4:k + 1]) if stop == "bars5" else level - 0.5 * a) - 0.01
+                assert e.stop == pytest.approx(want, abs=1e-12)
+                tg = dict(e.targets)
+                res = [x["price"] for x in LV.sr_fan(b[:k + 1], sd.c[k], LV.atr(b[:k + 1]))["res"] if x["price"] > e.fill]
+                assert tg["res"] == (res[0] if res else None)
+                hod = max(sd.h[:k + 1])
+                assert tg["hod"] == (hod if hod > e.fill else None)
+                seen += 1
+    assert seen >= 60, seen
+
+
+def test_a_level_target_is_a_resting_limit_at_the_price_its_rule_fixed():
+    from candidates import run as RUN
+    rows = [(330 + i, 10.0, 10.05, 9.95, 10.0, 1e4) for i in range(5)]
+    rows += [(335, 10.0, 10.30, 9.98, 10.25, 1e4), (336, 10.25, 10.60, 10.2, 10.5, 1e4)]
+    rows += [(337 + i, 10.5, 10.55, 10.45, 10.5, 1e4) for i in range(60)]
+    sd = sday(rows)
+    r, k, why, px, *_ = S.run(sd, 1, 1, 10.0, 10.0, 9.5, "res", minute(11, 30), target_px=10.40)
+    assert (why, px, sd.m[k]) == ("target", 10.40, 336) and r == pytest.approx(0.8)
+    with pytest.raises(ValueError):
+        S.run(sd, 1, 1, 10.0, 10.0, 9.5, "hod", minute(11, 30))
+    e = R.Entry(1, 10.0, 10.0, 9.5, True, 0, (("res", None), ("hod", 10.40)))
+    assert RUN.level_target(e, "res") == (11.0, True)                          # none found: 2 R
+    assert RUN.level_target(e, "hod") == (10.40, False)
+    assert RUN.level_target(e, "fixed2") == (None, None)
+    assert not S.MARKETABLE["target"]                                           # a resting limit: no spread paid
+
+
+def test_the_random_baseline_gets_the_trades_own_target_distance():
+    sd = volatile(5)
+    c = S.Costs()
+    args = (sd, 1, minute(9, 31), minute(11, 21), 0.04, "res", minute(11, 30), c, 20, 99)
+    a = S.random_baseline(*args, target_r=0.5)
+    assert a == S.random_baseline(*args, target_r=0.5) and a is not None
+    assert S.random_baseline(*args, target_r=3.0) != a
+    assert S.random_baseline(sd, 1, minute(9, 31), minute(11, 21), 0.04, "fixed2", minute(11, 30), c, 20, 99) == \
+        pytest.approx(S.random_baseline(sd, 1, minute(9, 31), minute(11, 21), 0.04, "res", minute(11, 30), c, 20, 99,
+                                        target_r=2.0), abs=1e-12)               # a 2 R level target is fixed2
+
+
+def test_the_levels_round_corrects_alpha_over_its_own_three_families(tmp_path):
+    assert R.ROUNDS[1] == ("L4", "L5", "L6") and set(R.ROUNDS[1]) <= set(R.OPENABLE)
+    assert P.corrected_alpha(family="L5") == pytest.approx(0.05 / 2 / 3)
+    assert P.corrected_alpha() == pytest.approx(0.05 / 2 / 3)                    # round 1, as before
+    e = P.open_holdout("L4", R.FAMILIES["L4"].configs[0], 8, {"n": 100}, {"n": 30},
+                       ledger=tmp_path / "l.jsonl", ledgers=(tmp_path / "c.jsonl", tmp_path / "l.jsonl"))
+    assert e["family"] == "L4"
+    assert len(R.FAMILIES["L4"].configs) == 8 and len({P.config_hash("L4", c) for c in R.FAMILIES["L4"].configs}) == 8
+    assert {R.label("L6", c) for c in R.FAMILIES["L6"].configs} >= {"bars5·res", "level·hod"}
+
+
+def test_the_levels_round_runs_end_to_end_on_the_cache_format(tmp_path, monkeypatch, capsys):
+    from candidates import run as RUN
+    day = "2022-03-01"
+    cache = tmp_path / "history"
+    cache.mkdir()
+    uni = {}
+    payload = {}
+    for i in range(6):
+        sd = volatile(i)
+        payload[f"S{i}"] = [[f"{day}T{(9 * 60 + mm) // 60:02d}:{(9 * 60 + mm) % 60:02d}:00Z", o, h, l, c, v]
+                            for mm, o, h, l, c, v in zip(sd.m, sd.o, sd.h, sd.l, sd.c, sd.v)]
+        uni[f"S{i}"] = {"prev_close": "4.0", "open_px": str(sd.open_px), "prior_dollar_volume_20d": "2000000"}
+    (cache / f"{day}.json").write_text(json.dumps(payload))
+    monkeypatch.setattr(D, "universe", lambda since=D.WINDOW[0], until=D.WINDOW[1], path=None:
+                        {day: uni} if since <= day <= until else {})
+    monkeypatch.setattr(P, "LOCAL_REGISTRY", tmp_path / "registry.jsonl")
+    monkeypatch.setattr(P, "LOCAL_LEDGER", tmp_path / "ledger.jsonl")
+    rc = RUN.main(["--cache", str(cache), "--no-fetch", "--sample", "5", "--families", "L4,L5,L6", "--draws", "2",
+                   "--out", str(tmp_path / "out")])
+    out = capsys.readouterr().out
+    assert rc == 0 and "amendment 2026-10-14" in out
+    assert all(out.count(f"REG {f} ") == 8 for f in ("L4", "L5", "L6"))
+    assert "TARGETS" in out
+    assert not (tmp_path / "registry.jsonl").exists() and not (tmp_path / "ledger.jsonl").exists()
+
+
+# ------------------------------------------------------------------ the level read-out (amendment 2026-10-14)
+def test_a_level_test_resolves_by_its_close_through_or_a_one_atr_move_away():
+    from candidates import level_read as LR
+    rows = [(330, 10.5, 10.6, 10.4, 10.5, 1e4), (331, 10.5, 10.5, 10.02, 10.10, 1e4)]    # bar 1 tests 10.00
+    held = sday(rows + [(332, 10.1, 10.6, 10.05, 10.2, 1e4)] + [(333 + i, 10.2, 10.3, 10.1, 10.2, 1e4) for i in range(40)])
+    assert LR.tested(held, 1, "support", 10.0, 0.05)
+    assert LR.resolve(held, 1, "support", 10.0, 0.05, 0.5) == ("held", 2)
+    broke = sday(rows[:1] + [(331, 10.5, 10.5, 9.8, 9.9, 1e4)] + [(332 + i, 9.9, 10.0, 9.8, 9.9, 1e4) for i in range(40)])
+    assert LR.resolve(broke, 1, "support", 10.0, 0.05, 0.5) == ("broke", 1)              # the test bar's own close
+    both = sday(rows + [(332, 10.1, 10.6, 9.5, 9.6, 1e4)] + [(333 + i, 9.6, 9.7, 9.5, 9.6, 1e4) for i in range(40)])
+    assert LR.resolve(both, 1, "support", 10.0, 0.05, 0.5)[0] == "held"                 # the high printed before the close
+    flat = sday(rows + [(332 + i, 10.1, 10.2, 10.0, 10.1, 1e4) for i in range(40)])
+    assert LR.resolve(flat, 1, "support", 10.0, 0.05, 0.5) == ("open", 31)
+    mirror = sday([(mm, 30 - o, 30 - l, 30 - h, 30 - c, v) for mm, o, h, l, c, v in zip(held.m, held.o, held.h, held.l,
+                                                                                      held.c, held.v)])
+    assert LR.tested(mirror, 1, "resistance", 20.0, 0.05)
+    assert LR.resolve(mirror, 1, "resistance", 20.0, 0.05, 0.5) == ("held", 2)
+
+
+def test_the_level_read_out_tests_every_level_and_its_placebo_from_past_bars_only():
+    from candidates import level_read as LR
+    seen = set()
+    for s in range(8):
+        sd = volatile(s)
+        ev = LR.day_tests(sd)
+        assert ev and all(D.minute(9, 30) <= e["t"] < D.minute(11, 30) for e in ev)
+        seen |= {(e["kind"], e["side"], e["placebo"]) for e in ev}
+        k = sd.first_at(D.minute(10, 30))
+        cut = LR.day_tests(_scramble(sd, k, s))
+        before = [e for e in ev if e["t"] < sd.m[k] - LR.HORIZON]
+        assert before == [e for e in cut if e["t"] < sd.m[k] - LR.HORIZON]          # resolved before the cut: same
+    assert {(k, s_, p) for k in ("fan", "vwap", "round", "hod") for s_ in ("support", "resistance")
+            for p in (False, True) if not (k == "hod" and s_ == "support")} <= seen
+
+
+def test_the_level_read_out_never_reads_a_holdout_day(tmp_path, monkeypatch, capsys):
+    from candidates import level_read as LR
+    asked = []
+    uni = {"2022-03-01": {"AAA": {"prev_close": "4.0"}}, "2023-05-01": {"BBB": {"prev_close": "4.0"}},
+           "2024-02-01": {"CCC": {"prev_close": "4.0"}}}
+    monkeypatch.setattr(D, "universe", lambda *a, **k: uni)
+
+    def fake_days(u, hist, days=None, coverage=None):
+        for d in days:
+            asked.append(d)
+            sd = volatile(len(asked))
+            sd.day, sd.split = d, D.split_of(d)
+            coverage.setdefault(sd.split, [0, 0])
+            coverage[sd.split][0] += 1
+            coverage[sd.split][1] += 1
+            yield d, [sd]
+    monkeypatch.setattr(D, "history_days", fake_days)
+    assert LR.main(["--no-fetch", "--cache", str(tmp_path), "--out", str(tmp_path / "out")]) == 0
+    assert asked == ["2022-03-01", "2023-05-01"]
+    out = capsys.readouterr().out
+    assert "decides nothing" in out and "fan" in out and "READING" in out

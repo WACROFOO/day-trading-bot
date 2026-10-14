@@ -17,6 +17,8 @@ Conventions (`scripts/edge_hunt/engine.py`, research/strategy-candidates/PREREGI
     through it, else at its price — so a limit placed on the wrong side of the market
     fills at once, at the open, as a real one would.
   * After a stop-limit fill at its cap (`high_ok` False) the fill bar's high earns nothing.
+  * A level target (`res`, `hod`; amendment 2026-10-14) is a resting limit at a price the
+    rule fixed at its signal, scored like the fixed target; the caller passes the price.
 """
 from __future__ import annotations
 
@@ -35,14 +37,16 @@ EXITS = {
     "newlow": {"newlow": True},
     "vwap": {"level": True},
     "vwap_reclaim": {"cross": True},
+    "res": {"target_px": True},          # the nearest fan resistance above the fill, else 2 R
+    "hod": {"target_px": True},          # the high of day at the signal, else 2 R
 }
 MARKETABLE = {"stop": True, "trail": True, "newlow": True, "cross": True, "flat": True, "end": True,
               "target": False, "level": False}
 
 
-def manage(m, o, h, l, c, k0, fill, entry, stop, ex, flat_min, high_ok=True, series=None):
+def manage(m, o, h, l, c, k0, fill, entry, stop, ex, flat_min, high_ok=True, series=None, target_px=None):
     """Manage one long from bar k0 (the fill bar). Returns (R, exit index, reason,
-    exit price, MFE R, MAE R)."""
+    exit price, MFE R, MAE R). `target_px`: the resting limit of a level target."""
     rps = entry - stop
     n = len(o)
     level = stop
@@ -50,7 +54,8 @@ def manage(m, o, h, l, c, k0, fill, entry, stop, ex, flat_min, high_ok=True, ser
     best = worst = fill
     prev_low = None
     pending = False
-    tgt = entry + ex["target"] * rps if ex.get("target") else None
+    tgt = (entry + ex["target"] * rps if ex.get("target")
+           else target_px if ex.get("target_px") else None)
     trail = ex.get("trail", 0.0)
     newlow = ex.get("newlow", False)
     use_level = bool(ex.get("level")) and series is not None
@@ -105,17 +110,20 @@ def _mirror(sd: SymbolDay):
 
 
 def run(sd: SymbolDay, side: int, k0: int, fill: float, entry: float, stop: float, exit_name: str,
-        flat_min: int, high_ok: bool = True):
+        flat_min: int, high_ok: bool = True, target_px: float | None = None):
     """One trade on a symbol-day, either side. Returns (R, exit index, reason, exit price,
     MFE R, MAE R) in the trade's own direction."""
     ex = EXITS[exit_name]
     needs = bool(ex.get("level") or ex.get("cross"))
+    if ex.get("target_px") and target_px is None:
+        raise ValueError(f"exit {exit_name} needs the target price its rule fixed")
     if side > 0:
         return manage(sd.m, sd.o, sd.h, sd.l, sd.c, k0, fill, entry, stop, ex, flat_min, high_ok,
-                      sd.vwap if needs else None)
+                      sd.vwap if needs else None, target_px)
     mo, mh, ml, mc, mv = _mirror(sd)
     r, k, why, px, mfe, mae = manage(sd.m, mo, mh, ml, mc, k0, -fill, -entry, -stop, ex, flat_min,
-                                     high_ok, mv if needs else None)
+                                     high_ok, mv if needs else None,
+                                     -target_px if target_px is not None else None)
     return r, k, why, -px, mfe, mae
 
 
@@ -157,10 +165,12 @@ def seed_of(*parts) -> int:
 
 
 def random_baseline(sd: SymbolDay, side: int, w0: int, w1: int, stop_frac: float, exit_name: str,
-                    flat_min: int, costs: Costs, draws: int = 20, seed: int = 0) -> float | None:
+                    flat_min: int, costs: Costs, draws: int = 20, seed: int = 0,
+                    target_r: float | None = None) -> float | None:
     """Mean net R of `draws` market entries at the open of random bars of this symbol-day
     stamped in [w0, w1), same side, same stop distance (a fraction of the entry), same exit,
-    same costs. Deterministic in `seed`. None when the window holds no bar."""
+    same costs; a level target at the trade's own distance in R (`target_r`). Deterministic
+    in `seed`. None when the window holds no bar."""
     idx = [k for k, mm in enumerate(sd.m) if w0 <= mm < w1]
     if not idx or stop_frac <= 0:
         return None
@@ -171,7 +181,8 @@ def random_baseline(sd: SymbolDay, side: int, w0: int, w1: int, stop_frac: float
         entry = sd.o[k]
         rps = entry * stop_frac
         stop = entry - rps if side > 0 else entry + rps
-        r, ke, why, px, mfe, mae = run(sd, side, k, entry, entry, stop, exit_name, flat_min)
+        tp = None if target_r is None else entry + side * target_r * rps
+        r, ke, why, px, mfe, mae = run(sd, side, k, entry, entry, stop, exit_name, flat_min, target_px=tp)
         cm, sp, _ = costs.parts(entry, rps, MARKETABLE[why], sd.m[k] < RTH, sd.dv5_before(k))
         tot += r - cm - sp
         n += 1

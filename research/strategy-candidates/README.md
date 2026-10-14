@@ -7,9 +7,11 @@ RULES    · PREREGISTRATION.md — written and committed BEFORE any five-year ru
 CODE     · scripts/candidates/ (README there) · tests/test_candidates.py
 DATA     · 2021-01-01 → 2026-08-21: 15,959 gapper symbol-days (candidate_days.csv), Alpaca SIP 1-minute
            bars — on the Mac; this container has no market-data keys and no bar cache
-STATUS   · CLOSED, none profitable. The five-year run (RESULTS.md): S1, S2 and L1 fail the 2023
-           gate. The real-quote cost check (COST-CHECK.md): the cost model holds, S2's lead S2W
-           fails its gate 1. No holdout was ever opened: 2024-2026 is unread for all of them
+STATUS   · Round 1 CLOSED, none profitable. The five-year run (RESULTS.md): S1, S2 and L1 fail the
+           2023 gate. The real-quote cost check (COST-CHECK.md): the cost model holds, S2's lead S2W
+           fails its gate 1. No holdout was ever opened: 2024-2026 is unread for all of them.
+           Round 2, the desk's levels (L4-L6 and the level read-out, amendment 2026-10-14):
+           preregistered, waiting for the Mac's five-year run
 ```
 
 ## 1 · The board — every candidate, every combination counted
@@ -24,6 +26,10 @@ STATUS   · CLOSED, none profitable. The five-year run (RESULTS.md): S1, S2 and 
 | **L2** | the #1 gainer's new-high break | 18 + 54 | **done before** — the edge hunt's F7 and F8 | ✗ F7 failed validation (net −0.270 R); F8's holdout −0.188 R over 592, every year negative. Not re-run: its holdout is read |
 | **L3** | reference: the bot's entry + stop ≥ 3 % + new-low exit + done after a loss | 1 | reference only, never opens the holdout | −0.371 train · −0.091 in 2023 |
 | shorts, 20 days | mirror, back side, extension, time fade, the owner's five-condition combination | 31 | first look, 2026-10-12 | ✗ every variant negative net on the selection days — 20 sessions, not evidence (`prior-20-days/`) |
+| **L4** | trend-line break: a close above the desk's down-line, stop under the last 5 bars or under the line, target 2 R / trail / next resistance / high of day | 8 | **preregistered** 2026-10-14 (amendment), not run on the five years | — |
+| **L5** | support hold: the fan's nearest support touched and held (Pine's retest test) | 8 | **preregistered** 2026-10-14, not run | — |
+| **L6** | resistance break: a close above the fan's nearest resistance + band | 8 | **preregistered** 2026-10-14, not run | — |
+| *level read-out* | do the desk's levels hold more often than the same levels moved ±0.5-1.5 ATR? Descriptive, 2021-2023 only | — | **preregistered** 2026-10-14, not run | — |
 
 Also counted in `registry.jsonl`: the megaday study's 4 hypotheses (L1's origin) and the edge
 hunt's 174 exit/sizing configurations (L3's origin).
@@ -35,6 +41,8 @@ bash scripts/update.sh
 python3 scripts/candidates/run.py              # the five-year run (done 2026-10-12T1350Z)
 python3 scripts/candidates/requote.py          # the real-quote cost check (done 2026-10-12T1512Z-quotes)
 python3 scripts/candidates/run.py --lead S2W   # not needed: its gate 1 is already read (COST-CHECK.md §4)
+python3 scripts/candidates/run.py --families L4,L5,L6   # the levels round (amendment 2026-10-14)
+python3 scripts/candidates/level_read.py       # the level read-out, 2021-2023 only
 ```
 
 The report prints on the screen: paste it back, or upload

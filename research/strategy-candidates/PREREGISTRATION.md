@@ -316,3 +316,122 @@ and recent dollar volume; quotes older than 10 s; our share count against the di
 every configuration's train and 2023 result under Q.
 
 **Run:** `python3 scripts/candidates/requote.py` (the Mac: bars cached, Alpaca keys).
+
+---
+
+## Amendment 2026-10-14 — the levels round: trend lines and support/resistance (L4, L5, L6), written before any run
+
+**Asked.** The owner, 2026-10-14: *"i want you backtesting trendlines and more accurately
+supports and resistance and suggestions of verdict, entry points, TP and SL from old records"*.
+
+**What is tested.** The levels the desk draws today, exactly as drawn:
+`src/momentum_platform/dashboard/web/levels.js` — its support/resistance fan is the port of
+`knowledge-base/tradingview/ross-fp-v4.pine` (V9.5), its trend lines the two-swing method of
+2026-10-14. They are ported line for line to Python (`src/momentum_platform/levels.py`), and a
+test runs both on the same bars. None of it is a Ross rule: of trend lines he says himself they
+are *"more abstract because different traders will draw them differently"* (`BUCPPCXOHbs`
+[01:12:11], quoted in `knowledge-base/strategies/PARAMETERS.md` §10). **Hypotheses to test.**
+
+**Contamination, declared.** The trend-line method was chosen on 2026-10-14 for how the lines
+look on a live chart (the owner's recording), the fan was built in 2026-08 on live and paper
+sessions; neither was ever scored on returns. No rule below has run on 2021-2026. The first
+look runs on the exported desk days of `research/daily/` (2026-09/10, outside the five years)
+**after** this amendment is committed, and changes nothing in it.
+
+### Bars, timing, the levels at a bar
+
+* The universe, splits, bars, costs, one position at a time and the engine conventions of §4-§5,
+  unchanged. Longs; flat at 11:30; one trade per symbol-day (the first signal that fills).
+* **Levels at bar t are the levels drawn from the bars before it** (0 … t−1, all complete), from
+  the symbol-day's own bars since 04:00 — the history cache holds no earlier session, while the
+  desk's chart may also hold yesterday's swings (declared in the limits below). ATR is ATR(14)
+  at bar t−1 (Pine's `ta.atr`, as `levels.js`), band = max(0.12 ATR, 1 ¢) (Pine `bandATRfrac`).
+* **The signal is bar t's close** against those levels; t stamped 09:30-11:19, the close ≥ 10 %
+  over the previous close (§4's real-time condition). **Entry:** a market buy at the open of the
+  next bar. An open at or under the stop cancels it and the scan goes on (as S1).
+
+| id | family | the signal at bar t's close |
+|---|---|---|
+| **L4** | trend-line break | the intact down-line drawn on bars 0 … t−1 exists and bar t closes above it (`levels.js` `trendLines`: `through`) — the desk's "downtrend BROKEN ▲" |
+| **L5** | support hold | the fan's nearest support S: bar t comes **to** it and holds — its low inside S ± band, its close above S and at or above its open. The touch is Pine V5's retest test with V8's two-sided band (`ross-fp-v4.pine`, HOD break-and-retest: *"A retest must come back TO the level, not through it"*), applied to the fan's support |
+| **L6** | resistance break | the fan's nearest resistance R: bar t closes above R + band |
+
+### Stops (fixed at the signal) and targets
+
+| stop | rule |
+|---|---|
+| **bars5** | the lowest low of bars t−4 … t, − 1 ¢ — under the structure that made the signal |
+| **level** | the level − 0.5 ATR − 1 ¢: the line's price at bar t (L4), S (L5), the broken R (L6). Half an ATR is the fan's own merge distance (Pine `tolSR`): anything closer would have been the same level |
+
+Taken only when the stop is 2-20 % under the signal close (the 2 % floor of L1, from §2: costs
+per R sink tighter stops); otherwise the scan goes on.
+
+| exit | rule (all flat at 11:30) |
+|---|---|
+| **fixed2** | a resting sell limit at 2 R |
+| **trail1** | a 1 R trailing stop |
+| **res** | a resting sell limit at the nearest fan resistance above the fill, from the levels drawn at the signal bar's close (bars 0 … t); none above → 2 R |
+| **hod** | a resting sell limit at the high of day as of the signal bar — the corpus's first target, *"retest of high of day"* (`PARAMETERS.md` §5, `target_1`); the high is at or under the fill → 2 R |
+
+**Grid:** 3 families × stop {bars5, level} × exit {fixed2, trail1, res, hod} = **24**. The
+report also gives each configuration's median target distance in R and the share of trades whose
+`res`/`hod` target fell back to 2 R.
+
+**Random baseline (criterion 5):** as §5, window 09:31-11:20, the trade's stop distance in % and
+its exit; for `res` and `hod` the random entry gets the trade's own target distance in R.
+
+### Choosing, the gate, the holdout
+
+§6 unchanged: train chooses (best one-position mean net R, ≥ 100 train trades), validation gates
+(> 0, ≥ 30), the holdout opens once per family behind a passed gate, ledger first, criteria 1-7
+(6 does not apply to longs). **α:** S1, S2 and L1 failed their gates and can never open (a re-run
+is deterministic), so the families allowed to open are L4, L5 and L6: one-sided α = 0.05 / 2 / 3
+= **0.83 %**. The run: `python3 scripts/candidates/run.py --families L4,L5,L6` (the Mac).
+
+### "Suggestions of verdict, entry, TP and SL from old records"
+
+The train choice **is** the suggested stop and target for each setup; its record is the verdict a
+live setup of that family may carry, in the desk's words, never BUY:
+
+| the family's record | verdict for a live setup of it |
+|---|---|
+| not run on the five years | **WAIT** — no record |
+| fails the 2023 gate, or too few trades | **NO** — the record says it loses |
+| passes the gate, not adopted on the holdout | **WATCH** — forward paper only |
+| passes every criterion **and** the owner adopts it (`docs/preregistration.md` §5) | **REVIEW** |
+
+### The level read-out — "more accurately supports and resistance" (descriptive, decides nothing)
+
+Do the desk's levels behave like support and resistance at all, against levels drawn nowhere in
+particular? Measured on **train and validation only** (2021-2023): the holdout years stay unread
+for these levels.
+
+| level | support (price above it) | resistance (price below it) |
+|---|---|---|
+| `fan` | the fan's nearest support | the fan's nearest resistance |
+| `trend` | the intact up-line at the bar | the intact down-line at the bar |
+| `vwap` | VWAP | VWAP |
+| `round` | the whole or half dollar below | the whole or half dollar above |
+| `pmh` | the pre-market high (04:00-09:29), once above it | the pre-market high, below it |
+| `hod` | — | the high of day so far |
+| `fan+` | a fan level with a whole/half dollar or VWAP inside its band — the corpus's "two reasons at one price" (`PARAMETERS.md` §3, `at_support`) | the same, above |
+
+* **A test** of a support at bar t (bars 09:30-11:30): the level as drawn at t−1, the previous
+  close above level + band, bar t's low at or under level + band. Frozen at the test.
+* **Outcome:** *broke* — a close under level − band (bar t's own close included); *held* — first,
+  from bar t+1, a high at level + 1 ATR; *unresolved* — neither in 30 bars. Resistance mirrors it.
+  One open test per level and side at a time.
+* **Placebo:** every level also moved by a random ±0.5-1.5 ATR (seeded by the symbol-day and the
+  level), tested the same way. **The reading is held % − placebo held %**, with a day-clustered
+  95 % interval, by level and side, train and validation apart.
+* What a reading can do: inform which levels the desk draws or highlights — the owner's call. It
+  is never a gate and never a trade.
+
+### Limits of this round
+
+* One-minute bars; levels from the symbol-day's own bars only (no prior session, no daily or
+  weekly levels — the corpus's "daily / weekly chart level" component is untestable here); the
+  pre-market of the universe is chosen knowing the 09:30 open, so nothing enters before 09:31.
+* `level` stops and `res` targets depend on ATR(14) of one-minute bars, which a halt distorts.
+* Run: `python3 scripts/candidates/run.py --families L4,L5,L6` then
+  `python3 scripts/candidates/level_read.py` (the Mac). Nothing measured yet.

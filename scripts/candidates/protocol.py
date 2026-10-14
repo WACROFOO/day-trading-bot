@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from candidates.data import ROOT
-from candidates.rules import OPENABLE
+from candidates.rules import OPENABLE, ROUNDS
 
 FOLDER = ROOT / "research" / "strategy-candidates"
 RESULTS = FOLDER / "results"
@@ -40,8 +40,12 @@ class HoldoutAlreadyOpened(RuntimeError):
     pass
 
 
-def corrected_alpha(n_families: int = len(OPENABLE)) -> float:
-    """One-sided: 95 % two-sided, Bonferroni over the families allowed to open."""
+def corrected_alpha(n_families: int | None = None, family: str | None = None) -> float:
+    """One-sided: 95 % two-sided, Bonferroni over the families allowed to open — those of the
+    family's round (amendment 2026-10-14: round 1's three can no longer open)."""
+    if n_families is None:
+        rnd = next((r for r in ROUNDS if family in r), ROUNDS[0])
+        n_families = len(rnd)
     return ALPHA / 2 / n_families
 
 
@@ -168,14 +172,15 @@ def with_borrow(trades: list[dict], pct: float) -> list[float]:
     return [t["net"] - pct / 100.0 * t["entry"] / t["risk"] for t in trades]
 
 
-def adoption(port: list[dict], side: int, older: list[dict] | None, real: dict | None = None) -> dict:
+def adoption(port: list[dict], side: int, older: list[dict] | None, real: dict | None = None,
+             family: str | None = None) -> dict:
     """Criteria 1-7 of PREREGISTRATION.md §6 on the holdout portfolio; with `real` (the same
     trades re-priced on quotes, amendment 2026-10-12c) also criterion 8."""
     v = [t["net"] for t in port]
     d = [t["day"] for t in port]
     n = len(v)
     mean = sum(v) / n if n else float("nan")
-    a = corrected_alpha()
+    a = corrected_alpha(family=family)
     lb = lower_bound(d, v, a)
     years = defaultdict(list)
     for t in port:

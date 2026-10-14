@@ -2,12 +2,14 @@
 
 Each generator reads one `SymbolDay` and returns the entries it would have taken:
 
-    Entry(k0, fill, entry, stop, high_ok, sig_k)
+    Entry(k0, fill, entry, stop, high_ok, sig_k, targets)
 
 `k0` is the fill bar, `entry` the planned price R is measured from (the trigger of a
-stop-limit, the fill of a market order), `sig_k` the bar whose close decided it. Nothing
-after `sig_k` is read to decide; `tests/test_candidates.py` truncates the bars after the
-signal and checks that the same entry comes out.
+stop-limit, the fill of a market order), `sig_k` the bar whose close decided it, `targets`
+the level-based take-profit prices a rule fixed at its signal ((exit name, price or None),
+amendment 2026-10-14). Nothing after `sig_k` is read to decide (the fill bar's open aside);
+`tests/test_candidates.py` truncates the bars after the fill and checks that the same entry
+comes out.
 """
 from __future__ import annotations
 
@@ -15,6 +17,7 @@ from dataclasses import dataclass
 from datetime import datetime, time as dtime, timedelta
 
 from candidates.data import ET, RTH, SymbolDay, minute
+from momentum_platform import levels as LV
 
 UP_MIN = 0.10                       # the real-time condition: up >= 10 % at the signal
 SSR_DROP = 0.10                     # Rule 201: a print 10 % under the previous close
@@ -29,6 +32,10 @@ L1_WIN = (minute(9, 30), minute(11, 20))
 L1_MAX_PB, L1_MAX_DEPTH, L1_STOP_X, L1_MIN_STOP = 5, 0.5, 2.0, 0.02
 L3_MIN_STOP_PCT = 3.0
 S2W_BAND = (0.10, 0.20)             # amendment 2026-10-12b: S2's lead, the stop 10-20 % above
+# amendment 2026-10-14, the levels round: L4 trend-line break, L5 support hold, L6 resistance break
+LV_WIN = (minute(9, 30), minute(11, 20))     # the signal bar 09:30-11:19, as L1
+LV_BAND = (0.02, 0.20)                       # the stop 2-20 % under the signal close
+LV_STOP_ATR = 0.5                            # `level`: half an ATR under the level (Pine tolSR)
 
 
 @dataclass(frozen=True)
@@ -39,6 +46,7 @@ class Entry:
     stop: float
     high_ok: bool
     sig_k: int
+    targets: tuple = ()
 
 
 def _risk_ok(px: float, stop: float) -> bool:
@@ -159,6 +167,73 @@ def l1(sd: SymbolDay, gain_min: float) -> Entry | None:
     return None
 
 
+# ------------------------------------------------------------------ L4-L6 the desk's levels (long)
+def day_levels(sd: SymbolDay) -> LV.DayLevels:
+    """The desk's levels for every bar of the symbol-day (src/momentum_platform/levels.py,
+    the port of levels.js), built once."""
+    lv = getattr(sd, "_levels", None)
+    if lv is None:
+        lv = LV.DayLevels(list(zip(sd.m, sd.o, sd.h, sd.l, sd.c, sd.v)))
+        sd._levels = lv
+    return lv
+
+
+def levels_signal(sd: SymbolDay, fam: str, k: int) -> float | None:
+    """The level bar k's close acts on, or None — amendment 2026-10-14. Levels are the ones
+    drawn from bars 0 … k−1; bar k's close decides.
+      L4  the intact down-line exists and bar k closes above it: the line's price at bar k
+      L5  the fan's nearest support S: bar k's low inside S ± band, its close above S and
+          at or above its open (Pine V5's retest touch, V8's two-sided band): S
+      L6  the fan's nearest resistance R: bar k closes above R + band: R"""
+    lv = day_levels(sd)
+    if fam == "L4":
+        ln = lv.lines(k, sd.c[k])["down"]
+        return ln["now"] if ln is not None and ln["through"] else None
+    fan = lv.fan(k, sd.c[k - 1])
+    band = fan["band"]
+    if fam == "L5":
+        if not fan["sup"]:
+            return None
+        s = fan["sup"][0]["price"]
+        ok = s - band <= sd.l[k] <= s + band and sd.c[k] > s and sd.c[k] >= sd.o[k]
+        return s if ok else None
+    if not fan["res"]:
+        return None
+    r = fan["res"][0]["price"]
+    return r if sd.c[k] > r + band else None
+
+
+def levels_entry(sd: SymbolDay, fam: str, stop_kind: str) -> Entry | None:
+    """L4 / L5 / L6: the first signal bar 09:30-11:19, up >= 10 %, whose stop is 2-20 % under
+    its close and whose next bar opens above the stop: a market buy at that open. Targets
+    fixed at the signal: `res` the nearest fan resistance above the fill (levels drawn on
+    bars 0 … k), `hod` the high of day as of bar k when above the fill; None → 2 R."""
+    m, o, h, l, c, pc = sd.m, sd.o, sd.h, sd.l, sd.c, sd.pc
+    n = len(sd)
+    lv = day_levels(sd)
+    hod = float("-inf")
+    for k in range(n - 1):
+        hod = max(hod, h[k])
+        if k == 0 or not (LV_WIN[0] <= m[k] < LV_WIN[1]) or c[k] < (1 + UP_MIN) * pc:
+            continue
+        a = lv.atr_before(k)
+        if a is None or a <= 0:
+            continue
+        level = levels_signal(sd, fam, k)
+        if level is None:
+            continue
+        stop = (min(l[max(0, k - 4):k + 1]) if stop_kind == "bars5" else level - LV_STOP_ATR * a) - 0.01
+        risk = c[k] - stop
+        if not (LV_BAND[0] * c[k] <= risk <= LV_BAND[1] * c[k]):
+            continue
+        if m[k + 1] >= FLAT_LONG or o[k + 1] <= stop:
+            continue                                         # past the flat, or opened through the stop
+        fill = o[k + 1]
+        res = next((x["price"] for x in lv.fan(k + 1, c[k])["res"] if x["price"] > fill), None)
+        return Entry(k + 1, fill, fill, stop, True, k, (("res", res), ("hod", hod if hod > fill else None)))
+    return None
+
+
 # ------------------------------------------------------------------ L3 the reference long
 def l3(sd: SymbolDay) -> list[tuple[Entry, str]]:
     """The desk's detector plans (`backtest_recent.plans_for_day`: VWAP with pre-market
@@ -215,12 +290,24 @@ FAMILIES = {
     "S2W": Family("S2W", "S2's lead: G20·hod·close, kept when the stop is 10-20 % above (amendment 2026-10-12b)",
                   -1, FLAT_SHORT, ({"G": 0.20, "stop": "hod", "exit": "close", "band": [0.10, 0.20]},), lead_of="S2"),
 }
+LEVEL_CONFIGS = tuple({"stop": s, "exit": e} for s in ("bars5", "level") for e in ("fixed2", "trail1", "res", "hod"))
+FAMILIES.update({
+    "L4": Family("L4", "trend-line break: a close above the desk's down-line", 1, FLAT_LONG, LEVEL_CONFIGS),
+    "L5": Family("L5", "support hold: the fan's nearest support touched and held", 1, FLAT_LONG, LEVEL_CONFIGS),
+    "L6": Family("L6", "resistance break: a close above the fan's nearest resistance", 1, FLAT_LONG, LEVEL_CONFIGS),
+})
+LEVEL_FAMILIES = ("L4", "L5", "L6")
 LEADS = ("S2W",)                    # run only with --lead, never in the main run
-# research/strategy-candidates/PREREGISTRATION.md §6: the families allowed to open a holdout
-OPENABLE = ("S1", "S2", "L1")
+# research/strategy-candidates/PREREGISTRATION.md §6, and amendment 2026-10-14: the families allowed
+# to open a holdout, by round. α is corrected over a round's families: round 1's three failed their
+# gates and can never open, so the levels round counts its own three.
+ROUNDS = (("S1", "S2", "L1"), LEVEL_FAMILIES)
+OPENABLE = tuple(f for r in ROUNDS for f in r)
 
 
 def signal_key(fam: str, cfg: dict):
+    if fam in LEVEL_FAMILIES:
+        return cfg["stop"]                       # the stop decides which signal is taken (its 2-20 % band)
     return {"S1": lambda c: c["A"], "S2": lambda c: (c["G"], c["stop"]), "L1": lambda c: c["G"],
             "L3": lambda c: "L3", "S2W": lambda c: "S2W"}[fam](cfg)
 
@@ -234,6 +321,8 @@ def entries(fam: str, sd: SymbolDay, key) -> list[tuple[Entry, str]]:
         e = l1(sd, key)
     elif fam == "S2W":
         e = s2w(sd)
+    elif fam in LEVEL_FAMILIES:
+        e = levels_entry(sd, fam, key)
     else:
         return l3(sd)
     return [(e, "regular")] if e is not None else []
@@ -245,7 +334,7 @@ def random_window(fam: str, window: str) -> tuple[int, int]:
         return minute(10, 1), minute(15, 1)
     if fam in ("S2", "S2W"):
         return minute(9, 35), minute(10, 31)
-    if fam == "L1":
+    if fam == "L1" or fam in LEVEL_FAMILIES:
         return minute(9, 31), minute(11, 21)
     return (minute(7, 1), RTH) if window == "pre-market" else (RTH, minute(11, 21))
 
@@ -259,4 +348,6 @@ def label(fam: str, cfg: dict) -> str:
         return f"G{round(cfg['G'] * 100)}·{cfg['exit']}"
     if fam == "S2W":
         return "G20·hod·close·stop10-20"
+    if fam in LEVEL_FAMILIES:
+        return f"{cfg['stop']}·{cfg['exit']}"
     return "live·3%·newlow·1loss"

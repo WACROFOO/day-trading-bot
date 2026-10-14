@@ -15,6 +15,7 @@ verdict. **It does not trade** — no order path exists in this package and
 | `catalyst.py` | catalyst evidence, three channels; `card_read` is the decision card's two-line grade (rules C0–C13 in `knowledge-base/strategies/CATALYST.md`) |
 | `cascade.py` | the reject cascade — the single authority on whether a name is tradeable (FILTERS.md Layer 1 kills, Layer 2 chart gates) |
 | `indicators.py` | the Layer 2 chart gates from minute bars alone: VWAP, EMA 9, MACD |
+| `levels.py` | the chart's support/resistance fan and trend lines in Python — a line-for-line port of `dashboard/web/levels.js` (parity in `tests/test_levels_port.py`), and `DayLevels`, the same answers at every bar of a day, for `scripts/candidates/`' levels round. Describes, never decides |
 | `five_minute.py` | the 5-minute state of a name whose 1-minute chart gives no pullback — display only |
 | `decision_card.py` | the per-symbol card a manual trader acts on: REVIEW / WATCH / WAIT / NO, the reason, the level, the gates as lamps, the bot's own order (2026-10-08) |
 | `order_math.py` | the order arithmetic the bot executes and the desk displays — one copy, re-exported by `execution.intent` |

@@ -5,6 +5,7 @@
     python3 scripts/candidates/run.py --source daily   # smoke test on research/daily: plumbing, not evidence
     python3 scripts/candidates/run.py --sample 30      # plumbing on 30 sessions a split; opens nothing
     python3 scripts/candidates/run.py --lead S2W       # a lead, by its amendment's gates (2026-10-12b)
+    python3 scripts/candidates/run.py --families L4,L5,L6   # the levels round (amendment 2026-10-14)
 
 The report goes to stdout (paste it back); progress goes to stderr. Files go to
 `research/strategy-candidates/results/<run>/` — git-ignored, so `scripts/update.sh` leaves
@@ -32,24 +33,40 @@ from candidates import data as D  # noqa: E402
 from candidates import diagnose as G  # noqa: E402
 from candidates import protocol as P  # noqa: E402
 from candidates import sim as S  # noqa: E402
-from candidates.rules import FAMILIES, LEADS, OPENABLE, entries, label, random_window, signal_key  # noqa: E402
+from candidates.rules import (FAMILIES, LEADS, LEVEL_FAMILIES, OPENABLE, entries, label, random_window,  # noqa: E402
+                              signal_key)
 
 SAMPLE_SEED = 20261012
 CAND_MAX = 120
 TRADE_COLS = ("fam", "hash", "label", "split", "day", "sym", "window", "sig_min", "fill_min", "exit_min", "entry",
               "fill", "stop", "risk_pct", "gross", "comm", "spread", "net", "why", "exit_px", "mfe", "mae", "rnd",
-              "gap", "dv20", "dv5", "sig_px")
+              "gap", "dv20", "dv5", "sig_px", "tp_r", "tp_fb")
 
 
 # ------------------------------------------------------------------ trades
+def level_target(e, exit_name: str) -> tuple[float | None, bool | None]:
+    """A level exit's resting limit (amendment 2026-10-14): the price the rule fixed at its
+    signal, or 2 R when it fixed none. Returns (price, fell back to 2 R); (None, None) for
+    any other exit."""
+    if not S.EXITS[exit_name].get("target_px"):
+        return None, None
+    px = dict(e.targets).get(exit_name)
+    if px is None:
+        return e.entry + 2.0 * (e.entry - e.stop), True
+    return px, False
+
+
 def trade(fam: str, cfg: dict, sd: D.SymbolDay, e, window: str, costs: S.Costs, draws: int) -> dict:
     F = FAMILIES[fam]
-    r, ke, why, px, mfe, mae = S.run(sd, F.side, e.k0, e.fill, e.entry, e.stop, cfg["exit"], F.flat, e.high_ok)
+    tp, fb = level_target(e, cfg["exit"])
+    r, ke, why, px, mfe, mae = S.run(sd, F.side, e.k0, e.fill, e.entry, e.stop, cfg["exit"], F.flat, e.high_ok,
+                                     target_px=tp)
     risk = abs(e.entry - e.stop)
+    tp_r = None if tp is None else (tp - e.entry) / (e.entry - e.stop)
     cm, sp, _ = costs.parts(e.entry, risk, S.MARKETABLE[why], sd.m[e.k0] < D.RTH, sd.dv5_before(e.k0))
     w0, w1 = random_window(fam, window)
     rnd = (S.random_baseline(sd, F.side, w0, w1, risk / e.entry, cfg["exit"], F.flat, costs, draws,
-                             S.seed_of(sd.day, sd.sym, e.k0)) if draws else None)
+                             S.seed_of(sd.day, sd.sym, e.k0), target_r=tp_r) if draws else None)
     # for the real-quote check (quotes.py): the minutes whose bar traded through a short's stop, from the
     # fill bar to the flat — a valid print through the stop can only be in one of them
     cand = ([sd.m[k] for k in range(e.k0, len(sd)) if sd.m[k] < F.flat and sd.h[k] >= e.stop][:CAND_MAX]
@@ -59,7 +76,7 @@ def trade(fam: str, cfg: dict, sd: D.SymbolDay, e, window: str, costs: S.Costs, 
             "exit_min": sd.m[ke], "entry": e.entry, "fill": e.fill, "stop": e.stop, "risk": risk,
             "risk_pct": 100.0 * risk / e.entry, "gross": r, "comm": cm, "spread": sp, "net": r - cm - sp,
             "why": why, "exit_px": px, "mfe": mfe, "mae": mae, "rnd": rnd, "gap": sd.gap(), "dv20": sd.dv20,
-            "dv5": sd.dv5_before(e.k0), "sig_px": sd.c[e.sig_k], "cand": cand}
+            "dv5": sd.dv5_before(e.k0), "sig_px": sd.c[e.sig_k], "cand": cand, "tp_r": tp_r, "tp_fb": fb}
 
 
 def collect(gen, wanted: dict, costs: S.Costs, draws: int, total: int | None = None, tag: str = "") -> dict:
@@ -158,6 +175,23 @@ def why_block(fam: str, r: dict) -> list[str]:
     vy = " · ".join(f"{y} {f3(m)} ({n})" for y, (m, n) in r["valid"].get("years", {}).items())
     out.append(f" YEARS   train {yrs}" + (f" │ validation {vy}" if vy else ""))
     return out
+
+
+def target_lines(rows: list[dict]) -> list[str]:
+    """Level exits (amendment 2026-10-14): how far the level target sat, and how often the
+    rule found none and fell back to 2 R — train trades, one position at a time."""
+    out = []
+    for r in rows:
+        ts = [t for t in r["tr"] if t.get("tp_r") is not None and t.get("tp_fb") is not None]
+        if not ts:
+            continue
+        d = sorted(t["tp_r"] for t in ts if not t["tp_fb"])
+        med = f"{d[len(d) // 2]:.2f} R" if d else "—"
+        fb = sum(1 for t in ts if t["tp_fb"]) / len(ts)
+        hit = sum(1 for t in ts if t["why"] == "target") / len(ts)
+        out.append(f"   {r['label']:<22} target at the level: median {med} away · none found → 2 R: {pct(fb)} · "
+                   f"target reached: {pct(hit)}")
+    return ([" TARGETS level exits on train — how far, how often missing, how often reached:"] + out) if out else []
 
 
 def lead_lines(rows: list[dict]) -> list[str]:
@@ -370,7 +404,8 @@ def main(argv=None) -> int:
     fams = [f.strip() for f in args.families.split(",") if f.strip()]
     for f in fams:
         if f not in FAMILIES or f in LEADS:
-            ap.error(f"unknown family {f} (S1, S2, L1, L3; L2 is not re-run; a lead runs only with --lead)")
+            ap.error(f"unknown family {f} (S1, S2, L1, L3, and the levels round L4, L5, L6; L2 is not re-run; "
+                     "a lead runs only with --lead)")
     smoke = args.source == "daily" or bool(args.sample)
     run_id = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H%MZ") + ("-smoke" if smoke else "")
     out_dir = Path(args.out) if args.out else P.RESULTS / run_id
@@ -402,8 +437,9 @@ def main(argv=None) -> int:
         print("no symbol-day had bars: run where data/cache/history exists, or with Alpaca keys in .env")
         return 2
 
-    rep = [f"STRATEGY CANDIDATES · run {run_id} · git {P.head()} · research/strategy-candidates/PREREGISTRATION.md",
-           f"SOURCE   {source}"]
+    amend = ", amendment 2026-10-14" if any(f in LEVEL_FAMILIES for f in fams) else ""
+    rep = [f"STRATEGY CANDIDATES · run {run_id} · git {P.head()} · research/strategy-candidates/PREREGISTRATION.md"
+           + amend, f"SOURCE   {source}"]
     if smoke:
         rep.append("! SMOKE — plumbing only, NOT evidence: nothing is opened and nothing enters the registry")
     rep.append("COVERAGE " + " · ".join(f"{sp} {c[1]:,} / {c[0]:,} symbol-days with bars" for sp, c in sorted(cov.items()))
@@ -442,6 +478,7 @@ def main(argv=None) -> int:
             else:
                 rep.append(f" → ✗ {gate['why']}")
                 rep += why_block(fam, max(rows, key=lambda r: r["train"].get("n", 0)))
+            rep += target_lines(rows)
             rep += lead_lines(rows)
         for r in rows:
             reg_rows.append({"family": fam, "hash": r["hash"], "config": r["cfg"], "label": r["label"], "run": run_id,
@@ -483,7 +520,7 @@ def main(argv=None) -> int:
                 F = FAMILIES[fam]
                 port = P.portfolio(got_h.get((fam, ch["hash"]), []))
                 older = P.portfolio(got_o.get((fam, ch["hash"]), []))
-                a = P.adoption(port, F.side, older)
+                a = P.adoption(port, F.side, older, family=fam)
                 res = {"label": ch["label"], "ledger": led[fam], "adoption": a}
                 P.record_result(fam, {k: v for k, v in a.items()} | {"hash": ch["hash"]})
                 summary[fam]["holdout"] = a
