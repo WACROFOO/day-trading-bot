@@ -561,7 +561,8 @@ class IbkrStream:
 
     def ingest_quote(self, symbol: str, price: Optional[float], size: float = 0.0,
                      bid: Optional[float] = None, ask: Optional[float] = None,
-                     market_data_type: Optional[int] = None) -> None:
+                     market_data_type: Optional[int] = None, print_ts: Optional[datetime] = None,
+                     venue: Optional[str] = None) -> None:
         if market_data_type in DELAYED_TYPES:
             self.health.market_data_type = market_data_type
             self.health.state = "DELAYED"
@@ -570,7 +571,8 @@ class IbkrStream:
         self.health.last_quote_at = self.clock()
         self._quote_at[symbol] = self.health.last_quote_at
         self.on_update(MarketUpdate(symbol=symbol, ts=self.clock(), price=price, size=size,
-                                    bid=bid, ask=ask, data_status=DataStatus.LIVE))
+                                    bid=bid, ask=ask, data_status=DataStatus.LIVE,
+                                    print_ts=print_ts, venue=venue))
 
     def poll_tickers(self) -> None:
         """Read the current top-of-book from each ticker; call on a short timer.
@@ -588,8 +590,11 @@ class IbkrStream:
             if self._last_quote.get(sym) == fingerprint:
                 continue
             self._last_quote[sym] = fingerprint
+            pts = getattr(t, "lastTimestamp", None)
             self.ingest_quote(sym, float(price), size, bid, ask,
-                              getattr(t, "marketDataType", None))
+                              getattr(t, "marketDataType", None),
+                              print_ts=pts if isinstance(pts, datetime) else None,
+                              venue=getattr(t, "lastExchange", None) or None)
 
     def _emit_closed(self, symbol: str) -> None:
         for bar in self.store.closed_1m(symbol, now=self.clock()):

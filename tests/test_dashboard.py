@@ -2171,3 +2171,4 @@ def test_ui_only_the_two_alerts_he_hears_make_a_sound(page):
       { scannerId: 'running_up' }, { scannerId: 'squeeze_5_in_5' }, { scannerId: 'running_up_filters' },
     ].map(a => window.__audible(a))""")
     assert got == [True, True, True, True, False, False, False, False, False]
+

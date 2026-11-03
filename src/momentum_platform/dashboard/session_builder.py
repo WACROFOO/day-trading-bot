@@ -242,6 +242,9 @@ def build_session_from_records(
                 "iexBid": rec.get("iex_bid"), "iexAsk": rec.get("iex_ask"),
                 "iexBidSize": rec.get("iex_bid_size"), "iexAskSize": rec.get("iex_ask_size"),
                 "iexLastTs": rec.get("iex_last_ts"),
+                # IBKR's overnight trade and book, apart from the session's
+                # (sessions.quote_parts, 2026-11-02); None in the session.
+                "overnight": rec.get("overnight"),
                 "lastSource": rec.get("last_source", "iex"),
                 "dailyBars": rec.get("daily_bars", []),
                 "stockType": rec.get("stock_type"),

@@ -212,6 +212,10 @@ Since 2026-10-09 (`docs/desk-grid-audit-2026-10-09.md`):
   layout links the 1-minute, the 5-minute and the daily).
 - The 1-minute chart draws the **pre-market high** beside the HOD ("HOD = PM
   HIGH" when they are one price). MACD is on the 1-minute only.
+- **After the session** (2026-11-02) the chip by the clock reads **closed · Fri 19:59**,
+  the scanner tiles **CLOSED**, the tape **CLOSED** until 04:00 ET. A trade on IBKR's
+  overnight venue shows as **overnight 2.17 +181%** beside the name — never as its price,
+  which stays the session's last trade, the one the gates judged.
 - The gainers list shows **every name green on the day** (2026-10-14; it
   showed names with 4 or 5 pillars), each with five marks — **P G R F N**,
   green pass, red fail, grey unknown: known, never a filter. Every scanner row

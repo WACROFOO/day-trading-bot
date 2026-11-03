@@ -114,6 +114,8 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .lag.warn{color:var(--unk-ink);background:var(--unk-bg);border-color:var(--unk-line)}
 .lag.bad{color:var(--no-ink);background:var(--no-bg);border-color:var(--no-line)}
 .lag[hidden]{display:none!important}
+/* the session is over: not green, not an alarm (2026-11-02) */
+.lag.closed{color:var(--ink-dim);background:#1a2230;border-color:var(--line)}
 .icon-btn{background:none;border:0;cursor:pointer;color:var(--ink-faint);padding:1px 3px;border-radius:3px}
 .icon-btn:hover{color:var(--ink);background:#1a2431}
 .icon-btn[aria-pressed="true"]{color:var(--hi)}
@@ -291,6 +293,9 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .ov-chips{display:inline-flex;gap:3px;margin-left:8px;flex:none}
 /* the line key gives way first when the header is narrow; the switches stay whole */
 .chart-card .card-head .legend{min-width:0;overflow:hidden}
+/* the card's name never gives way (2026-11-02: "5 minut…", "10 secon…"): the key and the role do first */
+.chart-card .card-head .card-title{flex:none}
+.chart-card .card-head .chart-role{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ov-chip{font:600 9.5px/1 var(--mono);padding:2px 6px;border-radius:3px;border:1px solid var(--line);
   background:transparent;color:var(--ink-faint);cursor:pointer;text-decoration:line-through}
 .ov-chip.on{color:#d1d4dc;border-color:#2962ff;background:#2962ff22;text-decoration:none}

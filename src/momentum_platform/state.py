@@ -30,6 +30,8 @@ class MarketUpdate:
     ask: Optional[float] = None
     bar: Optional[Bar] = None         # set when the update is a completed bar
     data_status: DataStatus = DataStatus.REPLAY
+    print_ts: Optional[datetime] = None   # a quote's last trade time, when the feed gives it
+    venue: Optional[str] = None           # … and its venue ("OVERNIGHT": IBKR's overnight session)
 
 
 @dataclass

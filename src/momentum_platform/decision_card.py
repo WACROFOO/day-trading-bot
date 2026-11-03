@@ -386,7 +386,12 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
     lg = ((cascade or {}).get("lastData") or cascade) if stale else cascade
     lamps = []
     gp = _gate(lg, "price")
-    lamps.append(lamp("price", "Price", gp.get("state", "UNKNOWN"), f"${_px(last)}",
+    # The price the gates judged — the session's last trade, the same snapshot
+    # as the gain below. The newest print (`last`) can be seconds fresher, and
+    # off-session it was IBKR's overnight trade: 2026-11-02 02:51 ET, PRICE
+    # $2.17 beside a GAIN of +166 % judged on 2.05.
+    judged = _f(m.get("last"))
+    lamps.append(lamp("price", "Price", gp.get("state", "UNKNOWN"), f"${_px(judged if judged is not None else last)}",
                       f"${PRICE_MIN:.0f}–{PRICE_MAX:.0f}", why=gp.get("reason")))
     chg = _f(m.get("changePct"))
     lamps.append(lamp("gain", "Gain", "UNKNOWN" if chg is None else ("PASS" if chg >= GAIN_MIN_PCT else "FAIL"),
@@ -405,7 +410,11 @@ def build_card(symbol: str, *, meta: dict, cascade: dict, bars: Sequence, detect
     if catalyst and catalyst.get("grade") == "UNKNOWN":
         cat_value = "no headline feed on this desk"
     elif catalyst:
-        cat_value = f"{catalyst['grade']} · {catalyst['type']} · {catalyst['age']}"
+        # The news line's own word (STRONG / SOME / WEAK / NONE): "no company news"
+        # is graded WEAK inside and read NONE on the line, and the tile said WEAK
+        # beside it (2026-11-02).
+        news_word = (catalyst.get("plain") or {}).get("label") or catalyst["grade"]
+        cat_value = f"{news_word} · {catalyst['type']} · {catalyst['age']}"
     else:
         cat_value = gc.get("value", "—")
     lamps.append(lamp("catalyst", "Catalyst", gc.get("state", "UNKNOWN"), cat_value,

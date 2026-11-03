@@ -42,7 +42,9 @@ KEEP = 600               # prints kept per tape
 SHOW = 80                # prints shipped in a snapshot, newest first
 GAPS_KEPT = 20           # gap markers kept (and shipped) per tape
 
-STATES = ("OFF", "STARTING", "LIVE", "QUIET", "PAUSED", "ERROR")
+STATES = ("OFF", "STARTING", "LIVE", "QUIET", "PAUSED", "ERROR", "CLOSED")
+CLOSED_WORDS = ("the session is over — prints resume at 04:00 ET "
+                "(an overnight trade still shows here if IBKR sends it)")
 
 
 @dataclass(frozen=True)
@@ -158,7 +160,7 @@ class TapeBook:
                 self._live_since = p.ts
             if self._facts_since is None:
                 self._facts_since = p.ts
-            if self.state in ("STARTING", "QUIET"):
+            if self.state in ("STARTING", "QUIET", "CLOSED"):
                 self.state, self.message = "LIVE", ""
             self.version += 1
             return p
@@ -291,6 +293,16 @@ class TapeBook:
                 # no number in the words: it froze while the age kept counting
                 # (review 2026-10-08); the card shows the live age beside it
                 self.set_state("QUIET", f"no print in the last {int(QUIET_S)} s")
+
+    def check_session(self, open_: bool) -> None:
+        """Outside the desk's session (20:00–04:00 ET, weekends, holidays) a tape
+        waiting for a print says the session is over instead of "starting…" all
+        night (2026-11-02, 02:51 ET); a print still shows, and makes it LIVE.
+        When the session opens it waits for the first print again."""
+        if not open_ and self.state in ("STARTING", "QUIET"):
+            self.set_state("CLOSED", CLOSED_WORDS)
+        elif open_ and self.state == "CLOSED":
+            self.set_state("STARTING", "waiting for the first print")
 
     def snapshot(self, n: int = SHOW, now: Optional[datetime] = None) -> dict:
         now = _utc(now or self.clock())

@@ -47,10 +47,14 @@ from ..datasources.ibkr_depth import DepthFeed
 from ..datasources.ibkr_tape import TapeFeed
 from .chart_history import ChartHistory
 from .seats import SeatClock, pairs
+from ..holidays import nyse_calendar
+from ..sessions import SESSION_SPAN, quote_parts
 from .session_builder import build_session_from_records
 from .stream import EventHub, UpdatePublisher
 
 UTC = timezone.utc
+#: the reference record's quote fields: the session's print and book (_quote_into)
+QUOTE_FIELDS = ("iex_last_price", "iex_last_ts", "iex_bid", "iex_ask", "iex_bid_size", "iex_ask_size", "overnight")
 
 
 def _et(ts: datetime) -> str:
@@ -133,7 +137,7 @@ class IbkrDesk:
         self.clock = clock
         self.headlines, self.sec = headlines, sec
         self.hub = EventHub()
-        self.publisher = UpdatePublisher(self.hub)
+        self.publisher = UpdatePublisher(self.hub, split=self._split_quote)
         self.stream: Optional[IbkrStream] = None
         self.scanner_ib = None
         self._scan_thread: Optional[threading.Thread] = None
@@ -1170,24 +1174,13 @@ class IbkrDesk:
             if len(mins) != len(self._minutes.get(sym, [])):
                 self._minutes[sym] = mins
             ref = dict(self._reference.get(sym) or {"type": "reference", "symbol": sym})
+            # The quote the reference was built with is the subscribe moment's;
+            # only the ticker's quote now, split by session, goes on the record.
+            for k in QUOTE_FIELDS:
+                ref.pop(k, None)
             t = s._tickers.get(sym)
             if t is not None:
-                last = getattr(t, "last", None)
-                if last is not None and last == last:
-                    ref["iex_last_price"] = float(last)
-                    # The PRINT's own time when the provider gives one. Stamping
-                    # it with the rebuild clock claimed a freshness the print
-                    # did not have: a quote from four minutes ago read as now.
-                    tick_ts = getattr(t, "time", None)
-                    ref["iex_last_ts"] = (tick_ts.isoformat(timespec="seconds")
-                                          if isinstance(tick_ts, datetime)
-                                          else self.clock().isoformat(timespec="seconds"))
-                    ref["iex_bid"] = _num(getattr(t, "bid", None))
-                    ref["iex_ask"] = _num(getattr(t, "ask", None))
-                    # Sizes travel with the quote so the ledger's NBBO-at-fill
-                    # check (brief R4) can ask "was that size actually there?"
-                    ref["iex_bid_size"] = _num(getattr(t, "bidSize", None))
-                    ref["iex_ask_size"] = _num(getattr(t, "askSize", None))
+                self._quote_into(ref, t, now, start)
             records.append(ref)
             tens = [r for r in store_records(s.store, sym) if r["ts"] >= start_iso]
             records += merge_minutes(mins, tens)
@@ -1248,6 +1241,14 @@ class IbkrDesk:
         # exactly the "stale but green" this design forbids.
         session["asOf"] = now.isoformat(timespec="seconds")
         session["sessionStart"] = start_iso
+        # Is the desk's session open now, and which phase is the market in, on
+        # the NYSE calendar (weekends and holidays included)? The page's chips
+        # and the tiles' state read these; until 2026-11-02 they said LIVE over
+        # Friday's 19:59 bar at 02:51 on Monday.
+        cal = nyse_calendar()
+        session["inSession"] = bool(start <= now < start + SESSION_SPAN
+                                    and cal.is_trading_day(start.astimezone(ET).date()))
+        session["marketPhase"] = cal.session_at(now).value
         through = self.data_through(session)
         session["dataThrough"] = through
         if through:
@@ -1291,6 +1292,7 @@ class IbkrDesk:
             "alerts": n_alerts, "symbols": list(self.symbols),
             "tradingDate": session["tradingDate"],
             "sessionStart": session["sessionStart"],
+            "inSession": session["inSession"], "marketPhase": session["marketPhase"],
             "dataLagSeconds": session["dataLagSeconds"],
             "feedLagSeconds": session["feedLagSeconds"],
             "frame": tail,
@@ -1308,6 +1310,54 @@ class IbkrDesk:
         })
         ph["publish"] = time.perf_counter() - tp
         return session
+
+    @staticmethod
+    def _print_time(t) -> Optional[datetime]:
+        """The last trade's own time: IBKR's tick 45 (`lastTimestamp`), else the
+        ticker's last update, else unknown."""
+        for name in ("lastTimestamp", "time"):
+            ts = getattr(t, name, None)
+            if isinstance(ts, datetime):
+                return ts if ts.tzinfo else ts.replace(tzinfo=UTC)
+        return None
+
+    def _quote_into(self, ref: dict, t, now: datetime, start: datetime) -> None:
+        """The ticker's quote onto the reference record: the session's part as
+        the desk's print and book, the night's apart (`overnight`) — 2026-11-02,
+        02:51 ET: an overnight trade at 2.17 was the card's PRICE beside a GAIN
+        judged on Friday's last session trade, 2.05 (sessions.quote_parts)."""
+        last = _num(getattr(t, "last", None))
+        parts = quote_parts(now, start, last=last, print_ts=self._print_time(t),
+                            venue=getattr(t, "lastExchange", None),
+                            bid=_num(getattr(t, "bid", None)), ask=_num(getattr(t, "ask", None)))
+        day, night = parts["session"], parts["overnight"]
+        iso = lambda ts: ts.astimezone(UTC).isoformat(timespec="seconds") if isinstance(ts, datetime) else None  # noqa: E731
+        if "last" in day:
+            ref["iex_last_price"] = float(day["last"])
+            # The PRINT's own time. Stamping it with the rebuild clock claimed a
+            # freshness the print did not have: a quote from four minutes ago read as now.
+            ref["iex_last_ts"] = iso(day["ts"])
+        if "bid" in day or "ask" in day:
+            ref["iex_bid"], ref["iex_ask"] = day.get("bid"), day.get("ask")
+            # Sizes travel with the quote so the ledger's NBBO-at-fill
+            # check (brief R4) can ask "was that size actually there?"
+            ref["iex_bid_size"] = _num(getattr(t, "bidSize", None))
+            ref["iex_ask_size"] = _num(getattr(t, "askSize", None))
+        if night:
+            ref["overnight"] = {"last": night.get("last"), "ts": iso(night.get("ts")),
+                                "bid": night.get("bid"), "ask": night.get("ask")}
+
+    def _split_quote(self, update) -> dict:
+        """A streamed quote, split the same way for the page (stream.UpdatePublisher)."""
+        now = self.clock()
+        parts = quote_parts(now, session_start(now), last=update.price, print_ts=update.print_ts,
+                            venue=update.venue, bid=update.bid, ask=update.ask)
+        day, night = parts["session"], parts["overnight"]
+        iso = lambda ts: ts.astimezone(UTC).isoformat(timespec="seconds") if isinstance(ts, datetime) else None  # noqa: E731
+        return {"price": day.get("last"), "printTs": iso(day.get("ts")),
+                "bid": day.get("bid"), "ask": day.get("ask"),
+                "overnight": ({"last": night.get("last"), "ts": iso(night.get("ts")),
+                               "bid": night.get("bid"), "ask": night.get("ask")} if night else None)}
 
     def _changed_cards(self, cards: dict) -> dict:
         """The cards whose content moved since the last tick, by value."""

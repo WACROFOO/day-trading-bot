@@ -588,11 +588,9 @@ function makePane(hostId, daily) {
       g.fillStyle = inside ? "rgba(251,192,45,0.40)" : "rgba(251,192,45,0.16)";
       g.fillRect(right - wd, yTop + 0.5, wd, h);
     });
-    g.font = "9px " + MONO; g.textAlign = "right";
     const yPoc = y(p.poc);
     if (yPoc != null) {                       // "my point of control by default in red" (wC2Bbf6OMFQ [00:06:14])
       g.fillStyle = "#ff5252"; g.fillRect(0, Math.round(yPoc), size.width, 1);
-      g.fillText("POC " + fmtP(p.poc), right - W - 4, Math.round(yPoc) - 3);
     }
     // the value area's edges, dotted over the histogram only
     g.fillStyle = "rgba(255,255,255,0.40)";
@@ -611,9 +609,7 @@ function makePane(hostId, daily) {
      against the average. Places to watch, never signals. */
   const srBands = layer("bottom", (g, size) => {
     if (!show.levels || daily || !paneLevels || !paneLevels.res) return;
-    const lv = paneLevels;
-    g.font = "9.5px " + MONO; g.textAlign = "left";
-    const marks = [];
+    const lv = paneLevels;                              // the words: labelLayer
     const draw = (lvl, i, res) => {
       const yy = y(lvl.price);
       if (yy == null || yy < -4 || yy > size.height + 4) return;
@@ -627,18 +623,9 @@ function makePane(hostId, daily) {
       }
       g.fillStyle = "rgba(" + rgb + "," + (i === 0 ? 0.80 : 0.45) + ")";
       g.fillRect(0, Math.round(yy) - (i === 0 ? 1 : 0), size.width, i === 0 ? 2 : 1);
-      marks.push({ yy, rgb, text: (res ? "R" : "S") + (i + 1) + " " + fmtP(lvl.price) +
-        (lvl.touches > 1 ? " · " + lvl.touches + " swings" : "") +
-        (lvl.dens != null ? " · vol " + lvl.dens.toFixed(1) + "×" : "") });
     };
     lv.res.forEach((l, i) => draw(l, i, true));
     lv.sup.forEach((l, i) => draw(l, i, false));
-    let lastY = -99;                                    // labels never sit on top of each other
-    marks.sort((a, b) => a.yy - b.yy).forEach(m => {
-      const ly = Math.max(m.yy - 3, lastY + 11);
-      lastY = ly;
-      g.fillStyle = "rgba(" + m.rgb + ",1)"; g.fillText(m.text, 32, ly);
-    });
   });
   /* The trend lines (levels.js trendLines, 2026-10-14): each through two of
      today's confirmed swings — dotted where it touches — the down-line red over
@@ -666,21 +653,71 @@ function makePane(hostId, daily) {
         const xx = xAt(i), yy = y(ln.at(i));
         if (xx != null && yy != null) { g.beginPath(); g.arc(xx, yy, 2.5, 0, 2 * Math.PI); g.fill(); }
       });
-      const text = broken ? (up ? "uptrend LOST ▼" : "downtrend BROKEN ▲")
-        : ln.through ? (up ? "uptrend BREAKING ▼" : "downtrend BREAKING ▲") : (up ? "uptrend" : "downtrend");
-      const iL = broken ? ln.brokeAt : t.live, xl = xAt(iL), yl = y(ln.at(iL));
-      if (xl == null || yl == null) return;
-      const xt = Math.min(xl + 8, size.width - g.measureText(text).width - 4);
-      g.fillStyle = broken || ln.through ? (up ? "#ff9800" : "#76ff03") : (up ? "#26a69a" : "#ef5350");
-      g.fillText(text, xt, yl + (up ? 13 : -6));
     };
     one(t.downBroken, false, true); one(t.upBroken, true, true);
     one(t.down, false, false); one(t.up, true, false);
+  });
+  /* Every word on the pane, drawn last, each on a dark plate and none on top
+     of another (owner's screenshot, 2026-11-02: on the 5-minute pane the R1 and
+     S1 labels were unreadable — drawn under the candles, and over the POC and
+     trend words). The trend labels first (they mark a break), then S/R at the
+     left, then the POC; a label with no room left is skipped, never stacked. */
+  const LABEL_H = 12;
+  let lastLabels = [];
+  const labelLayer = layer("top", (g, size) => {
+    lastLabels = [];
+    if (daily || !paneLevels) return;
+    g.font = "9.5px " + MONO; g.textAlign = "left";
+    const boxes = lastLabels;
+    const free = (x, yTop, w) => !boxes.some(b => x < b.x + b.w && b.x < x + w && yTop < b.y + LABEL_H && b.y < yTop + LABEL_H);
+    const put = (text, x, base, color, dir) => {
+      const w = g.measureText(text).width + 6;
+      const x0 = Math.max(2, Math.min(size.width - w - 2, x));
+      let yTop = base - LABEL_H + 3;
+      for (let k = 0; k < 6 && !free(x0, yTop, w); k++) yTop += dir * LABEL_H;
+      if (!free(x0, yTop, w) || yTop < 0 || yTop + LABEL_H > size.height) return false;
+      boxes.push({ x: x0, y: yTop, w, text });
+      g.fillStyle = "rgba(19,23,34,0.85)"; g.fillRect(x0, yTop, w, LABEL_H);
+      g.fillStyle = color; g.fillText(text, x0 + 3, yTop + LABEL_H - 3);
+      return true;
+    };
+    const t = show.trend && paneLevels.trend;
+    if (t) {
+      [[t.downBroken, false, true], [t.upBroken, true, true], [t.down, false, false], [t.up, true, false]]
+        .forEach(([ln, up, broken]) => {
+          if (!ln) return;
+          const text = broken ? (up ? "uptrend LOST ▼" : "downtrend BROKEN ▲")
+            : ln.through ? (up ? "uptrend BREAKING ▼" : "downtrend BREAKING ▲") : (up ? "uptrend" : "downtrend");
+          const iL = broken ? ln.brokeAt : t.live, xl = xAt(iL), yl = y(ln.at(iL));
+          if (xl == null || yl == null) return;
+          const color = broken || ln.through ? (up ? "#ff9800" : "#76ff03") : (up ? "#26a69a" : "#ef5350");
+          put(text, xl + 8, yl + (up ? 13 : -6), color, up ? 1 : -1);
+        });
+    }
+    if (show.levels && paneLevels.res) {
+      const marks = [];
+      [[paneLevels.res, true], [paneLevels.sup, false]].forEach(([list, res]) => (list || []).forEach((lvl, i) => {
+        const yy = y(lvl.price);
+        if (yy == null || yy < -4 || yy > size.height + 4) return;
+        marks.push({ yy, rgb: res ? "80,140,255" : "196,110,214", text: (res ? "R" : "S") + (i + 1) + " " + fmtP(lvl.price) +
+          (lvl.touches > 1 ? " · " + lvl.touches + " swings" : "") +
+          (lvl.dens != null ? " · vol " + lvl.dens.toFixed(1) + "×" : "") });
+      }));
+      marks.sort((a, b) => a.yy - b.yy).forEach(m => put(m.text, 32, m.yy - 3, "rgb(" + m.rgb + ")", 1));
+    }
+    if (show.profile && lastProfile) {
+      const yPoc = y(lastProfile.poc);
+      if (yPoc != null) {
+        const text = "POC " + fmtP(lastProfile.poc), w = g.measureText(text).width + 6;
+        put(text, size.width * 0.76 - w - 4, Math.round(yPoc) - 3, "#ff5252", -1);
+      }
+    }
   });
   candles.attachPrimitive(sessionBands);
   candles.attachPrimitive(srBands);
   candles.attachPrimitive(volumeProfile);
   candles.attachPrimitive(trendLayer);
+  candles.attachPrimitive(labelLayer);
 
   /* The crosshair, synced across the 1-minute, 5-minute and 10-second panes
      (2026-10-09): a bar hovered on one is the same moment on the others. The
@@ -973,6 +1010,7 @@ function makePane(hostId, daily) {
       return { up: one(t.up), down: one(t.down), upBroken: one(t.upBroken), downBroken: one(t.downBroken) };
     },
     profileDrawn() { return show.profile ? lastProfile : null; },
+    labelsDrawn() { return lastLabels.map(b => Object.assign({ h: LABEL_H }, b)); },   // tests: no two overlap
     priceZoomed() { return priceZoom ? Object.assign({}, priceZoom) : null; },
     drawStats() { return Object.assign({}, drawn); },
     liveButton() { return !liveBtn.hidden; },
@@ -1172,7 +1210,7 @@ function makePane(hostId, daily) {
       // to report a move in R.
       if (tools) tools.sync(opts.symbol || null, opts.tf || (daily ? "D" : null), opts.plan || null);
       showLegend(rows[rows.length - 1], vols[vols.length - 1], rows.length - 1);
-      [sessionBands, srBands, volumeProfile, trendLayer].forEach(p => p.refresh());
+      [sessionBands, srBands, volumeProfile, trendLayer, labelLayer].forEach(p => p.refresh());
       // Follow the tape only when the view is already parked at the newest
       // bar; a trader who scrolled back to read a pullback keeps their view.
       if (opts.snapToLive) {
@@ -1382,7 +1420,9 @@ function keepScroll(card, paint) {
 function feedLabel() {
   if (S.streaming || S.live) {
     const st = (S.provider && S.provider.state) ? String(S.provider.state).toUpperCase() : "LIVE";
-    return st;
+    // A connected feed over a finished session is not live data: at 02:51 on
+    // Monday the tiles read LIVE over Friday's 19:59 bar (2026-11-02).
+    return st === "LIVE" && S.inSession === false ? "CLOSED" : st;
   }
   return "REPLAY";
 }
@@ -1432,7 +1472,16 @@ function deskNow() {
 }
 const etParts = ms => new Date(ms).toLocaleTimeString("en-US",
   { timeZone: "America/New_York", hour12: false });
+/* The market's phase now: the desk's own calendar (weekends and NYSE holidays)
+   from its latest build, else the ET wall clock. The clock alone read
+   "regular" on a Saturday morning. */
+function phaseNow() {
+  const fresh = S.builtAt && Date.now() / 1000 - S.builtAt < 60;
+  return (fresh && S.marketPhase) || sessionAt(Date.now());
+}
 function sessionAt(ms) {
+  const wd = new Date(ms).toLocaleDateString("en-US", { timeZone: "America/New_York", weekday: "short" });
+  if (wd === "Sat" || wd === "Sun") return "closed";
   const hhmm = etParts(ms).slice(0, 5);
   return hhmm < "04:00" ? "closed" : hhmm < "09:30" ? "premarket"
        : hhmm < "16:00" ? "regular" : hhmm < "20:00" ? "after_hours" : "closed";
@@ -1938,6 +1987,8 @@ function alertDetail(a) {
    the names score: an empty card says so. */
 function tapeStalledNote() {
   if (!S.streaming) return null;
+  // After the session the tape is not stalled, it is over (2026-11-02).
+  if (S.inSession === false) return "The session is over — the scanners read bars again from 04:00 ET.";
   const f = FRAMES[FRAMES.length - 1];
   if (!f) return "No bars have arrived since the session start, so the event scanners have nothing to read.";
   const age = Math.round((Date.now() - f.t * 1000) / 1000);
@@ -2249,10 +2300,20 @@ function renderHeader(frame) {
   if (halted) stat("halt", "HALTED", "down");
   // The last print's time only when it is old enough to matter: in a thin
   // pre-market the "last" can be minutes behind the market.
-  const pAge = printAgeS(meta);
+  const pAge = S.inSession === false ? null : printAgeS(meta);
   if (pAge != null && pAge > 10)
     stat("print", agoText(pAge), pAge > 60 ? "down" : "warn",
          "the feed's most recent print, " + meta.iexLastTime + " ET — the price above is that old");
+  // IBKR's overnight venue (20:00–04:00 ET) trades on after the desk's session;
+  // its price is shown apart, never as the name's price (2026-11-02: 2.17 overnight
+  // beside a gain judged on Friday's last session trade, 2.05).
+  const night = meta.overnight;
+  if (night && night.last != null) {
+    const nc = meta.prevClose ? (night.last / meta.prevClose - 1) * 100 : null;
+    stat("overnight", fx(night.last) + (nc != null ? " " + pct(nc) : ""), "muted",
+         "IBKR's overnight session, " + (night.ts ? etClock(night.ts) + " ET" : "time unknown") +
+         " — not in the desk's bars, gates or charts; the session price is the one at left");
+  }
   const facts = $("#symFacts"); if (facts) { facts.textContent = ""; facts.hidden = true; }
   return { last, chg, hod, row, meta, nf, halted, sym };
 }
@@ -2552,6 +2613,11 @@ function renderQuote(frame, ctx) {
     if (meta.iexBid != null && meta.iexAsk != null)
       kv(grid, src + " bid/ask", fx(meta.iexBid) + " × " + fx(meta.iexAsk));
   }
+  if (meta.overnight && (meta.overnight.last != null || meta.overnight.bid != null)) {
+    const o = meta.overnight;
+    kv(grid, "Overnight", (o.last != null ? fx(o.last) + (o.ts ? " " + etClock(o.ts) : "") : "—") +
+       (o.bid != null && o.ask != null ? " · " + fx(o.bid) + " × " + fx(o.ask) : ""), "muted");
+  }
   q.appendChild(grid);
   // The catalyst lives on the decision card since 2026-10-08 — one home per
   // fact. A session without server cards keeps the browser's own read here.
@@ -2822,7 +2888,8 @@ function renderSizing(plan, row) {
 let TAPE = null, TAPE_AT = 0;
 let FOCUS_SENT = null, FOCUS_AT = 0, FOCUS_TIMER = null, FOCUS_PENDING = null, FOCUS_REFUSED = false;
 let FOCUS_CLAIM = true;               // a page that opens takes the tape once it is in view
-const TAPE_STATE_CLASS = { LIVE: "ok", QUIET: "warn", STARTING: "info", PAUSED: "warn", ERROR: "bad", OFF: "off" };
+const TAPE_STATE_CLASS = { LIVE: "ok", QUIET: "warn", STARTING: "info", PAUSED: "warn", ERROR: "bad", OFF: "off",
+                           CLOSED: "off" };
 const TAPE_MARK = { ask: "▲", bid: "▼", mid: "·", "?": "?" };
 const TAPE_WORDS = { ask: "at or above the ask — a buyer lifted the offer", bid: "at or below the bid — a seller hit the bid",
                      mid: "between the bid and the ask", "?": "side not known — no quote of that moment was read" };
@@ -2960,7 +3027,8 @@ function renderTape() {
   head.appendChild(el("b", null, t.symbol || "—"));
   const age = tapeAge();
   head.appendChild(el("span", "ts-age" + (age != null && age >= 30 ? " old" : ""),
-                      age != null ? "last print " + agoText(age) : st === "STARTING" ? "starting…" : "no print yet"));
+                      age != null ? "last print " + agoText(age) : st === "STARTING" ? "starting…"
+                      : st === "CLOSED" ? "session closed" : "no print yet"));
   // The mechanics (IBKR's 15-s pacing, the source) are in the tooltip; the
   // card says only what changes a read: an error, a pause, a silence.
   head.title = [t.source, t.message].filter(Boolean).join(" · ");
@@ -4719,6 +4787,17 @@ function renderLag(frame) {
   }
   host.onclick = null;
   host.classList.remove("parked");
+  // The session is over (20:00–04:00 ET, a weekend, a holiday): the newest bar
+  // is the last session's close, however live the connection. It read
+  // "live · 19:59" in green at 02:51 on Monday (2026-11-02).
+  if (S.streaming && S.inSession === false) {
+    host.hidden = false;
+    host.className = "lag closed";
+    host.textContent = frame ? "closed · " + etDayClock(frame.ts) : "closed";
+    host.title = "The session is over" + (frame ? " — the desk's newest bar is " + etDayClock(frame.ts) + " ET" : "") +
+      ". The next one opens at 04:00 ET; IBKR's overnight trades are shown apart, not as the price.";
+    return;
+  }
   const lastMs = frame ? frame.t * 1000 : 0;
   let lag = lastMs ? Math.max(0, Math.round((Date.now() - lastMs) / 1000)) : null;
   // A live desk is behind only when IBKR has gone quiet on it. Thin premarket
@@ -4755,6 +4834,12 @@ function renderLag(frame) {
   host.className = "lag" + (lag < 90 ? " ok" : lag < 600 ? " warn" : " bad");
   host.title = (feedLag != null ? "nothing from IBKR for " + fmtAge(feedLag * 1000) + " · " : "") +
     "newest bar on the desk: " + etClock(frame.ts) + " ET";
+}
+/* "Fri 19:59" — the newest bar's day and minute, ET. */
+function etDayClock(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-US", { timeZone: "America/New_York", weekday: "short" }) + " " +
+         etClock(iso).slice(0, 5);
 }
 /* Seconds since IBKR last sent anything, as the server measured it plus the
    time since that rebuild; streamed quotes since then count as fresh. */
@@ -4892,6 +4977,7 @@ function refreshSession() {
     S.fiveMinute = next.fiveMinute || {};
     S.cards = next.cards || S.cards;
     S.sessionStart = next.sessionStart || S.sessionStart;
+    S.inSession = next.inSession; S.marketPhase = next.marketPhase;   // the desk's calendar (2026-11-02)
     S.feedLagSeconds = next.feedLagSeconds;
     if (next.tradingDate && next.tradingDate !== S.tradingDate) newTradingDay(next.tradingDate);
     OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
@@ -4943,6 +5029,7 @@ function applySessionTick(p) {
   S.builtAt = p.builtAt;
   S.feedLagSeconds = p.feedLagSeconds;
   S.sessionStart = p.sessionStart || S.sessionStart;
+  if ("inSession" in p) { S.inSession = p.inSession; S.marketPhase = p.marketPhase; }
   if (!state.parked) state.frame = FRAMES.length - 1;
   render();
 }
@@ -4969,8 +5056,13 @@ function streamFollow() {
     if (b.symbol === state.selected) schedule();
   }).on("quote", q => {
     const meta = SYMS[q.symbol]; if (!meta) return;
-    meta.iexLast = q.price; meta.iexLastTime = etClock(q.ts);
+    // The desk splits each quote (sessions.quote_parts, 2026-11-02): `price`,
+    // `bid`, `ask` are the session's — null when the trade or the book belongs
+    // to IBKR's overnight venue, which rides apart under `overnight`.
+    if (q.price != null) { meta.iexLast = q.price; meta.iexLastTime = etClock(q.printTs || q.ts); }
     if (q.bid != null) meta.iexBid = q.bid; if (q.ask != null) meta.iexAsk = q.ask;
+    if (q.overnight) meta.overnight = Object.assign({}, meta.overnight || {},
+      Object.fromEntries(Object.entries(q.overnight).filter(([, v]) => v != null)));
     if (q.symbol === state.selected) schedule();
   }).on("health", setFeedBadge)
     .on("screener", renderScreener)
@@ -5213,7 +5305,7 @@ function render() {
   $("#clockET").textContent = live ? etParts(Date.now()) : etClock(frame.ts);
   $("#frameCounter").textContent = "frame " + (state.frame + 1) + "/" + FRAMES.length;
   const badge = $("#sessionBadge");
-  const ses = live ? sessionAt(Date.now()) : frame.session;
+  const ses = live ? phaseNow() : frame.session;
   badge.textContent = ses; badge.className = "badge " + ses;
   if (live) renderLag(frame);
   // The badge belongs to the health stream on a streaming desk. render() runs
@@ -5334,7 +5426,7 @@ function init() {
       // parked at its start time.
       setInterval(() => {
         $("#clockET").textContent = etParts(Date.now());
-        const ses = sessionAt(Date.now());
+        const ses = phaseNow();
         const b = $("#sessionBadge"); b.textContent = ses; b.className = "badge " + ses;
         // The frame the desk is DRAWING, never the newest one: reading the
         // live edge here is what let the chip say "live" over cards parked

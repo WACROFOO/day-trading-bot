@@ -198,19 +198,26 @@ class UpdatePublisher:
     events, and drains a BarStore's closed ten-second candles on demand. This
     is the glue an IbkrStream `on_update` callback plugs into."""
 
-    def __init__(self, hub: EventHub) -> None:
+    def __init__(self, hub: EventHub, split: Optional[Callable[[MarketUpdate], Dict[str, Any]]] = None) -> None:
         self.hub = hub
+        # The IBKR desk splits a quote between its session and the night
+        # (sessions.quote_parts): `price`, `bid`, `ask` are then the session's
+        # only, the rest rides under `overnight` (2026-11-02).
+        self.split = split
 
     def __call__(self, update: MarketUpdate) -> Event:
         if update.bar is not None:
             tf = update.bar.timeframe
             kind = {"1m": "bar1m", "10s": "bar10s", "5s": "bar5s"}.get(tf, "bar1m")
             return self.hub.publish(kind, bar_payload(update.bar))
-        return self.hub.publish("quote", {
+        payload = {
             "symbol": update.symbol, "ts": _iso(update.ts), "price": update.price,
             "size": update.size, "bid": update.bid, "ask": update.ask,
             "status": getattr(update.data_status, "value", str(update.data_status)),
-        })
+        }
+        if self.split is not None:
+            payload.update(self.split(update))
+        return self.hub.publish("quote", payload)
 
     def publish_closed_10s(self, store, symbols, sink=None) -> int:
         """Drain each symbol's closed ten-second candles to the hub.

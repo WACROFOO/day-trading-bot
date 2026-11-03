@@ -323,6 +323,13 @@ class TapeFeed:
             elif self._streams:
                 book.set_state("STARTING", "feed back — waiting for a print")
         book.check_quiet()
+        book.check_session(self._session_open())
+
+    def _session_open(self) -> bool:
+        """Pre-market, regular or after-hours on the NYSE calendar, now."""
+        from ..holidays import nyse_calendar
+        from ..models import Session
+        return nyse_calendar().session_at(self.clock()) != Session.CLOSED
 
     # -- history ----------------------------------------------------------------
 

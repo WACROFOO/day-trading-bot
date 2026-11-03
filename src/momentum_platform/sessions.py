@@ -8,7 +8,7 @@ data because a hardcoded list rots.
 
 from __future__ import annotations
 
-from datetime import datetime, time, date
+from datetime import datetime, time, date, timedelta
 from typing import Iterable, Optional
 from zoneinfo import ZoneInfo
 
@@ -71,3 +71,46 @@ class SessionCalendar:
             return None
         open_dt = et.replace(hour=9, minute=30, second=0, microsecond=0)
         return (et - open_dt).total_seconds() / 60.0
+
+
+# -- a feed quote: the desk's session, or the night (2026-11-02) -----------------
+
+SESSION_SPAN = timedelta(hours=16)       # 04:00-20:00 ET: pre-market, regular, after-hours
+OVERNIGHT_SPAN = timedelta(hours=8)      # 20:00-04:00 ET: IBKR's overnight venue
+OVERNIGHT_VENUES = ("OVERNIGHT",)
+
+
+def quote_parts(now: datetime, start: datetime, *, last: Optional[float] = None,
+                print_ts: Optional[datetime] = None, venue: Optional[str] = None,
+                bid: Optional[float] = None, ask: Optional[float] = None) -> dict:
+    """Split one feed quote between the desk's session and the night.
+
+    The desk's bars, gates and charts cover its session day, 04:00-20:00 ET
+    (`start` is that day's 04:00). IBKR's quote keeps moving after 20:00 on its
+    OVERNIGHT venue, and on 2026-11-02 at 02:51 ET a trade there (2.17) sat on
+    the card beside a gain judged on Friday's last session trade (2.05): two
+    prices for one name. So:
+
+      last     the session's when it printed inside the window and not on the
+               overnight venue; the night's when it printed after the window,
+               on that venue, or in the eight hours before the window; older
+               prints belong to neither (an earlier session's close is in the
+               bars already)
+      bid/ask  the session's while the desk's clock is inside the window, the
+               night's outside it
+
+    Returns {"session": {...}, "overnight": {...}} with only the keys that apply."""
+    end = start + SESSION_SPAN
+    session: dict = {}
+    night: dict = {}
+    if last is not None:
+        ts = print_ts or now
+        on_night_venue = (venue or "").upper() in OVERNIGHT_VENUES
+        if start <= ts < end and not on_night_venue:
+            session.update(last=last, ts=ts)
+        elif on_night_venue or ts >= end or start - ts <= OVERNIGHT_SPAN:
+            night.update(last=last, ts=ts)
+    if bid is not None or ask is not None:
+        (session if start <= now < end else night).update(bid=bid, ask=ask)
+    return {"session": session, "overnight": night}
+

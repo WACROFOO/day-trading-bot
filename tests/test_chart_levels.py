@@ -597,3 +597,55 @@ def test_the_header_chips_switch_the_overlays_off_and_on(synth_page):
     assert pg.evaluate(menu_box.replace("{}", "Trend lines")) is True
     assert pg.locator("[data-card=chart-daily] .ov-chip").count() == 0, "the daily has none of these overlays"
     assert not synth_page["errors"], synth_page["errors"]
+
+
+def test_no_two_words_on_a_pane_overlap_and_none_sits_under_the_candles(synth_page):
+    """Owner's screenshot, 2026-11-02: on the 5-minute pane the R1 and S1 labels were
+    unreadable — drawn under the candles and over the POC and trend words. Every word
+    is now drawn last, on its own plate; a word with no room is skipped, never stacked."""
+    pg = synth_page["pg"]
+    got = pg.evaluate("""() => {
+      const P = window.__deskPanes(), out = {};
+      ['a', 'b'].forEach(k => { out[k] = P[k].labelsDrawn ? P[k].labelsDrawn() : null; });
+      return out;
+    }""")
+    seen = 0
+    for k, boxes in got.items():
+        assert boxes is not None, k
+        for i, a in enumerate(boxes):
+            assert a["text"] and a["w"] > 0
+            for b in boxes[i + 1:]:
+                apart = a["x"] + a["w"] <= b["x"] or b["x"] + b["w"] <= a["x"] or \
+                    a["y"] + a["h"] <= b["y"] or b["y"] + b["h"] <= a["y"]
+                assert apart, (k, a, b)
+        seen += len(boxes)
+    texts = [b["text"] for boxes in got.values() for b in boxes]
+    assert seen >= 4 and any(t.startswith(("R1 ", "S1 ")) for t in texts), texts
+    app = (ROOT / "src" / "momentum_platform" / "dashboard" / "web" / "app.js").read_text()
+    layer = app.split("const labelLayer = layer(")[1][:20]
+    assert layer.startswith('"top"'), "the words are drawn above the candles"
+
+
+def test_a_chart_cards_name_is_never_cut_off(synth_page):
+    """Owner's screenshot, 2026-11-02: "5 minut…" and "10 secon…" — on a narrow card the
+    name shrank with the line key beside the S/R · trend · profile switches. The key and
+    the role give way first now; the name stays whole."""
+    pg = synth_page["pg"]
+    before = pg.viewport_size
+    try:
+        for width in (1180, 1000):
+            pg.set_viewport_size({"width": width, "height": 900})
+            pg.wait_for_timeout(300)
+            got = pg.evaluate("""() => ['chart-1m', 'chart-5m', 'chart-10s'].map(c => {
+              const card = document.querySelector('[data-card=' + c + ']');
+              if (!card || !card.offsetParent) return [c, null];
+              const t = card.querySelector('.card-head .card-title');
+              return [c, t.scrollWidth - t.clientWidth, Math.round(card.getBoundingClientRect().width),
+                      !!card.querySelector('.ov-chips')];
+            })""")
+            for c, cut, *rest in got:
+                if cut is None:
+                    continue
+                assert cut <= 1, (width, c, cut, rest)
+    finally:
+        pg.set_viewport_size(before)

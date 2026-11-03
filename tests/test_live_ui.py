@@ -351,6 +351,47 @@ def test_page_rolls_to_the_new_trading_day(desk_server):
         browser.close()
 
 
+@pytest.mark.skipif(not Path(CHROME).is_file(), reason="no chromium binary")
+def test_after_the_session_the_desk_says_closed_and_keeps_the_night_apart(desk_server):
+    """Owner's screenshot, 2026-11-02 02:51 ET: "LIVE · 19:59" in green and LIVE on
+    every scanner tile over Friday's last bar, and INO priced at an overnight trade
+    (2.17) beside a gain judged on Friday's last session trade. After the session the
+    chip says closed with the bar's day and minute, the tiles say CLOSED, and the
+    night's trade is a separate "overnight" figure — never the name's price."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    desk, clock, port = (desk_server[k] for k in ("desk", "clock", "port"))
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+        pg = browser.new_page(viewport={"width": 1500, "height": 900})
+        errors: list = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        try:
+            clock.now = datetime(2026, 9, 4, 2, 0, tzinfo=UTC)          # Thursday 22:00 ET
+            s = desk.refresh_session()
+            assert s["inSession"] is False and s["marketPhase"] == "closed"
+            assert s["symbols"]["AAA"]["iexLast"] is None and s["symbols"]["AAA"]["overnight"]["last"] == 4.35
+            pg.goto(f"http://127.0.0.1:{port}/?symbol=AAA")
+            pg.wait_for_function("window.DeskLive && window.DeskLive.state === 'open'", timeout=5000)
+            pg.wait_for_function("(document.querySelector('#dataLag') || {}).textContent?.startsWith('closed')",
+                                 timeout=5000)
+            assert pg.text_content("#dataLag").startswith("closed · Thu ")
+            assert "closed" in pg.get_attribute("#dataLag", "class")
+            states = pg.eval_on_selector_all(".card[data-kind] .tile-state", "els => els.map(e => e.textContent)")
+            assert states and set(states) == {"CLOSED"}, states
+            assert pg.text_content("#sessionBadge").strip().lower() == "closed"
+            price = pg.text_content("#symStats .stat-last")
+            night = pg.eval_on_selector_all("#symStats .stat", "els => els.map(e => e.textContent)")
+            assert price != "4.35", "the overnight trade is not the name's price"
+            assert any(t.startswith("overnight") and "4.35" in t for t in night), night
+            assert not any(t.startswith("print") for t in night), "no print age once the session is over"
+            assert not errors, errors
+        finally:
+            clock.now = T0
+            desk.refresh_session()
+            browser.close()
+
+
 # -- one desk, two browsers: the access key ----------------------------------------
 
 def test_with_no_key_configured_the_desk_stays_open(desk_server, monkeypatch):
