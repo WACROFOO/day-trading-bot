@@ -87,7 +87,7 @@ nothing else in the codebase talks to the broker.
 `buy()` calls `gate.assert_can_buy()` before it even fetches a quote. A vetoed
 order leaves no trace (`test_broker_buy_vetoed_and_records_nothing`).
 
-**Rule:** keep this. All pre-trade checks (STRATEGY.md §3) run before an order
+**Rule:** keep this. All pre-trade checks (STRATEGY.md §5) run before an order
 exists. A rejected order is logged as a rejected proposal, never as a
 half-created order.
 

@@ -1,13 +1,14 @@
-# Rule spec v0.1 — two-engine systematic portfolio
+# Rule spec v0.2 — one portfolio, seven sleeves, monthly rules
 
-**Verification status:** ❌ Not validated. These rules were designed in
-conversation and have never been backtested. Every number is a **starting value
-with a test range**, not a conclusion. ROADMAP.md Steps 4–5 decide what
-survives.
+**Verification status:** ❌ Not validated. v0.2 is rebuilt around the evidence
+in [the research report](research/reports/Retail%20systematic%20strategy%20candidates.md),
+but none of it has been backtested by us yet. Every number is a **starting
+value to test**, not a result. ROADMAP Steps 4–5 decide what survives.
 
 This file is the single source of truth for the rules. Code implements exactly
-what is written here, and any change to a rule is made here first, with a
-version bump.
+what is written here, and any change is made here first, with a version bump.
+v0.1 (two engines: defensive core + swing trading) is in git history; §10 lists
+what changed and why.
 
 ---
 
@@ -15,265 +16,235 @@ version bump.
 
 | Assumption | Why it matters | Confirm in |
 |---|---|---|
-| You are a **France tax resident** investing in **euros** (the PLAYBOOK is written in Paris time) | Every result is measured in EUR, because that is what you spend. Currency moves are part of the return. | ROADMAP Step 0 |
-| You are a **retail client** under EU rules | EU brokers cannot sell US-domiciled ETFs (XLV, IEF, GLD, SPY, QQQ…) to retail clients, because the issuers don't publish the KID document the PRIIPs rules require. Live trading uses **UCITS equivalents**. Single US stocks (MSFT, BRK-B…) are fine. | Step 0 |
-| Broker: **Interactive Brokers** (EU entity) | Has a Python API, a paper account, and UCITS ETFs plus US stocks in one account | Step 0 |
-| Decisions run once per trading day, **after the US close** | End-of-day data is free and accurate (LESSONS A2) | — |
-
-**Research vs. live instruments.** UCITS ETFs mostly launched after 2010, which
-is too little history to test across 2000–02 or 2008. Backtests therefore use
-the long-history US ETF (or an index/mutual-fund proxy before the ETF existed)
-as the signal and return series. Live orders go to the UCITS equivalent. Step 2
-checks that each pair actually tracks the same thing.
+| You are a **France tax resident** investing in **euros** | Every result is measured in EUR, after French tax | ROADMAP Step 0 |
+| **Two accounts:** a PEA (manual orders) and a CTO at Interactive Brokers (automated) | The PEA is tax-advantaged after 5 years but has no API and holds only PEA-eligible equity funds. Everything else needs the CTO. Without a PEA, everything goes in the CTO using accumulating ETFs. | Step 0 |
+| You are an EU **retail client** | US-listed ETFs are blocked (PRIIPs). Live trading uses UCITS ETFs. Backtests use long-history index data. | — |
+| **Monthly decisions** | Low turnover means low cost and low tax, and the system tolerates a missed day. Short-horizon edges are the most decayed (research report). | — |
+| **Benchmarks:** an MSCI World tracker held in a PEA, after tax; and a EUR 60/40 portfolio | The PEA tracker is your real alternative, so it is the bar to clear | — |
 
 ---
 
-## 1. Engine 1 — Core (70% of capital)
+## 1. Design principles
 
-### 1.1 Target weights (% of the core sleeve)
-
-| Bucket | Holding | Target | Backtest series | Live instrument (choose in Step 2) |
-|---|---|---|---|---|
-| Defensive equity — 30 | Healthcare | 15 | XLV | S&P 500 Health Care sector UCITS ETF |
-| | Consumer staples | 10 | XLP | S&P 500 Consumer Staples sector UCITS ETF |
-| | Berkshire Hathaway | 5 | BRK-B | BRK-B |
-| Growth — 20 | Quality growth | 15 | **QQQ** (see note) | Nasdaq-100 UCITS ETF *(default)* |
-| | International value | 5 | EFV | Developed-markets value UCITS ETF |
-| Treasuries — 20 | US Treasuries 7–10y | 20 | IEF | $ Treasury 7–10y UCITS ETF (hedged vs. unhedged is tested) |
-| Gold — 10 | Physical gold | 10 | GLD | Physical gold ETC |
-| Cash — 20 | Euro cash | 20 | EUR short rate | EUR money-market / overnight-rate ETF, **held at the broker** so the ladder can deploy it |
-
-That is 50% equities / 20% bonds / 10% gold / 20% cash.
-
-**Note on the growth bucket.** The earlier plan named Microsoft, Alphabet,
-Amazon and TSMC. A backtest of four stocks picked *today* because they won is
-pure hindsight: it would make the strategy look far better than anything we
-could have known in 2005. So the growth bucket is tested with QQQ, and the
-default live holding is the matching Nasdaq-100 ETF, which already holds those
-names heavily. Holding the four stocks directly is allowed, but it is an
-untested variant. If you choose it, the 5% single-stock cap (§3) applies.
-
-### 1.2 Rules
-
-**C1 · Hold by default.** No trade unless a rule below fires.
-
-**C2 · Rebalancing bands (the 5/25 rule).** Every day, check each **bucket**
-(not each holding). A bucket is out of band when its weight is off target by
-**≥ 5 points absolute** or **≥ 25% of its target**, whichever is hit first.
-(A flat 5-point band means nothing for the 10% gold bucket, because it would
-have to double first.) An out-of-band bucket is traded back to target.
-
-**C3 · Calendar rebalance.** On the first trading day of **January and July**,
-rebalance every holding to target, including drift *within* buckets.
-
-**C4 · Crash ladder.**
-- Signal series: Nasdaq-100 (QQQ / ^NDX) drawdown from its all-time closing high.
-- Three tranches, each worth **1/3 of the cash bucket's target** (6.7% of core).
-- A tranche is **armed** the first time the drawdown reaches −20%, −30% or −40%.
-- An armed tranche **fires** on the first close of QQQ above its 50-day SMA
-  after arming. This is the "only buy once it stops falling" confirmation. At
-  most one tranche fires per week.
-- A fired tranche moves cash into the growth bucket *and moves the targets with
-  it*: growth target +6.7, cash target −6.7. Fully deployed, the core is 70%
-  equities and 0% cash. This is the "move toward 70% stocks after a crash"
-  rule, made mechanical.
-- **Reset:** when the Nasdaq-100 makes a new all-time closing high, targets
-  revert to §1.1, and the bands sell the extra growth back into cash. You buy
-  in the crash and refill the cash near the top.
-
-**C5 · Trend filter.** While QQQ closes below its 200-day SMA, rebalancing may
-not *buy* into the growth bucket; only ladder tranches can. Selling growth that
-is above its band is still allowed. Defensive buckets are unaffected.
-
-**C6 · Never chase.** Buy orders are limit orders at or below the previous
-close. If one does not fill, the rule is re-evaluated the next day. That is
-"no buying after big up-days" written as an order type. If the same rebalance
-buy fails to fill for 5 sessions in a row, the limit moves to previous close
-+0.5% (tested in Step 4).
-
-**C7 · Minimum order.** Skip any order under max(€500, 0.5% of the portfolio),
-so fees never dominate a trade.
+1. **Harvest durable premia; don't predict.** Every sleeve earns a return that
+   has survived publication, costs, and testing in several countries: the
+   equity premium, momentum, quality, and trend.
+2. **Consistency comes from mixing things that fail at different times.**
+   Momentum suffers in violent rebounds. Trend suffers in sudden crashes. Bonds
+   suffer in inflation. Gold and managed futures tend to do well when the
+   others don't.
+3. **Few rules, few parameters.** Each extra rule is another chance to fit
+   noise. v0.2 has 7 rules and about 10 parameters, where v0.1 had 17.
+4. **The wrapper is a return source.** At 10% a year, a mature PEA is worth
+   about 1.8 points a year over a high-turnover CTO strategy (research report).
+   That is more than any tilt is likely to add.
+5. **The bot's real job is discipline:** following the rules through the
+   drawdowns where people usually quit. The behaviour gap costs a typical
+   investor about 1.2 points a year (research report).
 
 ---
 
-## 2. Engine 2 — Swing (30% of capital)
+## 2. Sleeves and target weights
 
-### 2.1 Universe (v1)
+| # | Sleeve | Target | Role | Backtest series (long history) | Live instrument (confirm in Step 2) | Account |
+|---|---|---|---|---|---|---|
+| S1 | World equity | **35%** | The equity premium | MSCI World net, in EUR | PEA-eligible MSCI World ETF (e.g. WPEA, DCAM) | PEA |
+| S2 | Momentum tilt | **15%** | Return tilt | MSCI World Momentum (back-tested before its 2013 launch); AQR momentum factors as cross-check | MSCI World Momentum UCITS ETF (e.g. IS3R, XDEM) | CTO |
+| S3 | Quality tilt | **10%** | Return tilt that partly offsets momentum crashes | MSCI World Quality | MSCI World Quality UCITS ETF (e.g. IS3Q, XDEQ) | CTO |
+| S4 | Managed futures | **15%** | Crisis diversifier: makes money in long bear markets | AQR Time-Series Momentum factor (from 1985) and SG Trend Index (from 2000), net of the fund's fees | iMGP DBi Managed Futures UCITS ETF, EUR-hedged | CTO |
+| S5 | US Treasuries 7–10y, EUR-hedged | **10%** | Hedge against deflationary crashes | 7–10y Treasury index, hedged to EUR | $ Treasury 7–10y UCITS ETF, EUR-hedged | CTO |
+| S6 | Gold | **5%** | Hedge against inflation and panic | Gold price in EUR | Physical gold ETC (French tax treatment still to confirm) | CTO |
+| S7 | EUR cash | **10%** | Dry powder, and where filtered sleeves park | EUR short rate | EUR overnight-rate ETF (e.g. XEON) in the CTO; plain cash in the PEA | both |
 
-| Role | Backtest series | Live |
-|---|---|---|
-| Momentum rotation | 11 SPDR sector ETFs: XLB, XLC, XLE, XLF, XLI, XLK, XLP, XLRE, XLU, XLV, XLY (each from its inception) | S&P 500 sector UCITS ETFs (confirm availability per sector in Step 2) |
-| Pullback | SPY, QQQ | S&P 500 and Nasdaq-100 UCITS ETFs |
-
-**Why ETFs first, not stocks.** Large sector ETFs essentially never get
-delisted, so the backtest has no survivorship bias. Free data for them is
-clean, spreads are tight, and UCITS versions exist. A stock universe (v2) is
-only worth testing with point-in-time index membership *and* price data for
-delisted names, which free yfinance data does not have (LESSONS A3, A5).
-
-### 2.2 Setup A — Momentum rotation
-
-| | Rule |
-|---|---|
-| When | Last trading day of each month |
-| Eligible | Close > 200-day SMA |
-| Rank by | Total return over 126 trading days (~6 months) |
-| Hold | Top **N = 3** eligible |
-| Entry | Limit at the signal day's close, valid 3 sessions |
-| Exit 1 | Trailing protective stop at **2 × ATR(20)** below the highest close since entry. Updated daily, only ever raised, and held **at the broker** |
-| Exit 2 | Close below the 50-day SMA, so sell next session |
-| Exit 3 | Falls out of the top 2N at the monthly ranking |
-
-### 2.3 Setup B — Pullback in an uptrend
-
-| | Rule |
-|---|---|
-| When | Daily |
-| Entry | Close > 200-day SMA **and** RSI(2) < 10, so buy next session (limit at the signal close, valid 1 session) |
-| Exit 1 | Close > 5-day SMA, so sell next session |
-| Exit 2 | Time stop: 10 sessions |
-| Exit 3 | Disaster stop at **3 × ATR(20)** below entry, held at the broker |
-| Limit | One open position per instrument |
-
-### 2.4 Sizing
-
-```
-risk_per_trade = 1% of Engine 2 equity            (halved while VIX closes > 30)
-shares         = risk_per_trade / stop_distance   (2×ATR for A, 3×ATR for B)
-position cap   = 20% of Engine 2 equity
-max positions  = 5 (A and B combined)  ->  never more than 100% invested, no margin
-```
-
-The cap is not decoration. A sector ETF with a 1.5% ATR has a 3% stop distance,
-so 1% risk means a 33% position. Without the cap, five positions would need
-165% of the sleeve.
-
-### 2.5 Brakes
-
-- Engine 2 down **10% within a calendar month** → no new entries until next
-  month. Exits keep working.
-- Engine 2 down **20% from its peak** → no new entries at all; open positions
-  run off through their normal exits. Restarts only after a review (the old
-  project's walkaway rule, kept).
+That is 60% equities, 15% managed futures, 10% bonds, 5% gold and 10% cash at
+target. When the filters are off, the equity share can drop to zero.
 
 ---
 
-## 3. Portfolio-wide limits and kill switch
+## 3. Rules
 
-These live in the execution layer and apply to both engines. Modelled on
-`src/paper_trading/risk_gate.py` (LESSONS B2–B4).
+**R1 · Monthly decisions, split across four dates.** Divide the portfolio into
+4 equal tranches. Tranche *k* is reviewed on the first trading day on or after
+the 1st, 8th, 15th and 22nd of each month respectively, using the previous
+close. Results from a single rebalance date are mostly luck: shifting Faber's
+rule by one day moved its max drawdown between 19% and 30% (research report).
+Splitting the dates removes most of that luck. Turnover is the same; you just
+make more, smaller orders.
+
+**R2 · Equity trend filter.** At each review, if MSCI World closes **above its
+10-month moving average**, the tranche holds its targets in S1, S2 and S3.
+Otherwise those three sleeves move to S7 cash. One signal drives all three:
+they are highly correlated, and one signal means fewer parameters and fewer
+whipsaws. Inside the PEA, switching between equity and cash is untaxed.
+
+**R3 · Gold trend filter.** Hold S6 while gold (in EUR) is above its 10-month
+average; otherwise move it to cash.
+
+**R4 · Bonds must beat cash.** Hold S5 only while its 12-month total return
+beats cash's 12-month return; otherwise move it to cash. In 2022, strategies
+that applied this rule kept drawdowns to about −8%, against −17% for those
+that held long bonds regardless (research report).
+
+**R5 · Managed futures are always held.** S4 is already a trend strategy, so
+filtering it would double up. It is only rebalanced (R6).
+
+**R6 · Rebalancing.** At each review, any sleeve outside its band gets traded
+back to target. The band is **5 points absolute or 25% of target**, whichever
+is hit first. There is also a full rebalance in January. **New money and
+distributions go to the most underweight sleeve first**, which rebalances
+without selling, so without realising taxable gains in the CTO.
+
+**R7 · Execution.** Orders go in at the next session after the signal, as
+marketable limits at the last price ±0.5% (DAY orders), re-placed for up to 3
+sessions if unfilled, then an alert. **There are no per-position stop
+losses:** the monthly filters are the exits. Stops on ETFs add whipsaw, and
+volatility-managed overlays generally failed out of sample (Cederburg et al.,
+research report).
+
+---
+
+## 4. Research sleeve (replaces v0.1's Engine 2)
+
+The research sleeve is **0% by default, with a 10% maximum**, taken pro rata
+from S1–S3. It is where higher-return ideas can earn a place, but only through
+the funnel in §7, followed by paper trading.
+
+Candidate queue, in order:
+
+1. **Self-built European large-cap momentum, inside the PEA.** The
+   post-publication evidence is strongest here (European long-short momentum:
+   +11.5% a year since 2015). It only makes sense above roughly €100k, because
+   of IBKR's €1.25 minimum commission, and it needs point-in-time European
+   stock data.
+2. **Sector-ETF rotation** (v0.1 Setup A), tested head-to-head against S2.
+3. **RSI(2) pullbacks** re-tested on European closing prices. The
+   post-publication evidence says this probably fails.
+
+---
+
+## 5. Portfolio-wide limits and kill switch
+
+These live in the execution layer and are modelled on
+`src/paper_trading/risk_gate.py` (LESSONS B2–B5).
 
 **Always:**
-- No margin, no shorting, no leverage, no options.
-- Entries are limit orders. Protective stops are GTC stop orders held at the
-  broker (LESSONS B7).
-- Max 10 orders per day, bot-wide.
-- Max single order: 10% of the portfolio (fat-finger guard; the initial
-  deployment happens in tranches, see ROADMAP Step 4).
-- Max single stock: 5% of the portfolio. ETFs: 25%.
+- No margin, no shorting, no options, no leverage at portfolio level. S4 uses
+  futures inside the fund; holding it unlevered means you cannot lose more than
+  you put in.
+- Max 12 orders per day.
+- Max single order: 10% of the portfolio. Max single ETF: 40%.
+- Single stocks (research sleeve only): max 5% each.
 
 **Pre-trade checks.** All run before an order exists; any failure means no
 order and an alert:
-- **Fresh data:** the last bar is the last completed session per the exchange
-  calendar.
-- **Sane data:** no close moved more than 25% day-over-day without a recorded
-  split.
+- **Fresh data:** the last bar is the last completed session.
+- **Sane data:** no close moved more than 25% without a recorded split.
 - **Sane price:** the limit is within 3% of the last close.
 - **Reconciled:** broker positions and cash match the internal ledger.
-- **Explained P&L:** today's portfolio change matches yesterday's holdings ×
-  today's prices to within 0.5%. A gap means a phantom fill, a wrong quantity
-  or bad data.
+- **Explained P&L:** the portfolio's daily change matches holdings × prices to
+  within 0.5%.
 
 **Kill switch.** Latched, persisted, and reset by a human only. While latched:
-no new buys; exits and broker-held stops still work. Triggers:
+no new buys, but sells still work. Triggers:
 - any unhandled exception in the daily run
 - a reconciliation or explained-P&L mismatch
 - 2 or more broker rejections in one day
 - a failed data check
-- portfolio down 4% or more in one day (pause and review; the ladder buys on
-  recoveries, not on crash days, so this rarely blocks it)
+- portfolio down 4% or more in one day (pause and review)
 
-**Alerts:** a daily summary, plus an immediate message on any latch.
-
----
-
-## 4. Timing
-
-| Event | New York | Paris (normal) |
-|---|---|---|
-| US close | 16:00 | 22:00 |
-| Daily run: fetch data → signals → targets → orders | 17:00 | 23:00 |
-| UCITS orders execute (Xetra/LSE) | — | from 09:00 next day |
-| US-stock orders execute | 09:30 next day | 15:30 next day |
-
-Jobs are scheduled in `America/New_York`, never in Paris time (LESSONS C4).
-
-**No lookahead.** A signal computed from day *t*'s close is filled on day
-*t+1* at the earliest: at the open, or at a resting limit if price trades
-through it. Live UCITS fills happen earlier in the European day than the US
-open the backtest assumes; Step 7 measures the difference.
+**Pain limit.** If the portfolio's drawdown from its peak exceeds the Step 0
+limit (default −20%), everything stops for a review. That is not a forced
+sale; it is a human decision, made with the backtest's distribution in front
+of us.
 
 ---
 
-## 5. Parameters
+## 6. Timing
 
-| Parameter | Start | Test range | Rule |
+The **daily job** runs after the US close (17:00 New York, 23:00 Paris). It
+fetches data, runs checks, reconciles, and sends a summary. It only **trades
+on the tranche dates** (R1). UCITS orders execute at the next European
+session; PEA orders are sent to you as instructions.
+
+**No lookahead.** A signal from day *t*'s close fills on day *t+1* at the
+earliest, and the backtest uses the European session's prices for UCITS
+lines.
+
+---
+
+## 7. The evidence funnel: rules for adding or changing anything
+
+Any new sleeve, rule or parameter has to pass all of these, and every trial
+goes in `research/experiments.csv`:
+
+| Step | Rule |
+|---|---|
+| Admit | Only families that replicate across studies and countries: momentum, value, quality, low-risk, time-series trend. No size, seasonality, microcap or intraday signals. |
+| Haircut first | Plan on 40–60% of the published premium. Subtract costs (at least 1% of monthly turnover), 0.57% a year of timing luck for single-date tests, and the 31.4% PFU on realised gains. |
+| Trial budget | At most ~10 configurations per family, counted honestly, quick looks included. |
+| History | Years of data ≥ 2·ln(trials)/Sharpe². That is about 18 years for 10 trials at a Sharpe of 0.5, so use index and factor histories, not ETF histories. |
+| Significance | t ≥ 3 for a new signal (t ≈ 2 for an established family confirmed elsewhere). Deflated Sharpe ≥ 0.95. |
+| Hold-out | The last ~5 years plus one region, looked at **once**. |
+| Costs | Everything also run at 2× costs. |
+| Plausibility | A backtest Sharpe above ~1 for a long-only equity tilt, or more than 20–25% a year, is a red flag, not a result. |
+
+---
+
+## 8. Parameters and pre-registered variants
+
+| Parameter | Default | Variants tested (and nothing else) | Test |
 |---|---|---|---|
-| `band_abs_pts` | 5 | 3–7 | C2 |
-| `band_rel_pct` | 25 | 15–35 | C2 |
-| `ladder_levels` | −20/−30/−40% | −15…−25 first step | C4 |
-| `ladder_confirm_sma` | 50 | 20–100 | C4 |
-| `trend_sma` | 200 | 150–250 | C5, A, B |
-| `mom_lookback` | 126 | 63–252, ± skip last 21 | A |
-| `mom_top_n` | 3 | 2–4 | A |
-| `atr_stop_mult_A` | 2.0 | 1.5–4.0 | A |
-| `exit_sma_A` | 50 | 20–100 | A |
-| `rsi2_entry` | 10 | 5–20 | B |
-| `exit_sma_B` | 5 | 3–10 | B |
-| `time_stop_B` | 10 | 5–15 | B |
-| `atr_stop_mult_B` | 3.0 | 2.0–5.0 | B |
-| `risk_per_trade` | 1% | 0.5–1.5% | 2.4 |
-| `vix_halve_above` | 30 | 25–40 | 2.4 |
-| `position_cap` | 20% | fixed | 2.4 |
-| `max_positions` | 5 | fixed | 2.4 |
+| `equity_filter` | Price > 10-month average | 12-month return > cash | 1 |
+| `filter_scope` | Full sleeve | Half sleeve (filter moves only 50% to cash) | 1 |
+| `bond_rule` | On | Off (always hold S5) | 1 |
+| `treasury_hedge` | EUR-hedged | Unhedged | 1 |
+| `crash_ladder` | Off | On: cash buys equity in thirds at −20/−30/−40% from the peak, once price is back above its 50-day average | 1 |
+| `tranches` | 4 | 1 (to measure timing luck, not to choose) | 1 |
+| `mf_weight` | 15% | 0, 10, 20% | 3 |
+| `momentum_sleeve` | MSCI World Momentum ETF | Sector rotation; GEM-style regional momentum | 2 |
+| `quality_weight` | 10% | 0% | 2 |
+| `bands` | 5 pts / 25% | — fixed | — |
 
-`fixed` means a risk limit, not something to optimise. Ranges are for the
-sensitivity check (ROADMAP Step 5): the chosen value has to sit on a plateau,
-where its neighbours also work.
+That is about 8 trials for Test 1, 3 for Test 2 and 3 for Test 3. Each family
+stays inside the §7 budget.
 
 ---
 
-## 6. Changes from the chat version
+## 9. What it should do in each market (hypotheses to test, not results)
 
-The plan discussed in chat had seven issues that would have surfaced in
-backtests or with real money:
+| Market | Expected behaviour | What makes it work, or hurt |
+|---|---|---|
+| Strong bull market (2017, 2021, 2023–24) | Trails 100% equity by a few points a year | 40% is not in equities; managed futures and gold may be flat |
+| Slow bear market (2000–02, 2008, 2022) | Much smaller loss than equities | The filter moves equity to cash within months; managed futures historically gained (2022: +27%); bonds held only if beating cash |
+| Sudden crash and rebound (2020, April 2025) | A loss and a late re-entry | The filter whipsaws and momentum lags the rebound. Quality cushions it, and the crash-ladder variant is designed for this case. |
+| Inflation shock (2022) | Bonds out via R4 | Gold and managed futures carry the defensive load |
+| Sideways or choppy market | A slow bleed from whipsaws | Split dates (R1) reduce it; this is the price of crash protection |
 
-1. **US ETFs can't be bought by EU retail clients.** XLV, IEF and GLD become
-   UCITS equivalents live, with US data for research (§0).
-2. **Euro investor.** Results are measured in EUR. Unhedged vs. EUR-hedged
-   Treasuries is tested rather than assumed (§1.1).
-3. **Hindsight in the growth picks.** The bucket is tested with QQQ, not four
-   stocks chosen today (§1.1).
-4. **A 5-point band does nothing for small slices.** Replaced by the 5/25 rule
-   on buckets (C2).
-5. **The trend filter conflicted with rebalancing.** Below the 200-day SMA,
-   rebalancing may not buy growth; only the ladder can (C5).
-6. **The VIX rule would have cancelled the crash ladder,** which buys precisely
-   when VIX is high. VIX sizing now applies to Engine 2 only (§2.4).
-7. **1% risk with ATR stops implied positions over 100%.** Positions are now
-   capped at 20% of the sleeve (§2.4).
-
-Also flagged for Step 4: **in 2022, stocks and Treasuries fell together.**
-The bond bucket is not a guaranteed hedge, so 2022 is a mandatory stress
-window.
+Step 4 replaces this table with backtested numbers per regime.
 
 ---
 
-## 7. What would change the status
+## 10. Changes from v0.1
+
+| v0.1 | v0.2 | Why (research report) |
+|---|---|---|
+| Healthcare, staples and Berkshire (30 of 50 equity points) | Broad world equity plus momentum and quality tilts | The defensive slice was a minimum-volatility bet, a style that lagged ~3.3 pts/yr over 2015–25 |
+| QQQ growth bucket | Dropped | The same hindsight problem the four-stock pick had, at index level |
+| Treasuries always held | Held only while beating cash (R4) | Bonds failed as a defence in 2022 |
+| Swing engine: sector rotation + RSI(2), daily, ATR stops, VIX sizing | Replaced by monthly sleeves; ideas moved to the research sleeve (0% by default) | Short-horizon edges are the most decayed and most taxed; RSI(2)'s post-publication Sharpe is 0.68 vs 0.87 for buy-and-hold |
+| Crash ladder on by default | A pre-registered variant only | No published evidence; four episodes can't validate it |
+| "Never chase" limits at or below the prior close | Marketable limits ±0.5% | No supporting evidence; executing late "significantly hurt" TAA results |
+| One rebalance date | Four split dates | Timing luck |
+| 17 parameters with ranges to sweep | ~10, with pre-registered variants | Trial budget and minimum backtest length |
+| Managed futures absent | 15% sleeve | The one genuine diversifier available as a UCITS ETF |
+
+---
+
+## 11. What would change the status
 
 | Gate (ROADMAP) | Evidence required | Status |
 |---|---|---|
-| G4 · Core backtest | Drawdown, return and ladder-value criteria met in EUR across 2000–02, 2007–09, 2020, 2022 | ❌ not run |
-| G5 · Swing out-of-sample | Beats the S&P 500 in EUR, risk-adjusted, out-of-sample, at 2× costs, on a parameter plateau | ❌ not run |
-| G7 · Paper | Signals match the backtest 100%; slippage ≤ 1.5× the model | ❌ not run |
-| G8 · Live | Live results inside the backtest's range at each size step | ❌ not run |
+| G4 · Portfolio backtest (Tests 1 and 3) | After-tax EUR results vs. the PEA world tracker and 60/40 across 1990s–2026, including 2000–02, 2008, 2020 and 2022 | ❌ not run |
+| G5 · Momentum sleeve (Test 2) | Positive net excess return in the full history and in the held-out region | ❌ not run |
+| G7 · Shadow run | Bot proposals match the backtest 100% | ❌ not run |
+| G8 · Automation | Automated orders match the proposals; costs ≤ 1.5× the model | ❌ not run |

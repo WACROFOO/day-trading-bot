@@ -19,24 +19,36 @@ that a claim is not evidence until we have reproduced it.
 
 ## What the new system is
 
-A **daily-bar, rules-based** portfolio in two engines. It makes decisions once
-a day, after the US close, from end-of-day data. It does not trade intraday and
-it does not try to predict prices.
+One **rules-based portfolio** with seven sleeves, managed by **monthly** rules.
+It does not trade intraday and it does not try to predict prices. Each sleeve
+earns a return that has survived publication, costs, and testing in several
+countries, and the sleeves are chosen to fail at different times, which is
+where consistency comes from.
 
-| Engine | Share of capital | What it does |
+| Sleeve | Target | Role |
 |---|---|---|
-| 1 · Core | 70% | Defensive barbell allocation, mechanical rebalancing, and a crash-buying ladder that deploys cash in steps when the Nasdaq falls 20/30/40%. |
-| 2 · Swing | 30% | Momentum rotation and pullback trades on liquid ETFs, with stops held at the broker and fixed risk per trade. Has to earn its place, or it is shut down and its money moves to the core. |
+| World equity (in a PEA) | 35% | The equity premium |
+| Momentum tilt | 15% | Return tilt (the best-evidenced one) |
+| Quality tilt | 10% | Return tilt that partly offsets momentum crashes |
+| Managed futures | 15% | Makes money in long bear markets |
+| US Treasuries, EUR-hedged | 10% | Deflation hedge, held only while beating cash |
+| Gold | 5% | Inflation and panic hedge |
+| EUR cash | 10% | Dry powder; where filtered sleeves park |
 
-The exact rules are in [STRATEGY.md](STRATEGY.md).
+A monthly trend filter moves the equity sleeves to cash while the world market
+is below its 10-month average. Rebalancing is split across four dates a month.
+The exact rules are in [STRATEGY.md](STRATEGY.md) (v0.2). Why these sleeves and
+not others is in the
+[research report](research/reports/Retail%20systematic%20strategy%20candidates.md).
 
 ## Files
 
 | File | What it is |
 |---|---|
 | [ROADMAP.md](ROADMAP.md) | The step-by-step plan: what we build, what you do, and the go/no-go gate at the end of each step. |
-| [STRATEGY.md](STRATEGY.md) | The rule spec (v0.1): every rule as a parameter we can backtest. |
+| [STRATEGY.md](STRATEGY.md) | The rule spec (v0.2): every rule as a parameter we can backtest, plus the evidence funnel for adding new ones. |
 | [LESSONS.md](LESSONS.md) | What we carry over from the Ross project: order handling, errors, data, process. |
+| [research/](research/reports/Retail%20systematic%20strategy%20candidates.md) | The strategy-candidate research: ranked candidates, evidence, French costs and tax, and the selection method. |
 
 Code will live here as it is built (`src/`, `tests/`, `research/`), with its
 own dependencies, and will not import from `src/paper_trading/`. Patterns get
@@ -44,7 +56,7 @@ copied and adapted, so the two projects can never break each other.
 
 ## Status
 
-**Step 0 of 9.** The plan is written. There is no code and no backtest yet.
+**Step 0 of 9.** The plan, the research and rule spec v0.2 are written. There is no code and no backtest yet.
 
 **Verification status:** ❌ Not validated. Every number in this folder is a
 starting value to test, not a result.
