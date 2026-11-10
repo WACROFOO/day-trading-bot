@@ -16,7 +16,7 @@ Earlier versions are in git history; §10 lists what changed and why.
 | Assumption | Why it matters | Confirm in |
 |---|---|---|
 | You are a **France tax resident** investing in **euros** | Every result is measured in EUR, after French tax | ROADMAP Step 0 |
-| **Two accounts:** a PEA (manual orders) and a CTO at Interactive Brokers (automated) | The PEA is tax-advantaged after 5 years but has no API and holds only PEA-eligible equity funds. Everything else needs the CTO. Without a PEA, everything goes in the CTO using accumulating ETFs. | Step 0 |
+| **Two accounts:** a PEA at a French broker with a free monthly plan (research/BROKERS.md) and a CTO at Interactive Brokers (automated from stage 3) | The PEA is tax-advantaged after 5 years and holds only PEA-eligible equity funds; its broker has no API, but its plan automates the monthly purchase. Everything else needs the CTO. Without a PEA, everything goes in the CTO using accumulating ETFs. | Step 0 |
 | You are an EU **retail client** | US-listed ETFs are blocked (PRIIPs). Live trading uses UCITS ETFs. Backtests use long-history index data. | — |
 | **Monthly decisions** | Low turnover means low cost and low tax, and the system tolerates a missed day. Short-horizon edges are the most decayed (research report). | — |
 | **Benchmarks:** an MSCI World tracker held in a PEA, after tax; and a EUR 60/40 portfolio | The PEA tracker is your real alternative, so it is the bar to clear | — |

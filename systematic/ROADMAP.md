@@ -32,7 +32,8 @@ a month. Automating them buys little, and it costs a lot relative to a small
 portfolio: market data, a server, and a weekly IBKR login. So the decision
 logic (the advisor) gets built and proven first. Automated order placement
 waits until stage 3, when the CTO holds four or more sleeves. The PEA stays
-manual for good, because no PEA broker offers an API.
+manual, but stage 1 needs no bot at all: the recommended PEA broker's free
+monthly plan does the buying (research/BROKERS.md).
 
 ---
 
@@ -44,13 +45,14 @@ it.
 
 1. **Emergency fund first.** 3–6 months of expenses, kept outside the
    portfolio, in full.
-2. **Open a PEA.** The 5-year tax clock starts at the first deposit, so every
-   month of delay costs a month of waiting later. Pick a broker where the
-   monthly order costs at most ~0.5% of its size. If the broker offers a free
-   automatic monthly savings plan on the ETF inside the PEA, that's ideal.
-3. **Buy a PEA-eligible MSCI World tracker every month.** Accumulating share
-   class; candidates from the research are WPEA or DCAM (~0.20% a year).
-   Confirm eligibility and fees on justETF and with the broker.
+2. **Open a PEA at Bourse Direct** (research/BROKERS.md). It is the only
+   French broker whose own schedule makes WPEA and DCAM free in an automatic
+   monthly plan; Trade Republic is a close second. The 5-year tax clock starts
+   at the first deposit, so every month of delay costs a month of waiting
+   later.
+3. **Buy the lump sum, then set up the monthly plan** on a PEA-eligible MSCI
+   World tracker: WPEA or DCAM (accumulating, ~0.20% a year). The plan runs on
+   the 5th of each month at no cost.
 4. **That's all.** No filter, no timing, no extra sleeves, no selling. The
    advisor (Step 6) takes over the monthly decision once it exists.
 
@@ -66,7 +68,7 @@ Your amounts stay out of git; the repo is public.
 | 2 | PEA | None yet, so **open one now** (see ▶ above) |
 | 3 | Pain limit | **−20%** from peak |
 | 4 | Trend sleeve (stage 2) | Only if **profitable** and **no leverage**. Managed-futures funds use leverage internally, so Test 3 tests both an S4a fund and an unlevered S4b basket (STRATEGY §2.2). You choose after seeing the results. |
-| 5 | Broker for the CTO | Interactive Brokers (EU entity), opened when the portfolio approaches €10k |
+| 5 | Broker for the CTO | Interactive Brokers, used from stage 2. **Any IBKR account must be declared on form 3916 every year, even unused** (research/BROKERS.md). |
 | 6 | Your time | Steps 1–6: 3–5 h/week. Live: about 10 minutes a month. |
 
 **Admin once the CTO exists (stage 2, France):**

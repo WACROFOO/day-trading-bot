@@ -169,7 +169,7 @@ The flat-tax rate is **31.4% in 2026** (12.8% income tax + 18.6% social contribu
 - **Gain computation:**
   - French rules compute gains on securities using the weighted-average acquisition price (PMP), in euros, with foreign-currency prices converted at each transaction date. IBKR's reports default to FIFO lots and the account's base currency.
   - Flex Queries (CSV/XML of trades with dates, prices and FX rates) should be set up from day one to rebuild PMP per ISIN. This is general knowledge and **UNVERIFIED this session** against BOFiP / art. 150-0 D CGI.
-- Because the investor **already has an IBKR account**, the 3916 obligation already applies for every tax year it was open, even if unused. If any past year was missed, regularise it.
+- For anyone who already holds an IBKR account, the 3916 obligation applies for every tax year it was open, even if unused. If a past year was missed, regularise it.
 - If an IBKR PEA is opened, IBKR auto-opens a linked CTO. Each account number probably needs its own 3916 line (inference from "per account" rule).
 
 ### Gaps
@@ -336,7 +336,7 @@ French forum and blog opinion is consistent:
 - **PEA.fr (15 Jan 2026):** support "competent but cold, often in English", replies in 24–48h; strict KYC and 2FA frustrate some users; the €1.25 minimum makes small monthly investing costly — [PEA.fr](https://pea.fr/courtier/pea-interactive-brokers-avis-2026/)
 
 ### Inferences
-- The investor's profile (systematic, API, multi-venue UCITS, comfortable with DIY tax) is the profile these reviewers say IBKR fits. Their complaints mostly concern beginners and small DCA savers.
+- A profile like this plan's (systematic, API, multi-venue UCITS, comfortable with DIY tax) is the profile these reviewers say IBKR fits. Their complaints mostly concern beginners and small DCA savers.
 
 ### Gaps
 - MoneyVox and Bogleheads France opinions specific to IBKR CTO taxation were not retrieved. Reddit was not attempted.

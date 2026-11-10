@@ -49,6 +49,7 @@ not others is in the
 | [ROADMAP.md](ROADMAP.md) | The step-by-step plan: what we build, what you do, and the go/no-go gate at the end of each step. |
 | [STRATEGY.md](STRATEGY.md) | The rule spec (v0.4): every rule as a parameter we can backtest, plus the evidence funnel for adding new ones. |
 | [LESSONS.md](LESSONS.md) | What we carry over from the Ross project: order handling, errors, data, process. |
+| [research/BROKERS.md](research/BROKERS.md) | Which broker for the PEA and the CTO, with fees, protection and the obligations of a foreign account. |
 | [DATA.md](DATA.md) | Where every number comes from: sources, sleeve proxies, their weak points, and the data checks. |
 | [research/](research/reports/Retail%20systematic%20strategy%20candidates.md) | The strategy-candidate research: ranked candidates, evidence, French costs and tax, and the selection method. |
 
