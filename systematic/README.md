@@ -49,6 +49,7 @@ not others is in the
 | [ROADMAP.md](ROADMAP.md) | The step-by-step plan: what we build, what you do, and the go/no-go gate at the end of each step. |
 | [STRATEGY.md](STRATEGY.md) | The rule spec (v0.4): every rule as a parameter we can backtest, plus the evidence funnel for adding new ones. |
 | [LESSONS.md](LESSONS.md) | What we carry over from the Ross project: order handling, errors, data, process. |
+| [DATA.md](DATA.md) | Where every number comes from: sources, sleeve proxies, their weak points, and the data checks. |
 | [research/](research/reports/Retail%20systematic%20strategy%20candidates.md) | The strategy-candidate research: ranked candidates, evidence, French costs and tax, and the selection method. |
 
 Code will live here as it is built (`src/`, `tests/`, `research/`), with its
@@ -57,7 +58,7 @@ copied and adapted, so the two projects can never break each other.
 
 ## Status
 
-**Step 0 of 9.** The plan, the research and rule spec v0.4 are written. There is no code and no backtest yet.
+**Step 2 of 9.** The plan, the research and rule spec v0.4 are written. The data layer is built and passes its checks (81/81); the backtest engine (Step 3) is next.
 
 **Verification status:** ❌ Not validated. Every number in this folder is a
 starting value to test, not a result.

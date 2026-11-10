@@ -96,6 +96,15 @@ Findings go into LESSONS.md §E. **Gate:** none.
 
 ## Step 2 — Data foundation (23 Nov → 4 Dec)
 
+**Status (10 Nov 2026): data layer built; G2 passes 81/81.** Details in
+[DATA.md](DATA.md). Open items:
+- Daily UCITS prices, for the tracking checks (needed from stage 3).
+- Month-end gold prices, to replace the World Bank monthly averages before the
+  final Test 1 run.
+- Choosing a broad commodity ETF for S4b.
+- Your confirmation that each fund in `config/instruments.csv` is tradable in
+  your accounts.
+
 All free, apart from optional daily UCITS prices:
 
 | Data | Source | Used for |

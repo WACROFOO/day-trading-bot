@@ -1,0 +1,21 @@
+sleeve,choice,name,isin,ticker,exchange,currency,ter_pct,distribution,hedged,pea_eligible,inception,backtest_series,notes
+S1,primary,iShares MSCI World Swap PEA UCITS ETF,IE0002XZSHO1,WPEA,Euronext Paris,EUR,0.20,Acc,no,yes,2024-03-26,world_equity_eur,Synthetic (swap) so it can sit in a PEA
+S1,alternative,Amundi PEA Monde (MSCI World) UCITS ETF,FR001400U5Q4,DCAM,Euronext Paris,EUR,0.20,Acc,no,yes,2025-03-04,world_equity_eur,Synthetic
+S1,alternative,Amundi PEA Global (MSCI ACWI) UCITS ETF,FR0014017NX3,GPEA,Euronext Paris,EUR,0.30,Acc,no,yes,2026-07-06,,Adds emerging markets; young fund
+S2,primary,iShares Edge MSCI World Momentum Factor UCITS ETF,IE00BP3QZ825,IS3R,Xetra,EUR,0.25,Acc,no,no,2014-10-03,momentum_eur,Check eligibility for IBKR commission-free iShares recurring plans
+S2,alternative,Xtrackers MSCI World Momentum UCITS ETF 1C,IE00BL25JP72,XDEM,Xetra,EUR,0.25,Acc,no,no,2014-09-05,momentum_eur,
+S3,primary,iShares Edge MSCI World Quality Factor UCITS ETF,IE00BP3QZ601,IS3Q,Xetra,EUR,0.25,Acc,no,no,2014-10-03,quality_eur,
+S3,alternative,Xtrackers MSCI World Quality UCITS ETF 1C,IE00BL25JL35,XDEQ,Xetra,EUR,0.25,Acc,no,no,2014-09-05,quality_eur,
+S4a,primary,iMGP DBi Managed Futures Fund R EUR HP UCITS ETF,LU3359622902,,Xetra / Euronext Paris,EUR,0.75,Acc,EUR,no,2026-05-13,trend_s4a_eur,Leverage inside the fund (STRATEGY 2.2); ticker to confirm
+S4a,alternative,iMGP DBi Managed Futures Fund R USD UCITS ETF,LU2951555585,,Euronext Paris,USD,0.75,Acc,no,no,2025-03-07,trend_s4a_eur,Unhedged USD class
+S4b,equity,iShares Core MSCI World UCITS ETF,IE00B4L5Y983,IWDA,Euronext Amsterdam / LSE,EUR,0.20,Acc,no,no,2009-09-25,world_equity_eur,CTO version of world equity for the S4b basket
+S4b,treasuries,Amundi US Treasury Bond 7-10Y UCITS ETF EUR Hedged Acc,LU1407888137,7USH,Xetra,EUR,0.06,Acc,EUR,no,2023-06-02,treasury_eur_hedged,
+S4b,gold,Amundi Physical Gold ETC,FR0013416716,GOLD,Euronext Paris,EUR,0.12,Acc,no,no,2019-05-21,gold_eur,French tax treatment of gold ETCs not confirmed
+S4b,commodities,Broad commodity UCITS ETF (to select),,,,EUR,,Acc,,no,,commodities_eur,Not yet researched; backtest proxy is a spot index
+S5,primary,Amundi US Treasury Bond 7-10Y UCITS ETF EUR Hedged Acc,LU1407888137,7USH,Xetra,EUR,0.06,Acc,EUR,no,2023-06-02,treasury_eur_hedged,
+S5,alternative,iShares USD Treasury Bond 7-10yr UCITS ETF EUR Hedged (Acc),IE000K1VI152,CEMF,Xetra,EUR,0.10,Acc,EUR,no,2025-07-25,treasury_eur_hedged,
+S5,unhedged variant,iShares USD Treasury Bond 7-10yr UCITS ETF (Acc),IE00B3VWN518,SXRM,Xetra,EUR,0.07,Acc,no,no,2009-06-03,treasury_eur_unhedged,For the hedged-vs-unhedged variant in Test 1
+S6,primary,Amundi Physical Gold ETC,FR0013416716,GOLD,Euronext Paris,EUR,0.12,Acc,no,no,2019-05-21,gold_eur,French tax treatment of gold ETCs not confirmed
+S6,alternative,iShares Physical Gold ETC,IE00B4ND3602,PPFB,Xetra,EUR,0.12,Acc,no,no,2011-04-08,gold_eur,
+S7,primary,Xtrackers II EUR Overnight Rate Swap UCITS ETF 1C,LU0290358497,XEON,Xetra,EUR,0.10,Acc,no,no,2007-05-25,cash_eur,
+S7,alternative,Amundi Smart Overnight Return UCITS ETF Acc,LU1190417599,CSH2,Euronext Paris,EUR,0.10,Acc,no,no,2015-03-02,cash_eur,
