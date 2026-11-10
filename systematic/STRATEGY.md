@@ -1,4 +1,4 @@
-# Rule spec v0.3 — one portfolio, seven sleeves, built in stages
+# Rule spec v0.4 — one portfolio, seven sleeves, built in stages
 
 **Verification status:** ❌ Not validated. The rules are built around the
 evidence in [the research report](research/reports/Retail%20systematic%20strategy%20candidates.md),
@@ -50,12 +50,12 @@ Earlier versions are in git history; §10 lists what changed and why.
 | S1 | World equity | **35%** | The equity premium | MSCI World net, in EUR | PEA-eligible MSCI World ETF (e.g. WPEA, DCAM) | PEA |
 | S2 | Momentum tilt | **15%** | Return tilt | MSCI World Momentum (back-tested before its 2013 launch); AQR momentum factors as cross-check | MSCI World Momentum UCITS ETF (e.g. IS3R, XDEM) | CTO |
 | S3 | Quality tilt | **10%** | Return tilt that partly offsets momentum crashes | MSCI World Quality | MSCI World Quality UCITS ETF (e.g. IS3Q, XDEQ) | CTO |
-| S4 | Managed futures | **15%** | Crisis diversifier: makes money in long bear markets | AQR Time-Series Momentum factor (from 1985) and SG Trend Index (from 2000), net of the fund's fees | iMGP DBi Managed Futures UCITS ETF, EUR-hedged | CTO |
+| S4 | Trend sleeve | **15%** | Crisis diversifier for long bear markets | S4a: AQR Time-Series Momentum (from 1985) and SG Trend (from 2000), net of fees · S4b: equity, Treasury, gold and commodity indexes | **S4a** managed-futures fund (iMGP DBi, EUR-hedged) *or* **S4b** an unlevered long-only trend basket. Chosen by §2.2. | CTO |
 | S5 | US Treasuries 7–10y, EUR-hedged | **10%** | Hedge against deflationary crashes | 7–10y Treasury index, hedged to EUR | $ Treasury 7–10y UCITS ETF, EUR-hedged | CTO |
 | S6 | Gold | **5%** | Hedge against inflation and panic | Gold price in EUR | Physical gold ETC (French tax treatment still to confirm) | CTO |
 | S7 | EUR cash | **10%** | Dry powder, and where filtered sleeves park | EUR short rate | EUR overnight-rate ETF (e.g. XEON) in the CTO; plain cash in the PEA | both |
 
-That is 60% equities, 15% managed futures, 10% bonds, 5% gold and 10% cash at
+That is 60% equities, 15% trend sleeve, 10% bonds, 5% gold and 10% cash at
 target. When the filters are off, the equity share can drop to zero.
 
 ### 2.1 Stages: the portfolio grows into its sleeves
@@ -68,7 +68,7 @@ portfolio grows:
 | Stage | Portfolio value | Holds | Why |
 |---|---|---|---|
 | 1 | under €10k | **S1 only**: the PEA world tracker, 100% | One order a month; every euro inside the tax wrapper; nothing to get wrong |
-| 2 | €10k–€30k | S1, plus **S2 momentum (15%)** and **S4 managed futures (10%)** in a CTO | The best-evidenced return tilt and the best diversifier, each at least €1,000 |
+| 2 | €10k–€30k | S1, plus **S2 momentum (15%)** and **S4 trend sleeve (10%)** in a CTO | The best-evidenced return tilt and the best diversifier, each at least €1,000 |
 | 3 | €30k and up | The full §2 targets: adds S3 quality, S5 Treasuries (R4), S6 gold (R3) and S7 cash | Each sleeve at least ~€1,500 |
 | 4 | €100k and up | Adds split dates (R1 with 4 tranches) and opens the research sleeve (§4) | Timing luck and self-built portfolios only matter when orders are large |
 
@@ -82,6 +82,27 @@ the PEA to fund the CTO.
 portfolio, a €16/month market-data subscription would cost 3.8% a year, and a
 €5/month server 1.2%. So stages 1–2 run on free end-of-day data on your own computer;
 paid data and a server wait for stage 3.
+
+### 2.2 The trend sleeve: two candidates, because of leverage
+
+Your conditions for S4 are that it must be **profitable** and use **no
+leverage**. Managed-futures funds fail the second condition if it is read
+strictly. They trade futures whose total exposure is usually larger than the
+money in the fund, which is leverage inside the fund. You still can never lose
+more than you invest, and you never get a margin call. So there are two
+candidates, and both are tested:
+
+| | S4a · Managed-futures fund | S4b · Unlevered trend basket |
+|---|---|---|
+| What | One UCITS ETF (iMGP DBi, EUR-hedged, 0.75%) following trends in ~50 futures markets, long or short | Four UCITS ETFs, equal weight: world equity, Treasuries 7–10y, gold, broad commodities. Each is held only while above its 10-month average; otherwise cash |
+| Leverage | Inside the fund; none for you | None anywhere |
+| In a long bear market | Can profit, by shorting what falls (2022: +27% for the SG Trend index) | Can't short. Steps aside to cash, and may hold whatever is still rising (commodities in 2022) |
+| Evidence | Long, but halved after publication; multi-year flat stretches | Faber-style trend timing: cuts drawdowns, costs return in bull markets |
+
+**Choice rule:** a candidate enters only if it passes G5's profitability test
+(ROADMAP Step 5). S4a is used **only if you accept leverage inside the fund**,
+a decision you make after seeing both results. Otherwise S4b is used if it
+passes, or the sleeve's weight goes to S1 if neither passes.
 
 ---
 
@@ -118,8 +139,10 @@ beats cash's 12-month return; otherwise move it to cash. In 2022, strategies
 that applied this rule kept drawdowns to about −8%, against −17% for those
 that held long bonds regardless (research report).
 
-**R5 · Managed futures are always held.** S4 is already a trend strategy, so
-filtering it would double up. It is only rebalanced (R6).
+**R5 · The trend sleeve follows its own rules.** S4a is always held and only
+rebalanced (R6): it is already a trend strategy, so filtering it would double
+up. S4b applies a 10-month filter to each of its four assets, with cash when
+off.
 
 **R6 · Rebalancing.** At each review, any sleeve outside its band gets traded
 back to target. The band is **5 points absolute or 25% of target**, whichever
@@ -162,9 +185,9 @@ These live in the execution layer and are modelled on
 `src/paper_trading/risk_gate.py` (LESSONS B2–B5).
 
 **Always:**
-- No margin, no shorting, no options, no leverage at portfolio level. S4 uses
-  futures inside the fund; holding it unlevered means you cannot lose more than
-  you put in.
+- No margin, no shorting, no options, no borrowing: you can never lose more
+  than you put in. Leverage inside a fund is allowed only if you choose S4a
+  (§2.2).
 - Max 12 orders per day.
 - Max single order: 10% of the portfolio. Max single ETF: 40%.
 - Single stocks (research sleeve only): max 5% each.
@@ -236,7 +259,8 @@ goes in `research/experiments.csv`:
 | `tranches` | 1 below €100k, 4 above | 1 vs. 4 at stage 4 (to measure timing luck, not to choose) | 1 |
 | `filter_in_accumulation` | Off in stages 1–2 | On, simulated with monthly contributions | 1 |
 | `stage_thresholds` | €10k / €30k / €100k | — fixed (set by order-size arithmetic, not tuned) | — |
-| `mf_weight` | 15% | 0, 10, 20% | 3 |
+| `s4_type` | Decided by §2.2 | S4a vs. S4b | 3 |
+| `s4_weight` | 15% | 0, 10, 20% | 3 |
 | `momentum_sleeve` | MSCI World Momentum ETF | Sector rotation; GEM-style regional momentum | 2 |
 | `quality_weight` | 10% | 0% | 2 |
 | `bands` | 5 pts / 25% | — fixed | — |
@@ -251,9 +275,9 @@ stays inside the §7 budget.
 | Market | Expected behaviour | What makes it work, or hurt |
 |---|---|---|
 | Strong bull market (2017, 2021, 2023–24) | Trails 100% equity by a few points a year | 40% is not in equities; managed futures and gold may be flat |
-| Slow bear market (2000–02, 2008, 2022) | Much smaller loss than equities | The filter moves equity to cash within months; managed futures historically gained (2022: +27%); bonds held only if beating cash |
+| Slow bear market (2000–02, 2008, 2022) | Much smaller loss than equities | The filter moves equity to cash within months; S4a historically gained (2022: +27%), while S4b moves to cash and holds what still rises; bonds held only if beating cash |
 | Sudden crash and rebound (2020, April 2025) | A loss and a late re-entry | The filter whipsaws and momentum lags the rebound. Quality cushions it, and the crash-ladder variant is designed for this case. |
-| Inflation shock (2022) | Bonds out via R4 | Gold and managed futures carry the defensive load |
+| Inflation shock (2022) | Bonds out via R4 | Gold, commodities (S4b) or managed futures (S4a) carry the defensive load |
 | Sideways or choppy market | A slow bleed from whipsaws | Split dates (R1) reduce it; this is the price of crash protection |
 
 Step 4 replaces this table with backtested numbers per regime.
@@ -261,6 +285,13 @@ Step 4 replaces this table with backtested numbers per regime.
 ---
 
 ## 10. Changes
+
+### v0.3 → v0.4: the trend sleeve under a strict no-leverage rule
+
+| v0.3 | v0.4 | Why |
+|---|---|---|
+| S4 = managed-futures fund | S4a managed-futures fund *or* S4b unlevered trend basket (§2.2) | Your rule is "profitable and no leverage"; managed-futures funds use leverage internally |
+| No-leverage rule at portfolio level only | No borrowing anywhere; fund-internal leverage only by explicit choice | Makes the rule match what you meant |
 
 ### v0.2 → v0.3: sized for a small, growing portfolio
 

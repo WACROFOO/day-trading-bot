@@ -21,7 +21,7 @@ evidence behind the sleeves is in the
 | 2 | Data foundation: index, factor and trend histories in EUR | Me | 4 Dec | G2 |
 | 3 | Backtest engine: contributions, stages, EUR, French tax | Me | 18 Dec | G3 |
 | 4 | Test 1: does the trend filter help a growing portfolio? | Both | 15 Jan 2027 | G4 |
-| 5 | Tests 2 and 3: momentum and managed futures (they decide stage 2) | Both | 12 Feb | G5 |
+| 5 | Tests 2 and 3: momentum and the trend sleeve (they decide stage 2) | Both | 12 Feb | G5 |
 | 6 | The advisor: monthly instructions, tracking, discipline checks | Me | Mar 2027 | G6 |
 | 7 | Stage 2: open the CTO, route contributions to the new sleeves | You + advisor | Portfolio reaches €10k | — |
 | 8 | Automation of the CTO sleeves: shadow run, then staged | Bot + you | Stage 3 (€30k) | G7, G8 |
@@ -56,18 +56,18 @@ it.
 
 ---
 
-## Step 0 — Remaining decisions (you, this week)
+## Step 0 — Decisions (done, 10 Nov 2026)
 
-Capital and contributions are decided. Your amounts stay out of git; the repo
-is public.
+Your amounts stay out of git; the repo is public.
 
-| # | Decision | Default |
+| # | Decision | Answer |
 |---|---|---|
-| 1 | **PEA:** do you already have one, and since when? | Open one now (see ▶ above) |
-| 2 | Broker for the CTO | Interactive Brokers (EU entity). Not needed until stage 2, so open it when the portfolio approaches €10k. |
-| 3 | Pain limit: the largest drop you could live through without abandoning the plan | −20% from peak |
-| 4 | Managed futures (stage 2): the fund uses futures inside, but you can't lose more than you put in. Acceptable? | Yes |
-| 5 | Your time | Steps 1–6: 3–5 h/week. Live: about 10 minutes a month. |
+| 1 | Capital and contributions | Decided (kept in `private/`) |
+| 2 | PEA | None yet, so **open one now** (see ▶ above) |
+| 3 | Pain limit | **−20%** from peak |
+| 4 | Trend sleeve (stage 2) | Only if **profitable** and **no leverage**. Managed-futures funds use leverage internally, so Test 3 tests both an S4a fund and an unlevered S4b basket (STRATEGY §2.2). You choose after seeing the results. |
+| 5 | Broker for the CTO | Interactive Brokers (EU entity), opened when the portfolio approaches €10k |
+| 6 | Your time | Steps 1–6: 3–5 h/week. Live: about 10 minutes a month. |
 
 **Admin once the CTO exists (stage 2, France):**
 - Declare the account every year on form 3916.
@@ -166,7 +166,7 @@ cash/bond mix sized to your pain limit.
 
 ---
 
-## Step 5 — Tests 2 and 3: momentum and managed futures (18 Jan → 12 Feb)
+## Step 5 — Tests 2 and 3: momentum and the trend sleeve (18 Jan → 12 Feb)
 
 These two sleeves are what stage 2 adds, so they must be settled before the
 portfolio reaches €10k.
@@ -174,15 +174,19 @@ portfolio reaches €10k.
 - **Test 2 · Momentum:** an MSCI World Momentum ETF against MSCI World. Sector
   rotation and GEM-style regional momentum run as alternative arms. Europe is
   the held-out region.
-- **Test 3 · Managed futures:** a sleeve at 0, 10, 15 and 20% added to the
-  portfolio, using the AQR and SG Trend histories net of the fund's 0.75% fee.
+- **Test 3 · Trend sleeve:** S4a (managed-futures fund, using the AQR and SG
+  Trend histories net of its 0.75% fee) and S4b (unlevered four-asset trend
+  basket), each at 0, 10, 15 and 20% of the portfolio.
 
 **Gate G5:**
 - **Momentum** enters stage 2 only with a positive net excess return over MSCI
   World in the full history *and* in the held-out region, and a worst relative
   drawdown you have seen in advance and accept.
-- **Managed futures** enter only if they raise the portfolio's Sharpe ratio
-  and reduce its max drawdown, at 2× costs as well.
+- **The trend sleeve** enters only if it is **profitable**: a positive return
+  above cash after fees over the full history, a higher portfolio Sharpe ratio
+  and a lower max drawdown, all at 2× costs as well. You also see its worst
+  stretch in advance (S4a's index lost 18.6% in the 12 months to April 2025).
+  S4a is used only if you accept leverage inside the fund; otherwise S4b.
 - A sleeve that fails is not added; stage 2 holds only what passed.
 
 ---
@@ -211,7 +215,7 @@ historical months; all tests offline.
 ## Step 7 — Stage 2 (when the portfolio reaches €10k)
 
 Open the CTO (default: IBKR). Monthly contributions go to whichever passed
-sleeves (momentum, managed futures) are most underweight, until they reach
+sleeves (momentum, trend sleeve) are most underweight, until they reach
 target. The PEA keeps its holdings and receives contributions only once the
 CTO sleeves are at target. The advisor handles the arithmetic.
 
@@ -276,6 +280,5 @@ and 4 bring in the protective and return-seeking sleeves.
 
 ## Next, I need from you
 
-1. **Do you have a PEA?** If not, opening one is the first action.
-2. Your pain limit (default −20%), and whether managed futures are OK.
-3. Your trade history from the Ross attempt, for Step 1.
+1. **Open the PEA** and make the first purchase (stage 1).
+2. Your trade history from the Ross attempt, for Step 1.
