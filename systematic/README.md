@@ -37,7 +37,8 @@ where consistency comes from.
 
 A monthly trend filter moves the equity sleeves to cash while the world market
 is below its 10-month average. Rebalancing is split across four dates a month.
-The exact rules are in [STRATEGY.md](STRATEGY.md) (v0.2). Why these sleeves and
+The sleeves open in stages as the portfolio grows, starting with the world
+tracker alone. The exact rules are in [STRATEGY.md](STRATEGY.md) (v0.3). Why these sleeves and
 not others is in the
 [research report](research/reports/Retail%20systematic%20strategy%20candidates.md).
 
@@ -46,7 +47,7 @@ not others is in the
 | File | What it is |
 |---|---|
 | [ROADMAP.md](ROADMAP.md) | The step-by-step plan: what we build, what you do, and the go/no-go gate at the end of each step. |
-| [STRATEGY.md](STRATEGY.md) | The rule spec (v0.2): every rule as a parameter we can backtest, plus the evidence funnel for adding new ones. |
+| [STRATEGY.md](STRATEGY.md) | The rule spec (v0.3): every rule as a parameter we can backtest, plus the evidence funnel for adding new ones. |
 | [LESSONS.md](LESSONS.md) | What we carry over from the Ross project: order handling, errors, data, process. |
 | [research/](research/reports/Retail%20systematic%20strategy%20candidates.md) | The strategy-candidate research: ranked candidates, evidence, French costs and tax, and the selection method. |
 
@@ -56,7 +57,7 @@ copied and adapted, so the two projects can never break each other.
 
 ## Status
 
-**Step 0 of 9.** The plan, the research and rule spec v0.2 are written. There is no code and no backtest yet.
+**Step 0 of 9.** The plan, the research and rule spec v0.3 are written. There is no code and no backtest yet.
 
 **Verification status:** ❌ Not validated. Every number in this folder is a
 starting value to test, not a result.

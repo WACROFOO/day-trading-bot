@@ -5,61 +5,76 @@ Each step lists **what we build** (mostly me, in code), **what you do**, and a
 fails, the step says what happens next. Sometimes the answer is "this part of
 the strategy is dropped". That counts as a success: it costs time, not money.
 
-This is v0.2 of the roadmap, rebuilt around STRATEGY.md v0.2 (one portfolio,
-seven sleeves, monthly rules) and the
+This is v0.3 of the roadmap. It follows STRATEGY.md v0.3: one portfolio that
+**grows into its sleeves in stages** (§2.1), because a small portfolio that
+grows through monthly contributions cannot hold seven sleeves cheaply. The
+evidence behind the sleeves is in the
 [research report](research/reports/Retail%20systematic%20strategy%20candidates.md).
-
-Dates assume we start the week of **16 November 2026** at a part-time pace
-(3–5 hours a week from you).
 
 ## Overview
 
-| Step | What | Who | Target | Gate |
+| Step | What | Who | When | Gate |
 |---|---|---|---|---|
-| 0 | Decisions: PEA, broker, capital, pain limit | You | 15 Nov 2026 | Answers given (or defaults accepted) |
-| 1 | Post-mortem of the Ross attempt | Both | 22 Nov | — (feeds the rules) |
-| 2 | Data foundation: index, factor and trend histories in EUR | Me | 4 Dec | G2 · data checks pass |
-| 3 | Backtest engine: monthly, split dates, EUR, French tax | Me | 18 Dec | G3 · known-answer tests pass |
-| 4 | Tests 1 and 3: the portfolio and the managed-futures sleeve | Both | 15 Jan 2027 | G4 |
-| 5 | Test 2: the momentum sleeve | Both | 29 Jan | G5 |
-| ▶ | **Portfolio goes live in advisor mode**: the system says what to do, you place the orders | You | Feb → Apr 2027 | — |
-| 6 | The bot: daily pipeline, IBKR, kill switch | Me | 5 Mar | G6 · fault-injection tests |
-| 7 | Shadow run: the bot proposes alongside your live portfolio | Bot + you | Mar → May | G7 |
-| 8 | Automation of the CTO sleeves, smallest first | Bot + you | Jun → Sep 2027 | G8 |
-| 9 | Operate, review, research sleeve | Ongoing | — | G9 |
+| ▶ | **Start stage 1 now:** open the PEA and buy the world tracker every month | You | Nov 2026 | — |
+| 0 | Remaining decisions | You | 15 Nov 2026 | Answers given (or defaults accepted) |
+| 1 | Post-mortem of the Ross attempt | Both | 22 Nov | — |
+| 2 | Data foundation: index, factor and trend histories in EUR | Me | 4 Dec | G2 |
+| 3 | Backtest engine: contributions, stages, EUR, French tax | Me | 18 Dec | G3 |
+| 4 | Test 1: does the trend filter help a growing portfolio? | Both | 15 Jan 2027 | G4 |
+| 5 | Tests 2 and 3: momentum and managed futures (they decide stage 2) | Both | 12 Feb | G5 |
+| 6 | The advisor: monthly instructions, tracking, discipline checks | Me | Mar 2027 | G6 |
+| 7 | Stage 2: open the CTO, route contributions to the new sleeves | You + advisor | Portfolio reaches €10k | — |
+| 8 | Automation of the CTO sleeves: shadow run, then staged | Bot + you | Stage 3 (€30k) | G7, G8 |
+| 9 | Operate and review | Ongoing | — | G9 |
 
-**Why the portfolio can go live before the bot exists.** v0.2 trades monthly,
-in a handful of orders. Placing them yourself from the system's instructions
-(advisor mode) is cheap and safe. The bot is then built and proven alongside
-the live portfolio, and automation takes over the CTO sleeves only once it has
-matched your manual orders for months. The PEA stays manual permanently,
-because no PEA broker offers an API.
+**The brain first, the hands later.** In stages 1–2 there are one or two orders
+a month. Automating them buys little, and it costs a lot relative to a small
+portfolio: market data, a server, and a weekly IBKR login. So the decision
+logic (the advisor) gets built and proven first. Automated order placement
+waits until stage 3, when the CTO holds four or more sleeves. The PEA stays
+manual for good, because no PEA broker offers an API.
 
 ---
 
-## Step 0 — Decisions (you, this week)
+## ▶ Start stage 1 now (no backtest needed)
 
-Answer these, or reply "defaults" to accept the right-hand column. Your actual
-numbers stay in `systematic/private/`, never in git (the repo is public).
+Stage 1 is the benchmark itself: a world index fund, bought every month. It
+doesn't need our backtest to justify it. Everything else gets tested against
+it.
+
+1. **Emergency fund first.** 3–6 months of expenses, kept outside the
+   portfolio, in full.
+2. **Open a PEA.** The 5-year tax clock starts at the first deposit, so every
+   month of delay costs a month of waiting later. Pick a broker where the
+   monthly order costs at most ~0.5% of its size. If the broker offers a free
+   automatic monthly savings plan on the ETF inside the PEA, that's ideal.
+3. **Buy a PEA-eligible MSCI World tracker every month.** Accumulating share
+   class; candidates from the research are WPEA or DCAM (~0.20% a year).
+   Confirm eligibility and fees on justETF and with the broker.
+4. **That's all.** No filter, no timing, no extra sleeves, no selling. The
+   advisor (Step 6) takes over the monthly decision once it exists.
+
+---
+
+## Step 0 — Remaining decisions (you, this week)
+
+Capital and contributions are decided. Your amounts stay out of git; the repo
+is public.
 
 | # | Decision | Default |
 |---|---|---|
-| 1 | **PEA:** do you have one, since when, and how much room is left under the €150k ceiling? | Use one for the world-equity sleeve (S1). If you don't have one, **open it now, even with a small deposit**: the 5-year tax clock starts at the first deposit. |
-| 2 | Broker for the CTO | Interactive Brokers (EU entity). **Open the account now**: verification takes days to weeks, and Step 2 needs it to check that the instruments are tradable for you. |
-| 3 | Capital, and monthly contributions | Your emergency fund (3–6 months of expenses) stays outside, in full. Monthly contributions are useful: rule R6 uses them to rebalance without selling. |
-| 4 | Pain limit: the largest portfolio drawdown you can live through without abandoning the plan | −20% from peak. This sets the gate in Step 4 and the stop-and-review rule live. |
-| 5 | Managed futures: the S4 fund uses futures *inside* the fund. You can't lose more than you put in. Acceptable? | Yes |
-| 6 | Where the bot runs; how alerts reach you | Small VPS (~€5/month) or an always-on PC; Telegram |
-| 7 | Your time | Steps 1–6: 3–5 h/week. Live: 2 min/day, about 15 min per tranche date for PEA orders, 30–60 min/month review. |
+| 1 | **PEA:** do you already have one, and since when? | Open one now (see ▶ above) |
+| 2 | Broker for the CTO | Interactive Brokers (EU entity). Not needed until stage 2, so open it when the portfolio approaches €10k. |
+| 3 | Pain limit: the largest drop you could live through without abandoning the plan | −20% from peak |
+| 4 | Managed futures (stage 2): the fund uses futures inside, but you can't lose more than you put in. Acceptable? | Yes |
+| 5 | Your time | Steps 1–6: 3–5 h/week. Live: about 10 minutes a month. |
 
-**Admin with a foreign broker (France):**
-- Declare the IBKR account every year on form 3916 (€1,500 fine per
-  undeclared account per year).
-- Declare gains yourself; the CTO flat tax (PFU) is **31.4%** since the 2026
-  social-security law.
-- Distributions need the monthly 12.8% prepayment form (2778-DIV-SD). Prefer
-  **accumulating** share classes, which avoid it and defer tax.
-- Sign the W-8BEN form for US dividends.
+**Admin once the CTO exists (stage 2, France):**
+- Declare the account every year on form 3916.
+- Declare gains yourself (PFU 31.4% since 2026).
+- Prefer accumulating share classes, which avoid the monthly 2778-DIV-SD
+  prepayment.
+- Sign the W-8BEN form.
 
 This is not tax advice: confirm with an accountant.
 
@@ -67,209 +82,155 @@ This is not tax advice: confirm with an accountant.
 
 ## Step 1 — Post-mortem of the Ross attempt (week of 16 Nov)
 
-**Why:** to find out where the money actually went. It also produces the
-lessons that become kill-switch triggers.
-
 **You give me** whatever trade history exists: `data/paper_trading.db` and/or
-broker statements (CSV). Attach them in chat, or put them in
-`systematic/private/` in your local clone. They never get committed.
+broker statements, attached in chat or in `systematic/private/` (never
+committed).
 
-**I build:** `systematic/research/postmortem.py`. It reports:
-- gross vs. net P&L, and cost per trade in R
-- win rate and expectancy
-- P&L by time of day and by price bucket
-- how often the risk rules tripped
-- what share of losses came from the worst 10% of trades
+**I build:** `systematic/research/postmortem.py`. It reports gross vs. net
+P&L, cost per trade, expectancy, P&L by time of day, how often the risk rules
+tripped, and how concentrated the losses were.
 
-**Output:** a report kept in `private/`. Findings go into LESSONS.md §E.
-**Gate:** none.
+Findings go into LESSONS.md §E. **Gate:** none.
 
 ---
 
 ## Step 2 — Data foundation (23 Nov → 4 Dec)
 
-The Ross data cannot be used here (research report): it has the wrong horizon,
-the wrong universe, and no stored prices. v0.2 needs **long monthly histories**,
-because the trial budget requires roughly 18+ years of data.
+All free, apart from optional daily UCITS prices:
 
-**I build:**
-
-| Data | Source (cost) | Used for |
+| Data | Source | Used for |
 |---|---|---|
-| MSCI World, World Momentum, World Quality, Europe Momentum (end-of-month, net) | MSCI index downloads (free); factor indexes are back-tested before launch | S1–S3, Test 2 |
-| Momentum, value and quality factors, US and international | Ken French library, AQR datasets (free) | Long-history cross-checks, hold-out region |
-| Trend: AQR Time-Series Momentum (from 1985), SG Trend Index (from 2000), DBMF (from 2019) | AQR, SG/BarclayHedge, fund data | S4, Test 3 |
-| 7–10y Treasury total return; EUR/USD; EUR and USD short rates (for hedging cost) | Index/fund data, ECB Data Portal, FRED (free) | S5, EUR conversion |
-| Gold in EUR | Free price series | S6 |
-| EUR short rate | ECB Data Portal (free) | S7, cash yield |
-| Daily UCITS ETF prices for the live period | EODHD (~USD 20/month); yfinance only as a fallback (rate limits); Stooq is out (CAPTCHA since Mar 2026) | Tracking checks, the bot |
-| Exchange calendars | Library | Tranche dates, data freshness |
+| MSCI World, World Momentum, World Quality, Europe Momentum (end-of-month, net) | MSCI index downloads; factor indexes are back-tested before launch | S1–S3, Tests 1–2 |
+| Momentum, value and quality factors, US and international | Ken French library, AQR datasets | Long-history checks, hold-out region |
+| Trend: AQR Time-Series Momentum (1985+), SG Trend Index (2000+), DBMF (2019+) | AQR, SG/BarclayHedge, fund data | Test 3 |
+| Treasuries, gold, EUR/USD, EUR and USD short rates | Index/fund data, ECB Data Portal, FRED | S5–S7, EUR conversion, hedging cost |
+| Daily UCITS ETF prices | EODHD (paid, from stage 3) or yfinance (free fallback) | Tracking checks, the advisor |
 
-Also the **instrument map**: each sleeve → UCITS ETF (ISIN, exchange, currency,
-accumulating, hedged, PEA-eligible yes/no, TER).
+Also the **instrument map**: each sleeve → UCITS ETF (ISIN, accumulating,
+hedged, PEA-eligible, TER).
 
-**You do:** confirm in IBKR (and your PEA broker) that each instrument is
-tradable for you.
-
-**Gate G2:**
-- MSCI World EUR annual returns match the published factsheets within 0.5
-  points.
-- Each UCITS ETF's tracking difference against its index is ≤ ~0.5% a year
-  over the overlap.
-- No unexplained gaps or jumps.
+**Gate G2:** MSCI World EUR annual returns match the factsheets within 0.5
+points; each ETF's tracking difference against its index is ≤ ~0.5% a year;
+no unexplained gaps.
 
 ---
 
 ## Step 3 — Backtest engine (7 Dec → 18 Dec)
 
-**Why our own engine:** the rules live in one module that outputs target
-weights, and the **same code** runs the backtest, the advisor, the shadow run
-and the automation. What is tested is exactly what is traded. `bt` (maintained,
-weight-based) serves as an independent cross-check for the known-answer tests.
+The rules live in one module that outputs target weights. The **same code**
+runs the backtest and the advisor (and later the bot), so what is tested is
+exactly what is traded. `bt` serves as an independent cross-check.
 
-**I build:**
-- Monthly decisions on 4 split dates (R1), all accounting in EUR, hedging
-  cost for EUR-hedged sleeves, and cash earning the EUR short rate.
-- Costs: IBKR commissions with minimums, spreads, FX conversion. Every run is
-  repeated at 2× costs.
-- **Tax layer:** the 31.4% PFU on gains realised in the CTO each year, with a
-  10-year loss carry-forward; PEA levies (18.6%) at the end. Results are
-  reported **after tax**, against an MSCI World tracker held in a PEA.
-- Metrics: CAGR, volatility, Sharpe, max drawdown, worst year, time under
-  water, turnover, cost and tax drag, **deflated Sharpe ratio**, and
-  **probability of backtest overfitting**.
-- The experiment log, `research/experiments.csv`, records every run.
+**What the engine models, beyond a textbook backtest:**
+- **Monthly contributions** and **stage transitions** (STRATEGY §2.1): the
+  portfolio is simulated as it will really be built, not as a lump sum.
+- **The PEA lock:** money never moves from the PEA to the CTO, so new sleeves
+  are funded only by routed contributions.
+- **Real costs:** order minimums (€1.25 at IBKR), spreads, FX, broker fees.
+  Every run is repeated at 2× costs.
+- **Tax:** the 31.4% PFU on gains realised in the CTO each year, and the 18.6%
+  PEA levies at the end. Results are reported **after tax**.
+- **Metrics:** after-tax ending wealth over rolling 10-year windows, Sharpe,
+  max drawdown in euros and in %, time under water, turnover, cost drag,
+  deflated Sharpe, and probability of backtest overfitting.
+- **The experiment log**, `research/experiments.csv`, records every run.
 
-**Gate G3:**
-- Buy-and-hold matches the index.
-- A monthly 60/40 matches `bt` and a hand calculation.
-- A lookahead test passes.
-- All tests run offline on fixtures.
+**Gate G3:** buy-and-hold matches the index; a monthly 60/40 matches `bt`;
+the contribution arithmetic matches a hand calculation; the lookahead test
+passes; all tests run offline.
 
 ---
 
-## Step 4 — Tests 1 and 3: the portfolio and managed futures (4 Jan → 15 Jan 2027)
+## Step 4 — Test 1: the trend filter for a growing portfolio (4 Jan → 15 Jan 2027)
 
-**Test 1** runs the v0.2 portfolio (STRATEGY.md §2–3) and its pre-registered
-variants (§8: filter type, filter scope, bond rule, hedging, crash ladder).
-**Test 3** runs the managed-futures weight at 0, 10, 15 and 20%.
-
-- **Comparison:** the PEA world tracker after tax, a EUR 60/40, and STRATEGY v0.1.
-- **Periods:** from the mid-1990s (the factor-index history) to 2021,
-  covering 2000–02, 2008 and 2020. **2021–2026 is held out and run once**, and
-  it includes 2022 and 2025.
-- **Timing luck:** every variant also runs with a single rebalance date, to
-  show how much luck that carries.
+**The question:** with monthly contributions, does the 10-month filter beat
+plain monthly buying? It is tested in stages 1–2 (S1 only) and stage 3 (the
+full portfolio), with the pre-registered variants in STRATEGY §8. The main
+period runs from the mid-1990s to 2021; **2021–2026 is held out and run
+once**.
 
 **Gate G4:**
-1. After-tax Sharpe ≥ the PEA world tracker's over the main period, and no
-   more than 0.2 below it in the hold-out.
-2. Max drawdown ≤ 60% of world equity's in 2000–02, 2008 and 2022, and inside
-   your pain limit.
-3. After-tax return ≥ the EUR 60/40's over the full period.
-4. **Managed futures stay** only if they raise the Sharpe ratio and reduce max
-   drawdown versus 0%, at 2× costs as well.
+- **Stages 1–2:** the filter switches on only if it raises the after-tax
+  Sharpe ratio *and* costs less than 5% of median ending wealth over rolling
+  10-year windows, compared with plain monthly buying. Otherwise stage 1 stays
+  plain buying.
+- **Stage 3 portfolio:**
+  - after-tax Sharpe ≥ the PEA world tracker's (no more than 0.2 below it in
+    the hold-out);
+  - max drawdown ≤ 60% of world equity's in 2000–02, 2008 and 2022, and
+    inside your pain limit;
+  - after-tax return ≥ a EUR 60/40's.
 
-*If it fails:* simplify to the robust fallback: the PEA world tracker plus a
-cash/bond mix sized to your pain limit. That is a fine portfolio, and the bot
-still enforces the rebalancing.
+*If stage 3 fails:* the long-run portfolio becomes the PEA tracker plus a
+cash/bond mix sized to your pain limit.
 
 ---
 
-## Step 5 — Test 2: the momentum sleeve (18 Jan → 29 Jan)
+## Step 5 — Tests 2 and 3: momentum and managed futures (18 Jan → 12 Feb)
 
-**Arms**, under identical guardrails:
-1. MSCI World Momentum ETF buy-and-hold (the default S2)
-2. Sector-ETF rotation
-3. GEM-style regional momentum
-4. Quality weight 10% vs. 0%
+These two sleeves are what stage 2 adds, so they must be settled before the
+portfolio reaches €10k.
 
-**Hold-out:** Europe (MSCI Europe Momentum, AQR European factors), looked at
-once.
+- **Test 2 · Momentum:** an MSCI World Momentum ETF against MSCI World. Sector
+  rotation and GEM-style regional momentum run as alternative arms. Europe is
+  the held-out region.
+- **Test 3 · Managed futures:** a sleeve at 0, 10, 15 and 20% added to the
+  portfolio, using the AQR and SG Trend histories net of the fund's 0.75% fee.
 
 **Gate G5:**
-- The momentum ETF arm has a **positive net excess return over MSCI World**
-  in the full history *and* in the held-out region.
-- Its worst relative drawdown is one you have seen in advance and accept.
-- An alternative arm replaces it only if it beats it on the same rules.
-
-*If it fails:* S2's weight moves to S1, and the portfolio gets simpler.
-
----
-
-## ▶ Live in advisor mode (Feb → Apr 2027)
-
-Once G4 and G5 pass, I add a `portfolio-advisor` command. It reads your
-holdings from a file in `private/` and prints, for each tranche date, exactly
-which orders to place in which account. You deploy the capital in **three
-monthly instalments** (February, March, April), so the entry date doesn't
-hinge on a single day.
+- **Momentum** enters stage 2 only with a positive net excess return over MSCI
+  World in the full history *and* in the held-out region, and a worst relative
+  drawdown you have seen in advance and accept.
+- **Managed futures** enter only if they raise the portfolio's Sharpe ratio
+  and reduce its max drawdown, at 2× costs as well.
+- A sleeve that fails is not added; stage 2 holds only what passed.
 
 ---
 
-## Step 6 — The bot (8 Feb → 5 Mar)
+## Step 6 — The advisor (Mar 2027)
 
-**I build**, in `systematic/src/`:
+The bot's brain, running on your own computer with free end-of-day data. On
+the first trading day of each month it:
+- reads your holdings (a file in `private/`, or your broker's CSV export);
+- works out your stage, applies the rules (filters, bands, contribution
+  routing), and **tells you exactly what to buy, in which account, for how
+  much**;
+- checks the discipline rules: the pain limit, results outside the backtest's
+  range, and any manual deviation from last month's instructions;
+- keeps the journal, and in January produces the tax pack (gains, form-3916
+  reminder).
 
-| Module | Job |
-|---|---|
-| `data` | Daily fetch, cache, data checks (STRATEGY §5) |
-| `strategy` | The rules → target weights. The same module as the backtest. |
-| `portfolio` | Targets vs. holdings → orders, per tranche and per account |
-| `risk` | Pre-trade checks, kill switch, pain-limit monitor (LESSONS B2–B5) |
-| `broker` | Local simulator and IBKR paper/live (via `ib_async`); the PEA is always advisor-only |
-| `ledger` | SQLite: order lifecycle with client IDs, fills, positions, tax lots |
-| `runner` | The daily 17:00 New York job; trades only on tranche dates |
-| `alerts` / `report` | Daily summary, tranche-date instructions, monthly report |
+Built with the risk and ledger patterns from the old project (LESSONS B1–B5,
+B10, C1–C4).
 
-**Modes:** `advisor` (instructions only), `paper`, `live` (explicit flag plus
-a config confirmation).
-
-**Operations:** IBC, the usual tool for running IB Gateway unattended, was
-retired in September 2026. Plan on IB Gateway's auto-restart setting plus a
-**weekly two-factor login on Monday** from your phone. A monthly strategy
-tolerates a missed day; the daily job alerts if the gateway is down.
-
-**Gate G6:** fault-injection tests pass for all of these:
-- stale data
-- broker unreachable
-- partial fill
-- rejected order
-- the job run twice (it must not double-buy)
-- a crash mid-run, then restart
-- a reconciliation mismatch
-- a DST-change date
-- a tranche date that falls on a holiday
+**Gate G6:** advisor output = the backtest's rules on the same dates, for 24
+historical months; all tests offline.
 
 ---
 
-## Step 7 — Shadow run (Mar → May 2027)
+## Step 7 — Stage 2 (when the portfolio reaches €10k)
 
-For 3 months the bot runs daily against the IBKR **paper** account while you
-run the real portfolio in advisor mode.
-
-**Weekly (me, with you):**
-- The bot's orders, the advisor's instructions and a backtest re-run over the
-  same dates must agree **100%**. A mismatch is a bug, fixed before the clock
-  continues.
-- Paper fills are compared with the cost model.
-- Once, trigger the kill switch on purpose to prove it works end to end.
-
-**Gate G7:**
-- 100% agreement.
-- Zero unhandled errors in the last 4 weeks.
-- Kill switch tested.
+Open the CTO (default: IBKR). Monthly contributions go to whichever passed
+sleeves (momentum, managed futures) are most underweight, until they reach
+target. The PEA keeps its holdings and receives contributions only once the
+CTO sleeves are at target. The advisor handles the arithmetic.
 
 ---
 
-## Step 8 — Automation of the CTO sleeves (Jun → Sep 2027)
+## Step 8 — Automation of the CTO sleeves (from stage 3, €30k)
 
-| Stage | Sleeves the bot trades | Duration | Move on only if |
-|---|---|---|---|
-| 1 | Gold and managed futures (the smallest) | 2 months | Automated orders = proposals 100%; costs ≤ 1.5× the model; no manual overrides |
-| 2 | All CTO sleeves | — | Same |
+From stage 3, the CTO holds four or more sleeves and automation pays for its
+fixed costs. **I build** the `broker` adapter (IBKR via `ib_async`), the
+order lifecycle with client IDs and reconciliation, and the kill switch
+(STRATEGY §5). IBC was retired in September 2026, so plan on IB Gateway's
+auto-restart setting plus a weekly two-factor login.
 
-The PEA sleeve stays in advisor mode for good. Any failure goes back a stage.
+- **Shadow run, 3 months:** the bot trades the IBKR paper account while you
+  follow the advisor. **G7:** 100% agreement, zero unhandled errors for 4
+  weeks, kill switch tested.
+- **Staged automation:** smallest sleeves first for 2 months, then all CTO
+  sleeves. **G8:** automated orders = proposals 100%; costs ≤ 1.5× the model;
+  no manual overrides.
 
 ---
 
@@ -277,22 +238,19 @@ The PEA sleeve stays in advisor mode for good. Any failure goes back a stage.
 
 | When | What |
 |---|---|
-| Daily | 2-minute summary; alerts only if something tripped |
-| Tranche dates (4 a month) | The bot trades the CTO; you place any PEA orders it sends |
-| Monthly | Performance vs. benchmarks, in EUR, after costs and tax |
-| January | Full rebalance; tax pack (form 3916, gains, prepayments) |
-| Yearly | Strategy review; candidates for the research sleeve go through the funnel (STRATEGY §7) |
+| Monthly (about 10 minutes) | Read the advisor's instructions, place the order(s), confirm |
+| January | Full rebalance check (with new money first); tax pack |
+| Yearly | Strategy review; research-sleeve candidates through the funnel (from stage 4) |
 
 **Review and stop rules (Gate G9):**
-- **Pain limit hit** → everything stops for a review.
-- **Live results outside the backtest's range** (for example, a 12-month
-  return below the backtest's 5th percentile for that kind of market) → review
-  for bugs or a regime change. This is not an automatic quit.
-- **Never judge the strategy on 12 months against the S&P 500.** A realistic
-  tilt needs decades to prove itself statistically (research report); short
-  windows measure noise.
-- **Never:** leverage, rule changes during a drawdown, or manual overrides.
-  Every change goes through the funnel → backtest → shadow run.
+- **Pain limit hit** → stop and review.
+- **Results outside the backtest's range** → review for bugs or a regime
+  change. Not an automatic quit.
+- **Never judge on 12 months against the S&P 500.** Short windows measure
+  noise.
+- **Never:** leverage, rule changes during a drawdown, or skipped
+  contributions because the market "looks bad". Every rule change goes
+  through the funnel → backtest → advisor.
 
 ---
 
@@ -300,25 +258,24 @@ The PEA sleeve stays in advisor mode for good. Any failure goes back a stage.
 
 | Does | Doesn't |
 |---|---|
-| Writes and tests all the code; runs backtests and keeps the experiment log | Predict prices |
-| Computes your instructions on every tranche date | Trade your account from the chat |
-| Reviews results monthly and explains every alert | Promise returns |
+| Writes and tests the code; runs the backtests and keeps the experiment log | Predict prices |
+| Computes your monthly instructions | Trade your account from the chat |
+| Reviews results and explains every alert | Promise returns |
 | Challenges every rule change against the evidence funnel | Skip a gate because results look good |
 
 ## Realistic expectations
 
-v0.2 is designed for **consistency**: returns close to equities over a full
-cycle, with drawdowns roughly half as deep. That is a hypothesis; Step 4
-replaces it with backtested, after-tax numbers per market type. Expect to
-trail a 100% equity portfolio in strong bull years, to lose money in sudden
-crashes, and to live through a managed-futures sleeve's flat years. Following
-the rules through those periods is where the long-run result comes from.
+While the portfolio is small, **the monthly contribution is the main engine**:
+in the early years, what you add matters far more than any strategy's extra
+return. The strategy's job in that phase is to keep costs and taxes near zero
+and to keep you buying through crashes. Strategy returns start to matter once
+the portfolio is worth several years of contributions, which is when stages 3
+and 4 bring in the protective and return-seeking sleeves.
 
 ---
 
-## To start Step 1, I need from you
+## Next, I need from you
 
-1. Your Step 0 answers, or "defaults". Above all: **do you have a PEA?**
-2. Your trade history from the Ross attempt, attached in chat or in
-   `systematic/private/`.
-3. Any lessons for LESSONS.md §E: rejections, order mistakes, rule breaks.
+1. **Do you have a PEA?** If not, opening one is the first action.
+2. Your pain limit (default −20%), and whether managed futures are OK.
+3. Your trade history from the Ross attempt, for Step 1.

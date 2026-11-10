@@ -1,14 +1,13 @@
-# Rule spec v0.2 — one portfolio, seven sleeves, monthly rules
+# Rule spec v0.3 — one portfolio, seven sleeves, built in stages
 
-**Verification status:** ❌ Not validated. v0.2 is rebuilt around the evidence
-in [the research report](research/reports/Retail%20systematic%20strategy%20candidates.md),
+**Verification status:** ❌ Not validated. The rules are built around the
+evidence in [the research report](research/reports/Retail%20systematic%20strategy%20candidates.md),
 but none of it has been backtested by us yet. Every number is a **starting
 value to test**, not a result. ROADMAP Steps 4–5 decide what survives.
 
 This file is the single source of truth for the rules. Code implements exactly
 what is written here, and any change is made here first, with a version bump.
-v0.1 (two engines: defensive core + swing trading) is in git history; §10 lists
-what changed and why.
+Earlier versions are in git history; §10 lists what changed and why.
 
 ---
 
@@ -59,11 +58,38 @@ what changed and why.
 That is 60% equities, 15% managed futures, 10% bonds, 5% gold and 10% cash at
 target. When the filters are off, the equity share can drop to zero.
 
+### 2.1 Stages: the portfolio grows into its sleeves
+
+A small portfolio cannot hold seven sleeves cheaply. Spreading a few hundred
+euros of monthly contributions over seven sleeves means orders under €100,
+and at IBKR's €1.25 minimum that costs well over 1% per trade. So the sleeves open in stages, as the
+portfolio grows:
+
+| Stage | Portfolio value | Holds | Why |
+|---|---|---|---|
+| 1 | under €10k | **S1 only**: the PEA world tracker, 100% | One order a month; every euro inside the tax wrapper; nothing to get wrong |
+| 2 | €10k–€30k | S1, plus **S2 momentum (15%)** and **S4 managed futures (10%)** in a CTO | The best-evidenced return tilt and the best diversifier, each at least €1,000 |
+| 3 | €30k and up | The full §2 targets: adds S3 quality, S5 Treasuries (R4), S6 gold (R3) and S7 cash | Each sleeve at least ~€1,500 |
+| 4 | €100k and up | Adds split dates (R1 with 4 tranches) and opens the research sleeve (§4) | Timing luck and self-built portfolios only matter when orders are large |
+
+**Moving between stages uses only new money.** Money cannot move from the PEA
+to the CTO without a withdrawal, and a withdrawal before 5 years closes the
+PEA. So new sleeves are funded by routing monthly contributions to them (R6),
+and the PEA's share of the portfolio falls gradually. Nothing is ever sold in
+the PEA to fund the CTO.
+
+**Recurring costs stay below 0.5% of the portfolio a year.** On a €5,000
+portfolio, a €16/month market-data subscription would cost 3.8% a year, and a
+€5/month server 1.2%. So stages 1–2 run on free end-of-day data on your own computer;
+paid data and a server wait for stage 3.
+
 ---
 
 ## 3. Rules
 
-**R1 · Monthly decisions, split across four dates.** Divide the portfolio into
+**R1 · Monthly decisions, split across four dates from stage 4.** Below €100k,
+there is one decision date a month (the first trading day), so orders stay
+large enough to keep commissions low. From stage 4, divide the portfolio into
 4 equal tranches. Tranche *k* is reviewed on the first trading day on or after
 the 1st, 8th, 15th and 22nd of each month respectively, using the previous
 close. Results from a single rebalance date are mostly luck: shifting Faber's
@@ -76,6 +102,13 @@ make more, smaller orders.
 Otherwise those three sleeves move to S7 cash. One signal drives all three:
 they are highly correlated, and one signal means fewer parameters and fewer
 whipsaws. Inside the PEA, switching between equity and cash is untaxed.
+
+*Stages 1–2:* the filter is **off by default**, and Test 1 decides whether to
+switch it on. While the portfolio is small compared with the contributions,
+a crash mostly helps you, because new money buys cheaply; a filter would park
+that money in cash and buy back higher. Protection becomes valuable once the
+portfolio is worth several years of contributions. That is a hypothesis, and
+Test 1 checks it with the monthly contributions simulated.
 
 **R3 · Gold trend filter.** Hold S6 while gold (in EUR) is above its 10-month
 average; otherwise move it to cash.
@@ -92,7 +125,8 @@ filtering it would double up. It is only rebalanced (R6).
 back to target. The band is **5 points absolute or 25% of target**, whichever
 is hit first. There is also a full rebalance in January. **New money and
 distributions go to the most underweight sleeve first**, which rebalances
-without selling, so without realising taxable gains in the CTO.
+without selling, so without realising taxable gains in the CTO. Balance
+between the PEA and the CTO is managed only this way (§2.1).
 
 **R7 · Execution.** Orders go in at the next session after the signal, as
 marketable limits at the last price ±0.5% (DAY orders), re-placed for up to 3
@@ -199,7 +233,9 @@ goes in `research/experiments.csv`:
 | `bond_rule` | On | Off (always hold S5) | 1 |
 | `treasury_hedge` | EUR-hedged | Unhedged | 1 |
 | `crash_ladder` | Off | On: cash buys equity in thirds at −20/−30/−40% from the peak, once price is back above its 50-day average | 1 |
-| `tranches` | 4 | 1 (to measure timing luck, not to choose) | 1 |
+| `tranches` | 1 below €100k, 4 above | 1 vs. 4 at stage 4 (to measure timing luck, not to choose) | 1 |
+| `filter_in_accumulation` | Off in stages 1–2 | On, simulated with monthly contributions | 1 |
+| `stage_thresholds` | €10k / €30k / €100k | — fixed (set by order-size arithmetic, not tuned) | — |
 | `mf_weight` | 15% | 0, 10, 20% | 3 |
 | `momentum_sleeve` | MSCI World Momentum ETF | Sector rotation; GEM-style regional momentum | 2 |
 | `quality_weight` | 10% | 0% | 2 |
@@ -224,7 +260,19 @@ Step 4 replaces this table with backtested numbers per regime.
 
 ---
 
-## 10. Changes from v0.1
+## 10. Changes
+
+### v0.2 → v0.3: sized for a small, growing portfolio
+
+| v0.2 | v0.3 | Why |
+|---|---|---|
+| All seven sleeves from day one | Sleeves open in four stages by portfolio value (§2.1) | Small orders pay 1% or more in minimum commissions (€1.25 on a €125 order) |
+| Four split dates a month | One date below €100k | Splitting small orders multiplies minimum fees |
+| Trend filter always on | Off in stages 1–2 unless Test 1 says otherwise | While contributions dominate, crashes are buying opportunities |
+| Implicit cross-account rebalancing | New money only; never withdraw from the PEA | A withdrawal before 5 years closes the PEA |
+| Paid data and a server assumed | Recurring costs capped at 0.5% a year | €16/month of data is 3.8% a year on €5,000 |
+
+### v0.1 → v0.2
 
 | v0.1 | v0.2 | Why (research report) |
 |---|---|---|
