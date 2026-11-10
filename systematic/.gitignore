@@ -1,0 +1,11 @@
+# The repo is public. Trade logs, broker statements, account details and
+# capital amounts stay on your machine.
+private/
+
+# Downloaded market data and runtime databases are regenerated, never committed.
+data/
+*.db
+
+# The experiment log is research output, not personal data: keep it tracked
+# (the root .gitignore ignores *.csv everywhere).
+!research/experiments.csv
