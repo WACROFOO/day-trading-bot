@@ -126,11 +126,16 @@ no unexplained gaps.
 
 ---
 
-## Step 3 — Backtest engine (7 Dec → 18 Dec)
+## Step 3 — Backtest engine (24 Nov → 18 Dec)
+
+**Full design: [ENGINE.md](ENGINE.md)**, covering architecture, the monthly
+loop, costs, tax, metrics, the experiment log and hold-out lock, and seven
+milestones (M1–M7) each with its own tests.
 
 The rules live in one module that outputs target weights. The **same code**
 runs the backtest and the advisor (and later the bot), so what is tested is
-exactly what is traded. `bt` serves as an independent cross-check.
+exactly what is traded. An independent vectorised calculation in the tests
+serves as the cross-check.
 
 **What the engine models, beyond a textbook backtest:**
 - **Monthly contributions** and **stage transitions** (STRATEGY §2.1): the
@@ -146,8 +151,9 @@ exactly what is traded. `bt` serves as an independent cross-check.
   deflated Sharpe, and probability of backtest overfitting.
 - **The experiment log**, `research/experiments.csv`, records every run.
 
-**Gate G3:** buy-and-hold matches the index; a monthly 60/40 matches `bt`;
-the contribution arithmetic matches a hand calculation; the lookahead test
+**Gate G3:** buy-and-hold matches the index; a monthly 60/40 matches an
+independent calculation; the contribution arithmetic matches the annuity
+formula; the tax module reproduces worked examples; the lookahead test
 passes; all tests run offline.
 
 ---
