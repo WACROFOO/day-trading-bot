@@ -43,7 +43,7 @@ def main() -> int:
     args = parser.parse_args()
 
     rule = rules.FrozenRule.load()
-    candles = completed_days(catalog.load("btceur_daily", refresh=not args.cached))
+    candles = completed_days(catalog.load("btcusd_daily", refresh=not args.cached))
     close = candles["close"]
     day = close.index[-1]
     yesterday = pd.Timestamp.now(tz="UTC").tz_localize(None).normalize() - pd.Timedelta(days=1)
@@ -60,12 +60,12 @@ def main() -> int:
     sma200 = close.rolling(200).mean().iloc[-1]
 
     print(f"== {rule.name}: decision after the {day:%Y-%m-%d} close (UTC) ==")
-    print(f"  BTC/EUR close            {close.iloc[-1]:,.2f}")
+    print(f"  BTC/USD close            {close.iloc[-1]:,.2f}")
     print("  trend votes              " + "  ".join(f"{L}d:{'up' if v else 'down'}" for L, v in votes.items()))
     print(f"  signal                   {rules.ensemble_signal(close, rule.lookback_days).iloc[-1]:.2f}")
     print(f"  60-day volatility        {vol:.1%} a year")
     print(f"  raw target               {raw:.1%} in BTC")
-    print(f"  exposure after band      {exposure.iloc[-1]:.1%} in BTC, {1 - exposure.iloc[-1]:.1%} in EURC")
+    print(f"  exposure after band      {exposure.iloc[-1]:.1%} in BTC, {1 - exposure.iloc[-1]:.1%} in USDC")
     print(f"  benchmark C1 (200-day)   {'in' if c1.iloc[-1] == 1 else 'out'} "
           f"(200-day average {sma200:,.2f})")
 

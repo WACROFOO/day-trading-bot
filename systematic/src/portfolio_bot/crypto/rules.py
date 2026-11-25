@@ -33,8 +33,8 @@ class FrozenRule:
     max_exposure: float = 1.0
     band_min_change: float = 0.10
     exit_fully_when_target_zero: bool = True
-    maker_fee: float = 0.004
-    taker_fee: float = 0.008
+    maker_fee: float = 0.001
+    taker_fee: float = 0.002
     spread: float = 0.0002
     forward_record_starts: str = "2026-11-26"
     name: str = field(default="crypto-primary-v1", compare=False)

@@ -4,16 +4,21 @@
   "forward_record_starts": "2026-11-26",
   "description": "Long-or-flat bitcoin trend ensemble sized by a 25% volatility target. Frozen before any forward data exists; changing anything here restarts the forward record and adds a trial (crypto/PLAN.md §8).",
   "asset": "BTC",
-  "quote": "EUR",
+  "quote": "USD",
   "data": {
-    "source": "Bitstamp daily OHLC, pair btceur, UTC calendar days",
+    "source": "Bitstamp daily OHLC, pair btcusd, UTC calendar days",
     "price": "close",
     "completed_days_only": true
   },
   "decision_time_utc": "00:05",
   "signal": {
     "type": "tsmom_ensemble_long_flat",
-    "lookback_days": [30, 91, 182, 365],
+    "lookback_days": [
+      30,
+      91,
+      182,
+      365
+    ],
     "rule": "mean over lookbacks of 1 if close/close[L days ago] > 1 else 0, giving 0, 0.25, 0.5, 0.75 or 1"
   },
   "sizing": {
@@ -25,21 +30,28 @@
     "rule": "target = signal * min(1, 0.25 / annualised stdev of the last 60 daily log returns)"
   },
   "band": {
-    "min_change": 0.10,
+    "min_change": 0.1,
     "exit_fully_when_target_zero": true,
     "rule": "hold the current exposure unless the target moves by at least 0.10, or the target is 0 (then exit fully)"
   },
-  "risk_off_asset": "EURC",
-  "contributions": "monthly deposits join the next rebalance; they buy BTC only up to the target exposure of the whole crypto book; the rest waits in EUR/EURC",
+  "risk_off_asset": "USDC",
+  "contributions": "monthly EUR deposits are converted to USDC, join the next rebalance, and buy BTC only up to the target exposure of the whole crypto book; the rest waits in USDC",
   "execution": "post-only limit orders, timed fallback to a market order",
   "cost_model": {
-    "maker": 0.004,
-    "taker_fallback": 0.008,
+    "maker": 0.001,
+    "taker_fallback": 0.002,
     "spread": 0.0002,
     "stress_multiplier": 2
   },
-  "benchmarks": ["c1_sma200_long_flat", "plain_monthly_dca", "btc_buy_and_hold"],
-  "variants": ["v1_btc_eth_equal_risk", "v2_weekly_rebalance_monday"],
+  "benchmarks": [
+    "c1_sma200_long_flat",
+    "plain_monthly_dca",
+    "btc_buy_and_hold"
+  ],
+  "variants": [
+    "v1_btc_eth_equal_risk",
+    "v2_weekly_rebalance_monday"
+  ],
   "trial_count_at_freeze": 10,
   "forward_bands": {
     "minimum_duration_months": 12,
@@ -47,5 +59,8 @@
     "exposure_path_must_match_rerun": true,
     "max_cost_vs_model": 1.5,
     "max_drawdown_vs_btc_in_declines_of_20pct_or_more": 0.5
-  }
+  },
+  "revision": 2,
+  "revision_note": "Re-frozen 2026-11-25 10:55 UTC, before the forward record began: risk-off asset USDC (owner's choice on OKX Europe), so the signal now runs on BTC/USD to match the traded pair BTC/USDC; cost model set to OKX EU spot fees. This is exactly the configuration already logged as ext-20261125-06 (BTC/USD), so the trial count is unchanged.",
+  "venue": "OKX Europe (eea.okx.com), pair BTC-USDC"
 }

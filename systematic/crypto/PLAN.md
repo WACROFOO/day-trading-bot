@@ -1,6 +1,6 @@
 # Crypto track: finance and development plan (v0.2)
 
-**Status (25 Nov 2026):** the primary rule is **frozen**
+**Status (25 Nov 2026):** the primary rule is **frozen** (revision 2: USDC, BTC/USD signal)
 ([frozen_rules.json](frozen_rules.json)); its forward record starts on
 **26 Nov 2026**.
 **Verification status:** ❌ Not validated. The rule rests on published
@@ -60,12 +60,12 @@ Four pieces, each covering a weakness in another:
 |---|---|---|
 | **Signal** | Average of the signs of bitcoin's 30-, 91-, 182- and 365-day returns, giving 0/25/50/75/100% (long or flat) | Ensembles beat any single lookback; single rules whipsaw (the 200-day rule switched 19 times in 2021) |
 | **Sizing** | × min(1, 25% ÷ 60-day realised volatility); never above 100%; skip changes under 10 points, except a full exit when the target is 0 | Keeps drawdowns near −20% to −30%; cuts turnover from 12 to ~5 a year, which matters at 0.40% fees and for the habitual-trading test |
-| **Contributions** | Each monthly deposit joins the next rebalance and buys BTC only up to the current target weight; the rest waits in EUR/EURC | DCA is the community's one robust habit; gating it with the trend avoids buying all the way through a 2022-style bear market |
-| **Risk-off leg** | Exits swap BTC **directly into EURC**, never through EUR | Tax-deferred under current French law (§5) |
+| **Contributions** | Each monthly EUR deposit is converted to USDC, joins the next rebalance and buys BTC only up to the current target weight; the rest waits in USDC |
+| **Risk-off leg** | Exits swap BTC **directly into USDC** (pair BTC-USDC on OKX Europe), never through EUR | Tax-deferred under current French law (§5) |
 
 **Execution:** post-only limit orders, with a timed fallback to a market
 order. **Decision time:** 00:05 UTC on the completed daily close.
-**Data:** Bitstamp BTC/EUR daily closes.
+**Data:** Bitstamp BTC/USD daily closes (the traded pair is BTC-USDC). *Revision 2, 25 Nov 2026, before the forward record began: risk-off asset USDC (owner's choice), signal on BTC/USD; same configuration as the logged research run, so the trial count is unchanged.*
 
 **Frozen:** every parameter above is in [frozen_rules.json](frozen_rules.json)
 and implemented in `src/portfolio_bot/crypto/rules.py`. A test enforces that
@@ -78,7 +78,7 @@ vs 1.25, max drawdown −30.7% vs −30.7%, turnover 5.0 vs 5.0 a year. That
 configuration was already logged, so this is not a new trial.
 
 **State on 24 Nov 2026:** all four trend votes are down, so the rule holds
-**0% BTC and 100% EURC**. A bot started now would sit in EURC until the next
+**0% BTC and 100% USDC**. A bot started now would sit in USDC until the next
 uptrend. Its first real test is a re-entry.
 
 ---
@@ -91,7 +91,8 @@ uptrend. Its first real test is a re-entry.
 | Leverage | Spot only, never more than 100% invested |
 | Exchange failure | MiCA-licensed exchange only; only the crypto book on it; a dedicated sub-account |
 | Key abuse | Trade-only API keys (no withdrawals), locked to the bot's IP address, held in `.env` only. **The bot halts on any order or trading pair it did not send itself**: a trade-only key can still be abused, as the 3Commas leak showed |
-| Stablecoin | EURC only; stop buying if it drifts more than 1% from €1 (USDC traded at $0.88 in March 2023) |
+| Stablecoin | USDC only (MiCA e-money token, issued by Circle's French entity); stop buying if it drifts more than 1% from $1 (it traded at $0.88 in March 2023) |
+| Currency (EUR/USD) | The USDC leg is a **dollar position for a euro investor**: EUR/USD moves about 6–8% a year (the euro rose ~13% against the dollar in 2025). Results and the −30% limit are measured in EUR, so this risk counts |
 | Bot errors | The STRATEGY.md §5 kill switch, adapted for 24/7 markets: stale data (already enforced in `crypto_signal.py`), reconciliation, explained P&L, rejections |
 | Behaviour | No manual trades in the bot's sub-account; every override is logged |
 
@@ -114,8 +115,9 @@ taker fallback and 0.02% spread, with a stress test at 2× and a turnover
 budget of about 5 a year.
 
 **Choosing the exchange.** The exchange is chosen on four things:
-1. A **direct BTC/EURC pair** with real depth. Selling BTC for EUR and then
-   buying EURC would be a taxable sale.
+1. A **direct BTC/stablecoin pair** with real depth (BTC-USDC on OKX: about
+   700 BTC a day). Selling BTC for EUR and then buying a stablecoin would be
+   a taxable sale.
 2. The fee actually charged at your size, as shown in the order preview.
 3. Trade-only, IP-locked keys (verified for Kraken and Coinbase).
 4. How stablecoin pairs are billed (Kraken uses a separate 0.20% schedule).
@@ -127,7 +129,8 @@ budget of about 5 a year.
 - **No loss carry-forward** for crypto.
 - **Paperwork:** form 3916-bis every year for each exchange account (€750
   fine per undeclared account), and form 2086 for gains.
-- **BTC→EURC swaps are tax-neutral today.** The 2027 budget nearly ended that
+- **BTC→USDC swaps are tax-neutral today** (USDC, like EURC, is an e-money
+  token). The 2027 budget amendment targeted exactly these swaps and nearly ended that
   (adopted 38–37, then lapsed, then rejected by the Senate on 24 Nov). The
   budget is finalised around **17 December 2026: re-check then.**
 - **Habitual-trading risk (BNC):** frequent automated trading can be
@@ -136,7 +139,7 @@ budget of about 5 a year.
 
 **Route A (crypto ETPs in your IBKR account)** stays a computed alternative:
 fund fees of 0.10–0.15% a year, every exit taxable, but losses carry
-forward. If BTC→EURC swaps become taxable, Route A probably wins. The engine
+forward. If BTC→stablecoin swaps become taxable, Route A probably wins. The engine
 computes both routes, so the choice rests on numbers.
 
 ---
@@ -145,8 +148,8 @@ computes both routes, so the choice rests on numbers.
 
 | Series | Source | Coverage | Status |
 |---|---|---|---|
-| BTC/EUR daily | Bitstamp | Apr 2016 → yesterday | Built, freshness-checked |
-| BTC/USD daily | Bitstamp | Aug 2011 → yesterday | Built; used for the longer history (pre-2016 EUR via ECB rates) and the reconciliation |
+| BTC/EUR daily | Bitstamp | Apr 2016 → yesterday | Built; used to report results in EUR |
+| BTC/USD daily | Bitstamp | Aug 2011 → yesterday | Built; **the frozen rule's signal**, the reconciliation, and the long history |
 | ETH/EUR daily | Bitstamp | 2017 → | Variant V1 |
 
 No USDT pairs are used anywhere. Downloads are cached in the gitignored
@@ -160,7 +163,8 @@ These go on top of ENGINE.md (bar-agnostic):
 - **Execution model:** maker first, unfilled orders, a taker fallback, and
   slippage measured against the model.
 - **Tax:** portfolio value logged at every euro withdrawal; no loss
-  carry-forward; Route A vs Route B; a scenario where EURC swaps are taxed.
+  carry-forward; Route A vs Route B; a scenario where stablecoin swaps are taxed.
+- **Currency:** the USDC leg valued in EUR, so EUR/USD moves show up in results.
 - **Reporting:** results by window (2015–2020, 2021–2023), because
   whole-sample statistics are dominated by 2016–17 and 2020.
 
@@ -217,11 +221,11 @@ capital.
 | `scripts/crypto_signal.py` | **Built:** today's decision, the forward record, the reconciliation |
 | `broker.ccxt_adapter` | Exchange connection via `ccxt`: balances, maker-first orders, fills; paper mode |
 | `runner.crypto` | 00:05 UTC daily job: fetch → freshness check → signal → size → reconcile → orders → journal → alert |
-| `risk` | Kill switch, pain limit, EURC depeg, unexpected-order halt |
+| `risk` | Kill switch, pain limit, USDC depeg, unexpected-order halt |
 | `alerts` | Telegram: daily summary, plus an immediate alert on any trip |
 
 **Modes:**
-- `advisor`: the target, for example "BTC 0%, EURC 100%", is sent to you;
+- `advisor`: the target, for example "BTC 0%, USDC 100%", is sent to you;
 - `paper`;
 - `live`.
 
@@ -234,7 +238,7 @@ must stay ≤ 0.5%/yr.
 |---|---|---|
 | ✅ | Community scan, ranking, rule frozen, data built, reconciliation | 25 Nov 2026 |
 | ▶ | **Forward record running** | from 26 Nov 2026 |
-| 1 | Re-check the French budget (EURC swaps); choose the venue | after ~17 Dec 2026 |
+| 1 | Re-check the French budget (stablecoin swaps); test trade on OKX (§11) | after ~17 Dec 2026 |
 | 2 | Engine additions (§7); CG1 on data to Nov 2024 | Dec 2026 – Jan 2027 |
 | 3 | Bot: `ccxt` adapter, runner, risk, alerts; fault-injection tests | Jan – Feb 2027 |
 | 4 | Engineering gate (8 weeks of paper trading) | Feb – Apr 2027 |
@@ -245,9 +249,9 @@ must stay ≤ 0.5%/yr.
 
 | # | Decision | Default |
 |---|---|---|
-| 1 | Venue | **OKX Europe preferred**, if a small test trade confirms: (a) the BTC-EUR fee, (b) BTC-EUR orders settle in EURC (`tradeQuoteCcy=EURC`), (c) the statement shows only BTC and EURC legs (a EUR leg could be taxable), (d) a ccxt order works on `eea.okx.com`. **Kraken is the fallback.** Re-check the EURC tax status after ~17 Dec (see [okx_venue_check.md](../research/research_notes/Crypto%20strategy%20community%20scan/okx_venue_check.md)) |
+| 1 | Venue | **Decided: OKX Europe, pair BTC-USDC** (account open). To confirm with a small test trade: the fee charged, that the statement shows only BTC and USDC legs (a EUR leg could be taxable), and a ccxt order on `eea.okx.com`. Kraken is the fallback. Re-check the stablecoin tax status after ~17 Dec |
 | 2 | Crypto pain limit | **−30%: decided** |
-| 3 | PEA / crypto split at go-live | The crypto book sits about half in EURC on average, so size it at **about twice** the bitcoin exposure you want |
+| 3 | PEA / crypto split at go-live | The crypto book sits about half in USDC on average, so size it at **about twice** the bitcoin exposure you want |
 
 ## 12. Expectations
 
@@ -256,7 +260,7 @@ must stay ≤ 0.5%/yr.
   costs.
 - **Long flat spells,** and large lags in bull years: Bitwise's trend ETF
   lagged bitcoin by about 97 points over three years to March 2026.
-- **EURC earns nothing:** MiCA bans interest on e-money tokens.
+- **USDC earns nothing:** MiCA bans interest on e-money tokens.
 - **The goal is to keep the book alive through −75% crashes,** not to
   out-earn bitcoin.
 
