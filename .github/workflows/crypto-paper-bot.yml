@@ -1,0 +1,68 @@
+# Daily paper bot for the frozen crypto rule (systematic/crypto/frozen_rules.json).
+# Public data only: no API key, no secrets, nothing traded. The record lives on
+# the `paper-record` branch so main stays clean. A failed run (for example
+# stale data) emails the repository owner: that is the alert.
+#
+# Note: GitHub runs scheduled workflows only from the default branch (main).
+
+name: crypto-paper-bot
+
+on:
+  schedule:
+    - cron: "15 0 * * *"   # 00:15 UTC daily, after the 00:05 UTC decision time
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: crypto-paper-bot
+  cancel-in-progress: false
+
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r systematic/requirements.txt
+
+      - name: Restore the record from the paper-record branch
+        run: |
+          mkdir -p paper-out
+          if git ls-remote --exit-code --heads origin paper-record > /dev/null; then
+            git fetch --depth=1 origin paper-record
+            git show FETCH_HEAD:paper/record.csv > paper-out/record.csv 2>/dev/null || true
+            git show FETCH_HEAD:paper/decisions.csv > paper-out/decisions.csv 2>/dev/null || true
+          fi
+
+      - name: Run the paper bot
+        run: python systematic/scripts/paper_bot.py --out-dir paper-out
+
+      - name: Save the record to the paper-record branch
+        run: |
+          cp -r paper-out /tmp/paper-out
+          git config user.name "crypto-paper-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin paper-record > /dev/null; then
+            git fetch --depth=1 origin paper-record
+            git checkout -B paper-record FETCH_HEAD
+          else
+            git checkout --orphan paper-record
+            git rm -rf --quiet .
+          fi
+          mkdir -p paper
+          cp /tmp/paper-out/*.csv paper/
+          git add paper
+          if git diff --cached --quiet; then
+            echo "Nothing new to record."
+          else
+            git commit -m "Paper record $(date -u +%Y-%m-%d)"
+            git push origin paper-record
+          fi

@@ -1,0 +1,329 @@
+# Rule spec v0.4 — one portfolio, seven sleeves, built in stages
+
+**Verification status:** ❌ Not validated. The rules are built around the
+evidence in [the research report](research/reports/Retail%20systematic%20strategy%20candidates.md),
+but none of it has been backtested by us yet. Every number is a **starting
+value to test**, not a result. ROADMAP Steps 4–5 decide what survives.
+
+This file is the single source of truth for the rules. Code implements exactly
+what is written here, and any change is made here first, with a version bump.
+Earlier versions are in git history; §10 lists what changed and why.
+
+---
+
+## 0. Assumptions
+
+| Assumption | Why it matters | Confirm in |
+|---|---|---|
+| You are a **France tax resident** investing in **euros** | Every result is measured in EUR, after French tax | ROADMAP Step 0 |
+| **Two accounts:** a PEA at a French broker with a free monthly plan (research/BROKERS.md) and a CTO at Interactive Brokers (automated from stage 3) | The PEA is tax-advantaged after 5 years and holds only PEA-eligible equity funds; its broker has no API, but its plan automates the monthly purchase. Everything else needs the CTO. Without a PEA, everything goes in the CTO using accumulating ETFs. | Step 0 |
+| You are an EU **retail client** | US-listed ETFs are blocked (PRIIPs). Live trading uses UCITS ETFs. Backtests use long-history index data. | — |
+| **Monthly decisions** | Low turnover means low cost and low tax, and the system tolerates a missed day. Short-horizon edges are the most decayed (research report). | — |
+| **Benchmarks:** an MSCI World tracker held in a PEA, after tax; and a EUR 60/40 portfolio | The PEA tracker is your real alternative, so it is the bar to clear | — |
+
+---
+
+## 1. Design principles
+
+1. **Harvest durable premia; don't predict.** Every sleeve earns a return that
+   has survived publication, costs, and testing in several countries: the
+   equity premium, momentum, quality, and trend.
+2. **Consistency comes from mixing things that fail at different times.**
+   Momentum suffers in violent rebounds. Trend suffers in sudden crashes. Bonds
+   suffer in inflation. Gold and managed futures tend to do well when the
+   others don't.
+3. **Few rules, few parameters.** Each extra rule is another chance to fit
+   noise. v0.2 has 7 rules and about 10 parameters, where v0.1 had 17.
+4. **The wrapper is a return source.** At 10% a year, a mature PEA is worth
+   about 1.8 points a year over a high-turnover CTO strategy (research report).
+   That is more than any tilt is likely to add.
+5. **The bot's real job is discipline:** following the rules through the
+   drawdowns where people usually quit. The behaviour gap costs a typical
+   investor about 1.2 points a year (research report).
+
+---
+
+## 2. Sleeves and target weights
+
+| # | Sleeve | Target | Role | Backtest series (long history) | Live instrument (confirm in Step 2) | Account |
+|---|---|---|---|---|---|---|
+| S1 | World equity | **35%** | The equity premium | MSCI World net, in EUR | PEA-eligible MSCI World ETF (e.g. WPEA, DCAM) | PEA |
+| S2 | Momentum tilt | **15%** | Return tilt | MSCI World Momentum (back-tested before its 2013 launch); AQR momentum factors as cross-check | MSCI World Momentum UCITS ETF (e.g. IS3R, XDEM) | CTO |
+| S3 | Quality tilt | **10%** | Return tilt that partly offsets momentum crashes | MSCI World Quality | MSCI World Quality UCITS ETF (e.g. IS3Q, XDEQ) | CTO |
+| S4 | Trend sleeve | **15%** | Crisis diversifier for long bear markets | S4a: AQR Time-Series Momentum (from 1985) and SG Trend (from 2000), net of fees · S4b: equity, Treasury, gold and commodity indexes | **S4a** managed-futures fund (iMGP DBi, EUR-hedged) *or* **S4b** an unlevered long-only trend basket. Chosen by §2.2. | CTO |
+| S5 | US Treasuries 7–10y, EUR-hedged | **10%** | Hedge against deflationary crashes | 7–10y Treasury index, hedged to EUR | $ Treasury 7–10y UCITS ETF, EUR-hedged | CTO |
+| S6 | Gold | **5%** | Hedge against inflation and panic | Gold price in EUR | Physical gold ETC (French tax treatment still to confirm) | CTO |
+| S7 | EUR cash | **10%** | Dry powder, and where filtered sleeves park | EUR short rate | EUR overnight-rate ETF (e.g. XEON) in the CTO; plain cash in the PEA | both |
+
+That is 60% equities, 15% trend sleeve, 10% bonds, 5% gold and 10% cash at
+target. When the filters are off, the equity share can drop to zero.
+
+### 2.1 Stages: the portfolio grows into its sleeves
+
+A small portfolio cannot hold seven sleeves cheaply. Spreading a few hundred
+euros of monthly contributions over seven sleeves means orders under €100,
+and at IBKR's €1.25 minimum that costs well over 1% per trade. So the sleeves open in stages, as the
+portfolio grows:
+
+| Stage | Portfolio value | Holds | Why |
+|---|---|---|---|
+| 1 | under €10k | **S1 only**: the PEA world tracker, 100% | One order a month; every euro inside the tax wrapper; nothing to get wrong |
+| 2 | €10k–€30k | S1, plus **S2 momentum (15%)** and **S4 trend sleeve (10%)** in a CTO | The best-evidenced return tilt and the best diversifier, each at least €1,000 |
+| 3 | €30k and up | The full §2 targets: adds S3 quality, S5 Treasuries (R4), S6 gold (R3) and S7 cash | Each sleeve at least ~€1,500 |
+| 4 | €100k and up | Adds split dates (R1 with 4 tranches) and opens the research sleeve (§4) | Timing luck and self-built portfolios only matter when orders are large |
+
+**Moving between stages uses only new money.** Money cannot move from the PEA
+to the CTO without a withdrawal, and a withdrawal before 5 years closes the
+PEA. So new sleeves are funded by routing monthly contributions to them (R6),
+and the PEA's share of the portfolio falls gradually. Nothing is ever sold in
+the PEA to fund the CTO.
+
+**Recurring costs stay below 0.5% of the portfolio a year.** On a €5,000
+portfolio, a €16/month market-data subscription would cost 3.8% a year, and a
+€5/month server 1.2%. So stages 1–2 run on free end-of-day data on your own computer;
+paid data and a server wait for stage 3.
+
+### 2.2 The trend sleeve: two candidates, because of leverage
+
+Your conditions for S4 are that it must be **profitable** and use **no
+leverage**. Managed-futures funds fail the second condition if it is read
+strictly. They trade futures whose total exposure is usually larger than the
+money in the fund, which is leverage inside the fund. You still can never lose
+more than you invest, and you never get a margin call. So there are two
+candidates, and both are tested:
+
+| | S4a · Managed-futures fund | S4b · Unlevered trend basket |
+|---|---|---|
+| What | One UCITS ETF (iMGP DBi, EUR-hedged, 0.75%) following trends in ~50 futures markets, long or short | Four UCITS ETFs, equal weight: world equity, Treasuries 7–10y, gold, broad commodities. Each is held only while above its 10-month average; otherwise cash |
+| Leverage | Inside the fund; none for you | None anywhere |
+| In a long bear market | Can profit, by shorting what falls (2022: +27% for the SG Trend index) | Can't short. Steps aside to cash, and may hold whatever is still rising (commodities in 2022) |
+| Evidence | Long, but halved after publication; multi-year flat stretches | Faber-style trend timing: cuts drawdowns, costs return in bull markets |
+
+**Choice rule:** a candidate enters only if it passes G5's profitability test
+(ROADMAP Step 5). S4a is used **only if you accept leverage inside the fund**,
+a decision you make after seeing both results. Otherwise S4b is used if it
+passes, or the sleeve's weight goes to S1 if neither passes.
+
+---
+
+## 3. Rules
+
+**R1 · Monthly decisions, split across four dates from stage 4.** Below €100k,
+there is one decision date a month (the first trading day), so orders stay
+large enough to keep commissions low. From stage 4, divide the portfolio into
+4 equal tranches. Tranche *k* is reviewed on the first trading day on or after
+the 1st, 8th, 15th and 22nd of each month respectively, using the previous
+close. Results from a single rebalance date are mostly luck: shifting Faber's
+rule by one day moved its max drawdown between 19% and 30% (research report).
+Splitting the dates removes most of that luck. Turnover is the same; you just
+make more, smaller orders.
+
+**R2 · Equity trend filter.** At each review, if MSCI World closes **above its
+10-month moving average**, the tranche holds its targets in S1, S2 and S3.
+Otherwise those three sleeves move to S7 cash. One signal drives all three:
+they are highly correlated, and one signal means fewer parameters and fewer
+whipsaws. Inside the PEA, switching between equity and cash is untaxed.
+
+*Stages 1–2:* the filter is **off by default**, and Test 1 decides whether to
+switch it on. While the portfolio is small compared with the contributions,
+a crash mostly helps you, because new money buys cheaply; a filter would park
+that money in cash and buy back higher. Protection becomes valuable once the
+portfolio is worth several years of contributions. That is a hypothesis, and
+Test 1 checks it with the monthly contributions simulated.
+
+**R3 · Gold trend filter.** Hold S6 while gold (in EUR) is above its 10-month
+average; otherwise move it to cash.
+
+**R4 · Bonds must beat cash.** Hold S5 only while its 12-month total return
+beats cash's 12-month return; otherwise move it to cash. In 2022, strategies
+that applied this rule kept drawdowns to about −8%, against −17% for those
+that held long bonds regardless (research report).
+
+**R5 · The trend sleeve follows its own rules.** S4a is always held and only
+rebalanced (R6): it is already a trend strategy, so filtering it would double
+up. S4b applies a 10-month filter to each of its four assets, with cash when
+off.
+
+**R6 · Rebalancing.** At each review, any sleeve outside its band gets traded
+back to target. The band is **5 points absolute or 25% of target**, whichever
+is hit first. There is also a full rebalance in January. **New money and
+distributions go to the most underweight sleeve first**, which rebalances
+without selling, so without realising taxable gains in the CTO. Balance
+between the PEA and the CTO is managed only this way (§2.1).
+
+**R7 · Execution.** Orders go in at the next session after the signal, as
+marketable limits at the last price ±0.5% (DAY orders), re-placed for up to 3
+sessions if unfilled, then an alert. **There are no per-position stop
+losses:** the monthly filters are the exits. Stops on ETFs add whipsaw, and
+volatility-managed overlays generally failed out of sample (Cederburg et al.,
+research report).
+
+---
+
+## 4. Research sleeve (replaces v0.1's Engine 2)
+
+The research sleeve is **0% by default, with a 10% maximum**, taken pro rata
+from S1–S3. It is where higher-return ideas can earn a place, but only through
+the funnel in §7, followed by paper trading.
+
+Candidate queue, in order:
+
+1. **Self-built European large-cap momentum, inside the PEA.** The
+   post-publication evidence is strongest here (European long-short momentum:
+   +11.5% a year since 2015). It only makes sense above roughly €100k, because
+   of IBKR's €1.25 minimum commission, and it needs point-in-time European
+   stock data.
+2. **Sector-ETF rotation** (v0.1 Setup A), tested head-to-head against S2.
+3. **RSI(2) pullbacks** re-tested on European closing prices. The
+   post-publication evidence says this probably fails.
+
+---
+
+## 5. Portfolio-wide limits and kill switch
+
+These live in the execution layer and are modelled on
+`src/paper_trading/risk_gate.py` (LESSONS B2–B5).
+
+**Always:**
+- No margin, no shorting, no options, no borrowing: you can never lose more
+  than you put in. Leverage inside a fund is allowed only if you choose S4a
+  (§2.2).
+- Max 12 orders per day.
+- Max single order: 10% of the portfolio. Max single ETF: 40%.
+- Single stocks (research sleeve only): max 5% each.
+
+**Pre-trade checks.** All run before an order exists; any failure means no
+order and an alert:
+- **Fresh data:** the last bar is the last completed session.
+- **Sane data:** no close moved more than 25% without a recorded split.
+- **Sane price:** the limit is within 3% of the last close.
+- **Reconciled:** broker positions and cash match the internal ledger.
+- **Explained P&L:** the portfolio's daily change matches holdings × prices to
+  within 0.5%.
+
+**Kill switch.** Latched, persisted, and reset by a human only. While latched:
+no new buys, but sells still work. Triggers:
+- any unhandled exception in the daily run
+- a reconciliation or explained-P&L mismatch
+- 2 or more broker rejections in one day
+- a failed data check
+- portfolio down 4% or more in one day (pause and review)
+
+**Pain limit.** If the portfolio's drawdown from its peak exceeds the Step 0
+limit (default −20%), everything stops for a review. That is not a forced
+sale; it is a human decision, made with the backtest's distribution in front
+of us.
+
+---
+
+## 6. Timing
+
+The **daily job** runs after the US close (17:00 New York, 23:00 Paris). It
+fetches data, runs checks, reconciles, and sends a summary. It only **trades
+on the tranche dates** (R1). UCITS orders execute at the next European
+session; PEA orders are sent to you as instructions.
+
+**No lookahead.** A signal from day *t*'s close fills on day *t+1* at the
+earliest, and the backtest uses the European session's prices for UCITS
+lines.
+
+---
+
+## 7. The evidence funnel: rules for adding or changing anything
+
+Any new sleeve, rule or parameter has to pass all of these, and every trial
+goes in `research/experiments.csv`:
+
+| Step | Rule |
+|---|---|
+| Admit | Only families that replicate across studies and countries: momentum, value, quality, low-risk, time-series trend. No size, seasonality, microcap or intraday signals. |
+| Haircut first | Plan on 40–60% of the published premium. Subtract costs (at least 1% of monthly turnover), 0.57% a year of timing luck for single-date tests, and the 31.4% PFU on realised gains. |
+| Trial budget | At most ~10 configurations per family, counted honestly, quick looks included. |
+| History | Years of data ≥ 2·ln(trials)/Sharpe². That is about 18 years for 10 trials at a Sharpe of 0.5, so use index and factor histories, not ETF histories. |
+| Significance | t ≥ 3 for a new signal (t ≈ 2 for an established family confirmed elsewhere). Deflated Sharpe ≥ 0.95. |
+| Hold-out | The last ~5 years plus one region, looked at **once**. |
+| Costs | Everything also run at 2× costs. |
+| Plausibility | A backtest Sharpe above ~1 for a long-only equity tilt, or more than 20–25% a year, is a red flag, not a result. |
+
+---
+
+## 8. Parameters and pre-registered variants
+
+| Parameter | Default | Variants tested (and nothing else) | Test |
+|---|---|---|---|
+| `equity_filter` | Price > 10-month average | 12-month return > cash | 1 |
+| `filter_scope` | Full sleeve | Half sleeve (filter moves only 50% to cash) | 1 |
+| `bond_rule` | On | Off (always hold S5) | 1 |
+| `treasury_hedge` | EUR-hedged | Unhedged | 1 |
+| `crash_ladder` | Off | On: cash buys equity in thirds at −20/−30/−40% from the peak, once price is back above its 50-day average | 1 |
+| `tranches` | 1 below €100k, 4 above | 1 vs. 4 at stage 4 (to measure timing luck, not to choose) | 1 |
+| `filter_in_accumulation` | Off in stages 1–2 | On, simulated with monthly contributions | 1 |
+| `stage_thresholds` | €10k / €30k / €100k | — fixed (set by order-size arithmetic, not tuned) | — |
+| `s4_type` | Decided by §2.2 | S4a vs. S4b | 3 |
+| `s4_weight` | 15% | 0, 10, 20% | 3 |
+| `momentum_sleeve` | MSCI World Momentum ETF | Sector rotation; GEM-style regional momentum | 2 |
+| `quality_weight` | 10% | 0% | 2 |
+| `bands` | 5 pts / 25% | — fixed | — |
+
+That is about 8 trials for Test 1, 3 for Test 2 and 3 for Test 3. Each family
+stays inside the §7 budget.
+
+---
+
+## 9. What it should do in each market (hypotheses to test, not results)
+
+| Market | Expected behaviour | What makes it work, or hurt |
+|---|---|---|
+| Strong bull market (2017, 2021, 2023–24) | Trails 100% equity by a few points a year | 40% is not in equities; managed futures and gold may be flat |
+| Slow bear market (2000–02, 2008, 2022) | Much smaller loss than equities | The filter moves equity to cash within months; S4a historically gained (2022: +27%), while S4b moves to cash and holds what still rises; bonds held only if beating cash |
+| Sudden crash and rebound (2020, April 2025) | A loss and a late re-entry | The filter whipsaws and momentum lags the rebound. Quality cushions it, and the crash-ladder variant is designed for this case. |
+| Inflation shock (2022) | Bonds out via R4 | Gold, commodities (S4b) or managed futures (S4a) carry the defensive load |
+| Sideways or choppy market | A slow bleed from whipsaws | Split dates (R1) reduce it; this is the price of crash protection |
+
+Step 4 replaces this table with backtested numbers per regime.
+
+---
+
+## 10. Changes
+
+### v0.3 → v0.4: the trend sleeve under a strict no-leverage rule
+
+| v0.3 | v0.4 | Why |
+|---|---|---|
+| S4 = managed-futures fund | S4a managed-futures fund *or* S4b unlevered trend basket (§2.2) | Your rule is "profitable and no leverage"; managed-futures funds use leverage internally |
+| No-leverage rule at portfolio level only | No borrowing anywhere; fund-internal leverage only by explicit choice | Makes the rule match what you meant |
+
+### v0.2 → v0.3: sized for a small, growing portfolio
+
+| v0.2 | v0.3 | Why |
+|---|---|---|
+| All seven sleeves from day one | Sleeves open in four stages by portfolio value (§2.1) | Small orders pay 1% or more in minimum commissions (€1.25 on a €125 order) |
+| Four split dates a month | One date below €100k | Splitting small orders multiplies minimum fees |
+| Trend filter always on | Off in stages 1–2 unless Test 1 says otherwise | While contributions dominate, crashes are buying opportunities |
+| Implicit cross-account rebalancing | New money only; never withdraw from the PEA | A withdrawal before 5 years closes the PEA |
+| Paid data and a server assumed | Recurring costs capped at 0.5% a year | €16/month of data is 3.8% a year on €5,000 |
+
+### v0.1 → v0.2
+
+| v0.1 | v0.2 | Why (research report) |
+|---|---|---|
+| Healthcare, staples and Berkshire (30 of 50 equity points) | Broad world equity plus momentum and quality tilts | The defensive slice was a minimum-volatility bet, a style that lagged ~3.3 pts/yr over 2015–25 |
+| QQQ growth bucket | Dropped | The same hindsight problem the four-stock pick had, at index level |
+| Treasuries always held | Held only while beating cash (R4) | Bonds failed as a defence in 2022 |
+| Swing engine: sector rotation + RSI(2), daily, ATR stops, VIX sizing | Replaced by monthly sleeves; ideas moved to the research sleeve (0% by default) | Short-horizon edges are the most decayed and most taxed; RSI(2)'s post-publication Sharpe is 0.68 vs 0.87 for buy-and-hold |
+| Crash ladder on by default | A pre-registered variant only | No published evidence; four episodes can't validate it |
+| "Never chase" limits at or below the prior close | Marketable limits ±0.5% | No supporting evidence; executing late "significantly hurt" TAA results |
+| One rebalance date | Four split dates | Timing luck |
+| 17 parameters with ranges to sweep | ~10, with pre-registered variants | Trial budget and minimum backtest length |
+| Managed futures absent | 15% sleeve | The one genuine diversifier available as a UCITS ETF |
+
+---
+
+## 11. What would change the status
+
+| Gate (ROADMAP) | Evidence required | Status |
+|---|---|---|
+| G4 · Portfolio backtest (Tests 1 and 3) | After-tax EUR results vs. the PEA world tracker and 60/40 across 1990s–2026, including 2000–02, 2008, 2020 and 2022 | ❌ not run |
+| G5 · Momentum sleeve (Test 2) | Positive net excess return in the full history and in the held-out region | ❌ not run |
+| G7 · Shadow run | Bot proposals match the backtest 100% | ❌ not run |
+| G8 · Automation | Automated orders match the proposals; costs ≤ 1.5× the model | ❌ not run |

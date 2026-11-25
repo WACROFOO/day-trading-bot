@@ -6,6 +6,10 @@ An intraday trading bot built from scratch. Early stage — architecture and str
 
 🚧 Early stage. The paper-trading platform runs; the automated bot does not exist yet.
 
+**New:** a separate, fresh-start systematic strategy project lives in
+[`systematic/`](systematic/README.md). It builds on the lessons from this one
+and changes nothing here.
+
 ## Paper trading platform
 
 A fully local, free manual paper-trading platform for the Ross Cameron

@@ -1,0 +1,24 @@
+# The repo is public. Trade logs, broker statements, account details and
+# capital amounts stay on your machine.
+/private/
+
+# Downloaded market data and runtime databases are regenerated, never committed.
+/data/
+*.db
+
+# The experiment log is research output, not personal data: keep it tracked
+# (the root .gitignore ignores *.csv everywhere).
+!research/experiments.csv
+
+# The instrument map is configuration, not data: keep it tracked.
+!config/instruments.csv
+
+# Test runner cache
+.pytest_cache/
+
+# Research results are documentation without personal data: keep them
+# tracked (the root .gitignore ignores results/ everywhere).
+!research/results/
+
+# Local paper-bot output; the real record lives on the paper-record branch.
+/paper/
