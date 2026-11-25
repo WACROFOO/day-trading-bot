@@ -87,7 +87,7 @@ uptrend. Its first real test is a re-entry.
 
 | Risk | Control |
 |---|---|
-| Market drawdown | Trend exits plus volatility sizing. **Crypto pain limit** (you decide; default −30%): breaching it stops the bot for review |
+| Market drawdown | Trend exits plus volatility sizing. **Crypto pain limit −30%** (decided 25 Nov 2026): breaching it stops the bot for review |
 | Leverage | Spot only, never more than 100% invested |
 | Exchange failure | MiCA-licensed exchange only; only the crypto book on it; a dedicated sub-account |
 | Key abuse | Trade-only API keys (no withdrawals), locked to the bot's IP address, held in `.env` only. **The bot halts on any order or trading pair it did not send itself**: a trade-only key can still be abused, as the 3Commas leak showed |
@@ -244,8 +244,8 @@ must stay ≤ 0.5%/yr.
 
 | # | Decision | Default |
 |---|---|---|
-| 1 | Venue | Route B (MiCA exchange + EURC) if swaps stay tax-neutral after the budget; otherwise compare with Route A |
-| 2 | Crypto pain limit | −30% |
+| 1 | Venue | Route B (MiCA exchange + EURC) if swaps stay tax-neutral after the budget; otherwise compare with Route A. **Candidate under review: OKX Europe** (owner's preference) |
+| 2 | Crypto pain limit | **−30%: decided** |
 | 3 | PEA / crypto split at go-live | The crypto book sits about half in EURC on average, so size it at **about twice** the bitcoin exposure you want |
 
 ## 12. Expectations
