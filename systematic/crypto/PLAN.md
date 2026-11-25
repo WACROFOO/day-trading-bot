@@ -106,6 +106,7 @@ uptrend. Its first real test is a re-entry.
 | Kraken Pro | 0.40% / 0.80% (since 9 July 2026) | Official |
 | Coinbase Advanced | 0.25% / 0.50% (EU, reported since September 2026) | Press only |
 | Bitstamp | ~0.30% / 0.40% | Unconfirmed |
+| **OKX Europe** (Malta) | **0.10% / 0.20%** (EU spot account, since 25 Sep 2026); free SEPA | Official notice; the BTC-EUR fee group still needs confirming |
 
 All four (Kraken, Coinbase, Bitstamp, Bitpanda) are MiCA-licensed for
 France; Binance is not. The cost model is therefore 0.40% maker, a 0.80%
@@ -244,7 +245,7 @@ must stay ≤ 0.5%/yr.
 
 | # | Decision | Default |
 |---|---|---|
-| 1 | Venue | Route B (MiCA exchange + EURC) if swaps stay tax-neutral after the budget; otherwise compare with Route A. **Candidate under review: OKX Europe** (owner's preference) |
+| 1 | Venue | **OKX Europe preferred**, if a small test trade confirms: (a) the BTC-EUR fee, (b) BTC-EUR orders settle in EURC (`tradeQuoteCcy=EURC`), (c) the statement shows only BTC and EURC legs (a EUR leg could be taxable), (d) a ccxt order works on `eea.okx.com`. **Kraken is the fallback.** Re-check the EURC tax status after ~17 Dec (see [okx_venue_check.md](../research/research_notes/Crypto%20strategy%20community%20scan/okx_venue_check.md)) |
 | 2 | Crypto pain limit | **−30%: decided** |
 | 3 | PEA / crypto split at go-live | The crypto book sits about half in EURC on average, so size it at **about twice** the bitcoin exposure you want |
 
