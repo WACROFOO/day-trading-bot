@@ -15,3 +15,7 @@
 
 # Test runner cache
 .pytest_cache/
+
+# Research results are documentation without personal data: keep them
+# tracked (the root .gitignore ignores results/ everywhere).
+!research/results/

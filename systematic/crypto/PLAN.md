@@ -182,7 +182,7 @@ The only unseen data left is the future.**
    spent trials. The candidate list is **frozen**: primary, C1 benchmark, and
    two variants. The honest trial count is **10**, at the budget limit, so
    nothing else gets added.
-2. **CG1, the backtest:** run on data up to November 2024, net of the
+2. **CG1, the backtest — PASSED on 25 Nov 2026** ([results](../research/results/crypto_cg1.md)): drawdown ratio 0.36 (2015–20) and 0.27 (2021–23) against the 0.5 bar; still passes at 2× costs. The deflated Sharpe (1.00) clears its bar easily, but it only shows the Sharpe is above zero, not that the rule beats buy-and-hold. Run on data up to November 2024, net of the
    §5 cost model, with results by window.
    - Primary test: **drawdown under half of buy-and-hold's** in each window.
      That is the large, consistent effect; the Sharpe gain (+0.16 to +0.19)
@@ -239,7 +239,8 @@ must stay ≤ 0.5%/yr.
 | ✅ | Community scan, ranking, rule frozen, data built, reconciliation | 25 Nov 2026 |
 | ▶ | **Forward record running** | from 26 Nov 2026 |
 | 1 | Re-check the French budget (stablecoin swaps); test trade on OKX (§11) | after ~17 Dec 2026 |
-| 2 | Engine additions (§7); CG1 on data to Nov 2024 | Dec 2026 – Jan 2027 |
+| ✅ | CG1 on data to Nov 2024: **passed** | 25 Nov 2026 |
+| 2 | Engine additions (§7): contributions, OKX fees, EUR view, tax routes | Dec 2026 – Jan 2027 |
 | 3 | Bot: `ccxt` adapter, runner, risk, alerts; fault-injection tests | Jan – Feb 2027 |
 | 4 | Engineering gate (8 weeks of paper trading) | Feb – Apr 2027 |
 | 5 | Small live trading (CG4) | from ~Apr 2027 |
