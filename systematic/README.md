@@ -61,9 +61,11 @@ copied and adapted, so the two projects can never break each other.
 
 ## Status
 
-**Development focus: the crypto track** ([crypto/PLAN.md](crypto/PLAN.md)):
-long-or-flat trend on BTC and ETH with volatility targeting, spot only, no
-leverage. Phase 0 (your decisions) comes first.
+**Development focus: the crypto track** ([crypto/PLAN.md](crypto/PLAN.md), v0.2):
+a long-or-flat bitcoin trend ensemble with volatility targeting, spot only,
+no leverage, chosen from the community scan. **The rule was frozen on 25 Nov
+2026, and its forward record runs from 26 Nov 2026**
+([crypto/frozen_rules.json](crypto/frozen_rules.json)).
 
 **Stocks track:** stage 1 (the PEA world tracker via the broker's free monthly
 plan) runs on its own. The data layer is built and passes its checks (81/81).

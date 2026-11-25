@@ -81,6 +81,13 @@ CATALOG: dict[str, Spec] = {spec.name: spec for spec in [
     # --- commodities --------------------------------------------------------
     Spec("wb_prices", lambda: src.fetch_world_bank("Monthly Prices"),
          "World Bank Pink Sheet prices, monthly AVERAGES, USD, 1960+ (gold)", "World Bank"),
+    # --- crypto: daily candles, every UTC calendar day ------------------------
+    Spec("btceur_daily", lambda: src.fetch_bitstamp_daily("btceur", start="2016-01-01"),
+         "Bitcoin in EUR, daily OHLC (UTC days), 2016+", "Bitstamp", frequency="daily"),
+    Spec("btcusd_daily", lambda: src.fetch_bitstamp_daily("btcusd", start="2011-01-01"),
+         "Bitcoin in USD, daily OHLC (UTC days), 2011+", "Bitstamp", frequency="daily"),
+    Spec("etheur_daily", lambda: src.fetch_bitstamp_daily("etheur", start="2017-01-01"),
+         "Ether in EUR, daily OHLC (UTC days), 2017+ (variant V1)", "Bitstamp", frequency="daily"),
     Spec("wb_indices", lambda: src.fetch_world_bank("Monthly Indices"),
          "World Bank commodity price indices, monthly averages, 2010=100, 1960+", "World Bank"),
 ]}

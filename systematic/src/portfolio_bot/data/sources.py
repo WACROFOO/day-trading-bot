@@ -36,6 +36,7 @@ AQR_URL = "https://www.aqr.com/-/media/AQR/Documents/Insights/Data-Sets/{name}.x
 FRED_URL = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}"
 ECB_URL = "https://data-api.ecb.europa.eu/service/data/{flow}/{key}?format=csvdata"
 WORLD_BANK_PAGE = "https://www.worldbank.org/en/research/commodity-markets"
+BITSTAMP_OHLC_URL = "https://www.bitstamp.net/api/v2/ohlc/{pair}/?step=86400&limit=1000&start={start}"
 
 _KF_DATE = re.compile(r"^\d{6}$")
 _WB_DATE = re.compile(r"^\d{4}M\d{2}$")
@@ -253,3 +254,60 @@ def world_bank_monthly_url(page_html: bytes) -> str:
 def fetch_world_bank(sheet: str = "Monthly Prices") -> pd.DataFrame:
     url = world_bank_monthly_url(http_get(WORLD_BANK_PAGE))
     return parse_world_bank(http_get(url), sheet=sheet)
+
+
+# --------------------------------------------------------------------------
+# Bitstamp daily candles (crypto; every UTC calendar day)
+# --------------------------------------------------------------------------
+
+def parse_bitstamp_ohlc(payload: bytes) -> pd.DataFrame:
+    """Bitstamp OHLC JSON -> daily candles indexed by their UTC start date.
+
+    A daily candle dated D covers D 00:00 to D+1 00:00 UTC, so its close is
+    known only at D+1 00:00. Use ``completed_days`` before computing signals.
+    """
+    data = json.loads(payload)
+    rows = data.get("data", {}).get("ohlc", [])
+    if not rows:
+        return pd.DataFrame(columns=["open", "high", "low", "close", "volume"], dtype=float)
+    df = pd.DataFrame(rows)
+    idx = pd.to_datetime(df["timestamp"].astype("int64"), unit="s", utc=True).dt.tz_localize(None)
+    out = df[["open", "high", "low", "close", "volume"]].astype(float)
+    out.index = pd.DatetimeIndex(idx).normalize()
+    out = out.sort_index()
+    return out[~out.index.duplicated(keep="last")]
+
+
+def completed_days(candles: pd.DataFrame, now_utc: pd.Timestamp | None = None) -> pd.DataFrame:
+    """Drop the candle of the UTC day still in progress (its close isn't final)."""
+    now = pd.Timestamp.now(tz="UTC") if now_utc is None else pd.Timestamp(now_utc)
+    if now.tzinfo is not None:
+        now = now.tz_convert("UTC").tz_localize(None)
+    return candles[candles.index + pd.Timedelta(days=1) <= now]
+
+
+def fetch_bitstamp_daily(pair: str, start: str = "2011-01-01") -> pd.DataFrame:
+    """All daily candles for a Bitstamp pair, paging forward up to today.
+
+    Each request returns at most 1,000 days counted from ``start``, including
+    days before the pair was listed, so a short page does not mean the end of
+    the data. Paging continues until the cursor passes the current time.
+    """
+    step = 86400
+    cursor = int(pd.Timestamp(start, tz="UTC").timestamp())
+    now = int(pd.Timestamp.now(tz="UTC").timestamp())
+    frames = []
+    while cursor <= now:
+        page = parse_bitstamp_ohlc(http_get(BITSTAMP_OHLC_URL.format(pair=pair, start=cursor)))
+        if page.empty:
+            cursor += 1000 * step  # window entirely before listing: jump ahead
+            continue
+        frames.append(page)
+        next_cursor = int(pd.Timestamp(page.index.max(), tz="UTC").timestamp()) + step
+        if next_cursor <= cursor:
+            break
+        cursor = next_cursor
+    if not frames:
+        raise ValueError(f"Bitstamp returned no candles for {pair}")
+    out = pd.concat(frames).sort_index()
+    return out[~out.index.duplicated(keep="last")]
