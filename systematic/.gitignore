@@ -19,3 +19,6 @@
 # Research results are documentation without personal data: keep them
 # tracked (the root .gitignore ignores results/ everywhere).
 !research/results/
+
+# Local paper-bot output; the real record lives on the paper-record branch.
+/paper/

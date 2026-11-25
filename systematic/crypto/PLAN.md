@@ -219,6 +219,7 @@ capital.
 |---|---|
 | `crypto.rules` | **Built:** the frozen rule, C1, simulation |
 | `scripts/crypto_signal.py` | **Built:** today's decision, the forward record, the reconciliation |
+| `crypto.paper` + `scripts/paper_bot.py` | **Built:** the daily paper bot (public data, no API key). It recomputes the forward record and logs each day's decision with live OKX quotes; it runs daily via GitHub Actions (`.github/workflows/crypto-paper-bot.yml`) and writes to the `paper-record` branch |
 | `broker.ccxt_adapter` | Exchange connection via `ccxt`: balances, maker-first orders, fills; paper mode |
 | `runner.crypto` | 00:05 UTC daily job: fetch → freshness check → signal → size → reconcile → orders → journal → alert |
 | `risk` | Kill switch, pain limit, USDC depeg, unexpected-order halt |
