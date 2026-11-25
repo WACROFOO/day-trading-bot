@@ -86,6 +86,8 @@ CATALOG: dict[str, Spec] = {spec.name: spec for spec in [
          "Bitcoin in EUR, daily OHLC (UTC days), 2016+", "Bitstamp", frequency="daily"),
     Spec("btcusd_daily", lambda: src.fetch_bitstamp_daily("btcusd", start="2011-01-01"),
          "Bitcoin in USD, daily OHLC (UTC days), 2011+", "Bitstamp", frequency="daily"),
+    Spec("ethusd_daily", lambda: src.fetch_bitstamp_daily("ethusd", start="2017-01-01"),
+         "Ether in USD, daily OHLC (UTC days), Aug 2017+ (robustness check)", "Bitstamp", frequency="daily"),
     Spec("etheur_daily", lambda: src.fetch_bitstamp_daily("etheur", start="2017-01-01"),
          "Ether in EUR, daily OHLC (UTC days), 2017+ (variant V1)", "Bitstamp", frequency="daily"),
     Spec("wb_indices", lambda: src.fetch_world_bank("Monthly Indices"),
