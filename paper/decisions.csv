@@ -1,0 +1,2 @@
+decision_date,based_on_close,run_utc,primary,v1_btc,v1_eth,v2_weekly,c1_sma200,btc_close,eth_close,quote_source,btc_usdc_bid,btc_usdc_ask,eth_usdc_bid,eth_usdc_ask
+2026-11-25,2026-11-24,2026-11-25 13:23,0.0,0.0,0.0,0.0,0.0,59743.5,1677.53,eea.okx.com,58758.1,58758.2,1648.06,1648.07
