@@ -50,6 +50,7 @@ not others is in the
 | [STRATEGY.md](STRATEGY.md) | The rule spec (v0.4): every rule as a parameter we can backtest, plus the evidence funnel for adding new ones. |
 | [LESSONS.md](LESSONS.md) | What we carry over from the Ross project: order handling, errors, data, process. |
 | [research/BROKERS.md](research/BROKERS.md) | Which broker for the PEA and the CTO, with fees, protection and the obligations of a foreign account. |
+| [crypto/PLAN.md](crypto/PLAN.md) | The crypto track: angles, edge map, the strategy to test, risk, venue and tax, data, gates and timeline. |
 | [ENGINE.md](ENGINE.md) | The backtest engine's design: how your real plan (contributions, two accounts, fees, French tax) is simulated, and the milestones to build it. |
 | [DATA.md](DATA.md) | Where every number comes from: sources, sleeve proxies, their weak points, and the data checks. |
 | [research/](research/reports/Retail%20systematic%20strategy%20candidates.md) | The strategy-candidate research: ranked candidates, evidence, French costs and tax, and the selection method. |
@@ -60,7 +61,14 @@ copied and adapted, so the two projects can never break each other.
 
 ## Status
 
-**Step 2 of 9.** The plan, the research and rule spec v0.4 are written. The data layer is built and passes its checks (81/81); the backtest engine (Step 3) is next.
+**Development focus: the crypto track** ([crypto/PLAN.md](crypto/PLAN.md)):
+long-or-flat trend on BTC and ETH with volatility targeting, spot only, no
+leverage. Phase 0 (your decisions) comes first.
+
+**Stocks track:** stage 1 (the PEA world tracker via the broker's free monthly
+plan) runs on its own. The data layer is built and passes its checks (81/81).
+The backtest engine (ENGINE.md) is being made bar-agnostic so that it serves
+both tracks.
 
 **Verification status:** ❌ Not validated. Every number in this folder is a
 starting value to test, not a result.

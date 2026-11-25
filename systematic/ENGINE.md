@@ -8,6 +8,11 @@ have felt like?** It feeds Gates G4 (Tests 1 and 3) and G5 (Test 2).
 This document is the plan. Code follows it milestone by milestone (§9), and
 each milestone ships with its tests.
 
+> **Update (25 Nov 2026):** the engine is built **bar-agnostic** (daily or
+> monthly), so it serves both the stocks track and the crypto track. The
+> crypto-specific pieces (24/7 calendar, maker/taker fees, the French crypto
+> tax regime) are listed in [crypto/PLAN.md](crypto/PLAN.md) §7.
+
 ---
 
 ## 1. Design principles

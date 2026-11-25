@@ -1,5 +1,10 @@
 # Roadmap — from zero to a live system, step by step
 
+> **Priority update (25 Nov 2026):** development now focuses on the crypto
+> track, which has its own phases and gates in [crypto/PLAN.md](crypto/PLAN.md).
+> On this stocks track, stage 1 (the PEA monthly plan) keeps running with no
+> development needed. Steps 3–5 resume once the shared engine exists.
+
 Each step lists **what we build** (mostly me, in code), **what you do**, and a
 **gate**: the test that has to pass before the next step starts. If a gate
 fails, the step says what happens next. Sometimes the answer is "this part of
