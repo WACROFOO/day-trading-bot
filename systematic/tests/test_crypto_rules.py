@@ -160,3 +160,28 @@ def test_bitstamp_fetch_pages_past_short_first_page(monkeypatch):
     df = src.fetch_bitstamp_daily("btceur", start="2025-12-31")
     assert len(df) == 10 and df.index.is_unique
     assert df.index[-1] == pd.Timestamp("2026-01-10")
+
+
+# --------------------------------------------------------------------------
+# pre-registered variants
+# --------------------------------------------------------------------------
+
+def test_variant_definitions_match_frozen_file():
+    spec = json.loads(rules.FROZEN_RULES_JSON.read_text())["variant_rules"]
+    assert spec["v1_btc_eth_equal_risk"]["max_exposure_per_asset"] == 0.5
+    assert spec["v1_btc_eth_equal_risk"]["target_vol_per_asset"] == 0.125
+    assert spec["v2_weekly_rebalance_monday"]["decision_weekday_of_close"] == "Sunday"
+
+
+def test_v1_never_exceeds_half_per_coin_or_full_in_total():
+    up = daily(100 * 1.0005 ** np.arange(500))
+    e = rules.v1_btc_eth_exposures(up, up * 0.1).dropna()
+    assert (e.max() <= 0.5).all() and (e.sum(axis=1) <= 1.0).all()
+
+
+def test_v2_changes_exposure_only_after_sunday_closes():
+    rng = np.random.default_rng(3)
+    close = daily(100 * np.cumprod(1 + rng.normal(0.002, 0.03, 700)))
+    e = rules.v2_weekly_exposure(close).dropna()
+    changed = e[e.diff().fillna(0) != 0]
+    assert len(changed) > 0 and all(d.dayofweek == 6 for d in changed.index)

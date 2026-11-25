@@ -60,7 +60,23 @@
     "max_cost_vs_model": 1.5,
     "max_drawdown_vs_btc_in_declines_of_20pct_or_more": 0.5
   },
-  "revision": 2,
-  "revision_note": "Re-frozen 2026-11-25 10:55 UTC, before the forward record began: risk-off asset USDC (owner's choice on OKX Europe), so the signal now runs on BTC/USD to match the traded pair BTC/USDC; cost model set to OKX EU spot fees. This is exactly the configuration already logged as ext-20261125-06 (BTC/USD), so the trial count is unchanged.",
-  "venue": "OKX Europe (eea.okx.com), pair BTC-USDC"
+  "revision": 3,
+  "revision_note": "Re-frozen 2026-11-25 10:55 UTC, before the forward record began: risk-off asset USDC (owner's choice on OKX Europe), so the signal now runs on BTC/USD to match the traded pair BTC/USDC; cost model set to OKX EU spot fees. This is exactly the configuration already logged as ext-20261125-06 (BTC/USD), so the trial count is unchanged. Revision 3 (2026-11-25 12:50 UTC, still before the forward record began): the two pre-registered variants are now defined exactly (variant_rules); no rule or parameter of the primary changed.",
+  "venue": "OKX Europe (eea.okx.com), pair BTC-USDC",
+  "variant_rules": {
+    "v1_btc_eth_equal_risk": {
+      "assets": [
+        "BTC",
+        "ETH"
+      ],
+      "data": "Bitstamp daily OHLC, pairs btcusd and ethusd",
+      "rule": "each coin uses the primary signal on its own price; its exposure = signal * min(0.5, 0.125 / its 60-day annualised vol), i.e. half the volatility budget and half the capital cap each; the 0.10 band and full exit at zero apply per coin",
+      "max_exposure_per_asset": 0.5,
+      "target_vol_per_asset": 0.125
+    },
+    "v2_weekly_rebalance_monday": {
+      "rule": "the primary rule, but the exposure may change only at decisions taken after Sunday's close (executed Monday 00:05 UTC); it is held unchanged on other days",
+      "decision_weekday_of_close": "Sunday"
+    }
+  }
 }

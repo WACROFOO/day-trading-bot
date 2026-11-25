@@ -120,6 +120,33 @@ def primary_exposure(close: pd.Series, rule: FrozenRule = FrozenRule()) -> pd.Se
     return apply_band(raw_target(close, rule), rule.band_min_change, rule.exit_fully_when_target_zero)
 
 
+def v1_btc_eth_exposures(btc: pd.Series, eth: pd.Series, rule: FrozenRule = FrozenRule(),
+                         cap: float = 0.5, target_vol: float = 0.125) -> pd.DataFrame:
+    """Variant V1: the primary rule on each coin, each with half the vol budget and half the cap."""
+    out = {}
+    for name, close in (("BTC", btc), ("ETH", eth)):
+        signal = ensemble_signal(close, rule.lookback_days)
+        vol = realised_vol(close, rule.vol_window_days, rule.annualization_days)
+        target = signal * (target_vol / vol).clip(upper=cap)
+        out[name] = apply_band(target, rule.band_min_change, rule.exit_fully_when_target_zero)
+    return pd.DataFrame(out)
+
+
+def v2_weekly_exposure(close: pd.Series, rule: FrozenRule = FrozenRule()) -> pd.Series:
+    """Variant V2: the primary rule, but exposure changes only on decisions after Sunday's close."""
+    target = raw_target(close, rule)
+    out, current = [], 0.0
+    for day, value in target.items():
+        if np.isnan(value):
+            out.append(np.nan)
+            continue
+        if day.dayofweek == 6:  # Sunday's close -> Monday 00:05 UTC decision
+            if (rule.exit_fully_when_target_zero and value == 0.0) or abs(value - current) >= rule.band_min_change - 1e-12:
+                current = float(value)
+        out.append(current)
+    return pd.Series(out, index=target.index, name="v2_exposure")
+
+
 def c1_sma200_exposure(close: pd.Series, window: int = 200) -> pd.Series:
     """Benchmark C1: 100% while the close is above its 200-day average, else 0."""
     s = _daily(close)
