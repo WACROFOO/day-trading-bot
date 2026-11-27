@@ -1,1 +1,2 @@
-date,btc_close,eth_close,primary_exposure,v2_weekly_exposure,c1_sma200_exposure,v1_btc_exposure,v1_eth_exposure,primary_nav,v1_btc_eth_nav,v2_weekly_nav,c1_sma200_nav
+date,btc_close,eth_close,primary_exposure,v2_weekly_exposure,c1_sma200_exposure,v1_btc_exposure,v1_eth_exposure,primary_nav,v1_btc_eth_nav,v2_weekly_nav,c1_sma200_nav,btc_buy_hold_nav
+2026-11-26,60492.370000,1687.480000,0.000000,0.000000,0.000000,0.000000,0.000000,1.000000,1.000000,1.000000,1.000000,1.001826
